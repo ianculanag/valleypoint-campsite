@@ -32,9 +32,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `valleypoint`.`accommodation` (
   `accommodationID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `accommodationType` VARCHAR(20) NOT NULL,
+  `accommodationType` ENUM('transient', 'backpacker', 'glamping') NOT NULL,
   `price` DOUBLE NOT NULL DEFAULT 00.00,
-  `paymentStatus` VARCHAR(20) NULL DEFAULT 'pending',
+  `paymentStatus` ENUM('pending', 'paid') NOT NULL,
   `staffID` INT UNSIGNED NOT NULL,
   `unitID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`accommodationID`),
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `valleypoint`.`sales` (
   `salesID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `paymentDatetime` DATETIME NOT NULL,
   `amount` DOUBLE NOT NULL,
-  `paymentCategory` VARCHAR(30) NOT NULL,
+  `paymentCategory` ENUM('lodging', 'restobar') NOT NULL,
   `orderID` INT UNSIGNED NOT NULL,
   `accommodationID` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`salesID`),
@@ -128,7 +128,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `valleypoint`.`orders` (
   `orderID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `orderNumber` INT NOT NULL,
-  `paymentStatus` VARCHAR(20) NULL DEFAULT 'pending',
+  `paymentStatus` ENUM('pending', 'paid') NOT NULL,
   `orderDatetime` DATETIME NOT NULL,
   `productID` INT UNSIGNED NOT NULL,
   `shiftID` INT UNSIGNED NOT NULL,
