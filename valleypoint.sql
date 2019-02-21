@@ -20,9 +20,9 @@ USE `valleypoint` ;
 CREATE TABLE IF NOT EXISTS `valleypoint`.`units` (
   `unitID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `unitNumber` VARCHAR(10) NOT NULL,
-  `unitType` VARCHAR(20) NOT NULL DEFAULT 'room',
+  `unitType` ENUM('room', 'bed', 'tent') NOT NULL,
   `capacity` INT NOT NULL,
-  `status` VARCHAR(15) NOT NULL DEFAULT 'unoccupied',
+  `status` ENUM('available', 'reserved', 'occupied') NOT NULL,
   PRIMARY KEY (`unitID`))
 ENGINE = InnoDB;
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `valleypoint`.`staff` (
   `password` VARCHAR(30) NOT NULL DEFAULT 'password',
   `lastName` VARCHAR(30) NOT NULL,
   `firstName` VARCHAR(30) NOT NULL,
-  `role` VARCHAR(20) NOT NULL,
+  `role` ENUM('admin', 'general', 'lodging', 'cashier') NOT NULL,
   `contactNumber` VARCHAR(11) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`staffID`))
@@ -152,7 +152,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `valleypoint`.`products` (
   `productID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `productName` VARCHAR(45) NOT NULL,
-  `productType` VARCHAR(10) NOT NULL,
+  `productType` ENUM('food', 'beverage') NOT NULL,
   `price` DOUBLE NOT NULL DEFAULT 00.00,
   PRIMARY KEY (`productID`))
 ENGINE = InnoDB;
