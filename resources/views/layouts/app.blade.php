@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min/css') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
         <title>{{config('app.name', 'Valleypoint Campsite')}}</title>
     </head>
     <body>
