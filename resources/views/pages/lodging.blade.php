@@ -21,19 +21,74 @@
     @if(count($units) > 0)
     <div class="container" style="padding-top: 1em;">
         <div class="container">
+            <h5 class="unit-heading">4 pax</h5>
             <div class="row">
     <!--h2>Rooms</h2-->
         @foreach($units as $unit)
             {{--insert frontend loop here--}}
-            @if($unit->unitType == 'room')            
+            @if($unit->unitType == 'room' && $unit->capacity == 4)            
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{$unit->unitNumber}}</h5>
                     <p class="card-text">Guest Name</p>
                     <p class="card-text">Guest ID</p>
-                    <p class="card-text">Status: {{$unit->status}}</p>
                     <div class="text-right">
-                        <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                    <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                    </div>
+                </div>
+            </div>
+            <!--div class="card">
+                    <h3><a href="/units/{{--$unit->id}}">{{$unit->unitNumber}}<a></h3>
+                    <p>Capacity: {{$unit->capacity}}</p>
+                    <p>Status: {{$unit->status}}</p>
+                    <p>Type: {{$unit->unitType--}}</p>
+            </div-->
+            @endif
+        @endforeach
+            </div>
+
+            <!-- 6 pax -->
+
+            <h5 class="unit-heading">6 pax</h5>
+            <div class="row">
+    <!--h2>Rooms</h2-->
+        @foreach($units as $unit)
+            {{--insert frontend loop here--}}
+            @if($unit->unitType == 'room' && $unit->capacity == 6)            
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{$unit->unitNumber}}</h5>
+                    <p class="card-text">Guest Name</p>
+                    <p class="card-text">Guest ID</p>
+                    <div class="text-right">
+                    <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                    </div>
+                </div>
+            </div>
+            <!--div class="card">
+                    <h3><a href="/units/{{--$unit->id}}">{{$unit->unitNumber}}<a></h3>
+                    <p>Capacity: {{$unit->capacity}}</p>
+                    <p>Status: {{$unit->status}}</p>
+                    <p>Type: {{$unit->unitType--}}</p>
+            </div-->
+            @endif
+        @endforeach
+            </div>
+
+        <!-- 10 pax -->
+        <h5 class="unit-heading">10 pax</h5>
+            <div class="row">
+    <!--h2>Rooms</h2-->
+        @foreach($units as $unit)
+            {{--insert frontend loop here--}}
+            @if($unit->unitType == 'room' && $unit->capacity == 10)            
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{$unit->unitNumber}}</h5>
+                    <p class="card-text">Guest Name</p>
+                    <p class="card-text">Guest ID</p>
+                    <div class="text-right">
+                    <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
                     </div>
                 </div>
             </div>
