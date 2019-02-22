@@ -15,4 +15,5 @@ Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
 Route::get('/pos', 'PagesController@pos');
 
-Route::resource('guests', 'GuestsController');
+//Route::resource('guests', 'GuestsController');
+Route::resource('units', 'UnitsController'); 

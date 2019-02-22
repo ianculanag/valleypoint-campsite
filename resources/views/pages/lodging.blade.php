@@ -2,12 +2,18 @@
 
 @section('content')
     <h1>Lodging Monitoring</h1>
-    @if(count($services) > 0)
-        <ul class="list-group">
-        @foreach($services as $service)
-            <li class="list-group-item">{{$service}}</li>
+    @if(count($units) > 0)
+        @foreach($units as $unit)
+            {{--insert frontend here--}}
+            <div class="card">
+                <h3><a href="/units/{{$unit->id}}">{{$unit->unitNumber}}<a></h3>
+                <p>Capacity: {{$unit->capacity}}</p>
+                <p>Status: {{$unit->status}}</p>
+            </div>
         @endforeach
-        </ul>
+        {{--$units->links()--}}
+    @else
+        <p>No units found</p>
     @endif
 @endsection
  

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Units;
 
 class UnitsController extends Controller
 {
@@ -12,8 +13,11 @@ class UnitsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        $units = Units::all();
+        //$units = Units::orderBy('unitNumber')->paginate(1); 
+        //$units = Units::where('unitNumber)
+        return view('pages.lodging')->with('units', $units);
     }
 
     /**
@@ -45,7 +49,7 @@ class UnitsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Units::find($id);
     }
 
     /**

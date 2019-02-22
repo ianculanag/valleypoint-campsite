@@ -21,15 +21,6 @@ class CreateUnitsTable extends Migration
             $table->enum('status',['available','reserved','occupied']);
             $table->timestamps();
         });
-
-        DB::table('units')->insert(
-            array(
-                'unitNumber' => '01',
-                'unitType' => 'room',
-                'capacity' => '10',
-                'status' => 'available'
-            )
-        );
     }
 
     /**
