@@ -15,6 +15,13 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
+            $table->dateTime('paymentDatetime');
+            $table->double('amount', 8, 2);
+            $table->enum('paymentCategory', ['lodging', 'restobar']);
+            $table->integer('orderID')->unsigned();
+            $table->integer('accommodationID')->unsigned();
+            $table->foreign('orderID')->references('id')->on('Orders');
+            $table->foreign('accommodationID')->references('id')->on('Accommodation');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateAccommodationsTable extends Migration
         Schema::create('accommodations', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('accommodationType',['transient','backpacker','glamping']);
-            $table->double('price');
+            $table->double('price', 8, 2);
             $table->enum('paymentStatus',['pending','paid']);
             $table->integer('staffID')->unsigned();
             $table->integer('unitID')->unsigned();

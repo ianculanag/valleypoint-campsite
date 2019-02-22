@@ -19,7 +19,7 @@ class CreateGuestStaysTable extends Migration
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
             $table->foreign('guestID')->references('id')->on('Staff');
-            $table->foreign('accommodationID')->references('id')->on('Units');
+            $table->foreign('accommodationID')->references('id')->on('Accommodation');
             $table->timestamps();
         });
     }

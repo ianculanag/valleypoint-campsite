@@ -14,8 +14,12 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->integer('orderID')->unsigned();
+            $table->integer('productID')->unsigned();
+            $table->integer('quantity');
+            $table->double('unitPrice', 8, 2);
+            $table->foreign('orderID')->references('id')->on('Orders');
+            $table->foreign('productID')->references('id')->on('Products');
         });
     }
 

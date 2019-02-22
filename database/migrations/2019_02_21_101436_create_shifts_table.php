@@ -17,7 +17,7 @@ class CreateShiftsTable extends Migration
             $table->increments('id');
             $table->datetime('shiftStart');
             $table->datetime('shiftEnd');
-            $table->double('cashStart');
+            $table->double('cashStart', 8, 2);
             $table->integer('staffID')->unsigned();
             $table->foreign('staffID')->references('id')->on('Staff');
             $table->timestamps();
