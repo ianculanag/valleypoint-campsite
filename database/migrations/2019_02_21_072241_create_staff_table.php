@@ -24,6 +24,18 @@ class CreateStaffTable extends Migration
             $table->string('email')->unique();
             $table->timestamps();
         });
+
+        DB::table('staff')->insert(
+            array(
+                'username' => 'lodging1',
+                'password' => 'lodging1',
+                'lastName' => 'Aquino',
+                'firstName' => 'Jhaypee',
+                'role' => 'lodging',
+                'contactNumber' => '09000000000',
+                'email' => 'jhaypee@valleypoint.com'
+            )
+        );
     }
 
     /**
