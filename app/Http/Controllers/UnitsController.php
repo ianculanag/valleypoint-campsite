@@ -18,13 +18,38 @@ class UnitsController extends Controller
         //$units = Units::all();
         //$units = Units::orderBy('unitNumber')->paginate(1); 
         //$units = Units::where('unitNumber)
+    }
+
+    /**
+     * Display all transient and backpacker units
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function transientBackpacker()
+    {        
         $units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
         ->select('units.*', 'accommodations.*', 'guests.*')
         ->get();
-        return view('pages.lodging')->with('units', $units);
+        return view('pages.transient')->with('units', $units);
+    }
+
+    /**
+     * Display all glamping units.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function glamping()
+    {
+        $units = DB::table('units')
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
+        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
+        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
+        ->select('units.*', 'accommodations.*', 'guests.*')
+        ->get();
+        return view('pages.glamping')->with('units', $units);
     }
 
     /**

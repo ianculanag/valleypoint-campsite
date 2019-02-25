@@ -16,4 +16,5 @@ Route::get('/lodging', 'PagesController@lodging');
 Route::get('/pos', 'PagesController@pos');
 
 //Route::resource('guests', 'GuestsController');
-Route::resource('units', 'UnitsController'); 
+Route::get('/transient-backpacker', 'UnitsController@transientBackpacker'); 
+Route::get('/glamping', 'UnitsController@glamping'); 
