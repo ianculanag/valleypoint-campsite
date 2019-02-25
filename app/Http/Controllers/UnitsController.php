@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Units;
+use Illuminate\Support\Facades\DB;
 
 class UnitsController extends Controller
 {
@@ -14,9 +15,15 @@ class UnitsController extends Controller
      */
     public function index()
     {        
-        $units = Units::all();
+        //$units = Units::all();
         //$units = Units::orderBy('unitNumber')->paginate(1); 
         //$units = Units::where('unitNumber)
+        $units = DB::table('units')
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
+        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
+        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
+        ->select('units.*', 'accommodations.*', 'guests.*')
+        ->get();
         return view('pages.lodging')->with('units', $units);
     }
 
@@ -49,7 +56,13 @@ class UnitsController extends Controller
      */
     public function show($id)
     {
-        return Units::find($id);
+        //return Units::find($id);
+        return DB::table('units') //get units table
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
+        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
+        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID') // join with guests
+        ->select('units.*', 'accommodations.*', 'guests.*') // select everything in units, accommodations, and guests
+        ->get();
     }
 
     /**

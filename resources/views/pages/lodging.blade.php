@@ -85,8 +85,8 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{$unit->unitNumber}}</h5>
-                    <p class="card-text">Guest Name</p>
-                    <p class="card-text">Guest ID</p>
+                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                    <p class="card-text">{{$unit->id}}</p>
                     <div class="text-right">
                     <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
                     </div>
