@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Staff;
 
 class StaffController extends Controller
 {
@@ -30,12 +31,28 @@ class StaffController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        /*$this->validate($request, [
+            'username' => 'required',
+            'password' => 'required'
+        ]);*/
+
+        // Add user to db
+        $staff = new Staff;
+        $staff->username = $request->input('username');
+        $staff->password = $request->input('password');
+        $staff->lastName = $request->input('lastName');
+        $staff->firstName = $request->input('firstName');
+        $staff->role = $request->input('role');
+        $staff->contactNumber = $request->input('contactNumber');
+        $staff->email = $request->input('email');
+        $staff->save();
+
+        return $request; 
     }
 
     /**
