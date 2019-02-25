@@ -24,6 +24,7 @@ class StaffController extends Controller
     public function create()
     {
         //
+        return view('admin.addusers');
     }
 
     /**

@@ -23,4 +23,10 @@ class PagesController extends Controller
     public function pos(){
         return view('pages.pos'); 
     }
+
+    /*
+    public function addusers(){
+        return view('admin.addusers');
+    }
+    */
 }
