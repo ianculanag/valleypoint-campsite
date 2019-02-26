@@ -64,6 +64,29 @@
             </div>
         </div>
     </div>
+<!-- Details Modal -->
+<div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <!--p class="heading lead">Tent 1</p-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="modal-body">
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-right">
+                <button type="button" class="btn btn-info">Edit</button>
+                <button type="button" class="btn btn-danger">Check-out</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
         <!--h2>tent</h2-->
         {{--@foreach($units as $unit)
         {{--insert frontend here--
@@ -76,6 +99,43 @@
         </div>
         @endif--}}
         {{--$units->links()--}}
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('.load-details').click(function(){
+                jQuery.get('loadDetails/'+$(this).attr('id'), function(data){
+                    console.log(data[0].lastName);
+                    /*<div class="container">
+                        <p>
+                            Tent ID: 00001
+                        </p>
+                        <p>
+                            Tent number: 1
+                        </p>
+                        <p>
+                            Capacity: 4 pax
+                        </p>
+                    </div>*/
+                    let modal = document.getElementById('modal-body');
+                    modal.innerHTML = ""
+                    
+                    //repeat till 
+                    let div = document.createElement('DIV');
+                    div.classList.add('container');
+                    let tentID = document.createElement('P');
+
+                    let tentIDLabel = 'Tent ID: ';
+                    let tentIDbody = document.createTextNode(tentIDLabel+data[0].unitID);
+                    
+                    tentID.appendChild(tentIDbody);
+                    div.appendChild(tentID);
+                    modal.appendChild(div);
+                    //here
+
+                })
+            });
+        }); 
+        </script>
     @else
         <p>No units found</p>
     @endif
