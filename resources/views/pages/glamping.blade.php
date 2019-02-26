@@ -118,19 +118,41 @@
                     </div>*/
                     let modal = document.getElementById('modal-body');
                     modal.innerHTML = ""
+
+                    let tentH5 =  document.createElement('H5');
+                    tentH5.classList.add('text-center');
+                    let tentH5Body = document.createTextNode('Tent Details');
+                    tentH5.appendChild(tentH5Body);
                     
-                    //repeat till 
+                    //first div
                     let div = document.createElement('DIV');
                     div.classList.add('container');
-                    let tentID = document.createElement('P');
-
-                    let tentIDLabel = 'Tent ID: ';
-                    let tentIDbody = document.createTextNode(tentIDLabel+data[0].unitID);
                     
-                    tentID.appendChild(tentIDbody);
+                    //repeat all inside container
+                    let tentID = document.createElement('P');
+                    let tentIDLabel = 'Tent ID: ';
+                    let tentIDBody = document.createTextNode(tentIDLabel+data[0].unitID);
+                    tentID.appendChild(tentIDBody);
+
+                    //repeat all inside container
+                    let tentNumber = document.createElement('P');
+                    let tentNumberLabel = 'Tent number: ';
+                    let tentNumberBody = document.createTextNode(tentNumberLabel+data[0].unitNumber);
+                    tentNumber.appendChild(tentNumberBody);
+
+                    //repeat all inside container
+                    let capacity = document.createElement('P');
+                    let capacityLabel = 'Tent number: ';
+                    let capacityBody = document.createTextNode(capacityLabel+data[0].capacity);
+                    capacity.appendChild(capacityBody);
+
+                    div.appendChild(tentH5);
                     div.appendChild(tentID);
+                    div.appendChild(tentNumber);
+                    div.appendChild(capacity);
+                    
                     modal.appendChild(div);
-                    //here
+                    //append everything
 
                 })
             });
