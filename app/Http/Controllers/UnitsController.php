@@ -32,7 +32,7 @@ class UnitsController extends Controller
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
         ->select('units.*', 'accommodations.*', 'guests.*')
-        ->get();
+        ->get(['units.id AS unitID']);
         return view('pages.transient')->with('units', $units);
     }
 
@@ -122,5 +122,25 @@ class UnitsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function loadUnit($id)
+    {
+        //if(Request::ajax()){
+        //return 'getRequest has loaded completely';
+        return DB::table('units') //get units table
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
+        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
+        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID') // join with guests
+        ->select('units.*', 'accommodations.*', 'guests.*') // select everything in units, accommodations, and guests
+        ->where('units.id', '=', $id)
+        ->get();
+        //}
     }
 }

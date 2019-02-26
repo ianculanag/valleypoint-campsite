@@ -21,3 +21,6 @@ Route::get('/glamping', 'UnitsController@glamping');
 
 //Route::get('/addusers', 'PagesController@addusers');
 Route::resource('staff', 'StaffController');
+
+//
+Route::get('/loadDetails/{id}', 'UnitsController@loadUnit'); 
