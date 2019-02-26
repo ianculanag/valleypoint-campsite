@@ -138,7 +138,7 @@ class UnitsController extends Controller
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID') // join with guests
-        ->select('units.*', 'accommodations.*', 'guests.*') // select everything in units, accommodations, and guests
+        ->select('units.*', 'accommodations.*', 'guests.*', 'guest_stays.*') // select everything in units, accommodations, and guests
         ->where('units.id', '=', $id)
         ->get(['units.id AS unitID', 'guests.id AS guestID']);
         //}

@@ -107,7 +107,7 @@
         jQuery(document).ready(function(){
             jQuery('.load-details').click(function(){
                 jQuery.get('loadDetails/'+$(this).attr('id'), function(data){
-                    console.log(data[0].lastName);
+                    console.log(data);
                     /*<div class="container">
                         <p>
                             Tent ID: 00001
@@ -118,9 +118,32 @@
                         <p>
                             Capacity: 4 pax
                         </p>
+                    </div>
+                    <hr>
+                    <h5 class="text-center">
+                        Guest Details
+                    </h5>
+                    <div class="container">
+                        <p>
+                            Guest ID: 00001
+                        </p>
+                        <p>
+                            Guest name: Dawn Cundangan
+                        </p>
+                        <p>
+                            Contact number: 09000000000
+                        </p>
+                        <p>
+                            Number of pax: 2 pax
+                        </p>
+                        <p style="font-style: italic; color: green;">
+                            Checked-in *date* at *time*
+                        </p>
                     </div>*/
                     let modal = document.getElementById('modal-body');
                     modal.innerHTML = ""
+
+                    let hr = document.createElement('HR');
 
                     let tentH5 =  document.createElement('H5');
                     tentH5.classList.add('text-center');
@@ -128,8 +151,8 @@
                     tentH5.appendChild(tentH5Body);
                     
                     //first div
-                    let div = document.createElement('DIV');
-                    div.classList.add('container');
+                    let firstDiv = document.createElement('DIV');
+                    firstDiv.classList.add('container');
                     
                     //repeat all inside container
                     let tentID = document.createElement('P');
@@ -149,12 +172,62 @@
                     let capacityBody = document.createTextNode(capacityLabel+data[0].capacity);
                     capacity.appendChild(capacityBody);
 
-                    div.appendChild(tentH5);
-                    div.appendChild(tentID);
-                    div.appendChild(tentNumber);
-                    div.appendChild(capacity);
+                    firstDiv.appendChild(tentH5);
+                    firstDiv.appendChild(tentID);
+                    firstDiv.appendChild(tentNumber);
+                    firstDiv.appendChild(capacity);
+                    firstDiv.appendChild(hr);
+
+                     //second div
+                    let secondDiv = document.createElement('DIV');
+                    secondDiv.classList.add('container');
+
+                    let guestH5 =  document.createElement('H5');
+                    guestH5.classList.add('text-center');
+                    let guestH5Body = document.createTextNode('Guest Details');
+                    guestH5.appendChild(guestH5Body);
                     
-                    modal.appendChild(div);
+                    //repeat all inside container
+                    let guestID = document.createElement('P');
+                    let guestIDLabel = 'Guest ID: ';
+                    let guestIDBody = document.createTextNode(guestIDLabel+data[0].id);
+                    guestID.appendChild(guestIDBody);
+
+                    //repeat all inside container
+                    let guestName = document.createElement('P');
+                    let guestNameLabel = 'Guest name: ';
+                    let guestNameBody = document.createTextNode(guestNameLabel+data[0].firstName);
+                    guestName.appendChild(guestNameBody);
+
+                    //repeat all inside container
+                    let contactNumber = document.createElement('P');
+                    let contactNumberLabel = 'Contact number: ';
+                    let contactNumberBody = document.createTextNode(contactNumberLabel+data[0].contactNumber);
+                    contactNumber.appendChild(contactNumberBody);
+                    
+                    //repeat all inside container
+                    let pax = document.createElement('P');
+                    let paxLabel = 'Number of Pax: ';
+                    let paxBody = document.createTextNode(paxLabel+data[0].numberOfPax);
+                    pax.appendChild(paxBody);
+
+                    //repeat all inside container
+                    let checkIn = document.createElement('P');
+                    //checkIn.style(color.green);
+                    let checkInLabel = 'Checked in on ';
+                    let checkInBody = document.createTextNode(checkInLabel+data[0].checkinDatetime);
+                    checkIn.appendChild(checkInBody);
+
+
+                    secondDiv.appendChild(guestH5);
+                    secondDiv.appendChild(guestID);
+                    secondDiv.appendChild(guestName);
+                    secondDiv.appendChild(contactNumber);
+                    secondDiv.appendChild(pax);
+                    secondDiv.appendChild(checkIn);
+                    
+                    modal.appendChild(firstDiv);
+                    modal.appendChild(secondDiv);
                     //append everything
 
                 })
