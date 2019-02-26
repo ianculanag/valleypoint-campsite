@@ -10656,7 +10656,7 @@ a.text-dark:focus {
 }
 
 .unit-heading {
-  padding-top: 1em;
+  padding-top: 0.2em;
 }
 
 .card {
@@ -10669,6 +10669,7 @@ a.text-dark:focus {
 .card-text {
   padding: 0em;
   margin: 0em;
+  font-size: 0.925em;
 }
 
 .lodging-tabs {

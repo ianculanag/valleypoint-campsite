@@ -32,7 +32,7 @@ class UnitsController extends Controller
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
         ->select('units.*', 'accommodations.*', 'guests.*')
-        ->get(['units.id AS unitID']);
+        ->get(['units.id AS unitID', 'guests.id AS guestID']);
         return view('pages.transient')->with('units', $units);
     }
 

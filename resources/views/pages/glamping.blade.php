@@ -3,8 +3,8 @@
 @section('content')
     <div class="col-md-12 text-center lodging-tabs">
         <nav class="nav nav-pills centered-pills">
-            <a class="nav-item nav-link active" href="#">Physical View</a>
-            <a class="nav-item nav-link" href="#">Calendar View</a>
+            <a class="nav-item nav-link active" style="background-color:#505050" href="#">Physical View</a>
+            <a class="nav-item nav-link" style="color:#505050" href="#">Calendar View</a>
         </nav>
     </div>
     <div class="container lodging-tabs">
@@ -13,7 +13,7 @@
                 <a class="nav-link active" href="/glamping">Glamping</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/transient-backpacker">Transient Backpacker</a>
+                <a class="nav-link" style="color:#505050;" href="/transient-backpacker">Transient Backpacker</a>
             </li>
         </ul>
     </div>
@@ -21,25 +21,45 @@
     @if(count($units) > 0)
     <div class="container" style="padding-top: 1em;">
         <div class="container">
-            <div class="row">
+            <div class="row">  
     <!--h2>Rooms</h2-->
         @foreach($units as $unit)
             {{--insert frontend loop here--}}
-            @if($unit->unitType == 'tent')            
-            <div class="card" style="width: 18rem;">
+            @if($unit->unitType == 'tent')          
+            <div class="card" style="width:18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">{{$unit->unitNumber}}</h5>
-                    
-                    @if($unit->status == 'occupied')
+
+                @if($unit->status == 'occupied')
+                    <h5 class="card-title">
+                        {{$unit->unitNumber}}
+                        <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
+                    </h5>
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                     <p class="card-text">{{$unit->unitID}}</p>
 
+<<<<<<< HEAD
                     @else
                     <p class="card-text">Guest Name</p>
                     <p class="card-text">Guest ID</p>
+=======
+                @elseif($unit->status == 'reserved')
+                    <h5 class="card-title">
+                        {{$unit->unitNumber}}
+                        <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
+                    </h5>
+                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                    <p class="card-text">{{$unit->id}}</p>
+>>>>>>> Lodging Monitoring: Integrated transient-backpacker (GET), added unit labels, updated custom.scss
 
-                    @endif
+                @else
+                    <h5 class="card-title">
+                        {{$unit->unitNumber}}
+                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
+                    </h5>
+                    <p class="card-text">Unit available</p>
+                    <p></p>
 
+<<<<<<< HEAD
                     <div class="text-right">
                     <!--a href="/units/{{--$unit->id--}}"-->
                     <button type="button" class="btn btn-info logding-details-btn load-details"
@@ -50,8 +70,14 @@
                     id="{{--$unit->unitID--}}"">getRequest</button-->
 
                     </div>
+=======
+                @endif
+                <div class="text-right">
+                    <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+>>>>>>> Lodging Monitoring: Integrated transient-backpacker (GET), added unit labels, updated custom.scss
                 </div>
             </div>
+        </div>
             @endif
         @endforeach
             </div>
