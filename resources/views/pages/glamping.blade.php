@@ -55,7 +55,10 @@
 
                 @endif
                 <div class="text-right">
-                    <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                    <!--a href="/units/{{--$unit->id--}}"-->
+                    <button type="button" class="btn btn-info logding-details-btn load-details"
+                    data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
+                    <!--/a-->
                 </div>
             </div>
         </div>
