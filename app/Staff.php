@@ -12,4 +12,10 @@ class Staff extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
+
+    // Foreign key to
+    public function accommodation()
+    {
+        return $this->hasMany('App\Accommodation');
+    }
 }
