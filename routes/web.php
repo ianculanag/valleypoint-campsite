@@ -24,3 +24,5 @@ Route::resource('staff', 'StaffController');
 
 //
 Route::get('/loadDetails/{id}', 'UnitsController@loadUnit'); 
+
+Route::post('/guests', 'GuestsController@addGuest');

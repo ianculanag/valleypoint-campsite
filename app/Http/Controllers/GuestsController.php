@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Guests;
+use App\Accommodation;
 
 class GuestsController extends Controller
 {
@@ -35,6 +37,51 @@ class GuestsController extends Controller
     public function store(Request $request)
     {
         //
+        $guest = new Guests;
+        $guest->lastName = 'Tagudar';
+        $guest->firstName = 'Vince';
+        $guest->contactNumber = '09087018753';
+        $guest->numberOfPax = '2';
+        $guest->save();
+        
+        $accommodation = new Accommodation;
+        $accommodation->accommodationType = 'transient';
+        $accommodation->price = '3500';
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->staffID = '1';
+        $accommodation->unitID = '3';
+        
+        $guest->accommodation()->save($accommodation);
+
+        return 'Hello';
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addGuest()
+    {
+        //
+        $guest = new Guests;
+        $guest->lastName = 'Tagudar';
+        $guest->firstName = 'Vince';
+        $guest->contactNumber = '09087018753';
+        $guest->numberOfPax = '2';
+        $guest->save();
+        
+        $accommodation = new Accommodation;
+        $accommodation->accommodationType = 'transient';
+        $accommodation->price = '3500';
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->staffID = '1';
+        $accommodation->unitID = '3';
+        
+        $guest->accommodation()->save($accommodation);
+
+        return 'Hello';
     }
 
     /**
