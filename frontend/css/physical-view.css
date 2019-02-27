@@ -112,5 +112,23 @@ border-bottom: 2px ridge gray;
     border-radius: 50%;
 }
 
+/* Log In */
+.container h2{
+  font-style: oblique;
+  font-family: "Times New Roman", Times, serif;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 3em;
+  color: #ffffff;
+  display: block;
+}
+
+.container p{
+  font-style: oblique;
+  font-size: 1em;
+  color: "blue";
+  font-family: "Times New Roman", Times, serif;
+}
+
 
  

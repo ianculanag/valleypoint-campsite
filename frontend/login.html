@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,14 +7,15 @@
             
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <title>Log In</title>
+        <link rel="stylesheet" href="css/physical-view.css">
+            <title>Log in</title>
     </head>
 
-    <body>
-        <div class="container center-block">
+    <body background="https://lh3.googleusercontent.com/ISvXwEGCXgikZjyEgx2Ny_PMh-6N5lsBqV0r0tiQy7Ga_uzqZ4BwV6Buu_vWM4cB8UJgMQ9zKCJ7VRoes068zbV9w0zWj6jJkmY783sV94TnNIabIV0WFayQXfcX7f_rqxN7yClFGthl3ExEFewbvRrW3aqDcMxKQuRy9dXWHtj01JWauQhPd2oJLjwNdL9_Q2PwI8s6s8ktSztSz_LbVhful55DUpiyHLAeByy8RffeLYWNHTn9NMkAPWX93BvDtDd9Ou8q1tft6JAsdEsAuSVOOLH4R1uebsPjwdRoGzVxFTw8lpk0WuFcVB6DL3_k0l9TVJndaiELleblsm0sV2hg4pZwnAWTQ_4YnQXwUFQAYjtz3cCLMW1f7IsnVHKxWpD7ExqPZT95nfQKiTvhJUK4uysAZjRuJdUH_3tWJchQAEcyR9gLRz61G7uOeMH4ur3qvTsDqX1NoXLto9GviiYZnwqnoye8UwqP7a7xcK_jsHX9YnM4SmKDyy0ApiiFz-0KrE-bJ4hPMfoerw2JuJVugSNCS2HnFCCEqZL3Fb2-1ZrCHI6_QrHNgZDOj2RMIvX13FLtzmMFIkfTvBOiyPjf5T5f2RmaesQnMkw5dnb2VN6mSi7ulYC5s8tykvjafsdl0xnzC-B7-fanr8YAPo4HKXnfQ0b5xpQAmy5NPOgSzP6RXhCYvmaVASonnrl_mOE-HO3QwhKBgKy8bKw=w1292-h969-no">
+
+        <div class="container">
             <div class="py-5 text-center">
-                <img class="d-block mx-auto mb-4" alt="" width="72" height="72">
-                    <h2>Log in</h2>
+                    <h2>Please Log in</h2>
             </div>
         </div>
             
@@ -23,15 +23,21 @@
             <form>
                <center> <div class="mb-3 col-md-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                      <form method="post">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
                     </div>
+
                     <div class="form-group">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password"><br>
+                       <form method="post">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"><br>
+
                      <div class="form-group">
-                          <a href="forgetPass.html" class="forgetPass"><p>Forgot Password?</p>
+                          <a href="#forgotPass" class="forgetPass"><p>Forgot Password?</p>
                       </a></div>
-                    <a href="dashboard.php" button type="submit" class="btn btn-primary">Log in</button></a>
-            </div>
+
+                    <button type="submit" class="btn btn-primary"><p>Log in</p></button></a>
+
+              </div>
                 </center>   
                 </div>
             </form>
