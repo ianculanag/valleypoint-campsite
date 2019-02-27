@@ -34,7 +34,7 @@ body {
   
   .sidenav {
     height: 100%;
-    width: 15%;
+    width: 18%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -43,18 +43,34 @@ body {
     overflow-x: hidden;
     padding-top: 20px;
   }
+  .sidenav h6{
+    margin-top: 170%;
+    float: left;
+    font-family: "Times New Roman", Times, serif;
+  }
   
+  .sidenav p{
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: rgb(241, 249, 255);
+    font-family: "Times New Roman", Times, serif;
+    float: right;
+    margin-bottom: 30%;
+  }
   .sidenav a {
+    font-family: "Times New Roman", Times, serif;
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 1em;
-    color: #818181;
+    font-size: 1.2em;
+    color: #ffffff;
     display: block;
   }
   
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: #6df75b;
   }
+  
   
   .main {
     margin-left: 160px; /* Same as the width of the sidenav */
@@ -67,7 +83,10 @@ body {
     .sidenav a {font-size: 18px;}
   }
   
-  .logo {
+  .img {
       height: 2em;
-      width: 2em;
+      width: em;
+      border-radius: 50%;
   }
+
+ 
