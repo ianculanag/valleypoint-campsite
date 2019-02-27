@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Staff;
+use App\Shifts;
 
 class StaffController extends Controller
 {
@@ -51,6 +52,14 @@ class StaffController extends Controller
         $staff->contactNumber = $request->input('contactNumber');
         $staff->email = $request->input('email');
         $staff->save();
+
+        $shift = new Shifts;
+        $shift->shiftStart = '2008-11-09 15:45:21';
+        $shift->shiftEnd = '2008-11-09 15:45:21';
+        $shift->cashStart = '3520.50';
+        $shift->staffID = $staff->id;
+                
+        $shift->save();
 
         return $request; 
     }

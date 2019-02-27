@@ -1,3 +1,8 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+/* Physical view */
 .unit-heading {
     padding-top: 1em;
 }
@@ -28,10 +33,11 @@
     justify-content: center;
 }
 
-body {
-    font-family: "Lato", sans-serif;
-  }
-  
+.borderless td, .borderless th {
+    border: none;
+}
+
+/* Side navbar */
   .sidenav {
     height: 100%;
     width: 18%;
@@ -73,8 +79,8 @@ body {
   
   
   .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
+    margin-left: 160px;
+    font-size: 28px;
     padding: 0px 10px;
   }
   

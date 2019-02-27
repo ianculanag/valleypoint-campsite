@@ -18,4 +18,10 @@ class Staff extends Model
     {
         return $this->hasMany('App\Accommodation');
     }
+
+    // Foreign key to
+    public function shift()
+    {
+        return $this->hasMany('App\Shifts');
+    }
 }

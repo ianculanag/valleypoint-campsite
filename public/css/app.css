@@ -10686,6 +10686,11 @@ a.text-dark:focus {
   justify-content: center;
 }
 
+.borderless td,
+.borderless th {
+  border: none !important;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
