@@ -55,7 +55,8 @@
 
                 @endif
                     <div class="text-right">
-                        <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                        <button type="button" class="btn btn-info logding-details-btn load-details"
+                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
                     </div>
                 </div>
             </div>
@@ -98,7 +99,8 @@
 
                 @endif
                     <div class="text-right">
-                        <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                        <button type="button" class="btn btn-info logding-details-btn load-details"
+                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
                     </div>
                 </div>
             </div>
@@ -141,7 +143,8 @@
 
                 @endif
                     <div class="text-right">
-                        <a href="/units/{{$unit->id}}"><button type="button" class="btn btn-info logding-details-btn">View Details</button></a>
+                        <button type="button" class="btn btn-info logding-details-btn load-details"
+                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
                     </div>
                 </div>
             </div>
@@ -151,6 +154,70 @@
     </div>
     </div>
 
+<!-- Details Modal -->
+<div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <!--p class="heading lead">Tent 1</p-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="modal-body">
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-right">
+                <button type="button" class="btn btn-info">Edit</button>
+                <button type="button" class="btn btn-danger">Check-out</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('.load-details').click(function(){
+            jQuery.get('loadDetails/'+$(this).attr('id'), function(data){
+                console.log(data[0].lastName);
+                let modal = document.getElementById('modal-body');
+                modal.innerHTML = ""
+
+                let tentH5 =  document.createElement('H5');
+                tentH5.classList.add('text-center');
+                let tentH5Body = document.createTextNode('Tent Details');
+                tentH5.appendChild(tentH5Body);
+                    
+                let div = document.createElement('DIV');
+                div.classList.add('container');
+                
+                let tentID = document.createElement('P');
+                let tentIDLabel = 'Tent ID: ';
+                let tentIDBody = document.createTextNode(tentIDLabel+data[0].unitID);
+                tentID.appendChild(tentIDBody);
+
+                let tentNumber = document.createElement('P');
+                let tentNumberLabel = 'Tent number: ';
+                let tentNumberBody = document.createTextNode(tentNumberLabel+data[0].unitNumber);
+                tentNumber.appendChild(tentNumberBody);
+
+                let capacity = document.createElement('P');
+                let capacityLabel = 'Tent number: ';
+                let capacityBody = document.createTextNode(capacityLabel+data[0].capacity);
+                capacity.appendChild(capacityBody);
+
+                div.appendChild(tentH5);
+                div.appendChild(tentID);
+                div.appendChild(tentNumber);
+                div.appendChild(capacity);
+                    
+                modal.appendChild(div);
+            })
+        });
+    }); 
+</script>
     @else
         <p>No units found</p>
     @endif
