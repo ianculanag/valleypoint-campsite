@@ -38,64 +38,79 @@ body {
 }
 
 /* Side navbar */
-  .sidenav {
-    height: 100%;
-    width: 18%;
-    position: fixed;
-    z-index: ;
-    top: 0;
-    left: 0;
-    background-color: rgb(20, 20, 20);
-    overflow-x: hidden;
-    padding-top: 25px;
-    padding-right: 10px;
-  }
-  .sidenav h6{
-    margin-top: 175%;
-    float: left;
-    font-family: "Times New Roman", Times, serif;
-    padding-left: 12px;
-  }
-  
-  .sidenav p{
-    font-style: oblique;
-    font-weight: bold;
-    font-size: 1.5em;
-    color: rgb(241, 249, 255);
-    font-family: "Times New Roman", Times, serif;
-    float: right;
-    margin-bottom: 30%;
-  }
-  .sidenav a {
-    font-style: oblique;
-    font-family: "Times New Roman", Times, serif;
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 1.2em;
-    color: #ffffff;
-    display: block;
-  }
-  
-  .sidenav a:hover {
-    color: #6df75b;
-  }
-  
-  
-  .main {
-    margin-left: 160px;
-    font-size: 28px;
-    padding: 0px 10px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-  
-  .img {
-      height: 2em;
-      width: em;
-      border-radius: 50%;
-  }
+ /* Side navbar */
+ .sidenav {
+  height: 100%;
+  width: 18%;
+  position: fixed;
+  z-index: ;
+  top: 0;
+  left: 0;
+  background-color: rgb(20, 20, 20);
+  overflow-x: hidden;
+  padding-top: 25px;
+  padding-right: 10px;
+}
+.sidenav h6{
+  margin-top: 170%;
+  float: right;
+  font-size: .9em;
+  font-family: "Times New Roman", Times, serif;
+  padding-left: 12px;
+  width: 120%;
+  border-top: 2px ridge gray;
+  padding-top: 5px;
+  width: 95%;
+}
+
+.sidenav p{
+  font-style: oblique;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: rgb(241, 249, 255);
+  font-family: "Times New Roman", Times, serif;
+  float: right;
+  margin-bottom: 30%;
+
+}
+
+.sidenav a {
+  font-style: oblique;
+  font-family: "Times New Roman", Times, serif;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #ffffff;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #6df75b;
+}
+
+.sidenav li{
+padding-left: 10%;
+width: 95%;
+border-bottom: 2px ridge gray;
+
+}
+
+.main {
+  margin-left: 160px;
+  font-size: 28px;
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.img {
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+}
+
 
  
