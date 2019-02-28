@@ -128,6 +128,77 @@
                         </div>
                         <hr class="mb-4">
                         <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
+                        <!--div class="container">
+                            <table id="guest-table" class="table guest-list">   
+                                <tbody>
+                                    <thead>
+                                        <tr class="row">
+                                            <td class="col-md-4 mb-1">
+                                                First name
+                                            </td>
+                                            <td class="col-md-4 mb-1">
+                                                Last name
+                                            </td>
+                                            <td class="col-md-3 mb-1">
+                                                Phone
+                                            </td>
+                                            <td class="col-md-1 mb-1"></td>
+                                        </tr>
+                                    </thead>
+                                    <tr class="row">
+                                        <td class="col-md-4 mb-1">
+                                            <input class="form-control" type="text" id="firstName" placeholder="" value="Ian Jemuel">
+                                        </td>
+                                        <td class="col-md-4 mb-1">
+                                            <input class="form-control" type="text" id="lastName" placeholder="" value="Culanag">
+                                        </td>
+                                        <td class="col-md-3 mb-1">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                                <input class="form-control" type="text" id="contactNumber" placeholder="" value="09709849000">
+                                            </div>
+                                        </td>
+                                        <td class="col-md-1">
+                                            <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
+                                        </td>
+                                    </tr>
+                                    <tr class="row">
+                                        <td class="col-md-4 mb-1">
+                                            <input type="text" id="firstName" class="form-control" />
+                                        </td>
+                                        <td class="col-md-4 mb-1">
+                                            <input type="mail" id="lastName"  class="form-control"/>
+                                        </td>
+                                        <td class="col-md-3 mb-1">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                                <input class="form-control" type="text" id="contactNumber">
+                                            </div>
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="text-align: left;">
+                                            <input type="button" class="btn btn-info btn-sm btn-block" id="addrow" value="Add Row" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div-->
                         <div class="form-group row">
                             <div class="col-md-4 mb-1">
                                 <label for="firstName">First name</label>
@@ -179,6 +250,47 @@
                 </div>
             </div>
         </div>
+        <!--script>
+            $(document).ready(function () {
+                var counter = 0;
+            
+                $("#addrow").on("click", function () {
+                    var newRow = $("<tr class='row'>");
+                    var cols = "";
+            
+                    cols += '<td class="col-md-4 mb-1"> <input class="form-control" type="text" id="firstName" placeholder="" ' + counter + '"></td>';
+                    cols += '<td class="col-md-4 mb-1"> <input class="form-control" type="text" id="lastName" placeholder="" ' + counter + '"></td>';
+                    cols += '<td class="col-md-3 mb-1"> <div class="input-group"> <div class="input-group-prepend"> <span class="input-group-text"> <i class="fa fa-phone" aria-hidden="true"></i> </span> </div> <input class="form-control" type="text" id="contactNumber" placeholder="" value="09709849000"> </div "' + counter + '"></td>';
+            
+                    cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+                    newRow.append(cols);
+                    $("table.guest-list").append(newRow);
+                    counter++;
+                });
+            
+            
+            
+                $("table.guest-list").on("click", ".ibtnDel", function (event) {
+                    $(this).closest("tr").remove();       
+                    counter -= 1
+                });
+            
+            
+            });
+
+            function calculateRow(row) {
+                var price = +row.find('input[name^="price"]').val();
+
+            }
+
+            function calculateGrandTotal() {
+                var grandTotal = 0;
+                $("table.guest-list").find('input[name^="price"]').each(function () {
+                    grandTotal += +$(this).val();
+                });
+                $("#grandtotal").text(grandTotal.toFixed(2));
+            }
+        </script-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
