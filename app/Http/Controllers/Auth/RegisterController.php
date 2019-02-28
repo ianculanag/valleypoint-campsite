@@ -69,6 +69,11 @@ class RegisterController extends Controller
             //'email' => $data['email'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'contactNumber' => $data['contactNumber'],
+            'email' => $data['email'],
+            'role' => $data['role'],
         ]);
     }
+
+    //public function showRegistrationForm() {return view('admin.addusers');}
 }

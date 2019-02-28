@@ -47,13 +47,13 @@
         <h2>Add Users</h2>
     </div>
     <div class="col-sm-4 offset-sm-4 text-center">
-        {!! Form::open(['action' => 'StaffController@store', 'method' => 'POST', 'class' => 'form-inlin justify-content-center']) !!}
+        {!! Form::open(['action' => 'Auth\RegisterController@register', 'method' => 'POST', 'class' => 'form-inlin justify-content-center']) !!}
         <div class="row">
             <div class="form-group col-md-6">
-                {{Form::text('firstName', '', ['required' => 'required', 'class' => 'form-control', 'id' => 'inputFirstName',  'placeholder' => 'First name'])}}
+                {{Form::text('name', '', ['required' => 'required', 'class' => 'form-control', 'id' => 'inputFirstName',  'placeholder' => 'First name'])}}
             </div>
             <div class="form-group col-md-6">
-                {{Form::text('lastName', '', ['required' => 'required', 'class' => 'form-control', 'id' => 'inputLastName', 'placeholder' => 'Last name'])}}
+                {{--Form::text('lastName', '', ['required' => 'required', 'class' => 'form-control', 'id' => 'inputLastName', 'placeholder' => 'Last name'])--}}
             </div>
         </div>
         <div class="form-group">
