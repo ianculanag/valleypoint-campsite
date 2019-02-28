@@ -14,9 +14,9 @@ class Accommodation extends Model
     public $timestamps = true;
 
     // References Staff
-    public function staff()
+    public function user()
     {
-        return $this->belongsTo('App\Staff');
+        return $this->belongsTo('App\User');
     }
 
     // References Units

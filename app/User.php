@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'lastName', 'firstName', 'role', 'contactNumber','email', 'password',
     ];
 
     /**
@@ -27,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // Foreign key to
+    public function accommodation()
+    {
+        return $this->hasMany('App\Accommodation');
+    }
+
+    // Foreign key to
+    public function shift()
+    {
+        return $this->hasMany('App\Shifts');
+    }
 }

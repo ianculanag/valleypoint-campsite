@@ -18,9 +18,9 @@ class CreateAccommodationsTable extends Migration
             $table->enum('accommodationType',['transient','backpacker','glamping']);
             $table->double('price', 8, 2);
             $table->enum('paymentStatus',['pending','paid']);
-            $table->integer('staffID')->unsigned();
+            $table->integer('userID')->unsigned();
             $table->integer('unitID')->unsigned();
-            $table->foreign('staffID')->references('id')->on('Staff');
+            $table->foreign('userID')->references('id')->on('User');
             $table->foreign('unitID')->references('id')->on('Units');
             $table->timestamps();
         });
