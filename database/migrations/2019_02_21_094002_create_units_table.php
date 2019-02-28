@@ -17,7 +17,8 @@ class CreateUnitsTable extends Migration
             $table->increments('id');
             $table->string('unitNumber');
             $table->enum('unitType',['room','bed','tent']);
-            $table->integer('capacity');
+            $table->integer('partOf')->nullable();
+            $table->integer('capacity')->default(1);
             $table->enum('status',['available','reserved','occupied']);
             $table->timestamps();
         });
