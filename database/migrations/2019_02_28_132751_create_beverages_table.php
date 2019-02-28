@@ -14,7 +14,9 @@ class CreateBeveragesTable extends Migration
     public function up()
     {
         Schema::create('beverages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('productID')->unsigned();
+            $table->integer('drinkSize (mL)');
+            $table->foreign('productID')->references('id')->on('Products');
             $table->timestamps();
         });
     }

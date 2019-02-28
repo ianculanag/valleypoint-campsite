@@ -127,6 +127,7 @@ body {
 /* Guest check-out */
 .check-out-form {
     font-size: 0.90em;
+    /*color: #383838 !important;*/
 }
 
 .form-control {

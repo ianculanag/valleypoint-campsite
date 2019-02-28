@@ -16,7 +16,7 @@
                         <strong>Back</strong>
                     </span>
                 </a>
-                <h3>Transaction Details</h3>
+                <h3>Edit Transaction Details</h3>
             </div>
             <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
@@ -47,6 +47,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-danger" type="submit">Check-out</button>
                     </form>
                 </div>
                 <div class="col-md-8 order-md-1 check-out-form">
@@ -65,14 +66,16 @@
                                 <input class="form-control" type="text" id="unitNumber" placeholder="" value="Tent 1" disabled>
                             </div>
                         </div>
+                        <hr class="mb-4">
+                        <h5 style="margin-bottom:.80em;">Guest Details</h5>
                         <div class="form-group row">
                             <div class="col-md-5 mb-1">
                                 <label for="firstName">First name</label>
-                                <input class="form-control" type="text" id="firstName" placeholder="" value="Dawn" disabled>
+                                <input class="form-control" type="text" id="firstName" placeholder="" value="Dawn">
                             </div>
                             <div class="col-md-7 mb-1">
                                 <label for="lastName">Last name</label>
-                                <input class="form-control" type="text" id="lastName" placeholder="" value="Cundangan" disabled>
+                                <input class="form-control" type="text" id="lastName" placeholder="" value="Cundangan">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -84,17 +87,19 @@
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" type="text" id="contactNumber" placeholder="" value="09774249000" disabled>
+                                    <input class="form-control" type="text" id="contactNumber" placeholder="" value="09774249000">
                                 </div>
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="numberOfPax">No. of pax</label>
-                                <input class="form-control" type="number" id="contactNumber" placeholder="" value="3" disabled>
+                                <input class="form-control" type="number" id="contactNumber" placeholder="" value="3">
                             </div>
                             <div class="col-md-4 mb-1 form-group">
                                 <label for="accommodationType">Accommodation</label>
-                                <select id="disabledSelect" class="form-control" disabled>
+                                <select id="disabledSelect" class="form-control">
                                     <option>Glamping</option>
+                                    <option>Transient</option>
+                                    <option>Backpacker</option>
                                 </select>
                             </div>
                         </div>
@@ -107,37 +112,67 @@
                                             <i class="fa fa-calendar" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                <input class="form-control" type="text" id="contactNumber" placeholder="" value="02/24/2019 02:40:00" disabled>
+                                <input class="form-control" type="text" id="contactNumber" placeholder="" value="02/24/2019 02:40:00" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-1 form-group">
                                 <label for="numberOfPax">Stay duration</label>
-                                <input class="form-control" type="number" id="numberOfPax" placeholder="" value="5" disabled>
+                                <input class="form-control" type="number" id="numberOfPax" placeholder="" value="5">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12 mb-1 form-group">
-                                <label for="additionalServices">Additional charges</label>
-                                <textarea class="form-control" id="additionalServices" rows="3" disabled>Airsoft (2 pax)</textarea>
+                                <label for="additionalServices">Additional services</label>
+                                <textarea class="form-control" id="additionalServices" rows="3">Airsoft (2 pax)</textarea>
                             </div>
                         </div>
-                        <div class="panel-group" style="margin-bottom:2em;">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h6 class="panel-title">
-                                        <a class="check-out-form" data-toggle="collapse" href="#collapse1">Accompanying guests</a>
-                                    </h6>
-                                </div>
-                                <div id="collapse1" class="panel-collapse collapse">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Ian Jemuel Culanag</li>
-                                        <li class="list-group-item">Albren Jr. Cundangan</li>
-                                    </ul>
+                        <hr class="mb-4">
+                        <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
+                        <div class="form-group row">
+                            <div class="col-md-4 mb-1">
+                                <label for="firstName">First name</label>
+                                <input class="form-control" type="text" id="firstName" placeholder="" value="Ian Jemuel">
+                            </div>
+                            <div class="col-md-5 mb-1">
+                                <label for="lastName">Last name</label>
+                                <input class="form-control" type="text" id="lastName" placeholder="" value="Culanag">
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label for="contactNumber">Contact number</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="text" id="contactNumber" placeholder="" value="09709849000">
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-md-4 mb-1">
+                                <label for="firstName">First name</label>
+                                <input class="form-control" type="text" id="firstName" placeholder="" value="Albren Jr.">
+                            </div>
+                            <div class="col-md-5 mb-1">
+                                <label for="lastName">Last name</label>
+                                <input class="form-control" type="text" id="lastName" placeholder="" value="Cundangan">
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label for="contactNumber">Contact number</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="text" id="contactNumber" placeholder="" value="09789249000">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
                         <div style="float:right;">
-                            <button class="btn btn-info" style="width:10em;" type="submit">Check-out</button>
+                            <button class="btn btn-info" style="width:10em;" type="submit">Save Changes</button>
                             <button class="btn btn-danger" style="width:10em;" type="submit">Cancel</button>
                         </div>
                     </form>

@@ -14,7 +14,9 @@ class CreateFoodsTable extends Migration
     public function up()
     {
         Schema::create('foods', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('productID')->unsigned();
+            $table->enum('foodCategory',['all day breakfast','appetizers','pasta','pancit','bread','rice bowls']);
+            $table->foreign('productID')->references('id')->on('Products');
             $table->timestamps();
         });
     }
