@@ -36,48 +36,8 @@ body {
 .borderless td, .borderless th {
     border: none;
 }
-/*Sidebar*/
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-}
-
-a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.navbar {
-    background: rgb(255, 255, 255);
-    border: none;
-    border-radius: 0;
-    margin-bottom: 20px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-btn {
-    box-shadow: none;
-    outline: none !important;
-    border: none;
-    background-color: #4e4e4e;
-}
-
-.line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed rgb(14, 13, 13);
-    margin: 40px 0;
-}
-
-i, span {
-    display: inline-block;
-}
-
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
+/* Sidebar */
 .wrapper {
     display: flex;
     align-items: stretch;
@@ -162,4 +122,13 @@ i, span {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+}
+
+/* Guest check-out */
+.check-out-form {
+    font-size: 0.90em;
+}
+
+.form-control {
+    font-size: 0.90em;
 }
