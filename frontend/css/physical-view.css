@@ -36,99 +36,130 @@ body {
 .borderless td, .borderless th {
     border: none;
 }
+/*Sidebar*/
 
-/* Side navbar */
- /* Side navbar */
- .sidenav {
-  height: 100%;
-  width: 18%;
-  position: fixed;
-  z-index: ;
-  top: 0;
-  left: 0;
-  background-color: rgb(20, 20, 20);
-  overflow-x: hidden;
-  padding-top: 25px;
-  padding-right: 10px;
-}
-.sidenav h6{
-  margin-top: 170%;
-  float: right;
-  font-size: .9em;
-  font-family: "Times New Roman", Times, serif;
-  padding-left: 12px;
-  width: 120%;
-  border-top: 2px ridge gray;
-  padding-top: 5px;
-  width: 95%;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
 }
 
-.sidenav p{
-  font-style: oblique;
-  font-weight: bold;
-  font-size: 1.5em;
-  color: rgb(241, 249, 255);
-  font-family: "Times New Roman", Times, serif;
-  float: right;
-  margin-bottom: 30%;
-
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
-.sidenav a {
-  font-style: oblique;
-  font-family: "Times New Roman", Times, serif;
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 1.2em;
-  color: #ffffff;
-  display: block;
+.navbar {
+    background: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.sidenav a:hover {
-  color: #6df75b;
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+    background-color: #4e4e4e;
 }
 
-.sidenav li{
-padding-left: 10%;
-width: 95%;
-border-bottom: 2px ridge gray;
-
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed rgb(14, 13, 13);
+    margin: 40px 0;
 }
 
-.main {
-  margin-left: 160px;
-  font-size: 28px;
-  padding: 0px 10px;
+i, span {
+    display: inline-block;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
 }
 
-.img {
-    height: 2em;
-    width: 2em;
-    border-radius: 50%;
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: rgb(41, 41, 43);
+    color: rgb(255, 255, 255);
+    transition: all 0.3s;
 }
 
-/* Log In */
-.container h2{
-  font-style: oblique;
-  font-family: "Times New Roman", Times, serif;
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 3em;
-  color: #ffffff;
-  display: block;
+#sidebar.active {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
 }
 
-.container p{
-  font-style: oblique;
-  font-size: 1em;
-  color: "blue";
-  font-family: "Times New Roman", Times, serif;
+#sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
+    display: none;
 }
 
+#sidebar.active .sidebar-header strong {
+    display: block;
+}
 
- 
+#sidebar ul li a {
+    text-align: left;
+}
+
+#sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+#sidebar.active ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+#sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #383838;
+}
+
+#sidebar .sidebar-header strong {
+    display: none;
+    font-size: 1.8em;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #4e4e4e;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: rgb(82, 82, 83);
+    background: #fff;
+}
+#sidebar ul li a i {
+    margin-right: 10px;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #4e4e4e;
+}
+#content {
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
