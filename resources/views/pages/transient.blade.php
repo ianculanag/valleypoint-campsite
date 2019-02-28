@@ -65,9 +65,9 @@
         </div>
     </div>
 
-        <div class="container">
-            <h5 class="unit-heading">6 pax</h5> 
-                <div class="row"> 
+    <div class="container">
+        <h5 class="unit-heading">6 pax</h5> 
+            <div class="row"> 
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 6)           
             <div class="card" style="width: 18rem;">
@@ -109,9 +109,9 @@
         </div>
     </div>
 
-        <div class="container">
-            <h5 class="unit-heading">10 pax</h5> 
-                <div class="row"> 
+    <div class="container">
+        <h5 class="unit-heading">10 pax</h5> 
+            <div class="row"> 
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 10)           
             <div class="card" style="width: 18rem;">
@@ -150,8 +150,13 @@
             </div>
             @endif
         @endforeach
+        @else
+            <div class="container" style="padding-top:1em; padding-left:2em;">
+                <p>No units found</p>
+            </div>
+        @endif
+            </div>
         </div>
-    </div>
     </div>
 
 <!-- Details Modal -->
@@ -324,8 +329,5 @@
         });
     }); 
 </script>
-    @else
-        <p>No units found</p>
-    @endif
 @endsection
  
