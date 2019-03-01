@@ -3,7 +3,7 @@
 @section('content')
         <div class="container">
             <div class="py-5 text-center">
-                    <img src="{{asset('logo.png')}}" style="width: 10em;">
+                    <img src="{{asset('logo.jpg')}}" style="width: 12em;">
                     <h2>Login to Valleypoint Campsite</h2>
             </div>
         </div>
