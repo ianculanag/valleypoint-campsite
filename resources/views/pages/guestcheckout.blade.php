@@ -30,7 +30,7 @@
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
                                 <td style="text-align:right;">{{$guestDetails->price}}</td>
                             </tr>
-                            <!--tr>
+                            <tr>
                                 <td>Airsoft</td>
                                 <td style="text-align:right;">3</td>
                                 <td style="text-align:right;">4500.00</td>
@@ -38,7 +38,7 @@
                             <tr>
                                 <th colspan="2" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">8500.00</th>
-                            </tr-->
+                            </tr>
                         </tbody>
                     </table>
                 </form>
@@ -112,13 +112,13 @@
 
                                     $diff = $later->diff($earlier)->format("%a");*/
                                 @endphp
-                            <input class="form-control" type="number" id="numberOfPax" placeholder="" value="{{$earlier}}" disabled>
+                            <input class="form-control" type="number" id="numberOfPax" placeholder="" value="1" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12 mb-1 form-group">
                             <label for="additionalServices">Additional charges</label>
-                            <textarea class="form-control" id="additionalServices" rows="3" disabled><!--Airsoft (2 pax)--></textarea>
+                            <textarea class="form-control" id="additionalServices" rows="3" disabled>Airsoft (2 pax)</textarea>
                         </div>
                     </div>
                     <div class="panel-group" style="margin-bottom:2em;">
