@@ -18,6 +18,7 @@ Route::get('/pos', 'PagesController@pos');
 //Route::resource('guests', 'GuestsController');
 Route::get('/transient-backpacker', 'UnitsController@transientBackpacker'); 
 Route::get('/glamping', 'UnitsController@glamping'); 
+Route::get('/guestcheckout/{id}', 'UnitsController@loadGuestDetails');
 
 //Route::get('/addusers', 'PagesController@addusers');
 Route::resource('staff', 'StaffController');

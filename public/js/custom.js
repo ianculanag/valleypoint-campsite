@@ -8,10 +8,10 @@ jQuery(document).ready(function(){
 
             let hr = document.createElement('HR');
 
-            let tentH5 =  document.createElement('H5');
-            tentH5.classList.add('text-center');
-            let tentH5Body = document.createTextNode('Tent Details');
-            tentH5.appendChild(tentH5Body);
+            let unitH5 =  document.createElement('H5');
+            unitH5.classList.add('text-center');
+            let unitH5Body = document.createTextNode('Unit Details');
+            unitH5.appendChild(unitH5Body);
             
             //first div
             let firstDiv = document.createElement('DIV');
@@ -24,27 +24,27 @@ jQuery(document).ready(function(){
 
             let firstTableBody = document.createElement('TBODY');
             
-            let tentID = document.createElement('TR');
-            let tentIDLabel = document.createElement('TD');
-            let tentIDLabelData = document.createTextNode('Tent ID: ');
-            tentIDLabel.appendChild(tentIDLabelData);
-            tentIDLabel.style.width='35%';
-            let tentIDBody = document.createElement('TD');
-            let tentIDBodyData = document.createTextNode(data[0].unitID);
-            tentIDBody.appendChild(tentIDBodyData);
-            tentID.appendChild(tentIDLabel);
-            tentID.appendChild(tentIDBody);
+            let unitID = document.createElement('TR');
+            let unitIDLabel = document.createElement('TD');
+            let unitIDLabelData = document.createTextNode('Unit ID: ');
+            unitIDLabel.appendChild(unitIDLabelData);
+            unitIDLabel.style.width='35%';
+            let unitIDBody = document.createElement('TD');
+            let unitIDBodyData = document.createTextNode(data[0].unitID);
+            unitIDBody.appendChild(unitIDBodyData);
+            unitID.appendChild(unitIDLabel);
+            unitID.appendChild(unitIDBody);
             
-            let tentNumber = document.createElement('TR');
-            let tentNumberLabel = document.createElement('TD');
-            let tentNumberLabelData = document.createTextNode('Tent Number: ');
-            tentNumberLabel.appendChild(tentNumberLabelData);
-            tentNumberLabel.style.width='35%';
-            let tentNumberBody = document.createElement('TD');
-            let tentNumberBodyData = document.createTextNode(data[0].unitNumber);
-            tentNumberBody.appendChild(tentNumberBodyData);
-            tentNumber.appendChild(tentNumberLabel);
-            tentNumber.appendChild(tentNumberBody);
+            let unitNumber = document.createElement('TR');
+            let unitNumberLabel = document.createElement('TD');
+            let unitNumberLabelData = document.createTextNode('Unit Number: ');
+            unitNumberLabel.appendChild(unitNumberLabelData);
+            unitNumberLabel.style.width='35%';
+            let unitNumberBody = document.createElement('TD');
+            let unitNumberBodyData = document.createTextNode(data[0].unitNumber);
+            unitNumberBody.appendChild(unitNumberBodyData);
+            unitNumber.appendChild(unitNumberLabel);
+            unitNumber.appendChild(unitNumberBody);
             
             let capacity = document.createElement('TR');
             let capacityLabel = document.createElement('TD');
@@ -57,10 +57,10 @@ jQuery(document).ready(function(){
             capacity.appendChild(capacityLabel);
             capacity.appendChild(capacityBody);
 
-            firstDiv.appendChild(tentH5);
+            firstDiv.appendChild(unitH5);
 
-            firstTableBody.appendChild(tentID); 
-            firstTableBody.appendChild(tentNumber);
+            firstTableBody.appendChild(unitID); 
+            firstTableBody.appendChild(unitNumber);
             firstTableBody.appendChild(capacity);
             firstTable.appendChild(firstTableBody);
             firstDiv.appendChild(firstTable);
@@ -82,7 +82,7 @@ jQuery(document).ready(function(){
 
             let secondTableBody = document.createElement('TBODY');
             
-            let guestID = document.createElement('TR');
+            /*let guestID = document.createElement('TR');
             let guestIDLabel = document.createElement('TD');
             let guestIDLabelData = document.createTextNode('Guest ID: ');
             guestIDLabel.appendChild(guestIDLabelData);
@@ -91,7 +91,7 @@ jQuery(document).ready(function(){
             let guestIDBodyData = document.createTextNode(data[0].id);
             guestIDBody.appendChild(guestIDBodyData);
             guestID.appendChild(guestIDLabel);
-            guestID.appendChild(guestIDBody);
+            guestID.appendChild(guestIDBody);*/
             
             let guestName = document.createElement('TR');
             let guestNameLabel = document.createElement('TD');
@@ -131,7 +131,7 @@ jQuery(document).ready(function(){
 
             secondDiv.appendChild(guestH5);
 
-            secondTableBody.appendChild(guestID); 
+            //secondTableBody.appendChild(guestID); 
             secondTableBody.appendChild(guestName);
             secondTableBody.appendChild(pax);
             secondTableBody.appendChild(checkIn);

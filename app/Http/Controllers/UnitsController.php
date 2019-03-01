@@ -144,4 +144,27 @@ class UnitsController extends Controller
         ->get(['units.id AS unitID', 'guests.id AS guestID']);
         //}
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function loadGuestDetails($id)
+    {
+        //if(Request::ajax()){
+        //return 'getRequest has loaded completely';
+        $guest = DB::table('units') //get units table
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
+        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
+        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID') // join with guests
+        ->select('units.*', 'accommodations.*', 'guests.*', 'guest_stays.*') // select everything in units, accommodations, and guests
+        ->where('guests.id', '=', $id)
+        ->get(['units.id AS unitID', 'guests.id AS guestID']);
+        //return $guest;
+        return view('pages.guestcheckout')->with('guest', $guest);
+        //}
+    }
+
 }

@@ -35,7 +35,7 @@
                         <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
                     </h5>
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                    <p class="card-text">{{$unit->id}}</p>
+                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
                 @elseif($unit->status == 'reserved')
                     <h5 class="card-title">
@@ -43,7 +43,7 @@
                         <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
                     </h5>
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                    <p class="card-text">{{$unit->id}}</p>
+                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
 
                 @else
                     <h5 class="card-title">
@@ -94,19 +94,6 @@
         </div>
     </div>
 </div>
-
-        <!--h2>tenthello</h2-->
-        {{--@foreach($units as $unit)
-        {{--insert frontend here--
-        @if($unit->unitType == 'tent')
-        <div class="card">
-                <h3><a href="/units/{{$unit->id}}">{{$unit->unitNumber}}<a></h3>
-                <p>Capacity: {{$unit->capacity}}</p>
-                <p>Status: {{$unit->status}}</p>
-                <p>Type: {{$unit->unitType}}</p>
-        </div>
-        @endif--}}
-        {{--$units->links()--}}
-
+<script src="{{ asset('js/app.js') }}"></script>
 @endsection
  
