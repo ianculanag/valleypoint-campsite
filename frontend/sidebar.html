@@ -7,7 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Sidebar</title>
   <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+  <link href="/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <!-- Our Custom CSS -->
   <link rel="stylesheet" href="css/physical-view.css"> </head>
   
@@ -42,7 +45,7 @@
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
-      <nav class="navbar navbar-default w-50">
+      <!--nav class="navbar navbar-default w-50">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" id="sidebarCollapse" class="btn btn-primary navbar-btn">
@@ -53,7 +56,197 @@
             
           </div>
         </div>
-      </nav>
+      </nav-->
+    <!--div class="py-5 bg-light mr-auto w-25"-->
+        <div class="container main-content" style="padding-top: 1em;">
+            <div class="col-md-12 text-center lodging-tabs">
+                <nav class="nav nav-pills centered-pills">
+                    <a class="nav-item nav-link active" href="#">Physical View</a>
+                    <a class="nav-item nav-link" href="#">Calendar View</a>
+                </nav>
+            </div>
+            <div class="container lodging-tabs">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Glamping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="physical view (transient-backpacker).html">Transient Backpacker</a>
+                    </li>
+                </ul>
+            </div>
+        <div class="container">
+            <div class="row">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 1</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn" class="btn btn-info" data-toggle="modal" data-target="#view-details">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 2</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 3</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 4</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 5</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 6</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 7</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Tent 8</h5>
+                        <p class="card-text">Guest Name</p>
+                        <p class="card-text">Guest ID</p>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-info logding-details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      <!--div class="container">
+        <div class="row">
+          <h1 class="text-center text-uppercase text-primary">Available Units</h1>
+          <div class="col-md-4 p-3">
+            <img class="img-fluid d-block rounded-circle mx-auto" src="images/29468922_x.jpeg" width="300" height="200">
+            <p>
+              <b>Azalea Residences</b>
+              <br>Baguio, 1.1 km to Baguio City Center</p>
+            <p>Location: &nbsp;
+              <b>7 Leonard Wood Rd, Baguio, 2600 Benguet</b>
+              <br> Price: &nbsp; </p>
+            <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+            <br>
+            <br> </div>
+          <div class="col-md-4 p-3">
+            <img class="img-fluid d-block rounded-circle mx-auto" src="images/137627804_x.jpeg" width="300" height="200">
+            <p>
+              <b>Microtel Inn and Suites by Wyndham Baguio</b>
+              <br>Baguio, 0.7 km to Baguio City Center</p>
+            <p>Location: &nbsp;
+              <b>Upper Session Rd, Baguio, 2600 Benguet</b>
+              <br> Price: &nbsp; </p>
+            <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+            <br>
+            <br> </div>
+          <div class="col-md-4 p-3">
+            <img class="img-fluid d-block rounded-circle mx-auto" src="images/141682166_x.jpeg" height="200" width="300">
+            <p>
+              <b>Elizabeth Baguio</b>
+              <br>Baguio, 2.7 km to Baguio City Center</p>
+            <p>Location: &nbsp;
+              <b>1 J.Felipe St, Baguio, Benguet</b>
+              <br> Price: &nbsp; </p>
+            <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+            <br>
+            <br> </div>
+        </div>
+        <div class="col-md-4 p-3">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="images/196717348_x.jpeg" width="300" height="200">
+          <p>
+            <b>The Manor At Camp John Hay</b>
+            <br>Baguio, 2.8 km to Baguio City Center</p>
+          <p>Location: &nbsp;
+            <b>Camp John Hay, Ordonio Dr, Baguio, 2600 Benguet</b>
+            <br> Price: &nbsp; </p>
+          <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+          <br>
+          <br> </div>
+        <div class="col-md-4 p-3">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="images/198934520_x.jpeg" width="300" height="200">
+          <p>
+            <b>Prestige - Bonbel Condominium</b>
+            <br>Baguio, 2.0 km to The Manor At Camp John Hay</p>
+          <p>Location: &nbsp;
+            <b>1 Navy Base Extension Road</b>
+            <br> Price: &nbsp; </p>
+          <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+          <br>
+          <br> </div>
+        <div class="col-md-4 p-3">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="images/201874276_x.jpeg" height="200" width="300">
+          <p>
+            <b>La Casa Bianca</b>
+            <br>Baguio, 1.9 km to The Manor At Camp John Hay</p>
+          <p>Location: &nbsp;
+            <b>Leonard Wood Rd, Baguio, Benguet</b>
+            <br> Price: &nbsp; </p>
+          <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+          <br>
+          <br> </div>
+        <div class="col-md-4 p-3">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="images/198939004_x.jpeg" height="200" width="300">
+          <p>
+            <b>Mountain Lodge</b>
+            <br>Baguio, 1.5 km to Baguio City Center</p>
+          <p>Location: &nbsp;
+            <b>27 Leonard Wood Road, Baguio, Benguet, Philippines</b>
+            <br> Price: &nbsp; </p>
+          <a class="btn btn-lg btn-primary" href="reserve.html">Reserve/Avail</a>
+          <br>
+          <br> </div>
+      </div>
+    </div-->
       
       <!-- jQuery CDN -->
       <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
