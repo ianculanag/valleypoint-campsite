@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
-        $title = 'Valleypoint Campsite Homepage';
+        //$title = 'Valleypoint Campsite Homepage';
         //return view('pages.index', compact('title')); 
-        return view('pages.index')->with('title', $title);
+        //return view('pages.index')->with('title', $title);
+        return redirect('/glamping');
+        
     }
 
     public function lodging(){

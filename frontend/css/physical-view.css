@@ -47,10 +47,12 @@ body {
     min-width: 250px;
     max-width: 250px;
     background: rgb(41, 41, 43);
+    background: rgb(48,62,77);
     color: rgb(255, 255, 255);
     transition: all 0.3s;
     position:fixed;
     min-height:100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-content {
@@ -95,6 +97,7 @@ body {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #383838;
+    background: rgb(44,56,73);
 }
 
 #sidebar .sidebar-header strong {
@@ -112,10 +115,13 @@ body {
     font-size: 1.1em;
     display: block;
     color: #17a2b8;
+    color: rgb(153,160,168);
 }
 #sidebar ul li a:hover {
     color: rgb(82, 82, 83);
+    color: rgb(153,160,168);
     background: #fff;
+    background: rgb(74,86,100);
     text-decoration: none;
 }
 #sidebar ul li a i {
@@ -125,6 +131,7 @@ body {
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
     background: #4e4e4e;
+    background: rgb(102,152,200);
 }
 #content {
     padding: 20px;

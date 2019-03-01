@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.logapp')
 
 @section('content')
 <div class="container">
@@ -72,7 +72,7 @@
                     <select name="role" class="custom-select d-block w-100" required="required">
                         <option value="">Select Role:</option>
                         <option value="general">General Manager</option>
-                        <option value="lodging">Lodging</option>
+                        <option value="lodging">Lodging Manager</option>
                         <option value="cashier">Cashier</option>
                     </select>
                 </div>
