@@ -3,7 +3,8 @@
 @section('content')
         <div class="container">
             <div class="py-5 text-center">
-                    <h2>Log in</h2>
+                    <img src="{{asset('logo.png')}}" style="width: 10em;">
+                    <h2>Login to Valleypoint Campsite</h2>
             </div>
         </div>
         <div class="container center-block">
@@ -42,4 +43,6 @@
                 </div>
             </form>
         </div>  
+    </div>
+</div>
 @endsection
