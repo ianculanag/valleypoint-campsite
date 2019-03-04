@@ -13,7 +13,7 @@
 
                 <div class="mb-3 col-md-4">
                     <div class="form-group">
-                <input id="username" type="text" placeholder="Username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                <input id="username" type="text" placeholder="Username" maxlength="25" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
                 @if ($errors->has('username'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('username') }}</strong>
@@ -22,7 +22,7 @@
             </div>
 
                     <div class="form-group">
-                            <input id="password" type="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required><br>
+                            <input id="password" type="password" placeholder="Password" maxlength="25" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required><br>
                             @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('password') }}</strong>
