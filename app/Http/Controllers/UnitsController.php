@@ -44,7 +44,7 @@ class UnitsController extends Controller
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
         ->select('units.*', 'accommodations.*', 'guests.*')
         ->get(['units.id AS unitID', 'guests.id AS guestID']);
-        return view('pages.transient')->with('units', $units);
+        return view('lodging.transient')->with('units', $units);
     }
 
     /**
@@ -60,7 +60,7 @@ class UnitsController extends Controller
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
         ->select('units.*', 'accommodations.*', 'guests.*')
         ->get();
-        return view('pages.glamping')->with('units', $units);
+        return view('lodging.glamping')->with('units', $units);
     }
 
     /**
@@ -174,7 +174,7 @@ class UnitsController extends Controller
         ->where('guests.id', '=', $id)
         ->get(['units.id AS unitID', 'guests.id AS guestID']);
         //return $guest;
-        return view('pages.guestcheckout')->with('guest', $guest);
+        return view('lodging.guestcheckout')->with('guest', $guest);
         //}
     }
 

@@ -25,7 +25,8 @@
 
         @foreach($units as $unit)
             
-            @if($unit->unitType == 'tent')          
+            @if($unit->unitType == 'tent')   
+            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
             <div class="card" style="width:18rem;">
                 <div class="card-body">
 
@@ -50,18 +51,13 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    <p class="card-text">Unit available</p>
+                    <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                     <p></p>
 
                 @endif
-                <div class="text-right">
-                    <!--a href="/units/{{--$unit->id--}}"-->
-                    <button type="button" class="btn btn-info logding-details-btn load-details"
-                    data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
-                    <!--/a-->
                 </div>
             </div>
-        </div>
+            </a>
             @endif
         @endforeach
         @else

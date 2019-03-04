@@ -26,7 +26,7 @@
         
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 4)           
-            <a data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>
+            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                             
@@ -51,7 +51,7 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text">Unit available</p>
+                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif
@@ -67,7 +67,8 @@
         <h5 class="unit-heading">6 pax</h5> 
             <div class="row"> 
         @foreach($units as $unit)   
-            @if($unit->unitType == 'room' && $unit->capacity == 6)           
+            @if($unit->unitType == 'room' && $unit->capacity == 6)   
+            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>        
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                             
@@ -92,16 +93,13 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text">Unit available</p>
+                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif
-                    <div class="text-right">
-                        <button type="button" class="btn btn-info logding-details-btn load-details"
-                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
-                    </div>
                 </div>
             </div>
+            </a>
             @endif
         @endforeach
         </div>
@@ -111,7 +109,8 @@
         <h5 class="unit-heading">10 pax</h5> 
             <div class="row"> 
         @foreach($units as $unit)   
-            @if($unit->unitType == 'room' && $unit->capacity == 10)           
+            @if($unit->unitType == 'room' && $unit->capacity == 10) 
+            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>          
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                             
@@ -136,16 +135,13 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text">Unit available</p>
+                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif
-                    <div class="text-right">
-                        <button type="button" class="btn btn-info logding-details-btn load-details"
-                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
-                    </div>
                 </div>
             </div>
+            </a>
             @endif
         @endforeach
         @else
