@@ -177,5 +177,4 @@ class UnitsController extends Controller
         return view('lodging.guestcheckout')->with('guest', $guest);
         //}
     }
-
 }

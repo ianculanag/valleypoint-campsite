@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Guests;
 use App\Accommodation;
+use App\GuestStay;
+use Auth;
 
 class GuestsController extends Controller
 {
@@ -127,5 +129,50 @@ class GuestsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkin(Request $request)
+    {
+        //
+        $guest = new Guests;
+        $guest->lastName = $request->input('lastName');
+        $guest->firstName = $request->input('firstName');
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->numberOfPax = $request->input('numberOfPax');
+        $guest->save();
+
+        $accommodation = new Accommodation;        
+        $accommodation->accommodationType = 'glamping';
+        $accommodation->price = '3500';
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->userID = Auth::user()->id;
+        $accommodation->unitID = $request->input('unitID');                
+        $accommodation->save();
+
+        $guestStay = new GuestStay;
+        $guestStay->guestID = $guest->id;
+        $guestStay->accommodationID = $accommodation->id;
+        //$guestStay->checkinDatetime = $request->input('checkinDate')+' '+$request->input('checkinTime');
+        //$guestStay->checkoutDatetime = $request->input('checkoutDate')+' '+$request->input('checkoutTime');
+        $guestStay->checkinDatetime = '2019-03-27 15:45:21';
+        $guestStay->checkoutDatetime = '2019-03-29 15:45:21';
+        return redirect('/glamping');
+    }
+
+    /**
+     * Show the check in form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCheckinForm($unitID)
+    {
+        return view('lodging.checkin')->with('unitID', $unitID);
     }
 }

@@ -32,3 +32,8 @@ Auth::routes();
 Route::get('/dashboard', 'UnitsController@glamping');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+
+//Check-in guests
+Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
+Route::post('/checkinAt', 'GuestsController@checkin');
