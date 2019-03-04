@@ -43,6 +43,64 @@ class GuestsController extends Controller
     }
 
     /**
+     *  Add reservation guests
+     * 
+     * 
+     */
+
+    public function addReservation(Request $request)
+    {
+        $guest = new Guests;
+        $guest->lastname = $request->input('lastName');
+        $guest->firstname = $request->input('firstName');
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->numberofPax = $request->input('numberOfPax');
+        $guest->save();
+
+        $accommodation = new Accomodation;
+        $accommodation->accomodationType = 'transient';
+        $accomodation->price = '3500';
+        $accommodation->paymentStatus = 'pending';
+        $accomodation->userID = Auth::user()->id;
+        $accomodation->save();
+
+        $guestStay = new GuestStay;
+        $guestStay ->guestID = $guest->id;
+        $guestStay ->accomodationID = $accommodation->id;
+        $guestStay ->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $guestStay ->checkoutDatetime = $request->input('checkoutDate'). ' '.$request->input('checkoutTime');
+        $guestStay->save();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addGuest()
+    {
+        //
+        $guest = new Guests;
+        $guest->lastName = 'Tagudar';
+        $guest->firstName = 'Vince';
+        $guest->contactNumber = '09087018753';
+        $guest->numberOfPax = '2';
+        $guest->save();
+        
+        $accommodation = new Accommodation;
+        $accommodation->accommodationType = 'transient';
+        $accommodation->price = '3500';
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->staffID = '1';
+        $accommodation->unitID = '3';
+        
+        $guest->accommodation()->save($accommodation);
+
+        return 'Hello';
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id

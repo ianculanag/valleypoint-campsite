@@ -10,21 +10,28 @@
             </div>
 
             <div class="col-sm-4 offset-sm-4 text-center">
-                <form action="" class="form-inlin justify-content-center">
-                    <div class="form-group">
+                <form  method="POST" action="/addReservation" class="form-inlin justify-content-center">
+                    @csrf
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                
+                    <!--div class="form-group">
                         <input type="text" required="required" class="form-control" id="inputGuestid" placeholder="GuestID">
+                    </div-->
+
+                    <div class="form-group" col-md-6>
+                        <input type="text" name="unitID" required="required" class="form-control" style="display:none" value={{$unitID}}>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <input type="text" required="required" class="form-control" id="inputFirstname" placeholder="First name">
+                                <input type="text" name="firstName" required="required" class="form-control" id="inputFirstname" placeholder="First name">
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="text" required="required" class="form-control" id="inputLastname" placeholder="Last name">
-                        </div>  
-                    </div> 
-
-                    <div class="form-group">
+                                <input type="text" required="required" class="form-control" id="inputLastname" placeholder="Last name">
+                            </div>  
+                    </div>
+                      <div class="form-group">
                         <input type="text" required="required" class="form-control" id="inputContactnum" placeholder="Contact Number">
                     </div>
                     <div class="form-group">
