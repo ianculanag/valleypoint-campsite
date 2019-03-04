@@ -26,11 +26,11 @@
         @foreach($units as $unit)
             
             @if($unit->unitType == 'tent')   
-            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
-            <div class="card" style="width:18rem;">
-                <div class="card-body">
-
+            
                 @if($unit->status == 'occupied')
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
+                    <div class="card" style="width:18rem;">
+                        <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
                         <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
@@ -39,6 +39,9 @@
                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
                 @elseif($unit->status == 'reserved')
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
+                    <div class="card" style="width:18rem;">
+                        <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
                         <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
@@ -47,6 +50,9 @@
                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
 
                 @else
+                <a href="/checkin/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>       
+                    <div class="card" style="width:18rem;">
+                        <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>

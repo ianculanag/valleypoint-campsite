@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GuestStay extends Model
 {
     // Table Name
-    protected $table = 'guests_stays';
+    protected $table = 'guest_stays';
     // Primary Key
     public $primaryKey = 'id';
     // Timestamps

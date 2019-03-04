@@ -58,9 +58,17 @@ class UnitsController extends Controller
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
         ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
-        ->select('units.*', 'accommodations.*', 'guests.*')
+        ->select('units.*', 'units.id AS unitID', 'guest_stays.*', 'guests.id AS guestID', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        'accommodations.accommodationType', 'accommodations.price', 'accommodations.paymentStatus',
+        'guest_stays.checkinDatetime', 'guest_stays.checkoutDatetime','accommodations.id AS accommodationsID' )
         ->get();
+        //->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
+        //->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
+        //->select('units.*', 'accommodations.*', 'guests.*')
+        //->get(['units.id AS unitID', 'guests.id AS guestID']);
         return view('lodging.glamping')->with('units', $units);
+        //return $units;
     }
 
     /**

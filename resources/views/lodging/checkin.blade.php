@@ -7,7 +7,7 @@
             <h2>Check-in Guests</h2>
     </div>
 
-    <div class="col-sm-4 offset-sm-4 text-left">
+    <div class="col-sm-5 offset-sm-4 text-left">
         <form method="POST" action="/checkinAt" class="justify-content-center">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -138,7 +138,7 @@
                     <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="time" name="checkoutDate" required="required" class="form-control" id="time">
+                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             <!--div class="row">

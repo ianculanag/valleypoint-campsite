@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Guests;
 use App\Accommodation;
 use App\GuestStay;
+use App\Units;
 use Auth;
 
 class GuestsController extends Controller
@@ -39,51 +40,6 @@ class GuestsController extends Controller
     public function store(Request $request)
     {
         //
-        $guest = new Guests;
-        $guest->lastName = 'Tagudar';
-        $guest->firstName = 'Vince';
-        $guest->contactNumber = '09087018753';
-        $guest->numberOfPax = '2';
-        $guest->save();
-        
-        $accommodation = new Accommodation;
-        $accommodation->accommodationType = 'transient';
-        $accommodation->price = '3500';
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->staffID = '1';
-        $accommodation->unitID = '3';
-        
-        $guest->accommodation()->save($accommodation);
-
-        return 'Hello';
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addGuest()
-    {
-        //
-        $guest = new Guests;
-        $guest->lastName = 'Tagudar';
-        $guest->firstName = 'Vince';
-        $guest->contactNumber = '09087018753';
-        $guest->numberOfPax = '2';
-        $guest->save();
-        
-        $accommodation = new Accommodation;
-        $accommodation->accommodationType = 'transient';
-        $accommodation->price = '3500';
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->staffID = '1';
-        $accommodation->unitID = '3';
-        
-        $guest->accommodation()->save($accommodation);
-
-        return 'Hello';
     }
 
     /**
@@ -159,10 +115,17 @@ class GuestsController extends Controller
         $guestStay = new GuestStay;
         $guestStay->guestID = $guest->id;
         $guestStay->accommodationID = $accommodation->id;
-        //$guestStay->checkinDatetime = $request->input('checkinDate')+' '+$request->input('checkinTime');
-        //$guestStay->checkoutDatetime = $request->input('checkoutDate')+' '+$request->input('checkoutTime');
-        $guestStay->checkinDatetime = '2019-03-27 15:45:21';
-        $guestStay->checkoutDatetime = '2019-03-29 15:45:21';
+        $guestStay->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $guestStay->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime');
+        //$guestStay->checkinDatetime = '2019-03-27 15:45:21';
+        //$guestStay->checkoutDatetime = '2019-03-29 15:45:21';
+        $guestStay->save();
+
+        $unit = Units::find($request->input('unitID'));
+        $unit->update([
+            'status' => 'occupied'
+        ]);
+
         return redirect('/glamping');
     }
 

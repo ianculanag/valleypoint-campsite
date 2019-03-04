@@ -10693,6 +10693,11 @@ a.text-dark:focus {
   border: none !important;
 }
 
+h5.card-title {
+  text-decoration: none !important;
+  color: #282828 !important;
+}
+
 /* Side Bar Glyphicons */
 
 body {

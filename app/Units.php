@@ -13,6 +13,15 @@ class Units extends Model
     // Timestamps
     public $timestamps = true;
 
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status',
+    ];
+
     // Foreign key to
     public function accommodation()
     {
