@@ -27,7 +27,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 4)           
             <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;height:7.5em;">
                 <div class="card-body">
                             
                 @if($unit->status == 'occupied') 
@@ -51,7 +51,7 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
+                <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif
@@ -69,7 +69,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 6)   
             <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>        
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;height:7.5em;">
                 <div class="card-body">
                             
                 @if($unit->status == 'occupied') 
@@ -93,7 +93,7 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
+                <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif
@@ -111,7 +111,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 10) 
             <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>          
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;height:7.5em;">
                 <div class="card-body">
                             
                 @if($unit->status == 'occupied') 
@@ -135,7 +135,7 @@
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                 </h5>
-                <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
+                <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                 <p></p>
 
                 @endif

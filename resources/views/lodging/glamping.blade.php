@@ -19,14 +19,14 @@
     </div>
     
     @if(count($units) > 0)
-    <div class="container" style="padding-top: 1em;">
+    <div class="container" style="padding-top:1em;">
         <div class="container">
             <div class="row">  
 
         @foreach($units as $unit)
             
             @if($unit->unitType == 'tent')   
-            
+
                 @if($unit->status == 'occupied')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;">
@@ -57,7 +57,7 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    <p class="card-text" style="color:red; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
+                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                     <p></p>
 
                 @endif

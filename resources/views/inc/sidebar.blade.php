@@ -1,38 +1,48 @@
-<nav id="sidebar">
-    <div class="sidebar-header">
-      <h5> Hi, {{ Auth::user()->name }}!</h5>
-      {{--<h4>Hi, Jhaypee!</h4>--}}
-    </div>
-    <ul class="list-unstyled components">
-      <li class="active">
-        <a href="dashboard.html">
-          <i class="glyphicon glyphicon-dashboard"></i> Dashboard </a>
-      </li>
-      <li>
-        <a href="reservations.html">
-          <i class="glyphicon glyphicon-file"></i> Reservations</a>
-
-        <a href="guests.html">
-          <i class="glyphicon glyphicon-user"></i> Guests </a>
-      </li>
-      <li>
-        <a href="reports.html">
-          <i class="glyphicon glyphicon-print"></i> Reports</a>
-      </li>
-      <li>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="glyphicon glyphicon-log-out"></i> Logout </a>
-          {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>--}}
-
+<nav id="sidebar" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Valleypoint Campsite</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout 
+            </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-        </div>
-      </li>
+        </li>
     </ul>
-  </nav>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            Reservations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Guests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                            Reports
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
