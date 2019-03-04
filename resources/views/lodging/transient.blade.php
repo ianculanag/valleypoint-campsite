@@ -26,6 +26,7 @@
         
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 4)           
+            <a data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                             
@@ -54,12 +55,9 @@
                 <p></p>
 
                 @endif
-                    <div class="text-right">
-                        <button type="button" class="btn btn-info logding-details-btn load-details"
-                        data-toggle="modal" data-target="#view-details" id={{$unit->unitID}}>View Details</button>
-                    </div>
                 </div>
             </div>
+            </a>
             @endif
         @endforeach
         </div>

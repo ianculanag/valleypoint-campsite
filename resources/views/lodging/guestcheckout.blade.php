@@ -101,7 +101,7 @@
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$guestDetails->checkinDatetime}}" disabled>
+                            <input class="form-control" type="date" id="contactNumber" placeholder="" value="{{$guestDetails->checkinDatetime}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 mb-1 form-group">
