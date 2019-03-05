@@ -10672,6 +10672,7 @@ body {
   color: white;
   transition: all 0.3s;
   min-height: 100%;
+  margin-top: 1em;
 }
 
 .sidebar-sticky {
@@ -10749,7 +10750,7 @@ body {
 
 .main-content {
   margin-left: 250px !important;
-  margin-top: 4em;
+  margin-top: 5em;
   width: 81% !important;
 }
 

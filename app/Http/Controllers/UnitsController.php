@@ -54,6 +54,7 @@ class UnitsController extends Controller
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID')
+        ->orderBy('unitID')
         ->get();
         //return $units;
         return view('lodging.transient')->with('units', $units);
@@ -91,6 +92,7 @@ class UnitsController extends Controller
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID')
+        ->orderBy('unitID')
         ->get();
         //return $units;
         return view('lodging.glamping')->with('units', $units);

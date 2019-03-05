@@ -163,6 +163,69 @@ class CreateUnitsTable extends Migration
         $unit20->capacity = '4';
         $unit20->status = 'available';
         $unit20->save();
+
+        $unit21 = new Units;
+        $unit21->unitNumber = 'Room1';
+        $unit21->unitType = 'room';
+        $unit21->capacity = '4';
+        $unit21->status = 'available';
+        $unit21->save();
+
+        $unit22 = new Units;
+        $unit22->unitNumber = 'Room2';
+        $unit22->unitType = 'room';
+        $unit22->capacity = '4';
+        $unit22->status = 'available';
+        $unit22->save();
+
+        $unit23 = new Units;
+        $unit23->unitNumber = 'Room3';
+        $unit23->unitType = 'room';
+        $unit23->capacity = '4';
+        $unit23->status = 'available';
+        $unit23->save();
+
+        $unit24 = new Units;
+        $unit24->unitNumber = 'Room4';
+        $unit24->unitType = 'room';
+        $unit24->capacity = '6';
+        $unit24->status = 'available';
+        $unit24->save();
+
+        $unit25 = new Units;
+        $unit25->unitNumber = 'Room5';
+        $unit25->unitType = 'room';
+        $unit25->capacity = '6';
+        $unit25->status = 'available';
+        $unit25->save();
+
+        $unit26 = new Units;
+        $unit26->unitNumber = 'Room6';
+        $unit26->unitType = 'room';
+        $unit26->capacity = '6';
+        $unit26->status = 'available';
+        $unit26->save();
+        
+        $unit27 = new Units;
+        $unit27->unitNumber = 'Room7';
+        $unit27->unitType = 'room';
+        $unit27->capacity = '10';
+        $unit27->status = 'available';
+        $unit27->save();
+
+        $unit28 = new Units;
+        $unit28->unitNumber = 'Room8';
+        $unit28->unitType = 'room';
+        $unit28->capacity = '10';
+        $unit28->status = 'available';
+        $unit28->save();
+
+        $unit29 = new Units;
+        $unit29->unitNumber = 'Room9';
+        $unit29->unitType = 'room';
+        $unit29->capacity = '10';
+        $unit29->status = 'available';
+        $unit29->save();
     }
 
     /**

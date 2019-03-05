@@ -14,6 +14,7 @@ body {
   color: rgb(255, 255, 255);
   transition: all 0.3s;
   min-height:100%;
+  margin-top:1em;
 }
 
 .sidebar-sticky {
@@ -88,7 +89,7 @@ body {
 /* Main container */
 .main-content {
   margin-left: 250px !important;
-  margin-top: 4em;
+  margin-top: 5em;
   width: 81% !important;
 }
 
