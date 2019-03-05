@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.logapp')
 
 @section('content')
     
-@endsection
         <div class="container">
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4" alt="" width="72" height="72">
