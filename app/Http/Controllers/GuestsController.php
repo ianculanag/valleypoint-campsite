@@ -57,7 +57,7 @@ class GuestsController extends Controller
         $guest->numberofPax = $request->input('numberOfPax');
         $guest->save();
 
-        $accommodation = new Accomodation;
+        $accommodation = new Accommodation;
         $accommodation->accomodationType = 'transient';
         $accomodation->price = '3500';
         $accommodation->paymentStatus = 'pending';
@@ -162,22 +162,25 @@ class GuestsController extends Controller
         $guest->numberOfPax = $request->input('numberOfPax');
         $guest->save();
 
-        $accommodation = new Accommodation;        
-        $accommodation->accommodationType = 'glamping';
-        $accommodation->price = '3500';
+        $accommodation = new Accommodation;         
+        $accommodation->guestID = $guest->id;   
+        $accommodation->serviceID = '4';
+        //$accommodation->price = '3500';
         $accommodation->paymentStatus = 'pending';
         $accommodation->userID = Auth::user()->id;
-        $accommodation->unitID = $request->input('unitID');                
+        $accommodation->unitID = $request->input('unitID');
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
         $accommodation->save();
 
-        $guestStay = new GuestStay;
+        /*$guestStay = new GuestStay;
         $guestStay->guestID = $guest->id;
         $guestStay->accommodationID = $accommodation->id;
         $guestStay->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $guestStay->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime');
         //$guestStay->checkinDatetime = '2019-03-27 15:45:21';
         //$guestStay->checkoutDatetime = '2019-03-29 15:45:21';
-        $guestStay->save();
+        $guestStay->save();*/
 
         $unit = Units::find($request->input('unitID'));
         $unit->update([

@@ -24,4 +24,16 @@ class Accommodation extends Model
     {
         return $this->belongsTo('App\Units');
     }
+
+    // References Guests
+    public function guest()
+    {
+        return $this->belongsTo('App\Guests');
+    }
+
+    // References Services
+    public function service()
+    {
+        return $this->belongsTo('App\Services');
+    }
 }

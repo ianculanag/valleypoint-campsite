@@ -14,8 +14,8 @@ class Guests extends Model
     public $timestamps = true;
 
     // Foreign key to
-    public function guestStays()
+    public function accommodation()
     {
-        return $this->hasMany('App\GuestStay');
+        return $this->hasMany('App\Accommodation');
     }
 }
