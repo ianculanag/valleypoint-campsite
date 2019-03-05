@@ -8,6 +8,15 @@
             <a class="nav-item nav-link" style="color:#505050" href="#">Calendar View</a>
         </nav>
     </div>
+    <!--div class="form-group row" style="float:left;">
+        <label class="col-form-label col-md-2" for="accommodationType">Sort by: </label>
+        <div class="col-md-10">
+            <select class="form-control">
+                <option>Capacity</option>
+                <option>Status</option>
+            </select>
+        </div>
+    </div-->
     <div class="container lodging-tabs">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -30,7 +39,7 @@
 
                 @if($unit->status == 'occupied')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
-                    <div class="card" style="width:18rem;">
+                    <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
@@ -41,7 +50,7 @@
 
                 @elseif($unit->status == 'reserved')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
-                    <div class="card" style="width:18rem;">
+                    <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
@@ -52,7 +61,7 @@
 
                 @else
                 <a href="/checkin/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>       
-                    <div class="card" style="width:18rem;">
+                    <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">
                         {{$unit->unitNumber}}
