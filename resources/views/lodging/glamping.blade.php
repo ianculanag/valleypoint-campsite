@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="col-md-12 text-center lodging-tabs">
         <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link active" style="background-color:#505050" href="#">Physical View</a>
@@ -96,6 +97,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
 @endsection
  

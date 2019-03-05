@@ -4,7 +4,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
+  position: fixed !important;
   z-index: 100; 
   padding: 48px 0 0;
   min-width: 250px;
@@ -110,9 +110,13 @@ body {
     font-size: 0.925em;
 }
 
-h5.card-title {
+.card-title {
   text-decoration:none !important;
   color: rgb(40,40,40) !important;
+}
+
+.card-title:hover {
+  color: rgb(70,70,70) !important;
 }
 
 .lodging-tabs {

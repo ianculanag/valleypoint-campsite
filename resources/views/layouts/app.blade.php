@@ -84,7 +84,7 @@
                 @yield('content')
             </div>
     </div>--}}
-    @include('inc.sidebar');
+    @include('inc.sidebar')
     <div class="container main-content">
         @yield('content')
     </div>

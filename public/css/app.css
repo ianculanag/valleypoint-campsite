@@ -10662,7 +10662,7 @@ body {
 /* Sidebar */
 
 .sidebar {
-  position: fixed;
+  position: fixed !important;
   z-index: 100;
   padding: 48px 0 0;
   min-width: 250px;
@@ -10770,6 +10770,15 @@ body {
   padding: 0em;
   margin: 0em;
   font-size: 0.925em;
+}
+
+.card-title {
+  text-decoration: none !important;
+  color: #282828 !important;
+}
+
+.card-title:hover {
+  color: #464646 !important;
 }
 
 .lodging-tabs {
