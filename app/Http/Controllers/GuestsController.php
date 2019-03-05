@@ -58,18 +58,16 @@ class GuestsController extends Controller
         $guest->save();
 
         $accommodation = new Accommodation;
-        $accommodation->accomodationType = 'transient';
-        $accomodation->price = '3500';
+        $accommodation->guestID= $guest->id;
+        $accommodation->serviceID = '6';
         $accommodation->paymentStatus = 'pending';
-        $accomodation->userID = Auth::user()->id;
-        $accomodation->save();
+        $accommodation->userID = Auth::user()->id;
+        $accommodation->unitID = $request->input('unitID');
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
+        $accommodation->save();
 
-        $guestStay = new GuestStay;
-        $guestStay ->guestID = $guest->id;
-        $guestStay ->accomodationID = $accommodation->id;
-        $guestStay ->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $guestStay ->checkoutDatetime = $request->input('checkoutDate'). ' '.$request->input('checkoutTime');
-        $guestStay->save();
+        return redirect ('/glamping');
     }
 
     /**
@@ -199,4 +197,14 @@ class GuestsController extends Controller
     {
         return view('lodging.checkin')->with('unitID', $unitID);
     }
+
+/**
+ * Show add Reservation form
+ * 
+ * @return \Illuminate\Http\Response
+ */
+public function showAddReserveForm($unitID)
+{
+    return view ('lodging.addreserve')->with('unitID', $unitID);
+}
 }
