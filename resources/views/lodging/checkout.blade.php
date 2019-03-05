@@ -4,7 +4,7 @@
     @foreach ($guest as $guestDetails)
     <div class="container">
         <div class="py-5 text-center">
-            <a href="#">
+            <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -26,7 +26,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{$guestDetails->accommodationType}}</td>
+                                <td>{{$guestDetails->serviceName}}</td>
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
                                 <td style="text-align:right;">{{$guestDetails->price}}</td>
                             </tr>
@@ -48,7 +48,7 @@
                     <div class="form-group row">
                         <div class="col-md-3 mb-1">
                             <label for="accommodationID">Accommodation ID</label>
-                            <input class="form-control" type="text" id="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
+                            <input class="form-control" type="text" id="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}" disabled>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitID">Unit ID</label>
@@ -88,7 +88,7 @@
                         <div class="col-md-4 mb-1 form-group">
                             <label for="accommodationType">Accommodation</label>
                             <select id="disabledSelect" class="form-control" disabled>
-                                <option>{{$guestDetails->accommodationType}}</option>
+                                <option>{{$guestDetails->serviceName}}</option>
                             </select>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="date" id="contactNumber" placeholder="" value="{{$guestDetails->checkinDatetime}}" disabled>
+                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$guestDetails->checkinDatetime}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 mb-1 form-group">
@@ -130,7 +130,7 @@
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <ul class="list-group">
-                                    <li class="list-group-item">Ian Jemuel Culanag</li>
+                                    <!--li class="list-group-item">Ian Jemuel Culanag</li-->
                                     <li class="list-group-item">Albren Jr. Cundangan</li>
                                 </ul>
                             </div>
@@ -138,7 +138,9 @@
                     </div>
                     <div style="float:right;">
                         <button class="btn btn-info" style="width:10em;" type="submit">Check-out</button>
-                        <button class="btn btn-danger" style="width:10em;" type="submit">Cancel</button>
+                        <a href="/glamping" style="text-decoration:none;">
+                            <button class="btn btn-danger" style="width:10em;" type="button">Cancel</button>
+                        </a>
                     </div>
                 </form>
             </div>

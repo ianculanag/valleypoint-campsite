@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Guests;
 use App\Accommodation;
 use App\GuestStay;
@@ -198,13 +199,36 @@ class GuestsController extends Controller
         return view('lodging.checkin')->with('unitID', $unitID);
     }
 
-/**
- * Show add Reservation form
- * 
- * @return \Illuminate\Http\Response
- */
-public function showAddReserveForm($unitID)
-{
-    return view ('lodging.addreserve')->with('unitID', $unitID);
-}
+    /**
+     * Show add Reservation form
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function showAddReserveForm($unitID)
+    {
+        return view ('lodging.addreserve')->with('unitID', $unitID);
+    }
+
+    /**
+     * Show the check out form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCheckoutForm($unitID)
+    {
+        $guest = DB::table('units') //get units table
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
+        ->leftJoin('guests', 'guests.id', 'accommodations.guestID') // join with guests
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID') // join with services
+        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        'accommodations.serviceID', 'accommodations.paymentStatus',
+        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
+        'services.id AS serviceID', 'services.serviceName', 'services.price')
+        ->where('units.id', '=', $unitID)
+        ->get();
+        //return $guest;
+        return view('lodging.checkout')->with('guest', $guest);
+        //return view('lodging.checkout')->with('unitID', $unitID);
+    }
 }
