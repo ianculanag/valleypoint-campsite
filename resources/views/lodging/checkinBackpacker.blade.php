@@ -71,28 +71,25 @@
                     </label>
                 </div--> 
         </div>
-        <div class="col-md-4">
-            <div class="form-group col-md-12">
-                <label for="arrival">Arrival Date and Time:</label>
-            </div>
+        <div class="col-sm-5">
             <div class="row">
                 <div class="form-group col-md-6">
+                <label for="arrival">Arrival Date:</label>
                     <input type="date" name="checkinDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
+                <label for="arrival">Time: </label>
                     <input type="time" name="checkinTime" required="required" class="form-control" id="time">
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label for="arrival">Departure Date and Time:</label>
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="form-group col-md-6">
+                    <label for="arrival">Departure Date:</label>
                     <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
+                    <label for="arrival">Time:</label>
                     <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
                 </div>
             </div>
