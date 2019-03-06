@@ -49,3 +49,8 @@ Route::post('/addReservation','GuestsController@addReservation');
 
 //ViewGuests
 Route::get('/viewguests', 'GuestsController@viewguests');
+
+//bruteforce do not touch
+Route::get('/checkinBackpacker', function() {
+    return view('lodging.checkinBackpacker');
+});

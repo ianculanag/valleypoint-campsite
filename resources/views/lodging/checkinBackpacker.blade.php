@@ -15,9 +15,9 @@
                 <!--div class="form-group">
                     <input type="text" required="required" class="form-control" id="inputGuestid" placeholder="Unit Number">
                 </div-->
-                <div class="form-group col-md-6">
+                {{--<div class="form-group col-md-6">
                     <input type="text" name="unitID" required="required" class="form-control" style="display:none" value={{$unitID}}>
-                </div>
+                </div>--}}
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="fname">First Name</label>
@@ -39,7 +39,23 @@
                     <input type="text" name="contactNumber" required="required" class="form-control" id="inputContactnum" placeholder="09#########">
                     </div>
                 </div>
-                <div class="form-group row-md-6">
+                <div class="form-group row-md-5 float-left">
+                    <label for="numberOfPax">Number Of Pax:</label>
+                    <select class="custom-select d-block w-1" name="numberOfPax" id="numPax" required="required">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>     
+           
+                <!--div class="form-group row-md-6">
                     <label for="numberOfPax">Number Of Pax:</label><br>
                     <label class="radio-inline pr-3">
                         <input type="radio"  name="numberOfPax" value="1"> Solo
@@ -53,9 +69,9 @@
                     <label class="radio-inline pr-3">
                         <input type="radio" name="numberOfPax" value="4"> 4 Pax
                     </label>
-                </div> 
+                </div--> 
         </div>
-        <div class="col-md-4 order-md-2 mb-4">
+        <div class="col-md-4">
             <div class="form-group col-md-12">
                 <label for="arrival">Arrival Date and Time:</label>
             </div>
