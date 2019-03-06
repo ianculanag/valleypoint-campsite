@@ -35,8 +35,10 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 //Check-in guests
-Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
-Route::post('/checkinAt', 'GuestsController@checkin');
+//Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
+//Route::post('/checkinAt', 'GuestsController@checkin');
+Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
+Route::post('/checkinAt', 'AccommodationsController@checkin');
 
 //Check-out guests
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');

@@ -28,28 +28,23 @@ class CreateServicesTable extends Migration
 
         $service2 = new Services;
         $service2->serviceName = 'Glamping 2 pax';
-        $service2->price = '2500';
+        $service2->price = '1250';
         $service2->save();
 
         $service3 = new Services;
         $service3->serviceName = 'Glamping 3 pax';
-        $service3->price = '3000';
+        $service3->price = '1000';
         $service3->save();
 
         $service4 = new Services;
         $service4->serviceName = 'Glamping 4 pax';
-        $service4->price = '3400';
+        $service4->price = '850';
         $service4->save();
 
         $service5 = new Services;
         $service5->serviceName = 'Backpacker';
         $service5->price = '750';
         $service5->save();
-
-        $service6 = new Services;
-        $service6->serviceName = 'Transient';
-        $service6->price = '750';
-        $service6->save();
 
         $service7 = new Services;
         $service7->serviceName = 'Airsoft';

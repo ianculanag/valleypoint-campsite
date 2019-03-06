@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class CreateUsersTable extends Migration
 {
@@ -38,6 +40,14 @@ class CreateUsersTable extends Migration
                 'email' => 'jhaypee@valleypoint.com'
             )
         );*/
+        $user = new User;
+        $user->username = 'jpaquino';
+        $user->password = Hash::make('jpaquino');
+        $user->name = 'Jhaypee';
+        $user->role = 'lodging';
+        $user->contactNumber = '09178504634';
+        $user->email = 'jhaypee@valleypoint.com';
+        $user->save();
     }
 
     /**

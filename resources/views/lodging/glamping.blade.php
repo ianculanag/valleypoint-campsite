@@ -23,7 +23,7 @@
                 <a class="nav-link active" href="/glamping">Glamping</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#505050;" href="/transient-backpacker">Transient Backpacker</a>
+                <a class="nav-link" style="color:#505050;" href="/transient-backpacker">Backpacker</a>
             </li>
         </ul>
     </div>

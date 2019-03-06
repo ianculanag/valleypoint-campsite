@@ -214,6 +214,17 @@
             </div-->
             
             <!-- Button trigger modal -->
+
+            {{-- Gac code --}}
+            <input type="text" name="firstName1" id="token" value="Ian" style="display:none;">
+            <input type="text" name="lastName1" id="token" value="Culanag" style="display:none;">
+            <input type="text" name="contactNumber1" id="token" value="09060568265" style="display:none;">
+
+            <input type="text" name="firstName2" id="token" value="Albren" style="display:none;">
+            <input type="text" name="lastName2" id="token" value="Cundangan Jr." style="display:none;">
+            <input type="text" name="contactNumber2" id="token" value="09078218097" style="display:none;">
+            {{-- DO NOT TOUCH --}}
+
             <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#check-in guests">
                 Check-in
             </button>
@@ -239,6 +250,11 @@
                 </div>
                 </div>
             </div>
+        
+        <!--input type="hidden" name="firstName2" id="token" value="Albren">
+        <input type="hidden" name="lastName2" id="token" value="Cundangan">
+        <input type="hidden" name="contactNumber2" id="token" value="09083019923"-->
+        </div> 
     </div>
 </div>
 @endsection

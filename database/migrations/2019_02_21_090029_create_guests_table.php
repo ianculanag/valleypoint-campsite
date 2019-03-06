@@ -17,9 +17,10 @@ class CreateGuestsTable extends Migration
             $table->increments('id');
             $table->string('lastName',30);
             $table->string('firstName',30);
+            $table->integer('accommodationID')->unsigned();
             $table->string('listedUnder')->nullable();
             $table->string('contactNumber',11);
-            $table->integer('numberOfPax')->default(1);
+            $table->foreign('accommodationID')->references('id')->on('Accommodation');
             $table->timestamps();
         });
     }

@@ -13,9 +13,9 @@ class Guests extends Model
     // Timestamps
     public $timestamps = true;
 
-    // Foreign key to
+    // References Accommodation
     public function accommodation()
     {
-        return $this->hasMany('App\Accommodation');
+        return $this->belongsTo('App\Accommodation');
     }
 }

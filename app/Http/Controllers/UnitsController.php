@@ -47,13 +47,14 @@ class UnitsController extends Controller
         return view('lodging.transient')->with('units', $units);*/
         $units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.id', 'accommodations.guestID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 'guests.accommodationID', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID')
+        ->where('guests.listedUnder', '=', null)
         ->orderBy('unitID')
         ->get();
         //return $units;
@@ -85,16 +86,16 @@ class UnitsController extends Controller
 
         $units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.id', 'accommodations.guestID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 'guests.accommodationID', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID')
+        ->where('guests.listedUnder', '=', null)
         ->orderBy('unitID')
         ->get();
-        //return $units;
         return view('lodging.glamping')->with('units', $units);
     }
 
@@ -184,10 +185,10 @@ class UnitsController extends Controller
         //->get(['units.id AS unitID', 'guests.id AS guestID']);
         return DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.id', 'accommodations.guestID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
         ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        'guests.lastName', 'guests.firstName', 'guests.accommodationID','guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID')

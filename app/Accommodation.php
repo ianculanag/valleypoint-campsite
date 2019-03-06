@@ -13,6 +13,14 @@ class Accommodation extends Model
     // Timestamps
     public $timestamps = true;
 
+    
+
+    // Foreign Key to
+    public function guest()
+    {
+        return $this->hasMany('App\Guests');
+    }
+
     // References Staff
     public function user()
     {
@@ -23,12 +31,6 @@ class Accommodation extends Model
     public function units()
     {
         return $this->belongsTo('App\Units');
-    }
-
-    // References Guests
-    public function guest()
-    {
-        return $this->belongsTo('App\Guests');
     }
 
     // References Services
