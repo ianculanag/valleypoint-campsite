@@ -196,4 +196,15 @@ class GuestsController extends Controller
         return view('lodging.checkout')->with('guest', $guest);
         //return view('lodging.checkout')->with('unitID', $unitID);
     }
+
+    public function viewGuests()
+    {
+        $guest = DB::table('guests')
+        ->leftJoin('accommodations', 'accommodations.id', 'guests.accommodationID')
+        // ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
+        ->select('guests.*', 'guests.id AS guestID')
+        ->get();
+       // return $guest;
+        return view('lodging.viewguests')->with('guest', $guest);
+    }
 }
