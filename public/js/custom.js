@@ -144,3 +144,23 @@ jQuery(document).ready(function(){
         })
     });
 }); 
+
+//Dynamic adding of forms: Firstname, Lastname, Contact Number depending on the number of Pax
+jQuery("#numPax").change(function() {
+    var htmlString = "";
+    var len = jQuery(this).val();
+    for (var i = 1; i < len; i++) {
+        htmlString += "<div class='row'>";
+        htmlString += "<div class='form-group col-md-4'>";
+        htmlString +=" <input type='text' name='firstName' required='required' class='form-control' placeholder='First name'>";
+        htmlString +="</div>";
+        htmlString +="<div class='form-group col-md-4'>";
+        htmlString +="<input type='text' name='lasttName' required='required' class='form-control' placeholder='Last name'>";
+        htmlString +="</div>";
+        htmlString +="<div class='form-group col-md-4'>";
+        htmlString +="<input type='text' name='contactNumber' required='required' class='form-control' placeholder='Contact Number'>";
+        htmlString +="</div>";
+        htmlString +="</div>";
+    }
+        jQuery("#outputArea").html(htmlString);
+});

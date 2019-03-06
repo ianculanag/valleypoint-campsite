@@ -35,7 +35,7 @@ class CreateAccommodationsTable extends Migration
             $table->integer('userID')->unsigned();
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
-            //$table->foreign('guestID')->references('id')->on('Guests');
+            $table->foreign('guestID')->references('id')->on('Guests');
             $table->foreign('serviceID')->references('id')->on('Services');
             $table->foreign('userID')->references('id')->on('User');
             $table->foreign('unitID')->references('id')->on('Units');

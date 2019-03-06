@@ -43,33 +43,7 @@ class GuestsController extends Controller
         //
     }
 
-    /**
-     *  Add reservation guests
-     * 
-     * 
-     */
 
-    public function addReservation(Request $request)
-    {
-        $guest = new Guests;
-        $guest->lastname = $request->input('lastName');
-        $guest->firstname = $request->input('firstName');
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->numberofPax = $request->input('numberOfPax');
-        $guest->save();
-
-        $accommodation = new Accommodation;
-        $accommodation->guestID= $guest->id;
-        $accommodation->serviceID = '6';
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->unitID = $request->input('unitID');
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->save();
-
-        return redirect ('/glamping');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -199,15 +173,6 @@ class GuestsController extends Controller
         return view('lodging.checkin')->with('unitID', $unitID);
     }
 
-    /**
-     * Show add Reservation form
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function showAddReserveForm($unitID)
-    {
-        return view ('lodging.addreserve')->with('unitID', $unitID);
-    }
 
     /**
      * Show the check out form

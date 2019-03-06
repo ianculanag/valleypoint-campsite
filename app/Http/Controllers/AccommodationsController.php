@@ -152,4 +152,45 @@ class AccommodationsController extends Controller
 
         return redirect('/glamping');
     }
+
+
+    /**
+     *  Add reservation guests
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+
+    public function addReservation(Request $request)
+    {
+
+        $accommodation = new Accommodation;
+        $accommodation->serviceID = '6';
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->userID = Auth::user()->id;
+        $accommodation->unitID = $request->input('unitID');
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime');
+        $accommodation->numberOfPax = $request->input('numberOfPax'); 
+        $accommodation->save();
+
+        $guest = new Guests;
+        $guest->accommodationID = $accommodation->id;
+        $guest->lastname = $request->input('lastName');
+        $guest->firstname = $request->input('firstName');
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->save();
+
+        return redirect ('/glamping');
+    }
+
+    /**
+     * Show add Reservation form
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function showAddReserveForm($unitID)
+    {
+        return view ('lodging.addreserve')->with('unitID', $unitID);
+    }
 }
