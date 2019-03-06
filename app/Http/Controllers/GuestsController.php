@@ -183,14 +183,15 @@ class GuestsController extends Controller
     {
         $guest = DB::table('units') //get units table
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
-        ->leftJoin('guests', 'guests.id', 'accommodations.guestID') // join with guests
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id') // join with guests
         ->leftJoin('services', 'services.id', 'accommodations.serviceID') // join with services
         ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
+        ->where('guests.listedUnder', '=', null)
         ->get();
         //return $guest;
         return view('lodging.checkout')->with('guest', $guest);
