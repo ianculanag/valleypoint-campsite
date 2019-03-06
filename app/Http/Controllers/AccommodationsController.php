@@ -95,7 +95,7 @@ class AccommodationsController extends Controller
      */
     public function showCheckinForm($unitID)
     {
-        return view('lodging.checkin')->with('unitID', $unitID);
+        return view('lodging.checkinglamping')->with('unitID', $unitID);
     }
 
     /**
