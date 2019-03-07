@@ -20,23 +20,23 @@
                 </div>--}}
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="fname">First Name</label>
-                        <input type="text" name="firstName" required="required" class="form-control" id="inputFirstname" placeholder="Juan">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="firstName" required="required" class="form-control" id="inputfirstName" placeholder="Juan">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="lname">Last Name</label>
-                        <input type="text" name="lastName" required="required" class="form-control" id="inputLastname" placeholder="Dela Cruz">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="lastName" required="required" class="form-control" id="inputlastName" placeholder="Dela Cruz">
                     </div>  
                 </div> 
                 <div class="form-group">
-                    <label for="fname">Contact Number</label>
+                    <label for="contactNumber">Contact Number</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                    <input type="text" name="contactNumber" required="required" class="form-control" id="inputContactnum" placeholder="09#########">
+                    <input type="text" name="contactNumber" required="required" class="form-control" id="inputcontactNumber" placeholder="09#########">
                     </div>
                 </div>
                 <div class="form-group row-md-5 float-left">
@@ -74,23 +74,23 @@
         <div class="col-sm-5">
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="arrival">Arrival Date:</label>
-                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
+                <label for="arrivalDate">Arrival Date:</label>
+                    <input type="date" name="checkInDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
-                <label for="arrival">Time: </label>
-                    <input type="time" name="checkinTime" required="required" class="form-control" id="time">
+                <label for="arrivalTime">Time: </label>
+                    <input type="time" name="checkInTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="arrival">Departure Date:</label>
-                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
+                    <label for="departureDate">Departure Date:</label>
+                    <input type="date" name="checkOutDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="arrival">Time:</label>
-                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
+                    <label for="arrivalTime">Time:</label>
+                    <input type="time" name="checkOutTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             
