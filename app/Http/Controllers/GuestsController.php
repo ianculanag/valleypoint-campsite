@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Guests;
 use App\Accommodation;
-use App\GuestStay;
 use App\Units;
 use Auth;
+use Redirect;
 
 class GuestsController extends Controller
 {
@@ -164,6 +164,31 @@ class GuestsController extends Controller
     }
 
     /**
+     * Update guest details
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDetails(Request $request)
+    {
+
+        //$unit = Units::find($request->input('unitID'));
+        $user = Guests::find($request->input('guestID'));
+        $user->update([
+            'firstName' => $request->input('firstName'),
+            'lastName' =>  $request->input('lastName'),
+            'contactNumber' => $request->input('contactNumber')
+            //'numberOfPax' => $numberOfPax
+        ]);
+
+        $url = '/editdetails'.'/'.$request->input('unitID');
+        //return \Redirect::route('/editdetails', [$request->input('unitID')]);
+        //return $url;
+        return redirect($url);
+    }
+
+
+    /**
      * Show the check in form
      *
      * @return \Illuminate\Http\Response
@@ -190,7 +215,6 @@ class GuestsController extends Controller
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
-        ->where('guests.listedUnder', '=', null)
         ->get();
         return view('lodging.editdetails')->with('guest', $guest);
     }

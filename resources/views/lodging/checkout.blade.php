@@ -58,25 +58,25 @@
                     <div class="form-group row">
                         <div class="col-md-3 mb-1">
                             <label for="accommodationID">Accommodation ID</label>
-                            <input class="form-control" type="text" id="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}" disabled>
+                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}" disabled>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitID">Unit ID</label>
-                            <input class="form-control" type="text" id="unitID" placeholder="" value="{{$guestDetails->unitID}}" disabled>
+                            <input class="form-control" type="text" name="unitID" placeholder="" value="{{$guestDetails->unitID}}" disabled>
                         </div>
                         <div class="col-md-6 mb-1">
                             <label for="unitNumber">Unit number</label>
-                            <input class="form-control" type="text" id="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
+                            <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-5 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" id="firstName" placeholder="" value="{{$guestDetails->firstName}}" disabled>
+                            <input class="form-control" type="text" name="firstName" placeholder="" value="{{$guestDetails->firstName}}" disabled>
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" id="lastName" placeholder="" value="{{$guestDetails->lastName}}" disabled>
+                            <input class="form-control" type="text" name="lastName" placeholder="" value="{{$guestDetails->lastName}}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -88,16 +88,16 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$guestDetails->contactNumber}}" disabled>
+                                <input class="form-control" type="text" name="contactNumber" placeholder="" value="{{$guestDetails->contactNumber}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control" type="number" id="contactNumber" placeholder="" value="{{$guestDetails->numberOfPax}}" disabled>
+                            <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" disabled>
                         </div>
                         <div class="col-md-4 mb-1 form-group">
                             <label for="accommodationType">Accommodation</label>
-                            <select id="disabledSelect" class="form-control" disabled>
+                            <select name="serviceName" id="disabledSelect" class="form-control" disabled>
                                 <option>{{$guestDetails->serviceName}}</option>
                             </select>
                         </div>
@@ -115,7 +115,7 @@
                                     $checkedIn = new DateTime($guestDetails->checkinDatetime);
                                     $checkedInAt = $checkedIn->format("F j, o h:i A");
                                 @endphp
-                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$checkedInAt}}" disabled>
+                            <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 mb-1 form-group">
@@ -125,13 +125,13 @@
                                     $now = new DateTime("now");
                                     $stayDuration = date_diff($checkin, $now)->days+1;
                                 @endphp
-                            <input class="form-control" type="number" id="numberOfPax" placeholder="" value="{{$stayDuration}}" disabled>
+                            <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12 mb-1 form-group">
                             <label for="additionalServices">Additional charges</label>
-                            <textarea class="form-control" id="additionalServices" rows="3" disabled>None</textarea>
+                            <textarea class="form-control" name="additionalServices" rows="3" disabled>None</textarea>
                         </div>
                     </div>
                     <div class="panel-group" style="margin-bottom:2em;">

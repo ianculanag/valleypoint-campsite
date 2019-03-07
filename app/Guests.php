@@ -18,4 +18,14 @@ class Guests extends Model
     {
         return $this->belongsTo('App\Accommodation');
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'firstName', 'lastName', 'contactNumber',
+    ];
+
 }
