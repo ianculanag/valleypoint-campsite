@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="container">
-    <div class="py-5">
+    <div class="py-5 text-center">
+            <a href="/glamping">
+                <span style="float:left;">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <strong>Back</strong>
+                </span>
+            </a>
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
             <h2>Check-in Guests</h2>
     </div>
@@ -54,6 +60,8 @@
                         <input type="radio" name="numberOfPax" value="4"> 4 Pax
                     </label>
                 </div> 
+                <div id="outputDiv">
+                </div>
         </div>
         <div class="col-sm-5">
             <div class="row">
@@ -77,9 +85,13 @@
                     <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
                 </div>
             </div>
+
+            <button type="submit" value="Submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#check-in guests">
+                    Check-in
+            </button>
             
             
-            {{-- Gac code --}}
+            {{-- Gac code}}
             <input type="text" name="firstName1" id="token" value="Ian" style="display:none;">
             <input type="text" name="lastName1" id="token" value="Culanag" style="display:none;">
             <input type="text" name="contactNumber1" id="token" value="09060568265" style="display:none;">
@@ -87,11 +99,7 @@
             <input type="text" name="firstName2" id="token" value="Albren" style="display:none;">
             <input type="text" name="lastName2" id="token" value="Cundangan Jr." style="display:none;">
             <input type="text" name="contactNumber2" id="token" value="09078218097" style="display:none;">
-            {{-- DO NOT TOUCH --}}
-
-            <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#check-in guests">
-                Check-in
-            </button>
+            {{DO NOT TOUCH --}}
             </div>        
         </form>
     </div>

@@ -53,7 +53,7 @@ class UnitsController extends Controller
         'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID')
+        'services.id AS serviceID', 'services.serviceName')
         ->where('guests.listedUnder', '=', null)
         ->orderBy('unitID')
         ->get();
@@ -92,7 +92,7 @@ class UnitsController extends Controller
         'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID')
+        'services.id AS serviceID', 'services.serviceName')
         ->where('guests.listedUnder', '=', null)
         ->orderBy('unitID')
         ->get();
@@ -191,7 +191,7 @@ class UnitsController extends Controller
         'guests.lastName', 'guests.firstName', 'guests.accommodationID','guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID')
+        'services.id AS serviceID', 'services.serviceName')
         ->where('units.id', '=', $id)
         ->get();
         //return $units;

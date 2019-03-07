@@ -46,7 +46,7 @@
                         <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
                     </h5>
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
+                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
 
                 @elseif($unit->status == 'reserved')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       

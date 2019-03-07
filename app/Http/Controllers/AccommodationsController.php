@@ -107,7 +107,7 @@ class AccommodationsController extends Controller
     public function checkin(Request $request)
     {
         $accommodation = new Accommodation;         
-        $accommodation->serviceID = '4';
+        $accommodation->serviceID = $request->input('numberOfPax');
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');
         $accommodation->paymentStatus = 'pending';
@@ -123,7 +123,7 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        if ($accommodation->numberOfPax > 1) {
+        /*if ($accommodation->numberOfPax > 1) {
             $guest2 = new Guests;
             $guest2->lastName = $request->input('lastName1');
             $guest2->firstName = $request->input('firstName1');
@@ -142,6 +142,20 @@ class AccommodationsController extends Controller
                 $guest3->save();
     
                 
+            }
+        }*/
+        if ($accommodation->numberOfPax > 1) {
+            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
+                $accompanyingGuest = new Guests;
+
+                $lastName = 'lastName'.$count;
+                $firstName = 'firstName'.$count;
+
+                $accompanyingGuest->lastName = $request->input($lastName);
+                $accompanyingGuest->firstName = $request->input($firstName);
+                $accompanyingGuest->accommodationID = $accommodation->id;
+                $accompanyingGuest->listedUnder = $guest->id;   
+                $accompanyingGuest->save();
             }
         }
 

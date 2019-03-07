@@ -44,8 +44,8 @@ Route::post('/checkinAt', 'AccommodationsController@checkin');
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
 
 //AddReservation
-Route::get('/addReservation/{unitID}', 'GuestsController@showAddReserveForm');
-Route::post('/addReservation','GuestsController@addReservation');
+Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
+Route::post('/addReservation','AccommodationsController@addReservation');
 
 //ViewGuests
 Route::get('/viewguests', 'GuestsController@viewguests');

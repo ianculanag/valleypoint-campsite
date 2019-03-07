@@ -164,3 +164,33 @@ jQuery("#numPax").change(function() {
     }
         jQuery("#outputArea").html(htmlString);
 });
+
+//Dynamic adding of forms: Firstname Lastname
+jQuery("input[type=radio][name=numberOfPax]").change(function() {
+    var htmlString = "";
+    var len = jQuery(this).val();
+    console.log(len);
+    if (len > 1) {
+        htmlString += "<h5>Accompanying Guests</h5>";
+        htmlString += "<div class='row'>";
+        htmlString += "<div class='form-group col-md-6'>";
+        htmlString += "<label for='fname'>First Name</label>";
+        htmlString += "<input type='text' name='firstName1' required='required' class='form-control' placeholder='Juan'>";
+        htmlString += "</div>";
+        htmlString += "<div class='form-group col-md-6'>";
+        htmlString += "<label for='lname'>Last Name</label>";
+        htmlString += "<input type='text' name='lastName1' required='required' class='form-control' placeholder='Dela Cruz'>";
+        htmlString += "</div>";
+        
+        for (var i = 2; i < len; i++) {
+            htmlString += "<div class='form-group col-md-6'>";
+            htmlString += "<input type='text' name='firstName" + i + "' required='required' class='form-control' placeholder='Juan'>";
+            htmlString += "</div>";
+            htmlString += "<div class='form-group col-md-6'>";
+            htmlString += "<input type='text' name='lastName" + i + "' required='required' class='form-control' placeholder='Dela Cruz'>";
+            htmlString += "</div>";  
+        }        
+        htmlString +="</div>";
+    }
+    jQuery("#outputDiv").html(htmlString);
+});
