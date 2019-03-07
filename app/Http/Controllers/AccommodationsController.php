@@ -171,6 +171,59 @@ class AccommodationsController extends Controller
         return redirect('/glamping');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkinBackpacker(Request $request)
+    {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+        ]);
+
+        $accommodation = new Accommodation;         
+        $accommodation->serviceID = $request->input('numberOfPax');
+        $accommodation->unitID = $request->input('unitID');
+        $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation->paymentStatus = 'pending';
+        $accommodation->userID = Auth::user()->id;
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
+        $accommodation->save();
+
+        $guest = new Guests;
+        $guest->lastName = $request->input('lastName');
+        $guest->firstName = $request->input('firstName');
+        $guest->accommodationID = $accommodation->id;   
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->save();
+
+        if ($accommodation->numberOfPax > 1) {
+            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
+                $accompanyingGuest = new Guests;
+
+                $lastName = 'lastName'.$count;
+                $firstName = 'firstName'.$count;
+
+                $accompanyingGuest->lastName = $request->input($lastName);
+                $accompanyingGuest->firstName = $request->input($firstName);
+                $accompanyingGuest->accommodationID = $accommodation->id;
+                $accompanyingGuest->listedUnder = $guest->id;   
+                $accompanyingGuest->save();
+            }
+        }
+
+        $unit = Units::find($request->input('unitID'));
+        $unit->update([
+            'status' => 'occupied'
+        ]);
+
+        return redirect('/transient-backpacker');
+    }
+
+
 
     /**
      *  Add reservation guests
@@ -227,5 +280,16 @@ class AccommodationsController extends Controller
         ->get();
         return view('lodging.viewreserve')->with('reserve', $reserve);
         //return $reserve;
+
+    }
+    /**
+    * Show the check in backpacker form
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function showCheckinBackpackerForm($unitID)
+    {
+        return view('lodging.checkinBackpacker')->with('unitID', $unitID);
+        
     }
 }

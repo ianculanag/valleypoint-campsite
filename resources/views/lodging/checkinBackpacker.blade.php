@@ -9,15 +9,16 @@
 
     <div class="row">
         <div class="col-sm-5 text-left">
-            <form method="POST" action="/checkinAt" class="justify-content-center">
+            <form method="POST" action="/checkinBackpacker" class="justify-content-center">
                 @csrf
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <!--div class="form-group">
                     <input type="text" required="required" class="form-control" id="inputGuestid" placeholder="Unit Number">
                 </div-->
-                {{--<div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <input type="text" name="unitID" required="required" class="form-control" style="display:none" value={{$unitID}}>
-                </div>--}}
+                </div>
+                
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
@@ -39,8 +40,8 @@
                     <input type="text" name="contactNumber" required="required" class="form-control" id="inputcontactNumber" placeholder="09#########">
                     </div>
                 </div>
-                <div class="form-group row-md-5 float-left">
-                    <label for="numberOfPax">Number Of Pax:</label>
+                <div class="form-group row-md-3">
+                    <label for="numberOfPax" >Number Of Pax:</label>
                     <select class="custom-select d-block w-1" name="numberOfPax" id="numPax" required="required">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -53,7 +54,7 @@
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select>
-                </div>     
+                </div>  
            
                 <!--div class="form-group row-md-6">
                     <label for="numberOfPax">Number Of Pax:</label><br>
@@ -70,6 +71,11 @@
                         <input type="radio" name="numberOfPax" value="4"> 4 Pax
                     </label>
                 </div--> 
+                
+                <!-- To be fixed outputArea-->
+                <div id="outputArea">
+                </div>
+
         </div>
         <div class="col-sm-5">
             <div class="row">
@@ -91,7 +97,7 @@
                 <div class="form-group col-md-6">
                     <label for="arrivalTime">Time:</label>
                     <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
-                </div>
+                </div>    
             </div>
             
             {{-- Gac code}}
@@ -107,9 +113,12 @@
             <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#check-in guests">
                 Check-in
             </button>
+                   <div id="outputArea">
+            </div> 
             </div>        
         </form>
     </div>
+  
     <!-- Modal -->
     <div class="modal fade" id="check-in guests" tabindex="-1" role="dialog" aria-labelledby="check-in guests" aria-hidden="true">
         <div class="modal-dialog" role="document">

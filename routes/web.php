@@ -34,11 +34,15 @@ Route::get('/dashboard', 'UnitsController@glamping');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
-//Check-in guests
+//Check-in guests glamping
 //Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkinAt', 'AccommodationsController@checkin');
+
+//Check-in backpacker
+Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
+Route::post('/checkinBackpacker','AccommodationsController@checkinBackpacker');
 
 //Edit guest details
 Route::get('/editdetails/{unitID}', 'GuestsController@editGuestDetails');

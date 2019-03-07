@@ -47,6 +47,7 @@
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
 
                 @else
+                
                 <h5 class="card-title">
                     {{$unit->unitNumber}}
                     <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
