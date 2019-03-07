@@ -57,3 +57,6 @@ Route::get('/viewguests', 'GuestsController@viewguests');
 Route::get('/checkinBackpacker', function() {
     return view('lodging.checkinBackpacker');
 });
+
+//ViewReservations
+Route::get('/viewReservations', 'AccommodationsController@viewReservation');

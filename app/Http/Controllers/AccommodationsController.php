@@ -211,4 +211,21 @@ class AccommodationsController extends Controller
     {
         return view ('lodging.addreserve')->with('unitID', $unitID);
     }
+
+     /**
+     * Display all reservations.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function viewReservation()
+    {
+        $reserve = DB::table('accommodations')
+        ->leftJoin('units', 'units.id', 'accommodations.unitID')
+        ->leftJoin('guests', 'guests.id', 'accommodations.unitID')
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
+        ->select('accommodations.*', 'units.*', 'guests.*', 'services.*')
+        ->get();
+        return view('lodging.viewreserve')->with('reserve', $reserve);
+        //return $reserve;
+    }
 }
