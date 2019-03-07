@@ -173,6 +173,27 @@ class GuestsController extends Controller
         return view('lodging.checkin')->with('unitID', $unitID);
     }
 
+    /**
+     * Show the check out form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editGuestDetails($unitID)
+    {
+        $guest = DB::table('units') //get units table
+        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id') // join with guests
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID') // join with services
+        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
+        'accommodations.serviceID', 'accommodations.paymentStatus',
+        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
+        'services.id AS serviceID', 'services.serviceName', 'services.price')
+        ->where('units.id', '=', $unitID)
+        ->where('guests.listedUnder', '=', null)
+        ->get();
+        return view('lodging.editdetails')->with('guest', $guest);
+    }
 
     /**
      * Show the check out form
@@ -193,9 +214,7 @@ class GuestsController extends Controller
         ->where('units.id', '=', $unitID)
         ->where('guests.listedUnder', '=', null)
         ->get();
-        //return $guest;
         return view('lodging.checkout')->with('guest', $guest);
-        //return view('lodging.checkout')->with('unitID', $unitID);
     }
 
     public function viewGuests()
