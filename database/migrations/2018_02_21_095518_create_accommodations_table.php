@@ -27,7 +27,6 @@ class CreateAccommodationsTable extends Migration
 
         Schema::create('accommodations', function (Blueprint $table) {
             $table->increments('id');
-            //$table->integer('guestID')->unsigned();
             $table->integer('serviceID')->unsigned();            
             $table->integer('unitID')->unsigned();           
             $table->integer('numberOfPax')->default(1);

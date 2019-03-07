@@ -30,14 +30,24 @@
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
                                 <td style="text-align:right;">{{$guestDetails->price}}</td>
                             </tr>
+                            {{--@foreach ( as )
                             <tr>
                                 <td>Airsoft</td>
                                 <td style="text-align:right;">3</td>
                                 <td style="text-align:right;">4500.00</td>
                             </tr>
+                            @endforeach--}}
                             <tr>
                                 <th colspan="2" scope="row">TOTAL:</th>
-                                <th style="text-align:right;">8500.00</th>
+                                {{--@php
+                                    if (count($services) > 0) {
+                                        $sum = 0;
+                                        foreach() {
+
+                                        }
+                                    }
+                                @endphp--}}
+                                <th style="text-align:right;">{{$guestDetails->price}}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -101,24 +111,27 @@
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$guestDetails->checkinDatetime}}" disabled>
+                                @php
+                                    $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                    $checkedInAt = $checkedIn->format("F j, o h:i A");
+                                @endphp
+                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="{{$checkedInAt}}" disabled>
                             </div>
                         </div>
                         <div class="col-md-6 mb-1 form-group">
                             <label for="numberOfPax">Stay duration</label>
                                 @php
-                                   /*$earlier = $guestDetails->checkinDatetime;
-                                    $later = $guestDetails->checkoutDatetime;
-
-                                    $diff = $later->diff($earlier)->format("%a");*/
+                                    $checkin = new DateTime($guestDetails->checkinDatetime);
+                                    $now = new DateTime("now");
+                                    $stayDuration = date_diff($checkin, $now)->days+1;
                                 @endphp
-                            <input class="form-control" type="number" id="numberOfPax" placeholder="" value="1" disabled>
+                            <input class="form-control" type="number" id="numberOfPax" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12 mb-1 form-group">
                             <label for="additionalServices">Additional charges</label>
-                            <textarea class="form-control" id="additionalServices" rows="3" disabled>Airsoft (2 pax)</textarea>
+                            <textarea class="form-control" id="additionalServices" rows="3" disabled>None</textarea>
                         </div>
                     </div>
                     <div class="panel-group" style="margin-bottom:2em;">
