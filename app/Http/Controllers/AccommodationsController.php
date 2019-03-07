@@ -106,6 +106,10 @@ class AccommodationsController extends Controller
      */
     public function checkin(Request $request)
     {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+        ]);
+
         $accommodation = new Accommodation;         
         $accommodation->serviceID = $request->input('numberOfPax');
         $accommodation->unitID = $request->input('unitID');

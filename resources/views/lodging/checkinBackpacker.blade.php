@@ -75,26 +75,26 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
-                    <input type="date" name="checkInDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
-                    <input type="time" name="checkInTime" required="required" class="form-control" id="time">
+                    <input type="time" name="checkinTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="departureDate">Departure Date:</label>
-                    <input type="date" name="checkOutDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="arrivalTime">Time:</label>
-                    <input type="time" name="checkOutTime" required="required" class="form-control" id="time">
+                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             
-            {{-- Gac code --}}
+            {{-- Gac code}}
             <input type="text" name="firstName1" id="token" value="Ian" style="display:none;">
             <input type="text" name="lastName1" id="token" value="Culanag" style="display:none;">
             <input type="text" name="contactNumber1" id="token" value="09060568265" style="display:none;">
@@ -102,7 +102,7 @@
             <input type="text" name="firstName2" id="token" value="Albren" style="display:none;">
             <input type="text" name="lastName2" id="token" value="Cundangan Jr." style="display:none;">
             <input type="text" name="contactNumber2" id="token" value="09078218097" style="display:none;">
-            {{-- DO NOT TOUCH --}}
+            {{DO NOT TOUCH --}}
 
             <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#check-in guests">
                 Check-in
