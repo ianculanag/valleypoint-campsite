@@ -141,6 +141,9 @@ jQuery(document).ready(function(){
             modal.appendChild(firstDiv);
             modal.appendChild(secondDiv);
             //append everything
+
+            jQuery("#editDetails").attr("href", "editdetails/"+data[0].unitID);
+            jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
         })
     });
 }); 

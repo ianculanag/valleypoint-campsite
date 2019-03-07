@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="col-md-12 text-center lodging-tabs">
         <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link active" style="background-color:#505050" href="#">Physical View</a>
@@ -84,27 +83,31 @@
             </div>
         </div>
     </div>
-<!-- Details Modal -->
-<div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-        <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-                <!--p class="heading lead">Tent 1</p-->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="white-text">×</span>
-                </button>
-            </div>
-            <!--Body-->
-            <div class="modal-body" id="modal-body">
-            </div>
-            <!--Footer-->
-            <div class="modal-footer justify-content-right">
-                <button type="button" class="btn btn-info">Edit</button>
-                <button type="button" class="btn btn-danger">Check-out</button>
+    <!-- Details Modal -->
+    <div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <!--p class="heading lead">Tent 1</p-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body" id="modal-body">
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-right">
+                    <a href="" id="editDetails">
+                        <button type="button" class="btn btn-info">Edit</button>
+                    </a>
+                    <a href="" id="checkout">
+                        <button type="button" class="btn btn-danger">Check-out</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
  

@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($guest as $guestDetails)
         <div class="py-5 text-center">
-            <a href="#">
+            <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -222,7 +222,9 @@
                     <hr class="mb-4">
                     <div style="float:right;">
                         <button class="btn btn-info" style="width:10em;" type="submit">Save Changes</button>
-                        <button class="btn btn-danger" style="width:10em;" type="submit">Cancel</button>
+                        <a href="/glamping" style="text-decoration:none;">
+                            <button class="btn btn-danger" style="width:10em;" type="button">Cancel</button>
+                        </a>
                     </div>
                 </form>
             </div>
