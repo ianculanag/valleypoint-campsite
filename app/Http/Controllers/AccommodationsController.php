@@ -255,28 +255,23 @@ class AccommodationsController extends Controller
         return redirect ('/glamping');
     }
 
-    /**
-     * Show add Reservation form
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function showAddReserveForm($unitID)
-    {
-        return view ('lodging.addreserve')->with('unitID', $unitID);
-    }
-
-     /**
+        /**
      * Display all reservations.
      * 
      * @return \Illuminate\Http\Response
      */
     public function viewReservation()
     {
-        $reserve = DB::table('accommodations')
+        $reserve = DB::table('guests')
+        ->leftJoin('accommodations', 'accommodations.id', 'guests.accommodationID')
         ->leftJoin('units', 'units.id', 'accommodations.unitID')
-        ->leftJoin('guests', 'guests.id', 'accommodations.unitID')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('accommodations.*', 'units.*', 'guests.*', 'services.*')
+        ->select('units.id as unitID', 'accommodations.id as accommodationID', 'guests.id as guestID',
+        'services.id as serviceID', 'units.unitNumber', 'units.unitType', 'units.partOf', 'units.capacity',
+        'guests.accommodationID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder', 
+        'guests.contactNumber','accommodations.unitID', 'accommodations.serviceID', 
+        'accommodations.numberOfPax', 'accommodations.paymentStatus', 'accommodations.checkinDatetime',
+        'accommodations.checkoutDatetime', 'services.serviceName', 'services.price')
         ->get();
         return view('lodging.viewreserve')->with('reserve', $reserve);
         //return $reserve;
@@ -291,5 +286,15 @@ class AccommodationsController extends Controller
     {
         return view('lodging.checkinBackpacker')->with('unitID', $unitID);
         
+    }
+
+    /**
+     * Show add Reservation form
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function showAddReserveForm($unitID)
+    {
+        return view ('lodging.addreserve')->with('unitID', $unitID);
     }
 }

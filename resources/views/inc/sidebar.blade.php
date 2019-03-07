@@ -98,8 +98,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <a class="nav-link" href="/viewReservation">
+                            <i class="fa fa-book" aria-hidden="true"></i>
                             Reservations
                         </a>
                     </li>
