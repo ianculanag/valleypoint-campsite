@@ -16,7 +16,7 @@ class CreateBeveragesTable extends Migration
         Schema::create('beverages', function (Blueprint $table) {
             $table->integer('productID')->unsigned();
             $table->integer('drinkSize (mL)');
-            //$table->foreign('productID')->references('id')->on('Products');
+            $table->foreign('productID')->references('id')->on('Products');
             $table->timestamps();
         });
     }

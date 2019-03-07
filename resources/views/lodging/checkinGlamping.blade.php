@@ -76,11 +76,11 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
-                    <input type="date" name="checkInDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
-                    <input type="time" name="checkInTime" required="required" class="form-control" id="time">
+                    <input type="time" name="checkinTime" required="required" class="form-control" id="time">
                 </div>
             </div>
             
