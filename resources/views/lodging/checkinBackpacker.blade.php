@@ -2,9 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="py-5">
+    <div class="py-5 text-center">
+        <a href="/transient-backpacker">
+        <span style="float:left;">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            <strong>Back</strong>
+        </span>
+    </a>
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
-            <h2>Check-in Guests</h2>
+            <h2>Check-in/Reserve Backpackers</h2>
     </div>
 
     <div class="row">
@@ -15,7 +21,7 @@
                 <!--div class="form-group">
                     <input type="text" required="required" class="form-control" id="inputGuestid" placeholder="Unit Number">
                 </div-->
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6" style="position:absolute;">
                     <input type="text" name="unitID" required="required" class="form-control" style="display:none" value={{$unitID}}>
                 </div>
                 
@@ -110,7 +116,7 @@
             <input type="text" name="contactNumber2" id="token" value="09078218097" style="display:none;">
             {{DO NOT TOUCH --}}
 
-            <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#check-in guests">
+            <button type="submit" value="Submit" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#check-in guests">
                 Check-in
             </button>
                    <div id="outputArea">

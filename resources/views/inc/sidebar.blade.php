@@ -98,7 +98,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/viewReservation">
+                        <a class="nav-link" href="/viewReservations">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             Reservations
                         </a>
