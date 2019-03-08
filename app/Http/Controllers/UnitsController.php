@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Units;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UnitsController extends Controller
@@ -83,6 +84,67 @@ class UnitsController extends Controller
         //->get(['units.id AS unitID', 'guests.id AS guestID']);
         return view('lodging.glamping')->with('units', $units);
         //return $units;*/
+        
+        /*$unit = Units::find($request->input('unitID'));
+        $unit->update([
+            'status' => 'occupied'
+        ]);*/
+        $pastAccommodations = DB::table('accommodations')
+        ->where('accommodations.checkinDatetime', '<', Carbon::now())
+        ->where('accommodations.checkoutDatetime', '<', Carbon::now())
+        //->orWhere('accommodations.checkinDatetime', '>', Carbon::now())
+        //->orWhere('accommodations.checkoutDatetime', '>', Carbon::now())
+        ->get();
+
+        //return $pastAccommodations;
+
+        if(count($pastAccommodations) > 0) {
+            for($count = 0; $count < count($pastAccommodations); $count++) {
+                $unit = Units::find($pastAccommodations[$count]->unitID);
+                $unit->update([
+                    'status' => 'available'
+                ]);
+            }
+        }
+
+        $reservedAccommodations = DB::table('accommodations')
+        //->where('accommodations.checkinDatetime', '<', Carbon::now())
+        //->where('accommodations.checkoutDatetime', '<', Carbon::now())
+        ->where('accommodations.checkinDatetime', '>', Carbon::now())
+        ->where('accommodations.checkoutDatetime', '>', Carbon::now())
+        ->get();
+
+        //return $reservedAccommodations;
+
+        if(count($reservedAccommodations) > 0) {
+            for($count = 0; $count < count($reservedAccommodations); $count++) {
+                $unit = Units::find($reservedAccommodations[$count]->unitID);
+                $unit->update([
+                    'status' => 'reserved'
+                ]);
+            }
+        }
+
+        $activeAccommodations = DB::table('accommodations')
+        ->whereDate('accommodations.checkinDatetime', '=', Carbon::today())
+        ->where('accommodations.checkoutDatetime', '>', Carbon::now())
+        ->get();
+
+        if(count($activeAccommodations) > 0) {
+            for($count = 0; $count < count($activeAccommodations); $count++) {
+                $unit = Units::find($activeAccommodations[$count]->unitID);
+                $unit->update([
+                    'status' => 'occupied'
+                ]);
+            }
+        }
+
+        //return $activeAccommodations;
+        
+        //$unit = Units::find($accommodations[0].unitID));
+        //$unit->update([
+        //    'status' => 'occupied'
+        //]);
 
         $units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
@@ -93,9 +155,15 @@ class UnitsController extends Controller
         'accommodations.serviceID', 'accommodations.paymentStatus',
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID', 'services.serviceName')
-        ->where('guests.listedUnder', '=', null)
+        ->where('guests.listedUnder', '=', null)        
+        ->whereDate('accommodations.checkoutDatetime', '>', Carbon::now())
+        ->orWhere('accommodations.checkoutDatetime', '=', null)
         ->orderBy('unitID')
         ->get();
+
+
+        
+        //->where('accommodations.checkinDatetime', '>', Carbon::now())
         return view('lodging.glamping')->with('units', $units);
     }
 

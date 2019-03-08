@@ -56,7 +56,11 @@
                         <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
                     </h5>
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
+                    @php
+                        $checkedIn = new DateTime($unit->checkinDatetime);
+                        $checkedInAt = $checkedIn->format("F j, o");
+                    @endphp
+                    <p class="card-text" style="color:green; font-style:italic;"> Checks in on {{$checkedInAt}} </p>
 
                 @else
                 <a href="/checkin/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>       
