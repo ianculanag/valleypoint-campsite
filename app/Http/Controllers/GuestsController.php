@@ -181,6 +181,28 @@ class GuestsController extends Controller
             //'numberOfPax' => $numberOfPax
         ]);
 
+        //for ('listedUnder', '=', $guest[0]->guestID) {}
+        if ($request->numberOfPax > 1) {
+
+            $accompanyingGuests = DB::table('guests')
+            ->where('listedUnder', '=', $request->input('guestID'))
+            ->get();
+
+            //return $accompanyingGuests;
+
+            for ($count = 1; $count < $request->numberOfPax; $count++) {
+                $firstName = 'firstName'.$count;
+                $lastName = 'lastName'.$count;
+
+                $user = Guests::find($accompanyingGuests[$count-1]->id);
+                $user->update([
+                    'firstName' => $request->input($firstName),
+                    'lastName' =>  $request->input($lastName)
+                ]);
+            }
+        }
+
+
         $url = '/editdetails'.'/'.$request->input('unitID');
         //return \Redirect::route('/editdetails', [$request->input('unitID')]);
         //return $url;
@@ -215,8 +237,15 @@ class GuestsController extends Controller
         'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
         'services.id AS serviceID', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
+        ->where('guests.listedUnder', '=', null)
         ->get();
-        return view('lodging.editdetails')->with('guest', $guest);
+
+        $accompanyingGuest = DB::table('guests')
+        ->select('guests.*')
+        ->where('listedUnder', '=', $guest[0]->guestID)
+        ->get();
+
+        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest);
     }
 
     /**
@@ -238,7 +267,13 @@ class GuestsController extends Controller
         ->where('units.id', '=', $unitID)
         ->where('guests.listedUnder', '=', null)
         ->get();
-        return view('lodging.checkout')->with('guest', $guest);
+        
+        $accompanyingGuest = DB::table('guests')
+        ->select('guests.*')
+        ->where('listedUnder', '=', $guest[0]->guestID)
+        ->get();
+
+        return view('lodging.checkout')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest);
     }
 
     public function viewGuests()

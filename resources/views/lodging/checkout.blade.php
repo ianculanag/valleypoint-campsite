@@ -28,7 +28,7 @@
                             <tr>
                                 <td>{{$guestDetails->serviceName}}</td>
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
-                                <td style="text-align:right;">{{$guestDetails->price}}</td>
+                                <td style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
                             </tr>
                             {{--@foreach ( as )
                             <tr>
@@ -47,7 +47,7 @@
                                         }
                                     }
                                 @endphp--}}
-                                <th style="text-align:right;">{{$guestDetails->price}}</th>
+                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -134,7 +134,24 @@
                             <textarea class="form-control" name="additionalServices" rows="3" disabled>None</textarea>
                         </div>
                     </div>
-                    <div class="panel-group" style="margin-bottom:2em;">
+
+                    @if (count($accompanyingGuest) > 0)
+                    <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
+                    <div class="form-group row pb-3">
+                        @foreach ($accompanyingGuest as $company)
+                            <div class="col-md-5 mb-1">
+                                <label for="firstName{{$loop->iteration}}">First Name</label>
+                                <input class="form-control" type="text" name="accompanyingGuestFirstName" placeholder="" value="{{$company->firstName}}" disabled>
+                            </div>
+                            <div class="col-md-7 mb-1">
+                                <label for="lastName{{$loop->iteration}}">Last Name</label>
+                                <input class="form-control" type="text" name="accompanyingGuestLastName" placeholder="" value="{{$company->lastName}}" disabled>
+                            </div>
+                        @endforeach
+                        </div>
+                    @endif
+
+                    <!--div class="panel-group" style="margin-bottom:2em;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h6 class="panel-title">
@@ -143,12 +160,11 @@
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <ul class="list-group">
-                                    <!--li class="list-group-item">Ian Jemuel Culanag</li-->
                                     <li class="list-group-item">Albren Jr. Cundangan</li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div-->
                     <div style="float:right;">
                         <button class="btn btn-info" style="width:10em;" type="submit">Check-out</button>
                         <a href="/glamping" style="text-decoration:none;">

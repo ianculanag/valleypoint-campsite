@@ -123,11 +123,30 @@ jQuery(document).ready(function(){
             let checkInLabel = document.createElement('TD');
             checkInLabel.colSpan='2';
             let checkInLabelData = 'Checked-in on ';
+            /*let checkedInAt = new Datetime(data[0].checkinDatetime);
+            checkedInAt.toLocaleString(undefined, {
+                month : 'short',
+                day : 'numeric',
+                year : 'numeric',
+                hour : '2-digit',
+                minute : '2-digit',
+            });*/
             let checkInBody = document.createTextNode(checkInLabelData+data[0].checkinDatetime);
             checkInLabel.style.color='green';
             checkInLabel.style.fontStyle='italic';
             checkInLabel.appendChild(checkInBody);
             checkIn.appendChild(checkInLabel);
+
+            let checkOut = document.createElement('TR');
+            let checkOutLabel = document.createElement('TD');
+            checkOutLabel.colSpan='2';
+            let checkOutLabelData = 'Due ';
+            //let checkedOutAt = new Datetime(data[0].checkoutDatetime);
+            let checkOutBody = document.createTextNode(checkOutLabelData+data[0].checkoutDatetime);
+            checkOutLabel.style.color='green';
+            checkOutLabel.style.fontStyle='italic';
+            checkOutLabel.appendChild(checkOutBody);
+            checkOut.appendChild(checkOutLabel);
 
             secondDiv.appendChild(guestH5);
 
@@ -135,6 +154,7 @@ jQuery(document).ready(function(){
             secondTableBody.appendChild(guestName);
             secondTableBody.appendChild(pax);
             secondTableBody.appendChild(checkIn);
+            secondTableBody.appendChild(checkOut);
             secondTable.appendChild(secondTableBody);
             secondDiv.appendChild(secondTable);
             

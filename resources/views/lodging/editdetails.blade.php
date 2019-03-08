@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{$guestDetails->serviceName}}</td>
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
-                                <td style="text-align:right;">{{$guestDetails->price}}</td>
+                                <td style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
                             </tr>
                             {{--@foreach ( as )
                             <tr>
@@ -46,7 +46,7 @@
                                         }
                                     }
                                 @endphp--}}
-                                <th style="text-align:right;">{{$guestDetails->price}}</th>
+                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -80,11 +80,11 @@
                     <div class="form-group row">
                         <div class="col-md-5 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" placeholder="" value="{{$guestDetails->firstName}}" maxlength="15">
+                            <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName" placeholder="" value="{{$guestDetails->lastName}}" maxlength="20">
+                            <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -96,12 +96,16 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber" placeholder="" value="{{$guestDetails->contactNumber}}">
+                                <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" disabled>
+                            <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10" disabled>
+                        </div>
+                        <div class="col-md-3 mb-1" style="display:none; position:absolute;">
+                            <label for="numberOfPax">No. of pax</label>
+                            <input class="form-control"  type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10">
                         </div>
                         <div class="col-md-4 mb-1 form-group">
                             <label for="accommodationType">Accommodation</label>
@@ -139,11 +143,9 @@
                     <div class="form-group row">
                         <div class="col-md-12 mb-1 form-group">
                             <label for="additionalServices">Additional services</label>
-                            <textarea class="form-control" name="additionalServices" rows="3" value="None"></textarea>
+                            <textarea class="form-control" name="additionalServices" rows="3" placeholder="None"></textarea>
                         </div>
                     </div>
-                    <hr class="mb-4">
-                    <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
                     <!--div class="container">
                         <table id="guest-table" class="table guest-list">   
                             <tbody>
@@ -215,17 +217,23 @@
                             </tfoot>
                         </table>
                     </div-->
-                    <div class="form-group row">
-                        <div class="col-md-5 mb-1">
-                            <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="accommpanyingGuestFirstName" placeholder="" value="Albren Jr.">
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="accommpanyingGuestLastName" placeholder="" value="Cundangan">
-                        </div>
-                    </div>
+                    @if (count($accompanyingGuest) > 0)
                     <hr class="mb-4">
+                    <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
+                    <div class="form-group row pb-3">
+                        @foreach ($accompanyingGuest as $company)
+                            <div class="col-md-5 mb-1">
+                                <label for="firstName{{$loop->iteration}}">First Name</label>
+                                <input class="form-control" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}">
+                            </div>
+                            <div class="col-md-7 mb-1">
+                                <label for="lastName{{$loop->iteration}}">Last Name</label>
+                                <input class="form-control" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}">
+                            </div>
+                        @endforeach
+                        </div>
+                    @endif
+                    
                     <div style="float:right;">
                         <button class="btn btn-info" style="width:10em;" type="submit">Save Changes</button>
                         <a href="/glamping" style="text-decoration:none;">
