@@ -7,19 +7,24 @@
             <a class="nav-item nav-link" style="color:#505050" href="#">Calendar View</a>
         </nav>
     </div>
-    <!--div class="form-group row" style="float:left;">
-        <label class="col-form-label col-md-2" for="accommodationType">Sort by: </label>
-        <div class="col-md-10">
-            <select class="form-control">
-                <option>Capacity</option>
-                <option>Status</option>
-            </select>
-        </div>
-    </div-->
+    <div class="container" style="position:absolute;">
+        <form style="float:right; padding-right:3em;">
+            <div class="form-group row mb-0">
+                <label for="staticEmail" class="col-md-5 col-form-label" style="padding-left:0; padding-right:.5;">Sort by:</label>
+                <div class="col-md-7 p-0" style="width:8em;;">
+                    <select class="form-control" style="padding-left:1">
+                        <option>Capacity</option>
+                        <option>Status</option>
+                        <option>Guest</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="container lodging-tabs">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs w-100 pt-0">
             <li class="nav-item">
-                <a class="nav-link active" href="/glamping">Glamping</a>
+                <a class="nav-link active" href="/glamping/">Glamping</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#505050;" href="/transient-backpacker">Backpacker</a>
