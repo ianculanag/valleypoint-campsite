@@ -61,6 +61,7 @@
                         <div class="col-md-3 mb-1">
                             <label for="accommodationID">Accommodation ID</label>
                             <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}" disabled>
+                            <input class="form-control" type="text" style="display:none; position:absolute;" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitID">Unit ID</label>
@@ -146,6 +147,10 @@
                             <textarea class="form-control" name="additionalServices" rows="3" placeholder="None"></textarea>
                         </div>
                     </div>
+                    <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
+                    <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
+                    <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
+                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">
                     <!--div class="container">
                         <table id="guest-table" class="table guest-list">   
                             <tbody>

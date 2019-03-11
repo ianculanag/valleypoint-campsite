@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Guests;
 use App\Accommodation;
 use App\Units;
+use App\AdditionalCharges;
+use App\Services;
 use Auth;
 use Redirect;
 
@@ -199,6 +201,40 @@ class GuestsController extends Controller
                     'firstName' => $request->input($firstName),
                     'lastName' =>  $request->input($lastName)
                 ]);
+            }
+        }
+
+        if ($request->input('numberOfAdditionalCharges') > 0) {
+
+            $services = DB::table('services')
+            ->where('id', '>', 5)
+            ->get();
+
+            for ($count = 1; $count <= $request->input('numberOfAdditionalCharges'); $count++) {
+                $serviceID = 'serviceID'.$count;
+                $numberOfPax = 'numberOfPaxAdditional'.$count;
+                $paymentStatus = 'paymentStatus'.$count;
+
+                $service = DB::table('services')
+                ->where('id', '=', $request->input($serviceID))
+                ->get();
+
+                $price = $service[0]->price;
+                $pax = $request->input($numberOfPax);
+                $totalPrice = $price * $pax;
+
+                $additionalCharge = new AdditionalCharges;
+                $additionalCharge->accommodationID = $request->input('accommodationID');
+                $additionalCharge->serviceID = $request->input($serviceID);
+                $additionalCharge->numberOfPax = $request->input($numberOfPax);
+                $additionalCharge->totalPrice = $totalPrice;
+                $additionalCharge->paymentStatus = $request->input($paymentStatus);
+                $additionalCharge->save();
+                
+                //$totalPrice = $service->price * $numberOfPax;
+
+                //EARTHQUAKE DRILL
+
             }
         }
 
