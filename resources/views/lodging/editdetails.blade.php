@@ -141,11 +141,44 @@
                             <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
+                    <hr class="mb-4">
                     <div class="form-group row">
-                        <div class="col-md-12 mb-1 form-group">
-                            <label for="additionalServices">Additional services</label>
-                            <textarea class="form-control" name="additionalServices" rows="3" placeholder="None"></textarea>
+                        <div class="col-md-12 mb-1">
+                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
+                        <div class="col-md-6 mb-1">
+                            <label for="additionalServiceName">Service name</label>
+                            <select name="additionalServiceName" class="form-control" placeholder="Choose...">
+                                <option value="" selected disabled >Choose...</option>
+                                <option>Airsoft</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <label for="additionalServiceNumberOfPax">Pax</label>
+                            <input class="form-control" type="number" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalServicePrice">Price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control" type="text" name="additionalServicePrice" maxlength="11" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-1">
+                            <label for="additionalServicePrice"> </label>
+                            <div class="input-group">
+                                <button class="btn btn-info">
+                                    <span class="fa fa-plus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <!--div class="col-md-1">
+                            <button class="btn btn-info">
+                                <span class="fa fa-plus" aria-hidden="true"></span>
+                            </button>
+                        </div-->
                     </div>
                     <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">

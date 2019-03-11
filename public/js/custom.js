@@ -228,3 +228,4 @@ jQuery("input[type=radio][name=numberOfPax]").change(function() {
     }
     jQuery("#outputDiv").html(htmlString);
 });
+
