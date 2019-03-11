@@ -4,9 +4,8 @@
 <div class="py-4 text-center">
   <h3 class="text-center">Guests</h3>
 </div>
-<div class="table-responsive">
-    <div class="container-fluid">
-            <table class="table table-bordered" >
+<div class="col-md-12">
+  <table class="table table-striped table-sm reservationTable">
                 <thead>
                   <tr class="">
                     <th scope="col" class="text-center">ID</th>
