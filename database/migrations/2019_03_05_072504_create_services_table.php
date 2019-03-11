@@ -48,7 +48,12 @@ class CreateServicesTable extends Migration
 
         $service7 = new Services;
         $service7->serviceName = 'Airsoft';
-        $service7->price = '750';
+        $service7->price = '250';
+        $service7->save();
+
+        $service7 = new Services;
+        $service7->serviceName = 'Archery';
+        $service7->price = '250';
         $service7->save();
     }
 

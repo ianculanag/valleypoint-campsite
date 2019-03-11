@@ -18,4 +18,10 @@ class Services extends Model
     {
         return $this->hasMany('App\Accommodation');
     }
+    
+    // Foreign Key to
+    public function additionalCharge()
+    {
+        return $this->hasMany('App\AdditionalCharges');
+    }
 }

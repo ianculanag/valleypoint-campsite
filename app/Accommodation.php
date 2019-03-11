@@ -21,6 +21,12 @@ class Accommodation extends Model
         return $this->hasMany('App\Guests');
     }
 
+    // Foreign Key to
+    public function additionalCharge()
+    {
+        return $this->hasMany('App\AdditionalCharges');
+    }
+
     // References Staff
     public function user()
     {

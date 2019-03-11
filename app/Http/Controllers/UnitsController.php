@@ -39,13 +39,6 @@ class UnitsController extends Controller
      */
     public function transientBackpacker()
     {        
-        /*$units = DB::table('units')
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
-        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
-        ->select('units.*', 'accommodations.*', 'guests.*')
-        ->get(['units.id AS unitID', 'guests.id AS guestID']);
-        return view('lodging.transient')->with('units', $units);*/
         $units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
@@ -69,26 +62,6 @@ class UnitsController extends Controller
      */
     public function glamping()
     {
-        /*$units = DB::table('units')
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
-        ->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
-        ->select('units.*', 'units.id AS unitID', 'guest_stays.*', 'guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'guests.numberOfPax',
-        'accommodations.accommodationType', 'accommodations.price', 'accommodations.paymentStatus',
-        'guest_stays.checkinDatetime', 'guest_stays.checkoutDatetime','accommodations.id AS accommodationsID' )
-        ->get();
-        //->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id')
-        //->leftJoin('guests', 'guests.id', 'guest_stays.guestID')
-        //->select('units.*', 'accommodations.*', 'guests.*')
-        //->get(['units.id AS unitID', 'guests.id AS guestID']);
-        return view('lodging.glamping')->with('units', $units);
-        //return $units;*/
-        
-        /*$unit = Units::find($request->input('unitID'));
-        $unit->update([
-            'status' => 'occupied'
-        ]);*/
         $pastAccommodations = DB::table('accommodations')
         ->where('accommodations.checkinDatetime', '<', Carbon::now())
         ->where('accommodations.checkoutDatetime', '<', Carbon::now())
@@ -242,15 +215,6 @@ class UnitsController extends Controller
      */
     public function loadUnit($id)
     {
-        //if(Request::ajax()){
-        //return 'getRequest has loaded completely';
-        //return DB::table('units') //get units table
-        //->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
-        //->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
-        //->leftJoin('guests', 'guests.id', 'guest_stays.guestID') // join with guests
-        //->select('units.*', 'accommodations.*', 'guests.*', 'guest_stays.*') // select everything in units, accommodations, and guests
-        //->where('units.id', '=', $id)
-        //->get(['units.id AS unitID', 'guests.id AS guestID']);
         return DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
@@ -262,9 +226,6 @@ class UnitsController extends Controller
         'services.id AS serviceID', 'services.serviceName')
         ->where('units.id', '=', $id)
         ->get();
-        //return $units;
-        //return view('lodging.glamping')->with('units', $units);
-        //}
     }
 
     /**
@@ -275,8 +236,6 @@ class UnitsController extends Controller
      */
     public function loadGuestDetails($id)
     {
-        //if(Request::ajax()){
-        //return 'getRequest has loaded completely';
         $guest = DB::table('units') //get units table
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
         ->leftJoin('guest_stays', 'guest_stays.accommodationID', 'accommodations.id') //join with guest stays
