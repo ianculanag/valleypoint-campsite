@@ -10,7 +10,7 @@
                 </span>
             </a>
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
-            <h2>Check-in/Reserve Guests</h2>
+            <h2>Check-in Guests</h2>
     </div>
     @if ($errors->any())
     <div class="alert alert-danger">

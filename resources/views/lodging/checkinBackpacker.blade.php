@@ -10,7 +10,7 @@
         </span>
     </a>
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
-            <h2>Check-in/Reserve Backpackers</h2>
+            <h2>Check-in Backpacker</h2>
     </div>
 
     <div class="row">
@@ -105,6 +105,37 @@
                     <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
                 </div>    
             </div>
+
+            <div class="row">
+            <div class="card p-2 col-md-11 ">
+            <label for="payment">Payment</label>
+            <div class="row">
+                <div class="form-group col-md-6">
+                <label for="amount">Amount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                
+                            </span>
+                        </div>
+                    
+                    <input type="number" name="amountpaid" required="required" class="form-control" id="amount">
+</div>
+                </div>
+
+                
+                <div class="form-group col-md-6">
+                <label for="arrivalTime">Status: </label>
+                <select class="form-control" id="status" name="status">
+                    <option>Paid</option>
+                    <option>Unpaid</option>
+                </select>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+
             
             {{-- Gac code}}
             <input type="text" name="firstName1" id="token" value="Ian" style="display:none;">
@@ -124,7 +155,8 @@
             </div>        
         </form>
     </div>
-  
+
+    
     <!-- Modal -->
     <div class="modal fade" id="check-in guests" tabindex="-1" role="dialog" aria-labelledby="check-in guests" aria-hidden="true">
         <div class="modal-dialog" role="document">
