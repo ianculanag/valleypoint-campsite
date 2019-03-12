@@ -20,8 +20,8 @@
                         <thead>
                             <tr>
                                 <th scope="col" style="width:55%;">Availed Services</th>
-                                <th scope="col">Pax</th>
-                                <th scope="col">Price</th>
+                                <th scope="col">Pax/Qty.</th>
+                                <th scope="col">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,27 +128,60 @@
                             <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-12 mb-1 form-group">
-                            <label for="additionalServices">Additional charges</label>
-                            <textarea class="form-control" name="additionalServices" rows="3" disabled>None</textarea>
-                        </div>
+                    <hr class="mb-4">
+                    <div class="col-md-12 mb-1">
+                        <p>Additional Services</p>
+                        <table>
+                            <thread>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </thead>
+                        </table>
                     </div>
+                    <!--div class="form-group row">
+                        <div class="col-md-12 mb-1">
+                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label for="additionalServiceName">Service name</label>
+                            <select name="additionalServiceName" class="form-control" disabled>
+                                <option>Airsoft</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalServiceNumberOfPax">Pax</label>
+                            <input class="form-control" type="number" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10" disabled>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalServicePrice">Price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control" type="text" name="additionalServicePrice" maxlength="11" placeholder="" value="" disabled>
+                            </div>
+                        </div>
+                    </div-->
 
                     @if (count($accompanyingGuest) > 0)
+                    <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
                     <div class="form-group row pb-3">
+                        <div class="col-md-5 mb-1">
+                            <label for="firstName{{$loop->iteration}}">First Name</label>
                         @foreach ($accompanyingGuest as $company)
-                            <div class="col-md-5 mb-1">
-                                <label for="firstName{{$loop->iteration}}">First Name</label>
-                                <input class="form-control" type="text" name="accompanyingGuestFirstName" placeholder="" value="{{$company->firstName}}" disabled>
-                            </div>
-                            <div class="col-md-7 mb-1">
-                                <label for="lastName{{$loop->iteration}}">Last Name</label>
-                                <input class="form-control" type="text" name="accompanyingGuestLastName" placeholder="" value="{{$company->lastName}}" disabled>
-                            </div>
+                            <input class="form-control mb-3" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}" disabled>
                         @endforeach
                         </div>
+                        <div class="col-md-7 mb-1">
+                            <label for="lastName{{$loop->iteration}}">Last Name</label>
+                        @foreach ($accompanyingGuest as $company)
+                            <input class="form-control mb-3" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}" disabled>
+                        @endforeach
+                        </div>
+                    </div>
                     @endif
 
                     <!--div class="panel-group" style="margin-bottom:2em;">
@@ -166,7 +199,7 @@
                         </div>
                     </div-->
                     <div style="float:right;">
-                        <button class="btn btn-info" style="width:10em;" type="submit">Check-out</button>
+                        <button class="btn btn-success" style="width:10em;" type="submit">Check-out</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-danger" style="width:10em;" type="button">Cancel</button>
                         </a>

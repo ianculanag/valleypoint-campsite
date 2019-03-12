@@ -146,28 +146,35 @@
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="additionalServiceName">Service name</label>
-                            <select name="additionalServiceName" class="form-control" placeholder="Choose...">
+                            <select name="additionalServiceName" class="form-control">
                                 <option value="" selected disabled >Choose...</option>
                                 <option>Airsoft</option>
+                                <option>Archery</option>
                             </select>
                         </div>
                         <div class="col-md-2 mb-1">
                             <label for="additionalServiceNumberOfPax">Pax</label>
-                            <input class="form-control" type="number" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
+                            <input class="form-control" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="additionalServicePrice">Price</label>
                             <div class="input-group">
+                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="₱ " disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalServiceAmountPaid">Amount Paid</label>
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">₱</span>
                                 </div>
-                                <input class="form-control" type="text" name="additionalServicePrice" maxlength="11" placeholder="" value="">
+                                <!-- set amount limit input as the value of price -->
+                                <input class="form-control" type="text" name="additionalServiceAmountPaid" placeholder="" value="">
                             </div>
                         </div>
-                        <div class="col-md-1 mb-1">
-                            <label for="additionalServicePrice"> </label>
+                        <div style="margin-top:2em;">
                             <div class="input-group">
                                 <button class="btn btn-info">
                                     <span class="fa fa-plus" aria-hidden="true"></span>
@@ -259,21 +266,23 @@
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Accompanying Guests</h5>
                     <div class="form-group row pb-3">
+                        <div class="col-md-5 mb-1">
+                            <label for="firstName{{$loop->iteration}}">First Name</label>
                         @foreach ($accompanyingGuest as $company)
-                            <div class="col-md-5 mb-1">
-                                <label for="firstName{{$loop->iteration}}">First Name</label>
-                                <input class="form-control" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}">
-                            </div>
-                            <div class="col-md-7 mb-1">
-                                <label for="lastName{{$loop->iteration}}">Last Name</label>
-                                <input class="form-control" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}">
-                            </div>
+                            <input class="form-control mb-3" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}">
                         @endforeach
                         </div>
+                        <div class="col-md-7 mb-1">
+                            <label for="lastName{{$loop->iteration}}">Last Name</label>
+                        @foreach ($accompanyingGuest as $company)
+                            <input class="form-control mb-3" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}">
+                        @endforeach
+                        </div>
+                    </div>
                     @endif
                     
                     <div style="float:right;">
-                        <button class="btn btn-info" style="width:10em;" type="submit">Save Changes</button>
+                        <button class="btn btn-success" style="width:10em;" type="submit">Save Changes</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-danger" style="width:10em;" type="button">Cancel</button>
                         </a>
