@@ -281,7 +281,16 @@ class GuestsController extends Controller
         ->where('listedUnder', '=', $guest[0]->guestID)
         ->get();
 
-        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest);
+        $sales = DB::table('sales')
+        ->join('accommodations', 'accommodations.id', 'sales.accommodationID')
+        ->join('services', 'services.id', 'accommodations.serviceID')
+        ->select('sales.*', 'accommodations.*', 'services.*')
+        ->where('accommodationID', '=', $guest[0]->accommodationsID)
+        ->get();
+
+        //return $sales;
+
+        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('sales', $sales);
     }
 
     /**

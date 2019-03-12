@@ -8,6 +8,8 @@ use App\Guests;
 use App\Accommodation;
 use App\GuestStay;
 use App\Units;
+use App\Sales;
+use Carbon\Carbon;
 use Auth;
 
 class AccommodationsController extends Controller
@@ -114,7 +116,7 @@ class AccommodationsController extends Controller
         $accommodation->serviceID = $request->input('numberOfPax');
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');
-        $accommodation->paymentStatus = 'pending';
+        $accommodation->paymentStatus = $request->input('paymentStatus');
         $accommodation->userID = Auth::user()->id;
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
@@ -127,27 +129,13 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        /*if ($accommodation->numberOfPax > 1) {
-            $guest2 = new Guests;
-            $guest2->lastName = $request->input('lastName1');
-            $guest2->firstName = $request->input('firstName1');
-            $guest2->accommodationID = $accommodation->id;
-            $guest2->listedUnder = $guest->id;   
-            $guest2->contactNumber = $request->input('contactNumber1');
-            $guest2->save();
+        $sale = new Sales;
+        $sale->paymentDatetime = Carbon::now();
+        $sale->amount = $request->input('amountPaid');
+        $sale->paymentCategory = 'lodging';
+        $sale->accommodationID = $accommodation->id;
+        $sale->save();
 
-            if ($accommodation->numberOfPax > 2) {
-                $guest3 = new Guests;
-                $guest3->lastName = $request->input('lastName2');
-                $guest3->firstName = $request->input('firstName2');
-                $guest3->accommodationID = $accommodation->id;
-                $guest3->listedUnder = $guest->id;   
-                $guest3->contactNumber = $request->input('contactNumber2');
-                $guest3->save();
-    
-                
-            }
-        }*/
         if ($accommodation->numberOfPax > 1) {
             for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
                 $accompanyingGuest = new Guests;
@@ -167,6 +155,7 @@ class AccommodationsController extends Controller
         $unit->update([
             'status' => 'occupied'
         ]);
+        
 
         return redirect('/glamping');
     }

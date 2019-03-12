@@ -14,21 +14,29 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <form class="card p-2">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Sales Invoice</h4>
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:55%;">Availed Services</th>
-                                <th scope="col">Pax</th>
-                                <th scope="col">Price</th>
+                                <th scope="col">Pax/Qty.</th>
+                                <th scope="col">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $total = 0;
+                            @endphp
+                            @foreach($sales as $salesDetails)
                             <tr>
-                                <td>{{$guestDetails->serviceName}}</td>
-                                <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
-                                <td style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
+                                <td>{{$salesDetails->serviceName}}</td>
+                                <td style="text-align:right;">{{$salesDetails->numberOfPax}}</td>
+                                <td style="text-align:right;">{{$salesDetails->amount}}</td>
                             </tr>
+                            @php
+                                $total += $salesDetails->amount;
+                            @endphp
+                            @endforeach
                             {{--@foreach ( as )
                             <tr>
                                 <td>Airsoft</td>
@@ -38,19 +46,11 @@
                             @endforeach--}}
                             <tr>
                                 <th colspan="2" scope="row">TOTAL:</th>
-                                {{--@php
-                                    if (count($services) > 0) {
-                                        $sum = 0;
-                                        foreach() {
-
-                                        }
-                                    }
-                                @endphp--}}
-                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</th>
+                                <th style="text-align:right;">{{$total}}</th>
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-danger" type="submit">Check-out</button>
+                    <!--button class="btn btn-danger" type="submit">Check-out</button-->
                 </form>
             </div>
             <div class="col-md-8 order-md-1 check-out-form">

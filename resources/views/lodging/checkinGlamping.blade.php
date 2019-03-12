@@ -76,11 +76,11 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
-                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="datePicker" value="<?php echo date("Y-m-d");?>">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
-                    <input type="time" name="checkinTime" required="required" class="form-control" id="time">
+                    <input type="time" name="checkinTime" required="required" class="form-control" id="time" value="14:00">
                 </div>
             </div>
             
@@ -91,9 +91,35 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="departureTime">Time:</label>
-                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
+                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time" value="12:00">
                 </div>
             </div>
+
+            <div class="row">
+                <div class="card p-2 col-md-11 ">
+                <label for="payment">Payment:</label>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                    <label for="amount">Amount:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                            </div>                    
+                        <input type="number" name="amountPaid" placeholder="0" class="form-control" id="amount">
+                    </div>
+                    </div>
+    
+                    
+                    <div class="form-group col-md-6">
+                    <label for="arrivalTime">Status: </label>
+                    <select class="form-control" id="status" name="paymentStatus">
+                        <option value="paid">Fully paid</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                    </div>
+                    </div>
+                </div>
+                </div>
 
             <button type="submit" value="Submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#check-in guests">
                     Check-in

@@ -108,27 +108,24 @@
 
             <div class="row">
             <div class="card p-2 col-md-11 ">
-            <label for="payment">Payment</label>
+            <label for="payment">Payment:</label>
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="amount">Amount</label>
+                <label for="amount">Amount:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                
-                            </span>
-                        </div>
-                    
-                    <input type="number" name="amountpaid" required="required" class="form-control" id="amount">
-</div>
+                            <span class="input-group-text">₱</span>
+                        </div>                    
+                    <input type="number" name="amountpaid" placeholder="0" step="50" min="0" max="1000000" class="form-control" id="amount">
+                </div>
                 </div>
 
                 
                 <div class="form-group col-md-6">
-                <label for="arrivalTime">Status: </label>
+                <label for="arrivalTime">Status:</label>
                 <select class="form-control" id="status" name="status">
-                    <option>Paid</option>
-                    <option>Unpaid</option>
+                    <option>Fully paid</option>
+                    <option>Pending</option>
                 </select>
                 </div>
                 </div>
