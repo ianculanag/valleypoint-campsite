@@ -97,7 +97,7 @@
 
             <div class="row">
                 <div class="card p-2 col-md-11 ">
-                <label for="payment">Payment:</label>
+                <label for="payment">Payment</label>
                 <div class="row">
                     <div class="form-group col-md-6">
                     <label for="amount">Amount:</label>

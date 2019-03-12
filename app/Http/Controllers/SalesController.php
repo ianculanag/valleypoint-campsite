@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class SalesController extends Controller
 {
@@ -80,5 +81,21 @@ class SalesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display sales transactions for lodging.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewLodgingSales()
+    {
+        $sales = DB::table('sales')
+        ->join('accommodations', 'accommodations.id', 'sales.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->where('guests.listedUnder', '=', null)
+        ->get();
+
+        return $sales;
     }
 }

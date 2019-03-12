@@ -110,7 +110,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/transactions">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             Transactions
                         </a>
