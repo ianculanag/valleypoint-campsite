@@ -52,7 +52,7 @@
                             </tr>
                             <thread>
                                 <th colspan="3" scope="row">Remaining balance:</td>
-                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
+                                <th style="text-align:right;">{{(($salesDetails->price)*($salesDetails->numberOfPax))-($salesDetails->amount)}}</td>
                             </thread>
                         </tbody>
                     </table>
