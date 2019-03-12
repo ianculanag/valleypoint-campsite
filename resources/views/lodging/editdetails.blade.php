@@ -14,12 +14,13 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <form class="card p-2">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Sales Invoice</h4>
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
-                                <th scope="col" style="width:55%;">Availed Services</th>
-                                <th scope="col">Pax/Qty.</th>
+                                <th scope="col" style="width:55%">Desciption</th>
+                                <th scope="col">Qty.</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Amount</th>
                             </tr>
                         </thead>
@@ -31,10 +32,11 @@
                             <tr>
                                 <td>{{$salesDetails->serviceName}}</td>
                                 <td style="text-align:right;">{{$salesDetails->numberOfPax}}</td>
-                                <td style="text-align:right;">{{$salesDetails->amount}}</td>
+                                <td style="text-align:right;">{{$salesDetails->price}}</td>
+                                <td style="text-align:right;">{{($salesDetails->price)*($salesDetails->numberOfPax)}}</td>
                             </tr>
                             @php
-                                $total += $salesDetails->amount;
+                                $total += ($salesDetails->price*$salesDetails->numberOfPax);
                             @endphp
                             @endforeach
                             {{--@foreach ( as )
@@ -48,6 +50,10 @@
                                 <th colspan="2" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">{{$total}}</th>
                             </tr>
+                            <thread>
+                                <th colspan="3" scope="row">Remaining balance:</td>
+                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
+                            </thread>
                         </tbody>
                     </table>
                     <!--button class="btn btn-danger" type="submit">Check-out</button-->

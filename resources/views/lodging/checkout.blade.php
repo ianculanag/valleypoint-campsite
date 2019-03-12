@@ -19,8 +19,9 @@
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
-                                <th scope="col" style="width:55%;">Availed Services</th>
-                                <th scope="col">Pax/Qty.</th>
+                                <th scope="col" style="width:55%">Desciption</th>
+                                <th scope="col">Qty.</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Amount</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                             <tr>
                                 <td>{{$guestDetails->serviceName}}</td>
                                 <td style="text-align:right;">{{$guestDetails->numberOfPax}}</td>
+                                <td style="text-align:right;">{{$guestDetails->price}}</td>
                                 <td style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
                             </tr>
                             {{--@foreach ( as )
@@ -38,7 +40,7 @@
                             </tr>
                             @endforeach--}}
                             <tr>
-                                <th colspan="2" scope="row">TOTAL:</th>
+                                <th colspan="3" scope="row">TOTAL:</th>
                                 {{--@php
                                     if (count($services) > 0) {
                                         $sum = 0;
@@ -49,6 +51,10 @@
                                 @endphp--}}
                                 <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</th>
                             </tr>
+                            <thread>
+                                <th colspan="3" scope="row">Remaining balance:</td>
+                                <th style="text-align:right;">{{($guestDetails->price)*($guestDetails->numberOfPax)}}</td>
+                            </thread>
                         </tbody>
                     </table>
                 </form>
@@ -128,39 +134,53 @@
                             <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
-                    <hr class="mb-4">
-                    <div class="col-md-12 mb-1">
-                        <p>Additional Services</p>
-                        <table>
-                            <thread>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </thead>
-                        </table>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-1">
+                            <p>Additional Services</p>
+                            <table class="table table-sm col-md-12 mb-1">
+                                <thread>
+                                    <th scope="col" width="40%">Service name</th>
+                                    <th scope="col" width="10%">Pax</th>
+                                    <th scope="col" width="20%">Price</th>
+                                    <th scope="col" width="20%">Amount Paid</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Airsoft</td>
+                                        <td>3</td>
+                                        <td>3000</td>
+                                        <td>3000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <!--div class="form-group row">
+                    <!--hr class="mb-4">
+                    <div class="form-group row">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-4 mb-1">
                             <label for="additionalServiceName">Service name</label>
                             <select name="additionalServiceName" class="form-control" disabled>
                                 <option>Airsoft</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-2 mb-1">
                             <label for="additionalServiceNumberOfPax">Pax</label>
                             <input class="form-control" type="number" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10" disabled>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="additionalServicePrice">Price</label>
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control" type="text" name="additionalServicePrice" maxlength="11" placeholder="" value="" disabled>
+                                <input class="form-control" type="text" name="additionalServicePrice" maxlength="11" placeholder="" value="₱ " disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalServiceAmountPaid">Amount Paid</label>
+                            <div class="input-group">
+                                set amount limit input as the value of price
+                                <input class="form-control" type="text" name="additionalServiceAmountPaid" placeholder="" value="₱" disabled>
                             </div>
                         </div>
                     </div-->
