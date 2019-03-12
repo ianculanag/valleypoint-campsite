@@ -21,7 +21,7 @@
                                 <th scope="col" style="width:55%">Desciption</th>
                                 <th scope="col">Qty.</th>
                                 <th scope="col">Price</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                             </tr>
                             @endforeach--}}
                             <tr>
-                                <th colspan="2" scope="row">TOTAL:</th>
+                                <th colspan="3" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">{{$total}}</th>
                             </tr>
                             <thread>
@@ -167,17 +167,19 @@
                         <div class="col-md-3 mb-1">
                             <label for="additionalServicePrice">Price</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="₱ " disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="additionalServiceAmountPaid">Amount Paid</label>
-                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">₱</span>
                                 </div>
-                                <!-- set amount limit input as the value of price -->
-                                <input class="form-control" type="text" name="additionalServiceAmountPaid" placeholder="" value="">
+                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="additionalPaymentStatus">Payment Status</label>
+                            <div class="input-group">
+                                <select name="additionalPaymentStatus" class="form-control">
+                                    <option>Pending</option>
+                                    <option>Paid</option>
+                                </select>
                             </div>
                         </div>
                         <div style="margin-top:2em;">

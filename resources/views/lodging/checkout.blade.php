@@ -22,7 +22,7 @@
                                 <th scope="col" style="width:55%">Desciption</th>
                                 <th scope="col">Qty.</th>
                                 <th scope="col">Price</th>
-                                <th scope="col">Amount</th>
+                                <th scope="col">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,19 +137,19 @@
                     <div class="form-group row">
                         <div class="col-md-12 mb-1">
                             <p>Additional Services</p>
-                            <table class="table table-sm col-md-12 mb-1">
+                            <table class="table table-sm col-md-12 mb-1 table-bordered">
                                 <thread>
                                     <th scope="col" width="40%">Service name</th>
                                     <th scope="col" width="10%">Pax</th>
                                     <th scope="col" width="20%">Price</th>
-                                    <th scope="col" width="20%">Amount Paid</th>
+                                    <th scope="col" width="20%">Payment Status</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Airsoft</td>
-                                        <td>3</td>
-                                        <td>3000</td>
-                                        <td>3000</td>
+                                        <td style="text-align:right">3</td>
+                                        <td style="text-align:right">3000</td>
+                                        <td style="text-align:right">3000</td>
                                     </tr>
                                 </tbody>
                             </table>
