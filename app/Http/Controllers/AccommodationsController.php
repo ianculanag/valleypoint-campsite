@@ -134,6 +134,7 @@ class AccommodationsController extends Controller
         $sale->amount = $request->input('amountPaid');
         $sale->paymentCategory = 'lodging';
         $sale->accommodationID = $accommodation->id;
+        $sale->serviceID = $request->input('numberOfPax');
         $sale->save();
 
         if ($accommodation->numberOfPax > 1) {
@@ -173,7 +174,7 @@ class AccommodationsController extends Controller
         ]);
 
         $accommodation = new Accommodation;         
-        $accommodation->serviceID = $request->input('numberOfPax');
+        $accommodation->serviceID = '5';
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');
         $accommodation->paymentStatus = 'pending';

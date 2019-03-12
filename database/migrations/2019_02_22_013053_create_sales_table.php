@@ -19,9 +19,11 @@ class CreateSalesTable extends Migration
             $table->double('amount', 8, 2);
             $table->enum('paymentCategory', ['lodging', 'restobar']);
             $table->integer('orderID')->unsigned()->nullable();
-            $table->integer('accommodationID')->unsigned()->nullable();
+            $table->integer('accommodationID')->unsigned()->nullable();                    
+            $table->integer('serviceID')->unsigned()->nullable();
             $table->foreign('orderID')->references('id')->on('Orders');
-            $table->foreign('accommodationID')->references('id')->on('Accommodation');
+            $table->foreign('accommodationID')->references('id')->on('Accommodation');   
+            $table->foreign('serviceID')->references('id')->on('Services');    
             $table->timestamps();
         });
     }
