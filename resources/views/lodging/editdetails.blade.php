@@ -277,6 +277,7 @@
                         <div class="col-md-5 mb-1">
                             <label for="firstName{{$loop->iteration}}">First Name</label>
                         @foreach ($accompanyingGuest as $company)
+<<<<<<< HEAD
                             <input class="form-control mb-3" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}">
                         @endforeach
                         </div>
@@ -284,6 +285,16 @@
                             <label for="lastName{{$loop->iteration}}">Last Name</label>
                         @foreach ($accompanyingGuest as $company)
                             <input class="form-control mb-3" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}">
+=======
+                            <div class="col-md-5 mb-1">
+                                <label for="firstName{{$loop->iteration}}">First Name</label>
+                                <input class="form-control" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{old($company->firstName)}}">
+                            </div>
+                            <div class="col-md-7 mb-1">
+                                <label for="lastName{{$loop->iteration}}">Last Name</label>
+                                <input class="form-control" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{old($company->lastName)}}">
+                            </div>
+>>>>>>> Initial form storing data when error/fail
                         @endforeach
                         </div>
                     </div>

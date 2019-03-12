@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-sm-5 text-left">
-            <form method="POST" action="/checkinAt" class="justify-content-center">
+        <form method="POST" action="/checkinAt" class="justify-content-center">
                 @csrf
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <!--div class="form-group">
@@ -36,11 +36,11 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" name="firstName" required="required" class="form-control" id="inputfirstName" placeholder="Juan">
+                    <input type="text" name="firstName" required="required" class="form-control" id="inputfirstName" placeholder="Juan" value="{{old('firstName')}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastName">Last Name</label>
-                        <input type="text" name="lastName" required="required" class="form-control" id="inputlastName" placeholder="Dela Cruz">
+                    <input type="text" name="lastName" required="required" class="form-control" id="inputlastName" placeholder="Dela Cruz" value="{{old('lastName')}}">
                     </div>  
                 </div> 
                 <div class="form-group">
@@ -51,13 +51,13 @@
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                    <input type="text" name="contactNumber" required="required" class="form-control" id="inputcontactNumber" placeholder="09#########">
+                    <input type="text" name="contactNumber" required="required" class="form-control" id="inputcontactNumber" placeholder="09#########" value="{{old('contactNumber')}}">
                     </div>
                 </div>
                 <div class="form-group row-md-6">
-                    <label for="numberOfPax">Number Of Pax:</label><br>
+                <label for="numberOfPax">Number Of Pax:</label><br>
                     <label class="radio-inline pr-3">
-                        <input type="radio"  name="numberOfPax" value="1"> Solo
+                    <input type="radio"  name="numberOfPax" value="1"> Solo
                     </label>
                     <label class="radio-inline pr-3">
                         <input type="radio" name="numberOfPax" value="2"> 2 Pax
@@ -76,22 +76,34 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
+<<<<<<< HEAD
                     <input type="date" name="checkinDate" required="required" class="form-control" id="datePicker" value="<?php echo date("Y-m-d");?>">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
                     <input type="time" name="checkinTime" required="required" class="form-control" id="time" value="14:00">
+=======
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="date" value="{{old('checkinDate')}}">
+                </div>
+                <div class="form-group col-md-6">
+                <label for="arrivalTime">Time: </label>
+                    <input type="time" name="checkinTime" required="required" class="form-control" id="time" value="{{old('checkinTime')}}">
+>>>>>>> Initial form storing data when error/fail
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="departureDate">Departure Date:</label>
-                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="{{old('checkoutDate')}}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="departureTime">Time:</label>
+<<<<<<< HEAD
                     <input type="time" name="checkoutTime" required="required" class="form-control" id="time" value="12:00">
+=======
+                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time" value="{{old('checkoutTime')}}">
+>>>>>>> Initial form storing data when error/fail
                 </div>
             </div>
 
