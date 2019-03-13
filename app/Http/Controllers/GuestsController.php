@@ -296,7 +296,10 @@ class GuestsController extends Controller
         $guest = DB::table('guests')
         ->leftJoin('accommodations', 'accommodations.id', 'guests.accommodationID')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('guests.*', 'guests.id AS guestID', 'serviceName', 'accommodations.numberOfPax')
+        ->leftJoin('units', 'units.id', 'accommodations.unitID')
+        ->select('units.id as unitID', 'guests.id as guestID', 'units.unitNumber', 'units.unitType', 
+        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber',
+        'accommodations.unitID','accommodations.numberOfPax', 'services.serviceName')
         ->get();
        // return $guest;
         return view('lodging.viewguests')->with('guest', $guest);
