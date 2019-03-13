@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Guests;
 use App\Accommodation;
 use App\AccommodationUnits;
@@ -257,8 +258,11 @@ class AccommodationsController extends Controller
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
+            'checkinDate'   => 'required',
+            'checkoutDate'  => 'required',
         ]);
 
+<<<<<<< HEAD
         
         //GAC
         $accommodation = new Accommodation;                 
@@ -321,6 +325,16 @@ class AccommodationsController extends Controller
         return redirect('/transient-backpacker');
 
         /*$accommodation = new Accommodation;         
+=======
+
+        if ($request->input('checkinDate') > $request->input('checkoutDate')){
+            return redirect()->back()->withInput();
+            
+        }
+
+
+        $accommodation = new Accommodation;         
+>>>>>>> check dates validation
         $accommodation->serviceID = '5';
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');
@@ -336,6 +350,7 @@ class AccommodationsController extends Controller
         $guest->accommodationID = $accommodation->id;   
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
+
 
         if ($accommodation->numberOfPax > 1) {
             for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
@@ -434,4 +449,5 @@ class AccommodationsController extends Controller
     {
         return view ('lodging.addreserve')->with('unitID', $unitID);
     }
-}
+
+        }

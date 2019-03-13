@@ -12,6 +12,15 @@
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
             <h2>Check-in Backpacker</h2>
     </div>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <div class="row">
         <div class="col-sm-5 text-left">
@@ -87,7 +96,7 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
-                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="date" value="{{ old('checkinDate') }}">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
@@ -98,7 +107,7 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="departureDate">Departure Date:</label>
-                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
+                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="{{ old('checkoutDate') }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="arrivalTime">Time:</label>
