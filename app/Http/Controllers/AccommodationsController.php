@@ -110,6 +110,8 @@ class AccommodationsController extends Controller
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
+            'firstName' => 'required|max:30',
+            'lastName' => 'required|max:30'
         ]);
 
         $accommodation = new Accommodation;         
