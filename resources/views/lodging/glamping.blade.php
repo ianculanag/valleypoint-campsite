@@ -41,7 +41,7 @@
             
             @if($unit->unitType == 'tent')   
 
-                {{--@if($unit->status == 'occupied')--
+                @if($unit->status == 'ongoing')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
@@ -52,7 +52,7 @@
                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
 
-                @elseif($unit->status == 'reserved')
+                {{--@elseif($unit->status == 'reserved')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
@@ -79,6 +79,7 @@
                     <p></p>
 
                 @endif--}}
+                @else
                 <a href="/checkin/{{$unit->unitID}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
@@ -88,6 +89,7 @@
                     </h5>
                     <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                     <p></p>
+                @endif
                 </div>
             </div>
             </a>

@@ -263,34 +263,39 @@ class GuestsController extends Controller
      */
     public function editGuestDetails($unitID)
     {
-        $guest = DB::table('units') //get units table
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id') // join with accommodations
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id') // join with guests
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID') // join with services
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
-        'accommodations.serviceID', 'accommodations.paymentStatus',
-        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID', 'services.serviceName', 'services.price')
+        $guest = DB::table('units')
+        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
+        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodations.id AS accommodationID', 'accommodations.numberOfPax',
+                 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber',
+                 'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
         ->where('guests.listedUnder', '=', null)
         ->get();
+
+        //return $guest;
 
         $accompanyingGuest = DB::table('guests')
         ->select('guests.*')
         ->where('listedUnder', '=', $guest[0]->guestID)
         ->get();
 
-        $sales = DB::table('sales')
-        ->join('accommodations', 'accommodations.id', 'sales.accommodationID')
-        ->join('services', 'services.id', 'accommodations.serviceID')
-        ->select('sales.*', 'accommodations.*', 'services.*')
-        ->where('accommodationID', '=', $guest[0]->accommodationsID)
+        //return $accompanyingGuest;
+
+        $charges = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->leftJoin('payments', 'payments.chargeID', 'charges.id')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->get();
 
-        //return $sales;
+        //return $charges;
 
-        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('sales', $sales);
+        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
     }
 
     /**

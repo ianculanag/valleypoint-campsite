@@ -81,17 +81,16 @@ class UnitsController extends Controller
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
-                 'accommodation_units.status',
+                 'accommodation_units.status', 'services.serviceName', 
                  'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
                  'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
         ->where('guests.listedUnder', '=', null)   
-        ->where('accommodation_units.status', '=', 'ongoing')        
+        //->where('accommodation_units.status', '=', 'ongoing')        
         ->orderBy('unitID')
         ->get(); 
-
-        return $units;
         
         return view('lodging.glamping')->with('units', $units);
     }
@@ -172,16 +171,17 @@ class UnitsController extends Controller
     public function loadUnit($id)
     {
         return DB::table('units')
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
+        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 
-        'guests.lastName', 'guests.firstName', 'guests.accommodationID','guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
-        'accommodations.serviceID', 'accommodations.paymentStatus',
-        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID', 'services.serviceName')
-        ->where('units.id', '=', $id)
-        ->get();
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'services.serviceName', 
+                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
+                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
+        ->where('unitID', '=', $id)   
+        ->get(); 
     }
 
     /**

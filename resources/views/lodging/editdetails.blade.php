@@ -28,15 +28,15 @@
                             @php
                                 $total = 0;
                             @endphp
-                            @foreach($sales as $salesDetails)
+                            @foreach($charges as $charge)
                             <tr>
-                                <td>{{$salesDetails->serviceName}}</td>
-                                <td style="text-align:right;">{{$salesDetails->numberOfPax}}</td>
-                                <td style="text-align:right;">{{$salesDetails->price}}</td>
-                                <td style="text-align:right;">{{($salesDetails->price)*($salesDetails->numberOfPax)}}</td>
+                                <td>{{$charge->serviceName}}</td>
+                                <td style="text-align:right;">{{$charge->numberOfPax}}</td>
+                                <td style="text-align:right;">{{$charge->price}}</td>
+                                <td style="text-align:right;">{{($charge->totalPrice)}}</td>
                             </tr>
                             @php
-                                $total += ($salesDetails->price*$salesDetails->numberOfPax);
+                                $total += $charge->totalPrice;
                             @endphp
                             @endforeach
                             {{--@foreach ( as )
@@ -52,7 +52,7 @@
                             </tr>
                             <thread>
                                 <th colspan="3" scope="row">Remaining balance:</td>
-                                <th style="text-align:right;">{{(($salesDetails->price)*($salesDetails->numberOfPax))-($salesDetails->amount)}}</td>
+                                <th style="text-align:right;">{{($charge->totalPrice)-($charge->amount)}}</td>
                             </thread>
                         </tbody>
                     </table>
@@ -66,8 +66,8 @@
                     <div class="form-group row">
                         <div class="col-md-3 mb-1">
                             <label for="accommodationID">Accommodation ID</label>
-                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}" disabled>
-                            <input class="form-control" type="text" style="display:none; position:absolute;" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationsID}}">
+                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
+                            <input class="form-control" type="text" style="display:none; position:absolute;" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitID">Unit ID</label>
