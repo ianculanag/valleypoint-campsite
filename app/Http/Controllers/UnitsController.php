@@ -62,64 +62,7 @@ class UnitsController extends Controller
      */
     public function glamping()
     {
-        $pastAccommodations = DB::table('accommodations')
-        ->where('accommodations.checkinDatetime', '<', Carbon::now())
-        ->where('accommodations.checkoutDatetime', '<', Carbon::now())
-        //->orWhere('accommodations.checkinDatetime', '>', Carbon::now())
-        //->orWhere('accommodations.checkoutDatetime', '>', Carbon::now())
-        ->get();
-
-        //return $pastAccommodations;
-
-        if(count($pastAccommodations) > 0) {
-            for($count = 0; $count < count($pastAccommodations); $count++) {
-                $unit = Units::find($pastAccommodations[$count]->unitID);
-                $unit->update([
-                    'status' => 'available'
-                ]);
-            }
-        }
-
-        $reservedAccommodations = DB::table('accommodations')
-        //->where('accommodations.checkinDatetime', '<', Carbon::now())
-        //->where('accommodations.checkoutDatetime', '<', Carbon::now())
-        ->where('accommodations.checkinDatetime', '>', Carbon::now())
-        ->where('accommodations.checkoutDatetime', '>', Carbon::now())
-        ->get();
-
-        //return $reservedAccommodations;
-
-        if(count($reservedAccommodations) > 0) {
-            for($count = 0; $count < count($reservedAccommodations); $count++) {
-                $unit = Units::find($reservedAccommodations[$count]->unitID);
-                $unit->update([
-                    'status' => 'reserved'
-                ]);
-            }
-        }
-
-        $activeAccommodations = DB::table('accommodations')
-        ->whereDate('accommodations.checkinDatetime', '=', Carbon::today())
-        ->where('accommodations.checkoutDatetime', '>', Carbon::now())
-        ->get();
-
-        if(count($activeAccommodations) > 0) {
-            for($count = 0; $count < count($activeAccommodations); $count++) {
-                $unit = Units::find($activeAccommodations[$count]->unitID);
-                $unit->update([
-                    'status' => 'occupied'
-                ]);
-            }
-        }
-
-        //return $activeAccommodations;
-        
-        //$unit = Units::find($accommodations[0].unitID));
-        //$unit->update([
-        //    'status' => 'occupied'
-        //]);
-
-        $units = DB::table('units')
+        /*$units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
@@ -132,11 +75,24 @@ class UnitsController extends Controller
         ->whereDate('accommodations.checkoutDatetime', '>', Carbon::now())
         ->orWhere('accommodations.checkoutDatetime', '=', null)
         ->orderBy('unitID')
-        ->get();
+        ->get();*/
 
+        $units = DB::table('units')
+        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status',
+                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
+                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
+        ->where('guests.listedUnder', '=', null)   
+        ->where('accommodation_units.status', '=', 'ongoing')        
+        ->orderBy('unitID')
+        ->get(); 
 
+        return $units;
         
-        //->where('accommodations.checkinDatetime', '>', Carbon::now())
         return view('lodging.glamping')->with('units', $units);
     }
 

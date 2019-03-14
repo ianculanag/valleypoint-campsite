@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Guests;
 use App\Accommodation;
-use App\GuestStay;
+use App\AccommodationUnits;
 use App\Units;
-use App\Sales;
+use App\Services;
+use App\Charges;
+use App\Payments;
 use Carbon\Carbon;
 use Auth;
 
@@ -159,6 +161,88 @@ class AccommodationsController extends Controller
             'status' => 'occupied'
         ]);
         
+
+        return redirect('/glamping');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkinGlamping(Request $request)
+    {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+            'firstName' => 'required|max:30',
+            'lastName' => 'required|max:30'
+        ]);
+
+        $accommodation = new Accommodation;                 
+        $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
+        $accommodation->serviceID = $request->input('numberOfPax');
+        $accommodation->userID = Auth::user()->id;
+        //$accommodation->unitID = $request->input('unitID');
+        //$accommodation->paymentStatus = $request->input('paymentStatus');
+        $accommodation->save();
+
+        $guest = new Guests;
+        $guest->lastName = $request->input('lastName');
+        $guest->firstName = $request->input('firstName');
+        $guest->accommodationID = $accommodation->id;   
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->save();
+
+        if ($accommodation->numberOfPax > 1) {
+            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
+                $accompanyingGuest = new Guests;
+
+                $lastName = 'lastName'.$count;
+                $firstName = 'firstName'.$count;
+
+                $accompanyingGuest->lastName = $request->input($lastName);
+                $accompanyingGuest->firstName = $request->input($firstName);
+                $accompanyingGuest->accommodationID = $accommodation->id;
+                $accompanyingGuest->listedUnder = $guest->id;   
+                $accompanyingGuest->save();
+            }
+        }
+      
+        /*$sale = new Sales;
+        $sale->paymentDatetime = Carbon::now();
+        $sale->amount = $request->input('amountPaid');
+        $sale->paymentCategory = 'lodging';
+        $sale->accommodationID = $accommodation->id;
+        $sale->serviceID = $request->input('numberOfPax');
+        $sale->save();*/
+
+        $service = Services::find($request->input('numberOfPax'));
+        
+        $charge = new Charges;
+        $charge->quantity = $request->input('numberOfPax');
+        $charge->totalPrice = $charge->quantity*$service->price;
+        $charge->remarks = $request->input('paymentStatus');
+        $charge->accommodationID = $accommodation->id;
+        $charge->serviceID = $service->id;
+        $charge->save();
+
+        if($request->input('paymentStatus') != 'unpaid') {
+            $payment = new Payments;
+            $payment->paymentDatetime = Carbon::now();
+            $payment->amount = $request->input('amountPaid');
+            $payment->paymentStatus = $request->input('paymentStatus');
+            $payment->chargeID = $charge->id;
+            $payment->save();
+        }
+
+        $accommodationUnit = new AccommodationUnits;
+        $accommodationUnit->accommodationID = $accommodation->id;
+        $accommodationUnit->unitID = $request->input('unitID');
+        $accommodationUnit->status = 'ongoing';
+        $accommodationUnit->save();
 
         return redirect('/glamping');
     }

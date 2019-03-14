@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a929cd0aa268c691ba1258c81bd9bb96",
+    "content-hash": "083cadb5bf05b8f9d300ce3eec7a4987",
     "packages": [
+        {
+            "name": "coenjacobs/eloquent-composite-primary-keys",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coenjacobs/eloquent-composite-primary-keys.git",
+                "reference": "62d0cc1107cf3f91e4890f65d2bc08c13a3195f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coenjacobs/eloquent-composite-primary-keys/zipball/62d0cc1107cf3f91e4890f65d2bc08c13a3195f8",
+                "reference": "62d0cc1107cf3f91e4890f65d2bc08c13a3195f8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoenJacobs\\EloquentCompositePrimaryKeys\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Coen Jacobs",
+                    "email": "coenjacobs@gmail.com"
+                }
+            ],
+            "description": "Offers composite primary keys on Eloquent models",
+            "time": "2017-10-23T09:10:24+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

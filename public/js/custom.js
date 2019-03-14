@@ -228,13 +228,3 @@ jQuery("input[type=radio][name=numberOfPax]").change(function() {
     }
     jQuery("#outputDiv").html(htmlString);
 });
-
-Date.prototype.toDateInputValue = (function() {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0,10);
-});
-
-jQuery(document).ready( function() {
-    jQuery('#datePicker').val(new Date().toDateInputValue());
-});​

@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use CoenJacobs\EloquentCompositePrimaryKeys\HasCompositePrimaryKey;
 
 class AccommodationUnits extends Model
 {
+    use HasCompositePrimaryKey;
+   
+    protected $primaryKey = array('accommodationID', 'unitID');
+
     // References Accommodatinos
     public function accommodation()
     {

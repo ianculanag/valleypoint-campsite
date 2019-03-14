@@ -38,7 +38,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
-Route::post('/checkinAt', 'AccommodationsController@checkin');
+Route::post('/checkinGlamping', 'AccommodationsController@checkinGlamping');
 
 //Check-in backpacker
 Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');

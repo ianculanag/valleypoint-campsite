@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-sm-5 text-left">
-        <form method="POST" action="/checkinAt" class="justify-content-center">
+        <form method="POST" action="/checkinGlamping" class="justify-content-center">
                 @csrf
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <!--div class="form-group">
@@ -76,26 +76,53 @@
             <div class="row">
                 <div class="form-group col-md-6">
                 <label for="arrivalDate">Arrival Date:</label>
-                <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="{{old('checkinDate')}}">
+                <input type="date" name="checkinDate" required="required" class="form-control" id="date" value="<?php echo date("Y-m-d");?>">
                 </div>
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Time: </label>
-                <input type="time" name="checkinTime" required="required" class="form-control" id="time" value="14:00{{old('checkinTime')}}">
+                <input type="time" name="checkinTime" required="required" class="form-control" id="time" value="14:00">
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="departureDate">Departure Date:</label>
-                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="{{old('checkoutDate')}}">
+                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="departureTime">Time:</label>
-                <input type="time" name="checkoutTime" required="required" class="form-control" id="time" value="12:00{{old('checkoutTime')}}">
+                <input type="time" name="checkoutTime" required="required" class="form-control" id="time" value="12:00">
                 </div>
             </div>
 
-            <button type="submit" value="Submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#check-in guests">
+            <div class="row">
+                <div class="card p-2 col-md-11 ">
+                <label for="payment">Payment:</label>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                    <label for="amount">Amount:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">₱</span>
+                            </div>                    
+                        <input type="number" name="amountPaid" placeholder="0" class="form-control" id="amount">
+                    </div>
+                    </div>
+
+
+                     <div class="form-group col-md-6">
+                    <label for="arrivalTime">Status: </label>
+                    <select class="form-control" id="status" name="paymentStatus">
+                        <option value="full">Full Payment</option>
+                        <option value="partial">Partial</option>
+                        <option value="unpaid">Unpaid</option>
+                    </select>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+                <button type="submit" value="Submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#check-in guests">
                     Check-in
             </button>
             

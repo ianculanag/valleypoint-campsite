@@ -15,7 +15,8 @@ class CreateAccommodationUnitsTable extends Migration
     {
         Schema::create('accommodation_units', function (Blueprint $table) {
             $table->integer('accommodationID')->unsigned();
-            $table->integer('unitID')->unsigned();
+            $table->integer('unitID')->unsigned();         
+            $table->primary(['accommodationID', 'unitID']);
             $table->enum('status', ['ongoing','finished']);
             $table->foreign('accommodationID')->references('id')->on('Accommodations');
             $table->foreign('unitID')->references('id')->on('Units');
