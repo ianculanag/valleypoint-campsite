@@ -22,21 +22,21 @@ class Accommodation extends Model
     }
 
     // Foreign Key to
-    public function additionalCharge()
+    public function accommodationUnit()
     {
-        return $this->hasMany('App\AdditionalCharges');
+        return $this->hasMany('App\AccommodationUnits');
     }
+
+     // Foreign Key to
+     public function charge()
+     {
+         return $this->hasMany('App\Charges');
+     }
 
     // References Staff
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    // References Units
-    public function units()
-    {
-        return $this->belongsTo('App\Units');
     }
 
     // References Services

@@ -27,4 +27,10 @@ class Units extends Model
     {
         return $this->hasMany('App\Accommodation');
     }
+
+    // Foreign Key to
+    public function accommodationUnit()
+    {
+        return $this->hasMany('App\AccommodationUnits');
+    }
 }
