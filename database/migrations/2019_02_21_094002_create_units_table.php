@@ -16,11 +16,10 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('unitNumber');
             $table->enum('unitType',['room','bed','tent']);
-            $table->integer('partOf')->nullable();
+            $table->string('unitNumber');
             $table->integer('capacity')->default(1);
-            $table->enum('status',['available','reserved','occupied']);
+            $table->integer('partOf')->nullable();
             $table->timestamps();
         });
 

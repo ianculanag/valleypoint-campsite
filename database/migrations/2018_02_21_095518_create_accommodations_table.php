@@ -26,17 +26,14 @@ class CreateAccommodationsTable extends Migration
         });*/
 
         Schema::create('accommodations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('serviceID')->unsigned();            
-            $table->integer('unitID')->unsigned();           
+            $table->increments('id');                  
             $table->integer('numberOfPax')->default(1);
-            $table->enum('paymentStatus',['pending','paid']); 
-            $table->integer('userID')->unsigned();
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
+            $table->integer('serviceID')->unsigned();  
+            $table->integer('userID')->unsigned();
             $table->foreign('serviceID')->references('id')->on('Services');
             $table->foreign('userID')->references('id')->on('User');
-            $table->foreign('unitID')->references('id')->on('Units');
             $table->timestamps();
         });
     }

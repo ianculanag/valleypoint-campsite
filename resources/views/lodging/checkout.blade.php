@@ -136,7 +136,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12 mb-1">
-                            <p>Additional Services</p>
+                            <p>Additional Charges</p>
                             <table class="table table-sm col-md-12 mb-1 table-bordered">
                                 <thread>
                                     <th scope="col" width="40%">Service name</th>

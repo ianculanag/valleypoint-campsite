@@ -150,7 +150,7 @@
                     <hr class="mb-4">
                     <div class="form-group row">
                         <div class="col-md-12 mb-1">
-                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
+                            <h5 style="margin-bottom:.80em;">Additional Charges</h5>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="additionalServiceName">Service name</label>
