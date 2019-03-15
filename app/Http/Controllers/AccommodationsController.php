@@ -259,9 +259,39 @@ class AccommodationsController extends Controller
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
-            'checkinDate'   => 'required',
-            'checkoutDate'  => 'required',
-        ]);
+            'checkinDate' => 'required', 'checkinTime' => 'required',
+        'checkoutDate' => 'required', 'checkoutTime' => 'required',
+        'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
+    ]);
+
+        
+    /*if(count($reservedAccommodations)>0){
+        for($count=0;$count<count($reservedAccommodations);$count+1){
+            if($request->input('checkinDate')<=$reservedAccommodations[$count]){
+            //return redirect()->back()->withInput();    
+            return("Nakapasok");
+            }else{
+                return("Error pre");
+            }
+        }
+    }*/
+
+        /*$BeforeAccommodations = DB::table('accommodations')
+        ->select('accommodations.checkinDatetime')
+        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::today())
+        ->get();
+        $AfterAccommodations = DB::table('accommodations')
+        ->select('accommodations.checkoutDatetime')
+        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::today())            
+        ->get();
+
+        if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
+        {
+            return("Hello");
+        }else{
+            return $BeforeAccommodations;
+            return $request->input('checkinDate').' '.$request->input('checkinTime');
+        } */
         
         //GAC
         $accommodation = new Accommodation;                 
@@ -323,45 +353,6 @@ class AccommodationsController extends Controller
 
         return redirect('/transient-backpacker');
 
-        /*$accommodation = new Accommodation;         
-        $accommodation->serviceID = '5';
-        $accommodation->unitID = $request->input('unitID');
-        $accommodation->numberOfPax = $request->input('numberOfPax');
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->save();
-
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->accommodationID = $accommodation->id;   
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save();
-
-
-        if ($accommodation->numberOfPax > 1) {
-            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
-                $accompanyingGuest = new Guests;
-
-                $lastName = 'lastName'.$count;
-                $firstName = 'firstName'.$count;
-
-                $accompanyingGuest->lastName = $request->input($lastName);
-                $accompanyingGuest->firstName = $request->input($firstName);
-                $accompanyingGuest->accommodationID = $accommodation->id;
-                $accompanyingGuest->listedUnder = $guest->id;   
-                $accompanyingGuest->save();
-            }
-        }
-
-        /*$unit = Units::find($request->input('unitID'));
-        $unit->update([
-            'status' => 'occupied'
-        ]);*/
-
-        return redirect('/transient-backpacker');*/
     }
 
 
@@ -439,4 +430,4 @@ class AccommodationsController extends Controller
         return view ('lodging.addreserve')->with('unitID', $unitID);
     }
 
-        }
+}
