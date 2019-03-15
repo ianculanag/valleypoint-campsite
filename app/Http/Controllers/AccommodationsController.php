@@ -276,13 +276,13 @@ class AccommodationsController extends Controller
         }
     }*/
 
-        /*$BeforeAccommodations = DB::table('accommodations')
+        $BeforeAccommodations = DB::table('accommodations')
         ->select('accommodations.checkinDatetime')
-        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::today())
+        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())
         ->get();
         $AfterAccommodations = DB::table('accommodations')
         ->select('accommodations.checkoutDatetime')
-        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::today())            
+        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())            
         ->get();
 
         if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
@@ -290,8 +290,7 @@ class AccommodationsController extends Controller
             return("Hello");
         }else{
             return $BeforeAccommodations;
-            return $request->input('checkinDate').' '.$request->input('checkinTime');
-        } */
+        }
         
         //GAC
         $accommodation = new Accommodation;                 
