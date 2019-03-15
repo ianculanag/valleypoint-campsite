@@ -118,53 +118,8 @@ class GuestsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
+    } 
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function checkin(Request $request)
-    {
-        //
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->numberOfPax = $request->input('numberOfPax');
-        $guest->save();
-
-        $accommodation = new Accommodation;         
-        $accommodation->guestID = $guest->id;   
-        $accommodation->serviceID = '4';
-        //$accommodation->price = '3500';
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->unitID = $request->input('unitID');
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->save();
-
-        /*$guestStay = new GuestStay;
-        $guestStay->guestID = $guest->id;
-        $guestStay->accommodationID = $accommodation->id;
-        $guestStay->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $guestStay->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime');
-        //$guestStay->checkinDatetime = '2019-03-27 15:45:21';
-        //$guestStay->checkoutDatetime = '2019-03-29 15:45:21';
-        $guestStay->save();*/
-
-        $unit = Units::find($request->input('unitID'));
-        $unit->update([
-            'status' => 'occupied'
-        ]);
-
-        return redirect('/glamping');
-    }
-
     /**
      * Update guest details
      *

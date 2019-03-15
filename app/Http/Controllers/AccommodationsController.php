@@ -262,8 +262,6 @@ class AccommodationsController extends Controller
             'checkinDate'   => 'required',
             'checkoutDate'  => 'required',
         ]);
-
-<<<<<<< HEAD
         
         //GAC
         $accommodation = new Accommodation;                 
@@ -326,37 +324,6 @@ class AccommodationsController extends Controller
         return redirect('/transient-backpacker');
 
         /*$accommodation = new Accommodation;         
-=======
-
-        if ($request->input('checkinDate') > $request->input('checkoutDate')){
-            return redirect()->back()->withInput();
-            
-        }
-
-        //check Date Validation
-         $reservedAccommodations = DB::table('accommodations')
-         ->select('accommodations.checkinDatetime')
-         ->get();
-
-        
-            if(count($reservedAccommodations) > 0){
-                return $reservedAccommodations;
-                
-            for($count = 0; $count < count($reservedAccommodations); $count++) {
-             $checkinDateChecker = $reservedAccommodations[$count];
-
-             if($request->input('checkinDate') < $reservedAccommodations[$count]){
-                return redirect()->back()->withInput();
-
-             }else{
-                return("WAOW ERROR");
-             }
-            }
-         }
-
-
-        $accommodation = new Accommodation;         
->>>>>>> check dates validation
         $accommodation->serviceID = '5';
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');

@@ -83,23 +83,4 @@ class SalesController extends Controller
         //
     }
 
-    /**
-     * Display sales transactions for lodging.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function viewLodgingSales()
-    {
-        $sales = DB::table('sales')
-        ->join('services', 'services.id', 'sales.serviceID') 
-        ->join('accommodations', 'accommodations.id', 'sales.accommodationID')
-        ->join('guests', 'guests.accommodationID', 'accommodations.id')        
-        ->where('guests.listedUnder', '=', null)
-        //->orderBy('paymentDatetime')
-        ->get();
-
-        //return $sales;
-
-        return view('lodging.sales')->with('sales', $sales);
-    }
 }

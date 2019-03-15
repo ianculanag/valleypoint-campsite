@@ -8,7 +8,7 @@
             <strong>Back</strong>
         </span>
     </a>
-    <h3 class="text-center">Sales Transactions</h3>
+    <h3 class="text-center">Payment Transactions</h3>
 </div>
 <div class="col-md-12">
     <table class="table table-striped table-sm reservationTable">
@@ -19,20 +19,22 @@
                 <th scope="col">Service Name</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>                
-                <th scope="col">Payment Date</th>
+                <th scope="col">Payment Date</th>                            
+                <th scope="col">Payment Status</th>
                 <th scope="col">Amount Paid</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($sales as $sale)
+            @foreach($payments as $payment)
             <tr>
-                <td class="number">{{$sale->id}}</td>
-                <td class="number">{{$sale->accommodationID}}</td>
-                <td class="number">{{$sale->serviceName}}</td>                
-                <td>{{$sale->firstName}}</td>                             
-                <td>{{$sale->lastName}}</td>                             
-                <td>{{$sale->paymentDatetime}}</td>                             
-                <td style="text-align:right;">{{$sale->amount}}</td>
+                <td class="number">{{$payment->id}}</td>
+                <td class="number">{{$payment->accommodationID}}</td>
+                <td class="number">{{$payment->serviceName}}</td>                
+                <td>{{$payment->firstName}}</td>                             
+                <td>{{$payment->lastName}}</td>                             
+                <td>{{$payment->paymentDatetime}}</td>                                     
+                <td>{{$payment->paymentStatus}}</td>                            
+                <td style="text-align:right;">{{$payment->amount}}</td>
             </tr>
             @endforeach
         </tbody>
