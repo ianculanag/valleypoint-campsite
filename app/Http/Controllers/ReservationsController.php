@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Reservations;
 use DB;
 
 class ReservationsController extends Controller
@@ -32,12 +33,14 @@ class ReservationsController extends Controller
     public function makeReservation(Request $request)
     {
         $reservation = new Reservations;
-        $reservation->reservationDatetime = $request->input('reservationDatetime');
+        $reservation->reservationDatetime = $request->input('reservationDate');
         $reservation->lastName = $request->input('lastName');
         $reservation->firstName = $request->input('firstName');
         $reservation->numberOfPax = $request->input('numberOfPax');
         $reservation->contactNumber = $request->input('contactNumber');
-        $reservation->serviceID = $request->input('package');
+        $reservation->serviceID = $request->input('accommodationType');
         $reservation->save();
+
+        return redirect('/viewReservations');
     }
 }

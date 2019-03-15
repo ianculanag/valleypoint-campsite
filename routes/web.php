@@ -64,8 +64,18 @@ Route::get('/checkinBackpacker', function() {
 });
 
 //ViewReservations
-Route::get('/viewReservations', 'AccommodationsController@viewReservation');
+Route::get('/viewReservations', 'ReservationsController@viewReservations');
+//Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
 Route::get('/reservation', function () {
-    return view('lodging.reservation');
+    return view('lodging.makereservation');
 });
+
+//Make reservation
+Route::post('/makeReservation', 'ReservationsController@makeReservation');
+
+//Payment Transactions
+Route::get('transactions', 'PaymentsController@viewLodgingSales');
+
+//Select Service	
+Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 

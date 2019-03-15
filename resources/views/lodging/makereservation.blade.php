@@ -13,7 +13,10 @@
                 <h2>Reservation Form</h2>
         </div>
 <div class="row">
-        <div class="col-sm-5 text-left">
+        <div class="col-sm-5 text-left">            
+        <form method="POST" action="/makeReservation" class="justify-content-center">
+            @csrf
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
@@ -64,9 +67,9 @@
             <div class="row">
                     <div class="form-group col-md-6">
                             <label for="accommodationType" >Accommodation Type:</label>
-                            <select class="custom-select d-block w-1" name="accommodationType" id="numPax" required="required">
-                                <option value="1">Glamping/Tent</option>
-                                <option value="2">Backpacker</option>
+                            <select class="custom-select d-block w-1" name="accommodationType" required="required">
+                                <option value="4">Glamping/Tent</option>
+                                <option value="5">Backpacker</option>
                             </select>
                         </div>
             </div>
