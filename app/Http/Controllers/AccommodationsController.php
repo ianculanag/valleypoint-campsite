@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Arr;
 use App\Guests;
 use App\Accommodation;
 use App\AccommodationUnits;
@@ -332,6 +333,27 @@ class AccommodationsController extends Controller
             
         }
 
+        //check Date Validation
+         $reservedAccommodations = DB::table('accommodations')
+         ->select('accommodations.checkinDatetime')
+         ->get();
+
+        
+            if(count($reservedAccommodations) > 0){
+                return $reservedAccommodations;
+                
+            for($count = 0; $count < count($reservedAccommodations); $count++) {
+             $checkinDateChecker = $reservedAccommodations[$count];
+
+             if($request->input('checkinDate') < $reservedAccommodations[$count]){
+                return redirect()->back()->withInput();
+
+             }else{
+                return("WAOW ERROR");
+             }
+            }
+         }
+
 
         $accommodation = new Accommodation;         
 >>>>>>> check dates validation
@@ -367,10 +389,10 @@ class AccommodationsController extends Controller
             }
         }
 
-        $unit = Units::find($request->input('unitID'));
+        /*$unit = Units::find($request->input('unitID'));
         $unit->update([
             'status' => 'occupied'
-        ]);
+        ]);*/
 
         return redirect('/transient-backpacker');*/
     }
