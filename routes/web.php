@@ -68,3 +68,6 @@ Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
 //Sales Transactions
 Route::get('transactions', 'SalesController@viewLodgingSales');
+
+//Select Service
+Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices');

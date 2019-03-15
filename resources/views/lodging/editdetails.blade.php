@@ -154,15 +154,15 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="additionalServiceName">Service name</label>
-                            <select name="additionalServiceName" class="form-control">
+                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
                                 <option value="" selected disabled >Choose...</option>
-                                <option>Airsoft</option>
-                                <option>Archery</option>
+                                <option value="6">Airsoft</option>
+                                <option value="7">Archery</option>
                             </select>
                         </div>
                         <div class="col-md-2 mb-1">
                             <label for="additionalServiceNumberOfPax">Pax</label>
-                            <input class="form-control" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
+                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="additionalServicePrice">Price</label>

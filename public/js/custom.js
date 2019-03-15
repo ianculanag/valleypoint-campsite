@@ -228,3 +228,29 @@ jQuery("input[type=radio][name=numberOfPax]").change(function() {
     }
     jQuery("#outputDiv").html(htmlString);
 });
+
+jQuery(document).ready(function(){
+    var servicePrice = 0;
+    jQuery('.serviceSelect').change(function(){
+        jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
+            //console.log(data[0].price);
+            servicePrice = data[0].price;
+            console.log(servicePrice);
+
+            var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
+
+            if(numberOfPax) {
+                console.log('yeah');
+                document.getElementById('additionalServicePrice').value = servicePrice * numberOfPax;
+            }
+        })
+    });
+
+    jQuery('.paxSelect').change(function(){
+        var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value
+        console.log();
+        if(document.getElementById('serviceSelect').value) {
+            document.getElementById('additionalServicePrice').value = servicePrice * numberOfPax;
+        }
+    });
+}); 
