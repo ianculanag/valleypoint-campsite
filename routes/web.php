@@ -64,7 +64,7 @@ Route::get('/checkinBackpacker', function() {
 });
 
 //ViewReservations
-Route::get('/viewReservations', 'AccommodationsController@viewReservation');
+Route::get('/viewReservations', 'ReservationsController@viewReservations');
 
 //Sales Transactions
 Route::get('transactions', 'PaymentsController@viewLodgingSales');

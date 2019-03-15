@@ -24,7 +24,7 @@ class PaymentsController extends Controller
         //->orderBy('paymentDatetime')
         ->get();
 
-        //return $sales;
+        //return $payments;
 
         return view('lodging.payments')->with('payments', $payments);
     }
