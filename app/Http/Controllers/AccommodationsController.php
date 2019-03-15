@@ -298,7 +298,7 @@ class AccommodationsController extends Controller
             }
         }
 
-        $service = 5;
+        $service = Services::find(5);
         
         $charge = new Charges;
         $charge->quantity = $request->input('numberOfPax');

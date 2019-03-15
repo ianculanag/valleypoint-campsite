@@ -125,16 +125,17 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">₱</span>
                         </div>                    
-                    <input type="number" name="amountpaid" placeholder="0" step="50" min="0" max="1000000" class="form-control" id="amount">
+                    <input type="number" name="amountPaid" placeholder="0" step="50" min="0" max="1000000" class="form-control" id="amount">
                 </div>
                 </div>
 
                 
                 <div class="form-group col-md-6">
                 <label for="arrivalTime">Status:</label>
-                <select class="form-control" id="status" name="status">
-                    <option>Fully paid</option>
-                    <option>Pending</option>
+                <select class="form-control" id="status" name="paymentStatus">
+                    <option value="full">Full Payment</option>
+                    <option value="partial">Partial</option>
+                    <option value="unpaid">Unpaid</option>
                 </select>
                 </div>
                 </div>
