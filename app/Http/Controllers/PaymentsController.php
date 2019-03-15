@@ -7,8 +7,7 @@ use DB;
 
 class PaymentsController extends Controller
 {
-    //
-    /**
+     /**
      * Display payment transactions for lodging.
      *
      * @return \Illuminate\Http\Response
