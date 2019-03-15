@@ -259,7 +259,68 @@ class AccommodationsController extends Controller
             'contactNumber' => 'required|min:11|max:11',
         ]);
 
-        $accommodation = new Accommodation;         
+        
+        //GAC
+        $accommodation = new Accommodation;                 
+        $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
+        $accommodation->serviceID = 5;
+        $accommodation->userID = Auth::user()->id;
+        //$accommodation->unitID = $request->input('unitID');
+        //$accommodation->paymentStatus = $request->input('paymentStatus');
+        $accommodation->save();
+
+        $guest = new Guests;
+        $guest->lastName = $request->input('lastName');
+        $guest->firstName = $request->input('firstName');
+        $guest->accommodationID = $accommodation->id;   
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->save();
+
+        if ($accommodation->numberOfPax > 1) {
+            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
+                $accompanyingGuest = new Guests;
+
+                $lastName = 'lastName'.$count;
+                $firstName = 'firstName'.$count;
+
+                $accompanyingGuest->lastName = $request->input($lastName);
+                $accompanyingGuest->firstName = $request->input($firstName);
+                $accompanyingGuest->accommodationID = $accommodation->id;
+                $accompanyingGuest->listedUnder = $guest->id;   
+                $accompanyingGuest->save();
+            }
+        }
+
+        $service = 5;
+        
+        $charge = new Charges;
+        $charge->quantity = $request->input('numberOfPax');
+        $charge->totalPrice = $charge->quantity*$service->price;
+        $charge->remarks = $request->input('paymentStatus');
+        $charge->accommodationID = $accommodation->id;
+        $charge->serviceID = $service->id;
+        $charge->save();
+
+        if($request->input('paymentStatus') != 'unpaid') {
+            $payment = new Payments;
+            $payment->paymentDatetime = Carbon::now();
+            $payment->amount = $request->input('amountPaid');
+            $payment->paymentStatus = $request->input('paymentStatus');
+            $payment->chargeID = $charge->id;
+            $payment->save();
+        }
+
+        $accommodationUnit = new AccommodationUnits;
+        $accommodationUnit->accommodationID = $accommodation->id;
+        $accommodationUnit->unitID = $request->input('unitID');
+        $accommodationUnit->status = 'ongoing';
+        $accommodationUnit->save();
+
+        return redirect('/transient-backpacker');
+
+        /*$accommodation = new Accommodation;         
         $accommodation->serviceID = '5';
         $accommodation->unitID = $request->input('unitID');
         $accommodation->numberOfPax = $request->input('numberOfPax');
@@ -296,7 +357,7 @@ class AccommodationsController extends Controller
             'status' => 'occupied'
         ]);
 
-        return redirect('/transient-backpacker');
+        return redirect('/transient-backpacker');*/
     }
 
 

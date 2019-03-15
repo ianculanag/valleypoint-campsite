@@ -51,7 +51,7 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                @elseif($unit->status == 'reserved')
+                {{--@elseif($unit->status == 'reserved')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
@@ -61,9 +61,9 @@
                 </h5>
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-
+                --}}
                 @else
-                <a href="/checkinBackpacker/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
+                <a href="/checkinBackpacker/{{$unit->unitID}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -99,7 +99,7 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                @elseif($unit->status == 'reserved')
+                {{--@elseif($unit->status == 'reserved')
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>        
                 <div class="card" style="width: 18rem;height:7.5em;">
                     <div class="card-body">
@@ -109,9 +109,9 @@
                 </h5>
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-
+                --}}
                 @else
-                <a href="/checkinBackpacker/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
+                <a href="/checkinBackpacker/{{$unit->unitID}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -147,7 +147,7 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                @elseif($unit->status == 'reserved') 
+                {{--@elseif($unit->status == 'reserved') 
                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>          
                 <div class="card" style="width: 18rem;height:7.5em;">
                     <div class="card-body">
@@ -157,9 +157,9 @@
                 </h5>
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-
+                --}}
                 @else
-                <a href="/checkinBackpacker/{{$unit->id}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
+                <a href="/checkinBackpacker/{{$unit->unitID}}" style="cursor:pointer;text-decoration:none !important" class="load-details" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">

@@ -39,7 +39,7 @@ class UnitsController extends Controller
      */
     public function transientBackpacker()
     {        
-        $units = DB::table('units')
+        /*$units = DB::table('units')
         ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
@@ -52,31 +52,7 @@ class UnitsController extends Controller
         ->orderBy('unitID')
         ->get();
         //return $units;
-        return view('lodging.transient')->with('units', $units);
-    }
-
-    /**
-     * Display all glamping units.
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function glamping()
-    {
-        /*$units = DB::table('units')
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 'guests.accommodationID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
-        'accommodations.serviceID', 'accommodations.paymentStatus',
-        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID', 'services.serviceName')
-        ->where('guests.listedUnder', '=', null)        
-        ->whereDate('accommodations.checkoutDatetime', '>', Carbon::now())
-        ->orWhere('accommodations.checkoutDatetime', '=', null)
-        ->orderBy('unitID')
-        ->get();*/
-
+        return view('lodging.transient')->with('units', $units);*/
         $units = DB::table('units')
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
@@ -87,8 +63,31 @@ class UnitsController extends Controller
                  'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
                  'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
-        ->where('guests.listedUnder', '=', null)   
-        //->where('accommodation_units.status', '=', 'ongoing')        
+        ->where('guests.listedUnder', '=', null)        
+        ->orderBy('unitID')
+        ->get(); 
+        
+        return view('lodging.transient')->with('units', $units);
+    }
+
+    /**
+     * Display all glamping units.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function glamping()
+    {
+        $units = DB::table('units')
+        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'services.serviceName', 
+                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
+                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
+        ->where('guests.listedUnder', '=', null)        
         ->orderBy('unitID')
         ->get(); 
         
