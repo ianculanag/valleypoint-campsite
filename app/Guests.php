@@ -24,8 +24,7 @@ class Guests extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'firstName', 'lastName', 'contactNumber',
-    ];
+    protected $fillable = ['firstName', 'lastName', 'contactNumber'];
 
+    public $sortable = ['id', 'serviceName', 'lastName', 'firstName', 'numberOfPax'];
 }
