@@ -255,10 +255,8 @@ jQuery(document).ready(function(){
     });
 }); 
 
-jQuery('.additionalServiceForm').submit(function(event) {
-    console.log('pakyu');
-    event.preventDefault();
-    console.log('fuckyou');
-    jQuery.post('/addAdditionalService', jQuery('#additionalServiceForm').serialize());
-    console.log(jQuery('additionalServiceForm').serialize());
+jQuery(document).on('click','.collapse.in',function(e) {
+    if(jQuery(e.target).is('div') ) {
+        jQuery(this).collapse('hide');
+    }
 });

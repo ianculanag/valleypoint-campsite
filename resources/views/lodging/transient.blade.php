@@ -206,6 +206,35 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+<!-- Check-in or reserve modal -->
+    <div class="modal fade right" id="checkin-reserve" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body" id="modal-body">
+                    <div class="col-md-12">
+                        <h5 class="text-center mb-4">Choose action:</h5>
+                        <div style="width:80%; padding-left:20%;">
+                            <a href="" id="checkin">
+                                <button type="button" class="btn btn-primary btn-md btn-block mb-2">Check-in</button>
+                            </a>
+                            <a href="" id="reserve">
+                                <button type="button" class="btn btn-secondary btn-md btn-block mb-2">Reserve</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-right">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
  

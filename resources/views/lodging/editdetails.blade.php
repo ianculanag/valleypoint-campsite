@@ -369,5 +369,5 @@
                 </form>
             </div>
         </div>
-    @endforeach
+    @endforeach  
 @endsection
