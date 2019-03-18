@@ -95,11 +95,11 @@
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="10">
+                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="6" disabled>
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitNumbers" placeholder="This will be a listbox/tokenfield" role="listbox" value="">
+                            <input type="text" class="form-control" id="tokenfield" value="Tent 1, Tent 2" />
                         </div>
                     </div>
                     <div class="form-group row">
