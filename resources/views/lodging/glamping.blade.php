@@ -80,7 +80,7 @@
 
                 @endif--}}
                 @else
-                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-details" id={{$unit->unitID}}>       
+                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">

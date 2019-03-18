@@ -25,6 +25,16 @@ class ReservationsController extends Controller
     }
 
     /**
+     * Display reservationForm.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showReservationForm($unitID)
+    {
+        return view('lodging.makereservation')->with('unitID', $unitID);
+    }
+
+    /**
      * Store a newly created reservation.
      *
      * @param  \Illuminate\Http\Request  $request

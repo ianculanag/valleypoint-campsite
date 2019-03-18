@@ -229,7 +229,7 @@ jQuery("input[type=radio][name=numberOfPax]").change(function() {
     jQuery("#outputDiv").html(htmlString);
 });
 
-jQuery(document).ready(function(){
+/*jQuery(document).ready(function(){
     var servicePrice = 0;
     jQuery('.serviceSelect').change(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
@@ -253,7 +253,145 @@ jQuery(document).ready(function(){
             document.getElementById('additionalServicePrice').value = servicePrice * numberOfPax;
         }
     });
+}); */
+
+jQuery(document).on('click','.collapse.in',function(e) {
+    if(jQuery(e.target).is('div') ) {
+        jQuery(this).collapse('hide');
+    }
+});
+
+jQuery(document).ready(function(){
+    jQuery('.load-unit').click(function(){
+        //console.log(jQuery(this).attr('id'));
+        var unitID = jQuery(this).attr('id'); 
+        jQuery("#checkin").attr("href", "checkin/"+unitID);
+        jQuery("#reserve").attr("href", "makeReservation/"+unitID); 
+        //jQuery("#accommodationType").prop("disabled", true);
+    });
 }); 
+
+jQuery(document).ready(function(){
+    var daysDiff = 1;
+
+    jQuery('#checkoutDate').change(function(){
+        var checkin = Date.parse(jQuery('#checkinDate').val());
+        var checkout = Date.parse(jQuery('#checkoutDate').val());
+
+        var timeDiff = checkout-checkin;
+        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
+
+        //console.log(daysDiff);
+        //call Glamping method
+    });
+    
+    jQuery('.numberOfPaxGlamping').change(function(){
+        if(jQuery(this).val() > 0 && jQuery(this).val() < 5) {
+            //console.log('Hello');
+            jQuery('#accommodationType').val(jQuery(this).val());            
+            jQuery('#invoiceQuantity').html(jQuery(this).val()+'x'+daysDiff);
+
+            var packagePrice;
+            var totalPrice;
+            
+            jQuery.get('/getService/'+$(this).val(), function(data){ 
+                packagePrice = data[0].price;                         
+                jQuery('#invoiceUnit').html(packagePrice);
+                //console.log(daysDiff);
+                totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * daysDiff;
+                jQuery('#invoiceTotal').html(totalPrice);                
+
+                updateTotal();
+            })
+        } else {
+            jQuery('#accommodationType').val(1);
+            console.log('Out of bounds');
+        }
+    });
+
+    var servicePrice;
+
+    jQuery('.serviceSelect').change(function(){
+        jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
+            //console.log(data[0].price);
+            servicePrice = data[0].price;
+            console.log(servicePrice);
+
+            document.getElementsByClassName('additionalServiceUnitPrice')[0].value = servicePrice;
+            document.getElementsByClassName('additionalServiceUnitPrice')[1].value = servicePrice;
+            var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
+
+            if(numberOfPax) {
+                console.log('yeah');
+                document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;                
+                document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
+                jQuery('.additionalServiceFormAdd').prop('disabled', false);
+            }
+        })
+    });
+
+
+    jQuery('#additionalServiceNumberOfPax').change(function(){
+        console.log('Wooh');
+        var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
+        if(document.getElementById('serviceSelect').value) {
+            document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;            
+            document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
+            jQuery('.additionalServiceFormAdd').prop('disabled', false);
+        }
+    });
+
+    jQuery('.additionalServiceFormAdd').click(function(){
+        jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
+            console.log('Hello');
+            let tbody = jQuery('#invoiceRows');
+            let tr =  document.createElement('TR');
+            
+            let tdDescription = document.createElement('TD');
+            let tdDescriptionBody = document.createTextNode(data[0].serviceName);
+            tdDescription.appendChild(tdDescriptionBody);
+
+            let tdQuantity = document.createElement('TD');
+            let tdQuantityBody = document.createTextNode(jQuery('#additionalServiceNumberOfPax').val());
+            tdQuantity.appendChild(tdQuantityBody);
+            tdQuantity.style.textAlign = 'right';
+
+            let tdUnitPrice = document.createElement('TD');
+            let tdUnitPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceUnitPrice')[0].value);
+            tdUnitPrice.appendChild(tdUnitPriceBody);
+            tdUnitPrice.style.textAlign = 'right';
+            
+            let tdTotalPrice = document.createElement('TD');
+            let tdTotalPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceTotalPrice')[0].value);
+            tdTotalPrice.appendChild(tdTotalPriceBody);
+            tdTotalPrice.className = 'invoicePrices';
+            tdTotalPrice.style.textAlign = 'right';
+
+            tr.append(tdDescription);
+            tr.append(tdQuantity);
+            tr.append(tdUnitPrice);
+            tr.append(tdTotalPrice);
+            tbody.append(tr);
+
+            updateTotal();
+        })
+    });
+}); 
+
+function updateTotal() {
+    var totalPrice = 0;
+    var prices =  document.getElementsByClassName('invoicePrices');
+
+    //console.log(prices.length);
+    //console.log(prices[0].innerHTML);
+    for (var index = 0; index < prices.length; index++) {
+        console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
+        totalPrice += parseInt(prices[index].innerHTML);
+        console.log(totalPrice);
+    }
+    document.getElementById('invoiceGrandTotal').innerHTML="";
+    document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
+}
 
 jQuery(document).on('click','.collapse.in',function(e) {
     if(jQuery(e.target).is('div') ) {
@@ -267,4 +405,4 @@ jQuery('#tokenfield').tokenfield({
       delay: 100
     },
     showAutocompleteOnFocus: true
-  })
+});

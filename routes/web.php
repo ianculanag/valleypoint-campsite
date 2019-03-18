@@ -40,6 +40,11 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkinGlamping', 'AccommodationsController@checkinGlamping');
 
+
+//Make reservation
+Route::get('/makeReservation/{unitID}', 'ReservationsController@showReservationForm');
+Route::post('/makeReservation', 'ReservationsController@makeReservation');
+
 //Check-in backpacker
 Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
 Route::post('/checkinBackpacker','AccommodationsController@checkinBackpacker');
@@ -52,8 +57,8 @@ Route::post('/updateDetails', 'GuestsController@updateDetails');
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
 
 //AddReservation
-Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
-Route::post('/addReservation','AccommodationsController@addReservation');
+//Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
+//Route::post('/addReservation','AccommodationsController@addReservation');
 
 //ViewGuests
 Route::get('/viewguests', 'GuestsController@viewguests');
@@ -66,13 +71,6 @@ Route::get('/checkinBackpacker', function() {
 //ViewReservations
 Route::get('/viewReservations', 'ReservationsController@viewReservations');
 //Route::get('/viewReservations', 'AccommodationsController@viewReservation');
-
-Route::get('/reservation', function () {
-    return view('lodging.makereservation');
-});
-
-//Make reservation
-Route::post('/makeReservation', 'ReservationsController@makeReservation');
 
 //Payment Transactions
 Route::get('transactions', 'PaymentsController@viewLodgingSales');
