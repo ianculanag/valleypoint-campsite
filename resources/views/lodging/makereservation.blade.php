@@ -10,7 +10,7 @@
                     </span>
                 </a>
             <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
-                <h2>Reservation Form</h2>
+                <h2>Make Reservation</h2>
         </div>
 <div class="row">
         <div class="col-sm-5 text-left">            
@@ -59,9 +59,13 @@
         <div class="col-sm-5">
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="reservationDate">Reservation Date:</label>
-                    <input type="date" name="reservationDate" required="required" class="form-control" id="date">
+                <label for="reservationDate">Arrival Date:</label>
+                    <input type="date" name="checkinDate" required="required" class="form-control" id="date">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="reservationDate">Departure Date:</label>
+                        <input type="date" name="checkoutDate" required="required" class="form-control" id="date">
+                    </div>
             </div>
             
             <div class="row">
@@ -72,12 +76,11 @@
                                 <option value="5">Backpacker</option>
                             </select>
                         </div>
+                    
             </div>
-            <div class="col-sm-6">
-                    <button type="submit" value="submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#submit reservation">
-                            Submit
-                    </button>
-            </div>
+            <button type="submit" value="submit" style="width:10em;" class="btn btn-info float-right mt-5" data-toggle="modal" data-target="#submit reservation">
+                Submit
+        </button>
             </div>        
         </form>
         </div>

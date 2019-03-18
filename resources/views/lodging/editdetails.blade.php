@@ -186,10 +186,14 @@
                     @endif
 
                     <hr class="mb-4">
+                    {{--<form action="#" class="additionalServiceForm">
+                        @csrf
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">--}}
                     <div class="form-group row pb-3">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
+                        <input type="hidden" name="additionalServiceAccommodationID" value="{{$guestDetails->accommodationID}}">
                         <div class="col-md-3 mb-1">
                             <label for="additionalServiceName">Service name</label>
                             <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
@@ -220,19 +224,66 @@
                                 <input class="form-control" type="text" id="additionalServicePaymentAmount" name="additionalServicePaymentAmount" placeholder="" value="">
                             </div>
                         </div>
+
                         <div style="margin-top:2em;">
                             <div class="input-group">
-                                <button class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary additionalServiceForm">
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
                         </div>
+
+                        <!--div style="">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-danger additionalServiceForm">
+                                    <span class="fa fa-minus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div-->
+
+                        <!--
+                        <div class="col-md-3 mb-1">
+                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
+                                <option value="" selected disabled >Choose...</option>
+                                <option value="6">Airsoft</option>
+                                <option value="7">Archery</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-1">
+                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control" type="text" id="additionalServicePaymentAmount" name="additionalServicePaymentAmount" placeholder="" value="">
+                            </div>
+                        </div>
+
+                        <div style="">
+                            <div class="input-group">
+                                <button type="submit" class="btn btn-primary additionalServiceForm">
+                                    <span class="fa fa-p-lus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        -->
                         <!--div class="col-md-1">
                             <button class="btn btn-info">
                                 <span class="fa fa-plus" aria-hidden="true"></span>
                             </button>
                         </div-->
                     </div>
+                {{--</form>--}}
                     <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
                     <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">

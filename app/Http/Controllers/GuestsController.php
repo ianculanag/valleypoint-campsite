@@ -158,7 +158,7 @@ class GuestsController extends Controller
                 ]);
             }
         }
-
+        /*
         if ($request->input('numberOfAdditionalCharges') > 0) {
 
             $services = DB::table('services')
@@ -191,8 +191,7 @@ class GuestsController extends Controller
                 //EARTHQUAKE DRILL
 
             }
-        }
-
+        }*/
 
         $url = '/editdetails'.'/'.$request->input('unitID');
         //return \Redirect::route('/editdetails', [$request->input('unitID')]);

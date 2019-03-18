@@ -254,3 +254,11 @@ jQuery(document).ready(function(){
         }
     });
 }); 
+
+jQuery('.additionalServiceForm').submit(function(event) {
+    console.log('pakyu');
+    event.preventDefault();
+    console.log('fuckyou');
+    jQuery.post('/addAdditionalService', jQuery('#additionalServiceForm').serialize());
+    console.log(jQuery('additionalServiceForm').serialize());
+});

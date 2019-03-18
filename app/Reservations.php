@@ -6,5 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservations extends Model
 {
-    //
+    // Table Name
+    protected $table = 'reservations';
+    // Primary Key
+    public $primaryKey = 'id';
+    // Timestamps
+    public $timestamps = true;
+    
+    // Foreign Key to
+    public function reservationUnit()
+    {
+        return $this->hasMany('App\ReservationUnits');
+    }
 }

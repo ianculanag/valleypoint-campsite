@@ -33,7 +33,8 @@ class ReservationsController extends Controller
     public function makeReservation(Request $request)
     {
         $reservation = new Reservations;
-        $reservation->reservationDatetime = $request->input('reservationDate');
+        $reservation->checkinDatetime = $request->input('checkinDate');        
+        $reservation->checkoutDatetime = $request->input('checkinDate');
         $reservation->lastName = $request->input('lastName');
         $reservation->firstName = $request->input('firstName');
         $reservation->numberOfPax = $request->input('numberOfPax');
