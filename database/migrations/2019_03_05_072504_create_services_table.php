@@ -16,7 +16,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('serviceType', ['package', 'service', 'damage']);
+            $table->enum('serviceType', ['package', 'service', 'damage', 'extra']);
             $table->string('serviceName');
             $table->double('price', 8, 2);
             $table->timestamps();
@@ -105,6 +105,24 @@ class CreateServicesTable extends Migration
         $service14->serviceName = 'Tent';
         $service14->price = '8000';
         $service14->save();
+
+        $service15 = new Services;
+        $service15->serviceType = 'extra';
+        $service15->serviceName = 'Pillow';
+        $service15->price = '100';
+        $service15->save();
+
+        $service16 = new Services;
+        $service16->serviceType = 'extra';
+        $service16->serviceName = 'Bedsheet';
+        $service16->price = '200';
+        $service16->save();
+
+        $service17 = new Services;
+        $service17->serviceType = 'extra';
+        $service17->serviceName = 'Blanket';
+        $service17->price = '150';
+        $service17->save();
     }
 
     /**

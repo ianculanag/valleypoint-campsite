@@ -399,10 +399,10 @@ jQuery(document).on('click','.collapse.in',function(e) {
     }
 });
 
-jQuery('#tokenfield').tokenfield({
+/*jQuery('#tokenfield').tokenfield({
     autocomplete: {
       source: ['Tent 1','Tent 2','Tent 3','Tent 4','Tent 6','Tent 7','Tent 8'],
       delay: 100
     },
     showAutocompleteOnFocus: true
-});
+});*/

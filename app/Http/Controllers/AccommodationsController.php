@@ -101,7 +101,10 @@ class AccommodationsController extends Controller
      */
     public function showCheckinForm($unitID)
     {
-        return view('lodging.checkinglamping')->with('unitID', $unitID);
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+        return view('lodging.checkinGlamping')->with('unit', $unit);
     }
 
     /**
@@ -135,13 +138,13 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        $sale = new Sales;
+        /*$sale = new Sales;
         $sale->paymentDatetime = Carbon::now();
         $sale->amount = $request->input('amountPaid');
         $sale->paymentCategory = 'lodging';
         $sale->accommodationID = $accommodation->id;
         $sale->serviceID = $request->input('numberOfPax');
-        $sale->save();
+        $sale->save();*/
 
         if ($accommodation->numberOfPax > 1) {
             for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
@@ -198,7 +201,7 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        if ($accommodation->numberOfPax > 1) {
+        /*if ($accommodation->numberOfPax > 1) {
             for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
                 $accompanyingGuest = new Guests;
 
@@ -213,7 +216,7 @@ class AccommodationsController extends Controller
             }
         }
       
-        /*$sale = new Sales;
+        $sale = new Sales;
         $sale->paymentDatetime = Carbon::now();
         $sale->amount = $request->input('amountPaid');
         $sale->paymentCategory = 'lodging';
@@ -223,7 +226,7 @@ class AccommodationsController extends Controller
 
         $service = Services::find($request->input('numberOfPax'));
         
-        $charge = new Charges;
+        /*$charge = new Charges;
         $charge->quantity = $request->input('numberOfPax');
         $charge->totalPrice = $charge->quantity*$service->price;
         $charge->remarks = $request->input('paymentStatus');
@@ -238,7 +241,7 @@ class AccommodationsController extends Controller
             $payment->paymentStatus = $request->input('paymentStatus');
             $payment->chargeID = $charge->id;
             $payment->save();
-        }
+        }*/
 
         $accommodationUnit = new AccommodationUnits;
         $accommodationUnit->accommodationID = $accommodation->id;

@@ -40,6 +40,9 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkinGlamping', 'AccommodationsController@checkinGlamping');
 
+//Find Package
+Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
+
 
 //Make reservation
 Route::get('/makeReservation/{unitID}', 'ReservationsController@showReservationForm');
