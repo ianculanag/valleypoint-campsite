@@ -17,7 +17,6 @@ class CreateGuestsTable extends Migration
             $table->increments('id');
             $table->string('lastName',25);
             $table->string('firstName',25);
-            $table->integer('listedUnder')->nullable();
             $table->string('contactNumber', 11)->nullable();
             $table->integer('accommodationID')->unsigned();
             $table->foreign('accommodationID')->references('id')->on('Accommodation');

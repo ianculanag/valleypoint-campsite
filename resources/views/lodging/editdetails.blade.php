@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <form class="card p-2">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Transactions</h4>
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
@@ -50,10 +50,6 @@
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">{{$total}}</th>
                             </tr>
-                            <thread>
-                                <th colspan="3" scope="row">Remaining balance:</td>
-                                <th style="text-align:right;">{{($charge->totalPrice)-($charge->amount)}}</td>
-                            </thread>
                         </tbody>
                     </table>
                     <!--button class="btn btn-danger" type="submit">Check-out</button-->
@@ -63,7 +59,7 @@
                 <form method="POST" action="/updateDetails">
                     @csrf
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <div class="form-group row">
+                    {{--<div class="form-group row">
                         <div class="col-md-3 mb-1">
                             <label for="accommodationID">Accommodation ID</label>
                             <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
@@ -76,14 +72,14 @@
                         <div class="col-md-6 mb-1">
                             <label for="unitNumber">Unit number</label>
                             <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
-                        </div>
+                        </div>--}}
                         <div class="form-group col-md-6" style="position: absolute;">
-                            <input type="text" name="guestID" required="required" class="form-control" style="display:none" value={{$guestDetails->guestID}}>
+                            <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
                             <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">
                         </div>
-                    </div>
-                    <hr class="mb-4">
-                    <!--div class="panel-group" style="margin-bottom:2em;">
+                    {{--</div>
+                    {{--<hr class="mb-4">
+                    <div class="panel-group" style="margin-bottom:2em;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h6 class="panel-title">
@@ -96,75 +92,96 @@
                                 </ul>
                             </div>
                         </div>
-                    </div-->
-                    <h5 style="margin-bottom:.80em;" data-toggle="collapse" data-target="#collapseGuestDetails" aria-expanded="false" aria-controls="collapseGuestDetails">Guest Details</h5>
-                    <div id="collapseGuestDetails" class="collapse">
-                        <div class="form-group row">
-                            <div class="col-md-5 mb-1">
-                                <label for="firstName">First name</label>
-                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
-                            </div>
-                            <div class="col-md-7 mb-1">
-                                <label for="lastName">Last name</label>
-                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
+                    </div--}}
+                    <h5 style="margin-bottom:.80em;">Guest Details</h5>
+                    <div class="form-group row">
+                        <div class="col-md-5 mb-1">
+                            <label for="firstName">First name</label>
+                            <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
+                        </div>
+                        <div class="col-md-7 mb-1">
+                            <label for="lastName">Last name</label>
+                            <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-5 mb-1">
+                            <label for="contactNumber">Contact number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-5 mb-1">
-                                <label for="contactNumber">Contact number</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-phone" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
+                        <div class="col-md-3 mb-1">
+                            <label for="numberOfPax">No. of pax</label>
+                            <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10">
+                        </div>
+                        <div class="col-md-4 mb-1 form-group">
+                            <label for="accommodationType">Accommodation</label>
+                            <select id="disabledSelect" name="serviceName" class="form-control" disabled>
+                                <option>{{$guestDetails->serviceName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    {{--<hr class="mb-4">
+                    <h5 style="margin-bottom:.80em;">Unit Details</h5>
+                    <div class="form-group row">
+                        <div class="col-md-2 mb-1">
+                            <label for="unitID">No. of units</label>
+                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="6" disabled>
+                        </div>
+                        <div class="col-md-10 mb-1">
+                            <label for="unitNumber">Unit/s</label>
+                            <input type="text" class="form-control" id="tokenfield" value="Tent 1, Tent 2" />
+                        </div>
+                    </div>--}}
+                    <div class="form-group row">
+                        <div class="col-md-4 mb-1">
+                            <label for="checkInDatetime">Check-in date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                            </div>
-                            <div class="col-md-3 mb-1">
-                                <label for="numberOfPax">No. of pax</label>
-                                <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10" disabled>
-                            </div>
-                            <div class="col-md-3 mb-1" style="display:none; position:absolute;">
-                                <label for="numberOfPax">No. of pax</label>
-                                <input class="form-control"  type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10">
-                            </div>
-                            <div class="col-md-4 mb-1 form-group">
-                                <label for="accommodationType">Accommodation</label>
-                                <select id="disabledSelect" name="serviceName" class="form-control" disabled>
-                                    <option>{{$guestDetails->serviceName}}</option>
-                                </select>
+                                @php
+                                    $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                    $checkedInAt = $checkedIn->format("F j, o");
+                                @endphp
+                            <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 mb-1">
-                                <label for="checkInDatetime">Check-in date and time</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    @php
-                                        $checkedIn = new DateTime($guestDetails->checkinDatetime);
-                                        $checkedInAt = $checkedIn->format("F j, o h:i A");
-                                    @endphp
-                                <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                        <div class="col-md-4 mb-1">
+                            <label for="checkoutDatetime">Check-out date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                                @php
+                                    $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                    $checkOutAt = $checkOut->format("F j, o");
+                                @endphp
+                            <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
                             </div>
-                            <div class="col-md-6 mb-1 form-group">
-                                <label for="numberOfPax">Stay duration</label>
-                                    @php
-                                        $checkin = new DateTime($guestDetails->checkinDatetime);
-                                        $now = new DateTime("now");
-                                        $stayDuration = date_diff($checkin, $now)->days+1;
-                                    @endphp
-                                <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
-                            </div>
+                        </div>
+                        <div class="col-md-4 mb-1 form-group">
+                            <label for="numberOfPax">Stay duration</label>
+                                @php
+                                    $checkin = new DateTime($guestDetails->checkinDatetime);
+                                    $now = new DateTime("now");
+                                    $stayDuration = date_diff($checkin, $now)->days+1;
+                                @endphp
+                            <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>
                     </div>
 
-                    @if (count($accompanyingGuest) > 0)
+                    {{--@if (count($accompanyingGuest) > 0)
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;"data-toggle="collapse" data-target="#collapseAccompanyingGuests" aria-expanded="false" aria-controls="collapseAccompanyingGuests">Accompanying Guests</h5>
                     <div id="collapseAccompanyingGuests" class="collapse">
@@ -183,13 +200,12 @@
                             </div>
                         </div>
                     </div>
-                    @endif
-
+                    @endif--}}
                     <hr class="mb-4">
-                    {{--<form action="#" class="additionalServiceForm">
+                    <form action="#" class="additionalServiceForm">
                         @csrf
-                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">--}}
-                    <div class="form-group row pb-3">
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <div class="form-group row">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
@@ -207,21 +223,21 @@
                             <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="additionalServicePrice">Price</label>
+                            <label for="additionalServiceUnitPrice">Unit price</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">₱</span>
                                 </div>
-                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="" disabled>
+                                <input class="form-control" type="text" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" disabled>
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="additionalServicePaymentAmount">Amount paid</label>
+                            <label for="additionalServiceTotalPrice">Total price</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">₱</span>
                                 </div>
-                                <input class="form-control" type="text" id="additionalServicePaymentAmount" name="additionalServicePaymentAmount" placeholder="" value="">
+                                <input class="form-control" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
                             </div>
                         </div>
 
@@ -232,16 +248,18 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                
 
-                        <!--div style="">
+                        {{--<div style="">
                             <div class="input-group">
                                 <button type="submit" class="btn btn-danger additionalServiceForm">
                                     <span class="fa fa-minus" aria-hidden="true"></span>
                                 </button>
                             </div>
-                        </div-->
+                        </div>
 
-                        <!--
+                        
                         <div class="col-md-3 mb-1">
                             <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
                                 <option value="" selected disabled >Choose...</option>
@@ -283,7 +301,7 @@
                             </button>
                         </div-->
                     </div>
-                {{--</form>--}}
+                    </form>--}}
                     <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
                     <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
@@ -360,7 +378,7 @@
                         </table>
                     </div-->
                     
-                    <div style="float:right;">
+                    <div class="mt-3" style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>

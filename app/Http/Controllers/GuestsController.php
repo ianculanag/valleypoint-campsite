@@ -233,23 +233,26 @@ class GuestsController extends Controller
 
         //return $guest;
 
-        $accompanyingGuest = DB::table('guests')
+        /*$accompanyingGuest = DB::table('guests')
         ->select('guests.*')
-        ->where('listedUnder', '=', $guest[0]->guestID)
-        ->get();
+        //->where('listedUnder', '=', $guest[0]->guestID)
+        ->get();*/
 
         //return $accompanyingGuest;
 
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
-        ->leftJoin('payments', 'payments.chargeID', 'charges.id')
+        //->leftJoin('payments', 'payments.chargeID', 'charges.id')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->get();
 
+        
         //return $charges;
 
-        return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
+        //return view('lodging.editdetails')->with('guest', $guest);
+        //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
+        return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges);
     }
 
     /**
