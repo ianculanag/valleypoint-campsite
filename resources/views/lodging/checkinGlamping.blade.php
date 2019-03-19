@@ -38,7 +38,7 @@
                                 <td>Glamping</td>
                                 <td id="invoiceQuantity" style="text-align:right;">1</td>
                                 <td id="invoiceUnit" tyle="text-align:right;">{{--$charge->price--}}</td>
-                                <td id="invoiceTotal" style="text-align:right;">{{--($charge->totalPrice)--}}</td>
+                                <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">{{--($charge->totalPrice)--}}</td>
                             </tr>
                             
                             {{--@php
