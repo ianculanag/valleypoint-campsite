@@ -29,7 +29,7 @@
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="invoiceRows">
                             {{--@php
                                 $total = 0;
                             @endphp
@@ -40,10 +40,13 @@
                                 <td id="invoiceUnit" tyle="text-align:right;">{{--$charge->price--}}</td>
                                 <td id="invoiceTotal" style="text-align:right;">{{--($charge->totalPrice)--}}</td>
                             </tr>
+                            
                             {{--@php
                                 $total += $charge->totalPrice;
                             @endphp
                             @endforeach --}}
+                            </tbody>
+                            <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;">{{--$total--}}</th>
@@ -52,9 +55,9 @@
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
                                 <input type="number" name="amountPaid" step="50" placeholder="0" class="form-control" id="amount">
-                            </th>
+                                </th>
                             </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </div>
                 <!--/form-->
