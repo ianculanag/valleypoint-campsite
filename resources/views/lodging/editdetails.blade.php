@@ -93,6 +93,21 @@
                             </div>
                         </div>
                     </div--}}
+                    <div class="form-group row">
+                        <div class="col-md-2 mb-1">
+                            <label for="accommodationID">Acc ID</label>
+                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="unitID">No. of units</label>
+                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="6" disabled>
+                        </div>
+                        <div class="col-md-7 mb-1">
+                            <label for="unitNumber">Unit/s availed</label>
+                            <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Guest Details</h5>
                     <div class="form-group row">
                         <div class="col-md-5 mb-1">
@@ -140,7 +155,7 @@
                         </div>
                     </div>--}}
                     <div class="form-group row">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-6 mb-1">
                             <label for="checkInDatetime">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -155,7 +170,7 @@
                             <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-6 mb-1">
                             <label for="checkoutDatetime">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -170,15 +185,15 @@
                             <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-1 form-group">
-                            <label for="numberOfPax">Stay duration</label>
+                        {{--<div class="col-md-4 mb-1 form-group">
+                            <label for="numberOfPax">Stay duration as of now</label>
                                 @php
                                     $checkin = new DateTime($guestDetails->checkinDatetime);
                                     $now = new DateTime("now");
                                     $stayDuration = date_diff($checkin, $now)->days+1;
                                 @endphp
                             <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
-                        </div>
+                        </div>--}}
                     </div>
 
                     {{--@if (count($accompanyingGuest) > 0)
