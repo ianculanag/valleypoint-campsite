@@ -154,18 +154,18 @@
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control" id="date" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <label for="checkoutDate">Departure date</label>
+                            <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="">
+                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
                             </div>
                         </div>
                     </div>
