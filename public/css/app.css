@@ -9754,6 +9754,7 @@ body {
   overflow-y: auto;
   /* Scrollable contents if viewport is shorter than content. */
   margin-top: 4em;
+  min-height: 100%;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -9819,9 +9820,14 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 
-/* Main container*/
+/* Main content*/
 .main-content {
   margin-top: 3em;
+}
+
+/* Sidebar & Main Content */
+.sidebarMainContent {
+  min-height: 100vh;
 }
 
 /* Physical view */

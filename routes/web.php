@@ -83,3 +83,6 @@ Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices');
 
 //Post additional services
 Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
+
+//View users
+Route::get('/viewusers', 'UsersController@viewUsers');
