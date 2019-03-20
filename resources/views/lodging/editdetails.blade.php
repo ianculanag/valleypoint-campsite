@@ -2,6 +2,7 @@
 
 @section('content')
     @foreach ($guest as $guestDetails)
+    <div class="container">
         <div class="py-5 text-center">
             <a href="/glamping">
                 <span style="float:left;">
@@ -108,7 +109,8 @@
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <h5 style="margin-bottom:.80em;">Guest Details</h5>
+                    <h5 style="margin-bottom:.80em;" data-toggle="collapse" data-target="#guestDetails" aria-expanded="false" aria-controls="collapseExample">Guest Details</h5>
+                    <div class="collapse" id="guestDetails">
                     <div class="form-group row">
                         <div class="col-md-5 mb-1">
                             <label for="firstName">First name</label>
@@ -194,6 +196,7 @@
                                 @endphp
                             <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
                         </div>--}}
+                    </div>
                     </div>
 
                     {{--@if (count($accompanyingGuest) > 0)
@@ -402,5 +405,6 @@
                 </form>
             </div>
         </div>
+    </div>
     @endforeach  
 @endsection

@@ -4,26 +4,26 @@ body {
 
 /* Sidebar */
 .sidebar {
-  position: fixed !important;
+  //position: fixed !important;
   z-index: 100; 
   padding: 48px 0 0;
-  min-width: 250px;
-  max-width: 250px;
+  //min-width: 250px;
+  //max-width: 250px;
   background: rgb(41, 41, 43);
   background: rgb(48,62,77);
   color: rgb(255, 255, 255);
   transition: all 0.3s;
   min-height:100%;
-  margin-top:1em;
 }
 
 .sidebar-sticky {
-  position: relative;
+  position: fixed !important;
   top: 0;
   height: calc(100vh - 48px);
   padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  margin-top:4em;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -50,6 +50,10 @@ body {
 .sidebar .nav-link:hover i,
 .sidebar .nav-link.active i {
   color: inherit;
+}
+
+.sidebar .nav-item:hover i {
+    background-color: white;
 }
 
 .sidebar-heading {
@@ -86,11 +90,11 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
 
-/* Main container */
+/* Main container*/
 .main-content {
-  margin-left: 250px !important;
-  margin-top: 5em;
-  width: 81% !important;
+  //margin-left: 250px !important;
+  margin-top: 3em;
+  //width: 81% !important;
 }
 
 /* Physical view */
