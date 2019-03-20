@@ -272,7 +272,7 @@ jQuery(document).ready(function(){
 }); 
 
 jQuery(document).ready(function(){
-    var daysDiff = 2;
+    var daysDiff = 1;
 
     jQuery('#checkoutDate').change(function(){
         var checkin = Date.parse(jQuery('#checkinDate').val());
@@ -282,7 +282,7 @@ jQuery(document).ready(function(){
         daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
 
         jQuery('#accommodationType').val(jQuery('.numberOfPaxGlamping').val());            
-        jQuery('#invoiceQuantity').html(jQuery('.numberOfPaxGlamping').val()+'x'+(daysDiff-1));
+        jQuery('#invoiceQuantity').html(jQuery('.numberOfPaxGlamping').val()+'x'+(daysDiff));
 
         var packagePrice;
         var totalPrice;
@@ -291,7 +291,7 @@ jQuery(document).ready(function(){
             packagePrice = data[0].price;                         
             jQuery('#invoiceUnit').html(packagePrice);
             //console.log(daysDiff);
-            totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff-1);
+            totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
             jQuery('#invoiceTotal').html(totalPrice);                
 
             updateTotal();
@@ -304,7 +304,7 @@ jQuery(document).ready(function(){
         if(jQuery(this).val() > 0 && jQuery(this).val() < 5) {
             //console.log('Hello');
             jQuery('#accommodationType').val(jQuery(this).val());            
-            jQuery('#invoiceQuantity').html(jQuery(this).val()+'x'+(daysDiff-1));
+            jQuery('#invoiceQuantity').html(jQuery(this).val()+'x'+(daysDiff));
 
             var packagePrice;
             var totalPrice;
@@ -313,7 +313,7 @@ jQuery(document).ready(function(){
                 packagePrice = data[0].price;                         
                 jQuery('#invoiceUnit').html(packagePrice);
                 //console.log(daysDiff);
-                totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff-1);
+                totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
                 jQuery('#invoiceTotal').html(totalPrice);                
 
                 updateTotal();
@@ -356,11 +356,13 @@ jQuery(document).ready(function(){
         }
     });
 
+    let additionalServices = 0;
     jQuery('.additionalServiceFormAdd').click(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
-            console.log('Hello');
+            additionalServices++;
             let tbody = jQuery('#invoiceRows');
             let tr =  document.createElement('TR');
+            tr.id = 'invoiceRow'+additionalServices;
             
             let tdDescription = document.createElement('TD');
             let tdDescriptionBody = document.createTextNode(data[0].serviceName);
@@ -390,110 +392,71 @@ jQuery(document).ready(function(){
 
             updateTotal();
 
-            /*let divServiceName = document.getElementById('divServiceName');
-            let divServiceNameNew = document.createElement('DIV');
-            divServiceNameNew.className = 'mt-2';
-
-            let inputService = document.createElement('INPUT');
-            inputService.className = 'form-control';
-            inputService.disabled =  true;
-            inputService.value = data[0].serviceName;
-
-            divServiceNameNew.appendChild(inputService);
-            divServiceName.appendChild(divServiceNameNew);
-
-            let divQuantity = document.getElementById('divQuantity');
-            let divQuantityNew = document.createElement('DIV');
-            divQuantityNew.className = 'mt-2';
-
-            let inputQuantity = document.createElement('INPUT');
-            inputQuantity.className = 'form-control';
-            inputQuantity.disabled =  true;
-            inputQuantity.value = jQuery('#additionalServiceNumberOfPax').val();
-
-            divQuantityNew.appendChild(inputQuantity);
-            divQuantity.appendChild(divQuantityNew);
-
-            let divUnitPrice = document.getElementById('divUnitPrice');
-            let divUnitPriceNew = document.createElement('DIV');
-            divUnitPriceNew.className = 'mt-2';
-
-            let inputUnitPrice = document.createElement('INPUT');
-            inputUnitPrice.className = 'form-control';
-            inputUnitPrice.disabled =  true;
-            inputUnitPrice.value = document.getElementsByClassName('additionalServiceUnitPrice')[0].value;
-
-            divUnitPriceNew.appendChild(inputUnitPrice);
-            divUnitPrice.appendChild(divUnitPriceNew);
-
-            let divTotalPrice = document.getElementById('divTotalPrice');
-            let divTotalPriceNew = document.createElement('DIV');
-            divTotalPriceNew.className = 'mt-2';
-
-            let inputTotalPrice = document.createElement('INPUT');
-            inputTotalPrice.className = 'form-control';
-            inputTotalPrice.disabled =  true;
-            inputTotalPrice.value = document.getElementsByClassName('additionalServiceTotalPrice')[0].value;
-
-            divTotalPriceNew.appendChild(inputTotalPrice);
-            divTotalPrice.appendChild(divTotalPriceNew);
-
-            let divButton = document.getElementById('divButton');
-            let divButtonNew = document.createElement('DIV');
-            divButtonNew.className = 'input-group';
-
-            let button = document.createElement('BUTTON');
-            button.className = 'btn btn-danger additionalServiceFormAdd mt-2';
-            button.type = 'button';
-
-            let buttonSpan = document.createElement('SPAN');
-            buttonSpan.className = 'fa fa-minus';
-            buttonSpan.setAttribute('aria-hidden', 'true');
-
-            button.appendChild(buttonSpan);
-            divButtonNew.appendChild(button);
-            divButton.appendChild(divButtonNew);
-            */
             let htmlString = "";
-            htmlString += "<div class='col-md-3 mb-1' id='divServiceName'>";
-            htmlString += "<input class='form-control paxSelect' type='number' name='additionalServiceName' placeholder='"+data[0].serviceName+"' value='"+data[0].serviceName+"' disabled>";
+            htmlString += "<input type='number' style='display:none;float:left;' name='additionalServicesCount' value='"+additionalServices+"'>";
+            htmlString += "<input type='text' style='display:none;float:left;' name='additionalServiceID"+additionalServices+"' value='"+data[0].id+"'>";
+            htmlString += "<div class='col-md-3 mb-1' id='divServiceName"+additionalServices+"'>";
+            htmlString += "<input class='form-control paxSelect' type='text' name='additionalServiceName"+additionalServices+"' value='"+data[0].serviceName+"' readonly>";
             htmlString += "</div>";
-            htmlString += "<div class='col-md-2 mb-1' id='divQuantity'>";
-            htmlString += "<input class='form-control paxSelect' type='number' id='additionalServiceNumberOfPax' name='additionalServiceNumberOfPax' placeholder='' value='"+jQuery('#additionalServiceNumberOfPax').val()+"' min='1' max='10' {{--form='serviceForm'--}} disabled>";
+            htmlString += "<div class='col-md-2 mb-1' id='divQuantity"+additionalServices+"'>";
+            htmlString += "<input class='form-control paxSelect' type='number' id='additionalServiceNumberOfPax' name='additionalServiceNumberOfPax"+additionalServices+"' value='"+jQuery('#additionalServiceNumberOfPax').val()+"' min='1' max='10' {{--form='serviceForm'--}} readonly>";
             htmlString += "</div>";
-            htmlString += "<div class='col-md-3 mb-1' id='divUnitPrice'>";
+            htmlString += "<div class='col-md-3 mb-1' id='divUnitPrice"+additionalServices+"'>";
             htmlString += "<div class='input-group'>";
             htmlString += "<div class='input-group-prepend'>";
             htmlString += "<span class='input-group-text'>₱</span>";
             htmlString += "</div>";
-            htmlString += "<input class='form-control additionalServiceUnitPrice' type='text' id='additionalServiceUnitPrice' name='additionalServiceUnitPrice' placeholder='' value='"+document.getElementsByClassName('additionalServiceUnitPrice')[0].value+"' disabled>";
+            htmlString += "<input class='form-control additionalServiceUnitPrice' type='text' id='additionalServiceUnitPrice' name='additionalServiceUnitPrice"+additionalServices+"' placeholder='' value='"+document.getElementsByClassName('additionalServiceUnitPrice')[0].value+"' readonly>";
             htmlString += "</div>";
             htmlString += "</div>";
-            htmlString += "<div class='col-md-3 mb-1' id='divTotalPrice'>";
+            htmlString += "<div class='col-md-3 mb-1' id='divTotalPrice"+additionalServices+"'>";
             htmlString += "<div class='input-group'>";
             htmlString += "<div class='input-group-prepend'>";
             htmlString += "<span class='input-group-text'>₱</span>";
             htmlString += "</div>";
-            htmlString += "<input class='form-control additionalServiceTotalPrice' type='text' id='additionalServiceTotalPrice' name='additionalServiceTotalPrice' placeholder='' value='"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"' disabled>";
+            htmlString += "<input class='form-control additionalServiceTotalPrice' type='text' id='additionalServiceTotalPrice' name='additionalServiceTotalPrice"+additionalServices+"' placeholder='' value='"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"' readonly>";
             htmlString += "</div>";
             htmlString += "</div>";
-            htmlString += "<div id='divButton'>";
+            htmlString += "<div id='divButton"+additionalServices+"'>";
             htmlString += "<div class='input-group'>";
-            htmlString += "<button type='button' id='additionalServiceFormAdd' class='btn btn-danger additionalServiceFormRemove'>";
+            htmlString += "<button type='button' id='additionalServiceFormRemove"+additionalServices+"' value='"+additionalServices+"' class='btn btn-danger additionalServiceFormRemove'>";
             htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
             htmlString += "</button>";
             htmlString += "</div>";
             htmlString += "</div>";
 
             jQuery('#divAdditionalServices').append(htmlString);
-
-            
-
+        
             jQuery('#serviceSelect').val('choose');
             jQuery('#additionalServiceNumberOfPax').val('');            
             jQuery('#additionalServiceUnitPrice').val('');           
             jQuery('#additionalServiceTotalPrice').val('');
+
+            jQuery('#additionalServiceFormAdd').prop('disabled', true);
         })
+    });
+
+    jQuery(document).on('click', '.additionalServiceFormRemove', function() {
+        //console.log('FUUCK!');
+        //console.log(jQuery(this).attr('id'));
+        var id = jQuery(this).attr('id').slice(27);  
+        var divServiceName = '#divServiceName'+id;
+        var divQuantity = '#divQuantity'+id;
+        var divUnitPrice = '#divUnitPrice'+id;
+        var divTotalPrice = '#divTotalPrice'+id;
+        var divButton = '#divButton'+id;
+
+        jQuery(divServiceName).remove();
+        jQuery(divQuantity).remove();
+        jQuery(divUnitPrice).remove();
+        jQuery(divTotalPrice).remove();
+        jQuery(divButton).remove();
+
+        var divInvoiceRow = '#invoiceRow'+id;
+        jQuery(divInvoiceRow).remove();
+        
+        console.log(id);
+        updateTotal();
     });
 }); 
 

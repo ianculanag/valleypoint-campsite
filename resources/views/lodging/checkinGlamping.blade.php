@@ -54,7 +54,7 @@
                             <tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" step="50" placeholder="0" class="form-control" id="amount">
+                                <input type="number" name="amountPaid" step="50" placeholder="0" class="form-control" id="amount" required>
                                 </th>
                             </tr>
                         </tfoot>
@@ -67,11 +67,11 @@
                     <div class="form-group row">
                         <div class="col-md-5 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="Juan" value="">
+                            <input class="form-control" type="text" name="firstName" required maxlength="15" placeholder="Juan" value="">
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="Dela Cruz" value="">
+                            <input class="form-control" type="text" name="lastName" required maxlength="20" placeholder="Dela Cruz" value="">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -83,12 +83,12 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="09#########" value="">
+                                <input class="form-control" type="text" name="contactNumber" required maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control numberOfPaxGlamping" type="number" name="numberOfPax" placeholder="" value="" min="1" max="4">
+                            <input class="form-control numberOfPaxGlamping" type="number" required name="numberOfPax" placeholder="" value="" min="1" max="4">
                         </div>
                         <!--div class="col-md-3 mb-1" style="display:none; position:absolute;">
                             <label for="numberOfPax">No. of pax</label>
@@ -112,11 +112,11 @@
                         <div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10">
+                            <input class="form-control" type="number" name="numberOfUnits" required placeholder="" value="1" min="1" max="10">
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
+                            <input class="form-control" type="text" name="unitID" required placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
                             {{--input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">--}}
                             @endforeach
                             @else
@@ -131,7 +131,7 @@
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitNumbers" placeholder="This will be a listbox/tokenfield" role="listbox" value="">
+                            <input class="form-control" type="text" name="unitNumbers" required placeholder="This will be a listbox/tokenfield" role="listbox" value="">
                             
                             @endif
                         </div>
