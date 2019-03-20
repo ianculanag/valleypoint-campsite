@@ -271,6 +271,17 @@ jQuery(document).ready(function(){
     });
 }); 
 
+
+jQuery(document).ready(function(){
+    jQuery('#tokenfield').tokenfield({
+        autocomplete: {
+          source: ['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10'],
+          delay: 100
+        },
+        showAutocompleteOnFocus: true
+    });
+});
+
 jQuery(document).ready(function(){
     var daysDiff = 1;
 

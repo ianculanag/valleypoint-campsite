@@ -14,14 +14,14 @@ class CreateChargesTable extends Migration
     public function up()
     {
         Schema::create('charges', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id');         
+            $table->integer('serviceID')->unsigned();              
             $table->integer('quantity');
             $table->double('totalPrice', 8, 2);
             $table->enum('remarks', ['unpaid', 'partial', 'full']);
-            $table->integer('accommodationID')->unsigned();
-            $table->integer('serviceID')->unsigned();
-            $table->foreign('accommodationID')->references('id')->on('Accommodations');
+            $table->integer('accommodationID')->unsigned(); 
             $table->foreign('serviceID')->references('id')->on('Service');
+            $table->foreign('accommodationID')->references('id')->on('Accommodations');
             $table->timestamps();
         });
     }

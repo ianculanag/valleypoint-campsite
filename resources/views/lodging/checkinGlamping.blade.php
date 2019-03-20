@@ -112,13 +112,14 @@
                         <div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
-                            <input class="form-control" type="number" name="numberOfUnits" required placeholder="" value="1" min="1" max="10">
+                            <input class="form-control" type="number" name="numberOfUnits" required placeholder="" value="1" min="1" max="10" disabled>
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
-                            <input class="form-control" type="text" name="unitNumber" required placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
-                            {{--input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">--}}
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}">
+                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">
+                            {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}
                             @endforeach
                             @else
                             <select name="serviceName" class="form-control" id="accommodationType">
