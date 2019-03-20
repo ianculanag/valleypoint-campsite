@@ -254,7 +254,6 @@ class AccommodationsController extends Controller
         'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
     ]);
 
-<<<<<<< HEAD
         
     /*if(count($reservedAccommodations)>0){
         for($count=0;$count<count($reservedAccommodations);$count+1){
@@ -285,6 +284,7 @@ class AccommodationsController extends Controller
         }*/
 =======
         }
+<<<<<<< HEAD
 =======
         if ($request->input('checkinDate') > $request->input('checkoutDate')){
             return redirect()->back()->withInput();
@@ -314,6 +314,8 @@ class AccommodationsController extends Controller
 
 >>>>>>> check-in date validation
 >>>>>>> check-in date validation
+=======
+>>>>>>> continued check in validation
         
         //GAC
         $accommodation = new Accommodation;                 
@@ -375,47 +377,6 @@ class AccommodationsController extends Controller
 
         return redirect('/transient-backpacker');
 
-<<<<<<< HEAD
-=======
-        /*$accommodation = new Accommodation;         
-        $accommodation->serviceID = '5';
-        $accommodation->unitID = $request->input('unitID');
-        $accommodation->numberOfPax = $request->input('numberOfPax');
-        $accommodation->paymentStatus = 'pending';
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->save();
-
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->accommodationID = $accommodation->id;   
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save();
-
-
-        if ($accommodation->numberOfPax > 1) {
-            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
-                $accompanyingGuest = new Guests;
-
-                $lastName = 'lastName'.$count;
-                $firstName = 'firstName'.$count;
-
-                $accompanyingGuest->lastName = $request->input($lastName);
-                $accompanyingGuest->firstName = $request->input($firstName);
-                $accompanyingGuest->accommodationID = $accommodation->id;
-                $accompanyingGuest->listedUnder = $guest->id;   
-                $accompanyingGuest->save();
-            }
-        }
-
-        /*$unit = Units::find($request->input('unitID'));
-        $unit->update([
-            'status' => 'occupied'
-        ]);*/
-
->>>>>>> check-in date validation
     }
 
 
