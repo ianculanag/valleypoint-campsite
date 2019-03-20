@@ -32,7 +32,7 @@
                             @foreach($charges as $charge)
                             <tr>
                                 <td>{{$charge->serviceName}}</td>
-                                <td style="text-align:right;">{{$charge->numberOfPax}}</td>
+                                <td style="text-align:right;">{{$charge->quantity}}</td>
                                 <td style="text-align:right;">{{$charge->price}}</td>
                                 <td style="text-align:right;">{{($charge->totalPrice)}}</td>
                             </tr>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitID">No. of units</label>
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="6" disabled>
+                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="{{$guestDetails->numberOfUnits}}" disabled>
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="unitNumber">Unit/s availed</label>

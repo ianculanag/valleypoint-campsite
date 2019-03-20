@@ -224,7 +224,7 @@ class GuestsController extends Controller
         ->leftJoin('services', 'services.id', 'accommodations.serviceID')
         ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity', 'units.partOf',
                  'accommodation_units.status', 'accommodations.id AS accommodationID', 'accommodations.numberOfPax',
-                 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime',
+                 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime', 'accommodations.numberOfUnits',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
                  'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
