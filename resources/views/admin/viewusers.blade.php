@@ -27,8 +27,8 @@
                     <td>{{$user->contactNumber}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role}}</td>
-                    <td><button class="btn btn-info">Edit</button>
-                        <button class="btn btn-danger">Delete</button>
+                    <td><button class="btn btn-sm btn-info">Edit</button>
+                        <button class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>
                     @endforeach

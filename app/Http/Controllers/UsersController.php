@@ -19,5 +19,7 @@ class UsersController extends Controller
         ->get();
 
         return view('admin.viewusers')->with('users', $users);
+        /*$users = User::sortable()->paginate(5);
+        return view('admin.viewusers',compact('users'))->with('users', $users);*/
     }
 }

@@ -86,3 +86,6 @@ Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
 //View users
 Route::get('/viewusers', 'UsersController@viewUsers');
+
+//View units
+Route::get('/viewunits', 'UnitsController@viewUnits');

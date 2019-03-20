@@ -201,6 +201,20 @@ class UnitsController extends Controller
         //return $guest;
         return view('lodging.guestcheckout')->with('guest', $guest);
         //}
+    }
 
+    /**
+     * Display all units.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewUnits()
+    {
+        /*$units = DB::table('units')
+        ->get();
+
+        return view('admin.viewunits')->with('units', $units);*/
+        $units = Units::sortable()->paginate(8);
+        return view('admin.viewunits',compact('units'))->with('units', $units);
     }
 }
