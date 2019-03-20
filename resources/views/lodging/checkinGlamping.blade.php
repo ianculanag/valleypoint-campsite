@@ -103,7 +103,6 @@
                                 <option value="2">Glamping 2 Pax</option>
                                 <option value="3">Glamping 3 pax</option>
                                 <option value="4">Glamping 4 pax</option>
-                                <option value="5">Backpacker</option>
                             </select>
                         </div>
                     </div>
@@ -113,12 +112,12 @@
                         <div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>
+                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10">
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitNumber" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}" disabled>
-                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">
+                            <input class="form-control" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
+                            {{--input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">--}}
                             @endforeach
                             @else
                             <select name="serviceName" class="form-control" id="accommodationType">
@@ -163,15 +162,15 @@
                     </div>
 
                     <hr class="mb-4">
-                    <div class="form-group row pb-3">
+                    <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
                         <input type="hidden" name="additionalServiceAccommodationID" value="" {{--form="serviceForm"--}}>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-3 mb-1" id="divServiceName">
                             <label for="additionalServiceName">Service name</label>
                             <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect" {{--form="serviceForm"--}}>
-                                <option value="" selected disabled >Choose...</option>
+                                <option value="choose" selected disabled >Choose...</option>
                                 <option value="6">Airsoft</option>
                                 <option value="7">Archery</option>                                
                                 <option value="15">Pillow</option>
@@ -179,11 +178,11 @@
                                 <option value="17">Blanket</option>
                             </select>
                         </div>
-                        <div class="col-md-2 mb-1">
+                        <div class="col-md-2 mb-1" id="divQuantity">
                             <label for="additionalServiceNumberOfPax">Quantity</label>
                             <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-3 mb-1" id="divUnitPrice">
                             <label for="additionalServiceUnitPrice">Unit price</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -193,7 +192,7 @@
                                 <input class="form-control additionalServiceUnitPrice" type="text" style="display:none;float:left;" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" {{--form="serviceForm"--}}>
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-3 mb-1" id="divTotalPrice">
                             <label for="additionalServiceTotalPrice">Total price</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -204,7 +203,7 @@
                             </div>
                         </div>
 
-                        <div style="margin-top:2em;">
+                        <div style="margin-top:2em;" id="divButton">
                             <div class="input-group">
                                 <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" {{--form="serviceForm"--}}disabled>
                                     <span class="fa fa-plus" aria-hidden="true"></span>
