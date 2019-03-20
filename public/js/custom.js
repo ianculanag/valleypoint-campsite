@@ -292,8 +292,11 @@ jQuery(document).ready(function(){
             jQuery('#invoiceUnit').html(packagePrice);
             //console.log(daysDiff);
             totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
-            jQuery('#invoiceTotal').html(totalPrice);                
-
+            jQuery('#invoiceTotal').html(totalPrice);      
+            
+            //jQuery('#stayDuration').val(daysDiff);
+            document.getElementById('stayDuration').value = daysDiff;
+            //console.log(jQuery('#stayDuration').val());
             updateTotal();
         })
         //console.log(daysDiff);
@@ -394,7 +397,7 @@ jQuery(document).ready(function(){
 
             let htmlString = "";
             htmlString += "<input type='number' style='display:none;float:left;' name='additionalServicesCount' value='"+additionalServices+"'>";
-            htmlString += "<input type='text' style='display:none;float:left;' name='additionalServiceID"+additionalServices+"' value='"+data[0].id+"'>";
+            htmlString += "<input type='text' style='display:none;float:left;' id='additionalServiceID"+additionalServices+"' name='additionalServiceID"+additionalServices+"' value='"+data[0].id+"'>";
             htmlString += "<div class='col-md-3 mb-1' id='divServiceName"+additionalServices+"'>";
             htmlString += "<input class='form-control paxSelect' type='text' name='additionalServiceName"+additionalServices+"' value='"+data[0].serviceName+"' readonly>";
             htmlString += "</div>";
@@ -440,12 +443,14 @@ jQuery(document).ready(function(){
         //console.log('FUUCK!');
         //console.log(jQuery(this).attr('id'));
         var id = jQuery(this).attr('id').slice(27);  
+        var divServiceID = '#additionalServiceID'+id;
         var divServiceName = '#divServiceName'+id;
         var divQuantity = '#divQuantity'+id;
         var divUnitPrice = '#divUnitPrice'+id;
         var divTotalPrice = '#divTotalPrice'+id;
         var divButton = '#divButton'+id;
 
+        jQuery(divServiceID).remove();
         jQuery(divServiceName).remove();
         jQuery(divQuantity).remove();
         jQuery(divUnitPrice).remove();

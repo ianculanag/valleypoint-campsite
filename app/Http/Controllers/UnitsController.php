@@ -86,8 +86,8 @@ class UnitsController extends Controller
                  'accommodation_units.status', 'services.serviceName', 
                  'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
                  'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
-        ->where('guests.listedUnder', '=', null)        
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')   
+        //->where('guests.listedUnder', '=', null)        
         ->orderBy('unitID')
         ->get(); 
         
@@ -178,7 +178,7 @@ class UnitsController extends Controller
                  'accommodation_units.status', 'services.serviceName', 
                  'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
                  'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.listedUnder',   'guests.contactNumber')   
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName',   'guests.contactNumber')   
         ->where('unitID', '=', $id)   
         ->get(); 
     }

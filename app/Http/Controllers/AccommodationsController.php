@@ -186,6 +186,7 @@ class AccommodationsController extends Controller
 
         $accommodation = new Accommodation;                 
         $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
         $accommodation->serviceID = $request->input('numberOfPax');
@@ -201,53 +202,40 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        /*if ($accommodation->numberOfPax > 1) {
-            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
-                $accompanyingGuest = new Guests;
-
-                $lastName = 'lastName'.$count;
-                $firstName = 'firstName'.$count;
-
-                $accompanyingGuest->lastName = $request->input($lastName);
-                $accompanyingGuest->firstName = $request->input($firstName);
-                $accompanyingGuest->accommodationID = $accommodation->id;
-                $accompanyingGuest->listedUnder = $guest->id;   
-                $accompanyingGuest->save();
-            }
-        }
-      
-        $sale = new Sales;
-        $sale->paymentDatetime = Carbon::now();
-        $sale->amount = $request->input('amountPaid');
-        $sale->paymentCategory = 'lodging';
-        $sale->accommodationID = $accommodation->id;
-        $sale->serviceID = $request->input('numberOfPax');
-        $sale->save();*/
-
         $service = Services::find($request->input('numberOfPax'));
         
-        /*$charge = new Charges;
-        $charge->quantity = $request->input('numberOfPax');
-        $charge->totalPrice = $charge->quantity*$service->price;
-        $charge->remarks = $request->input('paymentStatus');
-        $charge->accommodationID = $accommodation->id;
-        $charge->serviceID = $service->id;
-        $charge->save();
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) {
+            $accommodationUnit = new AccommodationUnits;
+            $accommodationUnit->accommodationID = $accommodation->id;
+            $accommodationUnit->unitID = $request->input('unitID');
+            $accommodationUnit->status = 'ongoing';
+            $accommodationUnit->save();
+        }
 
-        if($request->input('paymentStatus') != 'unpaid') {
-            $payment = new Payments;
-            $payment->paymentDatetime = Carbon::now();
-            $payment->amount = $request->input('amountPaid');
-            $payment->paymentStatus = $request->input('paymentStatus');
-            $payment->chargeID = $charge->id;
-            $payment->save();
-        }*/
+        $charges = new Charges;
+        $charges->quantity = $request->input('numberOfPax');
+        $charges->totalPrice = $service->price*$charges->quantity*$request->input('stayDuration');
+        $charges->remarks = 'full';
+        $charges->accommodationID = $accommodation->id;
+        $charges->serviceID = $service->id;
+        $charges->save();
 
-        $accommodationUnit = new AccommodationUnits;
-        $accommodationUnit->accommodationID = $accommodation->id;
-        $accommodationUnit->unitID = $request->input('unitID');
-        $accommodationUnit->status = 'ongoing';
-        $accommodationUnit->save();
+        if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'full';
+                    $charges->accommodationID = $accommodation->id;
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                }
+            }
+        }
 
         return redirect('/glamping');
     }

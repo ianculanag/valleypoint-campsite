@@ -28,6 +28,7 @@ class CreateAccommodationsTable extends Migration
         Schema::create('accommodations', function (Blueprint $table) {
             $table->increments('id');                  
             $table->integer('numberOfPax')->default(1);
+            $table->integer('numberOfUnits')->default(1);
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
             $table->integer('serviceID')->unsigned();  

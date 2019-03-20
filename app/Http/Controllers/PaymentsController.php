@@ -19,7 +19,7 @@ class PaymentsController extends Controller
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('guests', 'guests.accommodationID', 'accommodations.id')
         ->join('services', 'services.id', 'charges.serviceID')
-        ->where('guests.listedUnder', '=', null)
+        //->where('guests.listedUnder', '=', null)
         //->orderBy('paymentDatetime')
         ->get();
 

@@ -19,7 +19,8 @@ class CreateReservationsTable extends Migration
             $table->dateTime('checkoutDatetime');
             $table->string('lastName', 25);
             $table->string('firstName', 25);
-            $table->integer('numberOfPax')->default(1);;
+            $table->integer('numberOfPax')->default(1);            
+            $table->integer('numberOfUnits')->default(1);
             $table->string('contactNumber', 11);
             $table->integer('unitID')->unsigned();
             $table->integer('serviceID')->unsigned();            

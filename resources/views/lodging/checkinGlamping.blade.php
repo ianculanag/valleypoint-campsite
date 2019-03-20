@@ -83,7 +83,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber" required maxlength="11" placeholder="09#########" value="">
+                                <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
@@ -116,7 +116,8 @@
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitID" required placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
+                            <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
+                            <input class="form-control" type="text" name="unitNumber" required placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->unitNumber}}">
                             {{--input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">--}}
                             @endforeach
                             @else
@@ -157,6 +158,7 @@
                                     </span>
                                 </div>
                                 <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
                         </div>
                     </div>
@@ -166,7 +168,7 @@
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
                         </div>
-                        <input type="hidden" name="additionalServiceAccommodationID" value="" {{--form="serviceForm"--}}>
+                        <input type="hidden" {{--name="additionalServiceAccommodationID" value="" {{--form="serviceForm"--}}>
                         <div class="col-md-3 mb-1" id="divServiceName">
                             <label for="additionalServiceName">Service name</label>
                             <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect" {{--form="serviceForm"--}}>
@@ -180,7 +182,7 @@
                         </div>
                         <div class="col-md-2 mb-1" id="divQuantity">
                             <label for="additionalServiceNumberOfPax">Quantity</label>
-                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
+                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
                         </div>
                         <div class="col-md-3 mb-1" id="divUnitPrice">
                             <label for="additionalServiceUnitPrice">Unit price</label>
@@ -189,7 +191,7 @@
                                     <span class="input-group-text">₱</span>
                                 </div>
                                 <input class="form-control additionalServiceUnitPrice" type="text" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" disabled>
-                                <input class="form-control additionalServiceUnitPrice" type="text" style="display:none;float:left;" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" {{--form="serviceForm"--}}>
+                                <input class="form-control additionalServiceUnitPrice" type="text" style="display:none;float:left;" id="additionalServiceUnitPrice" {{--name="additionalServiceUnitPrice"--}} placeholder="" value="" {{--form="serviceForm"--}}>
                             </div>
                         </div>
                         <div class="col-md-3 mb-1" id="divTotalPrice">
@@ -199,7 +201,7 @@
                                     <span class="input-group-text">₱</span>
                                 </div>
                                 <input class="form-control additionalServiceTotalPrice" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
-                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" {{--form="serviceForm"--}}>
+                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" {{--name="additionalServiceTotalPrice"--}} placeholder="" value="" {{--form="serviceForm"--}}>
                             </div>
                         </div>
 
