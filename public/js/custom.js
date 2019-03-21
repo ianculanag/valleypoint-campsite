@@ -511,7 +511,7 @@ jQuery(document).on('click','.collapse.in',function(e) {
 });
 
 jQuery(document).ready( function () {
-    jQuery('#unitsTable').DataTable();
+    jQuery('.dataTable').DataTable();
 });
 
 

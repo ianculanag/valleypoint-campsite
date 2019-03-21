@@ -5,23 +5,23 @@
         <h3 class="text-center">Users</h3>
     </div>
     <div class="col-md-12">
-        <table id="usersTable" class="table table-striped table-sm usersTable" cellspacing="0">
+        <table id="usersTable" data-order='[[ 1, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   
-                    <th scope="col" class="text-center">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Contact No.</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col" colspan="3">Action</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Contact No.</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                     @if(count($users) > 0)
                     @foreach($users as $user)
                 <tr>          
-                    <td class="text-center">{{$user->id}}</td>
+                    <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->username}}</td>
                     <td>{{$user->contactNumber}}</td>
