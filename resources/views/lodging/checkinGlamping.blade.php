@@ -35,7 +35,7 @@
                             @endphp
                             @foreach($charges as $charge)--}}
                             <tr>
-                                <td>Glamping</td>
+                                <td id="invoiceDescription">Glamping</td>
                                 <td id="invoiceQuantity" style="text-align:right;">1</td>
                                 <td id="invoiceUnit" tyle="text-align:right;">{{--$charge->price--}}</td>
                                 <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">{{--($charge->totalPrice)--}}</td>
@@ -54,7 +54,7 @@
                             <tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" step="50" placeholder="0" class="form-control" id="amount" required>
+                                <input type="number" name="amountPaid" placeholder="0" min="0" class="form-control" id="amount" required>
                                 </th>
                             </tr>
                         </tfoot>
@@ -88,24 +88,46 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control numberOfPaxGlamping" type="number" required name="numberOfPax" placeholder="" value="" min="1" max="4">
+                            <input class="form-control" type="number" required name="numberOfPax" placeholder="" value="" min="1" max="4">
                         </div>
                         <!--div class="col-md-3 mb-1" style="display:none; position:absolute;">
                             <label for="numberOfPax">No. of pax</label>
                             <input class="form-control"  type="number" name="numberOfPax" placeholder="" value="" min="1" max="10">
                         </div-->
                         <div class="col-md-4 mb-1 form-group">
-                            <label for="accommodationType">Accommodation</label>
+                            <label for="accommodationType">Accommodation type</label>
                             @if(count($unit) > 0)
                             @foreach($unit as $unit)
-                            <select name="serviceName" class="form-control" id="accommodationType" disabled>
-                                <option value="1">Glamping Solo</option>
-                                <option value="2">Glamping 2 Pax</option>
-                                <option value="3">Glamping 3 pax</option>
-                                <option value="4">Glamping 4 pax</option>
+                            <select class="form-control" {{--name="serviceName" id="accommodationType"--}}disabled>
+                                <option>Glamping</option>
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                            <div class="col-md-6 mb-1">
+                                <label for="checkinDate">Check-in date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <label for="checkoutDate">Check-out date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                    <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
+                                </div>
+                            </div>
+                        </div>
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
@@ -118,18 +140,53 @@
                                         <i class="fa fa-campground" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="10" disabled>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" disabled>
                             </div>
                         </div>
-                        <div class="col-md-10 mb-1">
+                        <div class="col-md-10 mb-1" id="divUnits">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}">
                             
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">
-                            {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}
+                            {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
+                            
+                            
+                            {{--gac dawn code--}}
+                            <!--label for="unitNumber">Unit/s</label-->
+                            <div class="row mt-3">
+                            {{--<input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}">
+                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">--}}
+                                <div class="col-md-4 mb-1" id="divUnitNumber">
+                                    <label for="unitNumber">Unit number</label>
+                                    <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                                </div>
+                                <div class="col-md-3 mb-1" id="divNumberOfPax">
+                                    <label for="unitNumberOfPax">No. of pax</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
+                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
+                                    <select name="serviceName" class="form-control" id="accommodationType" disabled>
+                                        <option value="1">Glamping Solo</option>
+                                        <option value="2">Glamping 2 Pax</option>
+                                        <option value="3">Glamping 3 pax</option>
+                                        <option value="4">Glamping 4 pax</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
                             @endforeach
-                            @else
+                            {{--@else
                             <select name="serviceName" class="form-control" id="accommodationType">
                                 <option value="1">Glamping Solo</option>
                                 <option value="2">Glamping 2 Pax</option>
@@ -141,37 +198,11 @@
                         </div>
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
-                            <input class="form-control" type="text" name="unitNumbers" required placeholder="This will be a listbox/tokenfield" role="listbox" value="">
+                            <input class="form-control" type="text" name="unitNumbers" required placeholder="This will be a listbox/tokenfield" role="listbox" value="">--}}
                             
                             @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-6 mb-1">
-                            <label for="checkinDate">Check-in date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <label for="checkoutDate">Check-out date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
-                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
-                            </div>
-                        </div>
-                    </div>
-
+                    </div>{{--end div--}}
+                    
                     <hr class="mb-4">
                     <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">

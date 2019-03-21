@@ -274,12 +274,41 @@ jQuery(document).ready(function(){
 
 jQuery(document).ready(function(){
     var numberOfUnits = 1;
+    var source =['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10'];
     jQuery('#tokenfield').tokenfield({
         autocomplete: {
-          source: ['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10'],
+          source: source,
           delay: 100
         },
         showAutocompleteOnFocus: true
+    });
+
+    jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
+        var existingTokens = $(this).tokenfield('getTokens');
+        jQuery.each(existingTokens, function(index, token) {
+            if (token.value === event.attrs.value)
+                event.preventDefault();
+        });
+
+        var exists = false;
+        jQuery.each(source, function(index, value) {
+                if (event.attrs.value === value) {
+                    exists = true;
+                }
+        });
+        if(!exists) {
+                event.preventDefault(); //prevents creation of token
+                alert('Please select the unit from the choices.')
+        }
+
+        /*var available_tokens = bloodhound_tokens.index.datums
+        var exists = true;
+        jQuery.each(available_tokens, function(index, token) {
+            if (token.value === event.attrs.value)
+                exists = false;
+        });
+        if(exists === true)
+            event.preventDefault();*/
     });
 
     jQuery('#tokenfield').on('tokenfield:removedtoken', function (e) {
@@ -292,8 +321,39 @@ jQuery(document).ready(function(){
         //alert('Token added! Token value was: ' + e.attrs.value)
         numberOfUnits++;
         jQuery('#numberOfUnits').val(numberOfUnits);
+        makeRow(e.attrs.value);
     });
 });
+
+function makeRow(unitNumber) {
+    console.log('It Works')
+    var htmlString = "";
+    htmlString += "<div class='row mt-1'>";
+    htmlString += "<div class='col-md-4 mb-1' id='divUnitNumber'>";
+    htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-3 mb-1' id='divNumberOfPax'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<div class='input-group-prepend'>";
+    htmlString += "<span class='input-group-text'>";
+    htmlString += "<i class='fa fa-users' aria-hidden='true'></i>";
+    htmlString += "</span>";
+    htmlString += "</div>";
+    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage'>";
+    htmlString += "<select name='serviceName' class='form-control' id='accommodationType' disabled>";
+    htmlString += "<option value='1'>Glamping Solo</option>";
+    htmlString += "<option value='2'>Glamping 2 Pax</option>";
+    htmlString += "<option value='3'>Glamping 3 pax</option>";
+    htmlString += "<option value='4'>Glamping 4 pax</option>";
+    htmlString += "</select>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+
+    jQuery('#divUnits').append(htmlString);
+}
 
 jQuery(document).ready(function(){
     var daysDiff = 1;
@@ -337,11 +397,13 @@ jQuery(document).ready(function(){
             var totalPrice;
             
             jQuery.get('/getService/'+$(this).val(), function(data){ 
-                packagePrice = data[0].price;                         
+                packagePrice = data[0].price;        
+                packageName = data[0].serviceName;            
+                jQuery('#invoiceDescription').html(packageName);                    
                 jQuery('#invoiceUnit').html(packagePrice);
                 //console.log(daysDiff);
                 totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
-                jQuery('#invoiceTotal').html(totalPrice);                
+                jQuery('#invoiceTotal').html(totalPrice); 
 
                 updateTotal();
             })
