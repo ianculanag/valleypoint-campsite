@@ -184,7 +184,7 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodation;                 
+        $accommodation = new Accommodations;                 
         $accommodation->numberOfPax = $request->input('numberOfPax');
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');

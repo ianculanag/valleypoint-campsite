@@ -273,12 +273,25 @@ jQuery(document).ready(function(){
 
 
 jQuery(document).ready(function(){
+    var numberOfUnits = 1;
     jQuery('#tokenfield').tokenfield({
         autocomplete: {
           source: ['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10'],
           delay: 100
         },
         showAutocompleteOnFocus: true
+    });
+
+    jQuery('#tokenfield').on('tokenfield:removedtoken', function (e) {
+        //alert('Token removed! Token value was: ' + e.attrs.value)
+        numberOfUnits--;
+        jQuery('#numberOfUnits').val(numberOfUnits);
+    });
+
+    jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
+        //alert('Token added! Token value was: ' + e.attrs.value)
+        numberOfUnits++;
+        jQuery('#numberOfUnits').val(numberOfUnits);
     });
 });
 
