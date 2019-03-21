@@ -510,6 +510,12 @@ jQuery(document).on('click','.collapse.in',function(e) {
     }
 });
 
+jQuery(document).ready( function () {
+    jQuery('#unitsTable').DataTable();
+});
+
+
+
 /*jQuery('#tokenfield').tokenfield({
     autocomplete: {
       source: ['Tent 1','Tent 2','Tent 3','Tent 4','Tent 6','Tent 7','Tent 8'],

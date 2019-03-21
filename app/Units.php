@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Kyslik\ColumnSortable\Sortable;
+//use Kyslik\ColumnSortable\Sortable;
 
 class Units extends Model
 {
-    use Sortable;
+    //use Sortable;
 
     // Table Name
     protected $table = 'units';
@@ -25,7 +25,7 @@ class Units extends Model
         'status',
     ];
 
-	public $sortable = ['id', 'unitType', 'unitNumber', 'capacity'];
+	//public $sortable = ['id', 'unitType', 'unitNumber', 'capacity'];
 
     // Foreign key to
     public function accommodation()

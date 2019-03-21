@@ -5,21 +5,21 @@
         <h3 class="text-center">Units</h3>
     </div>
     <div class="col-md-12">
-        <table id="unitsTable" class="table table-striped table-sm unitsTable" cellspacing="0">
+        <table data-order='[[ 1, "asc" ]]' id="unitsTable" class="table table-sm unitsTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   
-                    <th scope="col" class="text-center">@sortablelink('id')</th>
-                    <th scope="col">@sortablelink('unitType')</th>
-                    <th scope="col">@sortablelink('unitNumber')</th>
-                    <th scope="col">@sortablelink('capacity')</th>
-                    <th scope="col" colspan="3">Action</th>
+                    <th>ID</th>
+                    <th>Unit Type</th>
+                    <th data-class-name="priority">Unit Number</th>
+                    <th>Capacity</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                     @if(count($units) > 0)
                     @foreach($units as $unit)
                 <tr>          
-                    <td class="text-center">{{$unit->id}}</td>
+                    <td>{{$unit->id}}</td>
                     <td>{{$unit->unitType}}</td>
                     <td>{{$unit->unitNumber}}</td>
                     <td>{{$unit->capacity}}</td>
@@ -31,6 +31,5 @@
                     @endif
             </tbody>
         </table>
-        {!! $units->appends(\Request::except('page'))->render() !!}
     </div>
 @endsection
