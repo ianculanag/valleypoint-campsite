@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($guest as $guestDetails)
     <div class="container">
-        <div class="py-5 text-center">
+        <div class="pt-5 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>

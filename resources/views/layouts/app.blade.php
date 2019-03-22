@@ -86,7 +86,7 @@
             </div>
     </div>--}}
     
-    @include('inc.sidebar')
+    @include('inc.sidebarlodging')
     <div class="container main-content col-md-10">
         @yield('content')
     </div>
@@ -102,5 +102,21 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> 
     <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+        
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+          } else {
+          dropdownContent.style.display = "block";
+          }
+          });
+        }
+    </script>
 </body>
 </html>

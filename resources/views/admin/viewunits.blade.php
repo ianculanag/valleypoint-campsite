@@ -1,10 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="py-4 text-center">
+    <div class="pt-5 pb-3">
+        <a href="#">
+            <span style="float:left;">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <strong>Back</strong>
+            </span>
+        </a>
         <h3 class="text-center">Units</h3>
     </div>
     <div class="col-md-12">
+        <!--button class="btn btn-md btn-success mb-2">Add unit</button-->
         <table data-order='[[ 1, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   
