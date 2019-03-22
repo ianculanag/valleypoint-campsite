@@ -281,6 +281,7 @@ class AccommodationsController extends Controller
         }else{
             return $BeforeAccommodations;
 <<<<<<< HEAD
+<<<<<<< HEAD
         }*/
 =======
         }
@@ -316,6 +317,9 @@ class AccommodationsController extends Controller
 >>>>>>> check-in date validation
 =======
 >>>>>>> continued check in validation
+=======
+        }*/
+>>>>>>> Enabled checkin-reserve modal in backpacker
         
         //GAC
         $accommodation = new Accommodation;                 
