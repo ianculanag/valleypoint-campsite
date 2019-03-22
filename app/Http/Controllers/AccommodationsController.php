@@ -250,8 +250,7 @@ class AccommodationsController extends Controller
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
-            'checkinDate' => 'required', 'checkinTime' => 'required',
-        'checkoutDate' => 'required', 'checkoutTime' => 'required',
+            'checkinDate' => 'required', 'checkoutDate' => 'required',
         'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
     ]);
 
@@ -276,12 +275,39 @@ class AccommodationsController extends Controller
         ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())            
         ->get();
 
-        if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
+        /*if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
         {
             return("Hello");
         }else{
             return $BeforeAccommodations;
+
+        if ($request->input('checkinDate') > $request->input('checkoutDate')){
+            return redirect()->back()->withInput();
+            
         }
+
+        //check Date Validation
+         $reservedAccommodations = DB::table('accommodations')
+         ->select('accommodations.checkinDatetime')
+         ->get();
+
+        
+            if(count($reservedAccommodations) > 0){
+                return $reservedAccommodations;
+                
+            for($count = 0; $count < count($reservedAccommodations); $count++) {
+             $checkinDateChecker = $reservedAccommodations[$count];
+
+             if($request->input('checkinDate') < $reservedAccommodations[$count]){
+                return redirect()->back()->withInput();
+
+             }else{
+                return("WAOW ERROR");
+             }
+            }
+         }
+
+        }*/
         
         //GAC
         $accommodation = new Accommodation;                 
