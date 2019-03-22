@@ -9,7 +9,7 @@
                 <strong>Back</strong>
             </span>
         </a>
-        <h3>Check-in form</h3>
+        <h3>Check-in Form</h3>
     </div>
 
     <form method="POST" action="/checkinBackpacker">
@@ -28,7 +28,7 @@
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="invoiceRows">
                         <tr>
                             <td id="invoiceDescription">Backpacker</td>
                             <td id="invoiceQuantity" style="text-align:right;">1</td>
@@ -149,8 +149,9 @@
                                 </div>
                                 <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
                             </div>
-                        </div>  
-                        <hr class="mb-4">
+                        </div>
+                    </div>
+                    <hr class="mb-4">  
                     <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
