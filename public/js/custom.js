@@ -81,18 +81,7 @@ jQuery(document).ready(function(){
             secondTable.classList.add('borderless');
 
             let secondTableBody = document.createElement('TBODY');
-            
-            /*let guestID = document.createElement('TR');
-            let guestIDLabel = document.createElement('TD');
-            let guestIDLabelData = document.createTextNode('Guest ID: ');
-            guestIDLabel.appendChild(guestIDLabelData);
-            guestIDLabel.style.width='35%';
-            let guestIDBody = document.createElement('TD');
-            let guestIDBodyData = document.createTextNode(data[0].id);
-            guestIDBody.appendChild(guestIDBodyData);
-            guestID.appendChild(guestIDLabel);
-            guestID.appendChild(guestIDBody);*/
-            
+                     
             let guestName = document.createElement('TR');
             let guestNameLabel = document.createElement('TD');
             let guestNameLabelData = document.createTextNode('Guest Name: ');
@@ -228,32 +217,6 @@ jQuery("input[type=radio][name=numberOfPax]").change(function() {
     }
     jQuery("#outputDiv").html(htmlString);
 });
-
-/*jQuery(document).ready(function(){
-    var servicePrice = 0;
-    jQuery('.serviceSelect').change(function(){
-        jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
-            //console.log(data[0].price);
-            servicePrice = data[0].price;
-            console.log(servicePrice);
-
-            var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
-
-            if(numberOfPax) {
-                console.log('yeah');
-                document.getElementById('additionalServicePrice').value = servicePrice * numberOfPax;
-            }
-        })
-    });
-
-    jQuery('.paxSelect').change(function(){
-        var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value
-        console.log();
-        if(document.getElementById('serviceSelect').value) {
-            document.getElementById('additionalServicePrice').value = servicePrice * numberOfPax;
-        }
-    });
-}); */
 
 jQuery(document).on('click','.collapse.in',function(e) {
     if(jQuery(e.target).is('div') ) {
@@ -605,13 +568,3 @@ jQuery(document).on('click','.collapse.in',function(e) {
 jQuery(document).ready( function () {
     jQuery('.dataTable').DataTable();
 });
-
-
-
-/*jQuery('#tokenfield').tokenfield({
-    autocomplete: {
-      source: ['Tent 1','Tent 2','Tent 3','Tent 4','Tent 6','Tent 7','Tent 8'],
-      delay: 100
-    },
-    showAutocompleteOnFocus: true
-});*/
