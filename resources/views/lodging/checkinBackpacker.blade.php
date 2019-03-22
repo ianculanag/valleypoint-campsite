@@ -10,7 +10,7 @@
         </span>
     </a>
         <!--img class="d-block mx-auto mb-4" alt="" width="72" height="72"-->
-            <h2>Check-in Backpacker</h2>
+            <h2>Check-in For Backpackers</h2>
     </div>
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -37,11 +37,11 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" name="firstName" required="required" class="form-control" id="inputfirstName" placeholder="Juan">
+                        <input type="text" name="firstName" required class="form-control" maxlength="15" placeholder="Juan">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastName">Last Name</label>
-                        <input type="text" name="lastName" required="required" class="form-control" id="inputlastName" placeholder="Dela Cruz">
+                        <input type="text" name="lastName" required class="form-control" maxlength="20" placeholder="Dela Cruz">
                     </div>  
                 </div> 
                 <div class="form-group">
@@ -52,12 +52,12 @@
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                    <input type="text" name="contactNumber" required="required" class="form-control" id="inputcontactNumber" placeholder="09#########">
+                    <input type="text" name="contactNumber" required class="form-control" minlength="11" maxlength="11" placeholder="09#########">
                     </div>
                 </div>
                 <div class="form-group row-md-3">
                     <label for="numberOfPax" >Number Of Pax:</label>
-                    <select class="custom-select d-block w-1" name="numberOfPax" id="numPax" required="required">
+                    <select class="custom-select d-block w-1" name="numberOfPax" required min="1" max="10">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -95,23 +95,15 @@
         <div class="col-sm-5">
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="arrivalDate">Arrival Date:</label>
-                    <input type="date" name="checkinDate" required="required" class="form-control" id="date" value="{{ old('checkinDate') }}">
-                </div>
-                <div class="form-group col-md-6">
-                <label for="arrivalTime">Time: </label>
-                    <input type="time" name="checkinTime" required="required" class="form-control" id="time">
+                <label for="arrivalDate">Check-in Date:</label>
+                    <input type="date" name="checkinDate" required class="form-control" id="date" value="<?php echo date("Y-m-d");?>">
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="departureDate">Departure Date:</label>
-                    <input type="date" name="checkoutDate" required="required" class="form-control" id="date" value="{{ old('checkoutDate') }}">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="arrivalTime">Time:</label>
-                    <input type="time" name="checkoutTime" required="required" class="form-control" id="time">
+                    <label for="departureDate">Check-out Date:</label>
+                    <input type="date" name="checkoutDate" required class="form-control" id="date" value="">
                 </div>    
             </div>
 

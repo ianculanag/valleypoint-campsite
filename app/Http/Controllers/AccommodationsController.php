@@ -250,8 +250,7 @@ class AccommodationsController extends Controller
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
-            'checkinDate' => 'required', 'checkinTime' => 'required',
-        'checkoutDate' => 'required', 'checkoutTime' => 'required',
+            'checkinDate' => 'required', 'checkoutDate' => 'required',
         'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
     ]);
 
@@ -276,12 +275,12 @@ class AccommodationsController extends Controller
         ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())            
         ->get();
 
-        if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
+        /*if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
         {
             return("Hello");
         }else{
             return $BeforeAccommodations;
-        }
+        }*/
         
         //GAC
         $accommodation = new Accommodation;                 
