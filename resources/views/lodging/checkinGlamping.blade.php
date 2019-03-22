@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@if(count($unit) > 0)
+    @foreach($unit as $unit)
         <div class="py-5 text-center">
             <a href="/glamping">
                 <span style="float:left;">
@@ -27,11 +29,11 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                            <tr>
-                                <td id="invoiceDescription">Glamping Solo</td>
-                                <td id="invoiceQuantity" style="text-align:right;">1</td>
-                                <td id="invoiceUnit" tyle="text-align:right;">1350</td>
-                                <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">1350</td>
+                            <tr id="invoiceUnit{{$unit->unitNumber}}">
+                                <td id="invoiceDescription{{$unit->unitNumber}}">Glamping Solo</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">1350</td>
+                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -51,43 +53,47 @@
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
                     <h5 style="margin-bottom:.80em;">Guest Details</h5>
-                    <div class="form-group row">
-                        <div class="col-md-5 mb-1">
+                    <div class="row">
+                        <div class="row col-md-7">
+                    <div class="form-group row col-md-12">
+                        <div class="col-md-6">
                             <label for="firstName">First name</label>
                             <input class="form-control" type="text" name="firstName" required maxlength="15" placeholder="Juan" value="">
                         </div>
-                        <div class="col-md-7 mb-1">
+                        <div class="col-md-6">
                             <label for="lastName">Last name</label>
                             <input class="form-control" type="text" name="lastName" required maxlength="20" placeholder="Dela Cruz" value="">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-5 mb-1">
-                            <label for="contactNumber">Contact number</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
+                    <div class="form-group row col-md-12">
+                        <div class="col-md-12 mb-1">
+                        <label for="contactNumber">Contact number</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </span>
                             </div>
+                            <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                         </div>
-                        <div class="col-md-3 mb-1">
+                    </div>
+                </div>
+                        
+                        
+                        <!--/div-->
+                        {{--<div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control" type="number" required name="numberOfPax" placeholder="" value="" min="1" max="4">
+                            <input class="form-control" type="number" id="numberOfPax" required name="numberOfPax" placeholder="" value="" min="1" max="60">
                         </div>
                         <div class="col-md-4 mb-1 form-group">
                             <label for="accommodationType">Accommodation type</label>
-                            @if(count($unit) > 0)
-                            @foreach($unit as $unit)
                             <select class="form-control"disabled>
                                 <option>Glamping</option>
                             </select>
-                        </div>
+                        </div>--}}
                     </div>
-                    <div class="form-group row">
-                            <div class="col-md-6 mb-1">
+                    <div class="form-group row col-md-5">
+                            <div class="col-md-12 mb-3">
                                 <label for="checkinDate">Check-in date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -98,7 +104,7 @@
                                     <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-1">
+                            <div class="col-md-12 mb-1">
                                 <label for="checkoutDate">Check-out date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -110,7 +116,8 @@
                                     <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                                 </div>
                             </div>
-                        </div>
+                    </div>
+                </div>
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
@@ -131,7 +138,7 @@
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}">
                             
-                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" placeholder="This will be a listbox/tokenfield" role="listbox" value="{{$unit->id}}">
+                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
                             {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
                             
                             
@@ -150,12 +157,12 @@
                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                             </span>
                                         </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+                                        <input class="form-control paxSelect numberOfPaxGlamping" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Accommodation package</label>
-                                    <select name="serviceName" class="form-control" id="accommodationType" disabled>
+                                    <select name="serviceName" class="form-control" id="accommodationType{{$unit->unitNumber}}" disabled>
                                         <option value="1">Glamping Solo</option>
                                         <option value="2">Glamping 2 Pax</option>
                                         <option value="3">Glamping 3 pax</option>
@@ -164,10 +171,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                            @endforeach
-                           
-                            @endif
                     </div>
                     
                     <hr class="mb-4">
@@ -228,5 +231,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>                        
+        @endforeach  
+    @endif
 @endsection

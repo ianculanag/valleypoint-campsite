@@ -298,8 +298,8 @@ function makeInvoiceEntry(unitNumber) {
     htmlString += "<tr id='invoiceUnit"+unitNumber+"'>";
     htmlString += "<td id='invoiceDescription"+unitNumber+"'>Glamping Solo</td>";
     htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;'>1</td>";
-    htmlString += "<td id='invoiceUnit"+unitNumber+"' tyle='text-align:right;'>1350</td>";
-    htmlString += "<td id='invoiceTotal"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350</td>";
+    htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;'>1350</td>";
+    htmlString += "<td id='invoiceTotalPrice"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350</td>";
     htmlString += "</tr>";
 
     invoiceRows.append(htmlString);
@@ -320,11 +320,11 @@ function makeRow(unitNumber) {
     htmlString += "<i class='fa fa-users' aria-hidden='true'></i>";
     htmlString += "</span>";
     htmlString += "</div>";
-    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
+    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
     htmlString += "</div>";
     htmlString += "</div>";
     htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
-    htmlString += "<select name='serviceName' class='form-control' id='accommodationType' disabled>";
+    htmlString += "<select name='serviceName' class='form-control' id='accommodationType"+unitNumber+"' disabled>";
     htmlString += "<option value='1'>Glamping Solo</option>";
     htmlString += "<option value='2'>Glamping 2 Pax</option>";
     htmlString += "<option value='3'>Glamping 3 pax</option>";
@@ -351,7 +351,51 @@ function removeRow(unitNumber) {
 jQuery(document).ready(function(){
     var daysDiff = 1;
 
-    jQuery('#checkoutDate').change(function(){
+    jQuery(document).on('change', '#checkoutDate', function() {
+        var checkin = Date.parse(jQuery('#checkinDate').val());
+        var checkout = Date.parse(jQuery('#checkoutDate').val());
+
+        var timeDiff = checkout-checkin;
+        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
+
+        var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
+        //console.log(daysDiff);
+        //console.log(selectedUnits);
+
+        var currentUnit;
+        var invoiceQuantity;
+        var numberOfPaxGlamping;
+
+        var packagePrice;
+        var totalPrice;
+
+        var invoiceUnitPrice;
+        var invoiceTotalPrice;
+
+        for(var index = 0; index < selectedUnits.length; index++) {
+            currentUnit = selectedUnits[index].value;
+        
+            invoiceQuantity = '#invoiceQuantity'+currentUnit;
+            numberOfPaxGlamping = '#numberOfPaxGlamping'+currentUnit;
+            invoiceUnitPrice = '#invoiceUnitPrice'+currentUnit;
+            invoiceTotalPrice = '#invoiceTotalPrice'+currentUnit;
+
+            jQuery(invoiceQuantity).html(jQuery(numberOfPaxGlamping).val()+'x'+(daysDiff));
+
+            packagePrice = jQuery(invoiceUnitPrice).html();  
+
+            console.log(packagePrice);
+            totalPrice = packagePrice * jQuery(numberOfPaxGlamping).val() * (daysDiff);                       
+            
+            jQuery(invoiceUnitPrice).html(packagePrice);            
+            jQuery(invoiceTotalPrice).html(totalPrice);    
+            
+            document.getElementById('stayDuration').value = daysDiff;
+            
+            updateTotal();
+        }
+    });
+    /*jQuery('#checkoutDate').change(function(){
         var checkin = Date.parse(jQuery('#checkinDate').val());
         var checkout = Date.parse(jQuery('#checkoutDate').val());
 
@@ -366,10 +410,10 @@ jQuery(document).ready(function(){
         
         jQuery.get('/getService/'+$('.numberOfPaxGlamping').val(), function(data){ 
             packagePrice = data[0].price;                         
-            jQuery('#invoiceUnit').html(packagePrice);
+            jQuery('#invoiceUnitPrice').html(packagePrice);
             //console.log(daysDiff);
             totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
-            jQuery('#invoiceTotal').html(totalPrice);      
+            jQuery('#invoiceTotalPrice').html(totalPrice);      
             
             //jQuery('#stayDuration').val(daysDiff);
             document.getElementById('stayDuration').value = daysDiff;
@@ -378,25 +422,38 @@ jQuery(document).ready(function(){
         })
         //console.log(daysDiff);
         //call Glamping method
-    });
-    
-    jQuery('.numberOfPaxGlamping').change(function(){
+    });*/
+
+
+
+    jQuery(document).on('change','.numberOfPaxGlamping', function(){
         if(jQuery(this).val() > 0 && jQuery(this).val() < 5) {
             //console.log('Hello');
-            jQuery('#accommodationType').val(jQuery(this).val());            
-            jQuery('#invoiceQuantity').html(jQuery(this).val()+'x'+(daysDiff));
+            var unitNumber = jQuery(this).attr('id').slice(19);
+            var unitNumberId = '#'+jQuery(this).attr('id');
+            //console.log(unitNumber);
+
+            var accommodationType = '#accommodationType'+unitNumber;
+            var invoiceQuantity = '#invoiceQuantity'+unitNumber;
+
+            jQuery(accommodationType).val(jQuery(this).val());            
+            jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
 
             var packagePrice;
             var totalPrice;
+            var invoiceDescription = '#invoiceDescription'+unitNumber;
+            var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+            var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
             
-            jQuery.get('/getService/'+$(this).val(), function(data){ 
+            jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
                 packagePrice = data[0].price;        
-                packageName = data[0].serviceName;            
-                jQuery('#invoiceDescription').html(packageName);                    
-                jQuery('#invoiceUnit').html(packagePrice);
+                packageName = data[0].serviceName;       
+                
+                jQuery(invoiceDescription).html(packageName);                    
+                jQuery(invoiceUnitPrice).html(packagePrice);
                 //console.log(daysDiff);
-                totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
-                jQuery('#invoiceTotal').html(totalPrice); 
+                totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
+                jQuery(invoiceTotalPrice).html(totalPrice); 
 
                 updateTotal();
             })
