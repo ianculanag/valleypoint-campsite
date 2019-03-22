@@ -315,6 +315,8 @@ jQuery(document).ready(function(){
         //alert('Token removed! Token value was: ' + e.attrs.value)
         numberOfUnits--;
         jQuery('#numberOfUnits').val(numberOfUnits);
+        removeRow(e.attrs.value);
+        removeInvoiceEntry(e.attrs.value);
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
@@ -322,17 +324,33 @@ jQuery(document).ready(function(){
         numberOfUnits++;
         jQuery('#numberOfUnits').val(numberOfUnits);
         makeRow(e.attrs.value);
+        makeInvoiceEntry(e.attrs.value);
     });
 });
+
+function makeInvoiceEntry(unitNumber) {
+    var invoiceRows = jQuery('#invoiceRows');
+
+    htmlString = "";
+    htmlString += "<tr id='invoiceUnit"+unitNumber+"'>";
+    htmlString += "<td id='invoiceDescription"+unitNumber+"'>Glamping Solo</td>";
+    htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;'>1</td>";
+    htmlString += "<td id='invoiceUnit"+unitNumber+"' tyle='text-align:right;'>1350</td>";
+    htmlString += "<td id='invoiceTotal"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350</td>";
+    htmlString += "</tr>";
+
+    invoiceRows.append(htmlString);
+    updateTotal();
+}
 
 function makeRow(unitNumber) {
     console.log('It Works')
     var htmlString = "";
-    htmlString += "<div class='row mt-1'>";
-    htmlString += "<div class='col-md-4 mb-1' id='divUnitNumber'>";
+    htmlString += "<div class='row mt-1' id='divUnit"+unitNumber+"'>";
+    htmlString += "<div class='col-md-4 mb-1' id='divUnitNumber"+unitNumber+"'>";
     htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
     htmlString += "</div>";
-    htmlString += "<div class='col-md-3 mb-1' id='divNumberOfPax'>";
+    htmlString += "<div class='col-md-3 mb-1' id='divNumberOfPax"+unitNumber+"'>";
     htmlString += "<div class='input-group'>";
     htmlString += "<div class='input-group-prepend'>";
     htmlString += "<span class='input-group-text'>";
@@ -342,7 +360,7 @@ function makeRow(unitNumber) {
     htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
     htmlString += "</div>";
     htmlString += "</div>";
-    htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage'>";
+    htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
     htmlString += "<select name='serviceName' class='form-control' id='accommodationType' disabled>";
     htmlString += "<option value='1'>Glamping Solo</option>";
     htmlString += "<option value='2'>Glamping 2 Pax</option>";
@@ -353,6 +371,18 @@ function makeRow(unitNumber) {
     htmlString += "</div>";
 
     jQuery('#divUnits').append(htmlString);
+}
+
+function removeInvoiceEntry(unitNumber) {
+    var invoiceUnit = '#invoiceUnit'+unitNumber;
+    //console.log(invoiceUnit);
+    jQuery(invoiceUnit).remove();
+    updateTotal();
+}
+
+function removeRow(unitNumber) {
+    var divUnit = '#divUnit'+unitNumber;
+    jQuery(divUnit).remove();
 }
 
 jQuery(document).ready(function(){

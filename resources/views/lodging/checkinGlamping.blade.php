@@ -35,10 +35,10 @@
                             @endphp
                             @foreach($charges as $charge)--}}
                             <tr>
-                                <td id="invoiceDescription">Glamping</td>
+                                <td id="invoiceDescription">Glamping Solo</td>
                                 <td id="invoiceQuantity" style="text-align:right;">1</td>
-                                <td id="invoiceUnit" tyle="text-align:right;">{{--$charge->price--}}</td>
-                                <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">{{--($charge->totalPrice)--}}</td>
+                                <td id="invoiceUnit" tyle="text-align:right;">1350</td>
+                                <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">1350</td>
                             </tr>
                             
                             {{--@php
