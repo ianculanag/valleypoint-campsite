@@ -280,13 +280,7 @@ class AccommodationsController extends Controller
             return("Hello");
         }else{
             return $BeforeAccommodations;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        }*/
-=======
-        }
-<<<<<<< HEAD
-=======
+
         if ($request->input('checkinDate') > $request->input('checkoutDate')){
             return redirect()->back()->withInput();
             
@@ -313,13 +307,7 @@ class AccommodationsController extends Controller
             }
          }
 
->>>>>>> check-in date validation
->>>>>>> check-in date validation
-=======
->>>>>>> continued check in validation
-=======
         }*/
->>>>>>> Enabled checkin-reserve modal in backpacker
         
         //GAC
         $accommodation = new Accommodation;                 
