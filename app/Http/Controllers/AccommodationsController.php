@@ -185,21 +185,19 @@ class AccommodationsController extends Controller
         ]);
 
         $accommodation = new Accommodation;    
-        $totalNumberOfPax = 0;  
-        for($count = 0; $count < $request->input('numberOfUnits'); $count++) {
-            $unitNumbers = explode(',', $request->input('unitNumber'));
+        $totalNumberOfPax = 0;          
+        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
+        
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop one
             $numberOfPaxGlamping = 'numberOfPaxGlamping'.$unitNumbers[$count];
             $numberOfPax = (int) $request->input($numberOfPaxGlamping);
             $totalNumberOfPax += $numberOfPax;
-            //$totalNumberOfPax += 5;
-
-            //Putangina ayaw gumana
         }              
+
         $accommodation->numberOfPax = $totalNumberOfPax;
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        //$accommodation->serviceID = $request->input('numberOfPax');
         $accommodation->serviceID = 4;
         $accommodation->userID = Auth::user()->id;
         $accommodation->save();
@@ -209,22 +207,15 @@ class AccommodationsController extends Controller
         $guest->firstName = $request->input('firstName');
         $guest->accommodationID = $accommodation->id;   
         $guest->contactNumber = $request->input('contactNumber');
-        $guest->save();
+        $guest->save(); 
 
-        
-        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));   
-
-        for($count = 0; $count < sizeof($unitNumbers); $count++) {
-            
-            //$unitNumber = 'unitNumber'.$unitNumbers[$count];
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two
             
             $numberOfPaxGlamping = 'numberOfPaxGlamping'.$unitNumbers[$count];
+            $totalPrice = 'totalPrice'.$unitNumbers[$count];
 
-            //return 'fuck'.$unitNumbers[1].'fuck';
             $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
 
-            //return $unit;
-            
             $accommodationUnit = new AccommodationUnits;
             $accommodationUnit->accommodationID = $accommodation->id;
             $accommodationUnit->unitID = $unit[0]->id;
@@ -232,17 +223,24 @@ class AccommodationsController extends Controller
             $accommodationUnit->numberOfPax = $request->input($numberOfPaxGlamping);
             $accommodationUnit->serviceID =  $request->input($numberOfPaxGlamping);
             $accommodationUnit->save();
+
+            $charges = new Charges;
+            $charges->quantity = $request->input($numberOfPaxGlamping);
+            $charges->totalPrice = $request->input($totalPrice);
+            $charges->remarks = 'full';
+            $charges->accommodationID = $accommodation->id;
+            $charges->serviceID = $request->input($numberOfPaxGlamping);
+            $charges->save();
+
+            
+            //brute force code
+            $payment = new Payments;
+            $payment->paymentDatetime = Carbon::now();
+            $payment->amount = $request->input($totalPrice);
+            $payment->paymentStatus = 'full';
+            $payment->chargeID = $charges->id;
+            $payment->save();
         }
-
-        /*
-
-        $charges = new Charges;
-        $charges->quantity = $request->input('numberOfPax');
-        $charges->totalPrice = $service->price*$charges->quantity*$request->input('stayDuration');
-        $charges->remarks = 'full';
-        $charges->accommodationID = $accommodation->id;
-        $charges->serviceID = $service->id;
-        $charges->save();
 
         if($request->input('additionalServicesCount') > 0) {
             for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
@@ -257,9 +255,17 @@ class AccommodationsController extends Controller
                     $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
                     $charges->save();
+
+                    //brute force code
+                    $payment = new Payments;
+                    $payment->paymentDatetime = Carbon::now();
+                    $payment->amount = $request->input($additionalTotalPrice);
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $charges->id;
+                    $payment->save();
                 }
             }
-        }*/
+        }
 
         return redirect('/glamping');
     }

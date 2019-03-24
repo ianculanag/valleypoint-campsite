@@ -325,6 +325,7 @@ function makeRow(unitNumber) {
     htmlString += "</span>";
     htmlString += "</div>";
     htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' name='numberOfPaxGlamping"+unitNumber+"' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
+    htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
     htmlString += "</div>";
     htmlString += "</div>";
     htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
@@ -376,6 +377,8 @@ jQuery(document).ready(function(){
         var invoiceUnitPrice;
         var invoiceTotalPrice;
 
+        var hiddenTotalPrice;
+
         for(var index = 0; index < selectedUnits.length; index++) {
             currentUnit = selectedUnits[index].value;
         
@@ -383,6 +386,8 @@ jQuery(document).ready(function(){
             numberOfPaxGlamping = '#numberOfPaxGlamping'+currentUnit;
             invoiceUnitPrice = '#invoiceUnitPrice'+currentUnit;
             invoiceTotalPrice = '#invoiceTotalPrice'+currentUnit;
+
+            hiddenTotalPrice = '#totalPrice'+currentUnit;
 
             jQuery(invoiceQuantity).html(jQuery(numberOfPaxGlamping).val()+'x'+(daysDiff));
 
@@ -392,7 +397,9 @@ jQuery(document).ready(function(){
             totalPrice = packagePrice * jQuery(numberOfPaxGlamping).val() * (daysDiff);                       
             
             jQuery(invoiceUnitPrice).html(packagePrice);            
-            jQuery(invoiceTotalPrice).html(totalPrice);    
+            jQuery(invoiceTotalPrice).html(totalPrice);   
+                      
+            jQuery(hiddenTotalPrice).val(totalPrice);   
             
             document.getElementById('stayDuration').value = daysDiff;
             
@@ -449,6 +456,8 @@ jQuery(document).ready(function(){
             var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
             var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
             
+            var hiddenTotalPrice = '#totalPrice'+unitNumber;
+            
             jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
                 packagePrice = data[0].price;        
                 packageName = data[0].serviceName;       
@@ -458,6 +467,8 @@ jQuery(document).ready(function(){
                 //console.log(daysDiff);
                 totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
                 jQuery(invoiceTotalPrice).html(totalPrice); 
+
+                jQuery(hiddenTotalPrice).val(totalPrice);
 
                 updateTotal();
             })

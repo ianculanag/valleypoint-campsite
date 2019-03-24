@@ -158,6 +158,7 @@
                                             </span>
                                         </div>
                                         <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+                                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-1" id="divAccommodationPackage">
