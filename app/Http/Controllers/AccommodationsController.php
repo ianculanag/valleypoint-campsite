@@ -184,15 +184,24 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodations;                 
-        $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation = new Accommodation;    
+        $totalNumberOfPax = 0;  
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) {
+            $unitNumbers = explode(',', $request->input('unitNumber'));
+            $numberOfPaxGlamping = 'numberOfPaxGlamping'.$unitNumbers[$count];
+            $numberOfPax = (int) $request->input($numberOfPaxGlamping);
+            $totalNumberOfPax += $numberOfPax;
+            //$totalNumberOfPax += 5;
+
+            //Putangina ayaw gumana
+        }              
+        $accommodation->numberOfPax = $totalNumberOfPax;
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->serviceID = $request->input('numberOfPax');
+        //$accommodation->serviceID = $request->input('numberOfPax');
+        $accommodation->serviceID = 4;
         $accommodation->userID = Auth::user()->id;
-        //$accommodation->unitID = $request->input('unitID');
-        //$accommodation->paymentStatus = $request->input('paymentStatus');
         $accommodation->save();
 
         $guest = new Guests;
@@ -202,15 +211,30 @@ class AccommodationsController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
 
-        $service = Services::find($request->input('numberOfPax'));
         
-        for($count = 0; $count < $request->input('numberOfUnits'); $count++) {
+        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));   
+
+        for($count = 0; $count < sizeof($unitNumbers); $count++) {
+            
+            //$unitNumber = 'unitNumber'.$unitNumbers[$count];
+            
+            $numberOfPaxGlamping = 'numberOfPaxGlamping'.$unitNumbers[$count];
+
+            //return 'fuck'.$unitNumbers[1].'fuck';
+            $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+            //return $unit;
+            
             $accommodationUnit = new AccommodationUnits;
             $accommodationUnit->accommodationID = $accommodation->id;
-            $accommodationUnit->unitID = $request->input('unitID');
+            $accommodationUnit->unitID = $unit[0]->id;
             $accommodationUnit->status = 'ongoing';
+            $accommodationUnit->numberOfPax = $request->input($numberOfPaxGlamping);
+            $accommodationUnit->serviceID =  $request->input($numberOfPaxGlamping);
             $accommodationUnit->save();
         }
+
+        /*
 
         $charges = new Charges;
         $charges->quantity = $request->input('numberOfPax');
@@ -235,7 +259,7 @@ class AccommodationsController extends Controller
                     $charges->save();
                 }
             }
-        }
+        }*/
 
         return redirect('/glamping');
     }

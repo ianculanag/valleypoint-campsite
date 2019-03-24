@@ -216,4 +216,17 @@ class UnitsController extends Controller
         //$units = Units::sortable()->paginate(8);
         //return view('admin.viewunits',compact('units'))->with('units', $units);
     }
+
+    /**
+     * Get accommodation and reservation dates on units.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDates()
+    {
+        $dates = DB::table('units')
+        ->get();
+
+        return view('admin.viewunits')->with('units', $units);
+    }
 }

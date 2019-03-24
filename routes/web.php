@@ -89,3 +89,5 @@ Route::get('/viewusers', 'UsersController@viewUsers');
 
 //View units
 Route::get('/viewunits', 'UnitsController@viewUnits');
+
+Route::get('/getDates', 'UnitsController@getDates');

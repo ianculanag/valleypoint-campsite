@@ -224,6 +224,10 @@ jQuery(document).on('click','.collapse.in',function(e) {
     }
 });
 
+/*jQuery('#checkAvailability').click(function(){
+    jQuery.get('/getDates')
+});*/
+
 jQuery(document).ready(function(){
     jQuery('.load-unit').click(function(){
         //console.log(jQuery(this).attr('id'));
@@ -320,11 +324,11 @@ function makeRow(unitNumber) {
     htmlString += "<i class='fa fa-users' aria-hidden='true'></i>";
     htmlString += "</span>";
     htmlString += "</div>";
-    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
+    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' name='numberOfPaxGlamping"+unitNumber+"' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
     htmlString += "</div>";
     htmlString += "</div>";
     htmlString += "<div class='col-md-5 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
-    htmlString += "<select name='serviceName' class='form-control' id='accommodationType"+unitNumber+"' disabled>";
+    htmlString += "<select class='form-control' name='accommodationType"+unitNumber+"' id='accommodationType"+unitNumber+"' disabled>";
     htmlString += "<option value='1'>Glamping Solo</option>";
     htmlString += "<option value='2'>Glamping 2 Pax</option>";
     htmlString += "<option value='3'>Glamping 3 pax</option>";

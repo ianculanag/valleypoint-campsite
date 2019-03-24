@@ -12,7 +12,7 @@
             </a>
             <h3>Check-in Form</h3>
         </div>   
-        <form method="POST" action="/checkinGlamping">
+        <form method="POST" action="/checkinGlamping" class="pl-3">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
@@ -44,7 +44,7 @@
                             <tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" placeholder="0" min="0" class="form-control" id="amount" required>
+                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                 </th>
                             </tr>
                         </tfoot>
@@ -130,13 +130,13 @@
                                         <i class="fa fa-campground" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" disabled>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
                             </div>
                         </div>
                         <div class="col-md-10 mb-1" id="divUnits">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
-                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}">
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
                             
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
                             {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
@@ -157,12 +157,12 @@
                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                             </span>
                                         </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Accommodation package</label>
-                                    <select name="serviceName" class="form-control" id="accommodationType{{$unit->unitNumber}}" disabled>
+                                    <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}" readonly>
                                         <option value="1">Glamping Solo</option>
                                         <option value="2">Glamping 2 Pax</option>
                                         <option value="3">Glamping 3 pax</option>
@@ -223,7 +223,12 @@
                             </div>
                         </div>
                     </div>
-                    <div style="float:right;">
+                    
+                    <hr class="mb-4">
+                    <div style="float:right;">   
+                        <a href="/getDates" style="text-decoration:none;">                     
+                        <button class="btn btn-primary" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
+                        </a>
                         <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
