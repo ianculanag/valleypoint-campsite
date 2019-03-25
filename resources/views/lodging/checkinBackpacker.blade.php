@@ -38,11 +38,11 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                        <tr>
-                            <td id="invoiceDescription">Backpacker</td>
-                            <td id="invoiceQuantity" style="text-align:right;">1</td>
-                            <td id="invoiceUnit" tyle="text-align:right;"></td>
-                            <td id="invoiceTotal" style="text-align:right;" class="invoicePrices"></td>
+                        <tr id="invoiceUnit{{$unit->unitNumber}}">
+                            <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
+                            <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                            <td id="invoiceUnit{{$unit->unitNumber}}" tyle="text-align:right;"></td>
+                            <td id="invoiceTotal{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
                         </tr>
                         </tbody>
                         <tfoot>

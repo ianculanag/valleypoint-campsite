@@ -462,7 +462,10 @@ class AccommodationsController extends Controller
     */
     public function showCheckinBackpackerForm($unitID)
     {
-        return view('lodging.checkinBackpacker')->with('unitID', $unitID);
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+        return view('lodging.checkinBackpacker')->with('unit', $unit);     
         
     }
 

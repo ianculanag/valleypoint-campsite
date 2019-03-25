@@ -102,6 +102,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> 
     <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/custom2.js') }}"></script>
     <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
