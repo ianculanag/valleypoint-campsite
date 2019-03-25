@@ -141,9 +141,9 @@ class GuestsController extends Controller
         //for ('listedUnder', '=', $guest[0]->guestID) {}
         if ($request->numberOfPax > 1) {
 
-            $accompanyingGuests = DB::table('guests')
+            /*$accompanyingGuests = DB::table('guests')
             ->where('listedUnder', '=', $request->input('guestID'))
-            ->get();
+            ->get();*/
 
             //return $accompanyingGuests;
 
@@ -243,16 +243,26 @@ class GuestsController extends Controller
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
+        ->join('payments', 'chargeID', 'charges.id')
         //->leftJoin('payments', 'payments.chargeID', 'charges.id')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->get();
 
         
         //return $charges;
-
         //return view('lodging.editdetails')->with('guest', $guest);
         //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
-        return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges);
+        if($guest[0]->numberOfUnits > 1) {
+            $otherUnits = DB::table('accommodation_units')
+            ->join('units', 'units.id', 'accommodation_units.unitID')
+            ->join('services', 'services.id', 'accommodation_units.serviceID')
+            ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
+            ->get();
+
+            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('otherUnits', $otherUnits);
+        } else {
+            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges);
+        }  
     }
 
     /**

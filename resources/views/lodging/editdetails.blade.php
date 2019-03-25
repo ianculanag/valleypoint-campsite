@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <form class="card p-2">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Transactions</h4>
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
@@ -25,9 +25,11 @@
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="invoiceRows">
                             @php
                                 $total = 0;
+                                $totalPayment = 0;
+                                $balance = 0;
                             @endphp
                             @foreach($charges as $charge)
                             <tr>
@@ -38,16 +40,19 @@
                             </tr>
                             @php
                                 $total += $charge->totalPrice;
-                                //$balance = $total-$amount;
+                                $totalPayment += $charge->amount;
+                                $balance = $total - $totalPayment;
                             @endphp
                             @endforeach
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">{{$total}}</th>
                             </tr>
                             <tr>
                                 <th colspan="3" scope="row">Balance:</th>
-                                <th style="text-align:right;">{{$total}}</th>
+                                <th style="text-align:right;">{{$balance}}</th>
                             </tr>
                             <tr>
                                 <th colspan="1">Amount Paid:</th>
@@ -55,7 +60,7 @@
                                 <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                 </th>
                             </tr>
-                        </tbody>
+                        </tfoot>
                     </table>
                     <!--button class="btn btn-primary" type="submit">Check-out</button-->
                 </form>
@@ -184,19 +189,47 @@
                                         <i class="fa fa-campground" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" placeholder="" value="{{$guestDetails->numberOfUnits}}" min="1" max="80" readonly>
                             </div>
                         </div>
                         <div class="col-md-10 mb-1" id="divUnits">
+                        @if($guestDetails->numberOfUnits > 1)
+                            <div class="row">
+                                <div class="col-md-4 mb-1" id="divUnitNumber">
+                                    <label for="unitNumber">Unit number</label>
+                                    @foreach($otherUnits as $units)
+                                    <input type="text" class="form-control mb-1" value="{{$units->unitNumber}}" disabled>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-3 mb-1" id="divNumberOfPax">
+                                    <label for="unitNumberOfPax">No. of pax</label>
+                                    @foreach($otherUnits as $units)
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping" id="numberOfPaxGlamping" type="number" placeholder="" value="{{$units->numberOfPax}}" min="1" max="4">
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
+                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
+                                    @foreach($otherUnits as $units)
+                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
+                                        <option>{{$units->serviceName}}</option>
+                                    </select>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @else 
                             <label for="unitNumber">Unit/s</label>
-                            <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{--$unit->id--}}">
-                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{--$unit->unitNumber--}}" required>
-                            
-                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{--$unit->id--}}">
+                            <input type="text" name="unitID" required="required" class="form-control" value="{{$guestDetails->unitNumber}}" disabled>
                             <div class="row mt-3">
                                 <div class="col-md-4 mb-1" id="divUnitNumber">
                                     <label for="unitNumber">Unit number</label>
-                                    <input type="text" class="form-control" value="{{--$unit->unitNumber--}}" disabled>
+                                    <input type="text" class="form-control" value="{{$guestDetails->unitNumber}}" disabled>
                                 </div>
                                 <div class="col-md-3 mb-1" id="divNumberOfPax">
                                     <label for="unitNumberOfPax">No. of pax</label>
@@ -206,25 +239,21 @@
                                                 <i class="fa fa-users" aria-hidden="true"></i>
                                             </span>
                                         </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{--$unit->unitNumber--}}" id="numberOfPaxGlamping{{--$unit->unitNumber--}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
-                                        <input class="" name="totalPrice{{--$unit->unitNumber--}}" id="totalPrice{{--$unit->unitNumber--}}" type="number" style="display:none;position:absolute" value="">
+                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping" id="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="4">
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Accommodation package</label>
-                                    <select class="form-control" name="accommodationType{{--$unit->unitNumber--}}" id="accommodationType{{--$unit->unitNumber--}}" readonly>
-                                        <option value="1">Glamping Solo</option>
-                                        <option value="2">Glamping 2 Pax</option>
-                                        <option value="3">Glamping 3 pax</option>
-                                        <option value="4">Glamping 4 pax</option>
+                                    <select class="form-control" name="accommodationType" id="accommodationType" readonly>
+                                        <option>{{$guestDetails->serviceName}}</option>
                                     </select>
                                 </div>
                             </div>
+                        @endif
                         </div>
                     </div>
-
                     <hr class="mb-4">
-                    <form action="#" class="additionalServiceForm">
+                    {{--<form action="#" class="additionalServiceForm">
                         @csrf
                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                     <div class="form-group row">
@@ -266,6 +295,56 @@
                         <div style="margin-top:2em;">
                             <div class="input-group">
                                 <button type="submit" class="btn btn-primary additionalServiceForm">
+                                    <span class="fa fa-plus" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>--}}
+
+                    <div class="form-group row pb-3" id="divAdditionalServices">
+                        <div class="col-md-12 mb-1">
+                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
+                        </div>
+                        <input type="hidden">
+                        <div class="col-md-3 mb-1" id="divServiceName">
+                            <label for="additionalServiceName">Service name</label>
+                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
+                                <option value="choose" selected disabled >Choose...</option>
+                                <option value="6">Airsoft</option>
+                                <option value="7">Archery</option>                                
+                                <option value="15">Pillow</option>
+                                <option value="16">Bedsheet</option>
+                                <option value="17">Blanket</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-1" id="divQuantity">
+                            <label for="additionalServiceNumberOfPax">Quantity</label>
+                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
+                        </div>
+                        <div class="col-md-3 mb-1" id="divUnitPrice">
+                            <label for="additionalServiceUnitPrice">Unit price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control additionalServiceUnitPrice" type="text" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" disabled>
+                                <input class="form-control additionalServiceUnitPrice" type="text" style="display:none;float:left;" id="additionalServiceUnitPrice" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-1" id="divTotalPrice">
+                            <label for="additionalServiceTotalPrice">Total price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input class="form-control additionalServiceTotalPrice" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
+                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" placeholder="" value="" {{--form="serviceForm"--}}>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:2em;" id="divButton">
+                            <div class="input-group">
+                                <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" {{--form="serviceForm"--}}disabled>
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
