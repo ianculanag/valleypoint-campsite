@@ -52,16 +52,16 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-8 order-md-1 check-out-form">
+            <div class="col-md-8 order-md-1 check-in-form">
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                     <div class="form-group row">
                         <div class="col-md-4">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" required maxlength="15" placeholder="Juan" value="">
+                            <input class="form-control" type="text" name="firstName" required maxlength="15" placeholder="" value="">
                         </div>
                         <div class="col-md-4">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName" required maxlength="20" placeholder="Dela Cruz" value="">
+                            <input class="form-control" type="text" name="lastName" required maxlength="20" placeholder="" value="">
                         </div>
                         <div class="col-md-4 mb-1">
                             <label for="contactNumber">Contact number</label>

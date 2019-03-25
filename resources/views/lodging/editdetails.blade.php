@@ -38,63 +38,37 @@
                             </tr>
                             @php
                                 $total += $charge->totalPrice;
+                                //$balance = $total-$amount;
                             @endphp
                             @endforeach
-                            {{--@foreach ( as )
-                            <tr>
-                                <td>Airsoft</td>
-                                <td style="text-align:right;">3</td>
-                                <td style="text-align:right;">4500.00</td>
-                            </tr>
-                            @endforeach--}}
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th style="text-align:right;">{{$total}}</th>
                             </tr>
+                            <tr>
+                                <th colspan="3" scope="row">Balance:</th>
+                                <th style="text-align:right;">{{$total}}</th>
+                            </tr>
+                            <tr>
+                                <th colspan="1">Amount Paid:</th>
+                                <th style="text-align:right;"  colspan="3">
+                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                </th>
+                            </tr>
                         </tbody>
                     </table>
-                    <!--button class="btn btn-danger" type="submit">Check-out</button-->
+                    <!--button class="btn btn-primary" type="submit">Check-out</button-->
                 </form>
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
                 <form method="POST" action="/updateDetails">
                     @csrf
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <div class="form-group col-md-6" style="position: absolute;">
+                        <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
+                        <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">
+                    </div>
                     {{--<div class="form-group row">
-                        <div class="col-md-3 mb-1">
-                            <label for="accommodationID">Accommodation ID</label>
-                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
-                            <input class="form-control" type="text" style="display:none; position:absolute;" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}">
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="unitID">Unit ID</label>
-                            <input class="form-control" type="text" name="unitID" placeholder="" value="{{$guestDetails->unitID}}" disabled>
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <label for="unitNumber">Unit number</label>
-                            <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
-                        </div>--}}
-                        <div class="form-group col-md-6" style="position: absolute;">
-                            <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
-                            <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">
-                        </div>
-                    {{--</div>
-                    {{--<hr class="mb-4">
-                    <div class="panel-group" style="margin-bottom:2em;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h6 class="panel-title">
-                                    <a class="check-out-form" data-toggle="collapse" href="#collapse1">Accompanying guests</a>
-                                </h6>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Albren Jr. Cundangan</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div--}}
-                    <div class="form-group row">
                         <div class="col-md-2 mb-1">
                             <label for="accommodationID">Acc ID</label>
                             <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
@@ -108,32 +82,31 @@
                             <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
                         </div>
                     </div>
-                    <hr class="mb-4">
-                    <h5 style="margin-bottom:.80em;" data-toggle="collapse" data-target="#guestDetails" aria-expanded="false" aria-controls="collapseExample">Guest Details</h5>
-                    <div class="collapse" id="guestDetails">
-                    <div class="form-group row">
-                        <div class="col-md-5 mb-1">
-                            <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
-                        </div>
-                        <div class="col-md-7 mb-1">
-                            <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-5 mb-1">
-                            <label for="contactNumber">Contact number</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                    </span>
+                    <hr class="mb-4">--}}
+                    <h5 style="margin-bottom:.80em;" {{--data-toggle="collapse" data-target="#guestDetails" aria-expanded="false" aria-controls="collapseExample"--}}>Guest Details</h5>
+                    <div {{--class="collapse"--}} id="guestDetails">
+                        <div class="form-group row">
+                            <div class="col-md-4 mb-1">
+                                <label for="firstName">First name</label>
+                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label for="lastName">Last name</label>
+                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
+                            </div>
+                            <div class="col-md-4 mb-1">
+                                <label for="contactNumber">Contact number</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        {{--<div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
                             <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10">
                         </div>
@@ -143,7 +116,7 @@
                                 <option>{{$guestDetails->serviceName}}</option>
                             </select>
                         </div>
-                    </div>
+                    </div>--}}
                     {{--<hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
@@ -156,69 +129,100 @@
                             <input type="text" class="form-control" id="tokenfield" value="Tent 1, Tent 2" />
                         </div>
                     </div>--}}
-                    <div class="form-group row">
-                        <div class="col-md-6 mb-1">
-                            <label for="checkInDatetime">Check-in date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-1">
+                                <label for="checkInDatetime">Check-in date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    @php
+                                        $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                        $checkedInAt = $checkedIn->format("F j, o");
+                                    @endphp
+                                <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                                 </div>
-                                @php
-                                    $checkedIn = new DateTime($guestDetails->checkinDatetime);
-                                    $checkedInAt = $checkedIn->format("F j, o");
-                                @endphp
-                            <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <label for="checkoutDatetime">Check-out date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </span>
+                            <div class="col-md-6 mb-1">
+                                <label for="checkoutDatetime">Check-out date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    @php
+                                        $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                        $checkOutAt = $checkOut->format("F j, o");
+                                    @endphp
+                                <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
                                 </div>
-                                @php
-                                    $checkOut = new DateTime($guestDetails->checkoutDatetime);
-                                    $checkOutAt = $checkOut->format("F j, o");
-                                @endphp
-                            <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
                             </div>
+                            {{--<div class="col-md-4 mb-1 form-group">
+                                <label for="numberOfPax">Stay duration as of now</label>
+                                    @php
+                                        $checkin = new DateTime($guestDetails->checkinDatetime);
+                                        $now = new DateTime("now");
+                                        $stayDuration = date_diff($checkin, $now)->days+1;
+                                    @endphp
+                                <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
+                            </div>--}}
                         </div>
-                        {{--<div class="col-md-4 mb-1 form-group">
-                            <label for="numberOfPax">Stay duration as of now</label>
-                                @php
-                                    $checkin = new DateTime($guestDetails->checkinDatetime);
-                                    $now = new DateTime("now");
-                                    $stayDuration = date_diff($checkin, $now)->days+1;
-                                @endphp
-                            <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
-                        </div>--}}
                     </div>
+                    <hr class="mb-4">
+
+                    <h5 style="margin-bottom:.80em;">Unit Details</h5>
+                    <div class="form-group row">
+                        <div class="col-md-2 mb-1">
+                            <label for="unitID">No. of units</label>
+                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-campground" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-10 mb-1" id="divUnits">
+                            <label for="unitNumber">Unit/s</label>
+                            <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{--$unit->id--}}">
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{--$unit->unitNumber--}}" required>
+                            
+                            <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{--$unit->id--}}">
+                            <div class="row mt-3">
+                                <div class="col-md-4 mb-1" id="divUnitNumber">
+                                    <label for="unitNumber">Unit number</label>
+                                    <input type="text" class="form-control" value="{{--$unit->unitNumber--}}" disabled>
+                                </div>
+                                <div class="col-md-3 mb-1" id="divNumberOfPax">
+                                    <label for="unitNumberOfPax">No. of pax</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{--$unit->unitNumber--}}" id="numberOfPaxGlamping{{--$unit->unitNumber--}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+                                        <input class="" name="totalPrice{{--$unit->unitNumber--}}" id="totalPrice{{--$unit->unitNumber--}}" type="number" style="display:none;position:absolute" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
+                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
+                                    <select class="form-control" name="accommodationType{{--$unit->unitNumber--}}" id="accommodationType{{--$unit->unitNumber--}}" readonly>
+                                        <option value="1">Glamping Solo</option>
+                                        <option value="2">Glamping 2 Pax</option>
+                                        <option value="3">Glamping 3 pax</option>
+                                        <option value="4">Glamping 4 pax</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {{--@if (count($accompanyingGuest) > 0)
-                    <hr class="mb-4">
-                    <h5 style="margin-bottom:.80em;"data-toggle="collapse" data-target="#collapseAccompanyingGuests" aria-expanded="false" aria-controls="collapseAccompanyingGuests">Accompanying Guests</h5>
-                    <div id="collapseAccompanyingGuests" class="collapse">
-                        <div class="form-group row">
-                            <div class="col-md-5 mb-1">
-                                <label for="firstName{{$loop->iteration}}">First Name</label>
-                            @foreach ($accompanyingGuest as $company)
-                                <input class="form-control mb-2" type="text" name="firstName{{$loop->iteration}}" placeholder="" value="{{$company->firstName}}">
-                            @endforeach
-                            </div>
-                            <div class="col-md-7 mb-1">
-                                <label for="lastName{{$loop->iteration}}">Last Name</label>
-                            @foreach ($accompanyingGuest as $company)
-                                <input class="form-control mb-2" type="text" name="lastName{{$loop->iteration}}" placeholder="" value="{{$company->lastName}}">
-                            @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @endif--}}
                     <hr class="mb-4">
                     <form action="#" class="additionalServiceForm">
                         @csrf
