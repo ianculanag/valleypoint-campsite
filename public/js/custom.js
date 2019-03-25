@@ -234,6 +234,7 @@ jQuery(document).ready(function(){
         var unitID = jQuery(this).attr('id'); 
         jQuery("#checkin").attr("href", "checkin/"+unitID);
         jQuery("#reserve").attr("href", "makeReservation/"+unitID); 
+        jQuery("#checkinBackpacker").attr("href", "checkinBackpacker/"+unitID);
         //jQuery("#accommodationType").prop("disabled", true);
     });
 }); 

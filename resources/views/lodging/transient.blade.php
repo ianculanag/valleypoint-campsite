@@ -222,7 +222,7 @@
                     <div class="col-md-12">
                         <h5 class="text-center mb-4">Choose action:</h5>
                         <div style="width:80%; padding-left:20%;">
-                            <a href="" id="checkin">
+                            <a href="" id="checkinBackpacker">
                                 <button type="button" class="btn btn-primary btn-md btn-block mb-2">Check-in</button>
                             </a>
                             <a href="" id="reserve">

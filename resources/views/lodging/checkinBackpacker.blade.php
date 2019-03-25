@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="py-5 text-center">
         <a href="/transient-backpacker">
@@ -125,7 +126,7 @@
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="10" disabled>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="">
                             </div>
                         </div>
                         
@@ -134,7 +135,7 @@
                             <select name="roomNumber" class="form-control" id="room">
                                 <option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
-                                <option value="3">Room 3</option>
+                                <option value="3">Room 3</option> style="width: 10rem"
                                 <option value="4">Room 4</option>
                                 <option value="5">Room 5</option>
                             </select>
