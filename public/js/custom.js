@@ -657,6 +657,7 @@ jQuery('#checkAvailability').click(function(){
         var selectedUnit;
         var checkinDate;
         var checkoutDate;
+        var htmlString = '';
 
         for(var index = 0; index < data.length; index++) {
             currentUnit = data[index].unitNumber;
@@ -671,10 +672,24 @@ jQuery('#checkAvailability').click(function(){
                 if(selectedUnit == currentUnit) {
                     console.log('Hit in '+selectedUnit);
                     console.log(checkinDate+' wants to check in but current is '+currentCheckinDate);
+                    console.log(moment(currentCheckinDate).format('LL'));
                     console.log(checkinDate == currentCheckinDate);
-                    alert('Check-in at ' + selectedUnit + ' cannot be allowed.')
-                }
+                    //alert('Check-in at ' + selectedUnit + ' cannot be allowed.')
+                    htmlString += '<strong>Occupied!</strong> '+currentUnit+' is occupied from '
+                                + moment(currentCheckinDate).format('MMMM DD') + ' to ' +moment(currentCheckoutDate).format('MMMM DD');
+                    jQuery('#alertMessage').html(htmlString);
+                    jQuery('#alertContainer').css('display','block');
+                } /*else {
+                    htmlString += '<strong>Available!</strong> '+currentUnit+' is free from '+currentCheckinDate+
+                                  ' to ' +currentCheckoutDate;
+                    jQuery('#alertMessage').html(htmlString);
+                    jQuery('#alertContainer').css('display','block');
+                }*/
             }
         }
     });
+});
+
+jQuery('#alertContainer').click(function(){
+    jQuery(this).css('display','none');
 });

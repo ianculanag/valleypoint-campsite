@@ -132,6 +132,12 @@
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
                             
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
+                            
+                            <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
+                                <a href="#" class="close">&times;</a>
+                                <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
+                            </div>
+                            
                             {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
                             
                             

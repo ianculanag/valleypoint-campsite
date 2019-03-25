@@ -101,6 +101,7 @@
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>   
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> 
     <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/custom2.js') }}"></script>
     <script>
