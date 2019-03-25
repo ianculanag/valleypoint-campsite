@@ -224,9 +224,13 @@ class UnitsController extends Controller
      */
     public function getDates()
     {
-        $dates = DB::table('units')
+        $dates = DB::table('accommodation_units')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime')
+        ->where('accommodation_units.status', '=', 'ongoing')
         ->get();
 
-        return view('admin.viewunits')->with('units', $units);
+        return $dates;
     }
 }

@@ -641,3 +641,40 @@ jQuery(document).on('click','.collapse.in',function(e) {
 jQuery(document).ready( function () {
     jQuery('.dataTable').DataTable();
 });
+
+jQuery('#checkAvailability').click(function(){
+    //console.log('fuck');
+    var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
+    var checkinDate = jQuery('#checkinDate').val();
+    var checkoutDate = jQuery('#checkoutDate').val();
+
+    jQuery.get('/getDates', function(data) {
+        //console.log(data.length);
+        var currentUnit;
+        var currentCheckinDate;
+        var currentCheckoutDate;
+
+        var selectedUnit;
+        var checkinDate;
+        var checkoutDate;
+
+        for(var index = 0; index < data.length; index++) {
+            currentUnit = data[index].unitNumber;
+            currentCheckinDate = data[index].checkinDatetime;
+            currentCheckoutDate = data[index].checkoutDatetime;
+            //console.log(currentUnit);
+            for(var count = 0; count < selectedUnits.length; count++) {
+                selectedUnit = selectedUnits[count].value;
+                checkinDate = jQuery('#checkinDate').val()+' 14:00:00';
+                checkoutDate = jQuery('#checkoutDate').val()+' 12:00:00';
+                
+                if(selectedUnit == currentUnit) {
+                    console.log('Hit in '+selectedUnit);
+                    console.log(checkinDate+' wants to check in but current is '+currentCheckinDate);
+                    console.log(checkinDate == currentCheckinDate);
+                    alert('Check-in at ' + selectedUnit + ' cannot be allowed.')
+                }
+            }
+        }
+    });
+});

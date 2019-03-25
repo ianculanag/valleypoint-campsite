@@ -196,8 +196,8 @@ class AccommodationsController extends Controller
 
         $accommodation->numberOfPax = $totalNumberOfPax;
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
+        $accommodation->checkinDatetime = $request->input('checkinDate').' '.'14:00';
+        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.'12:00'; 
         $accommodation->serviceID = 4;
         $accommodation->userID = Auth::user()->id;
         $accommodation->save();
