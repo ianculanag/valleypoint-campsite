@@ -3,7 +3,8 @@
 @section('content')
 @if(count($unit) > 0)
     @foreach($unit as $unit)
-        <div class="py-5 text-center">
+    <div class="container">
+        <div class="pt-3 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -12,7 +13,7 @@
             </a>
             <h3>Check-in Form</h3>
         </div>   
-        <form method="POST" action="/checkinGlamping" class="pl-3">
+        <form method="POST" action="/checkinGlamping">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
@@ -52,34 +53,28 @@
                 </div>
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
-                    <h5 style="margin-bottom:.80em;">Guest Details</h5>
-                    <div class="row">
-                        <div class="row col-md-7">
-                    <div class="form-group row col-md-12">
-                        <div class="col-md-6">
+                <h5 style="margin-bottom:.80em;">Guest Details</h5>
+                    <div class="form-group row">
+                        <div class="col-md-4">
                             <label for="firstName">First name</label>
                             <input class="form-control" type="text" name="firstName" required maxlength="15" placeholder="Juan" value="">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="lastName">Last name</label>
                             <input class="form-control" type="text" name="lastName" required maxlength="20" placeholder="Dela Cruz" value="">
                         </div>
-                    </div>
-                    <div class="form-group row col-md-12">
-                        <div class="col-md-12 mb-1">
-                        <label for="contactNumber">Contact number</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </span>
+                        <div class="col-md-4 mb-1">
+                            <label for="contactNumber">Contact number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
-                            <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                         </div>
-                    </div>
-                </div>
-                        
-                        
+                    </div>         
                         <!--/div-->
                         {{--<div class="col-md-3 mb-1">
                             <label for="numberOfPax">No. of pax</label>
@@ -91,33 +86,31 @@
                                 <option>Glamping</option>
                             </select>
                         </div>--}}
-                    </div>
-                    <div class="form-group row col-md-5">
-                            <div class="col-md-12 mb-3">
-                                <label for="checkinDate">Check-in date</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-3">
+                            <label for="checkinDate">Check-in date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                             </div>
-                            <div class="col-md-12 mb-1">
-                                <label for="checkoutDate">Check-out date</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
-                                    <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <label for="checkoutDate">Check-out date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
+                        </div>
                     </div>
-                </div>
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
@@ -135,7 +128,7 @@
                         </div>
                         <div class="col-md-10 mb-1" id="divUnits">
                             <label for="unitNumber">Unit/s</label>
-                            <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}"">
+                            <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
                             
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
@@ -225,10 +218,9 @@
                         </div>
                     </div>
                     
-                    <hr class="mb-4">
-                    <div style="float:right;">   
+                    <div class="pt-4" style="float:right;">   
                         <a href="/getDates" style="text-decoration:none;">                     
-                        <button class="btn btn-primary" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
+                        <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         </a>
                         <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
@@ -237,7 +229,7 @@
                     </div>
                 </form>
             </div>
-        </div>                        
+        </div>                     
         @endforeach  
     @endif
 @endsection
