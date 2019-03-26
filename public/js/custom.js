@@ -546,6 +546,7 @@ jQuery(document).ready(function(){
             tr.append(tdQuantity);
             tr.append(tdUnitPrice);
             tr.append(tdTotalPrice);
+            console.log('Tama');
             tbody.append(tr);
 
             updateTotal();
@@ -584,7 +585,7 @@ jQuery(document).ready(function(){
             htmlString += "</div>";
 
             jQuery('#divAdditionalServices').append(htmlString);
-        
+            console.log('Hit');
             jQuery('#serviceSelect').val('choose');
             jQuery('#additionalServiceNumberOfPax').val('');            
             jQuery('#additionalServiceUnitPrice').val('');           
@@ -752,3 +753,9 @@ function checkAvailability() {
 jQuery('#alertContainer').click(function(){
     jQuery(this).css('display','none');
 });
+
+/*jQuery( "#accordion" ).on("shown.bs.collapse", function() {
+    jQuery.each($.fn.dataTable.tables(true), function(){
+        jQuery(this).DataTable().columns.adjust().draw();
+    });
+});*/

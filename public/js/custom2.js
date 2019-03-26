@@ -206,7 +206,7 @@ jQuery(document).ready(function(){
     });
 
     let additionalServices = 0;
-    jQuery('.additionalServiceFormAdd').click(function(){
+    /*jQuery('.additionalServiceFormAdd').click(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
             additionalServices++;
             let tbody = jQuery('#invoiceRows');
@@ -283,7 +283,7 @@ jQuery(document).ready(function(){
 
             jQuery('#additionalServiceFormAdd').prop('disabled', true);
         })
-    });
+    });*/
 
     jQuery(document).on('click', '.additionalServiceFormRemove', function() {
         //console.log('FUUCK!');

@@ -12,58 +12,190 @@
             </a>
             <h3>Edit Transaction Details</h3>
         </div>
-        <div class="row">
+        <div class="row" role="tablist" aria-multiselectable="false">
             <div class="col-md-4 order-md-2 mb-4">
-                <form class="card p-2">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
-                    <table class="table table-striped" style="font-size:.83em;">
-                        <thead>
-                            <tr>
-                                <th scope="col" style="width:55%">Desciption</th>
-                                <th scope="col">Qty.</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="invoiceRows">
-                            @php
-                                $total = 0;
-                                $totalPayment = 0;
-                                $balance = 0;
-                            @endphp
-                            @foreach($charges as $charge)
-                            <tr>
-                                <td>{{$charge->serviceName}}</td>
-                                <td style="text-align:right;">{{$charge->quantity}}</td>
-                                <td style="text-align:right;">{{$charge->price}}</td>
-                                <td style="text-align:right;">{{($charge->totalPrice)}}</td>
-                            </tr>
-                            @php
-                                $total += $charge->totalPrice;
-                                $totalPayment += $charge->amount;
-                                $balance = $total - $totalPayment;
-                            @endphp
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="3" scope="row">TOTAL:</th>
-                                <th style="text-align:right;">{{$total}}</th>
-                            </tr>
-                            <tr>
-                                <th colspan="3" scope="row">Balance:</th>
-                                <th style="text-align:right;">{{$balance}}</th>
-                            </tr>
-                            <tr>
-                                <th colspan="1">Amount Paid:</th>
-                                <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!--button class="btn btn-primary" type="submit">Check-out</button-->
-                </form>
+                <!-- Payment Transactions Accordion -->
+                <div id="accordion">
+                    <!-- All Transations -->
+                    <form class="card my-0">
+                        <p class="card-header" role="tab" id="headingOne">
+                            <!--a class="collapsed d-block" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed" style="font-size:1.1em;"-->
+                            <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size:1.1em;">
+                                <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
+                                All Transactions
+                            </a>
+                        </p>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body p-0">
+                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col">Qty.</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoiceRows">
+                                        @php
+                                            $total = 0;
+                                            $totalPayment = 0;
+                                            $balance = 0;
+                                        @endphp
+                                        @foreach($charges as $charge)
+                                        <tr>
+                                            <td>{{$charge->serviceName}}</td>
+                                            <td style="text-align:right;">{{$charge->quantity}}</td>
+                                            <td style="text-align:right;">{{$charge->price}}</td>
+                                            <td style="text-align:right;" class="invoicePrices">{{($charge->totalPrice)}}</td>
+                                        </tr>
+                                        @php
+                                            $total += $charge->totalPrice;
+                                            $totalPayment += $charge->amount;
+                                            $balance = $total - $totalPayment;
+                                        @endphp
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th  id="invoiceGrandTotal" style="text-align:right;">{{$total}}</th>
+                                        </tr>
+                                        {{--<tr>
+                                            <th colspan="3" scope="row">Balance:</th>
+                                            <th style="text-align:right;">{{$balance}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1">Amount Paid:</th>
+                                            <th style="text-align:right;"  colspan="3">
+                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                            </th>
+                                        </tr>--}}
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- First Transaction: Check-in -->
+                    <form class="card my-0">
+                        <p class="card-header" role="tab" id="headingTwo">
+                            <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size:1.1em;">
+                                <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
+                                Transaction 1
+                            </a>
+                        </p>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body p-0">
+                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col">Qty.</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{--@php
+                                            $total = 0;
+                                            $totalPayment = 0;
+                                            $balance = 0;
+                                        @endphp
+                                        @foreach($charges as $charge) --}}
+                                        <tr>
+                                            <td>{{--$charge->serviceName--}}</td>
+                                            <td style="text-align:right;">{{--$charge->quantity--}}</td>
+                                            <td style="text-align:right;">{{--$charge->price--}}</td>
+                                            <td style="text-align:right;">{{--($charge->totalPrice)--}}</td>
+                                        </tr>
+                                        {{--@php
+                                            $total += $charge->totalPrice;
+                                            $totalPayment += $charge->amount;
+                                            $balance = $total - $totalPayment;
+                                        @endphp
+                                        @endforeach--}}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th style="text-align:right;">{{--$total--}}</th>
+                                        </tr>
+                                        {{--<tr>
+                                            <th colspan="3" scope="row">Balance:</th>
+                                            <th style="text-align:right;">{{$balance}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1">Amount Paid:</th>
+                                            <th style="text-align:right;"  colspan="3">
+                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                            </th>
+                                        </tr>--}}
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Additional Transations -->
+                    <form class="card my-0">
+                        <p class="card-header" role="tab" id="headingThree">
+                            <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size:1.1em;">
+                                <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
+                                Transaction 2
+                            </a>
+                        </p>
+                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body p-0">
+                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col">Qty.</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{--@php
+                                            $total = 0;
+                                            $totalPayment = 0;
+                                            $balance = 0;
+                                        @endphp
+                                        @foreach($charges as $charge)--}}
+                                        <tr>
+                                            <td>{{--$charge->serviceName--}}</td>
+                                            <td style="text-align:right;">{{--$charge->quantity--}}</td>
+                                            <td style="text-align:right;">{{--$charge->price--}}</td>
+                                            <td style="text-align:right;">{{--($charge->totalPrice)--}}</td>
+                                        </tr>
+                                        {{--@php
+                                            $total += $charge->totalPrice;
+                                            $totalPayment += $charge->amount;
+                                            $balance = $total - $totalPayment;
+                                        @endphp
+                                        @endforeach--}}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th style="text-align:right;">{{--$total--}}</th>
+                                        </tr>
+                                        {{--<tr>
+                                            <th colspan="3" scope="row">Balance:</th>
+                                            <th style="text-align:right;">{{$balance}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1">Amount Paid:</th>
+                                            <th style="text-align:right;"  colspan="3">
+                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                            </th>
+                                        </tr>--}}
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- End of Payment Transactions Accordion -->
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
                 <form method="POST" action="/updateDetails">
@@ -224,9 +356,7 @@
                                 </div>
                             </div>
                         @else 
-                            <label for="unitNumber">Unit/s</label>
-                            <input type="text" name="unitID" required="required" class="form-control" value="{{$guestDetails->unitNumber}}" disabled>
-                            <div class="row mt-3">
+                            <div class="row">
                                 <div class="col-md-4 mb-1" id="divUnitNumber">
                                     <label for="unitNumber">Unit number</label>
                                     <input type="text" class="form-control" value="{{$guestDetails->unitNumber}}" disabled>
@@ -252,7 +382,6 @@
                         @endif
                         </div>
                     </div>
-                    <hr class="mb-4">
                     {{--<form action="#" class="additionalServiceForm">
                         @csrf
                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -300,7 +429,7 @@
                             </div>
                         </div>
                     </div>--}}
-
+                    <hr class="mb-4">
                     <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
@@ -338,13 +467,12 @@
                                     <span class="input-group-text">₱</span>
                                 </div>
                                 <input class="form-control additionalServiceTotalPrice" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
-                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" placeholder="" value="" {{--form="serviceForm"--}}>
+                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" placeholder="" value="">
                             </div>
                         </div>
-
                         <div style="margin-top:2em;" id="divButton">
                             <div class="input-group">
-                                <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" {{--form="serviceForm"--}}disabled>
+                                <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" disabled>
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
