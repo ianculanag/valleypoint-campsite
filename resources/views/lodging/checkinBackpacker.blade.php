@@ -37,12 +37,12 @@
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
-                        <tbody id="invoiceRows">
-                        <tr id="invoiceUnit{{$unit->unitNumber}}">
-                            <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
-                            <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
-                            <td id="invoiceUnit{{$unit->unitNumber}}" tyle="text-align:right;"></td>
-                            <td id="invoiceTotal{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
+                        <tbody id="invoiceRows2">
+                        <tr id="invoiceUnit2">
+                            <td id="invoiceDescription">Backpacker</td>
+                            <td id="invoiceQuantity" style="text-align:right;">1</td>
+                            <td id="invoiceUnit2" tyle="text-align:right;">750</td>
+                            <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">750</td>
                         </tr>
                         </tbody>
                         <tfoot>
@@ -87,6 +87,19 @@
                                 <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+                        <div class="col-md-3 mb-1">
+                            <label for="numberOfPax">No. of pax</label>
+                            <input class="form-control numberOfPaxBackpacker" type="number" required name="numberOfPax" placeholder="1" value="" min="1" max="10">
+                        </div>
+                        <fieldset disabled>
+                            <div class="col-md-10 mb-1 form-group">
+                                <label for="accommodationType">Accommodation</label>
+                                <input type="text" id="accommodationType" class="form-control" placeholder="Backpacker">
+                            </div>
+                        </fieldset>
+>>>>>>> Adding of prices in Backpacker module
                     </div>
                 </div>
                     <div class="form-group row col-md-5">
@@ -163,6 +176,10 @@
                                         </select>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+=======
+                                <input class="form-control paxSelect numberOfPaxBackpacker" name="numberOfPaxBackpacker{{$unit->unitNumber}}" id="numberOfPaxBackpacker{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
+>>>>>>> Adding of prices in Backpacker module
                             </div>
                     </div>
                     <hr class="mb-4">  

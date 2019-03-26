@@ -59,7 +59,7 @@ jQuery(document).ready(function(){
 
             firstDiv.appendChild(unitH5);
 
-            firstTableBody.appendChild(unitID);
+            firstTableBody.appendChild(unitID); 
             firstTableBody.appendChild(unitNumber);
             firstTableBody.appendChild(capacity);
             firstTable.appendChild(firstTableBody);
@@ -180,7 +180,7 @@ jQuery("#numPax").change(function() {
                 htmlString += "</div>";
                 htmlString += "<div class='form-group col-md-6'>";
                 htmlString += "<input type='text' name='lastName" + i + "' required='required' class='form-control' placeholder='Dela Cruz'>";
-                htmlString += "</div>";
+                htmlString += "</div>";  
             }        
             htmlString +="</div>";
         }
@@ -237,7 +237,7 @@ jQuery(document).ready(function(){
         jQuery("#checkinBackpacker").attr("href", "checkinBackpacker/"+unitID);
         //jQuery("#accommodationType").prop("disabled", true);
     });
-});
+}); 
 
 
 jQuery(document).ready(function(){
