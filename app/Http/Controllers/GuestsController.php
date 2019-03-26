@@ -304,15 +304,29 @@ class GuestsController extends Controller
     public function viewGuests()
     {
         $guest = DB::table('guests')
-        ->leftJoin('accommodations', 'accommodations.id', 'guests.accommodationID')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->leftJoin('units', 'units.id', 'accommodations.unitID')
-        ->select('units.id as unitID', 'guests.id as guestID', 'units.unitNumber', 'units.unitType', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber',
-        'accommodations.unitID','accommodations.numberOfPax', 'services.serviceName')
+        ->join('accommodations', 'accommodations.id', 'guests.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->select('guests.id as guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber', 
+        'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber')
+        //->select('guests.id as guestID', 'units.unitNumber', 'units.unitType', 
+        //'guests.lastName', 'guests.firstName', 'guests.contactNumber',
+        //'accommodations.unitID','accommodations.numberOfPax', 'services.serviceName')
         ->get();
        // return $guest;
-        return view('lodging.viewguests')->with('guest', $guest);
+
+        if($guest[0]->numberOfUnits > 1) {
+            $otherUnits = DB::table('accommodation_units')
+            ->join('units', 'units.id', 'accommodation_units.unitID')
+            ->join('services', 'services.id', 'accommodation_units.serviceID')
+            ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
+            ->get();
+
+            return view('lodging.viewguests')->with('guest', $guest)->with('otherUnits', $otherUnits);
+        } else {
+            return view('lodging.viewguests')->with('guest', $guest);
+        }
     }
 }
 

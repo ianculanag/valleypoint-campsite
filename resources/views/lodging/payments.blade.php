@@ -28,7 +28,7 @@
             <tbody>
                 @foreach($payments as $payment)
                 <tr>
-                    <td>{{$payment->id}}</td>
+                    <td>{{$payment->chargeID}}</td>
                     <td>{{$payment->accommodationID}}</td>
                     <td>{{$payment->serviceName}}</td>                
                     <td>{{$payment->firstName}}</td>                             
