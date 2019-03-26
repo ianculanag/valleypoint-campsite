@@ -659,33 +659,85 @@ jQuery('#checkAvailability').click(function(){
         var checkoutDate;
         var htmlString = '';
 
+        var occupiedUnits = 0;
+        var occupiedUnitNumbers = new Array();
+        var occupiedCheckinDates = new Array();
+        var occupiedCheckoutDates = new Array();
+
+
+
         for(var index = 0; index < data.length; index++) {
             currentUnit = data[index].unitNumber;
-            currentCheckinDate = data[index].checkinDatetime;
-            currentCheckoutDate = data[index].checkoutDatetime;
-            //console.log(currentUnit);
+            //currentCheckinDate = data[index].checkinDatetime;
+            //currentCheckoutDate = data[index].checkoutDatetime;
+            
+            //checkinDate = jQuery('#checkinDate').val()+' 14:00:00';
+            //checkoutDate = jQuery('#checkoutDate').val()+' 12:00:00';
+            
+            currentCheckinDate = moment(data[index].checkinDatetime).format('L');
+            currentCheckoutDate = moment(data[index].checkoutDatetime).format('L');
+
+            checkinDate = moment(jQuery('#checkinDate').val()).format('L');
+            checkoutDate = moment(jQuery('#checkoutDate').val()).format('L');
+
             for(var count = 0; count < selectedUnits.length; count++) {
                 selectedUnit = selectedUnits[count].value;
-                checkinDate = jQuery('#checkinDate').val()+' 14:00:00';
-                checkoutDate = jQuery('#checkoutDate').val()+' 12:00:00';
                 
-                if(selectedUnit == currentUnit) {
-                    console.log('Hit in '+selectedUnit);
-                    console.log(checkinDate+' wants to check in but current is '+currentCheckinDate);
-                    console.log(moment(currentCheckinDate).format('LL'));
-                    console.log(checkinDate == currentCheckinDate);
-                    //alert('Check-in at ' + selectedUnit + ' cannot be allowed.')
-                    htmlString += '<strong>Occupied!</strong> '+currentUnit+' is occupied from '
-                                + moment(currentCheckinDate).format('MMMM DD') + ' to ' +moment(currentCheckoutDate).format('MMMM DD');
-                    jQuery('#alertMessage').html(htmlString);
-                    jQuery('#alertContainer').css('display','block');
-                } /*else {
-                    htmlString += '<strong>Available!</strong> '+currentUnit+' is free from '+currentCheckinDate+
-                                  ' to ' +currentCheckoutDate;
-                    jQuery('#alertMessage').html(htmlString);
-                    jQuery('#alertContainer').css('display','block');
-                }*/
+                if(selectedUnit == currentUnit && ((checkinDate >= currentCheckinDate && checkoutDate <= currentCheckoutDate) || (checkinDate <= currentCheckinDate && checkoutDate >= currentCheckoutDate))) {
+                    //console.log((checkinDate >= currentCheckinDate && checkoutDate <= currentCheckoutDate) || (checkinDate <= currentCheckinDate && checkoutDate >= currentCheckoutDate))
+                    //console.log('Hello');
+                    //console.log(checkinDate >= currentCheckinDate);
+                    //console.log(checkoutDate <= currentCheckoutDate);
+                    //console.log(currentCheckoutDate);
+                    //htmlString += '<strong>Occupied!</strong> '+currentUnit+' is occupied from '
+                    //            + moment(currentCheckinDate).format('MMMM DD') + ' to ' +moment(currentCheckoutDate).format('MMMM DD');
+                    //jQuery('#alertMessage').html(htmlString);
+                    //jQuery('#alertContainer').css('display','block');
+                    occupiedUnits++;
+                    occupiedUnitNumbers.push(currentUnit);
+                    occupiedCheckinDates.push(currentCheckinDate);
+                    occupiedCheckoutDates.push(currentCheckoutDate);
+                    //console.log(occupiedUnits);
+                } else {
+                    //console.log(currentUnit + ' is free!');
+                }
             }
+        }
+
+        if(occupiedUnits > 0) {
+            htmlString += '<strong>Occupied!</strong>';
+            for(var count = 0; count < occupiedUnits; count++) {
+                console.log(occupiedUnitNumbers[count]);
+                console.log(occupiedCheckinDates[count]);
+                console.log(occupiedCheckoutDates[count]);
+                htmlString += '<br>' + occupiedUnitNumbers[count] + ' is occupied from ' + moment(occupiedCheckinDates[count]).format('MMMM DD') + ' to ' + moment(occupiedCheckoutDates[count]).format('MMMM DD') + '.';
+            }
+            jQuery('#alertMessage').html(htmlString);            
+            jQuery('#alertContainer').removeClass('alert-success');
+            jQuery('#alertContainer').addClass('alert-danger');
+            jQuery('#alertContainer').css('display','block');
+        } else {
+            htmlString += '<strong>Available! </strong>';
+            for(var count = 0; count < selectedUnits.length; count++) {
+                if(count==selectedUnits.length-1 && selectedUnits.length > 1) {
+                    htmlString += 'and ' + selectedUnits[count].value;
+                } else if(count==selectedUnits.length-1) {                    
+                    htmlString += selectedUnits[count].value;
+                } else {
+                    htmlString += selectedUnits[count].value + ', ';
+                }
+            }
+            if(selectedUnits.length == 1) {
+                htmlString += ' is available from ';
+            } else {
+                htmlString += ' are available from ';
+            }
+            htmlString += moment(checkinDate).format('MMMM DD') + ' to ' + moment(checkoutDate).format('MMMM DD') + '.';
+            console.log(selectedUnits);
+            jQuery('#alertMessage').html(htmlString);
+            jQuery('#alertContainer').removeClass('alert-danger');
+            jQuery('#alertContainer').addClass('alert-success');
+            jQuery('#alertContainer').css('display', 'block');
         }
     });
 });
