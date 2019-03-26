@@ -242,13 +242,14 @@ jQuery(document).ready(function(){
 
 jQuery(document).ready(function(){
     var numberOfUnits = 1;
-    var source =['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10'];
+    var source =['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10',
+                 'Tent11', 'Tent12', 'Tent13', 'Tent14', 'Tent15', 'Tent16', 'Tent17', 'Tent18', 'Tent19', 'Tent20'];
     jQuery('#tokenfield').tokenfield({
         autocomplete: {
           source: source,
           delay: 100
         },
-        showAutocompleteOnFocus: true
+        showAutocompleteOnFocus: false
     });
 
     jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
@@ -285,6 +286,7 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         removeRow(e.attrs.value);
         removeInvoiceEntry(e.attrs.value);
+        checkAvailability();
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
@@ -293,6 +295,7 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         makeRow(e.attrs.value);
         makeInvoiceEntry(e.attrs.value);
+        checkAvailability();
     });
 });
 
@@ -642,11 +645,12 @@ jQuery(document).ready( function () {
     jQuery('.dataTable').DataTable();
 });
 
-jQuery('#checkAvailability').click(function(){
+//jQuery('#checkAvailability').click(function(){
+function checkAvailability() {
     //console.log('fuck');
     var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
-    var checkinDate = jQuery('#checkinDate').val();
-    var checkoutDate = jQuery('#checkoutDate').val();
+    //var checkinDate = jQuery('#checkinDate').val();
+    //var checkoutDate = jQuery('#checkoutDate').val();
 
     jQuery.get('/getDates', function(data) {
         //console.log(data.length);
@@ -716,6 +720,7 @@ jQuery('#checkAvailability').click(function(){
             jQuery('#alertContainer').removeClass('alert-success');
             jQuery('#alertContainer').addClass('alert-danger');
             jQuery('#alertContainer').css('display','block');
+            jQuery('#checkinButton').prop('disabled', true);
         } else {
             htmlString += '<strong>Available! </strong>';
             for(var count = 0; count < selectedUnits.length; count++) {
@@ -738,9 +743,11 @@ jQuery('#checkAvailability').click(function(){
             jQuery('#alertContainer').removeClass('alert-danger');
             jQuery('#alertContainer').addClass('alert-success');
             jQuery('#alertContainer').css('display', 'block');
+            jQuery('#checkinButton').prop('disabled', false);
         }
     });
-});
+}
+//});
 
 jQuery('#alertContainer').click(function(){
     jQuery(this).css('display','none');

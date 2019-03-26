@@ -226,9 +226,9 @@
                     
                     <div class="pt-4" style="float:right;">   
                         {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
-                        <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
+                        {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
-                        <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
+                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
