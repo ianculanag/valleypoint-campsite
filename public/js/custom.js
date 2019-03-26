@@ -328,7 +328,7 @@ function makeRow(unitNumber) {
     htmlString += "<i class='fa fa-users' aria-hidden='true'></i>";
     htmlString += "</span>";
     htmlString += "</div>";
-    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' required='required' name='numberOfPaxGlamping"+unitNumber+"' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='' min='1' max='4'>";
+    htmlString += "<input class='form-control paxSelect numberOfPaxGlamping' required='required' name='numberOfPaxGlamping"+unitNumber+"' id='numberOfPaxGlamping"+unitNumber+"' type='number' name='additionalServiceNumberOfPax' placeholder='' value='1' min='1' max='4'>";
     htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
     htmlString += "</div>";
     htmlString += "</div>";
