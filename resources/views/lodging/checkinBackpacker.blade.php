@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="py-5 text-center">
         <a href="/transient-backpacker">
@@ -12,15 +11,7 @@
         </a>
         <h3>Check-in Form</h3>
     </div>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
     <form method="POST" action="/checkinBackpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -37,12 +28,12 @@
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
-                        <tbody id="invoiceRows2">
+                        <tbody id="invoiceRows">
                         <tr>
                             <td id="invoiceDescription">Backpacker</td>
                             <td id="invoiceQuantity" style="text-align:right;">1</td>
-                            <td id="invoiceUnit" tyle="text-align:right;">750</td>
-                            <td id="invoiceTotal" style="text-align:right;" class="invoicePrices">750</td>
+                            <td id="invoiceUnit" tyle="text-align:right;"></td>
+                            <td id="invoiceTotal" style="text-align:right;" class="invoicePrices"></td>
                         </tr>
                         </tbody>
                         <tfoot>
@@ -85,12 +76,19 @@
                                 <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control numberOfPaxBackpacker" type="number" required name="numberOfPax" placeholder="1" value="" min="1" max="10">
+                        <div class="col-md-3 mb-1" id="divNumberOfPax">
+                            <label for="unitNumberOfPax">No. of pax</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
+                            </div>
                         </div>
                         <fieldset disabled>
-                            <div class="col-md-10 mb-1 form-group">
+                            <div class="col-md-12 mb-1 form-group">
                                 <label for="accommodationType">Accommodation</label>
                                 <input type="text" id="accommodationType" class="form-control" placeholder="Backpacker">
                             </div>
@@ -125,40 +123,32 @@
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
-                        <div class="col-md-2 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="unitID">No. of beds</label>
-                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="">
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="10">
                             </div>
                         </div>
-                        
                         <div class="col-md-6 mb-1">
                             <label for="roomNumber">Room/s</label>
                             <select name="roomNumber" class="form-control" id="room">
                                 <option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
-                                <option value="3">Room 3</option> style="width: 10rem"
+                                <option value="3">Room 3</option>
                                 <option value="4">Room 4</option>
                                 <option value="5">Room 5</option>
+                                <option value="6">Room 6</option>
+                                <option value="7">Room 7</option>
+                                <option value="8">Room 8</option>
+                                <option value="9">Room 9</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-1" id="divNumberOfPax">
-                            <label for="unitNumberOfPax">No. of pax</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="4" {{--form="serviceForm"--}}>
-                            </div>
-                        </div>
+                        
                     </div>
                     <hr class="mb-4">  
                     <div class="form-group row pb-3" id="divAdditionalServices">
@@ -218,21 +208,14 @@
                     
                     <div style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
-                        <a href="/transient-backpacker" style="text-decoration:none;">
+                        <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
                     </div>       
                 </div>
             </form>
         </div>
-
-        
-       
-        
-            <!--input type="hidden" name="firstName2" id="token" value="Albren">
-            <input type="hidden" name="lastName2" id="token" value="Cundangan">
-            <input type="hidden" name="contactNumber2" id="token" value="09083019923"-->
-            </div> 
-        </div>
+        </div> 
     </div>
-    @endsection
+</div>
+@endsection
