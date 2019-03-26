@@ -240,6 +240,13 @@ class GuestsController extends Controller
 
         //return $accompanyingGuest;
 
+        $payments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->where('remarks', '=','full', 'OR', 'remarks', '=','partial')
+        ->get();
+
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -259,9 +266,9 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
-            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('otherUnits', $otherUnits);
+            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {
-            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges);
+            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('payments', $payments);
         }  
     }
 

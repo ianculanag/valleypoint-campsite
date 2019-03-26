@@ -12,20 +12,20 @@
             </a>
             <h3>Edit Transaction Details</h3>
         </div>
-        <div class="row" role="tablist" aria-multiselectable="false">
+        <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4">
                 <!-- Payment Transactions Accordion -->
                 <div id="accordion">
-                    <!-- All Transations -->
+                    <!-- All Paid Transations -->
                     <form class="card my-0">
                         <p class="card-header" role="tab" id="headingOne">
                             <!--a class="collapsed d-block" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed" style="font-size:1.1em;"-->
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size:1.1em;">
                                 <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
-                                All Transactions
+                                Paid Charges
                             </a>
                         </p>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body p-0">
                                 <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
                                     <thead>
@@ -33,7 +33,8 @@
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Total</th>
+                                            <th scope="col">Total</th> 
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="invoiceRows">
@@ -42,16 +43,17 @@
                                             $totalPayment = 0;
                                             $balance = 0;
                                         @endphp
-                                        @foreach($charges as $charge)
+                                        @foreach($payments as $payment)
                                         <tr>
-                                            <td>{{$charge->serviceName}}</td>
-                                            <td style="text-align:right;">{{$charge->quantity}}</td>
-                                            <td style="text-align:right;">{{$charge->price}}</td>
-                                            <td style="text-align:right;" class="invoicePrices">{{($charge->totalPrice)}}</td>
-                                        </tr>
+                                            <td>{{$payment->serviceName}}</td>
+                                            <td style="text-align:right;">{{$payment->quantity}}</td>
+                                            <td style="text-align:right;">{{$payment->price}}</td>
+                                            <td style="text-align:right;" class="invoicePrices">{{($payment->totalPrice)}}</td>
+                                            <td> {{$payment->remarks}} </td>
+                                            </tr>
                                         @php
-                                            $total += $charge->totalPrice;
-                                            $totalPayment += $charge->amount;
+                                            $total += $payment->totalPrice;
+                                            $totalPayment += $payment->amount;
                                             $balance = $total - $totalPayment;
                                         @endphp
                                         @endforeach
@@ -60,6 +62,7 @@
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
                                             <th  id="invoiceGrandTotal" style="text-align:right;">{{$total}}</th>
+                                            <th></th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="3" scope="row">Balance:</th>
@@ -76,12 +79,12 @@
                             </div>
                         </div>
                     </form>
-                    <!-- First Transaction: Check-in -->
+                    <!-- Unpaid Charges -->
                     <form class="card my-0">
                         <p class="card-header" role="tab" id="headingTwo">
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size:1.1em;">
                                 <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
-                                Transaction 1
+                                Unpaid Charges
                             </a>
                         </p>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -102,65 +105,6 @@
                                             $balance = 0;
                                         @endphp
                                         @foreach($charges as $charge) --}}
-                                        <tr>
-                                            <td>{{--$charge->serviceName--}}</td>
-                                            <td style="text-align:right;">{{--$charge->quantity--}}</td>
-                                            <td style="text-align:right;">{{--$charge->price--}}</td>
-                                            <td style="text-align:right;">{{--($charge->totalPrice)--}}</td>
-                                        </tr>
-                                        {{--@php
-                                            $total += $charge->totalPrice;
-                                            $totalPayment += $charge->amount;
-                                            $balance = $total - $totalPayment;
-                                        @endphp
-                                        @endforeach--}}
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="3" scope="row">TOTAL:</th>
-                                            <th style="text-align:right;">{{--$total--}}</th>
-                                        </tr>
-                                        {{--<tr>
-                                            <th colspan="3" scope="row">Balance:</th>
-                                            <th style="text-align:right;">{{$balance}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="1">Amount Paid:</th>
-                                            <th style="text-align:right;"  colspan="3">
-                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                            </th>
-                                        </tr>--}}
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- Additional Transations -->
-                    <form class="card my-0">
-                        <p class="card-header" role="tab" id="headingThree">
-                            <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="font-size:1.1em;">
-                                <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
-                                Transaction 2
-                            </a>
-                        </p>
-                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
-                            <div class="card-body p-0">
-                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" style="width:55%">Desciption</th>
-                                            <th scope="col">Qty.</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{--@php
-                                            $total = 0;
-                                            $totalPayment = 0;
-                                            $balance = 0;
-                                        @endphp
-                                        @foreach($charges as $charge)--}}
                                         <tr>
                                             <td>{{--$charge->serviceName--}}</td>
                                             <td style="text-align:right;">{{--$charge->quantity--}}</td>
