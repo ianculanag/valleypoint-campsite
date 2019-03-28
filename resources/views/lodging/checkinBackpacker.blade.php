@@ -141,6 +141,8 @@
                                 <option value="8">Room 8</option>
                                 <option value="9">Room 9</option>
                             </select>
+
+                            <div id="unitDetails"></div>
                         </div>
                         <div style="margin-top:2em;">
                             <div class="input-group">
