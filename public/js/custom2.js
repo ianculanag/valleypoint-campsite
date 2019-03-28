@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function makeInvoiceEntry2(unitNumber) {
     var invoiceRows2 = jQuery('#invoiceRows2');
 
@@ -310,3 +311,5 @@ jQuery(document).ready(function(){
         updateTotal();
     });
 }); 
+=======
+>>>>>>> Removed contents of custom2.js
