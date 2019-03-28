@@ -105,7 +105,7 @@
     <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
-    {{--<script src="{{ asset('js/custom2.js') }}"></script>--}}
+    <script src="{{ asset('js/custom2.js') }}"></script>
     <script>
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;

@@ -148,6 +148,8 @@
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
+
+                            <div id="unitDetails"></div>
                         </div>
                         
                     </div>
