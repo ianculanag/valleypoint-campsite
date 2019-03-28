@@ -17,13 +17,13 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-                <div class="card p-2">
+            <div class="col-md-4 order-md-2 mb-4 mx-0">
+                <div class="card p-0 mx-0">
                     <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
-                    <table class="table table-striped" style="font-size:.83em;">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col" style="width:55%">Description</th>
+                                <th scope="col" style="width:40%">Description</th>
                                 <th scope="col">Qty.</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Total</th>
@@ -42,12 +42,12 @@
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
-                            <tr>
+                            {{--<tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
                                 <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                 </th>
-                            </tr>
+                            </tr>--}}
                         </tfoot>
                     </table>
                 </div>
@@ -86,7 +86,7 @@
                                 <option>Glamping</option>
                             </select>
                         </div>--}}
-                    <div class="form-group row">
+                    <!--div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
@@ -110,12 +110,12 @@
                                 <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
                         </div>
-                    </div>
+                    </div-->
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
+                            <label for="unitID">Unit/s</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="col-md-10 mb-1" id="divUnits">
-                            <label for="unitNumber">Unit/s</label>
+                            <label for="unitNumber">Unit numbers</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
                             
@@ -141,34 +141,58 @@
                             {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
                             
                             
-                            {{--gac dawn code--}}
-                            <!--label for="unitNumber">Unit/s</label-->
-                            <div class="row mt-3">
-                                <div class="col-md-4 mb-1" id="divUnitNumber">
-                                    <label for="unitNumber">Unit number</label>
-                                    <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                            
+                        </div>
+                        {{--gac dawn code--}}
+                        <!--label for="unitNumber">Unit/s</label-->
+                        <div class="col-md-2 mb-1" id="divUnitNumber">
+                            <label for="unitNumber">Unit no.</label>
+                            <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                        </div>
+                        <div class="col-md-3 mb-1" id="divNumberOfPax"  style="display:none;">
+                            <label for="unitNumberOfPax">No. of pax</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <div class="col-md-3 mb-1" id="divNumberOfPax">
-                                    <label for="unitNumberOfPax">No. of pax</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-users" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="1" min="1" max="4" required="required"{{--form="serviceForm"--}}>
-                                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
-                                    </div>
+                                <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="1" min="1" max="4" required="required"{{--form="serviceForm"--}}>
+                                <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-1" id="divAccommodationPackage">
+                            <label for="additionalServiceUnitPrice">Package</label>
+                            <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}">
+                                <option value="1">Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4">4 pax</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="checkinDate">Check-in date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
-                                    <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}" readonly>
-                                        <option value="1">Glamping Solo</option>
-                                        <option value="2">Glamping 2 Pax</option>
-                                        <option value="3">Glamping 3 pax</option>
-                                        <option value="4">Glamping 4 pax</option>
-                                    </select>
+                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-1">
+                            <label for="checkoutDate">Check-out date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
                         </div>
                     </div>

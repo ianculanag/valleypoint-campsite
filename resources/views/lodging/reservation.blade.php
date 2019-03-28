@@ -11,7 +11,7 @@
                     <strong>Back</strong>
                 </span>
             </a>
-            <h3>Check-in Form</h3>
+            <h3>Make Reservation</h3>
         </div>   
         <form method="POST" action="/checkinGlamping">
         @csrf

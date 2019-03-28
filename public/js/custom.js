@@ -408,7 +408,60 @@ jQuery(document).ready(function(){
             document.getElementById('stayDuration').value = daysDiff;
             
             updateTotal();
-        }
+        }        
+        checkAvailability();
+    });
+
+    jQuery(document).on('change', '#checkinDate', function() {
+        /*var checkin = Date.parse(jQuery('#checkinDate').val());
+        var checkout = Date.parse(jQuery('#checkoutDate').val());
+
+        var timeDiff = checkout-checkin;
+        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
+
+        var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
+        //console.log(daysDiff);
+        //console.log(selectedUnits);
+
+        var currentUnit;
+        var invoiceQuantity;
+        var numberOfPaxGlamping;
+
+        var packagePrice;
+        var totalPrice;
+
+        var invoiceUnitPrice;
+        var invoiceTotalPrice;
+
+        var hiddenTotalPrice;
+
+        for(var index = 0; index < selectedUnits.length; index++) {
+            currentUnit = selectedUnits[index].value;
+        
+            invoiceQuantity = '#invoiceQuantity'+currentUnit;
+            numberOfPaxGlamping = '#numberOfPaxGlamping'+currentUnit;
+            invoiceUnitPrice = '#invoiceUnitPrice'+currentUnit;
+            invoiceTotalPrice = '#invoiceTotalPrice'+currentUnit;
+
+            hiddenTotalPrice = '#totalPrice'+currentUnit;
+
+            jQuery(invoiceQuantity).html(jQuery(numberOfPaxGlamping).val()+'x'+(daysDiff));
+
+            packagePrice = jQuery(invoiceUnitPrice).html();  
+
+            console.log(packagePrice);
+            totalPrice = packagePrice * jQuery(numberOfPaxGlamping).val() * (daysDiff);                       
+            
+            jQuery(invoiceUnitPrice).html(packagePrice);            
+            jQuery(invoiceTotalPrice).html(totalPrice);   
+                      
+            jQuery(hiddenTotalPrice).val(totalPrice);   
+            
+            document.getElementById('stayDuration').value = daysDiff;
+            
+            updateTotal();
+        }        */
+        checkAvailability();
     });
     /*jQuery('#checkoutDate').change(function(){
         var checkin = Date.parse(jQuery('#checkinDate').val());

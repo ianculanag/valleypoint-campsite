@@ -9734,6 +9734,11 @@ body {
   padding-bottom: 5em;
 }
 
+.no-gutters {
+  margin-right: 10% !important;
+  margin-left: 10% !important;
+}
+
 /* Sidebar */
 .sidebar {
   z-index: 100;
