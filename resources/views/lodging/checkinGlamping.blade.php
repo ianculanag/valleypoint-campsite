@@ -115,7 +115,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
-                            <label for="unitID">Unit/s</label>
+                            <label for="unitID">No. of units</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="col-md-10 mb-1" id="divUnits">
-                            <label for="unitNumber">Unit numbers</label>
+                            <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
                             
@@ -145,11 +145,11 @@
                         </div>
                         {{--gac dawn code--}}
                         <!--label for="unitNumber">Unit/s</label-->
-                        <div class="col-md-2 mb-1" id="divUnitNumber">
-                            <label for="unitNumber">Unit no.</label>
+                        <div class="col-md-2 mb-1 mt-3" id="divUnitNumber">
+                            <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
                         </div>
-                        <div class="col-md-3 mb-1" id="divNumberOfPax"  style="display:none;">
+                        <div class="col-md-3 mb-1 mt-3" id="divNumberOfPax"  style="display:none;">
                             <label for="unitNumberOfPax">No. of pax</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -161,7 +161,7 @@
                                 <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                             </div>
                         </div>
-                        <div class="col-md-2 mb-1" id="divAccommodationPackage">
+                        <div class="col-md-2 mb-1 mt-3" id="divAccommodationPackage">
                             <label for="additionalServiceUnitPrice">Package</label>
                             <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}">
                                 <option value="1">Solo</option>
@@ -171,7 +171,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -183,7 +183,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-4 mb-1 mt-3">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
