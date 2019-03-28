@@ -13,7 +13,7 @@
             <h3>Edit Transaction Details</h3>
         </div>
         <div class="row" role="tablist" aria-multiselectable="true">
-            <div class="col-md-4 order-md-2 mb-4">
+            <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
                 <!-- Payment Transactions Accordion -->
                 <div id="accordion">
                     <!-- All Paid Transations -->
@@ -30,28 +30,26 @@
                                 <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
                                     <thead>
                                         <tr>
+                                        @if(count($payments) > 0)
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
-                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="invoiceRows">
-                                        @php
-                                            $total = 0;
-                                            $totalPayment = 0;
-                                            $balance = 0;
-                                        @endphp
+                                    <tbody>
                                         @foreach($payments as $payment)
                                         <tr>
                                             <td>{{$payment->serviceName}}</td>
                                             <td style="text-align:right;">{{$payment->quantity}}</td>
                                             <td style="text-align:right;">{{$payment->price}}</td>
-                                            <td style="text-align:right;" class="invoicePrices">{{($payment->totalPrice)}}</td>
-                                            <td> {{$payment->remarks}} </td>
+                                            <td style="text-align:right;">{{$payment->totalPrice}}</td>
                                             </tr>
                                         @php
+                                            $total = 0;
+                                            $totalPayment = 0;
+                                            $balance = 0;
+
                                             $total += $payment->totalPrice;
                                             $totalPayment += $payment->amount;
                                             $balance = $total - $totalPayment;
@@ -61,8 +59,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th  id="invoiceGrandTotal" style="text-align:right;">{{$total}}</th>
-                                            <th></th>
+                                            <th style="text-align:right;">{{$total}}</th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="3" scope="row">Balance:</th>
@@ -75,6 +72,12 @@
                                             </th>
                                         </tr>--}}
                                     </tfoot>
+                                    @else
+                                        <th class="text-center">
+                                            No pending payments to show
+                                        </th>
+                                    </tr>
+                                    @endif
                                 </table>
                             </div>
                         </div>
@@ -84,7 +87,7 @@
                         <p class="card-header" role="tab" id="headingTwo">
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size:1.1em;">
                                 <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
-                                Unpaid Charges
+                                Pending Charges
                             </a>
                         </p>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -92,48 +95,59 @@
                                 <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
                                     <thead>
                                         <tr>
+                                        @if(count($pendingPayments) > 0)
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
-                                            <th scope="col">Total</th>
+                                            <th scope="col">Total</th> 
+                                            <th scope="col">Balance</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {{--@php
+                                    <tbody id="invoiceRows">
+                                        @foreach($pendingPayments as $pending)
+                                        @php
                                             $total = 0;
                                             $totalPayment = 0;
                                             $balance = 0;
+                                            $totalBalance = 0;
+
+                                            $balance = $pending->totalPrice - $pending->amount;
+                                            $total += $pending->totalPrice;
+                                            $totalPayment += $pending->amount;
+                                            $totalBalance = $total - $totalPayment;
                                         @endphp
-                                        @foreach($charges as $charge) --}}
                                         <tr>
-                                            <td>{{--$charge->serviceName--}}</td>
-                                            <td style="text-align:right;">{{--$charge->quantity--}}</td>
-                                            <td style="text-align:right;">{{--$charge->price--}}</td>
-                                            <td style="text-align:right;">{{--($charge->totalPrice)--}}</td>
-                                        </tr>
-                                        {{--@php
-                                            $total += $charge->totalPrice;
-                                            $totalPayment += $charge->amount;
-                                            $balance = $total - $totalPayment;
-                                        @endphp
-                                        @endforeach--}}
+                                            <td>{{$pending->serviceName}}</td>
+                                            <td style="text-align:right;">{{$pending->quantity}}</td>
+                                            <td style="text-align:right;">{{$pending->price}}</td>
+                                            <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
+                                            <td style="text-align:right;">{{$balance}}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th style="text-align:right;">{{--$total--}}</th>
-                                        </tr>
-                                        {{--<tr>
-                                            <th colspan="3" scope="row">Balance:</th>
-                                            <th style="text-align:right;">{{$balance}}</th>
+                                            <th id="invoiceGrandTotal" style="text-align:right;">{{$total}}</th>
+                                            <th></th>
                                         </tr>
                                         <tr>
+                                            <th colspan="4" scope="row">BALANCE:</th>
+                                            <th style="text-align:right;">{{$totalBalance}}</th>
+                                        </tr>
+                                        {{--<tr>
                                             <th colspan="1">Amount Paid:</th>
                                             <th style="text-align:right;"  colspan="3">
                                             <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                             </th>
                                         </tr>--}}
                                     </tfoot>
+                                    @else
+                                        <th class="text-center">
+                                            No pending payments to show
+                                        </th>
+                                    </tr>
+                                    @endif
                                 </table>
                             </div>
                         </div>
@@ -171,19 +185,19 @@
                                 <label for="firstName">First name</label>
                                 <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
                             </div>
-                            <div class="col-md-4 mb-1">
+                            <div class="col-md-5 mb-1">
                                 <label for="lastName">Last name</label>
                                 <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
                             </div>
-                            <div class="col-md-4 mb-1">
-                                <label for="contactNumber">Contact number</label>
+                            <div class="col-md-3 mb-1">
+                                <label for="unitNumberOfPax">No. of pax</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <i class="fa fa-users" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
+                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}">
                                 </div>
                             </div>
                         </div>
@@ -212,53 +226,40 @@
                     </div>--}}
                         <div class="form-group row">
                             <div class="col-md-6 mb-1">
-                                <label for="checkInDatetime">Check-in date</label>
+                                <label for="contactNumber">Contact number</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    @php
-                                        $checkedIn = new DateTime($guestDetails->checkinDatetime);
-                                        $checkedInAt = $checkedIn->format("F j, o");
-                                    @endphp
-                                <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-1">
-                                <label for="checkoutDatetime">Check-out date</label>
+                                <label for="glamping">Accommodation</label>
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    @php
-                                        $checkOut = new DateTime($guestDetails->checkoutDatetime);
-                                        $checkOutAt = $checkOut->format("F j, o");
-                                    @endphp
-                                <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
+                                    <input class="form-control" type="text" name="glamping" maxlength="11" placeholder="" value="Glamping" disabled>
                                 </div>
                             </div>
-                            {{--<div class="col-md-4 mb-1 form-group">
-                                <label for="numberOfPax">Stay duration as of now</label>
-                                    @php
-                                        $checkin = new DateTime($guestDetails->checkinDatetime);
-                                        $now = new DateTime("now");
-                                        $stayDuration = date_diff($checkin, $now)->days+1;
-                                    @endphp
-                                <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
-                            </div>--}}
                         </div>
                     </div>
+                    {{--<div class="col-md-4 mb-1 form-group">
+                        <label for="numberOfPax">Stay duration as of now</label>
+                            @php
+                                $checkin = new DateTime($guestDetails->checkinDatetime);
+                                $now = new DateTime("now");
+                                $stayDuration = date_diff($checkin, $now)->days+1;
+                            @endphp
+                        <input class="form-control" type="number" name="stayDuration" placeholder="" value="{{$stayDuration}}" disabled>
+                    </div>--}}
                     <hr class="mb-4">
 
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
-                        <div class="col-md-2 mb-1">
+                        {{--<div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
-                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
+                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -268,63 +269,106 @@
                             <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" placeholder="" value="{{$guestDetails->numberOfUnits}}" min="1" max="80" readonly>
                             </div>
                         </div>
-                        <div class="col-md-10 mb-1" id="divUnits">
+                        <div class="col-md-10 mb-1" id="divUnits">--}}
                         @if($guestDetails->numberOfUnits > 1)
-                            <div class="row">
-                                <div class="col-md-4 mb-1" id="divUnitNumber">
-                                    <label for="unitNumber">Unit number</label>
+                                <div class="col-md-1 mb-1" id="divUnitNumber">
+                                    <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
+                                    @foreach($otherUnits as $units)
+                                    <input type="text" readonly class="form-control-plaintext mb-1" style="text-align:center; font-weight:bold;" value="{{$loop->iteration}}">
+                                    @endforeach
+                                </div>
+                                <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
+                                    <label for="unitNumber">Unit no.</label>
                                     @foreach($otherUnits as $units)
                                     <input type="text" class="form-control mb-1" value="{{$units->unitNumber}}" disabled>
                                     @endforeach
                                 </div>
-                                <div class="col-md-3 mb-1" id="divNumberOfPax">
-                                    <label for="unitNumberOfPax">No. of pax</label>
-                                    @foreach($otherUnits as $units)
-                                    <div class="input-group mb-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-users" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping" id="numberOfPaxGlamping" type="number" placeholder="" value="{{$units->numberOfPax}}" min="1" max="4">
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
+                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
+                                    <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
                                     <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$units->serviceName}}</option>
                                     </select>
                                     @endforeach
                                 </div>
-                            </div>
-                        @else 
-                            <div class="row">
-                                <div class="col-md-4 mb-1" id="divUnitNumber">
-                                    <label for="unitNumber">Unit number</label>
-                                    <input type="text" class="form-control" value="{{$guestDetails->unitNumber}}" disabled>
-                                </div>
-                                <div class="col-md-3 mb-1" id="divNumberOfPax">
-                                    <label for="unitNumberOfPax">No. of pax</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
+                                <div class="col-md-3 mb-1">
+                                    <label for="checkInDatetime">Check-in date</label>
+                                     @foreach($otherUnits as $units)
+                                    <div class="input-group mb-1">
+                                        {{--<div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-users" aria-hidden="true"></i>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
                                             </span>
-                                        </div>
-                                        <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping" id="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="4">
+                                        </div>--}}
+                                        @php
+                                            $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                            $checkedInAt = $checkedIn->format("F j, o");
+                                        @endphp
+                                    <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                                     </div>
+                                    @endforeach
                                 </div>
-                                <div class="col-md-5 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Accommodation package</label>
-                                    <select class="form-control" name="accommodationType" id="accommodationType" readonly>
+                                <div class="col-md-3 mb-1">
+                                    <label for="checkoutDatetime">Check-out date</label>
+                                     @foreach($otherUnits as $units)
+                                    <div class="input-group mb-1">
+                                        {{--<div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
+                                        </div>--}}
+                                        @php
+                                            $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                            $checkOutAt = $checkOut->format("F j, o");
+                                        @endphp
+                                    <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            {{--</div>--}}
+                        @else 
+                                <div class="col-md-3 mb-1" id="divUnitNumber">
+                                    <label for="unitNumber">Unit no.</label>
+                                    <input type="text" class="form-control mb-1" value="{{$guestDetails->unitNumber}}" disabled>
+                                </div>
+                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
+                                    <label for="additionalServiceUnitPrice">Package</label>
+                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$guestDetails->serviceName}}</option>
                                     </select>
                                 </div>
-                            </div>
+                                <div class="col-md-3 mb-1">
+                                    <label for="checkInDatetime">Check-in date</label>
+                                    <div class="input-group mb-1">
+                                        {{--<div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
+                                        </div>--}}
+                                        @php
+                                            $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                            $checkedInAt = $checkedIn->format("F j, o");
+                                        @endphp
+                                    <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-1">
+                                    <label for="checkoutDatetime">Check-out date</label>
+                                    <div class="input-group mb-1">
+                                        {{--<div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            </span>
+                                        </div>--}}
+                                        @php
+                                            $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                            $checkOutAt = $checkOut->format("F j, o");
+                                        @endphp
+                                    <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
+                                    </div>
+                                </div>
                         @endif
-                        </div>
+                        {{--</div>--}}
                     </div>
                     {{--<form action="#" class="additionalServiceForm">
                         @csrf

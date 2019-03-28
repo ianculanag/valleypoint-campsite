@@ -245,23 +245,25 @@ class GuestsController extends Controller
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where('remarks', '=','full')
+        //->where(function ($query) {
+            //$query->where('remarks', '=','full');
+                //->orWhere('remarks', '=','partial');
+        //})
+        ->get();
+
+        $pendingPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->where(function ($query) {
-            $query->where('remarks', '=','full')
+            $query->where('remarks', '=','unpaid')
                 ->orWhere('remarks', '=','partial');
         })
         ->get();
 
-        
-
-        $charges = DB::table('charges')
-        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
-        ->join('services', 'services.id', 'charges.serviceID')
-        ->join('payments', 'chargeID', 'charges.id')
-        //->leftJoin('payments', 'payments.chargeID', 'charges.id')
-        ->where('accommodationID', '=', $guest[0]->accommodationID)
-        ->get();
-
-        
+        //return $pendingPayments;    
         //return $charges;
         //return view('lodging.editdetails')->with('guest', $guest);
         //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
@@ -272,9 +274,9 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
-            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('payments', $payments)->with('otherUnits', $otherUnits);
+            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {
-            return view('lodging.editdetails')->with('guest', $guest)->with('charges', $charges)->with('payments', $payments);
+            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
         }  
     }
 
