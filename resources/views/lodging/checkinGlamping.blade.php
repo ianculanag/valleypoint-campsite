@@ -164,7 +164,7 @@
                         </div>--}}
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
-                            <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}">
+                            <select class="form-control" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}" class="accommodationPackages">
                                 <option value="1">Solo</option>
                                 <option value="2">2 Pax</option>
                                 <option value="3">3 pax</option>
