@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="py-5 text-center">
+    <div class="pt-3 pb-3 text-center">
         <a href="/transient-backpacker">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -16,13 +16,13 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-                <div class="card p-2">
+            <div class="col-md-4 order-md-2 mb-4 mx-0">
+                <div class="card p-0 mx-0">
                     <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
                     <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
-                                <th scope="col" style="width:55%">Description</th>
+                                <th scope="col" style="width:40%">Description</th>
                                 <th scope="col">Qty.</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Total</th>
@@ -44,7 +44,7 @@
                             <tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" step="50" placeholder="0" class="form-control" id="amount" required>
+                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                 </th>
                             </tr>
                         </tfoot>
@@ -52,20 +52,20 @@
                 </div>
             </div>                
 
-            <div class="col-md-8 order-md-1 check-out-form">
+            <div class="col-md-8 order-md-1">
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                 <div class="form-group row">
                     <div class="col-md-5 mb-1">
                         <label for="firstName">First Name</label>
-                        <input type="text" name="firstName" required class="form-control" maxlength="15" placeholder="Juan">
+                        <input type="text" name="firstName" required class="form-control" maxlength="15" placeholder="">
                     </div>
-                        <div class="col-md-7 mb-1">
+                        <div class="col-md-5 mb-1">
                             <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" required class="form-control" maxlength="20" placeholder="Dela Cruz">
+                            <input type="text" name="lastName" required class="form-control" maxlength="20" placeholder="">
                         </div>  
                     </div> 
                     <div class="form-group row">
-                        <div class="col-md-5 mb-1">
+                        <div class="col-md-4 mb-1">
                             <label for="contactNumber">Contact number</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -76,7 +76,7 @@
                                 <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1" id="divNumberOfPax">
+                        <div class="col-md-3 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -84,19 +84,17 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control paxSelect numberOfPaxGlamping" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
+                                <input class="form-control numberOfPaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
                             </div>
                         </div>
-                        <fieldset disabled>
-                            <div class="col-md-12 mb-1 form-group">
-                                <label for="accommodationType">Accommodation</label>
-                                <input type="text" id="accommodationType" class="form-control" placeholder="Backpacker">
-                            </div>
-                        </fieldset>
+                        <div class="col-md-3 mb-1">
+                            <label for="accommodationType">Accommodation</label>
+                            <input type="text" id="accommodationType" class="form-control" placeholder="Backpacker" disabled>
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                            <div class="col-md-6 mb-1">
+                            <div class="col-md-5 mb-1">
                                 <label for="checkinDate">Check-in date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -107,7 +105,7 @@
                                     <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-1">
+                            <div class="col-md-5 mb-1">
                                 <label for="checkoutDate">Check-out date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -124,14 +122,14 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-3 mb-1">
-                            <label for="unitID">No. of beds</label>
+                            <label for="unitID">No. of bunk/s</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="10">
+                            <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="1" min="1" max="20">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -147,6 +145,13 @@
                                 <option value="8">Room 8</option>
                                 <option value="9">Room 9</option>
                             </select>
+                        </div>
+                        <div style="margin-top:2em;">
+                            <div class="input-group">
+                                <button type="button" id="additionalbed" class="btn btn-primary additionalbed">
+                                    <span class="fa fa-plus" aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </div>
                         
                     </div>
