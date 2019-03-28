@@ -126,7 +126,7 @@
                             <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
                             </div>
                         </div>
-                        <div class="col-md-10 mb-1" id="divUnits">
+                        <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
@@ -143,13 +143,14 @@
                             
                             
                         </div>
+                    </div>
+                    <div class="form-group row" id="divUnits">
                         {{--gac dawn code--}}
-                        <!--label for="unitNumber">Unit/s</label-->
-                        <div class="col-md-2 mb-1 mt-3" id="divUnitNumber">
+                        <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
                         </div>
-                        <div class="col-md-3 mb-1 mt-3" id="divNumberOfPax"  style="display:none;">
+                        {{--<div class="col-md-3 mb-1" id="divNumberOfPax{{$unit->unitNumber}}"  style="display:none;">
                             <label for="unitNumberOfPax">No. of pax</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -157,11 +158,11 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="1" min="1" max="4" required="required"{{--form="serviceForm"--}}>
+                                <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax" placeholder="" value="1" min="1" max="4" required="required"{{--form="serviceForm">
                                 <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                             </div>
-                        </div>
-                        <div class="col-md-2 mb-1 mt-3" id="divAccommodationPackage">
+                        </div>--}}
+                        <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
                             <select class="form-control" name="accommodationType{{$unit->unitNumber}}" id="accommodationType{{$unit->unitNumber}}">
                                 <option value="1">Solo</option>
@@ -171,7 +172,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-4 mb-3 mt-3">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -179,11 +180,11 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate" required="required" class="form-control checkinDates" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1 mt-3">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -191,7 +192,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                <input type="date" name="checkoutDate" required="required" class="form-control checkoutDates" id="checkoutDate" value="">
                                 <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
                         </div>

@@ -315,9 +315,8 @@ function makeInvoiceEntry(unitNumber) {
 }
 
 function makeRow(unitNumber) {
-    console.log('It Works')
     var htmlString = "";
-    htmlString += "<div class='row mt-1' id='divUnit"+unitNumber+"'>";
+    /*htmlString += "<div class='row mt-1' id='divUnit"+unitNumber+"'>";
     htmlString += "<div class='col-md-4 mb-1' id='divUnitNumber"+unitNumber+"'>";
     htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
     htmlString += "</div>";
@@ -340,6 +339,38 @@ function makeRow(unitNumber) {
     htmlString += "<option value='4'>Glamping 4 pax</option>";
     htmlString += "</select>";
     htmlString += "</div>";
+    htmlString += "</div>";*/
+    htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
+    htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-2 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
+    htmlString += "<select class='form-control' name='accommodationType"+unitNumber+"' id='accommodationType"+unitNumber+"'>";
+    htmlString += "<option value='1'>Solo</option>";
+    htmlString += "<option value='2'>2 Pax</option>";
+    htmlString += "<option value='3'>3 pax</option>";
+    htmlString += "<option value='4'>4 pax</option>";
+    htmlString += "</select>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-4 mb-3' id='divCheckinDate"+unitNumber+"'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<div class='input-group-prepend'>";
+    htmlString += "<span class='input-group-text'>";
+    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
+    htmlString += "</span>";
+    htmlString += "</div>";
+    htmlString += "<input type='date' name='checkinDate"+unitNumber+"' required='required' class='form-control checkinDates' id='checkinDate"+unitNumber+"' value='"+jQuery('.checkinDates').val()+"'>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<div class='input-group-prepend'>";
+    htmlString += "<span class='input-group-text'>";
+    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
+    htmlString += "</span>";
+    htmlString += "</div>";
+    htmlString += "<input type='date' name='checkoutDate"+unitNumber+"' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+"' value='"+jQuery('.checkoutDates').val()+"'>";
+    htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
+    htmlString += "</div>";
     htmlString += "</div>";
 
     jQuery('#divUnits').append(htmlString);
@@ -353,8 +384,15 @@ function removeInvoiceEntry(unitNumber) {
 }
 
 function removeRow(unitNumber) {
-    var divUnit = '#divUnit'+unitNumber;
-    jQuery(divUnit).remove();
+    var divUnitNumber = '#divUnitNumber'+unitNumber;
+    var divAccommodationPackage = '#divAccommodationPackage'+unitNumber;
+    var divCheckinDate = '#divCheckinDate'+unitNumber;
+    var divCheckoutDate = '#divCheckoutDate'+unitNumber;
+    
+    jQuery(divUnitNumber).remove();
+    jQuery(divAccommodationPackage).remove();
+    jQuery(divCheckinDate).remove();
+    jQuery(divCheckoutDate).remove();
 }
 
 jQuery(document).ready(function(){
