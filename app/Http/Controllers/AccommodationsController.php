@@ -315,29 +315,7 @@ class AccommodationsController extends Controller
             return redirect()->back()->withInput();
             
         }
-
-        //check Date Validation
-         $reservedAccommodations = DB::table('accommodations')
-         ->select('accommodations.checkinDatetime')
-         ->get();
-
-        
-            if(count($reservedAccommodations) > 0){
-                return $reservedAccommodations;
-                
-            for($count = 0; $count < count($reservedAccommodations); $count++) {
-             $checkinDateChecker = $reservedAccommodations[$count];
-
-             if($request->input('checkinDate') < $reservedAccommodations[$count]){
-                return redirect()->back()->withInput();
-
-             }else{
-                return("WAOW ERROR");
-             }
-            }
-         }
-
-        }*/
+*/
         
         //GAC
         $accommodation = new Accommodation;                 

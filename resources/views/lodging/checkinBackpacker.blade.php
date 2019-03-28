@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@if(count($unit) > 0)
+    @foreach($unit as $unit)
 <div class="container">
     <div class="pt-3 pb-3 text-center">
         <a href="/transient-backpacker">
@@ -29,23 +31,17 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                        <tr>
-                            <td id="invoiceDescription">Backpacker</td>
-                            <td id="invoiceQuantity" style="text-align:right;">1</td>
-                            <td id="invoiceUnit" tyle="text-align:right;"></td>
-                            <td id="invoiceTotal" style="text-align:right;" class="invoicePrices"></td>
+                        <tr id="invoiceUnit{{$unit->unitNumber}}">
+                            <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
+                            <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                            <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
+                            <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
                         </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
-                            </tr>
-                            <tr>
-                                <th colspan="1">Amount Paid:</th>
-                                <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                </th>
                             </tr>
                         </tfoot>
                     </table>
@@ -213,14 +209,16 @@
                     
                     <div style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
-                        <a href="/glamping" style="text-decoration:none;">
+                        <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
                     </div>       
                 </div>
             </form>
         </div>
-        </div> 
-    </div>
+    </div> 
 </div>
+</div>
+@endforeach  
+@endif
 @endsection
