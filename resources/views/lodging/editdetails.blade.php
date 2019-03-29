@@ -596,14 +596,92 @@
                     </div-->
                     
                     <div class="mt-3" style="float:right;">
-                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
+                        <!--button class="btn btn-success" style="width:10em;" type="submit">Save</button-->
+                        <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
+                            Proceed to payment
+                        </button>
                         <a href="/glamping" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
+                            <button class="btn btn-secondary" style="width:11em;" type="button">Cancel</button>
                         </a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <!-- charges modal -->
+    <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:50%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Charges</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="card my-0">
+                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th scope="col" style="width:55%">Desciption</th>
+                                    <th scope="col">Qty.</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Total</th> 
+                                </tr>
+                            </thead>
+                            <tbody id="chargesRows">
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <!--div class="form-check"-->
+                                        <input class="form-check-input" type="checkbox" id="charge1">
+                                        Glamping 4 pax
+                                        <!--/div-->
+                                    </td>
+                                    <td style="text-align:right;">4</td>
+                                    <td style="text-align:right;">850</td>
+                                    <td style="text-align:right;" class="chargesPrices">3400</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <!--div class="form-check"-->
+                                        <input class="form-check-input" type="checkbox" id="charge2">
+                                        Airsoft
+                                        <!--/div-->
+                                    </td>
+                                    <td style="text-align:right;">2</td>
+                                    <td style="text-align:right;">750</td>
+                                    <td style="text-align:right;" class="chargesPrices">1500</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="3" scope="row">Amount due:</th>
+                                    <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th scope="row">Amount paid:</th>
+                                    <th style="text-align:right;"  colspan="3">
+                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of charges modal -->
     @endforeach  
 @endsection
