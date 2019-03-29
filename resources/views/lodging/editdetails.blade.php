@@ -638,6 +638,9 @@
                         </button>
                         @else 
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
+                        <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
+                            Proceed to payment
+                        </button>
                         @endif
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button">Cancel</button>

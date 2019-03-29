@@ -84,14 +84,13 @@ jQuery('#additionalServiceFormAddExtra').click(function(){
         jQuery('#additionalServiceUnitPrice').val('');           
         jQuery('#additionalServiceTotalPrice').val('');
         jQuery('#noPendingPayments').hide();
+        jQuery('#showChargesModal').prop('disabled', false);
 
         //jQuery('#additionalServiceFormAddExtra').prop('disabled', true);
     })
 });
 
 jQuery(document).on('click', '.additionalServiceFormRemove', function() {
-    //console.log('FUUCK!');
-    //console.log(jQuery(this).attr('id'));
     var id = jQuery(this).attr('id').slice(27);  
     var divServiceID = '#additionalServiceID'+id;
     var divServiceName = '#divServiceName'+id;
@@ -110,16 +109,21 @@ jQuery(document).on('click', '.additionalServiceFormRemove', function() {
     var divInvoiceRow = '#invoiceRow'+id;
     jQuery(divInvoiceRow).remove();
     
-    console.log(id);
-    updateTotal();
-    updateBalance();
+    if(jQuery('.invoiceBalances').val() != "") {
+        updateTotal();
+        updateBalance();
+        jQuery('#noPendingPayments').show();
+        jQuery('#showChargesModal').prop('disabled', true);
+    } else {
+        updateTotal();
+        updateBalance();
+    }
+
 });
 
 function updateBalance() {
     var totalBalance = 0;
     var balance =  jQuery('.invoiceBalances');
-
-    console.log(balance);
 
     for (var index = 0; index < balance.length; index++) {
         totalBalance += parseInt(balance.eq(index).html());
