@@ -94,8 +94,8 @@
                             <div class="card-body p-0">
                                 <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
                                     <thead>
-                                        <tr>
                                         @if(count($pendingPayments) > 0)
+                                        <tr>
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
@@ -121,7 +121,7 @@
                                             <td style="text-align:right;">{{$pending->quantity}}</td>
                                             <td style="text-align:right;">{{$pending->price}}</td>
                                             <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
-                                            <td style="text-align:right;">{{$balance}}</td>
+                                            <td style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -133,7 +133,7 @@
                                         </tr>
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
-                                            <th style="text-align:right;">{{$totalBalance}}</th>
+                                            <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="1">Amount Paid:</th>
@@ -143,10 +143,39 @@
                                         </tr>--}}
                                     </tfoot>
                                     @else
-                                        <th class="text-center">
-                                            No pending payments to show
-                                        </th>
-                                    </tr>
+                                        <tr style="">
+                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col">Qty.</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th> 
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoiceRows" style="">
+                                        <!--tr>
+                                            <td ></td>
+                                            <td style="text-align:right;"></td>
+                                            <td style="text-align:right;"></td>
+                                            <td style="text-align:right;" class="invoicePrices"></td>
+                                            <td style="text-align:right;"></td>
+                                        </tr-->
+                                        <tr>
+                                            <th colspan="5" id="noPendingPayments" class="text-center">
+                                                No pending payments to show
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot style="">
+                                        <tr>
+                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4" scope="row">BALANCE:</th>
+                                            <th id="invoiceTotalBalance" style="text-align:right;"></th>
+                                        </tr>
+                                    </tfoot>
                                     @endif
                                 </table>
                             </div>
@@ -466,7 +495,7 @@
                         </div>
                         <div style="margin-top:2em;" id="divButton">
                             <div class="input-group">
-                                <button type="button" id="additionalServiceFormAddExtra" class="btn btn-primary additionalServiceFormAddExtra" disabled>
+                                <button type="button" id="additionalServiceFormAddExtra" class="btn btn-primary additionalServiceFormAddExtra">
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -602,10 +631,14 @@
                     </div-->
                     
                     <div class="mt-3" style="float:right;">
+                        @if(count($pendingPayments) > 0)
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
                         <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
                             Proceed to payment
                         </button>
+                        @else 
+                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
+                        @endif
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button">Cancel</button>
                         </a>

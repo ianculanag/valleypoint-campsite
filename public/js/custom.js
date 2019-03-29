@@ -616,6 +616,7 @@ jQuery(document).ready(function(){
                 document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;                
                 document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
                 jQuery('.additionalServiceFormAdd').prop('disabled', false);
+                jQuery('#additionalServiceFormAddExtra').prop('disabled', false);
             }
         })
     });
@@ -628,6 +629,7 @@ jQuery(document).ready(function(){
             document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;            
             document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
             jQuery('.additionalServiceFormAdd').prop('disabled', false);
+            jQuery('#additionalServiceFormAddExtra').prop('disabled', false);
         }
     });
 
