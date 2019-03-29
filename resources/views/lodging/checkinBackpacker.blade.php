@@ -116,7 +116,7 @@
                         </div>
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
-                    <div class="form-group row">
+                    <div class="form-group row" id="unitDetails">
                         <div class="col-md-3 mb-1">
                             <label for="unitID">No. of bunk/s</label>
                             <div class="input-group">
@@ -142,7 +142,7 @@
                                 <option value="9">Room 9</option>
                             </select>
 
-                            <div id="unitDetails"></div>
+                            
                         </div>
                         <div style="margin-top:2em;">
                             <div class="input-group">
@@ -151,7 +151,7 @@
                                 </button>
                             </div>
 
-                            <div id="unitDetails"></div>
+                            
                         </div>
                         
                     </div>
