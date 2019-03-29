@@ -112,14 +112,6 @@ jQuery(document).ready(function(){
             let checkInLabel = document.createElement('TD');
             checkInLabel.colSpan='2';
             let checkInLabelData = 'Checked-in on ';
-            /*let checkedInAt = new Datetime(data[0].checkinDatetime);
-            checkedInAt.toLocaleString(undefined, {
-                month : 'short',
-                day : 'numeric',
-                year : 'numeric',
-                hour : '2-digit',
-                minute : '2-digit',
-            });*/
             let checkInBody = document.createTextNode(checkInLabelData+data[0].checkinDatetime);
             checkInLabel.style.color='green';
             checkInLabel.style.fontStyle='italic';
@@ -281,25 +273,24 @@ jQuery(document).ready(function(){
     });
 
     jQuery('#tokenfield').on('tokenfield:removedtoken', function (e) {
-        //alert('Token removed! Token value was: ' + e.attrs.value)
-        numberOfUnits--;
-        jQuery('#numberOfUnits').val(numberOfUnits);
-        removeRow(e.attrs.value);
-        removeInvoiceEntry(e.attrs.value);
-        checkAvailability();
+        if(numberOfUnits == 1) {
+            alert('You cannot remove the last unit!');
+            e.preventDefault();
+        } else {
+            numberOfUnits--;
+            jQuery('#numberOfUnits').val(numberOfUnits);
+            removeRow(e.attrs.value);
+            removeInvoiceEntry(e.attrs.value);
+            //checkAvailability();
+        }
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
-        //alert('Token added! Token value was: ' + e.attrs.value)
         numberOfUnits++;
         jQuery('#numberOfUnits').val(numberOfUnits);
-        //if (numberOfUnits == 1) {
-        //    makeLabeledRow(e.attrs.value);
-        //} else {
         makeRow(e.attrs.value);
-        //}
         makeInvoiceEntry(e.attrs.value);
-        checkAvailability();
+        //checkAvailability();
     });
 });
 
@@ -324,14 +315,14 @@ function makeRow(unitNumber) {
     htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
     htmlString += "</div>";
     htmlString += "<div class='col-md-2 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
-    htmlString += "<select class='form-control' name='accommodationType"+unitNumber+"' id='accommodationType"+unitNumber+"'>";
+    htmlString += "<select class='form-control accommodationPackages' name='accommodationPackage"+unitNumber+"' id='accommodationPackage"+unitNumber+"'>";
     htmlString += "<option value='1'>Solo</option>";
     htmlString += "<option value='2'>2 Pax</option>";
     htmlString += "<option value='3'>3 pax</option>";
     htmlString += "<option value='4'>4 pax</option>";
     htmlString += "</select>";
     htmlString += "</div>";
-    htmlString += "<div class='col-md-4 mb-3' id='divCheckinDate"+unitNumber+"'>";
+    htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+"'>";
     htmlString += "<div class='input-group'>";
     htmlString += "<div class='input-group-prepend'>";
     htmlString += "<span class='input-group-text'>";
@@ -355,48 +346,6 @@ function makeRow(unitNumber) {
 
     jQuery('#divUnits').append(htmlString);
 }
-
-/*function makeLabeledRow(unitNumber) {
-    var htmlString = "";
-    htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
-    htmlString += "<label for='unitNumber'>Unit number</label>";
-    htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
-    htmlString += "</div>";
-    htmlString += "<div class='col-md-2 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
-    htmlString += "<label for='accommodationType'>Package</label>";
-    htmlString += "<select class='form-control' name='accommodationType"+unitNumber+"' id='accommodationType"+unitNumber+"'>";
-    htmlString += "<option value='1'>Solo</option>";
-    htmlString += "<option value='2'>2 Pax</option>";
-    htmlString += "<option value='3'>3 pax</option>";
-    htmlString += "<option value='4'>4 pax</option>";
-    htmlString += "</select>";
-    htmlString += "</div>";
-    htmlString += "<div class='col-md-4 mb-3' id='divCheckinDate"+unitNumber+"'>";
-    htmlString += "<label for='checkinDate'>Check-in date</label>";
-    htmlString += "<div class='input-group'>";
-    htmlString += "<div class='input-group-prepend'>";
-    htmlString += "<span class='input-group-text'>";
-    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
-    htmlString += "</span>";
-    htmlString += "</div>";
-    htmlString += "<input type='date' name='checkinDate"+unitNumber+"' required='required' class='form-control checkinDates' id='checkinDate"+unitNumber+"' value='"+jQuery('.checkinDates').val()+"'>";
-    htmlString += "</div>";
-    htmlString += "</div>";
-    htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"'>";
-    htmlString += "<label for='checkoutDate'>Check-out date</label>";
-    htmlString += "<div class='input-group'>";
-    htmlString += "<div class='input-group-prepend'>";
-    htmlString += "<span class='input-group-text'>";
-    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
-    htmlString += "</span>";
-    htmlString += "</div>";
-    htmlString += "<input type='date' name='checkoutDate"+unitNumber+"' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+"' value='"+jQuery('.checkoutDates').val()+"'>";
-    htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
-    htmlString += "</div>";
-    htmlString += "</div>";
-
-    jQuery('#divUnits').append(htmlString);
-}*/
 
 function removeInvoiceEntry(unitNumber) {
     var invoiceUnit = '#invoiceUnit'+unitNumber;
@@ -418,9 +367,59 @@ function removeRow(unitNumber) {
 }
 
 jQuery(document).ready(function(){
-    var daysDiff = 1;
+    //var daysDiff = 1;
 
-    jQuery(document).on('change', '#checkoutDate', function() {
+    jQuery(document).on('change', '.checkoutDates', function() {
+        var daysDiff = 0;
+        var unitNumber = jQuery(this).attr('id').slice(12);
+
+
+        var checkinDate = '#checkinDate'+unitNumber;
+        var checkoutDate = '#checkoutDate'+unitNumber;
+
+        var checkin = Date.parse(jQuery(checkinDate).val());
+        var checkout = Date.parse(jQuery(checkoutDate).val());
+
+        var timeDiff = checkout-checkin;
+        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+
+        //console.log(daysDiff);
+        var invoiceQuantity;
+        var numberOfPaxGlamping;
+
+        var packagePrice;
+        var totalPrice;
+
+        var invoiceUnitPrice;
+        var invoiceTotalPrice;
+
+        var hiddenTotalPrice;
+
+        invoiceQuantity = '#invoiceQuantity'+unitNumber;
+        accommodationPackage = '#accommodationPackage'+unitNumber;
+        invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+        invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+
+        hiddenTotalPrice = '#totalPrice'+unitNumber;
+
+        jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
+
+        packagePrice = jQuery(invoiceUnitPrice).html();  
+
+        console.log(packagePrice);
+        totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+        
+        jQuery(invoiceUnitPrice).html(packagePrice);            
+        jQuery(invoiceTotalPrice).html(totalPrice);   
+                    
+        jQuery(hiddenTotalPrice).val(totalPrice);   
+        
+        document.getElementById('stayDuration').value = daysDiff;
+        
+        updateTotal();
+    });
+
+    /*jQuery(document).on('change', '#checkoutDate', function() {
         var checkin = Date.parse(jQuery('#checkinDate').val());
         var checkout = Date.parse(jQuery('#checkoutDate').val());
 
@@ -470,90 +469,31 @@ jQuery(document).ready(function(){
             updateTotal();
         }        
         checkAvailability();
-    });
-
-    jQuery(document).on('change', '#checkinDate', function() {
-        checkAvailability();
-    });
-    /*jQuery('#checkoutDate').change(function(){
-        var checkin = Date.parse(jQuery('#checkinDate').val());
-        var checkout = Date.parse(jQuery('#checkoutDate').val());
-
-        var timeDiff = checkout-checkin;
-        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
-
-        jQuery('#accommodationType').val(jQuery('.numberOfPaxGlamping').val());            
-        jQuery('#invoiceQuantity').html(jQuery('.numberOfPaxGlamping').val()+'x'+(daysDiff));
-
-        var packagePrice;
-        var totalPrice;
-        
-        jQuery.get('/getService/'+$('.numberOfPaxGlamping').val(), function(data){ 
-            packagePrice = data[0].price;                         
-            jQuery('#invoiceUnitPrice').html(packagePrice);
-            //console.log(daysDiff);
-            totalPrice = packagePrice * jQuery('.numberOfPaxGlamping').val() * (daysDiff);
-            jQuery('#invoiceTotalPrice').html(totalPrice);      
-            
-            //jQuery('#stayDuration').val(daysDiff);
-            document.getElementById('stayDuration').value = daysDiff;
-            //console.log(jQuery('#stayDuration').val());
-            updateTotal();
-        })
-        //console.log(daysDiff);
-        //call Glamping method
     });*/
 
 
 
-    jQuery(document).on('change','.numberOfPaxGlamping', function(){
-        if(jQuery(this).val() > 0 && jQuery(this).val() < 5) {
-            //console.log('Hello');
-            var unitNumber = jQuery(this).attr('id').slice(19);
-            var unitNumberId = '#'+jQuery(this).attr('id');
-            //console.log(unitNumber);
-
-            var accommodationType = '#accommodationType'+unitNumber;
-            var invoiceQuantity = '#invoiceQuantity'+unitNumber;
-
-            jQuery(accommodationType).val(jQuery(this).val());            
-            jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
-
-            var packagePrice;
-            var totalPrice;
-            var invoiceDescription = '#invoiceDescription'+unitNumber;
-            var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
-            var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
-            
-            var hiddenTotalPrice = '#totalPrice'+unitNumber;
-            
-            jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
-                packagePrice = data[0].price;        
-                packageName = data[0].serviceName;       
-                
-                jQuery(invoiceDescription).html(packageName);                    
-                jQuery(invoiceUnitPrice).html(packagePrice);
-                //console.log(daysDiff);
-                totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
-                jQuery(invoiceTotalPrice).html(totalPrice); 
-
-                jQuery(hiddenTotalPrice).val(totalPrice);
-
-                updateTotal();
-            })
-        } else {
-            jQuery('#accommodationType').val(1);
-            console.log('Out of bounds');
-        }
+    jQuery(document).on('change', '#checkinDate', function() {
+        checkAvailability();
     });
 
     jQuery(document).on('change','.accommodationPackages', function(){
-        var unitNumber = jQuery(this).attr('id').slice(19);
+        var unitNumber = jQuery(this).attr('id').slice(20);
         var unitNumberId = '#'+jQuery(this).attr('id');
-        var accommodationType = '#accommodationType'+unitNumber;
+
+        console.log(unitNumberId);
         var invoiceQuantity = '#invoiceQuantity'+unitNumber;
 
-        jQuery(accommodationType).val(jQuery(this).val());            
+
+        var checkinDate = '#checkinDate'+unitNumber;
+        var checkoutDate = '#checkoutDate'+unitNumber;
+
+        var checkin = Date.parse(jQuery(checkinDate).val());
+        var checkout = Date.parse(jQuery(checkoutDate).val());
+
+        var timeDiff = checkout-checkin;
+        var daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+  
         jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
 
         var packagePrice;
@@ -578,13 +518,13 @@ jQuery(document).ready(function(){
 
             updateTotal();
         })
+        
     });
 
     var servicePrice;
 
     jQuery('.serviceSelect').change(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
-            //console.log(data[0].price);
             servicePrice = data[0].price;
             console.log(servicePrice);
 
@@ -694,8 +634,6 @@ jQuery(document).ready(function(){
     });
 
     jQuery(document).on('click', '.additionalServiceFormRemove', function() {
-        //console.log('FUUCK!');
-        //console.log(jQuery(this).attr('id'));
         var id = jQuery(this).attr('id').slice(27);  
         var divServiceID = '#additionalServiceID'+id;
         var divServiceName = '#divServiceName'+id;
@@ -723,8 +661,6 @@ function updateTotal() {
     var totalPrice = 0;
     var prices =  document.getElementsByClassName('invoicePrices');
 
-    //console.log(prices.length);
-    //console.log(prices[0].innerHTML);
     for (var index = 0; index < prices.length; index++) {
         console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
         totalPrice += parseInt(prices[index].innerHTML);

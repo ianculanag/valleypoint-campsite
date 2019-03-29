@@ -183,7 +183,7 @@
                         </div>--}}
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
-                            <select class="form-control" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}" class="accommodationPackages">
+                            <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
                                 <option value="1">Solo</option>
                                 <option value="2">2 Pax</option>
                                 <option value="3">3 pax</option>
@@ -199,7 +199,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control checkinDates" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
 
@@ -211,7 +211,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control checkoutDates" id="checkoutDate" value="">
+                                <input type="date" name="checkoutDate" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
                                 <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                             </div>
                         </div>
