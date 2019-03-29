@@ -32,9 +32,9 @@
                         </thead>
                         <tbody id="invoiceRows">
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
-                                <td id="invoiceDescription{{$unit->unitNumber}}">Glamping Solo</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">1350</td>
+                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
                                 <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
                             </tr>
                             </tbody>
@@ -58,11 +58,11 @@
                     <div class="form-group row">
                         <div class="col-md-4 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="">
+                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="">
                         </div>
                         <div class="col-md-5 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="">
+                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
@@ -72,7 +72,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="">
+                                <input class="form-control numberOfPaxGlamping"  required="required" min="1" max="100" name="numberOfPaxGlamping" type="number" placeholder="" value="">
                             </div>
                         </div>
                     </div>  
@@ -85,7 +85,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="">
+                                <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -273,7 +273,7 @@
                         {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
-                        <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
+                        <button type="button" class="btn btn-primary" id="proceedToPayment" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
                             Proceed to payment
                         </button>
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
@@ -307,7 +307,6 @@
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Total</th> 
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -322,11 +321,6 @@
                                     <td style="text-align:right;">4</td>
                                     <td style="text-align:right;">850</td>
                                     <td style="text-align:right;" class="chargesPrices">3400</td>
-                                    <td>
-                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
-                                            <span class="fa fa-minus" aria-hidden="true"></span>
-                                        </button>
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -339,11 +333,6 @@
                                     <td style="text-align:right;">2</td>
                                     <td style="text-align:right;">750</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
-                                    <td>
-                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
-                                            <span class="fa fa-minus" aria-hidden="true"></span>
-                                        </button>
-                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -351,7 +340,6 @@
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
                                     <th id="chargesGrandTotal" style="text-align:right;">1500</th>
-                                    <th></th>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -361,7 +349,6 @@
                                     <th style="text-align:right;"  colspan="3">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                     </th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

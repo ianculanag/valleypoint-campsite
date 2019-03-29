@@ -296,14 +296,40 @@ jQuery(document).ready(function(){
     });
 });
 
+/*Charges Modal*/
+jQuery('#proceedToPayment').click(function() {
+    var chargesRows = jQuery('#chargesRows');
+    chargesRows.html("");
+
+    var htmlString = "";
+    console.log(jQuery('.invoiceQuantities').length);
+
+    for(var index = 0; index < jQuery('.invoiceQuantities').length; index++) {
+        console.log(jQuery('.invoicePrices').eq(index).html());
+        //htmlString
+
+        htmlString += "<tr>";
+        htmlString += "<td></td>";
+        htmlString += "<td class='chargesDescriptions'>";
+        htmlString += "<input class='form-check-input' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceUnitPrices').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
+        htmlString += "</tr>";
+    }
+
+    chargesRows.html(htmlString);
+});
+/**/
+
 function makeInvoiceEntry(unitNumber) {
     var invoiceRows = jQuery('#invoiceRows');
 
     htmlString = "";
     htmlString += "<tr id='invoiceUnit"+unitNumber+"'>";
-    htmlString += "<td id='invoiceDescription"+unitNumber+"'>Glamping Solo</td>";
-    htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;'>1x1</td>";
-    htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;'>1350</td>";
+    htmlString += "<td id='invoiceDescription"+unitNumber+"' class='invoiceDescriptions'>Glamping Solo</td>";
+    htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;' class='invoiceQuantities'>1x1</td>";
+    htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;' class='invoiceUnitPrices'>1350</td>";
     htmlString += "<td id='invoiceTotalPrice"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350</td>";
     htmlString += "</tr>";
 
@@ -615,16 +641,19 @@ jQuery(document).ready(function(){
             
             let tdDescription = document.createElement('TD');
             let tdDescriptionBody = document.createTextNode(data[0].serviceName);
-            tdDescription.appendChild(tdDescriptionBody);
+            tdDescription.appendChild(tdDescriptionBody);            
+            tdDescription.className = 'invoiceDescriptions';
 
             let tdQuantity = document.createElement('TD');
             let tdQuantityBody = document.createTextNode(jQuery('#additionalServiceNumberOfPax').val());
-            tdQuantity.appendChild(tdQuantityBody);
+            tdQuantity.appendChild(tdQuantityBody);            
+            tdQuantity.className = 'invoiceQuantities';
             tdQuantity.style.textAlign = 'right';
 
             let tdUnitPrice = document.createElement('TD');
             let tdUnitPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceUnitPrice')[0].value);
-            tdUnitPrice.appendChild(tdUnitPriceBody);
+            tdUnitPrice.appendChild(tdUnitPriceBody);            
+            tdUnitPrice.className = 'invoiceUnitPrices';
             tdUnitPrice.style.textAlign = 'right';
             
             let tdTotalPrice = document.createElement('TD');
