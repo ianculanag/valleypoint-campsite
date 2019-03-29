@@ -117,12 +117,12 @@
                                             $totalBalance = $total - $totalPayment;
                                         @endphp
                                         <tr>
-                                            <td>{{$pending->serviceName}}</td>
-                                            <td style="text-align:right;">{{$pending->quantity}}</td>
-                                            <td style="text-align:right;">{{$pending->price}}</td>
+                                            <td class="invoiceDescriptions">{{$pending->serviceName}}</td>
+                                            <td style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
+                                            <td style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
                                             <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
                                             <td style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
-                                            </tr>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
@@ -633,7 +633,7 @@
                     <div class="mt-3" style="float:right;">
                         @if(count($pendingPayments) > 0)
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
+                        <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                             Proceed to payment
                         </button>
                         @else 
@@ -668,9 +668,9 @@
                                         Description
                                     </th>
                                     <th scope="col">Qty.</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Total</th> 
-                                    <th></th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Balance</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -683,7 +683,6 @@
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">4</td>
-                                    <td style="text-align:right;">850</td>
                                     <td style="text-align:right;" class="chargesPrices">3400</td>
                                     <td>
                                         <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
@@ -700,7 +699,6 @@
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">2</td>
-                                    <td style="text-align:right;">750</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
                                     <td>
                                         <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
@@ -713,15 +711,15 @@
                                 <tr>
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
-                                    <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                    <th id="invoiceTotalBalance" style="text-align:right;">2000</th>
                                     <th></th>
                                 </tr>
                                 <tr>
                                 </tr>
                                 <tr>
                                     <th></th>
-                                    <th scope="row">Amount paid:</th>
-                                    <th style="text-align:right;"  colspan="3">
+                                    <th colspan="2" scope="row">Amount paid:</th>
+                                    <th style="text-align:right;"  colspan="2">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                     </th>
                                     <th></th>

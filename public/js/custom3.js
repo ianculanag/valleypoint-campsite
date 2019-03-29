@@ -9,15 +9,18 @@ jQuery('#additionalServiceFormAddExtra').click(function(){
         let tdDescription = document.createElement('TD');
         let tdDescriptionBody = document.createTextNode(data[0].serviceName);
         tdDescription.appendChild(tdDescriptionBody);
+        tdDescription.className = 'invoiceDescriptions';
 
         let tdQuantity = document.createElement('TD');
         let tdQuantityBody = document.createTextNode(jQuery('#additionalServiceNumberOfPax').val());
         tdQuantity.appendChild(tdQuantityBody);
+        tdQuantity.className = 'invoiceQuantities';
         tdQuantity.style.textAlign = 'right';
 
         let tdUnitPrice = document.createElement('TD');
         let tdUnitPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceUnitPrice')[0].value);
         tdUnitPrice.appendChild(tdUnitPriceBody);
+        tdUnitPrice.className = 'invoiceUnitPrices';
         tdUnitPrice.style.textAlign = 'right';
         
         let tdTotalPrice = document.createElement('TD');
@@ -123,3 +126,27 @@ function updateBalance() {
     }
     jQuery('#invoiceTotalBalance').html(totalBalance);
 }
+
+/*Charges Modal*/
+jQuery('#showChargesModal').click(function() {
+    var chargesRows = jQuery('#chargesRows');
+    chargesRows.html("");
+    var htmlString = "";
+
+    for(var index = 0; index < jQuery('.invoiceQuantities').length; index++) {
+        htmlString += "<tr>";
+        htmlString += "<td></td>";
+        htmlString += "<td class='chargesDescriptions'>";
+        htmlString += "<input class='form-check-input invoiceDescriptions' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='invoiceQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='invoicePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='invoiceBalances'>"+jQuery('.invoiceBalances').eq(index).html()+"</td>";
+        htmlString += "<td><button type='button' id='deleteCharge' class='btn btn-sm btn-danger deleteCharge'><span class='fa fa-minus' aria-hidden='true'></span></button></td>";
+        htmlString += "</tr>";
+    }
+
+    chargesRows.html(htmlString);
+    updateBalance();
+    //console.log(totalBalance);
+});
+/**/
