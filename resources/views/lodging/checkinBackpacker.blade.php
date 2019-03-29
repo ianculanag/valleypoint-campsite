@@ -80,7 +80,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
+                                <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
                             </div>
                         </div>
                         <div class="col-md-3 mb-1">
