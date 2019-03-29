@@ -16,6 +16,7 @@
         <form method="POST" action="/checkinGlamping">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+        <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
@@ -32,7 +33,7 @@
                         <tbody id="invoiceRows">
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td id="invoiceDescription{{$unit->unitNumber}}">Glamping Solo</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1x1</td>
                                 <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">1350</td>
                                 <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
                             </tr>
@@ -212,7 +213,7 @@
                                     </span>
                                 </div>
                                 <input type="date" name="checkoutDate" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
-                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
+                                {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
                     </div>

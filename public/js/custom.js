@@ -271,18 +271,20 @@ jQuery(document).ready(function(){
         if(exists === true)
             event.preventDefault();*/
     });
+    
+    jQuery('#tokenfield').on('tokenfield:removetoken', function (e) {
+        if (e.attrs.value == jQuery('#selectedUnit').val()) {
+            alert('You cannot remove the selected unit.');
+            e.preventDefault();
+        }
+    });
 
     jQuery('#tokenfield').on('tokenfield:removedtoken', function (e) {
-        if(numberOfUnits == 1) {
-            alert('You cannot remove the last unit!');
-            e.preventDefault();
-        } else {
-            numberOfUnits--;
-            jQuery('#numberOfUnits').val(numberOfUnits);
-            removeRow(e.attrs.value);
-            removeInvoiceEntry(e.attrs.value);
-            //checkAvailability();
-        }
+        numberOfUnits--;
+        jQuery('#numberOfUnits').val(numberOfUnits);
+        removeRow(e.attrs.value);
+        removeInvoiceEntry(e.attrs.value);
+        //checkAvailability();
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
@@ -300,12 +302,89 @@ function makeInvoiceEntry(unitNumber) {
     htmlString = "";
     htmlString += "<tr id='invoiceUnit"+unitNumber+"'>";
     htmlString += "<td id='invoiceDescription"+unitNumber+"'>Glamping Solo</td>";
-    htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;'>1</td>";
+    htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;'>1x1</td>";
     htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;'>1350</td>";
     htmlString += "<td id='invoiceTotalPrice"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350</td>";
     htmlString += "</tr>";
 
     invoiceRows.append(htmlString);
+
+    if(jQuery('.checkoutDates').val() != "") {
+        //DUPLICATE CODE!!
+        var checkinDate = '#checkinDate'+unitNumber;
+        var checkoutDate = '#checkoutDate'+unitNumber;
+
+        var checkin = Date.parse(jQuery(checkinDate).val());
+        var checkout = Date.parse(jQuery(checkoutDate).val());
+
+        var timeDiff = checkout-checkin;
+        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+
+        var invoiceQuantity;
+
+        var packagePrice;
+        var totalPrice;
+
+        var invoiceUnitPrice;
+        var invoiceTotalPrice;
+
+        var hiddenTotalPrice;
+
+        invoiceQuantity = '#invoiceQuantity'+unitNumber;
+        accommodationPackage = '#accommodationPackage'+unitNumber;
+        invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+        invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+
+        hiddenTotalPrice = '#totalPrice'+unitNumber;
+
+        jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
+
+        packagePrice = jQuery(invoiceUnitPrice).html();  
+
+        console.log(packagePrice);
+        totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+        
+        jQuery(invoiceUnitPrice).html(packagePrice);            
+        jQuery(invoiceTotalPrice).html(totalPrice);   
+                    
+        jQuery(hiddenTotalPrice).val(totalPrice);   
+        //NEEDS REFACTORING
+    } else {
+        //DUPLICATED CODE
+        daysDiff = 1;
+
+        var invoiceQuantity;
+
+        var packagePrice;
+        var totalPrice;
+
+        var invoiceUnitPrice;
+        var invoiceTotalPrice;
+
+        var hiddenTotalPrice;
+
+        invoiceQuantity = '#invoiceQuantity'+unitNumber;
+        accommodationPackage = '#accommodationPackage'+unitNumber;
+        invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+        invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+
+        hiddenTotalPrice = '#totalPrice'+unitNumber;
+
+        jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
+
+        packagePrice = jQuery(invoiceUnitPrice).html();  
+
+        console.log(packagePrice);
+        totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+        
+        jQuery(invoiceUnitPrice).html(packagePrice);            
+        jQuery(invoiceTotalPrice).html(totalPrice);   
+                    
+        jQuery(hiddenTotalPrice).val(totalPrice);   
+        //NEEDS REFACTORING
+    }
+    
+    
     updateTotal();
 }
 
@@ -340,7 +419,7 @@ function makeRow(unitNumber) {
     htmlString += "</span>";
     htmlString += "</div>";
     htmlString += "<input type='date' name='checkoutDate"+unitNumber+"' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+"' value='"+jQuery('.checkoutDates').val()+"'>";
-    htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
+    //htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
     htmlString += "</div>";
     htmlString += "</div>";
 
@@ -414,111 +493,85 @@ jQuery(document).ready(function(){
                     
         jQuery(hiddenTotalPrice).val(totalPrice);   
         
-        document.getElementById('stayDuration').value = daysDiff;
+        //document.getElementById('stayDuration').value = daysDiff;
         
         updateTotal();
     });
-
-    /*jQuery(document).on('change', '#checkoutDate', function() {
-        var checkin = Date.parse(jQuery('#checkinDate').val());
-        var checkout = Date.parse(jQuery('#checkoutDate').val());
-
-        var timeDiff = checkout-checkin;
-        daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 * 24));
-
-        var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
-        //console.log(daysDiff);
-        //console.log(selectedUnits);
-
-        var currentUnit;
-        var invoiceQuantity;
-        var numberOfPaxGlamping;
-
-        var packagePrice;
-        var totalPrice;
-
-        var invoiceUnitPrice;
-        var invoiceTotalPrice;
-
-        var hiddenTotalPrice;
-
-        for(var index = 0; index < selectedUnits.length; index++) {
-            currentUnit = selectedUnits[index].value;
-        
-            invoiceQuantity = '#invoiceQuantity'+currentUnit;
-            numberOfPaxGlamping = '#numberOfPaxGlamping'+currentUnit;
-            invoiceUnitPrice = '#invoiceUnitPrice'+currentUnit;
-            invoiceTotalPrice = '#invoiceTotalPrice'+currentUnit;
-
-            hiddenTotalPrice = '#totalPrice'+currentUnit;
-
-            jQuery(invoiceQuantity).html(jQuery(numberOfPaxGlamping).val()+'x'+(daysDiff));
-
-            packagePrice = jQuery(invoiceUnitPrice).html();  
-
-            console.log(packagePrice);
-            totalPrice = packagePrice * jQuery(numberOfPaxGlamping).val() * (daysDiff);                       
-            
-            jQuery(invoiceUnitPrice).html(packagePrice);            
-            jQuery(invoiceTotalPrice).html(totalPrice);   
-                      
-            jQuery(hiddenTotalPrice).val(totalPrice);   
-            
-            document.getElementById('stayDuration').value = daysDiff;
-            
-            updateTotal();
-        }        
-        checkAvailability();
-    });*/
-
-
 
     jQuery(document).on('change', '#checkinDate', function() {
         checkAvailability();
     });
 
     jQuery(document).on('change','.accommodationPackages', function(){
+        var daysDiff = 0;
         var unitNumber = jQuery(this).attr('id').slice(20);
         var unitNumberId = '#'+jQuery(this).attr('id');
 
-        console.log(unitNumberId);
+        //console.log(unitNumberId);
         var invoiceQuantity = '#invoiceQuantity'+unitNumber;
-
 
         var checkinDate = '#checkinDate'+unitNumber;
         var checkoutDate = '#checkoutDate'+unitNumber;
 
-        var checkin = Date.parse(jQuery(checkinDate).val());
-        var checkout = Date.parse(jQuery(checkoutDate).val());
+        if (jQuery(checkoutDate).val() == "") {
+            console.log('fuck');  
+            daysDiff = 1;
+            jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
 
-        var timeDiff = checkout-checkin;
-        var daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
-  
-        jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
-
-        var packagePrice;
-        var totalPrice;
-        var invoiceDescription = '#invoiceDescription'+unitNumber;
-        var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
-        var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
-        
-        var hiddenTotalPrice = '#totalPrice'+unitNumber;
-        
-        jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
-            packagePrice = data[0].price;        
-            packageName = data[0].serviceName;       
+            var packagePrice;
+            var totalPrice;
+            var invoiceDescription = '#invoiceDescription'+unitNumber;
+            var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+            var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
             
-            jQuery(invoiceDescription).html(packageName);                    
-            jQuery(invoiceUnitPrice).html(packagePrice);
-            //console.log(daysDiff);
-            totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
-            jQuery(invoiceTotalPrice).html(totalPrice); 
+            var hiddenTotalPrice = '#totalPrice'+unitNumber;
+            
+            jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
+                packagePrice = data[0].price;        
+                packageName = data[0].serviceName;       
+                
+                jQuery(invoiceDescription).html(packageName);                    
+                jQuery(invoiceUnitPrice).html(packagePrice);
+                //console.log(daysDiff);
+                totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
+                jQuery(invoiceTotalPrice).html(totalPrice); 
 
-            jQuery(hiddenTotalPrice).val(totalPrice);
+                jQuery(hiddenTotalPrice).val(totalPrice);
 
-            updateTotal();
-        })
-        
+                updateTotal();
+            })
+        } else {
+            var checkin = Date.parse(jQuery(checkinDate).val());
+            var checkout = Date.parse(jQuery(checkoutDate).val());
+    
+            var timeDiff = checkout-checkin;
+            var daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+      
+            jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
+    
+            var packagePrice;
+            var totalPrice;
+            var invoiceDescription = '#invoiceDescription'+unitNumber;
+            var invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+            var invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+            
+            var hiddenTotalPrice = '#totalPrice'+unitNumber;
+            
+            jQuery.get('/getService/'+jQuery(unitNumberId).val(), function(data){ 
+                packagePrice = data[0].price;        
+                packageName = data[0].serviceName;       
+                
+                jQuery(invoiceDescription).html(packageName);                    
+                jQuery(invoiceUnitPrice).html(packagePrice);
+                //console.log(daysDiff);
+                totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
+                jQuery(invoiceTotalPrice).html(totalPrice); 
+    
+                jQuery(hiddenTotalPrice).val(totalPrice);
+    
+                updateTotal();
+            })
+        }    
     });
 
     var servicePrice;
@@ -662,9 +715,9 @@ function updateTotal() {
     var prices =  document.getElementsByClassName('invoicePrices');
 
     for (var index = 0; index < prices.length; index++) {
-        console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
+        //console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
         totalPrice += parseInt(prices[index].innerHTML);
-        console.log(totalPrice);
+        //console.log(totalPrice);
     }
     document.getElementById('invoiceGrandTotal').innerHTML="";
     document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
