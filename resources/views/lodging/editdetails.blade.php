@@ -25,7 +25,7 @@
                                 Paid Charges
                             </a>
                         </p>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body p-0">
                                 <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
                                     <thead>
@@ -90,9 +90,9 @@
                                 Pending Charges
                             </a>
                         </p>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body p-0">
-                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
                                     <thead>
                                         <tr>
                                         @if(count($pendingPayments) > 0)
@@ -183,11 +183,11 @@
                         <div class="form-group row">
                             <div class="col-md-4 mb-1">
                                 <label for="firstName">First name</label>
-                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}">
+                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}" required>
                             </div>
                             <div class="col-md-5 mb-1">
                                 <label for="lastName">Last name</label>
-                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}">
+                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}" required>
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="unitNumberOfPax">No. of pax</label>
@@ -197,7 +197,7 @@
                                             <i class="fa fa-users" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}">
+                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" required>
                                 </div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}">
+                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-1">
@@ -466,7 +466,7 @@
                         </div>
                         <div style="margin-top:2em;" id="divButton">
                             <div class="input-group">
-                                <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" disabled>
+                                <button type="button" id="additionalServiceFormAddExtra" class="btn btn-primary additionalServiceFormAddExtra" disabled>
                                     <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -602,7 +602,7 @@
                     </div-->
                     
                     <div class="mt-3" style="float:right;">
-                        <!--button class="btn btn-success" style="width:10em;" type="submit">Save</button-->
+                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
                         <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
                             Proceed to payment
                         </button>
@@ -616,7 +616,7 @@
     </div>
     <!-- charges modal -->
     <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:70%">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Charges</h5>
@@ -626,14 +626,18 @@
                 </div>
                 <div class="modal-body">
                     <form class="card my-0">
-                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
+                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th scope="col" style="width:50%">Desciption</th>
+                                    <th scope="col" style="width:50%">
+                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
+                                        Description
+                                    </th>
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Total</th> 
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -641,25 +645,35 @@
                                     <td></td>
                                     <td>
                                         <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge1">
+                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
                                         Glamping 4 pax
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">4</td>
                                     <td style="text-align:right;">850</td>
                                     <td style="text-align:right;" class="chargesPrices">3400</td>
+                                    <td>
+                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
+                                            <span class="fa fa-minus" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>
                                         <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge2">
+                                        <input class="form-check-input" type="checkbox" id="charge2" checked>
                                         Airsoft
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">2</td>
                                     <td style="text-align:right;">750</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
+                                    <td>
+                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
+                                            <span class="fa fa-minus" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -667,6 +681,7 @@
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
                                     <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                    <th></th>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -676,6 +691,7 @@
                                     <th style="text-align:right;"  colspan="3">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                     </th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

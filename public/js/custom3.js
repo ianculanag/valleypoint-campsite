@@ -1,37 +1,5 @@
-/*jQuery(document).ready(function(){
-    
-    var servicePrice;
-
-    jQuery('.serviceSelect').change(function(){
-        jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
-            servicePrice = data[0].price;
-            console.log(servicePrice);
-
-            document.getElementsByClassName('additionalServiceUnitPrice')[0].value = servicePrice;
-            document.getElementsByClassName('additionalServiceUnitPrice')[1].value = servicePrice;
-            var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
-
-            if(numberOfPax) {
-                document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;                
-                document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
-                jQuery('.additionalServiceFormAdd').prop('disabled', false);
-            }
-        })
-    });
-
-
-    jQuery('#additionalServiceNumberOfPax').change(function(){
-        console.log('Wooh');
-        var numberOfPax = document.getElementById('additionalServiceNumberOfPax').value;
-        if(document.getElementById('serviceSelect').value) {
-            document.getElementsByClassName('additionalServiceTotalPrice')[0].value = servicePrice * numberOfPax;            
-            document.getElementsByClassName('additionalServiceTotalPrice')[1].value = servicePrice * numberOfPax;
-            jQuery('.additionalServiceFormAdd').prop('disabled', false);
-        }
-    });
-
-    let additionalServices = 0;
-    jQuery('.additionalServiceFormAdd').click(function(){
+let additionalServices = 0;
+    jQuery('.additionalServiceFormAddExtra').click(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
             additionalServices++;
             let tbody = jQuery('#invoiceRows');
@@ -107,43 +75,6 @@
             jQuery('#additionalServiceUnitPrice').val('');           
             jQuery('#additionalServiceTotalPrice').val('');
 
-            jQuery('#additionalServiceFormAdd').prop('disabled', true);
+            jQuery('#additionalServiceFormAddExtra').prop('disabled', true);
         })
     });
-
-    jQuery(document).on('click', '.additionalServiceFormRemove', function() {
-        var id = jQuery(this).attr('id').slice(27);  
-        var divServiceID = '#additionalServiceID'+id;
-        var divServiceName = '#divServiceName'+id;
-        var divQuantity = '#divQuantity'+id;
-        var divUnitPrice = '#divUnitPrice'+id;
-        var divTotalPrice = '#divTotalPrice'+id;
-        var divButton = '#divButton'+id;
-
-        jQuery(divServiceID).remove();
-        jQuery(divServiceName).remove();
-        jQuery(divQuantity).remove();
-        jQuery(divUnitPrice).remove();
-        jQuery(divTotalPrice).remove();
-        jQuery(divButton).remove();
-
-        var divInvoiceRow = '#invoiceRow'+id;
-        jQuery(divInvoiceRow).remove();
-        
-        console.log(id);
-        updateTotal();
-    });
-}); 
-
-function updateTotal() {
-    var totalPrice = 0;
-    var prices =  document.getElementsByClassName('invoicePrices');
-    for (var index = 0; index < prices.length; index++) {
-        console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
-        totalPrice += parseInt(prices[index].innerHTML);
-        console.log(totalPrice);
-    }
-    document.getElementById('invoiceGrandTotal').innerHTML="";
-    document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
-}*/
-

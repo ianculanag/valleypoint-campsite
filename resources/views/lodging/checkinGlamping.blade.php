@@ -20,7 +20,7 @@
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
                     <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:40%">Description</th>
@@ -272,6 +272,9 @@
                         {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
+                        <button type="button" class="btn btn-primary" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
+                            Proceed to payment
+                        </button>
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
@@ -292,14 +295,18 @@
                 </div>
                 <div class="modal-body">
                     <form class="card my-0">
-                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
+                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th scope="col" style="width:50%">Desciption</th>
+                                    <th scope="col" style="width:50%">
+                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
+                                        Description
+                                    </th>
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Total</th> 
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -307,25 +314,35 @@
                                     <td></td>
                                     <td>
                                         <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge1">
+                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
                                         Glamping 4 pax
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">4</td>
                                     <td style="text-align:right;">850</td>
                                     <td style="text-align:right;" class="chargesPrices">3400</td>
+                                    <td>
+                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
+                                            <span class="fa fa-minus" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>
                                         <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge2">
+                                        <input class="form-check-input" type="checkbox" id="charge2" checked>
                                         Airsoft
                                         <!--/div-->
                                     </td>
                                     <td style="text-align:right;">2</td>
                                     <td style="text-align:right;">750</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
+                                    <td>
+                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
+                                            <span class="fa fa-minus" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -333,6 +350,7 @@
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
                                     <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                    <th></th>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -342,6 +360,7 @@
                                     <th style="text-align:right;"  colspan="3">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                     </th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
