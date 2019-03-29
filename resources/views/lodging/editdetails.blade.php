@@ -27,7 +27,7 @@
                         </p>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body p-0">
-                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                                <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
                                     <thead>
                                         <tr>
                                         @if(count($payments) > 0)
@@ -289,6 +289,12 @@
                                     <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$units->serviceName}}</option>
                                     </select>
+                                    {{--<select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
+                                        <option value="1">Solo</option>
+                                        <option value="2">2 Pax</option>
+                                        <option value="3">3 pax</option>
+                                        <option value="4">4 pax</option>
+                                    </select>--}}
                                     @endforeach
                                 </div>
                                 <div class="col-md-3 mb-1">
@@ -417,7 +423,7 @@
                             </div>
                         </div>
                     </div>--}}
-                    <hr class="mb-4">
+                    <hr class="mb-4 mt-4">
                     <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">
                             <h5 style="margin-bottom:.80em;">Additional Services</h5>
@@ -610,7 +616,7 @@
     </div>
     <!-- charges modal -->
     <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:50%">
+        <div class="modal-dialog" role="document" style="width:70%">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Charges</h5>
@@ -620,11 +626,11 @@
                 </div>
                 <div class="modal-body">
                     <form class="card my-0">
-                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.83em;">
+                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:.88em;">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th scope="col" style="width:55%">Desciption</th>
+                                    <th scope="col" style="width:50%">Desciption</th>
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Total</th> 
