@@ -51,12 +51,12 @@
             <div class="col-md-8 order-md-1">
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                 <div class="form-group row">
-                    <div class="col-md-5 mb-1">
-                        <label for="firstName">First Name</label>
+                    <div class="col-md-6 mb-1">
+                        <label for="firstName">First name</label>
                         <input type="text" name="firstName" required class="form-control" maxlength="15" placeholder="">
                     </div>
-                        <div class="col-md-5 mb-1">
-                            <label for="lastName">Last Name</label>
+                        <div class="col-md-6 mb-1">
+                            <label for="lastName">Last name</label>
                             <input type="text" name="lastName" required class="form-control" maxlength="20" placeholder="">
                         </div>  
                     </div> 
@@ -72,7 +72,7 @@
                                 <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="09#########" value="">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-4 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -83,14 +83,14 @@
                                 <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
                             </div>
                         </div>
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-4 mb-1">
                             <label for="accommodationType">Accommodation</label>
                             <input type="text" id="accommodationType" class="form-control" placeholder="Backpacker" disabled>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                            <div class="col-md-5 mb-1">
+                            <div class="col-md-6 mb-1">
                                 <label for="checkinDate">Check-in date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -101,7 +101,7 @@
                                     <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
-                            <div class="col-md-5 mb-1">
+                            <div class="col-md-6 mb-1">
                                 <label for="checkoutDate">Check-out date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -117,7 +117,7 @@
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row" id="unitDetails">
-                        <div class="col-md-3 mb-1">
+                        <div class="col-md-4 mb-1">
                             <label for="unitID">No. of bunk/s</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -128,7 +128,7 @@
                             <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="1" min="1" max="20">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-7 mb-1">
                             <label for="roomNumber">Room/s</label>
                             <select name="roomNumber" class="form-control" id="room">
                                 <option value="1">Room 1</option>
