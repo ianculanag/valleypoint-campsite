@@ -276,7 +276,7 @@
                         <button type="button" class="btn btn-primary" id="proceedToPayment" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
                             Proceed to payment
                         </button>
-                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
+                        <!--button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button-->
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
@@ -300,8 +300,8 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th scope="col" style="width:50%">
-                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
+                                    <th scope="col" style="width:40%">
+                                        <input class="form-check-input" type="checkbox" id="selectAll" checked>
                                         Description
                                     </th>
                                     <th scope="col">Qty.</th>
@@ -310,7 +310,7 @@
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
-                                <tr>
+                                {{--<tr>
                                     <td></td>
                                     <td>
                                         <!--div class="form-check"-->
@@ -333,7 +333,7 @@
                                     <td style="text-align:right;">2</td>
                                     <td style="text-align:right;">750</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
-                                </tr>
+                                </tr>--}}
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -355,7 +355,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success">Check-in</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

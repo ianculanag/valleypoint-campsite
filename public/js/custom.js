@@ -304,6 +304,8 @@ jQuery('#proceedToPayment').click(function() {
     var htmlString = "";
     console.log(jQuery('.invoiceQuantities').length);
 
+    var chargesGrandTotal = parseFloat(0);
+
     for(var index = 0; index < jQuery('.invoiceQuantities').length; index++) {
         console.log(jQuery('.invoicePrices').eq(index).html());
         //htmlString
@@ -311,14 +313,37 @@ jQuery('#proceedToPayment').click(function() {
         htmlString += "<tr>";
         htmlString += "<td></td>";
         htmlString += "<td class='chargesDescriptions'>";
-        htmlString += "<input class='form-check-input' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<input class='form-check-input paymentCheckboxes' type='checkbox' id='charge"+index+"' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceUnitPrices').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
         htmlString += "</tr>";
+
+        chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html());
     }
 
     chargesRows.html(htmlString);
+
+    jQuery('#chargesGrandTotal').html(chargesGrandTotal);
+});
+
+jQuery('#selectAll').change(function() {
+    var checkboxes = jQuery(this).closest('form').find(':checkbox');
+    checkboxes.prop('checked', jQuery(this).is(':checked'));
+});
+
+jQuery(document).on('change', '.paymentCheckboxes', function() {
+    var chargesGrandTotal = parseFloat(jQuery('#chargesGrandTotal').html());
+    var chargeNumber = jQuery(this).attr('id').slice(6);
+    var invoicePrice = parseFloat(jQuery('.invoicePrices').eq(chargeNumber).html());
+    console.log(chargesGrandTotal);
+    if(!(jQuery(this).is(':checked'))) {
+        var newGrandTotal = chargesGrandTotal-invoicePrice;        
+        jQuery('#chargesGrandTotal').html(newGrandTotal);
+    } else {
+        var newGrandTotal = chargesGrandTotal+invoicePrice;        
+        jQuery('#chargesGrandTotal').html(newGrandTotal);
+    }
 });
 /**/
 
