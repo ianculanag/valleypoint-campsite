@@ -29,11 +29,11 @@ class CreateAccommodationsTable extends Migration
             $table->increments('id');                  
             $table->integer('numberOfPax')->default(1);
             $table->integer('numberOfUnits')->default(1);
-            $table->dateTime('checkinDatetime');
-            $table->dateTime('checkoutDatetime');
-            $table->integer('serviceID')->unsigned();  
+            //$table->dateTime('checkinDatetime');
+            //$table->dateTime('checkoutDatetime');
+            //$table->integer('serviceID')->unsigned();  
             $table->integer('userID')->unsigned();
-            $table->foreign('serviceID')->references('id')->on('Services');
+            //$table->foreign('serviceID')->references('id')->on('Services');
             $table->foreign('userID')->references('id')->on('User');
             $table->timestamps();
         });

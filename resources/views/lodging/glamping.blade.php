@@ -87,7 +87,7 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
+                    <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
                     <p></p>
                 @endif
                 </div>

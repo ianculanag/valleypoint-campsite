@@ -86,7 +86,7 @@
             </div>
     </div>--}}
     
-    @include('inc.sidebarlodging')
+    @include('inc.sidebaradmin')
     <div class="container main-content col-md-10">
         @yield('content')
     </div>

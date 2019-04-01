@@ -18,6 +18,8 @@ class CreateAccommodationUnitsTable extends Migration
             $table->integer('unitID')->unsigned();         
             $table->primary(['accommodationID', 'unitID']);
             $table->integer('numberOfPax');
+            $table->dateTime('checkinDatetime');
+            $table->dateTime('checkoutDatetime');
             $table->integer('serviceID')->default(5);
             $table->enum('status', ['ongoing','finished']);
             $table->foreign('accommodationID')->references('id')->on('Accommodations');
