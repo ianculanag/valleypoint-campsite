@@ -42,8 +42,8 @@
                                         <tr>
                                             <td>{{$payment->serviceName}}</td>
                                             <td style="text-align:right;">{{$payment->quantity}}</td>
-                                            <td style="text-align:right;">{{$payment->price}}</td>
-                                            <td style="text-align:right;">{{$payment->totalPrice}}</td>
+                                            <td style="text-align:right;">{{$payment->price}}.00</td>
+                                            <td style="text-align:right;" type="number" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00">{{$payment->totalPrice}}.00</td>
                                             </tr>
                                         @php
                                             $total = 0;
@@ -59,7 +59,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th style="text-align:right;">{{$total}}</th>
+                                            <th style="text-align:right;">{{$total}}.00</th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="3" scope="row">Balance:</th>
@@ -173,7 +173,7 @@
                                         </tr>
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
-                                            <th id="invoiceTotalBalance" style="text-align:right;"></th>
+                                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;"></th>
                                         </tr>
                                     </tfoot>
                                     @endif
@@ -714,7 +714,7 @@
                                 <tr>
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
-                                    <th id="invoiceTotalBalance" style="text-align:right;">2000</th>
+                                    <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;">FUck</th>
                                     <th></th>
                                 </tr>
                                 <tr>

@@ -132,7 +132,7 @@ function updateBalance() {
 }
 
 /*Charges Modal*/
-jQuery('#showChargesModal').click(function() {
+jQuery(document).on('click', '#showChargesModal', function() {
     var chargesRows = jQuery('#chargesRows');
     chargesRows.html("");
     var htmlString = "";
@@ -141,16 +141,26 @@ jQuery('#showChargesModal').click(function() {
         htmlString += "<tr>";
         htmlString += "<td></td>";
         htmlString += "<td class='chargesDescriptions'>";
-        htmlString += "<input class='form-check-input invoiceDescriptions' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='invoiceQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='invoicePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='invoiceBalances'>"+jQuery('.invoiceBalances').eq(index).html()+"</td>";
+        htmlString += "<input class='form-check-input chargeDescriptions' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargeQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargeBalances'>"+jQuery('.invoiceBalances').eq(index).html()+"</td>";
         htmlString += "<td><button type='button' id='deleteCharge' class='btn btn-sm btn-danger deleteCharge'><span class='fa fa-minus' aria-hidden='true'></span></button></td>";
         htmlString += "</tr>";
     }
 
     chargesRows.html(htmlString);
-    updateBalance();
-    //console.log(totalBalance);
+
+    var totalBalance = 0;
+    var balance =  jQuery('.chargeBalances');
+
+    for (var index = 0; index < balance.length; index++) {
+        totalBalance += parseInt(balance.eq(index).html());
+    }    
+    jQuery('#invoiceTotalBalanceModal').html(totalBalance);
 });
 /**/
+
+jQuery(document).ready(function(){
+    myHTMLNumberInput.onchange = setTwoNumberDecimal;
+});
