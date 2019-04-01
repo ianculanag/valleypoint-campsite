@@ -76,7 +76,7 @@ class UnitsController extends Controller
      */
     public function glamping()
     {
-        $units = DB::table('units')
+        /*$units = DB::table('units')
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
@@ -88,7 +88,24 @@ class UnitsController extends Controller
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')   
         //->where('guests.listedUnder', '=', null)        
         ->orderBy('unitID')
-        ->get(); 
+        ->get(); */
+
+        $units = DB::table('units')
+        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
+                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
+                 'accommodations.id AS accommodationID', 'accommodations.userID', 
+                 'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
+        ->orderBy('unitID')
+        ->get();
+
+        //return $units;
         
         return view('lodging.glamping')->with('units', $units);
     }
