@@ -193,19 +193,21 @@ class UnitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function loadUnit($id)
+    public function loadGlampingUnit($id)
     {
         return DB::table('units')
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
-                 'accommodation_units.status', 'services.serviceName', 
-                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
-                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName',   'guests.contactNumber')   
-        ->where('unitID', '=', $id)   
+                 'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
+                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
+                 'accommodations.id AS accommodationID', 'accommodations.userID', 
+                 'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
+        ->where('unitID', '=', $id)
         ->get(); 
     }
 
