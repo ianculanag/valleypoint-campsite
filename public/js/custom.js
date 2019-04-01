@@ -474,6 +474,7 @@ function makeRow(unitNumber) {
     var htmlString = "";
     htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
     htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
+    htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
     htmlString += "</div>";
     htmlString += "<div class='col-md-2 mb-1' id='divAccommodationPackage"+unitNumber+"'>";
     htmlString += "<select class='form-control accommodationPackages' name='accommodationPackage"+unitNumber+"' id='accommodationPackage"+unitNumber+"'>";

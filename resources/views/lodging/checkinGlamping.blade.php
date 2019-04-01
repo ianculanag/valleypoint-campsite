@@ -169,6 +169,7 @@
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                            <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                         </div>
                         {{--<div class="col-md-3 mb-1" id="divNumberOfPax{{$unit->unitNumber}}"  style="display:none;">
                             <label for="unitNumberOfPax">No. of pax</label>
@@ -200,7 +201,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
 
@@ -212,7 +213,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
+                                <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
