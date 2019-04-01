@@ -73,9 +73,9 @@
                                         </tr>--}}
                                     </tfoot>
                                     @else
-                                        <th class="text-center">
+                                        <td class="text-center">
                                             No pending payments to show
-                                        </th>
+                                        </td>
                                     </tr>
                                     @endif
                                 </table>
@@ -160,9 +160,9 @@
                                             <td style="text-align:right;"></td>
                                         </tr-->
                                         <tr>
-                                            <th colspan="5" id="noPendingPayments" class="text-center">
+                                            <td colspan="5" id="noPendingPayments" class="text-center">
                                                 No pending payments to show
-                                            </th>
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tfoot style="">
@@ -632,19 +632,22 @@
                     
                     <div class="mt-3" style="float:right;">
                         @if(count($pendingPayments) > 0)
-                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
                         <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
-                            Proceed to payment
+                            Get payment
                         </button>
-                        @else 
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
+                        @else
                         <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
-                            Proceed to payment
-                        </button>
+                            Get payment
+                        </button> 
+                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
                         @endif
-                        <a href="/glamping" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="width:11em;" type="button">Cancel</button>
+                        <a {{--href="/glamping"--}} style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
+                        <!--button type="button" class="btn btn-primary" style="width:11em;" id="unsavedChanges" data-toggle="modal" data-target="#unsavedChagesModal">
+                            Unsaved try
+                        </button--> 
                     </div>
                 </form>
             </div>
@@ -732,12 +735,61 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- end of charges modal -->
+    <!-- unsaved changes modal -->
+    <div class="modal fade" id="unsavedChagesModal" tabindex="-1" role="dialog" aria-labelledby="unsavedChagesModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Unsaved changes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> You have unsaved changes. Are you sure you want to leave this page? </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" style="width:5em;">Yes</button>
+                    <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- unsaved changes modal -->
+
+    <script>
+        /*$(function () {
+            var unsaved = false;
+            $(":input").change(function () {
+                unsaved = true;
+            });
+
+            $('#cancelChanges').click(function () {
+                if (unsaved) {
+                    var flag = confirm("Job Function Not Saved. Are you Sure you want to leave with out saving the data?");
+                    if (flag)
+                        $('#unsavedChangesModal').modal('hide');
+                }
+                else
+                    $('#unsavedChangesModal').modal('hide');
+            });
+        });
+        $('#body-content').on('change keyup keydown', 'input, textarea, select', function (e) {
+            $(this).addClass('changed-input');
+        });
+        $(window).on('beforeunload', function () {
+            if ($('.changed-input').length) {
+                return 'You haven\'t saved your changes.';
+            }
+        });*/
+    </script>
+
     @endforeach  
 @endsection
