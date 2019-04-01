@@ -32,6 +32,7 @@
                         </thead>
                         <tbody id="invoiceRows">
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
+                                <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                                 <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
                                 <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
@@ -42,6 +43,11 @@
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                                    Get payment
+                                </button></td>
                             </tr>
                             {{--<tr>
                                 <th colspan="1">Amount Paid:</th>
@@ -274,29 +280,27 @@
                         {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
-                        <button type="button" class="btn btn-primary" id="proceedToPayment" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
-                            Get payment
-                        </button>
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
                     </div>
-                </form>
             </div>
         </div>
     <!-- charges modal -->
     <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
         <div class="modal-dialog" role="document" style="width:70%">
             <div class="modal-content">
+                <div id="selectedPayments" style="display:none;">
+                </div>
                 <div class="modal-header">
                     <h5 class="modal-title">Charges</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form class="card my-0">
+                <div class="modal-body my-0">
+                    <!--form class="card my-0"-->
                         <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
                             <thead>
                                 <tr>
@@ -311,30 +315,6 @@
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
-                                {{--<tr>
-                                    <td></td>
-                                    <td>
-                                        <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
-                                        Glamping 4 pax
-                                        <!--/div-->
-                                    </td>
-                                    <td style="text-align:right;">4</td>
-                                    <td style="text-align:right;">850</td>
-                                    <td style="text-align:right;" class="chargesPrices">3400</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <!--div class="form-check"-->
-                                        <input class="form-check-input" type="checkbox" id="charge2" checked>
-                                        Airsoft
-                                        <!--/div-->
-                                    </td>
-                                    <td style="text-align:right;">2</td>
-                                    <td style="text-align:right;">750</td>
-                                    <td style="text-align:right;" class="chargesPrices">1500</td>
-                                </tr>--}}
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -348,7 +328,7 @@
                                     <th></th>
                                     <th scope="row">Amount paid:</th>
                                     <th style="text-align:right;"  colspan="3">
-                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
                                     </th>
                                 </tr>
                             </tfoot>
@@ -356,8 +336,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="savePayments" class="btn btn-success" data-dismiss="modal">Save Changes</button>
+                    <!--button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button-->
                 </div>
             </div>
         </div>

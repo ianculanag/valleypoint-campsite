@@ -184,7 +184,7 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodation;    
+        $accommodation = new Accommodations;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
         
         /*for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop one
@@ -256,7 +256,7 @@ class AccommodationsController extends Controller
                     $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
-                    $charges->remarks = 'full';
+                    $charges->remarks = 'unpaid';
                     $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
                     $charges->save();

@@ -306,20 +306,27 @@ jQuery('#proceedToPayment').click(function() {
 
     var chargesGrandTotal = parseFloat(0);
 
+    var checked = "";
+
     for(var index = 0; index < jQuery('.invoiceQuantities').length; index++) {
-        console.log(jQuery('.invoicePrices').eq(index).html());
-        //htmlString
+        if(jQuery('.invoiceCheckboxes').eq(index).prop('checked') == true) {
+            checked = "checked";
+        } else {
+            checked = "";
+        }
 
         htmlString += "<tr>";
         htmlString += "<td></td>";
         htmlString += "<td class='chargesDescriptions'>";
-        htmlString += "<input class='form-check-input paymentCheckboxes' type='checkbox' id='charge"+index+"' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<input class='form-check-input paymentCheckboxes' type='checkbox' id='charge"+index+"' "+checked+">"+jQuery('.invoiceDescriptions').eq(index).html()+'</td>';
         htmlString += "<td style='text-align:right;' class='chargesQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargesUnitPrices'>"+jQuery('.invoiceUnitPrices').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargesInvoicePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
         htmlString += "</tr>";
 
-        chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html());
+        if(jQuery('.invoiceCheckboxes').eq(index).prop('checked') == true) {
+            chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html()); 
+        }
     }
 
     chargesRows.html(htmlString);
@@ -353,10 +360,12 @@ jQuery(document).on('change', '.paymentCheckboxes', function() {
     var invoicePrice = parseFloat(jQuery('.invoicePrices').eq(chargeNumber).html());
     console.log(chargesGrandTotal);
     if(!(jQuery(this).is(':checked'))) {
-        var newGrandTotal = chargesGrandTotal-invoicePrice;        
+        var newGrandTotal = chargesGrandTotal-invoicePrice;
+        jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', false);      
         jQuery('#chargesGrandTotal').html(newGrandTotal);
     } else {
-        var newGrandTotal = chargesGrandTotal+invoicePrice;        
+        var newGrandTotal = chargesGrandTotal+invoicePrice;            
+        jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', true);       
         jQuery('#chargesGrandTotal').html(newGrandTotal);
     }
 
@@ -376,6 +385,17 @@ function checkToggledCheckboxes(){
         jQuery('#selectAll').prop('checked', false);
     }
 }
+
+jQuery('#savePayments').click(function() {
+    jQuery('#selectedPayments').html("");
+    var htmlString = "";
+    for(var index = 0; index < jQuery('.paymentCheckboxes').length; index++){
+        if(jQuery('.paymentCheckboxes').eq(index).prop('checked')){
+            htmlString += "<input type='number' name='payment"+index+"' value='"+jQuery('.chargesInvoicePrices').eq(index).html()+"' style='display:none;'>";
+        }
+    }
+    jQuery('#selectedPayments').html(htmlString);
+});
 /**/
 
 function makeInvoiceEntry(unitNumber) {
@@ -383,6 +403,7 @@ function makeInvoiceEntry(unitNumber) {
 
     htmlString = "";
     htmlString += "<tr id='invoiceUnit"+unitNumber+"'>";
+    htmlString += "<td style='display:none;'><input id='invoiceCheckBox'"+unitNumber+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
     htmlString += "<td id='invoiceDescription"+unitNumber+"' class='invoiceDescriptions'>Glamping Solo</td>";
     htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;' class='invoiceQuantities'>1x1</td>";
     htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;' class='invoiceUnitPrices'>1350</td>";
@@ -576,8 +597,7 @@ jQuery(document).ready(function(){
                     
         jQuery(hiddenTotalPrice).val(totalPrice);   
         
-        //document.getElementById('stayDuration').value = daysDiff;
-        
+        //document.getElementById('stayDuration').value = daysDiff;        
         updateTotal();
     });
 
@@ -694,39 +714,21 @@ jQuery(document).ready(function(){
     jQuery('.additionalServiceFormAdd').click(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
             additionalServices++;
-            let tbody = jQuery('#invoiceRows');
-            let tr =  document.createElement('TR');
-            tr.id = 'invoiceRow'+additionalServices;
+            var htmlStringRow = "";
+
+            //let tbody = jQuery('#invoiceRows');
+            //let tr =  document.createElement('TR');
+            //tr.id = 'invoiceRow'+additionalServices;
+
+            htmlStringRow += "<tr id='invoiceRow"+additionalServices+"'>";
+            htmlStringRow += "<td style='display:none;'><input id='invoiceCheckBox"+additionalServices+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
+            htmlStringRow += "<td id='invoiceDescription"+additionalServices+"' class='invoiceDescriptions'>"+data[0].serviceName+"</td>";
+            htmlStringRow += "<td id='invoiceQuantity"+additionalServices+"' style='text-align:right;' class='invoiceQuantities'>"+jQuery('#additionalServiceNumberOfPax').val()+"</td>";
+            htmlStringRow += "<td id='invoiceUnitPrice"+additionalServices+"' style='text-align:right;' class='invoiceUnitPrices'>"+document.getElementsByClassName('additionalServiceUnitPrice')[0].value+"</td>";
+            htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"</td>";
+            htmlStringRow += "</tr>";
             
-            let tdDescription = document.createElement('TD');
-            let tdDescriptionBody = document.createTextNode(data[0].serviceName);
-            tdDescription.appendChild(tdDescriptionBody);            
-            tdDescription.className = 'invoiceDescriptions';
-
-            let tdQuantity = document.createElement('TD');
-            let tdQuantityBody = document.createTextNode(jQuery('#additionalServiceNumberOfPax').val());
-            tdQuantity.appendChild(tdQuantityBody);            
-            tdQuantity.className = 'invoiceQuantities';
-            tdQuantity.style.textAlign = 'right';
-
-            let tdUnitPrice = document.createElement('TD');
-            let tdUnitPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceUnitPrice')[0].value);
-            tdUnitPrice.appendChild(tdUnitPriceBody);            
-            tdUnitPrice.className = 'invoiceUnitPrices';
-            tdUnitPrice.style.textAlign = 'right';
-            
-            let tdTotalPrice = document.createElement('TD');
-            let tdTotalPriceBody = document.createTextNode(document.getElementsByClassName('additionalServiceTotalPrice')[0].value);
-            tdTotalPrice.appendChild(tdTotalPriceBody);
-            tdTotalPrice.className = 'invoicePrices';
-            tdTotalPrice.style.textAlign = 'right';
-
-            tr.append(tdDescription);
-            tr.append(tdQuantity);
-            tr.append(tdUnitPrice);
-            tr.append(tdTotalPrice);
-            console.log('Tama');
-            tbody.append(tr);
+            jQuery('#invoiceRows').append(htmlStringRow);
 
             updateTotal();
 
