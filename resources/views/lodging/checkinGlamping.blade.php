@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
                     <table class="table table-striped" style="font-size:.88em;">
                         <thead>
                             <tr>
@@ -274,9 +274,9 @@
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
                         <button type="button" class="btn btn-primary" id="proceedToPayment" style="width:11em;" data-toggle="modal" data-target="#chargesModal">
-                            Proceed to payment
+                            Get payment
                         </button>
-                        <!--button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button-->
+                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
@@ -355,7 +355,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Check-in</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

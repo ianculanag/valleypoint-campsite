@@ -42,7 +42,7 @@
             @if($unit->unitType == 'tent')   
 
                 @if($unit->status == 'ongoing')
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>       
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">

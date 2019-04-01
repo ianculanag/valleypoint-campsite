@@ -24,7 +24,7 @@ Route::get('/guestcheckout/{id}', 'UnitsController@loadGuestDetails');
 Route::resource('staff', 'StaffController');
 
 //
-Route::get('/loadDetails/{id}', 'UnitsController@loadUnit'); 
+Route::get('/loadGlampingDetails/{id}', 'UnitsController@loadGlampingUnit'); 
 
 Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();

@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
-    jQuery('.load-details').click(function(){
-        jQuery.get('loadDetails/'+$(this).attr('id'), function(data){
-            console.log(data);
+    jQuery('.load-glamping-details').click(function(){
+        jQuery.get('loadGlampingDetails/'+$(this).attr('id'), function(data){
+            /*console.log(data);
             
             let modal = document.getElementById('modal-body');
             modal.innerHTML = ""
@@ -144,7 +144,7 @@ jQuery(document).ready(function(){
             //append everything
 
             jQuery("#editDetails").attr("href", "editdetails/"+data[0].unitID);
-            jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+            jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);*/
         })
     });
 }); 
@@ -314,9 +314,9 @@ jQuery('#proceedToPayment').click(function() {
         htmlString += "<td></td>";
         htmlString += "<td class='chargesDescriptions'>";
         htmlString += "<input class='form-check-input paymentCheckboxes' type='checkbox' id='charge"+index+"' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoiceUnitPrices').eq(index).html()+"</td>";
-        htmlString += "<td style='text-align:right;' class='chargesPrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesUnitPrices'>"+jQuery('.invoiceUnitPrices').eq(index).html()+"</td>";
+        htmlString += "<td style='text-align:right;' class='chargesInvoicePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
         htmlString += "</tr>";
 
         chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html());
@@ -330,7 +330,22 @@ jQuery('#proceedToPayment').click(function() {
 jQuery('#selectAll').change(function() {
     var checkboxes = jQuery(this).closest('form').find(':checkbox');
     checkboxes.prop('checked', jQuery(this).is(':checked'));
+
+    updateChargesTotal();
 });
+
+function updateChargesTotal() {
+    var chargesGrandTotal = 0;
+    if(jQuery('#selectAll').prop('checked') == false){        
+        jQuery('#chargesGrandTotal').html(0);
+    } else {
+        for(var index = 0; index < jQuery('.invoicePrices').length; index++) {
+            console.log(jQuery('.invoicePrices').eq(index).html());
+            chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html());
+        }              
+        jQuery('#chargesGrandTotal').html(chargesGrandTotal);
+    }
+}
 
 jQuery(document).on('change', '.paymentCheckboxes', function() {
     var chargesGrandTotal = parseFloat(jQuery('#chargesGrandTotal').html());
@@ -344,7 +359,23 @@ jQuery(document).on('change', '.paymentCheckboxes', function() {
         var newGrandTotal = chargesGrandTotal+invoicePrice;        
         jQuery('#chargesGrandTotal').html(newGrandTotal);
     }
+
+    checkToggledCheckboxes();
 });
+
+function checkToggledCheckboxes(){
+    var hit = 0;
+    for (var index = 0; index < jQuery('.paymentCheckboxes').length; index++) {
+        if(jQuery('.paymentCheckboxes').eq(index).prop('checked') == false) {
+            hit++;
+        }
+    }
+    if (hit == 0) {
+        jQuery('#selectAll').prop('checked', true);
+    } else {
+        jQuery('#selectAll').prop('checked', false);
+    }
+}
 /**/
 
 function makeInvoiceEntry(unitNumber) {
