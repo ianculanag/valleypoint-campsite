@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
     jQuery('#additionalbed').click(function(){
         console.log("Gumana");
         var htmlString ="";
-        //htmlString += "<div class='form-group row'";
+        //htmlString += "<div class='form-group row'>";
         htmlString +="<div class='col-md-3 mb-1'>";
         //htmlString +="<label for='unitID'> No. of bunk/s</label>";
         htmlString +="<div class='input-group'>";
@@ -11,10 +11,10 @@ jQuery(document).ready(function(){
         htmlString +="<i class='fa fa-bed' aria-hidden='true'></i>";
         htmlString +="</span>";
         htmlString +="</div>";
-        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder'' value='1' min='1' max='20'>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='20'>";
         htmlString +="</div>";
         htmlString +="</div>";
-        htmlString +="<div class='col-md-6 mb-1'>";
+        htmlString +="<div class='col-md-7 mb-1'>";
         //htmlString +="<label for='roomNumber'>Room/s</label>";
         htmlString +="<select name='roomNumber' class='form-control' id='room'>";
         htmlString +="<option value='1'>Room 1 </option>";

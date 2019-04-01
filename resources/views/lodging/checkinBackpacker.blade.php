@@ -117,7 +117,7 @@
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row" id="unitDetails">
-                        <div class="col-md-4 mb-1">
+                        <div class="col-md-3 mb-1">
                             <label for="unitID">No. of bunk/s</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -128,7 +128,7 @@
                             <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="1" min="1" max="20">
                             </div>
                         </div>
-                        <div class="col-md-7 mb-1">
+                        <div class="col-md-6 mb-1">
                             <label for="roomNumber">Room/s</label>
                             <select name="roomNumber" class="form-control" id="room">
                                 <option value="1">Room 1</option>
