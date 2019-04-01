@@ -33,7 +33,7 @@
                         <tbody id="invoiceRows">
                         <tr id="invoiceUnit{{$unit->unitNumber}}">
                             <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
-                            <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                            <td class="invoiceQuantity" id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
                             <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
                             <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
                         </tr>
@@ -80,7 +80,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
+                                <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker{{$unit->unitNumber}}" type="number" placeholder="" value="" min="1" max="10">
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">

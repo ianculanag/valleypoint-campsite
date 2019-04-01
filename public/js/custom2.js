@@ -51,8 +51,22 @@ jQuery(document).ready(function(){
 
 //Price depending on the numberOfPaxBackpacker
 jQuery(document).ready(function(){
-    jQuery('#PaxBackpacker').change(function(){
+    /*jQuery('#PaxBackpacker').change(function(){
         //alert(jQuery(this).val());
+
+        //var unitNumber = jQuery(this).attr('id').slice(19);
+        var roomPriceTotal = null;
+        var quantity = jQuery(this).val();
+        roomPriceTotal = jQuery(this).val() * 750;
+        jQuery('#invoiceQuantityRoom1').html(quantity);
+        jQuery('#invoiceTotalPriceRoom1').html(roomPriceTotal);
+
+        var grandTotal= roomPriceTotal;
+        jQuery('#invoiceGrandTotal').html(grandTotal);
+
+    })*/
+    jQuery(document).on('change','.numberOfPaxBackpacker', function(){
+        var unitNumber = jQuery(this).attr('id').slice(17);
         var roomPriceTotal = null;
         var quantity = jQuery(this).val();
         roomPriceTotal = jQuery(this).val() * 750;
@@ -61,7 +75,7 @@ jQuery(document).ready(function(){
 
         var grandTotal= roomPriceTotal;
         jQuery('#invoiceGrandTotal').html(grandTotal);
-
+       
     });
 });
 
