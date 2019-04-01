@@ -113,6 +113,7 @@
             </div>
         </div>
     </div>
+
     <!-- Details Modal -->
     <div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
@@ -129,8 +130,11 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-right">
+                    <a href="" id="reserve">
+                        <button type="button" class="btn btn-success">Add Reservation</button>
+                    </a>
                     <a href="" id="editDetails">
-                        <button type="button" class="btn btn-info">Edit</button>
+                        <button type="button" class="btn btn-info">View Details</button>
                     </a>
                     <a href="" id="checkout">
                         <button type="button" class="btn btn-danger">Check-out</button>
@@ -152,23 +156,38 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body" id="modal-body">
-                    <div class="col-md-12">
+                    <!--div class="col-md-12">
                         <h5 class="text-center mb-4">Choose action:</h5>
-                        <div style="width:80%; padding-left:20%;">
-                            <a href="" id="checkin">
-                                <button type="button" class="btn btn-primary btn-md btn-block mb-2">Check-in</button>
-                            </a>
-                            <a href="" id="reserve">
-                                <button type="button" class="btn btn-secondary btn-md btn-block mb-2">Reserve</button>
-                            </a>
-                        </div>
-                    </div>
+                    </div-->
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-right">
+                    <a href="" id="checkin">
+                        <button type="button" class="btn btn-primary">Check-in</button>
+                    </a>
+                    <a href="" id="reserve">
+                        <button type="button" class="btn btn-secondary">Add reservation</button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Unit reservations modal
+    <div class="modal fade right" id="unitReservationsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer justify-content-right">
+                </div>
+            </div>
+        </div>
+    </div>-->
 @endsection
  
