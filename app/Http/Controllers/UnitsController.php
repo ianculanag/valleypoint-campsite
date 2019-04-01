@@ -105,9 +105,19 @@ class UnitsController extends Controller
         ->orderBy('unitID')
         ->get();
 
+        $reservations = DB::table('reservations')
+        //->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        //->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        //->where('reservation_units.unitID', '=', $units[0]->unitID)
+        ->get();
+        
+
+        //return $reservations;
         //return $units;
         
-        return view('lodging.glamping')->with('units', $units);
+        return view('lodging.glamping')->with('units', $units)->with('reservations', $reservations);
     }
 
     /**

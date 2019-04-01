@@ -87,8 +87,18 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
-                    <p></p>
+                    @foreach($reservations as $reservation)
+                    @endforeach
+                    @if($reservation->id == $unit->unitID)
+                        @if(count($reservations) == 1)
+                            <p class="card-text" style="color:lightseagreen; font-style:italic;">1 reservation</p>
+                        @else
+                            <p class="card-text" style="color:lightseagreen; font-style:italic;">{{(count($reservations))}} reservations</p>
+                        @endif
+                    @else
+                        <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
+                        <p></p>
+                    @endif
                 @endif
                 </div>
             </div>
