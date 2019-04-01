@@ -65,3 +65,10 @@ jQuery(document).ready(function(){
     });
 });
 
+/*
+jQuery(document).ready(function(){
+    jQuery('.load-Backpacker-details').click(function(){
+        jQuery.get('loadBackpackerDetails/');
+    });
+});
+*/

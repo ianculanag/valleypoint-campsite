@@ -51,6 +51,7 @@ Route::post('/makeReservation', 'ReservationsController@makeReservation');
 //Check-in backpacker
 Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
 Route::post('/checkinBackpacker','AccommodationsController@checkinBackpacker');
+Route::get('loadBackpackerDetails/');
 
 //Edit guest details
 Route::get('/editdetails/{unitID}', 'GuestsController@editGuestDetails');
