@@ -15,8 +15,6 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('checkinDatetime');            
-            $table->dateTime('checkoutDatetime');
             $table->string('lastName', 25);
             $table->string('firstName', 25);
             $table->integer('numberOfPax')->default(1);            

@@ -18,6 +18,8 @@ class CreateReservationUnitsTable extends Migration
             $table->integer('unitID')->unsigned();         
             $table->primary(['reservationID', 'unitID']);
             $table->enum('status', ['reserved','checkedin', 'canceled']);
+            $table->dateTime('checkinDatetime');            
+            $table->dateTime('checkoutDatetime');
             $table->foreign('reservationID')->references('id')->on('Reservations');
             $table->foreign('unitID')->references('id')->on('Units');
             $table->timestamps();
