@@ -113,69 +113,6 @@ class AccommodationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function checkin(Request $request)
-    {
-        $this->validate($request, [
-            'contactNumber' => 'required|min:11|max:11',
-            'firstName' => 'required|max:30',
-            'lastName' => 'required|max:30'
-        ]);
-
-        $accommodation = new Accommodation;         
-        $accommodation->serviceID = $request->input('numberOfPax');
-        $accommodation->unitID = $request->input('unitID');
-        $accommodation->numberOfPax = $request->input('numberOfPax');
-        $accommodation->paymentStatus = $request->input('paymentStatus');
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->save();
-
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->accommodationID = $accommodation->id;   
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save();
-
-        /*$sale = new Sales;
-        $sale->paymentDatetime = Carbon::now();
-        $sale->amount = $request->input('amountPaid');
-        $sale->paymentCategory = 'lodging';
-        $sale->accommodationID = $accommodation->id;
-        $sale->serviceID = $request->input('numberOfPax');
-        $sale->save();*/
-
-        if ($accommodation->numberOfPax > 1) {
-            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
-                $accompanyingGuest = new Guests;
-
-                $lastName = 'lastName'.$count;
-                $firstName = 'firstName'.$count;
-
-                $accompanyingGuest->lastName = $request->input($lastName);
-                $accompanyingGuest->firstName = $request->input($firstName);
-                $accompanyingGuest->accommodationID = $accommodation->id;
-                $accompanyingGuest->listedUnder = $guest->id;   
-                $accompanyingGuest->save();
-            }
-        }
-
-        $unit = Units::find($request->input('unitID'));
-        $unit->update([
-            'status' => 'occupied'
-        ]);
-        
-
-        return redirect('/glamping');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function checkinGlamping(Request $request)
     {
         $this->validate($request, [
@@ -186,18 +123,9 @@ class AccommodationsController extends Controller
 
         $accommodation = new Accommodations;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
-        
-        /*for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop one
-            $numberOfPaxGlamping = 'numberOfPaxGlamping'.$unitNumbers[$count];
-            $numberOfPax = (int) $request->input($numberOfPaxGlamping);
-            $totalNumberOfPax += $numberOfPax;
-        }   */           
 
         $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
-        /*$accommodation->checkinDatetime = $request->input('checkinDate').' '.'14:00';
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.'12:00'; 
-        $accommodation->serviceID = 4;*/
         $accommodation->userID = Auth::user()->id;
         $accommodation->save();
 
@@ -207,6 +135,9 @@ class AccommodationsController extends Controller
         $guest->accommodationID = $accommodation->id;   
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save(); 
+
+        $chargesCount = 0;
+        $chargesArray = array();
 
         for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two
             
@@ -231,20 +162,12 @@ class AccommodationsController extends Controller
             $charges = new Charges;
             $charges->quantity = $request->input($accommodationPackage);
             $charges->totalPrice = $request->input($totalPrice);
-            $charges->remarks = 'full';
+            $charges->remarks = 'unpaid';
             $charges->accommodationID = $accommodation->id;
             $charges->serviceID = $request->input($accommodationPackage);
             $charges->save();
-
-            
-            //brute force code
-            /*
-            $payment = new Payments;
-            $payment->paymentDatetime = Carbon::now();
-            $payment->amount = $request->input($totalPrice);
-            $payment->paymentStatus = 'full';
-            $payment->chargeID = $charges->id;
-            $payment->save();*/
+            $chargesCount++;
+            array_push($chargesArray, $charges->id);
         }
 
         if($request->input('additionalServicesCount') > 0) {
@@ -260,16 +183,21 @@ class AccommodationsController extends Controller
                     $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
                     $charges->save();
-
-                    //brute force code
-                    /*
-                    $payment = new Payments;
-                    $payment->paymentDatetime = Carbon::now();
-                    $payment->amount = $request->input($additionalTotalPrice);
-                    $payment->paymentStatus = 'full';
-                    $payment->chargeID = $charges->id;
-                    $payment->save();*/
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
                 }
+            }
+        }
+
+        for($count = 0; $count < $chargesCount; $count++) {
+            $paymentEntry = 'payment'.$count;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $chargesArray[$count];
+                $payment->save();
             }
         }
 
