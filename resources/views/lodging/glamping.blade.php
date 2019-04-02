@@ -87,13 +87,18 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    @foreach($reservations as $reservation)
-                    @endforeach
-                    @if($reservation->id == $unit->unitID)
-                        @if(count($reservations) == 1)
-                            <p class="card-text" style="color:lightseagreen; font-style:italic;">1 reservation</p>
+                    @if(count($reservations) > 0)
+                        @foreach($reservations as $reservation)
+                        @endforeach
+                        @if($reservation->id == $unit->unitID)
+                            @if(count($reservations) == 1)
+                                <p class="card-text" style="color:lightseagreen; font-style:italic;">1 reservation</p>
+                            @else
+                                <p class="card-text" style="color:lightseagreen; font-style:italic;">{{(count($reservations))}} reservations</p>
+                            @endif
                         @else
-                            <p class="card-text" style="color:lightseagreen; font-style:italic;">{{(count($reservations))}} reservations</p>
+                            <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
+                            <p></p>
                         @endif
                     @else
                         <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
@@ -189,5 +194,20 @@
             </div>
         </div>
     </div>-->
+    <script>
+    $(document).ready(function(){
+    var form = $('#some-form'),
+        original = form.serialize()
+
+    form.submit(function(){
+        window.onbeforeunload = null
+    })
+
+    window.onbeforeunload = function(){
+        if (form.serialize() != original)
+            return 'Are you sure you want to leave?'
+    }
+    })
+    </script>
 @endsection
  
