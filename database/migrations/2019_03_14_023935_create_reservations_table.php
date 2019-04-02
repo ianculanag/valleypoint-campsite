@@ -20,10 +20,6 @@ class CreateReservationsTable extends Migration
             $table->integer('numberOfPax')->default(1);            
             $table->integer('numberOfUnits')->default(1);
             $table->string('contactNumber', 11);
-            $table->integer('unitID')->unsigned();
-            $table->integer('serviceID')->unsigned();            
-            $table->foreign('serviceID')->references('id')->on('Services');
-            $table->foreign('serviceID')->references('id')->on('Services');
             $table->timestamps();
         });
     }

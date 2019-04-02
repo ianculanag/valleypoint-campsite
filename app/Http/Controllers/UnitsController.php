@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Units;
+use App\Services;
+use App\Reservations;
+use App\ReservationUnits;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -229,6 +232,30 @@ class UnitsController extends Controller
         //return $guest;
         return view('lodging.guestcheckout')->with('guest', $guest);
         //}
+    }
+
+    /**
+     * Load empty or available unit details
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function loadGlampingAvailableUnit($id)
+    {
+        return DB::table('units')
+        ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity',
+                 'reservations.id AS reservationID', 'reservations.lastName AS lastName', 
+                 'reservations.firstName AS firstName', 'reservations.numberOfPax AS numberOfPax',
+                 'reservations.numberOfUnits AS numberOfUnits', 'reservations.contactNumber AS contactNumber',
+                 'reservation_units.status AS status', 'reservation_units.checkinDatetime AS checkinDatetime', 
+                 'reservation_units.checkoutDatetime AS checkoutDatetime', 'services.id AS serviceID',
+                 'services.serviceType AS serviceType', 'services.serviceName AS serviceName')
+        //->select('units.id AS unitID')
+        ->where('units.id', '=', $id)
+        ->get();
     }
 
     /**

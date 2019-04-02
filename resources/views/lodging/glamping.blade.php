@@ -80,7 +80,7 @@
 
                 @endif--}}
                 @else
-                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>       
+                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>       
                     <div class="card" style="width:18rem;height:7.5em;">
                         <div class="card-body">
                     <h5 class="card-title">
@@ -160,7 +160,7 @@
                     </button>
                 </div>
                 <!--Body-->
-                <div class="modal-body" id="modal-body">
+                <div class="modal-body" id="modal-body-empty">
                     <!--div class="col-md-12">
                         <h5 class="text-center mb-4">Choose action:</h5>
                     </div-->
@@ -170,7 +170,7 @@
                     <a href="" id="checkin">
                         <button type="button" class="btn btn-primary">Check-in</button>
                     </a>
-                    <a href="" id="reserve">
+                    <a href="" id="reserveEmpty">
                         <button type="button" class="btn btn-secondary">Add reservation</button>
                     </a>
                 </div>
