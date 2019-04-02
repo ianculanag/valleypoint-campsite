@@ -73,6 +73,27 @@ class UnitsController extends Controller
     }
 
     /**
+     * Display units in a calendar
+     * 
+     * @return \Illuminate\Http\Respone
+     */
+    public function calendar()
+    {
+        $units = DB::table('units')
+        ->get();
+
+        $days = array();
+
+        for($index = 1; $index < 15; $index++){
+            array_push($days, Carbon::now()->addDays($index)->format('M j'));
+        }
+
+        //return $days;
+
+        return view('lodging.calendarGlamping')->with('units', $units)->with('dates', $days);
+    }
+
+    /**
      * Display all glamping units.
      * 
      * @return \Illuminate\Http\Response

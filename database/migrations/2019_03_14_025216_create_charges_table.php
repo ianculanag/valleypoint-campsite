@@ -19,9 +19,11 @@ class CreateChargesTable extends Migration
             $table->integer('quantity');
             $table->double('totalPrice', 8, 2);
             $table->enum('remarks', ['unpaid', 'partial', 'full']);
-            $table->integer('accommodationID')->unsigned(); 
+            $table->integer('accommodationID')->unsigned()->nullable(); 
+            $table->integer('reservationID')->unsigned()->nullable(); 
             $table->foreign('serviceID')->references('id')->on('Service');
             $table->foreign('accommodationID')->references('id')->on('Accommodations');
+            $table->foreign('reservationID')->references('id')->on('Reservations');
             $table->timestamps();
         });
     }
