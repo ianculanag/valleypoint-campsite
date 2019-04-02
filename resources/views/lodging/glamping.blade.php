@@ -87,22 +87,47 @@
                         {{$unit->unitNumber}}
                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                     </h5>
-                    @if(count($reservations) > 0)
+                    {{--@if(count($reservations) > 0)
+                        @php
+                            $countReservations = 0;
+                        @endphp
                         @foreach($reservations as $reservation)
+                        @php
+                            if($reservation->id == $unit->unitID) {                                
+                                $countReservations++;
+                            }
+                        @endphp
                         @endforeach
                         @if($reservation->id == $unit->unitID)
                             @if(count($reservations) == 1)
                                 <p class="card-text" style="color:lightseagreen; font-style:italic;">1 reservation</p>
                             @else
-                                <p class="card-text" style="color:lightseagreen; font-style:italic;">{{(count($reservations))}} reservations</p>
+                                <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$countReservations}} reservations</p>
                             @endif
                         @else
                             <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
                             <p></p>
+                        @endif--}}
+                    @php
+                        $reservationCount = 0;    
+                    @endphp
+                    @foreach($reservations as $reservation)
+                        @if($reservation->id == $unit->unitID)
+                            @php                                
+                                $reservationCount++;
+                            @endphp
+                        @else
+                        @endif
+                    @endforeach
+                    @if($reservationCount > 0)                    
+                        @if($reservationCount == 1)
+                            <p class="card-text" style="color:lightseagreen; font-style:italic;">1 reservation</p>                            
+                        @else
+                            <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$reservationCount}} reservations</p>                            
                         @endif
                     @else
-                        <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
-                        <p></p>
+                    <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
+                    <p></p>
                     @endif
                 @endif
                 </div>
