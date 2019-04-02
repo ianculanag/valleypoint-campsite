@@ -136,9 +136,10 @@ jQuery(document).ready(function(){
                 for(var count = 0; count < data.length; count++) {
                     htmlString += "<div class='container'>";
                     htmlString += "<table class='table table-sm borderless'>";
-                    htmlString += "<tr><td style='width:35%'>Guest name: </td>";
+                    htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + (1+count) +" </td>";
+                    htmlString += "<td style='width:45%'>Guest name: </td>";
                     htmlString += "<td>" + data[count].firstName + " " + data[count].lastName + "</td></tr>";
-                    htmlString += "<tr><td style='width:35%'>Service: </td>";
+                    htmlString += "<tr><td style='width:45%'>Service: </td>";
                     htmlString += "<td>" + data[count].serviceName + "</td></tr>";
                     htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Will check-in on " + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
                     htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Until " + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
