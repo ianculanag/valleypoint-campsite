@@ -208,11 +208,11 @@
                         <div class="form-group row">
                             <div class="col-md-4 mb-1">
                                 <label for="firstName">First name</label>
-                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}" required>
+                                <input class="form-control" type="text" name="firstName" maxlength="15" placeholder="" value="{{$guestDetails->firstName}}" disabled>
                             </div>
                             <div class="col-md-5 mb-1">
                                 <label for="lastName">Last name</label>
-                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}" required>
+                                <input class="form-control" type="text" name="lastName"  maxlength="20" placeholder="" value="{{$guestDetails->lastName}}" disabled>
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="unitNumberOfPax">No. of pax</label>
@@ -222,7 +222,7 @@
                                             <i class="fa fa-users" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" required>
+                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}" required>
+                                    <input class="form-control" type="text" name="contactNumber" maxlength="11" placeholder="" value="{{$guestDetails->contactNumber}}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-1">
@@ -335,7 +335,7 @@
                         </div>
                         <input type="hidden">
                         <div class="col-md-3 mb-1" id="divServiceName">
-                            <label for="additionalServiceName">Service name</label>
+                            <label for="additionalServiceName">Charge name</label>
                             <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
                                 <option value="choose" selected disabled >Choose...</option>
                                 <option value="8">Shoe box</option>
@@ -386,7 +386,11 @@
                     <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">
 
                     <div class="mt-3" style="float:right;">
-                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
+                    @if(count($pendingPayments) > 0)
+                        <button class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                    @else
+                        <button class="btn btn-success" style="width:10em;">Check-out</button>
+                    @endif
                         <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
