@@ -71,6 +71,7 @@ jQuery(document).ready(function(){
         var quantity = jQuery(this).val();
         roomPriceTotal = jQuery(this).val() * 750;
         
+        
         jQuery('#invoiceQuantityRoom'+unitNumber).html(quantity);
         jQuery('#invoiceTotalPriceRoom'+unitNumber).html(roomPriceTotal);
 
@@ -111,8 +112,9 @@ jQuery(document).ready(function(){
     jQuery(document).on('change','.backpackerCheckoutDates', function(){
         var unitNumber = jQuery(this).attr('id').slice(16);
         var roomPriceTotal = null;
-        var quantity = jQuery(this).val();
-        roomPriceTotal = jQuery(this).val() * 750;
+        var quantity = jQuery('.numberOfPaxBackpacker').val();
+        
+        roomPriceTotal = jQuery('.numberOfPaxBackpacker').val() * 750;
         
         jQuery('#invoiceQuantityRoom'+unitNumber).html(quantity);
         jQuery('#invoiceTotalPriceRoom'+unitNumber).html(roomPriceTotal);
@@ -129,7 +131,7 @@ jQuery(document).ready(function(){
          //calculation of prices based on how many days   
         if (jQuery(checkoutDate).val() == ""){
                 daysDiff = 1;
-                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery('.numberOfPaxBackpacker').val()+'x'+(daysDiff));
             } else{
                 var BackpackerCheckin = Date.parse(jQuery(checkinDate).val());
                 var BackpackerCheckout = Date.parse(jQuery(checkoutDate).val());
@@ -137,7 +139,7 @@ jQuery(document).ready(function(){
                 var timeDiff = BackpackerCheckout - BackpackerCheckin;
                 daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
                 
-                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery('.numberOfPaxBackpacker').val()+'x'+(daysDiff));
 
                 var finalRoomPrice = roomPriceTotal * daysDiff;
 
