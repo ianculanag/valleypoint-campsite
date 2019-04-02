@@ -147,6 +147,20 @@
                                             <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
                                             </th>
                                         </tr>--}}
+                                        
+                                        <tr>
+                                            <td colspan="5">
+                                            @if(count($pendingPayments) > 0)
+                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
+                                                Get payment
+                                            </button>
+                                                @else
+                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
+                                                Get payment
+                                            </button> 
+                                            @endif
+                                            </td>
+                                            </tr>
                                     </tfoot>
                                     @else
                                         <tr style="">
@@ -180,6 +194,19 @@
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;"></th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">
+                                            @if(count($pendingPayments) > 0)
+                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
+                                                Get payment
+                                            </button>
+                                             @else
+                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
+                                                Get payment
+                                            </button> 
+                                            @endif
+                                            </td>
                                         </tr>
                                     </tfoot>
                                     @endif
@@ -637,17 +664,7 @@
                     </div-->
                     
                     <div class="mt-3" style="float:right;">
-                        @if(count($pendingPayments) > 0)
-                        <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
-                            Get payment
-                        </button>
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        @else
-                        <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
-                            Get payment
-                        </button> 
-                        <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        @endif
                         <a {{--href="/glamping"--}} style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
@@ -676,7 +693,7 @@
                                 <tr>
                                     <th></th>
                                     <th scope="col" style="width:50%">
-                                        <input class="form-check-input" type="checkbox" id="charge1" checked>
+                                        <input class="form-check-input" type="checkbox" id="selectAllBalances" checked>
                                         Description
                                     </th>
                                     <th scope="col">Qty.</th>

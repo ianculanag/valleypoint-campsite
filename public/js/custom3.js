@@ -141,7 +141,7 @@ jQuery(document).on('click', '#showChargesModal', function() {
         htmlString += "<tr>";
         htmlString += "<td></td>";
         htmlString += "<td class='chargesDescriptions'>";
-        htmlString += "<input class='form-check-input chargeDescriptions' type='checkbox' id='charge1' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
+        htmlString += "<input class='form-check-input balancePaymentCheckboxes' type='checkbox' id='charge"+index+"' checked>"+jQuery('.invoiceDescriptions').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargeQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargeBalances'>"+jQuery('.invoiceBalances').eq(index).html()+"</td>";
@@ -159,6 +159,60 @@ jQuery(document).on('click', '#showChargesModal', function() {
     }    
     jQuery('#invoiceTotalBalanceModal').html(totalBalance);
 });
+
+jQuery(document).on('change', '.balancePaymentCheckboxes', function() {
+    var balancesGrandTotal = parseFloat(jQuery('#invoiceTotalBalanceModal').html());
+    var chargeNumber = jQuery(this).attr('id').slice(6);
+    var balancePrice = parseFloat(jQuery('.chargeBalances').eq(chargeNumber).html());
+    console.log(balancesGrandTotal);
+    console.log(chargeNumber);
+    console.log(balancePrice);
+    if(!(jQuery(this).is(':checked'))) {
+        var newBalanceGrandTotal = balancesGrandTotal-balancePrice;
+        //jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', false);      
+        jQuery('#invoiceTotalBalanceModal').html(newBalanceGrandTotal);
+    } else {
+        var newBalanceGrandTotal = balancesGrandTotal+balancePrice;            
+        //jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', true);       
+        jQuery('#invoiceTotalBalanceModal').html(newBalanceGrandTotal);
+    }
+
+    checkToggledBalanceCheckboxes();
+});
+
+function checkToggledBalanceCheckboxes(){
+    var hit = 0;
+    for (var index = 0; index < jQuery('.balancePaymentCheckboxes').length; index++) {
+        if(jQuery('.balancePaymentCheckboxes').eq(index).prop('checked') == false) {
+            hit++;
+        }
+    }
+    if (hit == 0) {
+        jQuery('#selectAllBalances').prop('checked', true);
+    } else {
+        jQuery('#selectAllBalances').prop('checked', false);
+    }
+}
+
+jQuery('#selectAllBalances').change(function() {
+    var checkboxes = jQuery(this).closest('form').find(':checkbox');
+    checkboxes.prop('checked', jQuery(this).is(':checked'));
+
+    updateBalancesTotal();
+});
+
+function updateBalancesTotal() {
+    var balancesGrandTotal = 0;
+    if(jQuery('#selectAllBalances').prop('checked') == false){        
+        jQuery('#invoiceTotalBalanceModal').html(0);
+    } else {
+        for(var index = 0; index < jQuery('.chargeBalances').length; index++) {
+            //console.log(jQuery('.invoicePrices').eq(index).html());
+            balancesGrandTotal += parseFloat(jQuery('.chargeBalances').eq(index).html());
+        }              
+        jQuery('#invoiceTotalBalanceModal').html(balancesGrandTotal);
+    }
+}
 /**/
 
 jQuery(document).ready(function(){
