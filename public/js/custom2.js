@@ -70,14 +70,86 @@ jQuery(document).ready(function(){
         var roomPriceTotal = null;
         var quantity = jQuery(this).val();
         roomPriceTotal = jQuery(this).val() * 750;
+        
         jQuery('#invoiceQuantityRoom'+unitNumber).html(quantity);
         jQuery('#invoiceTotalPriceRoom'+unitNumber).html(roomPriceTotal);
 
         var grandTotal= roomPriceTotal;
         jQuery('#invoiceGrandTotal').html(grandTotal);
-       
+
+        var daysDiff = null;
+        var checkinDate = '#checkinDateRoom'+unitNumber;
+        var checkoutDate = '#checkoutDateRoom'+unitNumber;
+        
+        //alert(jQuery(checkoutDate).val());
+
+         //calculation of prices based on how many days   
+        if (jQuery(checkoutDate).val() == ""){
+                daysDiff = 1;
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+            } else{
+                var BackpackerCheckin = Date.parse(jQuery(checkinDate).val());
+                var BackpackerCheckout = Date.parse(jQuery(checkoutDate).val());
+
+                var timeDiff = BackpackerCheckout - BackpackerCheckin;
+                daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+                
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+
+                var finalRoomPrice = roomPriceTotal * daysDiff;
+
+                jQuery('#invoiceTotalPriceRoom'+unitNumber).html(finalRoomPrice);
+                
+            }
+            updateTotal();
     });
+
 });
+
+//On Change date
+jQuery(document).ready(function(){
+    jQuery(document).on('change','.backpackerCheckoutDates', function(){
+        var unitNumber = jQuery(this).attr('id').slice(16);
+        var roomPriceTotal = null;
+        var quantity = jQuery(this).val();
+        roomPriceTotal = jQuery(this).val() * 750;
+        
+        jQuery('#invoiceQuantityRoom'+unitNumber).html(quantity);
+        jQuery('#invoiceTotalPriceRoom'+unitNumber).html(roomPriceTotal);
+
+        var grandTotal= roomPriceTotal;
+        jQuery('#invoiceGrandTotal').html(grandTotal);
+
+        var daysDiff = null;
+        var checkinDate = '#checkinDateRoom'+unitNumber;
+        var checkoutDate = '#checkoutDateRoom'+unitNumber;
+        
+        //alert(jQuery(checkoutDate).val());
+
+         //calculation of prices based on how many days   
+        if (jQuery(checkoutDate).val() == ""){
+                daysDiff = 1;
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+            } else{
+                var BackpackerCheckin = Date.parse(jQuery(checkinDate).val());
+                var BackpackerCheckout = Date.parse(jQuery(checkoutDate).val());
+
+                var timeDiff = BackpackerCheckout - BackpackerCheckin;
+                daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+                
+                jQuery('#invoiceQuantityRoom'+unitNumber).html(jQuery(this).val()+'x'+(daysDiff));
+
+                var finalRoomPrice = roomPriceTotal * daysDiff;
+
+                jQuery('#invoiceTotalPriceRoom'+unitNumber).html(finalRoomPrice);
+                
+            }
+            updateTotal();
+    });
+
+
+    });
+
 
 /*
 jQuery(document).ready(function(){

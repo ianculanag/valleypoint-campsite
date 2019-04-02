@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="form-group row">
-                            <div class="col-md-6 mb-1">
+                            <div class="col-md-6 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
                                 <label for="checkinDate">Check-in date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -98,10 +98,10 @@
                                             <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
+                                    <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-1">
+                            <div class="col-md-6 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
                                 <label for="checkoutDate">Check-out date</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -109,7 +109,7 @@
                                             <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
+                                <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control backpackerCheckoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
                                     <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
                                 </div>
                             </div>

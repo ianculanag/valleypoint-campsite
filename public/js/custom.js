@@ -501,7 +501,7 @@ jQuery(document).ready(function(){
         var checkoutDate = '#checkoutDate'+unitNumber;
 
         if (jQuery(checkoutDate).val() == "") {
-            console.log('fuck');  
+              
             daysDiff = 1;
             jQuery(invoiceQuantity).html(jQuery(this).val()+'x'+(daysDiff));
 
