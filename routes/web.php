@@ -54,7 +54,8 @@ Route::post('/checkinBackpacker','AccommodationsController@checkinBackpacker');
 Route::get('loadBackpackerDetails/');
 
 //Edit guest details
-Route::get('/editdetails/{unitID}', 'GuestsController@editGuestDetails');
+//Route::get('/editdetails/{unitID}', 'GuestsController@editGuestDetails');
+Route::get('/editdetails/{unitID}', 'GuestsController@viewGuestDetails');
 Route::post('/updateDetails', 'GuestsController@updateDetails');
 
 //Check-out guests

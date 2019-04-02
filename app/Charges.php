@@ -13,7 +13,14 @@ class Charges extends Model
     // Timestamps
     public $timestamps = true;
 
-    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'remarks',
+    ];    
 
     // References Accommodation
     public function accommodation()

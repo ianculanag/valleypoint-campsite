@@ -121,7 +121,7 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodations;    
+        $accommodation = new Accommodation;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
         $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');
@@ -198,6 +198,11 @@ class AccommodationsController extends Controller
                 $payment->paymentStatus = 'full';
                 $payment->chargeID = $chargesArray[$count];
                 $payment->save();
+
+                $charge = Charges::find($chargesArray[$count]);
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
             }
         }
 

@@ -104,16 +104,18 @@
                                         </tr>
                                     </thead>
                                     <tbody id="invoiceRows">
-                                        @foreach($pendingPayments as $pending)
                                         @php
                                             $total = 0;
                                             $totalPayment = 0;
                                             $balance = 0;
                                             $totalBalance = 0;
+                                        @endphp
+                                        @foreach($pendingPayments as $pending)
+                                        @php
 
-                                            $balance = $pending->totalPrice - $pending->amount;
+                                            //$balance = $pending->totalPrice - $pending->amount;
                                             $total += $pending->totalPrice;
-                                            $totalPayment += $pending->amount;
+                                            //$totalPayment += $pending->amount;
                                             $totalBalance = $total - $totalPayment;
                                         @endphp
                                         <tr>
@@ -121,7 +123,11 @@
                                             <td style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
                                             <td style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
                                             <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
+                                            @if($pending->remarks == 'unpaid')
+                                            <td style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
+                                            @else
                                             <td style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -735,7 +741,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger">Save</button>
+                    <button type="button" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
