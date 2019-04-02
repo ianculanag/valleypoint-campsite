@@ -49,8 +49,8 @@ Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
 
 //Make reservation
-Route::get('/makeReservation/{unitID}', 'ReservationsController@showReservationForm');
-Route::post('/makeReservation', 'ReservationsController@makeReservation');
+Route::get('/reservation/{unitID}', 'ReservationsController@showReservationForm');
+Route::post('/reservation', 'ReservationsController@makeReservation');
 
 //Check-in backpacker
 Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');

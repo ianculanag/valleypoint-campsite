@@ -30,8 +30,11 @@ class ReservationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showReservationForm($unitID)
-    {
-        return view('lodging.makereservation')->with('unitID', $unitID);
+    {        
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+        return view('lodging.reservation')->with('unit', $unit);
     }
 
     /**

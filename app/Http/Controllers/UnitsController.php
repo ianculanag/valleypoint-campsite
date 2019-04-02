@@ -297,13 +297,26 @@ class UnitsController extends Controller
      */
     public function getDates()
     {
-        $dates = DB::table('accommodation_units')
+        $accommodationDates = DB::table('accommodation_units')
         ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->join('units', 'units.id', 'accommodation_units.unitID')
-        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime')
+        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
+                 'accommodation_units.checkoutDatetime')
         ->where('accommodation_units.status', '=', 'ongoing')
-        ->get();
+        ->get()
+        ->toArray();
 
-        return $dates;
+        $reservationDates = DB::table('reservation_units')
+        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime')
+        ->where('reservation_units.status', '=', 'reserved')
+        ->get()
+        ->toArray();
+
+        //return $reservationDates;
+
+        return array_merge($accommodationDates, $reservationDates);
     }
 }

@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
             jQuery('#modal-body').html(htmlString);
             jQuery('#modal-head1').html(data[0].unitNumber);
 
-            jQuery("#reserve").attr("href", "makeReservation/"+data[0].unitID);
+            jQuery("#reserve").attr("href", "reservation/"+data[0].unitID);
             jQuery("#editDetails").attr("href", "editdetails/"+data[0].unitID);
             jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
         })
@@ -155,7 +155,7 @@ jQuery(document).ready(function(){
             jQuery('#modal-head2').html(data[0].unitNumber);
 
             jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);
-            jQuery("#reserveEmpty").attr("href", "makeReservation/"+data[0].unitID);
+            jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
         })
     });
 }); 
@@ -751,3 +751,14 @@ jQuery(document).on('click','.collapse.in',function(e) {
 jQuery(document).ready( function () {
     jQuery('.dataTable').DataTable();
 });
+
+//Date Validation
+jQuery('#checkAvailability').click( function() {
+    checkAvailability();
+});
+
+function checkAvailability() {
+    jQuery.get('/getDates', function(data) {
+        console.log(data);
+    })
+}
