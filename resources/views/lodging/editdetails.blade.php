@@ -151,11 +151,11 @@
                                         <tr>
                                             <td colspan="5">
                                             @if(count($pendingPayments) > 0)
-                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
+                                            <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                                                 Get payment
                                             </button>
-                                                @else
-                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
+                                            @else
+                                            <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
                                                 Get payment
                                             </button> 
                                             @endif
@@ -198,11 +198,11 @@
                                         <tr>
                                             <td colspan="5">
                                             @if(count($pendingPayments) > 0)
-                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
+                                            <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                                                 Get payment
                                             </button>
                                              @else
-                                            <button type="button" class="btn btn-primary" style="width:11em;" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
+                                            <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal" disabled>
                                                 Get payment
                                             </button> 
                                             @endif
@@ -220,7 +220,8 @@
             <div class="col-md-8 order-md-1 check-out-form">
                 <form method="POST" action="/updateDetails">
                     @csrf
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
+                    <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
                     <div class="form-group col-md-6" style="position: absolute;">
                         <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
                         <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">

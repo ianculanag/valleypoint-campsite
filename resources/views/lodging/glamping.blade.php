@@ -150,6 +150,7 @@
             <div class="modal-content">
                 <!--Header-->
                 <div class="modal-header">
+                    <h4 id="modal-head1"><h4>
                     <!--p class="heading lead">Tent 1</p-->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">×</span>
@@ -180,6 +181,7 @@
             <div class="modal-content">
                 <!--Header-->
                 <div class="modal-header">
+                    <h4 id="modal-head2"><h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">×</span>
                     </button>

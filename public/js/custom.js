@@ -18,12 +18,15 @@ jQuery(document).ready(function(){
             htmlString += "<table class='table table-sm borderless'>";
             htmlString += "<tr><td style='width:35%'>Guest Name: </td>";
             htmlString += "<td>" + data[0].firstName + " " + data[0].lastName + "</td></tr>";
-            htmlString += "<tr><td style='width:35%'>Number of pax: </td>";
-            htmlString += "<td>" + data[0].numberOfPax + "</td></tr>";
-            htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Checked-in on " + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
-            htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Due " + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
+            htmlString += "<tr><td style='width:30%'>Service: </td>";
+            htmlString += "<td>" + data[0].serviceName + "</td></tr>";
+            htmlString += "<tr><td>Checked-in: </td>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
+            htmlString += "<tr><td>Check-out: </td>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
 
             jQuery('#modal-body').html(htmlString);
+            jQuery('#modal-head1').html(data[0].unitNumber);
 
             jQuery("#reserve").attr("href", "makeReservation/"+data[0].unitID);
             jQuery("#editDetails").attr("href", "editdetails/"+data[0].unitID);
@@ -137,16 +140,19 @@ jQuery(document).ready(function(){
                     htmlString += "<div class='container'>";
                     htmlString += "<table class='table table-sm borderless'>";
                     htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + (1+count) +" </td>";
-                    htmlString += "<td style='width:45%'>Guest name: </td>";
+                    htmlString += "<td style='width:28%'>Guest name: </td>";
                     htmlString += "<td>" + data[count].firstName + " " + data[count].lastName + "</td></tr>";
-                    htmlString += "<tr><td style='width:45%'>Service: </td>";
+                    htmlString += "<tr><td style='width:28%'>Service: </td>";
                     htmlString += "<td>" + data[count].serviceName + "</td></tr>";
-                    htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Will check-in on " + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td colspan='2' style='color:green; font-syle:italic;'>Until " + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
+                    htmlString += "<tr><td>Check-in: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkinDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td>Check-out: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
                 }
             }
 
             jQuery('#modal-body-empty').html(htmlString);
+            jQuery('#modal-head2').html(data[0].unitNumber);
 
             jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);
             jQuery("#reserveEmpty").attr("href", "makeReservation/"+data[0].unitID);

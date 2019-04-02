@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Guests;
 use App\Accommodation;
 use App\Units;
-use App\AdditionalCharges;
+use App\Charges;
 use App\Services;
 use Auth;
 use Redirect;
@@ -138,28 +138,7 @@ class GuestsController extends Controller
             //'numberOfPax' => $numberOfPax
         ]);
 
-        //for ('listedUnder', '=', $guest[0]->guestID) {}
-        if ($request->numberOfPax > 1) {
-
-            /*$accompanyingGuests = DB::table('guests')
-            ->where('listedUnder', '=', $request->input('guestID'))
-            ->get();*/
-
-            //return $accompanyingGuests;
-
-            for ($count = 1; $count < $request->numberOfPax; $count++) {
-                $firstName = 'firstName'.$count;
-                $lastName = 'lastName'.$count;
-
-                $user = Guests::find($accompanyingGuests[$count-1]->id);
-                $user->update([
-                    'firstName' => $request->input($firstName),
-                    'lastName' =>  $request->input($lastName)
-                ]);
-            }
-        }
-        /*
-        if ($request->input('numberOfAdditionalCharges') > 0) {
+        /*if ($request->input('numberOfAdditionalCharges') > 0) {
 
             $services = DB::table('services')
             ->where('id', '>', 5)
@@ -178,20 +157,34 @@ class GuestsController extends Controller
                 $pax = $request->input($numberOfPax);
                 $totalPrice = $price * $pax;
 
-                $additionalCharge = new AdditionalCharges;
+                $additionalCharge = new Charges;
                 $additionalCharge->accommodationID = $request->input('accommodationID');
                 $additionalCharge->serviceID = $request->input($serviceID);
-                $additionalCharge->numberOfPax = $request->input($numberOfPax);
+                $additionalCharge->quantity = $request->input($numberOfPax);
                 $additionalCharge->totalPrice = $totalPrice;
-                $additionalCharge->paymentStatus = $request->input($paymentStatus);
+                //$additionalCharge->paymentStatus = $request->input($paymentStatus);
                 $additionalCharge->save();
                 
                 //$totalPrice = $service->price * $numberOfPax;
-
-                //EARTHQUAKE DRILL
-
             }
         }*/
+
+        if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $request->input('accommodationID');
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                }
+            }
+        }
 
         $url = '/editdetails'.'/'.$request->input('unitID');
         //return \Redirect::route('/editdetails', [$request->input('unitID')]);

@@ -299,6 +299,12 @@ body {
     font-size: 0.90em;
 }
 
+/* Modals */
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto !important;
+}
+
 //token field
 @-webkit-keyframes blink {
   0% {

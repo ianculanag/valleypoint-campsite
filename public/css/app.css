@@ -9734,11 +9734,6 @@ body {
   padding-bottom: 5em;
 }
 
-.no-gutters {
-  margin-right: 10% !important;
-  margin-left: 10% !important;
-}
-
 /* Sidebar */
 .sidebar {
   z-index: 100;
@@ -10035,6 +10030,12 @@ body {
 
 .form-control {
   font-size: 0.9em;
+}
+
+/* Modals */
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto !important;
 }
 
 @-webkit-keyframes blink {
