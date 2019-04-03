@@ -175,7 +175,7 @@ class GuestsController extends Controller
                 $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
                 $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
                 if($request->input($additionalServiceID)) {
-                    $charges = new Charges;                    
+                    $charges = new Chargesx;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';

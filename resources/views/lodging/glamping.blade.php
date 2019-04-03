@@ -198,7 +198,7 @@
                         <button type="button" class="btn btn-primary">Check-in</button>
                     </a>
                     <a href="" id="reserveEmpty">
-                        <button type="button" class="btn btn-success">Add reservation</button>
+                        <button type="button" class="btn btn-secondary">Add reservation</button>
                     </a>
                 </div>
             </div>

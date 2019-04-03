@@ -11,13 +11,22 @@
                 </span>
             </a>
             <h3>Edit Transaction Details</h3>
+        </div>        
+        <form method="POST" action="/updateDetails">
+        @csrf
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
+        <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
+
+        
+        <div id="selectedAdditionalPayments" style="display:none;">
         </div>
+
         <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
                 <!-- Payment Transactions Accordion -->
                 <div id="accordion">
                     <!-- All Paid Transations -->
-                    <form class="card my-0">
+                    <div class="card my-0">
                         <p class="card-header" role="tab" id="headingOne">
                             <!--a class="collapsed d-block" data-toggle="collapse" href="#collapse-collapsed" aria-expanded="true" aria-controls="collapse-collapsed" id="heading-collapsed" style="font-size:1.1em;"-->
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size:1.1em;">
@@ -81,9 +90,9 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <!-- Unpaid Charges -->
-                    <form class="card my-0">
+                    <div class="card my-0">
                         <p class="card-header" role="tab" id="headingTwo">
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size:1.1em;">
                                 <!--i class="fa fa-chevron-down pull-right" style="float:right;"></i-->
@@ -117,16 +126,20 @@
                                             $total += $pending->totalPrice;
                                             //$totalPayment += $pending->amount;
                                             $totalBalance = $total - $totalPayment;
+
+                                            $identifier = 'Pending'.$loop->iteration;
                                         @endphp
-                                        <tr>
-                                            <td class="invoiceDescriptions">{{$pending->serviceName}}</td>
-                                            <td style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
-                                            <td style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
-                                            <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
+                                        <tr id="invoiceRow{{$identifier}}">
+                                            <td id="invoiceDescription{{$identifier}}" class="invoiceDescriptions">{{$pending->serviceName}}</td>
+                                            <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->id}}"></td>
+                                            <td style="display:none;"><input id="invoiceCheckBox{{$identifier}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                                            <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
+                                            <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
+                                            <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
                                             @if($pending->remarks == 'unpaid')
-                                            <td style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
                                             @else
-                                            <td style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -213,34 +226,15 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- End of Payment Transactions Accordion -->
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
-                <form method="POST" action="/updateDetails">
-                    @csrf
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
-                    <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
                     <div class="form-group col-md-6" style="position: absolute;">
                         <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
                         <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">
                     </div>
-                    {{--<div class="form-group row">
-                        <div class="col-md-2 mb-1">
-                            <label for="accommodationID">Acc ID</label>
-                            <input class="form-control" type="text" name="accommodationID" placeholder="" value="{{$guestDetails->accommodationID}}" disabled>
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="unitID">No. of units</label>
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="{{$guestDetails->numberOfUnits}}" disabled>
-                        </div>
-                        <div class="col-md-7 mb-1">
-                            <label for="unitNumber">Unit/s availed</label>
-                            <input class="form-control" type="text" name="unitNumber" placeholder="" value="{{$guestDetails->unitNumber}}" disabled>
-                        </div>
-                    </div>
-                    <hr class="mb-4">--}}
                     <h5 style="margin-bottom:.80em;" {{--data-toggle="collapse" data-target="#guestDetails" aria-expanded="false" aria-controls="collapseExample"--}}>Guest Details</h5>
                     <div {{--class="collapse"--}} id="guestDetails">
                         <div class="form-group row">
@@ -264,29 +258,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{--<div class="col-md-3 mb-1">
-                            <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control" type="number" name="numberOfPax" placeholder="" value="{{$guestDetails->numberOfPax}}" min="1" max="10">
-                        </div>
-                        <div class="col-md-4 mb-1 form-group">
-                            <label for="accommodationType">Accommodation</label>
-                            <select id="disabledSelect" name="serviceName" class="form-control" disabled>
-                                <option>{{$guestDetails->serviceName}}</option>
-                            </select>
-                        </div>
-                    </div>--}}
-                    {{--<hr class="mb-4">
-                    <h5 style="margin-bottom:.80em;">Unit Details</h5>
-                    <div class="form-group row">
-                        <div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
-                            <input class="form-control" type="number" name="numberOfUnits" placeholder="" value="" min="1" max="6" disabled>
-                        </div>
-                        <div class="col-md-10 mb-1">
-                            <label for="unitNumber">Unit/s</label>
-                            <input type="text" class="form-control" id="tokenfield" value="Tent 1, Tent 2" />
-                        </div>
-                    </div>--}}
                         <div class="form-group row">
                             <div class="col-md-6 mb-1">
                                 <label for="contactNumber">Contact number</label>
@@ -439,53 +410,6 @@
                         @endif
                         {{--</div>--}}
                     </div>
-                    {{--<form action="#" class="additionalServiceForm">
-                        @csrf
-                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <div class="form-group row">
-                        <div class="col-md-12 mb-1">
-                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
-                        </div>
-                        <input type="hidden" name="additionalServiceAccommodationID" value="{{$guestDetails->accommodationID}}">
-                        <div class="col-md-3 mb-1">
-                            <label for="additionalServiceName">Service name</label>
-                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
-                                <option value="" selected disabled >Choose...</option>
-                                <option value="6">Airsoft</option>
-                                <option value="7">Archery</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 mb-1">
-                            <label for="additionalServiceNumberOfPax">Pax</label>
-                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="additionalServiceUnitPrice">Unit price</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control" type="text" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <label for="additionalServiceTotalPrice">Total price</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
-                            </div>
-                        </div>
-
-                        <div style="margin-top:2em;">
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-primary additionalServiceForm">
-                                    <span class="fa fa-plus" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>--}}
                     <hr class="mb-4 mt-4">
                     <div class="form-group row pb-3" id="divAdditionalServices">
                         <div class="col-md-12 mb-1">
@@ -536,144 +460,17 @@
                         </div>
                     </div>
                 
-
-                        {{--<div style="">
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-danger additionalServiceForm">
-                                    <span class="fa fa-minus" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-
-                        
-                        <div class="col-md-3 mb-1">
-                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect">
-                                <option value="" selected disabled >Choose...</option>
-                                <option value="6">Airsoft</option>
-                                <option value="7">Archery</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 mb-1">
-                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" name="additionalServiceNumberOfPax" placeholder="" value="" min="1" max="10">
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control" type="text" id="additionalServicePrice" name="additionalServicePrice" placeholder="" value="" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-1">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control" type="text" id="additionalServicePaymentAmount" name="additionalServicePaymentAmount" placeholder="" value="">
-                            </div>
-                        </div>
-
-                        <div style="">
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-primary additionalServiceForm">
-                                    <span class="fa fa-p-lus" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                        -->
-                        <!--div class="col-md-1">
-                            <button class="btn btn-info">
-                                <span class="fa fa-plus" aria-hidden="true"></span>
-                            </button>
-                        </div-->
-                    </div>
-                    </form>--}}
                     <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
                     <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">
-                    <!--div class="container">
-                        <table id="guest-table" class="table guest-list">   
-                            <tbody>
-                                <thead>
-                                    <tr class="row">
-                                        <td class="col-md-4 mb-1">
-                                            First name
-                                        </td>
-                                        <td class="col-md-4 mb-1">
-                                            Last name
-                                        </td>
-                                        <td class="col-md-3 mb-1">
-                                            Phone
-                                        </td>
-                                        <td class="col-md-1 mb-1"></td>
-                                    </tr>
-                                </thead>
-                                <tr class="row">
-                                    <td class="col-md-4 mb-1">
-                                        <input class="form-control" type="text" id="firstName" placeholder="" value="Ian Jemuel">
-                                    </td>
-                                    <td class="col-md-4 mb-1">
-                                        <input class="form-control" type="text" id="lastName" placeholder="" value="Culanag">
-                                    </td>
-                                    <td class="col-md-3 mb-1">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <input class="form-control" type="text" id="contactNumber" placeholder="" value="09709849000">
-                                        </div>
-                                    </td>
-                                    <td class="col-md-1">
-                                        <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
-                                    </td>
-                                </tr>
-                                <tr class="row">
-                                    <td class="col-md-4 mb-1">
-                                        <input type="text" id="firstName" class="form-control" />
-                                    </td>
-                                    <td class="col-md-4 mb-1">
-                                        <input type="mail" id="lastName"  class="form-control"/>
-                                    </td>
-                                    <td class="col-md-3 mb-1">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            <input class="form-control" type="text" id="contactNumber">
-                                        </div>
-                                    </td>
-                                    <td class="col-sm-1">
-                                        <input type="button" class="ibtnDel btn btn-md btn-danger" value="Delete">
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="5" style="text-align: left;">
-                                        <input type="button" class="btn btn-info btn-sm btn-block" id="addrow" value="Add Row" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div-->
                     
                     <div class="mt-3" style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        <a {{--href="/glamping"--}} style="text-decoration:none;">
+                        <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
-                        <!--button type="button" class="btn btn-primary" style="width:11em;" id="unsavedChanges" data-toggle="modal" data-target="#unsavedChagesModal">
-                            Unsaved try
-                        </button--> 
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -688,7 +485,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="card my-0">
                         <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
                             <thead>
                                 <tr>
@@ -750,7 +546,7 @@
                                     <th></th>
                                     <th colspan="2" scope="row">Amount paid:</th>
                                     <th style="text-align:right;"  colspan="2">
-                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
                                     </th>
                                     <th></th>
                                 </tr>
@@ -759,7 +555,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button id="saveAdditionalPayments" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
