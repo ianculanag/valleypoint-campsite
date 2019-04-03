@@ -164,12 +164,12 @@
                     <a href="" id="reserve">
                         <button type="button" class="btn btn-success">Add Reservation</button>
                     </a>
-                    <a href="" id="editDetails">
+                    <!--a href="" id="editDetails">
                         <button type="button" class="btn btn-info">View Details</button>
                     </a>
                     <a href="" id="checkout">
                         <button type="button" class="btn btn-danger">Check-out</button>
-                    </a>
+                    </a-->
                 </div>
             </div>
         </div>
@@ -198,7 +198,7 @@
                         <button type="button" class="btn btn-primary">Check-in</button>
                     </a>
                     <a href="" id="reserveEmpty">
-                        <button type="button" class="btn btn-secondary">Add reservation</button>
+                        <button type="button" class="btn btn-success">Add reservation</button>
                     </a>
                 </div>
             </div>

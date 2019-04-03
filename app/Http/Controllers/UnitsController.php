@@ -215,7 +215,7 @@ class UnitsController extends Controller
      */
     public function loadGlampingUnit($id)
     {
-        return DB::table('units')
+        $units = DB::table('units')
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
@@ -228,7 +228,24 @@ class UnitsController extends Controller
                  'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
         ->where('unitID', '=', $id)
-        ->get(); 
+        ->get()
+        ->toArray(); 
+        
+        $reservations = DB::table('units')
+        ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
+        ->select('reservations.id AS reservationID', 'reservations.lastName AS reservationLastName', 
+                'reservations.firstName AS reservationFirstName', 'reservations.numberOfPax AS reservationNumberOfPax',
+                'reservations.numberOfUnits AS reservationNumberOfUnits', 'reservations.contactNumber AS reservationContactNumber',
+                'reservation_units.status AS reservationStatus', 'reservation_units.checkinDatetime AS reservationCheckinDatetime', 
+                'reservation_units.checkoutDatetime AS reservationCheckoutDatetime', 'services.id AS serviceID',
+                'services.serviceType AS serviceType', 'services.serviceName AS serviceName')
+        ->where('unitID', '=', $id)
+        ->get()
+        ->toArray(); 
+
+        return array_merge($units, $reservations);
     }
 
     /**

@@ -23,7 +23,28 @@ jQuery(document).ready(function(){
             htmlString += "<tr><td>Checked-in: </td>";
             htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
             htmlString += "<tr><td>Check-out: </td>";
-            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr>";
+            htmlString += "<tr><td class='pt-3' colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
+            htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
+
+            if(data[1]) {
+                htmlString += "<hr><h5 class='text-center'>Reservations</h5>";
+                for(var count = 1; count < data.length; count++) {
+                    htmlString += "<div class='container'>";
+                    htmlString += "<table class='table table-sm borderless'>";
+                    htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + (count) +" </td>";
+                    htmlString += "<td style='width:28%'>Guest name: </td>";
+                    htmlString += "<td>" + data[count].reservationFirstName + " " + data[count].reservationLastName + "</td></tr>";
+                    htmlString += "<tr><td style='width:28%'>Service: </td>";
+                    htmlString += "<td>" + data[count].serviceName + "</td></tr>";
+                    htmlString += "<tr><td>Check-in: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].reservationCheckinDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td>Check-out: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].reservationCheckoutDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
+                    htmlString += "<a href='' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>";
+                }
+            }
 
             jQuery('#modal-body').html(htmlString);
             jQuery('#modal-head1').html(data[0].unitNumber);
@@ -147,7 +168,9 @@ jQuery(document).ready(function(){
                     htmlString += "<tr><td>Check-in: </td>";
                     htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkinDatetime).format('LLLL') + "</td></tr>";
                     htmlString += "<tr><td>Check-out: </td>";
-                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr></table></div>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
+                    htmlString += "<a href='' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>"
                 }
             }
 

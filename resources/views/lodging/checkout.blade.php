@@ -10,7 +10,7 @@
                     <strong>Back</strong>
                 </span>
             </a>
-            <h3>Check-out</h3>
+            <h3>Check-out Form</h3>
         </div>
         <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
