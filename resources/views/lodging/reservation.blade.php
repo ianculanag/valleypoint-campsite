@@ -13,7 +13,7 @@
             </a>
             <h3>Reservation Form</h3>
         </div>   
-        <form method="POST" action="/checkinGlamping">
+        <form method="POST" action="/reservation">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     
-                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:block;">
+                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
                         <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
                     </div>
