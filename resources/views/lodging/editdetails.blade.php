@@ -323,9 +323,10 @@
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
-                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
+                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$units->serviceName}}</option>
-                                    </select>
+                                    </select>--}}
+                                    <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
                                     {{--<select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
                                         <option value="1">Solo</option>
                                         <option value="2">2 Pax</option>

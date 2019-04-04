@@ -166,24 +166,11 @@
                         </div>
                     </div>
                     <div class="form-group row" id="divUnits">
-                        {{--gac dawn code--}}
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
                             <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                         </div>
-                        {{--<div class="col-md-3 mb-1" id="divNumberOfPax{{$unit->unitNumber}}"  style="display:none;">
-                            <label for="unitNumberOfPax">No. of pax</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input class="form-control paxSelect numberOfPaxGlamping" name="numberOfPaxGlamping{{$unit->unitNumber}}" id="numberOfPaxGlamping{{$unit->unitNumber}}" type="number" {{--name="additionalServiceNumberOfPax" placeholder="" value="1" min="1" max="4" required="required"{{--form="serviceForm">
-                                <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
-                            </div>
-                        </div>--}}
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
                             <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">

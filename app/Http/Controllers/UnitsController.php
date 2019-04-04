@@ -100,22 +100,12 @@ class UnitsController extends Controller
      */
     public function glamping()
     {
-        /*$units = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
-        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
-                 'accommodation_units.status', 'services.serviceName', 
-                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
-                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')   
-        //->where('guests.listedUnder', '=', null)        
-        ->orderBy('unitID')
-        ->get(); */
-
         $units = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        //->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
@@ -129,12 +119,17 @@ class UnitsController extends Controller
         ->orderBy('unitID')
         ->get();
 
+        //return $units;
+
         $reservations = DB::table('reservations')
-        ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+        ->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'reservations.id')
+                 ->where('status', 'reserved');
+        })
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->get();
         
-        //return $reservations;
+        return $reservations;
         //return $units;
         
         return view('lodging.glamping')->with('units', $units)->with('reservations', $reservations);
