@@ -465,8 +465,25 @@ class AccommodationsController extends Controller
             }
         }
         
-        $url = '/checkout'.'/'.$request->input('unitID');
-        return redirect($url);
+        /*$units = DB::table('accommodation_units')
+        //->select('accommodation_units.accommodationID')
+        ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+        ->get();
+
+        //return $units;
+        foreach ($units as $unit) {
+            $accommodationUnit = Charges::find($unit->accommodationID);
+            $accommodationUnit->update(['status' => 'finished']);
+        }*/
+        
+        $units = DB::table('accommodation_units')
+        //->select('accommodation_units.accommodationID')
+        ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+        ->update(array('status' => 'finished'));
+
+        //$url = '/checkout'.'/'.$request->input('unitID');
+        //return redirect($url);
+        return redirect('/glamping');
     }
 
 }

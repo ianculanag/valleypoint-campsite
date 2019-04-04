@@ -488,7 +488,7 @@
                                     <th></th>
                                     <th colspan="2" scope="row">Amount paid:</th>
                                     <th style="text-align:right;"  colspan="2">
-                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
+                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
                                     </th>
                                     <th></th>
                                 </tr>
