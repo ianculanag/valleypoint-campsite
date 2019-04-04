@@ -101,11 +101,7 @@ Route::get('/view-units', 'UnitsController@viewUnits');
 //Add unit
 Route::get('/add-unit', 'UnitsController@showAddUnitForm');
 
-<<<<<<< HEAD
 Route::get('/getDates', 'UnitsController@getDates');
 
 //Check-out guests
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
-=======
-Route::get('/getDates', 'UnitsController@getDates');
->>>>>>> Add user (unfinished)
