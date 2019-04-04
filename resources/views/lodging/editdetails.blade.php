@@ -12,7 +12,7 @@
             </a>
             <h3>Edit Transaction Details</h3>
         </div>        
-        <form method="POST" action="/updateDetails">
+        <form class="form" method="POST" action="/updateDetails">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
         <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
@@ -473,9 +473,12 @@
                     
                     <div class="mt-3" style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        <a style="text-decoration:none;">
+                        <a style="text-decoration:none;" href="/glamping">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
+                        <button type="button" class="btn btn-primary" style="display:none;" id="unsavedChanges" data-toggle="modal" data-target="#unsavedChangesModal">
+                            Leave
+                        </button>
                     </div>
             </div>
         </div>
@@ -569,7 +572,7 @@
     </div>
     <!-- end of charges modal -->
     <!-- unsaved changes modal -->
-    <div class="modal fade" id="unsavedChagesModal" tabindex="-1" role="dialog" aria-labelledby="unsavedChagesModal" aria-hidden="true">
+    <div class="modal fade" id="unsavedChangesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -589,33 +592,5 @@
         </div>
     </div>
     <!-- unsaved changes modal -->
-
-    <script>
-        /*$(function () {
-            var unsaved = false;
-            $(":input").change(function () {
-                unsaved = true;
-            });
-
-            $('#cancelChanges').click(function () {
-                if (unsaved) {
-                    var flag = confirm("Job Function Not Saved. Are you Sure you want to leave with out saving the data?");
-                    if (flag)
-                        $('#unsavedChangesModal').modal('hide');
-                }
-                else
-                    $('#unsavedChangesModal').modal('hide');
-            });
-        });
-        $('#body-content').on('change keyup keydown', 'input, textarea, select', function (e) {
-            $(this).addClass('changed-input');
-        });
-        $(window).on('beforeunload', function () {
-            if ($('.changed-input').length) {
-                return 'You haven\'t saved your changes.';
-            }
-        });*/
-    </script>
-
     @endforeach  
 @endsection

@@ -285,3 +285,16 @@ jQuery(document).ready(function(){
         tr.append(tdTotalPrice);
         tr.append(tdTotalBalance);
         tbody.append(tr);*/
+
+        jQuery(document).ready(function(){
+            jQuery(window).bind('beforeunload', function(){
+                /*var unsaved = false;
+                jQuery(":input").change(function () {
+                    unsaved = true;
+                    console.log('EWW');
+                });*/
+                jQuery("#unsavedChangesModal").modal('toggle');
+                preventDefault();
+            });
+        });
+        

@@ -83,7 +83,7 @@ Route::get('/view-reservations', 'ReservationsController@viewReservations');
 Route::get('transactions', 'PaymentsController@viewLodgingSales');
 
 //Select Service	
-Route::get('/service-select/{serviceID}', 'ServicesController@getPrices'); 
+Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
 
 //Post additional services
 Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
