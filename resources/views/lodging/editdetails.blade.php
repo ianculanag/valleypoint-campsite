@@ -154,6 +154,9 @@
                                             <th colspan="4" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
                                         </tr>
+                                        <tr style="disply:none;">
+                                            <input type="number" style="display:none;" value="{{count($pendingPayments)}}">
+                                        </tr>
                                         {{--<tr>
                                             <th colspan="1">Amount Paid:</th>
                                             <th style="text-align:right;"  colspan="3">

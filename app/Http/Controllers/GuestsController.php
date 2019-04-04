@@ -138,36 +138,10 @@ class GuestsController extends Controller
             //'numberOfPax' => $numberOfPax
         ]);
 
-        /*if ($request->input('numberOfAdditionalCharges') > 0) {
+        $users->error;
 
-            $services = DB::table('services')
-            ->where('id', '>', 5)
-            ->get();
-
-            for ($count = 1; $count <= $request->input('numberOfAdditionalCharges'); $count++) {
-                $serviceID = 'serviceID'.$count;
-                $numberOfPax = 'numberOfPaxAdditional'.$count;
-                $paymentStatus = 'paymentStatus'.$count;
-
-                $service = DB::table('services')
-                ->where('id', '=', $request->input($serviceID))
-                ->get();
-
-                $price = $service[0]->price;
-                $pax = $request->input($numberOfPax);
-                $totalPrice = $price * $pax;
-
-                $additionalCharge = new Charges;
-                $additionalCharge->accommodationID = $request->input('accommodationID');
-                $additionalCharge->serviceID = $request->input($serviceID);
-                $additionalCharge->quantity = $request->input($numberOfPax);
-                $additionalCharge->totalPrice = $totalPrice;
-                //$additionalCharge->paymentStatus = $request->input($paymentStatus);
-                $additionalCharge->save();
-                
-                //$totalPrice = $service->price * $numberOfPax;
-            }
-        }*/
+        $chargesCount = 0;
+        $chargesArray = array();
 
         if($request->input('additionalServicesCount') > 0) {
             for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
@@ -185,6 +159,42 @@ class GuestsController extends Controller
                 }
             }
         }
+
+        /*if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $accommodation->id;
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
+                }
+            }
+        }
+
+        for($count = 0; $count < $chargesCount; $count++) {
+            $paymentEntry = 'payment'.$count;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $chargesArray[$count];
+                $payment->save();
+
+                $charge = Charges::find($chargesArray[$count]);
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }*/
 
         $url = '/editdetails'.'/'.$request->input('unitID');
         //return \Redirect::route('/editdetails', [$request->input('unitID')]);
