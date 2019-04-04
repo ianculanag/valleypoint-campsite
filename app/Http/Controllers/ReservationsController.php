@@ -26,8 +26,8 @@ class ReservationsController extends Controller
     public function viewReservations()
     {
         $reservations = DB::table('reservations')
-        //->orderBy('paymentDatetime')
-        ->get();
+            ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+            ->get();
         
         //return $reservations;
 

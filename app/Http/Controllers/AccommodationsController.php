@@ -368,7 +368,7 @@ class AccommodationsController extends Controller
         'accommodations.numberOfPax', 'accommodations.paymentStatus', 'accommodations.checkinDatetime',
         'accommodations.checkoutDatetime', 'services.serviceName', 'services.price')
         ->get();
-        return view('lodging.viewreserve')->with('reserve', $reserve);
+        return view('lodging.view-reserve')->with('reserve', $reserve);
         //return $reserve;
 
     }
@@ -382,7 +382,7 @@ class AccommodationsController extends Controller
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.checkinBackpacker')->with('unit', $unit);     
+        return view('lodging.checkin-backpacker')->with('unit', $unit);     
         
     }
 
@@ -393,7 +393,7 @@ class AccommodationsController extends Controller
      */
     public function showAddReserveForm($unitID)
     {
-        return view ('lodging.addreserve')->with('unitID', $unitID);
+        return view ('lodging.add-reserve')->with('unitID', $unitID);
     }
 
     /**

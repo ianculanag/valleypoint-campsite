@@ -18,7 +18,7 @@ class UsersController extends Controller
         $users = DB::table('users')
         ->get();
 
-        return view('admin.viewusers')->with('users', $users);
+        return view('admin.view-users')->with('users', $users);
         /*$users = User::sortable()->paginate(5);
         return view('admin.viewusers',compact('users'))->with('users', $users);*/
     }
@@ -43,6 +43,6 @@ class UsersController extends Controller
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save(); 
 
-        return redirect('/viewusers');
+        return redirect('/view-users');
     }
 }

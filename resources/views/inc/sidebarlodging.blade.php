@@ -98,13 +98,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/viewReservations">
+                        <a class="nav-link" href="/view-reservations">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             Reservations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/viewguests">
+                        <a class="nav-link" href="/view-guests">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             Guests
                         </a>

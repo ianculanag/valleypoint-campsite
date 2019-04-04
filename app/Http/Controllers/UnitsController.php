@@ -90,7 +90,7 @@ class UnitsController extends Controller
 
         //return $days;
 
-        return view('lodging.calendarGlamping')->with('units', $units)->with('dates', $days);
+        return view('lodging.calendar-glamping')->with('units', $units)->with('dates', $days);
     }
 
     /**
@@ -267,7 +267,7 @@ class UnitsController extends Controller
         ->where('guests.id', '=', $id)
         ->get(['units.id AS unitID', 'guests.id AS guestID']);
         //return $guest;
-        return view('lodging.guestcheckout')->with('guest', $guest);
+        return view('lodging.guest-checkout')->with('guest', $guest);
         //}
     }
 
@@ -305,7 +305,7 @@ class UnitsController extends Controller
         $units = DB::table('units')
         ->get();
 
-        return view('admin.viewunits')->with('units', $units);
+        return view('admin.view-units')->with('units', $units);
         //$units = Units::sortable()->paginate(8);
         //return view('admin.viewunits',compact('units'))->with('units', $units);
     }

@@ -36,10 +36,10 @@
                 <td>{{$reservation->lastName}}</td>
                 <td>{{$reservation->contactNumber}}</td>
                 <td>{{$reservation->numberOfPax}}</td>
-                <td>{{$reservation->reservationDatetime}}</td>
-                    <td><button class="btn btn-success">Check-in</button>
-                        <button class="btn btn-info">Edit</button>
-                        <button class="btn btn-danger">Cancel</button>
+                <td>{{$reservation->checkinDatetime}}</td>
+                    <td><button class="btn btn-sm btn-success">Check-in</button>
+                        <button class="btn btn-sm btn-info">Edit</button>
+                        <button class="btn btn-sm btn-danger">Cancel</button>
                     </td>
                 </tr>
                 @endforeach
