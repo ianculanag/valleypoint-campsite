@@ -2,6 +2,8 @@ jQuery(document).ready(function(){
     jQuery('.load-glamping-details').click(function(){
         jQuery.get('loadGlampingDetails/'+$(this).attr('id'), function(data){
 
+            console.log(data);
+            
             var htmlString = "";
 
             htmlString += "<h5 class='text-center'>Unit Details</h5>";
@@ -177,7 +179,8 @@ jQuery(document).ready(function(){
             jQuery('#modal-body-empty').html(htmlString);
             jQuery('#modal-head2').html(data[0].unitNumber);
 
-            jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);
+            jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);            
+            jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
             jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
         })
     });

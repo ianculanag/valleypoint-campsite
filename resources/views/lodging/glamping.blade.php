@@ -194,7 +194,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-right">
-                    <a href="" id="checkin">
+                    <a href="" id="checkinMain">
                         <button type="button" class="btn btn-primary">Check-in</button>
                     </a>
                     <a href="" id="reserveEmpty">

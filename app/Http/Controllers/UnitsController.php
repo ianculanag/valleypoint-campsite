@@ -211,7 +211,11 @@ class UnitsController extends Controller
     public function loadGlampingUnit($id)
     {
         $units = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        //->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
@@ -225,9 +229,13 @@ class UnitsController extends Controller
         ->where('unitID', '=', $id)
         ->get()
         ->toArray(); 
-        
+
         $reservations = DB::table('units')
-        ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        //->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        ->join('reservation_units', function($join) {
+            $join->on('reservation_units.unitID', '=', 'units.id')
+                 ->where('status', 'reserved');
+        })
         ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
         ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
         ->select('reservations.id AS reservationID', 'reservations.lastName AS reservationLastName', 
