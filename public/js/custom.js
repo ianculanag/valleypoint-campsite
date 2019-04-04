@@ -782,6 +782,30 @@ jQuery('#checkAvailability').click( function() {
 
 function checkAvailability() {
     jQuery.get('/getDates', function(data) {
-        console.log(data);
+        console.log(data.length);
+        var alertMessage = "";
+
+        /*
+        for(var index=0; index < data.length; index++) {
+            if(data[index].accommodationID) {                
+                alertMessage += data[index].unitNumber + " is occupied from " +
+                                moment(data[index].checkinDatetime).format('MMMM D') + " to " +
+                                moment(data[index].checkoutDatetime).format('MMMM D') + ".<br>"
+            } else if (data[index].reservationID) {                
+                alertMessage += data[index].unitNumber + " is reserved from " +
+                                moment(data[index].checkinDatetime).format('MMMM D') + " to " +
+                                moment(data[index].checkoutDatetime).format('MMMM D') + ".<br>"
+            }   
+        }*/
+
+        alertMessage += '<strong>Available!</strong> All selected units are available.';
+        
+        jQuery('#alertMessage').html(alertMessage);
+        jQuery('#alertContainer').removeClass('alert-danger');
+        jQuery('#alertContainer').addClass('alert-success');
+        jQuery('#alertContainer').css('display', 'block');
+
+        //jQuery('#alertMessage').html(alertMessage);
+
     })
 }

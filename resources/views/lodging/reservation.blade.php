@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     
-                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
+                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:block;">
                         <a href="#" class="close">&times;</a>
                         <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
                     </div>

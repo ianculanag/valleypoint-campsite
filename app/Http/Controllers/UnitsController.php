@@ -318,7 +318,7 @@ class UnitsController extends Controller
         ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->join('units', 'units.id', 'accommodation_units.unitID')
         ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
-                 'accommodation_units.checkoutDatetime')
+                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
         ->where('accommodation_units.status', '=', 'ongoing')
         ->get()
         ->toArray();
@@ -327,7 +327,7 @@ class UnitsController extends Controller
         ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
-                 'reservation_units.checkoutDatetime')
+                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
         ->where('reservation_units.status', '=', 'reserved')
         ->get()
         ->toArray();
