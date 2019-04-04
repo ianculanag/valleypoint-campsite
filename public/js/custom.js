@@ -236,7 +236,7 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         removeRow(e.attrs.value);
         removeInvoiceEntry(e.attrs.value);
-        //checkAvailability();
+        checkAvailability();
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
@@ -244,6 +244,9 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         makeRow(e.attrs.value);
         makeInvoiceEntry(e.attrs.value);
+        if(jQuery('#checkoutDate'+e.attrs.value).val() >= jQuery('#checkinDate'+e.attrs.value).val()){
+            checkAvailability(); 
+        }
         //checkAvailability();
     });
 });
@@ -549,11 +552,12 @@ jQuery(document).ready(function(){
                     
         jQuery(hiddenTotalPrice).val(totalPrice);   
         
-        //document.getElementById('stayDuration').value = daysDiff;        
+        //document.getElementById('stayDuration').value = daysDiff;       
+        checkAvailability(); 
         updateTotal();
     });
 
-    jQuery(document).on('change', '#checkinDate', function() {
+    jQuery(document).on('change', '.checkinDates', function() {
         checkAvailability();
     });
 
@@ -780,32 +784,121 @@ jQuery('#checkAvailability').click( function() {
     checkAvailability();
 });
 
-function checkAvailability() {
+function checkAvailability() {    
+    var selectedUnits = jQuery('#tokenfield').tokenfield('getTokens');
     jQuery.get('/getDates', function(data) {
-        console.log(data.length);
+        //console.log(data.length);
+        //console.log(selectedUnits);
         var alertMessage = "";
 
-        /*
-        for(var index=0; index < data.length; index++) {
-            if(data[index].accommodationID) {                
-                alertMessage += data[index].unitNumber + " is occupied from " +
-                                moment(data[index].checkinDatetime).format('MMMM D') + " to " +
-                                moment(data[index].checkoutDatetime).format('MMMM D') + ".<br>"
-            } else if (data[index].reservationID) {                
-                alertMessage += data[index].unitNumber + " is reserved from " +
-                                moment(data[index].checkinDatetime).format('MMMM D') + " to " +
-                                moment(data[index].checkoutDatetime).format('MMMM D') + ".<br>"
-            }   
-        }*/
+        var selectedUnit;
+        var selectedCheckinDate;
+        var selectedCheckoutDate;
 
-        alertMessage += '<strong>Available!</strong> All selected units are available.';
-        
+        var currentUnit;
+        var currentCheckinDate;
+        var currentCheckoutDate;
+
+        var occupiedUnits = 0;
+        var occupiedUnitNumbers = new Array();
+        var occupiedCheckinDates = new Array();
+        var occupiedCheckoutDates = new Array();
+
+        var reservedUnits = 0;
+        var reservedUnitNumbers = new Array();
+        var reservedCheckinDates = new Array();
+        var reservedCheckoutDates = new Array();
+
+        /**
+         * 1. Get the units from tokenfield
+         * 2. For every unit, compare the dates
+         * 3. Build the alert message 
+         */
+
+         for(var count = 0; count < selectedUnits.length; count++) {             
+            selectedUnit = selectedUnits[count].value;            
+            selectedCheckinDate = moment(jQuery('#checkinDate'+selectedUnit).val()).format('L');
+            selectedCheckoutDate = moment(jQuery('#checkoutDate'+selectedUnit).val()).format('L');
+
+            //console.log(selectedUnit);
+            //console.log(selectedCheckinDate);
+            //console.log(selectedCheckoutDate);
+            for(var index=0; index < data.length; index++) {
+                currentUnit = data[index].unitNumber;
+                currentCheckinDate = moment(data[index].checkinDatetime).format('L');
+                currentCheckoutDate = moment(data[index].checkoutDatetime).format('L');
+                if(selectedUnit == currentUnit && ((selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) || (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate))) {
+                    if(data[index].accommodationID) {                        
+                        occupiedUnits++;
+                        occupiedUnitNumbers.push(currentUnit);
+                        occupiedCheckinDates.push(currentCheckinDate);
+                        occupiedCheckoutDates.push(currentCheckoutDate);
+                    } else if(data[index].reservationID) {                        
+                        reservedUnits++;
+                        reservedUnitNumbers.push(currentUnit);
+                        reservedCheckinDates.push(currentCheckinDate);
+                        reservedCheckoutDates.push(currentCheckoutDate);
+                    }
+                }
+            }
+         }
+
+        if(occupiedUnits > 0) {
+            alertMessage += '<strong>Occupied!</strong><br>';
+            for(var count = 0; count < occupiedUnits; count++) {
+                console.log(occupiedUnitNumbers[count]);
+                console.log(occupiedCheckinDates[count]);
+                console.log(occupiedCheckoutDates[count]);
+                alertMessage += occupiedUnitNumbers[count] + ' is occupied from ' + moment(occupiedCheckinDates[count]).format('MMMM D') + ' to ' + moment(occupiedCheckoutDates[count]).format('MMMM D') + '.<br>';
+            }
+            jQuery('#alertMessage').html(alertMessage);            
+            jQuery('#alertContainer').removeClass('alert-success');
+            jQuery('#alertContainer').addClass('alert-danger');
+            jQuery('#alertContainer').css('display','block');
+            jQuery('#checkinButton').prop('disabled', true);
+        } 
+
+        if(reservedUnits > 0) {
+            alertMessage += '<strong>Reserved!</strong><br>';
+            for(var count = 0; count < reservedUnits; count++) {
+                console.log(reservedUnitNumbers[count]);
+                console.log(reservedCheckinDates[count]);
+                console.log(reservedCheckoutDates[count]);
+                alertMessage += reservedUnitNumbers[count] + ' is reserved from ' + moment(reservedCheckinDates[count]).format('MMMM D') + ' to ' + moment(reservedCheckoutDates[count]).format('MMMM D') + '.<br>';
+            }
+            jQuery('#alertMessage').html(alertMessage);            
+            jQuery('#alertContainer').removeClass('alert-success');
+            jQuery('#alertContainer').addClass('alert-danger');
+            jQuery('#alertContainer').css('display','block');
+            jQuery('#checkinButton').prop('disabled', true);
+        }
+
+        if (occupiedUnits == 0 && reservedUnits == 0) {
+            alertMessage += '<strong>Available! </strong>';
+            for(var count = 0; count < selectedUnits.length; count++) {
+                if(count==selectedUnits.length-1 && selectedUnits.length > 1) {
+                    alertMessage += 'and ' + selectedUnits[count].value;
+                } else if(count==selectedUnits.length-1) {                    
+                    alertMessage += selectedUnits[count].value;
+                } else {
+                    alertMessage += selectedUnits[count].value + ', ';
+                }
+            }
+            if(selectedUnits.length == 1) {
+                alertMessage += ' is available within the specified dates.';
+            } else {
+                alertMessage += ' are available within the specified dates.';
+            }
+            //alertMessage += moment(selectedCheckinDate).format('MMMM DD') + ' to ' + moment(selectedCheckoutDate).format('MMMM DD') + '.';
+            console.log(selectedUnits);
+            jQuery('#alertMessage').html(alertMessage);
+            jQuery('#alertContainer').removeClass('alert-danger');
+            jQuery('#alertContainer').addClass('alert-success');
+            jQuery('#alertContainer').css('display', 'block');
+            jQuery('#checkinButton').prop('disabled', false);
+        }
+
         jQuery('#alertMessage').html(alertMessage);
-        jQuery('#alertContainer').removeClass('alert-danger');
-        jQuery('#alertContainer').addClass('alert-success');
-        jQuery('#alertContainer').css('display', 'block');
-
-        //jQuery('#alertMessage').html(alertMessage);
 
     })
 }

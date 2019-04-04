@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     
-                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:block;">
+                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
                         <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
                     </div>
@@ -277,7 +277,7 @@
                     </div>
                     
                     <div class="pt-4" style="float:right;">   
-                        {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
+                        {{--<a href="/getDates" style="text-decoration:none;">              
                         <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         {{--</a>--}}
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Make Reservation</button>

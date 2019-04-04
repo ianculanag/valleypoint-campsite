@@ -148,7 +148,7 @@ jQuery(document).on('click', '#showChargesModal', function() {
 });
 
 jQuery('#selectAllBalances').change(function() {
-    var checkboxes = jQuery(this).closest('form').find(':checkbox');
+    var checkboxes = jQuery(this).closest('body').find(':checkbox');
     checkboxes.prop('checked', jQuery(this).is(':checked'));
 
     updateBalancesTotal();
