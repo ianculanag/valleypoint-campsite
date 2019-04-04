@@ -10,7 +10,7 @@
                 </span>
             </a>
         </div>        
-        <form method="POST" action="/addUser">
+        <form method="POST" action="/register">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                   
 
@@ -19,28 +19,28 @@
                     <h3>Add User</h3>
                 </div>
                 <div class="form-group">
-                    <input type="text" required="required" class="form-control" id="inputName" placeholder="Name" max=20>
+                    <input type="text" required="required" class="form-control" name="name" placeholder="Name" maxlength=25>
                 </div>
                 <div class="form-group">
-                    <input type="text" required="required" class="form-control" id="inputUsername" placeholder="Username" max=15>
+                    <input type="text" required="required" class="form-control" name="username" placeholder="Username" maxlength=15>
                 </div>
                 <div class="form-group">
-                    <input type="password" required="required" class="form-control" id="inputPassword" placeholder="Password" min=6 max=25>
+                    <input type="password" required="required" class="form-control" name="password" placeholder="Password" minlength=6 maxlength=25>
                 </div>
                 <div class="form-group">
-                    <input type="password" required="required" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" min=6 max=25>
+                    <input type="password" required="required" class="form-control" name="confirmPassword" placeholder="Confirm Password" minlength=6 maxlength=25>
                 </div>
                 <div class="form-group">
-                    <input type="text" required="required" class="form-control" placeholder="Contact Number" max=11>
+                    <input type="text" required="required" name="contactNumber" class="form-control" placeholder="Contact Number" minlength=11 maxlength=11>
                 </div>
                 <div class="form-group">
-                    <input type="email" required="required" class="form-control" id="inputEmail" placeholder="Email" min=10 max=25>
+                    <input type="email" required="required" class="form-control" name="inputEmail" placeholder="Email" minlength=10 maxlength=25>
                 </div>
                 <div class="form-group">
-                    <select class="custom-select d-block w-100" id="state" required="required">
-                        <option value="">General Manager</option>
-                        <option>Lodging Manager</option>
-                        <option>Cashier</option>
+                    <select class="custom-select d-block w-100" id="state" required="required" name="role">
+                        <option value="general manager">General Manager</option>
+                        <option value="lodging">Lodging Manager</option>
+                        <option value="cashier">Cashier</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-block btn-success mt-4">Submit</button>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="position:fixed;">
+<div class="container" style="position:fixed; {{--height:80vh--}}">
     <div class="pt-3 pb-3">
         <a href="#">
             <span style="float:left;">
@@ -43,5 +43,10 @@
             </tbody>
         </table>
     </div>
-</div>
+    {{--<div style="position:absolute; bottom:0; right:0;">
+        <button class="btn btn-lg btn-success" style="border-radius:50% !important;">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+        </button>
+    </div>--}}
+</div> 
 @endsection

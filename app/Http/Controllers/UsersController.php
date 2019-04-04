@@ -32,16 +32,22 @@ class UsersController extends Controller
     public function addUser(Request $request)
     {
         $this->validate($request, [
+            'name' => 'required|max:25',
+            'username' => 'required|max:15',
+            'password' => 'required|min:6|max:25',
             'contactNumber' => 'required|min:11|max:11',
-            'firstName' => 'required|max:30',
-            'lastName' => 'required|max:30'
+            'email' => 'required|min:10|max:25',
+            'role' => 'required'
         ]);
 
-        $user = new User;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save(); 
+        $user = new Useras;
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->password = $request->input('password');
+        $user->contactNumber = $request->input('contactNumber');
+        $user->email = $request->input('email');
+        $user->email = $request->input('email');
+        $user->save(); 
 
         return redirect('/view-users');
     }

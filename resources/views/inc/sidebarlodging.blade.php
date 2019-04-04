@@ -39,7 +39,6 @@
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
-        <input class="form-control form-control-dark w-80" type="text" placeholder="Search" aria-label="Search">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>

@@ -132,8 +132,9 @@ body {
 
 /* Main content*/
 .main-content {
-    margin-top: 3em;
-    float: left;
+    padding-top: 3em;
+	float: left;
+	min-height: 100vh;
 }
 
 /* Sidebar & Main Content */

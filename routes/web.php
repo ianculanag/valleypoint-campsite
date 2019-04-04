@@ -23,7 +23,7 @@ Route::get('/calendar', 'UnitsController@calendar');
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 
-Route::resource('staff', 'StaffController');
+//Route::resource('staff', 'StaffController');
 
 //
 Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
@@ -93,6 +93,7 @@ Route::get('/view-users', 'UsersController@viewUsers');
 
 //Add user
 Route::get('/add-user', 'UsersController@showAddUserForm');
+Route::post('user-added', 'UsersController@addUser');
 
 //View units
 Route::get('/view-units', 'UnitsController@viewUnits');
@@ -100,7 +101,11 @@ Route::get('/view-units', 'UnitsController@viewUnits');
 //Add unit
 Route::get('/add-unit', 'UnitsController@showAddUnitForm');
 
+<<<<<<< HEAD
 Route::get('/getDates', 'UnitsController@getDates');
 
 //Check-out guests
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
+=======
+Route::get('/getDates', 'UnitsController@getDates');
+>>>>>>> Add user (unfinished)
