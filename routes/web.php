@@ -97,6 +97,9 @@ Route::get('/add-user', 'UsersController@showAddUserForm');
 //View units
 Route::get('/view-units', 'UnitsController@viewUnits');
 
+//Add unit
+Route::get('/add-unit', 'UnitsController@showAddUnitForm');
+
 Route::get('/getDates', 'UnitsController@getDates');
 
 //Check-out guests

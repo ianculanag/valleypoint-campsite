@@ -311,6 +311,19 @@ class UnitsController extends Controller
     }
 
     /**
+     * Show the add unit form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAddUnitForm()
+    {
+        $units = DB::table('units')
+        ->get(); 
+
+        return view('admin.addunit')->with('units', $units);
+    }
+
+    /**
      * Get accommodation and reservation dates on units.
      *
      * @return \Illuminate\Http\Response
