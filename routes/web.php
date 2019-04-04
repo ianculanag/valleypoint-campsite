@@ -21,14 +21,14 @@ Route::get('/glamping', 'UnitsController@glamping');
 
 Route::get('/calendar', 'UnitsController@calendar'); 
 
-Route::get('/guestcheckout/{id}', 'UnitsController@loadGuestDetails');
+Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 
-//Route::get('/addusers', 'PagesController@addusers');
+Route::get('/add-user', 'UsersController@addusers');
 Route::resource('staff', 'StaffController');
 
 //
-Route::get('/loadGlampingDetails/{id}', 'UnitsController@loadGlampingUnit');
-Route::get('/loadGlampingAvailableUnit/{id}', 'UnitsController@loadGlampingAvailableUnit');
+Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
+Route::get('/load-glamping-available-unit/{id}', 'UnitsController@loadGlampingAvailableUnit');
 
 Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();
@@ -42,7 +42,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
-Route::post('/checkinGlamping', 'AccommodationsController@checkinGlamping');
+Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
 
 //Find Package
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
@@ -53,13 +53,12 @@ Route::get('/reservation/{unitID}', 'ReservationsController@showReservationForm'
 Route::post('/reservation', 'ReservationsController@makeReservation');
 
 //Check-in backpacker
-Route::get('/checkinBackpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
-Route::post('/checkinBackpacker','AccommodationsController@checkinBackpacker');
-Route::get('loadBackpackerDetails/');
+Route::get('/checkin-backpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
+Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');
+Route::get('load-backpacker-details/');
 
 //Edit guest details
-//Route::get('/editdetails/{unitID}', 'GuestsController@editGuestDetails');
-Route::get('/editdetails/{unitID}', 'GuestsController@viewGuestDetails');
+Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');
 Route::post('/updateDetails', 'GuestsController@updateDetails');
 
 //Check-out guests
@@ -70,31 +69,31 @@ Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
 //Route::post('/addReservation','AccommodationsController@addReservation');
 
 //ViewGuests
-Route::get('/viewguests', 'GuestsController@viewguests');
+Route::get('/view-guests', 'GuestsController@viewguests');
 
 //bruteforce do not touch
-Route::get('/checkinBackpacker', function() {
+Route::get('/checkin-backpacker', function() {
     return view('lodging.checkinBackpacker');
 });
 
 //ViewReservations
-Route::get('/viewReservations', 'ReservationsController@viewReservations');
+Route::get('/view-reservations', 'ReservationsController@viewReservations');
 //Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
 //Payment Transactions
 Route::get('transactions', 'PaymentsController@viewLodgingSales');
 
 //Select Service	
-Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
+Route::get('/service-select/{serviceID}', 'ServicesController@getPrices'); 
 
 //Post additional services
 Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
 //View users
-Route::get('/viewusers', 'UsersController@viewUsers');
+Route::get('/view-users', 'UsersController@viewUsers');
 
 //View units
-Route::get('/viewunits', 'UnitsController@viewUnits');
+Route::get('/view-units', 'UnitsController@viewUnits');
 
 Route::get('/getDates', 'UnitsController@getDates');
 

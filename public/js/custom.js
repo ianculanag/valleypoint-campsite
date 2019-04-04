@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
     jQuery('.load-glamping-details').click(function(){
-        jQuery.get('loadGlampingDetails/'+$(this).attr('id'), function(data){
+        jQuery.get('load-glamping-details/'+$(this).attr('id'), function(data){
 
             console.log(data);
             
@@ -143,7 +143,7 @@ jQuery(document).on('click','.collapse.in',function(e) {
 jQuery(document).ready(function(){
     jQuery('.load-glamping-available-unit').click(function(){
         console.log('gumana');
-        jQuery.get('loadGlampingAvailableUnit/'+$(this).attr('id'), function(data){
+        jQuery.get('load-glamping-available-unit/'+$(this).attr('id'), function(data){
             console.log(data);
             var htmlString = "";
 
