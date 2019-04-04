@@ -396,4 +396,77 @@ class AccommodationsController extends Controller
         return view ('lodging.addreserve')->with('unitID', $unitID);
     }
 
+    /**
+     * Checkout glamping guests
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkoutGlamping(Request $request)
+    {
+
+        for($count = 0; $count < $request->input('chargesCount'); $count++) {
+            $existingCharge = 'charge'.$count;
+            $paymentEntry = 'payment'.$count;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $request->input($existingCharge);
+                $payment->save();
+
+                $charge = Charges::find($request->input($existingCharge));
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+
+        $additionalChargesCount = 0;
+        $additionalChargesArray = array();
+
+        if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $request->input('accommodationID');
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                    $additionalChargesCount++;
+                    array_push($additionalChargesArray, $charges->id);
+                }
+            }
+        }
+
+        $firstAdditionalCharge = $request->input('chargesCount'); //get index of newly added charges
+
+        for($count = 0; $count < $additionalChargesCount; $count++) {
+            $index = $count+$firstAdditionalCharge;
+            $paymentEntry = 'payment'.$index;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $additionalChargesArray[$count];
+                $payment->save();
+
+                $charge = Charges::find($additionalChargesArray[$count]);
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+        
+        $url = '/checkout'.'/'.$request->input('unitID');
+        return redirect($url);
+    }
+
 }

@@ -201,45 +201,7 @@ class GuestsController extends Controller
                 ]);
             }
         }
-
-        /*
-
-        if($request->input('additionalServicesCount') > 0) {
-            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
-                $additionalServiceID = 'additionalServiceID'.$count;
-                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
-                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
-                if($request->input($additionalServiceID)) {
-                    $charges = new Charges;                    
-                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
-                    $charges->totalPrice = $request->input($additionalTotalPrice);
-                    $charges->remarks = 'unpaid';
-                    $charges->accommodationID = $accommodation->id;
-                    $charges->serviceID = $request->input($additionalServiceID);
-                    $charges->save();
-                    $chargesCount++;
-                    array_push($chargesArray, $charges->id);
-                }
-            }
-        }
-
-        for($count = 0; $count < $chargesCount; $count++) {
-            $paymentEntry = 'payment'.$count;
-            if($request->input($paymentEntry)) {
-                $payment = new Payments;
-                $payment->paymentDatetime = Carbon::now();
-                $payment->amount = $request->input($paymentEntry);
-                $payment->paymentStatus = 'full';
-                $payment->chargeID = $chargesArray[$count];
-                $payment->save();
-
-                $charge = Charges::find($chargesArray[$count]);
-                $charge->update([
-                    'remarks' => 'full'
-                ]);
-            }
-        }*/
-
+        
         $url = '/editdetails'.'/'.$request->input('unitID');
         return redirect($url);
     }
@@ -256,7 +218,7 @@ class GuestsController extends Controller
     }
 
     /**
-     * Show the accommodationDetails
+     * Show the accommodationDetails di na gumagana
      *
      * @return \Illuminate\Http\Response
      */
@@ -391,6 +353,8 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
+            //return $otherUnits;
+
             return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {
             return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
@@ -415,7 +379,17 @@ class GuestsController extends Controller
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
                  'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
+        //->where('guests.listedUnder', '=', null)
         ->get();
+
+        //return $guest;
+
+        /*$accompanyingGuest = DB::table('guests')
+        ->select('guests.*')
+        //->where('listedUnder', '=', $guest[0]->guestID)
+        ->get();*/
+
+        //return $accompanyingGuest;
 
         $payments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
@@ -423,9 +397,14 @@ class GuestsController extends Controller
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->where('remarks', '=','full')
+        //->where(function ($query) {
+            //$query->where('remarks', '=','full');
+                //->orWhere('remarks', '=','partial');
+        //})
         ->get();
 
         $pendingPayments = DB::table('charges')
+        //->join('charges', 'charges.id', 'payments.chargeID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
@@ -433,14 +412,22 @@ class GuestsController extends Controller
             $query->where('remarks', '=','unpaid')
                 ->orWhere('remarks', '=','partial');
         })
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+                 'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
+       // return $pendingPayments;    
+        //return $charges;
+        //return view('lodging.editdetails')->with('guest', $guest);
+        //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
         if($guest[0]->numberOfUnits > 1) {
             $otherUnits = DB::table('accommodation_units')
             ->join('units', 'units.id', 'accommodation_units.unitID')
             ->join('services', 'services.id', 'accommodation_units.serviceID')
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
+
+            //return $otherUnits;
 
             return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {

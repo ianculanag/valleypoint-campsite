@@ -129,7 +129,7 @@ class UnitsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->get();
         
-        return $reservations;
+        //return $reservations;
         //return $units;
         
         return view('lodging.glamping')->with('units', $units)->with('reservations', $reservations);

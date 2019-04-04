@@ -12,12 +12,16 @@
             </a>
             <h3>Check-out Form</h3>
         </div>
+        
+        <form method="POST" action="/checkoutGlamping">
         <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
                 <!-- Payment Transactions Accordion -->
                 <div id="accordion">
                     <!-- All Paid Transations -->
-                    <form class="card my-0">
+                    <div id="selectedAdditionalPayments" style="display:none;">
+                    </div>
+                    <div class="card my-0">
                         <p class="card-header" role="tab" id="headingOne">
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size:1.1em;">
                                 Paid Charges
@@ -69,9 +73,9 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <!-- Unpaid Charges -->
-                    <form class="card my-0">
+                    <div class="card my-0">
                         <p class="card-header" role="tab" id="headingTwo">
                             <a class="collapsed d-block" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="font-size:1.1em;">
                                 Pending Charges
@@ -99,18 +103,25 @@
                                         @endphp
                                         @foreach($pendingPayments as $pending)
                                         @php
+
+                                            //$balance = $pending->totalPrice - $pending->amount;
                                             $total += $pending->totalPrice;
+                                            //$totalPayment += $pending->amount;
                                             $totalBalance = $total - $totalPayment;
+
+                                            $identifier = 'Pending'.$loop->iteration;
                                         @endphp
-                                        <tr>
-                                            <td class="invoiceDescriptions">{{$pending->serviceName}}</td>
-                                            <td style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
-                                            <td style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
-                                            <td style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
+                                        <tr id="invoiceRow{{$identifier}}">
+                                            <td id="invoiceDescription{{$identifier}}" class="invoiceDescriptions">{{$pending->serviceName}}</td>
+                                            <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->chargeID}}"></td>
+                                            <td style="display:none;"><input id="invoiceCheckBox{{$identifier}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                                            <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
+                                            <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
+                                            <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
                                             @if($pending->remarks == 'unpaid')
-                                            <td style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
                                             @else
-                                            <td style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -124,6 +135,10 @@
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
+                                        </tr>
+                                                                               
+                                        <tr style="display:none;">
+                                            <input type="number" name="chargesCount" style="display:none;" value="{{count($pendingPayments)}}">
                                         </tr>
                                         <tr>
                                             <td colspan="5">
@@ -171,7 +186,7 @@
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;"></th>
-                                        </tr>
+                                        </tr> 
                                         <tr>
                                             <td colspan="5">
                                             @if(count($pendingPayments) > 0)
@@ -190,15 +205,16 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <!-- End of Payment Transactions Accordion -->
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
-                <form method="POST" action="/updateDetails">
+                <div>
                     @csrf
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
                     <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
+                    
                     <div class="form-group col-md-6" style="position: absolute;">
                         <input type="text" name="guestID" required="required" class="form-control" style="display:none" value="{{$guestDetails->guestID}}">
                         <input style="display:none" class="form-control" type="text" name="unitID" value="{{$guestDetails->unitID}}">
@@ -266,9 +282,11 @@
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
-                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
+                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$units->serviceName}}</option>
-                                    </select>
+                                    </select>--}}
+                                    <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
+
                                     @endforeach
                                 </div>
                                 <div class="col-md-3 mb-1">
@@ -276,7 +294,7 @@
                                      @foreach($otherUnits as $units)
                                     <div class="input-group mb-1">
                                         @php
-                                            $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                            $checkedIn = new DateTime($units->checkinDatetime);
                                             $checkedInAt = $checkedIn->format("F j, o");
                                         @endphp
                                     <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
@@ -288,7 +306,7 @@
                                      @foreach($otherUnits as $units)
                                     <div class="input-group mb-1">
                                         @php
-                                            $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                            $checkOut = new DateTime($units->checkoutDatetime);
                                             $checkOutAt = $checkOut->format("F j, o");
                                         @endphp
                                     <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
@@ -302,9 +320,11 @@
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
-                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
+                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$guestDetails->serviceName}}</option>
-                                    </select>
+                                    </select>--}}
+                                    <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
+
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
@@ -380,22 +400,22 @@
                         </div>
                     </div>
                 
-                    <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
+                    {{--<input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
                     <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
-                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">
+                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
 
                     <div class="mt-3" style="float:right;">
                     @if(count($pendingPayments) > 0)
-                        <button class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                        <button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
                     @else
-                        <button class="btn btn-success" style="width:10em;">Check-out</button>
+                        <button id="checkoutButton" class="btn btn-success" style="width:10em;">Check-out</button>
                     @endif
                         <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -410,7 +430,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="card my-0">
+                    <div class="card my-0">
                         <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
                             <thead>
                                 <tr>
@@ -473,11 +493,12 @@
                                     <th></th>
                                 </tr>
                             </tfoot>
-                        </table>
-                    </form>
+                        </table>                        
+                     </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button id="saveAllPayments" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

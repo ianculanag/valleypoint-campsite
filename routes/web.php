@@ -97,3 +97,6 @@ Route::get('/viewusers', 'UsersController@viewUsers');
 Route::get('/viewunits', 'UnitsController@viewUnits');
 
 Route::get('/getDates', 'UnitsController@getDates');
+
+//Check-out guests
+Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');

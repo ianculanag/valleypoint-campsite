@@ -102,6 +102,7 @@ function updateBalance() {
         totalBalance += parseInt(balance.eq(index).html());
     }
     jQuery('#invoiceTotalBalance').html(totalBalance);
+    checkUnpaid();
 }
 
 /*Charges Modal*/
@@ -207,12 +208,37 @@ jQuery('#saveAdditionalPayments').click(function() {
     var htmlString = "";
     for(var index = 0; index < jQuery('.balancePaymentCheckboxes').length; index++){
         if(jQuery('.balancePaymentCheckboxes').eq(index).prop('checked')){
-            htmlString += "<input type='number' name='payment"+index+"' value='"+jQuery('.chargeBalances').eq(index).html()+"' style='display:none;'>";
+            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+jQuery('.chargeBalances').eq(index).html()+"' style='display:none;'>";
         //console.log('fuck');
         }
     }
     jQuery('#selectedAdditionalPayments').html(htmlString);
 });
+
+//CHECK OUT
+jQuery('#saveAllPayments').click(function() {
+    console.log(jQuery('.balancePaymentCheckboxes').length);
+    jQuery('#selectedAdditionalPayments').html("");
+    var htmlString = "";
+    for(var index = 0; index < jQuery('.balancePaymentCheckboxes').length; index++){
+        if(jQuery('.balancePaymentCheckboxes').eq(index).prop('checked')){
+            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+jQuery('.chargeBalances').eq(index).html()+"' style='display:none;'>";
+        //console.log('fuck');
+        }
+    }
+    jQuery('#selectedAdditionalPayments').html(htmlString);
+    checkUnpaid();
+});
+
+function checkUnpaid() {
+    if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
+        jQuery('#checkoutButton').prop('disabled', false);
+    } else {
+        jQuery('#checkoutButton').prop('disabled', true);
+    }
+}
+
+
 /**/
 
 jQuery(document).ready(function(){

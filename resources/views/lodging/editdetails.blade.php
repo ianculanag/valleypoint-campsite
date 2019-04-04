@@ -154,7 +154,7 @@
                                             <th colspan="4" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
                                         </tr>
-                                        <tr style="disply:none;">
+                                        <tr style="display:none;">
                                             <input type="number" name="chargesCount" style="display:none;" value="{{count($pendingPayments)}}">
                                         </tr>
                                         {{--<tr>
@@ -345,7 +345,7 @@
                                             </span>
                                         </div>--}}
                                         @php
-                                            $checkedIn = new DateTime($guestDetails->checkinDatetime);
+                                            $checkedIn = new DateTime($units->checkinDatetime);
                                             $checkedInAt = $checkedIn->format("F j, o");
                                         @endphp
                                     <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
@@ -362,7 +362,7 @@
                                             </span>
                                         </div>--}}
                                         @php
-                                            $checkOut = new DateTime($guestDetails->checkoutDatetime);
+                                            $checkOut = new DateTime($units->checkoutDatetime);
                                             $checkOutAt = $checkOut->format("F j, o");
                                         @endphp
                                     <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
@@ -377,9 +377,11 @@
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
-                                    <select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
+                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$guestDetails->serviceName}}</option>
-                                    </select>
+                                    </select>--}}
+                                    <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
+
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
