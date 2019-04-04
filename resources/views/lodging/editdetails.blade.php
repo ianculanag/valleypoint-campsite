@@ -131,7 +131,7 @@
                                         @endphp
                                         <tr id="invoiceRow{{$identifier}}">
                                             <td id="invoiceDescription{{$identifier}}" class="invoiceDescriptions">{{$pending->serviceName}}</td>
-                                            <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->id}}"></td>
+                                            <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->chargeID}}"></td>
                                             <td style="display:none;"><input id="invoiceCheckBox{{$identifier}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                             <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
                                             <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
@@ -155,7 +155,7 @@
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
                                         </tr>
                                         <tr style="disply:none;">
-                                            <input type="number" style="display:none;" value="{{count($pendingPayments)}}">
+                                            <input type="number" name="chargesCount" style="display:none;" value="{{count($pendingPayments)}}">
                                         </tr>
                                         {{--<tr>
                                             <th colspan="1">Amount Paid:</th>
@@ -463,10 +463,10 @@
                         </div>
                     </div>
                 
-                    <input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
+                    {{--<input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
                     <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
                     <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
-                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">
+                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
                     
                     <div class="mt-3" style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>

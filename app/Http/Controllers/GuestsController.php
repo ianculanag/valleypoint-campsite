@@ -9,6 +9,8 @@ use App\Accommodation;
 use App\Units;
 use App\Charges;
 use App\Services;
+use App\Payments;
+use Carbon\Carbon;
 use Auth;
 use Redirect;
 
@@ -138,10 +140,28 @@ class GuestsController extends Controller
             //'numberOfPax' => $numberOfPax
         ]);
 
-        $users->error;
+        //$users->error;
 
-        $chargesCount = 0;
-        $chargesArray = array();
+        for($count = 0; $count < $request->input('chargesCount'); $count++) {
+            $existingCharge = 'charge'.$count;
+            $paymentEntry = 'payment'.$count;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $request->input($existingCharge);
+                $payment->save();
+
+                $charge = Charges::find($request->input($existingCharge));
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+
+        $additionalChargesCount = 0;
+        $additionalChargesArray = array();
 
         if($request->input('additionalServicesCount') > 0) {
             for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
@@ -149,18 +169,42 @@ class GuestsController extends Controller
                 $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
                 $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
                 if($request->input($additionalServiceID)) {
-                    $charges = new Chargesx;                    
+                    $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $request->input('accommodationID');
                     $charges->serviceID = $request->input($additionalServiceID);
                     $charges->save();
+                    $additionalChargesCount++;
+                    array_push($additionalChargesArray, $charges->id);
                 }
             }
         }
 
-        /*if($request->input('additionalServicesCount') > 0) {
+        $firstAdditionalCharge = $request->input('chargesCount'); //get index of newly added charges
+
+        for($count = 0; $count < $additionalChargesCount; $count++) {
+            $index = $count+$firstAdditionalCharge;
+            $paymentEntry = 'payment'.$index;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $additionalChargesArray[$count];
+                $payment->save();
+
+                $charge = Charges::find($additionalChargesArray[$count]);
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+
+        /*
+
+        if($request->input('additionalServicesCount') > 0) {
             for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
                 $additionalServiceID = 'additionalServiceID'.$count;
                 $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
@@ -197,8 +241,6 @@ class GuestsController extends Controller
         }*/
 
         $url = '/editdetails'.'/'.$request->input('unitID');
-        //return \Redirect::route('/editdetails', [$request->input('unitID')]);
-        //return $url;
         return redirect($url);
     }
 
@@ -334,9 +376,11 @@ class GuestsController extends Controller
             $query->where('remarks', '=','unpaid')
                 ->orWhere('remarks', '=','partial');
         })
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+                 'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
-        //return $pendingPayments;    
+       // return $pendingPayments;    
         //return $charges;
         //return view('lodging.editdetails')->with('guest', $guest);
         //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
