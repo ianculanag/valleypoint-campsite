@@ -52,7 +52,7 @@ jQuery(document).ready(function(){
             jQuery('#modal-head1').html(data[0].unitNumber);
 
             jQuery("#reserve").attr("href", "reservation/"+data[0].unitID);
-            jQuery("#editDetails").attr("href", "editdetails/"+data[0].unitID);
+            jQuery("#editDetails").attr("href", "edit-details/"+data[0].unitID);
             jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
         })
     });

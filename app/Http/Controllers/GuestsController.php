@@ -281,9 +281,9 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
-            return view('lodging.edit-details')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
+            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {
-            return view('lodging.edit-details')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
+            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
         }  
     }
 
@@ -443,7 +443,7 @@ class GuestsController extends Controller
         ->join('services', 'services.id', 'accommodation_units.serviceID')
         ->join('units', 'units.id', 'accommodation_units.unitID')
         ->select('guests.id as guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber', 
-        'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber')
+        'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber', 'guests.accommodationID')
         //->select('guests.id as guestID', 'units.unitNumber', 'units.unitType', 
         //'guests.lastName', 'guests.firstName', 'guests.contactNumber',
         //'accommodations.unitID','accommodations.numberOfPax', 'services.serviceName')
@@ -457,9 +457,9 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
-            return view('lodging.view-guests')->with('guest', $guest)->with('otherUnits', $otherUnits);
+            return view('lodging.viewguests')->with('guest', $guest)->with('otherUnits', $otherUnits);
         } else {
-            return view('lodging.view-guests')->with('guest', $guest);
+            return view('lodging.viewguests')->with('guest', $guest);
         }
     }
 }

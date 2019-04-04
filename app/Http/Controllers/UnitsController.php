@@ -305,7 +305,7 @@ class UnitsController extends Controller
         $units = DB::table('units')
         ->get();
 
-        return view('admin.view-units')->with('units', $units);
+        return view('admin.viewunits')->with('units', $units);
         //$units = Units::sortable()->paginate(8);
         //return view('admin.viewunits',compact('units'))->with('units', $units);
     }

@@ -23,7 +23,6 @@ Route::get('/calendar', 'UnitsController@calendar');
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 
-Route::get('/add-user', 'UsersController@addusers');
 Route::resource('staff', 'StaffController');
 
 //
@@ -91,6 +90,9 @@ Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
 //View users
 Route::get('/view-users', 'UsersController@viewUsers');
+
+//Add user
+Route::get('/add-user', 'UsersController@showAddUserForm');
 
 //View units
 Route::get('/view-units', 'UnitsController@viewUnits');

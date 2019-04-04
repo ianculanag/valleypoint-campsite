@@ -18,7 +18,7 @@ class UsersController extends Controller
         $users = DB::table('users')
         ->get();
 
-        return view('admin.view-users')->with('users', $users);
+        return view('admin.viewusers')->with('users', $users);
         /*$users = User::sortable()->paginate(5);
         return view('admin.viewusers',compact('users'))->with('users', $users);*/
     }
@@ -44,5 +44,18 @@ class UsersController extends Controller
         $guest->save(); 
 
         return redirect('/view-users');
+    }
+
+    /**
+     * Show the add user form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAddUserForm()
+    {
+        $users = DB::table('users')
+        ->get(); 
+
+        return view('admin.adduser')->with('users', $users);
     }
 }
