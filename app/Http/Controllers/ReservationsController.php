@@ -48,25 +48,31 @@ class ReservationsController extends Controller
     }
 
     /**
-     * Store a newly created reservation.
+     * Display reservationForm.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /*public function makeReservation(Request $request)
-    {
-        $reservation = new Reservations;
-        $reservation->checkinDatetime = $request->input('checkinDate');        
-        $reservation->checkoutDatetime = $request->input('checkinDate');
-        $reservation->lastName = $request->input('lastName');
-        $reservation->firstName = $request->input('firstName');
-        $reservation->numberOfPax = $request->input('numberOfPax');
-        $reservation->contactNumber = $request->input('contactNumber');
-        $reservation->serviceID = $request->input('accommodationType');
-        $reservation->save();
+    public function showCheckinForm($unitID, $reservationID)
+    {        
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
 
-        return redirect('/viewReservations');
-    }*/
+        $reservation = DB::table('reservations')
+        ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->get();
+
+        //return $reservation;
+        $charges = DB::table('charges')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->get();
+
+        return $charges;
+
+        return view('lodging.checkinGlampingReservation')->with('unit', $unit)->with('reservation', $reservationID)->with('charges', $charges);
+    }
 
     /**
      * Store a newly created resource in storage.
