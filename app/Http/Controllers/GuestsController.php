@@ -202,7 +202,7 @@ class GuestsController extends Controller
             }
         }
         
-        $url = '/editdetails'.'/'.$request->input('unitID');
+        $url = '/edit-details'.'/'.$request->input('unitID');
         return redirect($url);
     }
 

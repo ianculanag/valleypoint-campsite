@@ -56,8 +56,8 @@
                                         <tr>
                                             <td>{{$payment->serviceName}}</td>
                                             <td style="text-align:right;">{{$payment->quantity}}</td>
-                                            <td style="text-align:right;">{{$payment->price}}.00</td>
-                                            <td style="text-align:right;" type="number" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00">{{$payment->totalPrice}}.00</td>
+                                            <td style="text-align:right;">{{number_format((float)($payment->price), 2, '.', '')}}</td>
+                                            <td style="text-align:right;" type="number" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00">{{number_format((float)($payment->totalPrice), 2, '.', '')}}</td>
                                             </tr>
                                         @php
                                             $total += $payment->totalPrice;
@@ -69,7 +69,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th style="text-align:right;">{{$total}}.00</th>
+                                            <th style="text-align:right;">{{number_format((float)($total), 2, '.', '')}}</th>
                                         </tr>
                                         {{--<tr>
                                             <th colspan="3" scope="row">Balance:</th>
@@ -122,10 +122,7 @@
                                         @endphp
                                         @foreach($pendingPayments as $pending)
                                         @php
-
-                                            //$balance = $pending->totalPrice - $pending->amount;
                                             $total += $pending->totalPrice;
-                                            //$totalPayment += $pending->amount;
                                             $totalBalance = $total - $totalPayment;
 
                                             $identifier = 'Pending'.$loop->iteration;
@@ -135,12 +132,12 @@
                                             <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->chargeID}}"></td>
                                             <td style="display:none;"><input id="invoiceCheckBox{{$identifier}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                             <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
-                                            <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{$pending->price}}</td>
-                                            <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{($pending->totalPrice)}}</td>
+                                            <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($pending->price), 2, '.', '')}}</td>
+                                            <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @if($pending->remarks == 'unpaid')
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{($pending->totalPrice)}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @else
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{$balance}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($balance), 2, '.', '')}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -148,12 +145,12 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th id="invoiceGrandTotal" style="text-align:right;">{{$total}}</th>
+                                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($total), 2, '.', '')}}</th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <th colspan="4" scope="row">BALANCE:</th>
-                                            <th id="invoiceTotalBalance" style="text-align:right;">{{$totalBalance}}</th>
+                                            <th id="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
                                         </tr>
                                         <tr style="display:none;">
                                             <input type="number" name="chargesCount" style="display:none;" value="{{count($pendingPayments)}}">
