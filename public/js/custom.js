@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
                     htmlString += "<tr><td>Check-out: </td>";
                     htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].reservationCheckoutDatetime).format('LLLL') + "</td></tr>";
                     htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
-                    htmlString += "<a href='' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>";
+                    //htmlString += "<a href='' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>";
                 }
             }
 
@@ -54,6 +54,52 @@ jQuery(document).ready(function(){
             jQuery("#reserve").attr("href", "reservation/"+data[0].unitID);
             jQuery("#editDetails").attr("href", "edit-details/"+data[0].unitID);
             jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+        })
+    });
+}); 
+
+jQuery(document).ready(function(){
+    jQuery('.load-glamping-available-unit').click(function(){
+        console.log('gumana');
+        jQuery.get('loadGlampingAvailableUnit/'+$(this).attr('id'), function(data){
+            console.log(data);
+            var htmlString = "";
+
+            htmlString += "<h5 class='text-center'>Unit Details</h5>";
+            htmlString += "<div class='container'>";
+            htmlString += "<table class='table table-sm borderless'>";
+            htmlString += "<tr><td style='width:35%'>Unit ID: </td>";
+            htmlString += "<td>" + data[0].unitID + "</td></tr>";
+            htmlString += "<tr><td style='width:35%'>Unit Number: </td>";
+            htmlString += "<td>" + data[0].unitNumber + "</td></tr>";
+            htmlString += "<tr><td style='width:35%'>Capacity: </td>";
+            htmlString += "<td>" + data[0].capacity + "</td></tr></table></div>";
+
+            if(data[0].reservationID) {
+                htmlString += "<hr><h5 class='text-center'>Reservations</h5>";
+                for(var count = 0; count < data.length; count++) {
+                    htmlString += "<div class='container'>";
+                    htmlString += "<table class='table table-sm borderless'>";
+                    htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + (1+count) +" </td>";
+                    htmlString += "<td style='width:28%'>Guest name: </td>";
+                    htmlString += "<td>" + data[count].firstName + " " + data[count].lastName + "</td></tr>";
+                    htmlString += "<tr><td style='width:28%'>Service: </td>";
+                    htmlString += "<td>" + data[count].serviceName + "</td></tr>";
+                    htmlString += "<tr><td>Check-in: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkinDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td>Check-out: </td>";
+                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr>";
+                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
+                    htmlString += "<a href='/checkin/"+data[0].unitID+"/"+data[count].reservationID+"' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>"
+                }
+            }
+
+            jQuery('#modal-body-empty').html(htmlString);
+            jQuery('#modal-head2').html(data[0].unitNumber);
+
+            //jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);            
+            jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
+            jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
         })
     });
 }); 
@@ -124,68 +170,6 @@ jQuery(document).on('click','.collapse.in',function(e) {
         jQuery(this).collapse('hide');
     }
 });
-
-/*jQuery('#checkAvailability').click(function(){
-    jQuery.get('/getDates')
-});*/
-
-/*jQuery(document).ready(function(){
-    jQuery('.load-unit').click(function(){
-        //console.log(jQuery(this).attr('id'));
-        var unitID = jQuery(this).attr('id'); 
-        jQuery("#checkin").attr("href", "checkin/"+unitID);
-        jQuery("#reserve").attr("href", "makeReservation/"+unitID); 
-        jQuery("#checkinBackpacker").attr("href", "checkinBackpacker/"+unitID);
-        //jQuery("#accommodationType").prop("disabled", true);
-    });
-}); */
-
-jQuery(document).ready(function(){
-    jQuery('.load-glamping-available-unit').click(function(){
-        console.log('gumana');
-        jQuery.get('load-glamping-available-unit/'+$(this).attr('id'), function(data){
-            console.log(data);
-            var htmlString = "";
-
-            htmlString += "<h5 class='text-center'>Unit Details</h5>";
-            htmlString += "<div class='container'>";
-            htmlString += "<table class='table table-sm borderless'>";
-            htmlString += "<tr><td style='width:35%'>Unit ID: </td>";
-            htmlString += "<td>" + data[0].unitID + "</td></tr>";
-            htmlString += "<tr><td style='width:35%'>Unit Number: </td>";
-            htmlString += "<td>" + data[0].unitNumber + "</td></tr>";
-            htmlString += "<tr><td style='width:35%'>Capacity: </td>";
-            htmlString += "<td>" + data[0].capacity + "</td></tr></table></div>";
-
-            if(data[0].reservationID) {
-                htmlString += "<hr><h5 class='text-center'>Reservations</h5>";
-                for(var count = 0; count < data.length; count++) {
-                    htmlString += "<div class='container'>";
-                    htmlString += "<table class='table table-sm borderless'>";
-                    htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + (1+count) +" </td>";
-                    htmlString += "<td style='width:28%'>Guest name: </td>";
-                    htmlString += "<td>" + data[count].firstName + " " + data[count].lastName + "</td></tr>";
-                    htmlString += "<tr><td style='width:28%'>Service: </td>";
-                    htmlString += "<td>" + data[count].serviceName + "</td></tr>";
-                    htmlString += "<tr><td>Check-in: </td>";
-                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkinDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td>Check-out: </td>";
-                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
-                    htmlString += "<a href='' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>"
-                }
-            }
-
-            jQuery('#modal-body-empty').html(htmlString);
-            jQuery('#modal-head2').html(data[0].unitNumber);
-
-            jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);            
-            jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
-            jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
-        })
-    });
-}); 
-
 
 jQuery(document).ready(function(){
     var numberOfUnits = 1;
