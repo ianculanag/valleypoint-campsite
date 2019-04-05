@@ -47,6 +47,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $total = 0;
+                                            $totalPayment = 0;
+                                            $balance = 0;
+                                        @endphp
                                         @foreach($payments as $payment)
                                         <tr>
                                             <td>{{$payment->serviceName}}</td>
@@ -55,13 +60,9 @@
                                             <td style="text-align:right;" type="number" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00">{{$payment->totalPrice}}.00</td>
                                             </tr>
                                         @php
-                                            $total = 0;
-                                            $totalPayment = 0;
-                                            $balance = 0;
-
                                             $total += $payment->totalPrice;
-                                            $totalPayment += $payment->amount;
-                                            $balance = $total - $totalPayment;
+                                            //$totalPayment += $payment->amount;
+                                            //$balance = $total - $totalPayment;
                                         @endphp
                                         @endforeach
                                     </tbody>

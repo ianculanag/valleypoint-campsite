@@ -286,15 +286,15 @@ jQuery(document).ready(function(){
         tr.append(tdTotalBalance);
         tbody.append(tr);*/
 
-        jQuery(document).ready(function(){
-            jQuery(window).bind('beforeunload', function(){
-                /*var unsaved = false;
-                jQuery(":input").change(function () {
-                    unsaved = true;
-                    console.log('EWW');
-                });*/
-                jQuery("#unsavedChangesModal").modal('toggle');
-                preventDefault();
-            });
+/*jQuery(document).ready(function(){
+    
+        jQuery(window).bind('beforeunload', function(e){
+            e.preventDefault();
         });
+        jQuery("#unsavedChangesModal").modal('toggle');  
+});
+
+window.onbeforeunload = function() {
+    return 'message';
+}*/
         
