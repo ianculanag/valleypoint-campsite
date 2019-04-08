@@ -281,7 +281,11 @@ class UnitsController extends Controller
     public function loadGlampingAvailableUnit($id)
     {
         return DB::table('units')
-        ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        //->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+        ->leftJoin('reservation_units', function($join) {
+            $join->on('reservation_units.unitID', '=', 'units.id')
+                 ->where('status', 'reserved');
+        })
         ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
         ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity',

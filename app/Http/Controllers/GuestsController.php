@@ -218,58 +218,6 @@ class GuestsController extends Controller
     }
 
     /**
-     * Show the accommodationDetails di na gumagana
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editGuestDetails($unitID)
-    {
-        $guest = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
-        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity', 'units.partOf',
-                 'accommodation_units.status', 'accommodations.id AS accommodationID', 'accommodations.numberOfPax',
-                 'accommodations.checkinDatetime', 'accommodations.checkoutDatetime', 'accommodations.numberOfUnits',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
-                 'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
-        ->where('units.id', '=', $unitID)
-        ->get();
-
-        $payments = DB::table('payments')
-        ->join('charges', 'charges.id', 'payments.chargeID')
-        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
-        ->join('services', 'services.id', 'charges.serviceID')
-        ->where('accommodationID', '=', $guest[0]->accommodationID)
-        ->where('remarks', '=','full')
-        ->get();
-
-        $pendingPayments = DB::table('payments')
-        ->join('charges', 'charges.id', 'payments.chargeID')
-        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
-        ->join('services', 'services.id', 'charges.serviceID')
-        ->where('accommodationID', '=', $guest[0]->accommodationID)
-        ->where(function ($query) {
-            $query->where('remarks', '=','unpaid')
-                ->orWhere('remarks', '=','partial');
-        })
-        ->get();
-
-        if($guest[0]->numberOfUnits > 1) {
-            $otherUnits = DB::table('accommodation_units')
-            ->join('units', 'units.id', 'accommodation_units.unitID')
-            ->join('services', 'services.id', 'accommodation_units.serviceID')
-            ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
-            ->get();
-
-            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
-        } else {
-            return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
-        }  
-    }
-
-    /**
      * Show the accommodationDetails
      *
      * @return \Illuminate\Http\Response
@@ -277,7 +225,11 @@ class GuestsController extends Controller
     public function viewGuestDetails($unitID)
     {
         $guest = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        //->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
@@ -367,7 +319,10 @@ class GuestsController extends Controller
     public function showCheckoutForm($unitID)
     {
         $guest = DB::table('units')
-        ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
@@ -377,17 +332,7 @@ class GuestsController extends Controller
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
                  'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
         ->where('units.id', '=', $unitID)
-        //->where('guests.listedUnder', '=', null)
         ->get();
-
-        //return $guest;
-
-        /*$accompanyingGuest = DB::table('guests')
-        ->select('guests.*')
-        //->where('listedUnder', '=', $guest[0]->guestID)
-        ->get();*/
-
-        //return $accompanyingGuest;
 
         $payments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
@@ -395,14 +340,9 @@ class GuestsController extends Controller
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->where('remarks', '=','full')
-        //->where(function ($query) {
-            //$query->where('remarks', '=','full');
-                //->orWhere('remarks', '=','partial');
-        //})
         ->get();
 
         $pendingPayments = DB::table('charges')
-        //->join('charges', 'charges.id', 'payments.chargeID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)

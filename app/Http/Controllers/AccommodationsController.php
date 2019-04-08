@@ -19,82 +19,6 @@ use Auth;
 class AccommodationsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
      * Show the check in form
      *
      * @return \Illuminate\Http\Response
@@ -465,24 +389,10 @@ class AccommodationsController extends Controller
             }
         }
         
-        /*$units = DB::table('accommodation_units')
-        //->select('accommodation_units.accommodationID')
-        ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
-        ->get();
-
-        //return $units;
-        foreach ($units as $unit) {
-            $accommodationUnit = Charges::find($unit->accommodationID);
-            $accommodationUnit->update(['status' => 'finished']);
-        }*/
-        
         $units = DB::table('accommodation_units')
-        //->select('accommodation_units.accommodationID')
         ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
         ->update(array('status' => 'finished'));
 
-        //$url = '/checkout'.'/'.$request->input('unitID');
-        //return redirect($url);
         return redirect('/glamping');
     }
 

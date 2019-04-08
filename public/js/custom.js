@@ -825,11 +825,13 @@ function checkAvailability() {
                         occupiedUnitNumbers.push(currentUnit);
                         occupiedCheckinDates.push(currentCheckinDate);
                         occupiedCheckoutDates.push(currentCheckoutDate);
-                    } else if(data[index].reservationID) {                        
-                        reservedUnits++;
-                        reservedUnitNumbers.push(currentUnit);
-                        reservedCheckinDates.push(currentCheckinDate);
-                        reservedCheckoutDates.push(currentCheckoutDate);
+                    } else if(data[index].reservationID) {  
+                        if(!(data[index].reservationID == jQuery('#reservationID').val())) {
+                            reservedUnits++;
+                            reservedUnitNumbers.push(currentUnit);
+                            reservedCheckinDates.push(currentCheckinDate);
+                            reservedCheckoutDates.push(currentCheckoutDate);
+                        }                   
                     }
                 }
             }
