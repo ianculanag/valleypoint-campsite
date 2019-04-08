@@ -149,7 +149,7 @@ jQuery(document).ready(function(){
             updateTotal();
     });
 
-
+ 
     });
 
 

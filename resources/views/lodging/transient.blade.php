@@ -41,7 +41,7 @@
                 @foreach($units as $unit)   
                     @if($unit->unitType == 'room' && $unit->capacity == 3)                                       
                         @if($unit->status == 'occupied') 
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-Backpacker-details" id={{$unit->unitID}}>
+                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>
                             <div class="card" style="width: 18rem;height:7.5em;">
                                 <div class="card-body">
                         <h5 class="card-title">
@@ -63,7 +63,7 @@
                         <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
                         --}}
                         @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
+                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
                             
                             <div class="card" style="width: 18rem;height:7.5em;">
                                 <div class="card-body">
@@ -91,7 +91,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 4)                                       
                 @if($unit->status == 'occupied') 
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -100,20 +100,8 @@
                 </h5> 
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-
-                {{--@elseif($unit->status == 'reserved')
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
-                    <div class="card" style="width: 18rem;height:7.5em;">
-                        <div class="card-body">
-                <h5 class="card-title">
-                    {{$unit->unitNumber}}
-                    <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
-                </h5>
-                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-                --}}
-                @else
-                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
+               @else
+                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
                     
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
@@ -140,7 +128,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 5)                                       
                 @if($unit->status == 'occupied') 
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -150,17 +138,6 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                {{--@elseif($unit->status == 'reserved')
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>
-                    <div class="card" style="width: 18rem;height:7.5em;">
-                        <div class="card-body">
-                <h5 class="card-title">
-                    {{$unit->unitNumber}}
-                    <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
-                </h5>
-                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-                --}}
                 @else
                 <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
                     
@@ -188,7 +165,7 @@
         @foreach($units as $unit)   
             @if($unit->unitType == 'room' && $unit->capacity == 6)                               
                 @if($unit->status == 'occupied') 
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>        
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>        
                 <div class="card" style="width: 18rem;height:7.5em;">
                     <div class="card-body">
                 
@@ -199,19 +176,9 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                {{--@elseif($unit->status == 'reserved')
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>        
-                <div class="card" style="width: 18rem;height:7.5em;">
-                    <div class="card-body">
-                <h5 class="card-title">
-                    {{$unit->unitNumber}}
-                    <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
-                </h5>
-                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-                --}}
+    
                 @else
-                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
+                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -237,7 +204,7 @@
             @if($unit->unitType == 'room' && $unit->capacity == 10)
                             
                 @if($unit->status == 'occupied')  
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>          
+                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>          
                 <div class="card" style="width: 18rem;height:7.5em;">
                     <div class="card-body">
                 <h5 class="card-title">
@@ -247,19 +214,8 @@
                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
 
-                {{--@elseif($unit->status == 'reserved') 
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-details" id={{$unit->unitID}}>          
-                <div class="card" style="width: 18rem;height:7.5em;">
-                    <div class="card-body">
-                <h5 class="card-title">
-                    {{$unit->unitNumber}}
-                    <span class="badge badge-secondary float-right" style="font-size:.55em;">Reserved</span>
-                </h5>
-                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} reserved</p>
-                --}}
                 @else
-                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
+                <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
                     <div class="card" style="width: 18rem;height:7.5em;">
                         <div class="card-body">
                 <h5 class="card-title">
@@ -307,29 +263,66 @@
     </div>
 </div>
 <!-- Check-in or reserve modal -->
-    <div class="modal fade right" id="checkin-reserve" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">×</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body" id="modal-body">
-                    <div class="col-md-12">
-                        <h5 class="text-center mb-4">Choose action:</h5>
-                        <div style="width:80%; padding-left:20%;">
-                            <a href="" id="checkinBackpacker">
-                                <button type="button" class="btn btn-primary btn-md btn-block mb-2">Check-in</button>
-                            </a>
-                            <a href="" id="reserve">
-                                <button type="button" class="btn btn-secondary btn-md btn-block mb-2">Reserve</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 id="modal-head1"><h4>
+                <!--p class="heading lead">Tent 1</p-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="modal-body">
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-right">
+                <a href="" id="reserve">
+                    <button type="button" class="btn btn-success">Add Reservation</button>
+                </a>
+                <!--a href="" id="editDetails">
+                    <button type="button" class="btn btn-info">View Details</button>
+                </a>
+                <a href="" id="checkout">
+                    <button type="button" class="btn btn-danger">Check-out</button>
+                </a-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Check-in or reserve modal -->
+<div class="modal fade right" id="checkin-reserve" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 id="modal-head2"><h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body" id="modal-body-empty">
+                <!--div class="col-md-12">
+                    <h5 class="text-center mb-4">Choose action:</h5>
+                </div-->
+            </div>
+            <!--Footer-->
+            <div class="modal-footer justify-content-right">
+                <a href="" id="checkin-backpacker">
+                    <button type="button" class="btn btn-primary">Check-in</button>
+                </a>
+                <a href="" id="reserve">
+                    <button type="button" class="btn btn-secondary">Add reservation</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
                 <!--Footer-->
                 <div class="modal-footer justify-content-right">
                 </div>
