@@ -3,25 +3,25 @@
 @section('content')
 @if(count($unit) > 0)
     @foreach($unit as $unit)
-<div class="container">
-    <div class="pt-3 pb-3 text-center">
-        <a href="/transient-backpacker">
-            <span style="float:left;">
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                <strong>Back</strong>
-            </span>
-        </a>
-        <h3>Reservation Form</h3>
-    </div>
-
-    <form method="POST" action="/checkinBackpacker">
+    <div class="container">
+        <div class="pt-3 pb-3 text-center">
+            <a href="/transient-backpacker">
+                <span style="float:left;">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <strong>Back</strong>
+                </span>
+            </a>
+            <h3>Reservation Form</h3>
+        </div>   
+        <form method="POST" action="/reservation2">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+        <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
-                    <table class="table table-striped" style="font-size:.83em;">
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
+                    <table class="table table-striped" style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:40%">Description</th>
@@ -31,23 +31,24 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                        <tr id="invoiceUnit{{$unit->unitNumber}}">
-                            <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
-                            <td class="invoiceQuantity" id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
-                            <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
-                            <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
+                            <tr id="invoiceUnit{{$unit->unitNumber}}">
+                                <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
+                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
-                            </tr>
+                            </tr-->
                             {{--<tr>
                                 <th colspan="1">Amount Paid:</th>
                                 <th style="text-align:right;"  colspan="3">
@@ -57,8 +58,7 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>                
-
+            </div>
             <div class="col-md-8 order-md-1">
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                 <div class="form-group row">
@@ -223,7 +223,7 @@
                     <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
                     
                     <div style="float:right;">
-                        <button class="btn btn-success" style="width:10em;" type="submit">Make Reservation</button>
+                        <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
                         <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
