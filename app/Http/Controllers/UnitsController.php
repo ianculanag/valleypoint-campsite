@@ -60,11 +60,11 @@ class UnitsController extends Controller
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
                  'accommodation_units.status', 'services.serviceName', 
-                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodations.checkinDatetime', 
-                 'accommodations.checkoutDatetime', 'accommodations.serviceID', 'accommodations.userID',
+                 'accommodations.id AS accommodationID', 'accommodations.numberOfPax', 'accommodation_units.checkinDatetime', 
+                 'accommodation_units.checkoutDatetime', 'accommodation_units.serviceID', 'accommodations.userID',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName',   'guests.contactNumber')      
         ->orderBy('unitID')
         ->get(); 
