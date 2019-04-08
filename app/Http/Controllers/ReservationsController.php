@@ -59,19 +59,45 @@ class ReservationsController extends Controller
         ->get();
 
         $reservation = DB::table('reservations')
-        ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
-        ->join('services', 'services.id', 'reservation_units.serviceID')
-        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('id', '=', $reservationID)
         ->get();
 
         //return $reservation;
-        $charges = DB::table('charges')
-        ->where('charges.reservationID', '=', $reservationID)
+        
+        
+        $reservedUnit = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '=', $unitID)
         ->get();
 
-        return $charges;
+        //return $reservedUnit;
 
-        return view('lodging.checkinGlampingReservation')->with('unit', $unit)->with('reservation', $reservationID)->with('charges', $charges);
+        $otherReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '!=', $unitID)
+        ->get();
+
+        $allReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        //->orderByRaw($unitID)
+        ->get();
+
+        //return $otherReservedUnits;
+        
+        $charges = DB::table('charges')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '<', '6')
+        ->get();
+
+        //return $charges;
+
+        return view('lodging.checkinGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges);
     }
 
     /**

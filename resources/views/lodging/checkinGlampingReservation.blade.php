@@ -2,7 +2,9 @@
 
 @section('content')
 @if(count($unit) > 0)
+    @if(count($reservation) > 0)
     @foreach($unit as $unit)
+    @foreach($reservation as $reservation)
     <div class="container">
         <div class="pt-3 pb-3 text-center">
             <a href="/glamping">
@@ -64,11 +66,11 @@
                     <div class="form-group row">
                         <div class="col-md-4 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="">
+                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="{{$reservation->firstName}}">
                         </div>
                         <div class="col-md-5 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="">
+                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="{{$reservation->lastName}}">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
@@ -78,7 +80,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxGlamping"  required="required" min="1" max="100" name="numberOfPaxGlamping" type="number" placeholder="" value="">
+                                <input class="form-control numberOfPaxGlamping"  required="required" min="1" max="100" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$reservation->numberOfPax}}">
                             </div>
                         </div>
                     </div>  
@@ -91,7 +93,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
+                                <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="{{$reservation->contactNumber}}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -113,39 +115,68 @@
                                         <i class="fa fa-campground" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{$reservation->numberOfUnits}}" min="1" max="80" readonly>
                             </div>
                         </div>
+                        
+                        @if(count($allReservedUnits) > 0)
+                        @php
+                            $units = "";
+                        @endphp
+                        @foreach($allReservedUnits as $singleReservedUnit)
+                        @php
+                            $units .= $singleReservedUnit->unitNumber.", ";
+                        @endphp
+                        @endforeach
+                        @endif
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
-                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$units}}" required>
                             
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
-                            
-                            <!-- relocated    div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
-                                <a href="#" class="close">&times;</a>
-                                <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
-                            </div-->
                         </div>
                     </div>
+                    @if(count($reservedUnit) > 0)
+                    @foreach($reservedUnit as $reservedUnit)
                     <div class="form-group row" id="divUnits">
-                        <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
+                        <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
-                            <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                            <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                            <input type="text" class="form-control" value="{{$reservedUnit->unitNumber}}" disabled>
+                            <input class="" name="totalPrice{{$reservedUnit->unitNumber}}" id="totalPrice{{$reservedUnit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                         </div>
-                        <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
+                        <div class="col-md-2 mb-1" id="divAccommodationPackage{{$reservedUnit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
-                            <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
-                                <option value="1">Solo</option>
+                            <select class="form-control accommodationPackages" name="accommodationPackage{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->serviceID}}" id="accommodationPackage{{$reservedUnit->unitNumber}}">
+                                @if($reservedUnit->serviceID == 1)                                
+                                <option value="1" selected>Solo</option>
                                 <option value="2">2 Pax</option>
                                 <option value="3">3 pax</option>
                                 <option value="4">4 pax</option>
+
+                                @elseif($reservedUnit->serviceID == 2)                                
+                                <option value="1">Solo</option>
+                                <option value="2" selected>2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4">4 pax</option>
+                                
+                                @elseif($reservedUnit->serviceID == 3)
+                                <option value="1">Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3" selected>3 pax</option>
+                                <option value="4">4 pax</option>
+                                
+                                @elseif($reservedUnit->serviceID == 4)
+                                <option value="1">Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4" selected>4 pax</option>
+
+                                @endif
                             </select>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$reservedUnit->unitNumber}}">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -153,11 +184,11 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
+                            <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($reservedUnit->checkinDatetime)->format('Y-m-d')}}">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$reservedUnit->unitNumber}}">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -165,10 +196,82 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
+                                <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($reservedUnit->checkoutDatetime)->format('Y-m-d')}}">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
+                    
+                    @endforeach
+                    @endif
+
+                    
+                    @if(count($otherReservedUnits) > 0)
+                    @foreach($otherReservedUnits as $otherReservedUnits)
+                        <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnits->unitNumber}}">
+                            {{--<label for="unitNumber">Unit number</label>--}}
+                            <input type="text" class="form-control" value="{{$otherReservedUnits->unitNumber}}" disabled>
+                            <input class="" name="totalPrice{{$otherReservedUnits->unitNumber}}" id="totalPrice{{$otherReservedUnits->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                        </div>
+                        <div class="col-md-2 mb-1" id="divAccommodationPackage{{$otherReservedUnits->unitNumber}}">
+                            {{--<label for="additionalServiceUnitPrice">Package</label>--}}
+                            <select class="form-control accommodationPackages" name="accommodationPackage{{$otherReservedUnits->unitNumber}}" value="{{$otherReservedUnits->serviceID}}" id="accommodationPackage{{$otherReservedUnits->unitNumber}}">
+                                @if($otherReservedUnits->serviceID == 1)                                
+                                <option value="1" selected>Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4">4 pax</option>
+
+                                @elseif($otherReservedUnits->serviceID == 2)                                
+                                <option value="1">Solo</option>
+                                <option value="2" selected>2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4">4 pax</option>
+                                
+                                @elseif($otherReservedUnits->serviceID == 3)
+                                <option value="1">Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3" selected>3 pax</option>   
+                                <option value="4">4 pax</option>
+                                
+                                @elseif($otherReservedUnits->serviceID == 4)
+                                <option value="1">Solo</option>
+                                <option value="2">2 Pax</option>
+                                <option value="3">3 pax</option>
+                                <option value="4" selected>4 pax</option>
+
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$otherReservedUnits->unitNumber}}">
+                            {{--<label for="checkinDate">Check-in date</label>--}}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            <input type="date" name="checkinDate{{$otherReservedUnits->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$otherReservedUnits->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnits->checkinDatetime)->format('Y-m-d')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherReservedUnits->unitNumber}}">
+                            {{--<label for="checkoutDate">Check-out date</label>--}}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="date" name="checkoutDate{{$otherReservedUnits->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$otherReservedUnits->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnits->checkoutDatetime)->format('Y-m-d')}}">
+                                {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
+                            </div>
+                        </div>
+                    
+                    @endforeach
+                    @endif
+
+                    
                     </div>
 
                     <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
@@ -295,5 +398,7 @@
     </div>
     <!-- end of charges modal -->                     
         @endforeach  
+        @endforeach  
+        @endif
     @endif
 @endsection

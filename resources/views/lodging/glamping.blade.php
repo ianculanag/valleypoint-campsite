@@ -221,20 +221,20 @@
             </div>
         </div>
     </div>-->
-    <script>
+    {{--<script>
     $(document).ready(function(){
     var form = $('#some-form'),
         original = form.serialize()
 
     form.submit(function(){
-        window.onbeforeunload = null
+        window.onbeforeunload = null;
     })
 
     window.onbeforeunload = function(){
-        if (form.serialize() != original)
+        if (form.serialize() != original
             return 'Are you sure you want to leave?'
     }
     })
-    </script>
+    </script>--}}
 @endsection
  
