@@ -258,10 +258,9 @@ class ReservationsController extends Controller
             $accommodationUnit->serviceID =  $request->input($accommodationPackage);
             $accommodationUnit->save();
 
-            /*TBC $reservationUnit = ReservationUnits::find($unit[0]->id);
-            $reservationUnit->update([                    
-                'status' => 'checkedin'
-            ]);*/
+            $units = DB::table('reservation_units')
+            ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+            ->update(array('status' => 'checkedin'));
 
             if($request->input($chargeID)) {
                 $charge = Charges::find($request->input($chargeID));
