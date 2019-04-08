@@ -9,6 +9,7 @@ use App\Reservations;
 use App\ReservationUnits;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 class UnitsController extends Controller
 {
@@ -343,6 +344,39 @@ class UnitsController extends Controller
         $unit->save(); 
 
         return redirect('/view-units');
+    }
+
+    /**
+     * Show edit unit form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewUnitDetails($unitID)
+    {
+        $units = DB::table('units')
+        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity')
+        ->where('units.id', '=', $unitID)
+        ->get();
+        
+        return view('admin.editunit')->with('units', $units);
+    }
+
+    /**
+     * Update unit details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateUnit(Request $request)
+    {   
+        $units = Units::find($request->input('unitID'));
+        $units->update([
+            'unitType' => $request->input('unitType'),
+            'unitNumber' => $request->input('unitNumber'),
+            'capacity' => $request->input('capacity')
+        ]);
+        
+        $url = '/edit-unit'.'/'.$request->input('unitID');
+        return redirect($url);
     }
 
     /**

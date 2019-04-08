@@ -105,6 +105,10 @@ Route::get('/view-units', 'UnitsController@viewUnits');
 Route::get('/add-unit', 'UnitsController@showAddUnitForm');
 Route::post('/unit-added', 'UnitsController@addUnit');
 
+//Edit unit
+Route::get('/edit-unit/{unitID}', 'UnitsController@viewUnitDetails');
+Route::post('/update-unit', 'UnitsController@updateUnit');
+
 Route::get('/getDates', 'UnitsController@getDates');
 
 //Check-out guests
