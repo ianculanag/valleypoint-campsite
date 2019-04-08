@@ -91,13 +91,36 @@ class ReservationsController extends Controller
         //return $otherReservedUnits;
         
         $charges = DB::table('charges')
+        ->join('reservation_units', 'reservation_units.unitID', 'charges.unitID')
+        /*->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'charges.reservationID')
+                 ->where('reservation_units.unitID', '=','charges.unitID');
+        })*/
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.reservationID',
+                 'reservation_units.unitID', 'reservation_units.numberOfPax', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'units.unitNumber', 'services.serviceName',
+                 'services.price')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '<', '6')
         ->get();
 
-        //return $charges;
+        $additionalCharges = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->get();
 
-        return view('lodging.checkinGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges);
+        $additionalServices = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->get();
+
+        //return $additionalCharges;
+
+        return view('lodging.checkinGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices);
     }
 
     /**
@@ -150,6 +173,7 @@ class ReservationsController extends Controller
             $charges->totalPrice = $request->input($totalPrice);
             $charges->remarks = 'unpaid';
             $charges->reservationID = $reservation->id;
+            $charges->unitID = $reservationUnit->unitID;
             $charges->serviceID = $request->input($accommodationPackage);
             $charges->save();
         }

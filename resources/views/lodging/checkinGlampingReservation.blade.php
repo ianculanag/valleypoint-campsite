@@ -33,18 +33,45 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                            <tr id="invoiceUnit{{$unit->unitNumber}}">
-                                <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
+                            @php
+                                $totalPrice = 0;    
+                            @endphp
+                            @if(count($charges) > 0)
+                            @foreach($charges as $charge)
+                            @php
+                                $checkin = new DateTime($charge->checkinDatetime);
+                                $checkout = new DateTime($charge->checkoutDatetime);
+                                $stayDuration = date_diff($checkin, $checkout)->days+1;
+                            @endphp
+                            <tr id="invoiceUnit{{$charge->unitNumber}}">
+                                <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                            <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
+                            <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
+                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
+                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
                             </tr>
+                            @php
+                                $totalPrice += $charge->totalPrice;    
+                            @endphp
+                            @endforeach
+                            @endif
+
+                            @if(count($additionalServices) > 0)
+                            @foreach($additionalServices as $additionalService)
+                            <tr id="invoiceRow{{$loop->iteration}}">
+                            <td style="display:none;"><input id="invoiceCheckBox{{$loop->iteration}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                            <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
+                            <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
+                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
+                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{$additionalService->totalPrice}}</td>
+                            </tr>
+                            @endforeach
+                            @endif
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
                             </tr>
                             <tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
@@ -328,6 +355,42 @@
                                 </button>
                             </div>
                         </div>
+
+                        @if(count($additionalCharges) > 0)
+                        @foreach($additionalCharges as $additionalCharge)
+                        <input type='number' style='display:none;float:left;' name='additionalServicesCount' value='{{$loop->iteration}}'>
+                        <input type='text' style='display:none;float:left;' id='additionalServiceID{{$loop->iteration}}' name='additionalServiceID{{$loop->iteration}}' value='{{$additionalCharge->id}}'>
+                        <div class='col-md-3 mb-1' id='divServiceName{{$loop->iteration}}'>
+                            <input class='form-control paxSelect' type='text' name='additionalServiceName{{$loop->iteration}}' value='{{$additionalCharge->serviceName}}' readonly>
+                        </div>
+                        <div class='col-md-2 mb-1' id='divQuantity{{$loop->iteration}}'>
+                            <input class='form-control paxSelect' type='number' id='additionalServiceNumberOfPax' name='additionalServiceNumberOfPax{{$loop->iteration}}' value='{{$additionalCharge->quantity}}' min='1' max='10' {{--form='serviceForm'--}} readonly>
+                        </div>
+                        <div class='col-md-3 mb-1' id='divUnitPrice{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <div class='input-group-prepend'>
+                                    <span class='input-group-text'>₱</span>
+                                </div>
+                            <input class='form-control additionalServiceUnitPrice' type='text' id='additionalServiceUnitPrice' name='additionalServiceUnitPrice{{$loop->iteration}}' placeholder='' value='{{$additionalCharge->price}}' readonly>
+                            </div>
+                        </div>
+                        <div class='col-md-3 mb-1' id='divTotalPrice{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <div class='input-group-prepend'>
+                                    <span class='input-group-text'>₱</span>
+                                </div>
+                            <input class='form-control additionalServiceTotalPrice' type='text' id='additionalServiceTotalPrice' name='additionalServiceTotalPrice{{$loop->iteration}}' placeholder='' value='{{$additionalCharge->totalPrice}}' readonly>
+                            </div>
+                        </div>
+                        <div id='divButton{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <button type='button' id='additionalServiceFormRemove{{$loop->iteration}}' value='{{$loop->iteration}}' class='btn btn-danger additionalServiceFormRemove'>
+                                    <span class='fa fa-minus' aria-hidden='true'></span>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
                     
                     <div class="pt-4" style="float:right;">   
