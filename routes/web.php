@@ -116,3 +116,7 @@ Route::post('/update-unit', 'UnitsController@updateUnit');
 
 //View services
 Route::get('/view-services', 'ServicesController@viewServices');
+
+//Add service
+Route::get('/add-service', 'ServicesController@showAddServiceForm');
+Route::post('/service-added', 'ServicesController@addService');
