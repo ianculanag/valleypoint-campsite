@@ -382,7 +382,7 @@ class AccommodationsController extends Controller
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.checkin-backpacker')->with('unit', $unit);     
+        return view('lodging.checkinBackpacker')->with('unit', $unit);     
         
     }
 
