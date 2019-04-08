@@ -50,11 +50,11 @@ class UsersController extends Controller
 
 
         $this->validate($request, [
-            'name' => 'required|max:25',
-            'username' => 'required|max:15',
-            'password' => 'required|min:6|max:25',
-            'contactNumber' => 'required|min:11|max:11',
-            'email' => 'required|email|min:10|max:25',
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'contactNumber' => 'required',
+            'email' => 'required|email',
             'role' => 'required'
         ]);
 

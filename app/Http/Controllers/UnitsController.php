@@ -375,8 +375,7 @@ class UnitsController extends Controller
             'capacity' => $request->input('capacity')
         ]);
         
-        $url = '/edit-unit'.'/'.$request->input('unitID');
-        return redirect($url);
+        return redirect('/view-units');
     }
 
     /**

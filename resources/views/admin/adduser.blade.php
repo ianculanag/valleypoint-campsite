@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <select class="custom-select d-block w-100" id="state" required="required" name="role">
-                        <option value="general manager">General Manager</option>
+                        <option value="general">General Manager</option>
                         <option value="lodging">Lodging Manager</option>
                         <option value="cashier">Cashier</option>
                     </select>

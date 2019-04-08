@@ -22,7 +22,7 @@ class Units extends Model
      * @var array
      */
     protected $fillable = [
-        'status',
+        'unitType', 'unitNumber', 'capacity' 
     ];
 
 	//public $sortable = ['id', 'unitType', 'unitNumber', 'capacity'];

@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <input type="number" required="required" class="form-control" name="capacity" placeholder="Capacity" value="{{$unit->capacity}}" min=1 max=20>
                 </div>
-                <button type="submit" class="btn btn-block btn-success mt-4">Submit</button>
+                <button type="submit" class="btn btn-block btn-success mt-4">Update</button>
             </div>
         </form>
         @endforeach
