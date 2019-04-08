@@ -13,7 +13,7 @@
             </a>
             <h3>Check-in Form</h3>
         </div>   
-        <form method="POST" action="/checkinGlamping">
+        <form method="POST" action="/checkin-glamping">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
