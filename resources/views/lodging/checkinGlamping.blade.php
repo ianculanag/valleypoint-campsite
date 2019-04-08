@@ -225,6 +225,8 @@
                                 </button>
                             </div>
                         </div>
+                        
+                        <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
                     </div>
                     
                     <div class="pt-4" style="float:right;">   

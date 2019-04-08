@@ -19,7 +19,7 @@ class Charges extends Model
      * @var array
      */
     protected $fillable = [
-        'remarks',
+        'remarks', 'serviceID', 'quantity', 'totalPrice', 'accommodationID'
     ];    
 
     // References Accommodation

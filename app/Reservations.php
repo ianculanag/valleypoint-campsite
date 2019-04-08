@@ -12,6 +12,15 @@ class Reservations extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status'
+    ];    
     
     // Foreign Key to
     public function reservationUnit()

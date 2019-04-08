@@ -173,7 +173,7 @@ jQuery(document).on('click','.collapse.in',function(e) {
 });
 
 jQuery(document).ready(function(){
-    var numberOfUnits = 1;
+    //var numberOfUnits = 1;
     var source =['Tent1', 'Tent2', 'Tent3', 'Tent4', 'Tent5', 'Tent6', 'Tent7', 'Tent8', 'Tent9', 'Tent10',
                  'Tent11', 'Tent12', 'Tent13', 'Tent14', 'Tent15', 'Tent16', 'Tent17', 'Tent18', 'Tent19', 'Tent20'];
     jQuery('#tokenfield').tokenfield({
@@ -220,6 +220,7 @@ jQuery(document).ready(function(){
     });
 
     jQuery('#tokenfield').on('tokenfield:removedtoken', function (e) {
+        var numberOfUnits = jQuery('#numberOfUnits').val();
         numberOfUnits--;
         jQuery('#numberOfUnits').val(numberOfUnits);
         removeRow(e.attrs.value);
@@ -228,6 +229,7 @@ jQuery(document).ready(function(){
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
+        var numberOfUnits = jQuery('#numberOfUnits').val();
         numberOfUnits++;
         jQuery('#numberOfUnits').val(numberOfUnits);
         makeRow(e.attrs.value);
@@ -654,9 +656,10 @@ jQuery(document).ready(function(){
         }
     });
 
-    let additionalServices = 0;
+    let additionalServices = jQuery('#additionalServicesCount').val();
     jQuery('.additionalServiceFormAdd').click(function(){
         jQuery.get('/serviceSelect/'+document.getElementById('serviceSelect').value, function(data){
+            console.log(jQuery('#additionalServicesCount').val());
             additionalServices++;
             var htmlStringRow = "";
 
@@ -676,8 +679,10 @@ jQuery(document).ready(function(){
 
             updateTotal();
 
+            jQuery('#additionalServicesCount').val(additionalServices);
+
             let htmlString = "";
-            htmlString += "<input type='number' style='display:none;float:left;' name='additionalServicesCount' value='"+additionalServices+"'>";
+            //htmlString += "<input type='number' style='display:none;float:left;' name='additionalServicesCount' value='"+additionalServices+"'>";
             htmlString += "<input type='text' style='display:none;float:left;' id='additionalServiceID"+additionalServices+"' name='additionalServiceID"+additionalServices+"' value='"+data[0].id+"'>";
             htmlString += "<div class='col-md-3 mb-1' id='divServiceName"+additionalServices+"'>";
             htmlString += "<input class='form-control paxSelect' type='text' name='additionalServiceName"+additionalServices+"' value='"+data[0].serviceName+"' readonly>";
@@ -710,7 +715,6 @@ jQuery(document).ready(function(){
             htmlString += "</div>";
 
             jQuery('#divAdditionalServices').append(htmlString);
-            console.log('Hit');
             jQuery('#serviceSelect').val('choose');
             jQuery('#additionalServiceNumberOfPax').val('');            
             jQuery('#additionalServiceUnitPrice').val('');           

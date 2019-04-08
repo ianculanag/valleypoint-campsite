@@ -8,6 +8,15 @@ use CoenJacobs\EloquentCompositePrimaryKeys\HasCompositePrimaryKey;
 class ReservationUnits extends Model
 {
     use HasCompositePrimaryKey;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status'
+    ];    
    
     protected $primaryKey = array('reservationID', 'unitID');
 

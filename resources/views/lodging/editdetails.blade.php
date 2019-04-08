@@ -462,6 +462,9 @@
                                 </button>
                             </div>
                         </div>
+
+                        
+                        <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
                     </div>
                 
                     {{--<input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">

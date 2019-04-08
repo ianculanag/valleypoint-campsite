@@ -42,6 +42,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
+Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
 
 //Check-in glamping guests from reservation
 Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showCheckinForm');

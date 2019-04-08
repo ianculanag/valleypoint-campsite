@@ -15,10 +15,11 @@
             </a>
             <h3>Check-in Form</h3>
         </div>   
-        <form method="POST" action="/checkinGlamping">
+        <form method="POST" action="/checkin-glamping-reservation">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
+        <input type="hidden" name="reservationID" id="reservationID" value="{{$reservation->id}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
@@ -44,9 +45,10 @@
                                 $stayDuration = date_diff($checkin, $checkout)->days+1;
                             @endphp
                             <tr id="invoiceUnit{{$charge->unitNumber}}">
-                                <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                            <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
-                            <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
+                                <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
+                                <input type="hidden" name="charge{{$charge->unitNumber}}" class="chargeIDs" value="{{$charge->chargeID}}"></td>
+                                <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
+                                <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
                                 <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
                                 <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
                             </tr>
@@ -59,7 +61,8 @@
                             @if(count($additionalServices) > 0)
                             @foreach($additionalServices as $additionalService)
                             <tr id="invoiceRow{{$loop->iteration}}">
-                            <td style="display:none;"><input id="invoiceCheckBox{{$loop->iteration}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                            <td style="display:none;"><input id="invoiceCheckBox{{$loop->iteration}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
+                            <input type="hidden" name="charge{{$loop->iteration}}" class="chargeIDs" value="{{$additionalService->chargeID}}"></td>
                             <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
                             <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
                             <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
@@ -152,7 +155,11 @@
                         @endphp
                         @foreach($allReservedUnits as $singleReservedUnit)
                         @php
-                            $units .= $singleReservedUnit->unitNumber.", ";
+                            if($loop->iteration == count($allReservedUnits)){
+                                $units .= $singleReservedUnit->unitNumber." ";
+                            } else {
+                                $units .= $singleReservedUnit->unitNumber.", ";
+                            }
                         @endphp
                         @endforeach
                         @endif
@@ -166,11 +173,14 @@
                     </div>
                     @if(count($reservedUnit) > 0)
                     @foreach($reservedUnit as $reservedUnit)
+                    @php
+                        $unitTotalPrice = $reservedUnit->price * $reservedUnit->numberOfPax;
+                    @endphp
                     <div class="form-group row" id="divUnits">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$reservedUnit->unitNumber}}" disabled>
-                            <input class="" name="totalPrice{{$reservedUnit->unitNumber}}" id="totalPrice{{$reservedUnit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                            <input class="" name="totalPrice{{$reservedUnit->unitNumber}}" id="totalPrice{{$reservedUnit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$reservedUnit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
@@ -234,10 +244,13 @@
                     
                     @if(count($otherReservedUnits) > 0)
                     @foreach($otherReservedUnits as $otherReservedUnits)
+                    @php
+                        $unitTotalPrice = $otherReservedUnits->price * $otherReservedUnits->numberOfPax;
+                    @endphp
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnits->unitNumber}}">
                             {{--<label for="unitNumber">Unit number</label>--}}
                             <input type="text" class="form-control" value="{{$otherReservedUnits->unitNumber}}" disabled>
-                            <input class="" name="totalPrice{{$otherReservedUnits->unitNumber}}" id="totalPrice{{$otherReservedUnits->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                        <input class="" name="totalPrice{{$otherReservedUnits->unitNumber}}" id="totalPrice{{$otherReservedUnits->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$otherReservedUnits->unitNumber}}">
                             {{--<label for="additionalServiceUnitPrice">Package</label>--}}
@@ -355,10 +368,10 @@
                                 </button>
                             </div>
                         </div>
+                    <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="{{count($additionalCharges)}}">
 
                         @if(count($additionalCharges) > 0)
                         @foreach($additionalCharges as $additionalCharge)
-                        <input type='number' style='display:none;float:left;' name='additionalServicesCount' value='{{$loop->iteration}}'>
                         <input type='text' style='display:none;float:left;' id='additionalServiceID{{$loop->iteration}}' name='additionalServiceID{{$loop->iteration}}' value='{{$additionalCharge->id}}'>
                         <div class='col-md-3 mb-1' id='divServiceName{{$loop->iteration}}'>
                             <input class='form-control paxSelect' type='text' name='additionalServiceName{{$loop->iteration}}' value='{{$additionalCharge->serviceName}}' readonly>
