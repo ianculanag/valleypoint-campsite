@@ -55,17 +55,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link" href="#">
+                        <button class="dropdown-btn nav-link" href="/view-users">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             User management
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/view-users">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 Users
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/view-roles">
                                 <i class="fa fa-briefcase" aria-hidden="true"></i>
                                 Roles
                             </a>
@@ -78,11 +78,11 @@
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/view-units">
                                 <i class="fa fa-door-closed" aria-hidden="true"></i>
                                 Units
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/view-services">
                                 <i class="fa fa-archive" aria-hidden="true"></i>
                                 Services
                             </a>
@@ -95,11 +95,11 @@
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/view-menu">
                                 <i class="fa fa-utensils" aria-hidden="true"></i>
                                 Menu
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="view-recipes">
                                 <i class="fa fa-book" aria-hidden="true"></i>
                                 Recipes
                             </a>

@@ -85,8 +85,11 @@
                 @yield('content')
             </div>
     </div>--}}
-    
-    @include('inc.sidebarlodging')
+    {{--@if(Request::url() === 'admin/*')--}}
+        @include('inc.sidebaradmin')
+    {{--@elseif(Request::url() === 'lodging/*')--}}
+        {{--@include('inc.sidebarlodging')--}}
+    {{--@endif--}}
     <div class="container main-content col-md-10">
         @yield('content')
     </div>

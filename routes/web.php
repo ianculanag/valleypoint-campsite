@@ -91,6 +91,11 @@ Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices');
 //Post additional services
 Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
+Route::get('/getDates', 'UnitsController@getDates');
+
+//Check-out guests
+Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
+
 //View users
 Route::get('/view-users', 'UsersController@viewUsers');
 
@@ -109,7 +114,5 @@ Route::post('/unit-added', 'UnitsController@addUnit');
 Route::get('/edit-unit/{unitID}', 'UnitsController@viewUnitDetails');
 Route::post('/update-unit', 'UnitsController@updateUnit');
 
-Route::get('/getDates', 'UnitsController@getDates');
-
-//Check-out guests
-Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
+//View services
+Route::get('/view-services', 'ServicesController@viewServices');

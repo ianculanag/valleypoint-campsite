@@ -17,4 +17,17 @@ class ServicesController extends Controller
 
         //return 'hello';
     }
+
+    /**
+     * Display all services
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewServices()
+    {
+        $services = DB::table('services')
+        ->get();
+
+        return view('admin.viewservices')->with('services', $services);
+    }
 }
