@@ -103,6 +103,7 @@ Route::get('/view-units', 'UnitsController@viewUnits');
 
 //Add unit
 Route::get('/add-unit', 'UnitsController@showAddUnitForm');
+Route::post('/unit-added', 'UnitsController@addUnit');
 
 Route::get('/getDates', 'UnitsController@getDates');
 

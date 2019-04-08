@@ -40,7 +40,7 @@ class UsersController extends Controller
             'role' => 'required'
         ]);
 
-        $user = new Useras;
+        $user = new Users;
         $user->name = $request->input('name');
         $user->username = $request->input('username');
         $user->password = $request->input('password');

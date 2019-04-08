@@ -324,6 +324,28 @@ class UnitsController extends Controller
     }
 
     /**
+     * Add a unit
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addUnit(Request $request)
+    {
+        $this->validate($request, [
+            'unitType' => 'required',
+            'unitNumber' => 'required|min:5|max:10',
+            'capacity' => 'required|min:1|max:20',
+        ]);
+
+        $unit = new Units;
+        $unit->unitType = $request->input('unitType');
+        $unit->unitNumber = $request->input('unitNumber');
+        $unit->capacity = $request->input('capacity');
+        $unit->save(); 
+
+        return redirect('/view-units');
+    }
+
+    /**
      * Get accommodation and reservation dates on units.
      *
      * @return \Illuminate\Http\Response

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container" style="position:fixed;">
         <div class="pt-3 pb-3 text-center">
-            <a href="/glamping">
+            <a href="/view-users">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
