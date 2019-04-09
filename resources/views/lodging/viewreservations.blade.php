@@ -12,7 +12,7 @@
         <h3 class="text-center">Reservations</h3>
     </div>
     <div class="col-md-12">
-        <table data-order='[[ 1, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0" id="reservationTable">
+        <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0" id="reservationTable">
             <thead>
                 <tr>
                     <!--th scope="col">Type</th-->                    
@@ -37,15 +37,48 @@
                 <td>{{$reservation->contactNumber}}</td>
                 <td>{{$reservation->numberOfPax}}</td>
                 <td>{{$reservation->checkinDatetime}}</td>
-                    <td><button class="btn btn-sm btn-success">Check-in</button>
+                <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>
-                        <button class="btn btn-sm btn-danger">Cancel</button>
+                        <a id="{{$reservation->id}}" class="load-reservation-details" data-toggle="modal" data-target="#remove-reservation-modal"><button class="btn btn-sm btn-danger">Cancel</button></a>
                     </td>
                 </tr>
                 @endforeach
             @endif
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="remove-reservation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancel Reservation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> <strong>Warning!</strong> Are you sure you want to cancel this reservation? This operation cannot be undone.</p>
+                
+                {{-- DAWN HELP <div class="container">
+                    <table class="table table-sm borderless">
+                    <tr><td rowspan="4" style="font-weight:bold; width:7%"></td>
+                    <td style="width:28%">Guest name: </td>
+                    <td></td></tr>
+                    <tr><td style="width:28%">Service: </td>
+                    <td></td></tr>
+                    <tr><td>Check-in: </td>
+                    <td style="color:green; font-syle:italic;"></td></tr>
+                    <tr><td>Check-out: </td>
+                    <td style="color:green; font-syle:italic;"></td></tr>
+                    <tr><td class="pt-3" colspan="3"><a href="" id="editResrvationDetails"><button type="button" class="btn btn-info" style="float:right">View Details</button></a>
+                    <a href=""" id="checkin"><button type="button" class="btn btn-success mx-2" style="float:right">Check-in</button></a></td></tr></table></div>--}}
+                 </div>
+            <div class="modal-footer">
+                <a href="" id="confirmCancel"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

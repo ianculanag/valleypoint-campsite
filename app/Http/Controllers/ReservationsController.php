@@ -28,12 +28,32 @@ class ReservationsController extends Controller
     public function viewReservations()
     {
         $reservations = DB::table('reservations')
-            ->join('reservation_units', 'reservation_units.reservationID', 'reservations.id')
-            ->get();
+        ->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'reservations.id')
+                 ->where('status', '=','reserved');
+        })
+        ->orderBy('reservations.id')
+        ->get();
         
+        $reservations =  $reservations->unique('reservationID');
+
         //return $reservations;
 
         return view('lodging.viewreservations')->with('reservations', $reservations);
+    }
+    
+    /**
+     * Cancel reservations.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelReservation($reservationID)
+    {
+        DB::table('reservation_units')
+        ->where('reservationID', $reservationID)
+        ->update(array('status' => 'canceled'));
+
+        return redirect('/view-reservations');
     }
 
     /**
