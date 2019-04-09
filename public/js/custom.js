@@ -954,7 +954,7 @@ jQuery(document).ready(function(){
 
             var htmlString = "";
 
-            htmlString += "<p class='mx-3'><strong>Warning!</strong>Are you sure you want to cancel this reservation? This operation cannot be undone.</p>";
+            htmlString += "<p class='mx-3'><strong>Warning!</strong> Are you sure you want to cancel this reservation? This operation cannot be undone.</p>";
             htmlString += "<div class='card'><div class='card-body'><table class='table table-sm borderless mb-0'>";
             htmlString += "<tr><td style='width:28%'>Guest name: </td>";
             htmlString += "<td>" + data[0].firstName +" "+ data[0].lastName + "</td></tr>";

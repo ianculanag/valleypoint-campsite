@@ -2,12 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Database\Eloquent\Model;
 //use Kyslik\ColumnSortable\Sortable;
 
 class Units extends Model
 {
-    //use Sortable;
+    use SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
 
     // Table Name
     protected $table = 'units';

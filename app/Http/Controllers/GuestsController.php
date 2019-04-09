@@ -387,6 +387,7 @@ class GuestsController extends Controller
         ->join('units', 'units.id', 'accommodation_units.unitID')
         ->select('guests.id as guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber', 
         'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber', 'guests.accommodationID')
+        ->where('accommodation_units.status', '=', 'ongoing')
         ->get();
 
         return view('lodging.viewguests')->with('guest', $guest);

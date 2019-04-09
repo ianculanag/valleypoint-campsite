@@ -2,10 +2,15 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Services extends Model
 {
+    use SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
+    
     // Table Name
     protected $table = 'services';
     // Primary Key

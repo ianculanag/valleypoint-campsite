@@ -22,6 +22,7 @@ class CreateServicesTable extends Migration
             $table->double('leanPrice', 8, 2);
             $table->double('peakPrice', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         $service1 = new Services;

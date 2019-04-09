@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 
 class User extends Authenticatable
 {
+    use SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
+
     use Notifiable;
 
     /**
