@@ -26,6 +26,7 @@ class ServicesController extends Controller
     public function viewServices()
     {
         $services = DB::table('services')
+        ->orderBy('id', 'ASC')
         ->get();
 
         return view('admin.viewservices')->with('services', $services);

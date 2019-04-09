@@ -31,7 +31,10 @@
                     <td>{{$unit->unitType}}</td>
                     <td>{{$unit->unitNumber}}</td>
                     <td>{{$unit->capacity}}</td>
-                    <td><button class="btn btn-sm btn-info">Edit</button>
+                    <td>
+                        <a href="edit-unit/{{$unit->id}}">
+                            <button class="btn btn-sm btn-info">Edit</button>
+                        <a>
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>

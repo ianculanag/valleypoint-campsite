@@ -16,6 +16,7 @@ class UsersController extends Controller
     public function viewUsers()
     {
         $users = DB::table('users')
+        ->orderBy('id', 'ASC')
         ->get();
 
         return view('admin.viewusers')->with('users', $users);

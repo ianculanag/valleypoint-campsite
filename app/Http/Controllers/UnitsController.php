@@ -308,6 +308,7 @@ class UnitsController extends Controller
     public function viewUnits()
     {
         $units = DB::table('units')
+        ->orderBy('id', 'ASC')
         ->get();
 
         return view('admin.viewunits')->with('units', $units);

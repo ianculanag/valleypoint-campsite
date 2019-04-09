@@ -34,7 +34,10 @@
                     <td>{{$user->contactNumber}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role}}</td>
-                    <td><button class="btn btn-sm btn-info">Edit</button>
+                    <td>
+                        <a href="edit-user/{{$user->id}}">
+                            <button class="btn btn-sm btn-info">Edit</button>
+                        </a>
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>

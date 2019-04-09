@@ -128,5 +128,6 @@ Route::get('/add-service', 'ServicesController@showAddServiceForm');
 Route::post('/service-added', 'ServicesController@addService');
 
 //Edit service
+//Route::get('/edit-this-service/{id}', 'ServicesController@loadServiceDetails');
 Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
 Route::post('/update-service', 'ServicesController@updateService');

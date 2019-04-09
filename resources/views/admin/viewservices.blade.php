@@ -34,7 +34,10 @@
                     <td>{{$service->price}}</td>
                     <td>{{$service->leanPrice}}</td>
                     <td>{{$service->peakPrice}}</td>
-                    <td><button class="btn btn-sm btn-info">Edit</button>
+                    <td>
+                        <a href="edit-service/{{$service->id}}">
+                            <button class="btn btn-sm btn-info">Edit</button>
+                        </a>
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>

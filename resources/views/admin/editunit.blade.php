@@ -37,7 +37,7 @@
                             <label for="unitNumber" class="col-sm-4 col-form-label">Unit number</label>
                             <input type="text" required="required" class="form-control col-sm-7 ml-3" name="unitNumber" placeholder="" value="{{$unit->unitNumber}}" minlength=5 maxlength=10>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row pb-3">
                             <label for="capacity" class="col-sm-4 col-form-label">Capacity</label>
                             <input type="number" required="required" class="form-control col-sm-7 ml-3" name="capacity" placeholder="" value="{{$unit->capacity}}" min=1 max=20>
                         </div>
