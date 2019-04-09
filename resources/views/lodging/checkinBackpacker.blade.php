@@ -32,16 +32,22 @@
                         </thead>
                         <tbody id="invoiceRows">
                         <tr id="invoiceUnit{{$unit->unitNumber}}">
-                            <td id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
-                            <td class="invoiceQuantity" id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
-                            <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
-                            <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
+                                <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
+                            <td class="invoiceDescriptions" id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
+                            <td class="invoiceQuantities" id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                            <td class="invoiceUnitPrices" id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
+                            <td class="invoicePrices" id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
                         </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                            </tr>
+                            <tr>
+                            <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                                    Get payment
+                                </button></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -223,6 +229,62 @@
     </div> 
 </div>
 </div>
+    <!-- charges modal -->
+    <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
+            <div class="modal-dialog" role="document" style="width:70%">
+                <div class="modal-content">
+                    <div id="selectedPayments" style="display:none;">
+                    </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Charges</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body my-0">
+                        <!--form class="card my-0"-->
+                            <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th scope="col" style="width:40%">
+                                            <input class="form-check-input" type="checkbox" id="selectAll" checked>
+                                            Description
+                                        </th>
+                                        <th scope="col">Qty.</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="chargesRows">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th colspan="3" scope="row">Amount due:</th>
+                                        <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th scope="row">Amount paid:</th>
+                                        <th style="text-align:right;"  colspan="3">
+                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="savePayments" class="btn btn-success" data-dismiss="modal">Save Changes</button>
+                        <!--button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of charges modal -->  
 @endforeach  
 @endif
 @endsection

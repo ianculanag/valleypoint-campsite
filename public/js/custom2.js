@@ -149,9 +149,7 @@ jQuery(document).ready(function(){
             updateTotal();
     });
 
- 
     });
-
 
 /*
 jQuery(document).ready(function(){
