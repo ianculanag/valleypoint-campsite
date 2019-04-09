@@ -69,4 +69,38 @@ class ServicesController extends Controller
 
         return redirect('/view-services');
     }
+
+    /**
+     * Show edit service form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewServiceDetails($serviceID)
+    {
+        $services = DB::table('services')
+        ->select('services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price', 'services.leanPrice', 'services.peakPrice')
+        ->where('services.id', '=', $serviceID)
+        ->get();
+        
+        return view('admin.editservice')->with('services', $services);
+    }
+
+    /**
+     * Update service details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateService(Request $request)
+    {   
+        $services = Services::find($request->input('serviceID'));
+        $services->update([
+            'serviceType' => $request->input('serviceType'),
+            'serviceName' => $request->input('serviceName'),
+            'price' => $request->input('price'),
+            'leanPrice' => $request->input('leanPrice'),
+            'peakPrice' => $request->input('peakPrice')
+        ]);
+        
+        return redirect('/view-services');
+    }
 }

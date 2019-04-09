@@ -36,4 +36,8 @@ class Services extends Model
     {
         return $this->hasMany('App\Charges');
     }
+
+    protected $fillable = [
+        'serviceType', 'serviceName', 'price', 'leanPrice', 'peakPrice'
+    ];
 }

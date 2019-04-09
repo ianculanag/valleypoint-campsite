@@ -43,7 +43,7 @@
                         <option value="cashier">Cashier</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-block btn-success mt-4">Submit</button>
+                <button type="submit" class="btn btn-block btn-success mt-4">Add</button>
             </div>
         </form>
     </div>

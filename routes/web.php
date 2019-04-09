@@ -100,6 +100,8 @@ Route::get('/getDates', 'UnitsController@getDates');
 //Check-out guests
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 
+/* Admin */
+
 //View users
 Route::get('/view-users', 'UsersController@viewUsers');
 
@@ -124,3 +126,7 @@ Route::get('/view-services', 'ServicesController@viewServices');
 //Add service
 Route::get('/add-service', 'ServicesController@showAddServiceForm');
 Route::post('/service-added', 'ServicesController@addService');
+
+//Edit service
+Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
+Route::post('/update-service', 'ServicesController@updateService');
