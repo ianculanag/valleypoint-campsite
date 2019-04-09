@@ -55,6 +55,10 @@ Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 Route::get('/reservation/{unitID}', 'ReservationsController@showReservationForm');
 Route::post('/reservation', 'ReservationsController@makeReservation');
 
+//Cancel reservation
+Route::get('/cancel-reservation-modal/{reservationID}', 'ReservationsController@cancelReservationModal');
+Route::post('/cancel-reservation/{reservationID}','ReservationsController@cancelReservation');
+
 //Check-in backpacker
 Route::get('/checkin-backpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
 Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');

@@ -91,7 +91,7 @@ class UnitsController extends Controller
 
         //return $days;
 
-        return view('lodging.calendar-glamping')->with('units', $units)->with('dates', $days);
+        return view('lodging.calendarglamping')->with('units', $units)->with('dates', $days);
     }
 
     /**

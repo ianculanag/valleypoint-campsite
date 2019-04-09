@@ -945,3 +945,28 @@ jQuery(document).ready(function() {
 	var pathname = window.location.pathname;
 	jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
 })
+
+jQuery(document).ready(function(){
+    jQuery('.cancel-reservation-modal').click(function(){
+        jQuery.get('/cancel-reservation-modal/'+$(this).attr('id'), function(data){
+            
+            console.log(data);
+
+            var htmlString = "";
+
+            htmlString += "<p class='mx-3'><strong>Warning!</strong>Are you sure you want to cancel this reservation? This operation cannot be undone.</p>";
+            htmlString += "<div class='card'><div class='card-body'><table class='table table-sm borderless mb-0'>";
+            htmlString += "<tr><td style='width:28%'>Guest name: </td>";
+            htmlString += "<td>" + data[0].firstName +" "+ data[0].lastName + "</td></tr>";
+            htmlString += "<tr><td style='width:28%'>Service: </td>";
+            htmlString += "<td>" + data[0].serviceName + "</td></tr>";
+            htmlString += "<tr><td style='width:28%'>Check-in: </td>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + data[0].checkinDatetime + "</td></tr>";
+            htmlString += "<tr><td style='width:28%'>Check-out: </td>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + data[0].checkoutDatetime + "</td></tr></table></div></div>";
+
+            jQuery('#cancelReservationModalBody').html(htmlString);
+            jQuery("#confirmCancel").attr("href", "/cancel-reservation/"+data[0].reservationID);
+        })
+    });
+}); 

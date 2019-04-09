@@ -39,7 +39,9 @@
                 <td>{{$reservation->checkinDatetime}}</td>
                 <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>
-                        <a id="{{$reservation->id}}" class="load-reservation-details" data-toggle="modal" data-target="#remove-reservation-modal"><button class="btn btn-sm btn-danger">Cancel</button></a>
+                    <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#remove-reservation-modal">
+                        <button class="btn btn-sm btn-danger">Cancel</button>
+                    </a>
                     </td>
                 </tr>
                 @endforeach
@@ -57,23 +59,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p> <strong>Warning!</strong> Are you sure you want to cancel this reservation? This operation cannot be undone.</p>
-                
-                {{-- DAWN HELP <div class="container">
-                    <table class="table table-sm borderless">
-                    <tr><td rowspan="4" style="font-weight:bold; width:7%"></td>
-                    <td style="width:28%">Guest name: </td>
-                    <td></td></tr>
-                    <tr><td style="width:28%">Service: </td>
-                    <td></td></tr>
-                    <tr><td>Check-in: </td>
-                    <td style="color:green; font-syle:italic;"></td></tr>
-                    <tr><td>Check-out: </td>
-                    <td style="color:green; font-syle:italic;"></td></tr>
-                    <tr><td class="pt-3" colspan="3"><a href="" id="editResrvationDetails"><button type="button" class="btn btn-info" style="float:right">View Details</button></a>
-                    <a href=""" id="checkin"><button type="button" class="btn btn-success mx-2" style="float:right">Check-in</button></a></td></tr></table></div>--}}
-                 </div>
+            <div class="modal-body" id="cancelReservationModalBody">
+                {{--<p> <strong>Warning!</strong> Are you sure you want to cancel this reservation? This operation cannot be undone.</p>
+                <div class="card">
+                    <div class="card-body px-0">
+                        <table class="table table-sm borderless">
+                            <tr>
+                                <td rowspan="4" style="font-weight:bold; width:7%"></td>
+                                <td style="width:28%">Guest name: </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="width:28%">Service: </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Check-in: </td>
+                                <td style="color:green; font-syle:italic;"></td>
+                            </tr>
+                            <tr>
+                                <td>Check-out: </td>
+                                <td style="color:green; font-syle:italic;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>--}}
+            </div>
             <div class="modal-footer">
                 <a href="" id="confirmCancel"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
                 <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>

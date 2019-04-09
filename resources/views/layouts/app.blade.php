@@ -22,10 +22,10 @@
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 </head>
 <body>
-{{--@if(Request::url() === 'admin/*')--}}
+{{--@if(Route::url()->current() === 'admin.*')
+    @include('inc.sidebaradmin')
+@elseif(Route::url()->current() === 'lodging.*')--}}
     @include('inc.sidebarlodging')
-{{--@elseif(Request::url() === 'lodging/*')--}}
-    {{--@include('inc.sidebarlodging')--}}
 {{--@endif--}}
         <div class="container main-content col-md-10">
             @yield('content')
