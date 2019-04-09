@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Model;
 //use Kyslik\ColumnSortable\Sortable;
 
 class Units extends Model
 {
-    use SoftDeletingTrait;
+    use softDeletes;
 
     protected $dates = ['deleted_at'];
 

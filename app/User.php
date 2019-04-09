@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Illuminate\Database\Eloquent\softDeletes;
 
 
 class User extends Authenticatable
 {
-    use SoftDeletingTrait;
+    use softDeletes;
 
     protected $dates = ['deleted_at'];
 
