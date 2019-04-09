@@ -8,7 +8,6 @@ jQuery('#additionalServiceFormAddExtra').click(function(){
         htmlStringRow += "<td style='display:none;'><input id='invoiceCheckBox"+additionalServices+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
         htmlStringRow += "<td id='invoiceDescription"+additionalServices+"' class='invoiceDescriptions'>"+data[0].serviceName+"</td>";
         htmlStringRow += "<td id='invoiceQuantity"+additionalServices+"' style='text-align:right;' class='invoiceQuantities'>"+jQuery('#additionalServiceNumberOfPax').val()+"</td>";
-        htmlStringRow += "<td id='invoiceUnitPrice"+additionalServices+"' style='text-align:right;' class='invoiceUnitPrices'>"+document.getElementsByClassName('additionalServiceUnitPrice')[0].value+"</td>";
         htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"</td>";
         htmlStringRow += "<td id='invoiceTotalBalance"+additionalServices+"' style='text-align:right;' class='invoiceBalances'>"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"</td>";
         htmlStringRow += "</tr>";

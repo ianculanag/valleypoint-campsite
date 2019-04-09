@@ -84,7 +84,7 @@
                                     </tfoot>
                                     @else
                                         <td class="text-center">
-                                            No pending payments to show
+                                            No payments to show
                                         </td>
                                     </tr>
                                     @endif
@@ -108,7 +108,6 @@
                                         <tr>
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
-                                            <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
                                             <th scope="col">Balance</th>
                                         </tr>
@@ -132,7 +131,6 @@
                                             <td style="display:none;"><input type="text" name="charge{{$loop->index}}" value="{{$pending->chargeID}}"></td>
                                             <td style="display:none;"><input id="invoiceCheckBox{{$identifier}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                             <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
-                                            <td id="invoiceUnitPrice{{$identifier}}"style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($pending->price), 2, '.', '')}}</td>
                                             <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @if($pending->remarks == 'unpaid')
                                             <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
@@ -144,26 +142,19 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th colspan="2" scope="row">TOTAL:</th>
                                             <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($total), 2, '.', '')}}</th>
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="4" scope="row">BALANCE:</th>
+                                            <th colspan="3" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
                                         </tr>
                                         <tr style="display:none;">
                                             <input type="number" name="chargesCount" style="display:none;" value="{{count($pendingPayments)}}">
                                         </tr>
-                                        {{--<tr>
-                                            <th colspan="1">Amount Paid:</th>
-                                            <th style="text-align:right;"  colspan="3">
-                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                            </th>
-                                        </tr>--}}
-                                        
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="4">
                                             @if(count($pendingPayments) > 0)
                                             <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                                                 Get payment
