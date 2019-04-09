@@ -13,12 +13,12 @@
     </div>
     <div class="col-md-12">
         <!--button class="btn btn-md btn-success mb-2">Add unit</button-->
-        <table data-order='[[ 1, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact" cellspacing="0">
+        <table data-order='[[ 0, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact text-center" cellspacing="0">
             <thead>
                 <tr>                   
                     <th>ID</th>
                     <th>Unit Type</th>
-                    <th data-class-name="priority">Unit Number</th>
+                    <th>Unit Number</th>
                     <th>Capacity</th>
                     <th>Action</th>
                 </tr>
@@ -30,7 +30,7 @@
                     <td>{{$unit->id}}</td>
                     <td>{{$unit->unitType}}</td>
                     <td>{{$unit->unitNumber}}</td>
-                    <td>{{$unit->capacity}}</td>
+                    <td class="text-center">{{$unit->capacity}}</td>
                     <td>
                         <a href="edit-unit/{{$unit->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>

@@ -25,6 +25,6 @@ class PaymentsController extends Controller
 
         //return $payments;
 
-        return view('lodging.payments')->with('payments', $payments);
+        return view('lodging.viewpayments')->with('payments', $payments);
     }
 }

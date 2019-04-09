@@ -12,7 +12,7 @@
         <h3 class="text-center">Guests</h3>
     </div>
     <div class="col-md-12">
-        <table id="guestsTable" data-order='[[ 1, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0">
+        <table id="guestsTable" data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0">
               <thead>
                 <tr class="">
                   <th>Guest ID</th>

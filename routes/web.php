@@ -87,7 +87,7 @@ Route::get('/view-reservations', 'ReservationsController@viewReservations');
 Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
 
 //Payment Transactions
-Route::get('transactions', 'PaymentsController@viewLodgingSales');
+Route::get('/view-payments', 'PaymentsController@viewLodgingSales');
 
 //Select Service	
 Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
@@ -128,6 +128,5 @@ Route::get('/add-service', 'ServicesController@showAddServiceForm');
 Route::post('/service-added', 'ServicesController@addService');
 
 //Edit service
-//Route::get('/edit-this-service/{id}', 'ServicesController@loadServiceDetails');
 Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
 Route::post('/update-service', 'ServicesController@updateService');

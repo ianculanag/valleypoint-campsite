@@ -77,7 +77,7 @@
                                 <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
                             </tr>
                             <tr>
-                                <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                                <td colspan="4"><button type="button" class="btn btn-primary btn-block" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
                             </tr>

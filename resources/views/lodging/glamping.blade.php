@@ -204,37 +204,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Unit reservations modal
-    <div class="modal fade right" id="unitReservationsModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">×</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body">
-                </div>
-                <div class="modal-footer justify-content-right">
-                </div>
-            </div>
-        </div>
-    </div>-->
-    {{--<script>
-    $(document).ready(function(){
-    var form = $('#some-form'),
-        original = form.serialize()
-
-    form.submit(function(){
-        window.onbeforeunload = null;
-    })
-
-    window.onbeforeunload = function(){
-        if (form.serialize() != original
-            return 'Are you sure you want to leave?'
-    }
-    })
-    </script>--}}
+    
 @endsection
  
