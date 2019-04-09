@@ -151,6 +151,18 @@ jQuery(document).ready(function(){
 
     });
 
+    //numberOfBunks will change depending on numberOfPax
+jQuery(document).ready(function(){
+    jQuery(document).on('change', '.numberOfPaxBackpacker', function(){
+        numOfBunks = jQuery(this).val();
+
+        currentBunks = numOfBunks;
+        jQuery('#numberOfBunks').val(numOfBunks);
+    });
+
+
+
+});
 /*
 jQuery(document).ready(function(){
     jQuery('.load-Backpacker-details').click(function(){
