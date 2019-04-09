@@ -932,3 +932,16 @@ function checkAvailability() {
     })
 }
 
+/*jQuery(document).ready(function(){
+    jQuery('.nav-item').on('click', 'a', function(){
+        jQuery('.nav-item a.active').removeClass('active');
+        jQuery(this).addClass('active');
+        jQuery(this).append("<span class='sr-only'>(current)></span>");
+        console.log('worked active');
+    });
+});*/
+
+jQuery(document).ready(function() {
+	var pathname = window.location.pathname;
+	jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
+})

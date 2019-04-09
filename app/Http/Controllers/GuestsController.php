@@ -276,7 +276,7 @@ class GuestsController extends Controller
 
     //View Details backpacker
 
-       /**
+    /**
      * Show the accommodationDetails
      *
      * @return \Illuminate\Http\Response
@@ -373,6 +373,11 @@ class GuestsController extends Controller
         }  
     }
 
+    /**
+     * Show view guests page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function viewGuests()
     {
         $guest = DB::table('guests')
