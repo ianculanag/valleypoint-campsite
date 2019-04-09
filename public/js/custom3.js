@@ -297,4 +297,11 @@ jQuery(document).ready(function(){
 window.onbeforeunload = function() {
     return 'message';
 }*/
+
+/***RESERVATIONS TABLE */
+jQuery('.load-reservation-details').click(function() {
+    var reservationID = jQuery(this).attr('id');
+    //console.log(reservationID);
+    jQuery('#confirmCancel').attr('href', '/cancel-reservation/'+reservationID);
+});
         

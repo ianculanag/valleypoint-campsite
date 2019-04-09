@@ -171,6 +171,11 @@
                         </div>
                     </div>
 
+                    <div id="dateAlertContainer" class="alert alert-warning mt-2" style="display:none;">
+                        <a href="#" class="close">&times;</a>
+                        <span id="dateAlertMessage"><strong>Invalid Date!</strong> Please select a check-out date after the check-in date.</span>
+                    </div>
+
                     <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
                         <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>

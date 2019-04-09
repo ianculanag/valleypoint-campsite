@@ -494,61 +494,96 @@ function removeRow(unitNumber) {
     jQuery(divCheckoutDate).remove();
 }
 
-jQuery(document).ready(function(){
-    //var daysDiff = 1;
+function checkDateValidity() {
+    console.log(jQuery('.checkoutDates').length);
+    var invalidCount = 0;
 
-    jQuery(document).on('change', '.checkoutDates', function() {
-        var daysDiff = 0;
-        var unitNumber = jQuery(this).attr('id').slice(12);
-
-
-        var checkinDate = '#checkinDate'+unitNumber;
-        var checkoutDate = '#checkoutDate'+unitNumber;
-
-        var checkin = Date.parse(jQuery(checkinDate).val());
-        var checkout = Date.parse(jQuery(checkoutDate).val());
+    for (var count = 0; count < jQuery('.checkoutDates').length; count++) {    
+        var daysDiff = 0;    
+        var checkin = Date.parse(jQuery('.checkinDates').eq(count).val());
+        var checkout = Date.parse(jQuery('.checkoutDates').eq(count).val());
 
         var timeDiff = checkout-checkin;
         daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
 
-        //console.log(daysDiff);
-        var invoiceQuantity;
-        var numberOfPaxGlamping;
+        if(daysDiff < 1) {
+            invalidCount++;
+        }
+    }
 
-        var packagePrice;
-        var totalPrice;
-
-        var invoiceUnitPrice;
-        var invoiceTotalPrice;
-
-        var hiddenTotalPrice;
-
-        invoiceQuantity = '#invoiceQuantity'+unitNumber;
-        accommodationPackage = '#accommodationPackage'+unitNumber;
-        invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
-        invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
-
-        hiddenTotalPrice = '#totalPrice'+unitNumber;
-
-        jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
-
-        packagePrice = jQuery(invoiceUnitPrice).html();  
-
-        console.log(packagePrice);
-        totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+    if(invalidCount > 0) {        
+        jQuery('#alertContainer').css('display', 'none');
+        jQuery('#dateAlertContainer').css('display', 'block');
         
-        jQuery(invoiceUnitPrice).html(packagePrice);            
-        jQuery(invoiceTotalPrice).html(totalPrice);   
-                    
-        jQuery(hiddenTotalPrice).val(totalPrice);   
+        jQuery('#checkinButton').prop('disabled', true);
+        return true;
+    } else {        
+        jQuery('#dateAlertContainer').css('display', 'none');
         
-        //document.getElementById('stayDuration').value = daysDiff;       
-        checkAvailability(); 
-        updateTotal();
+        jQuery('#checkinButton').prop('disabled', false);
+        return false;
+    }
+}
+
+jQuery(document).ready(function(){
+    //var daysDiff = 1;
+
+    jQuery(document).on('change', '.checkoutDates', function() {
+        if (checkDateValidity() == false) {
+            var daysDiff = 0;
+            var unitNumber = jQuery(this).attr('id').slice(12);
+
+
+            var checkinDate = '#checkinDate'+unitNumber;
+            var checkoutDate = '#checkoutDate'+unitNumber;
+
+            var checkin = Date.parse(jQuery(checkinDate).val());
+            var checkout = Date.parse(jQuery(checkoutDate).val());
+
+            var timeDiff = checkout-checkin;
+            daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+
+            //console.log(daysDiff);
+            var invoiceQuantity;
+            var numberOfPaxGlamping;
+
+            var packagePrice;
+            var totalPrice;
+
+            var invoiceUnitPrice;
+            var invoiceTotalPrice;
+
+            var hiddenTotalPrice;
+
+            invoiceQuantity = '#invoiceQuantity'+unitNumber;
+            accommodationPackage = '#accommodationPackage'+unitNumber;
+            invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+            invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+
+            hiddenTotalPrice = '#totalPrice'+unitNumber;
+
+            jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
+
+            packagePrice = jQuery(invoiceUnitPrice).html();  
+
+            console.log(packagePrice);
+            totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+            
+            jQuery(invoiceUnitPrice).html(packagePrice);            
+            jQuery(invoiceTotalPrice).html(totalPrice);   
+                        
+            jQuery(hiddenTotalPrice).val(totalPrice);   
+            
+            //document.getElementById('stayDuration').value = daysDiff;       
+            checkAvailability(); 
+            updateTotal();
+        }
     });
 
     jQuery(document).on('change', '.checkinDates', function() {
-        checkAvailability();
+        if (checkDateValidity() == false) {
+            checkAvailability();
+        }
     });
 
     jQuery(document).on('change','.accommodationPackages', function(){

@@ -86,7 +86,7 @@
             </div>
     </div>--}}
     {{--@if(Request::url() === 'admin/*')--}}
-        @include('inc.sidebaradmin')
+        @include('inc.sidebarlodging')
     {{--@elseif(Request::url() === 'lodging/*')--}}
         {{--@include('inc.sidebarlodging')--}}
     {{--@endif--}}
