@@ -93,6 +93,122 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function viewReservationDetails($unitID, $reservationID)
+    {        
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+
+        $reservation = DB::table('reservations')
+        ->where('id', '=', $reservationID)
+        ->get();
+
+        //return $reservation;        
+        
+        $reservedUnit = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '=', $unitID)
+        ->get();
+
+        //return $reservedUnit;
+
+        $otherReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '!=', $unitID)
+        ->get();
+
+        $allReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        //->orderByRaw($unitID)
+        ->get();
+
+        //return $otherReservedUnits;
+        
+        $charges = DB::table('charges')
+        ->join('reservation_units', 'reservation_units.unitID', 'charges.unitID')
+        /*->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'charges.reservationID')
+                 ->where('reservation_units.unitID', '=','charges.unitID');
+        })*/
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.reservationID',
+                 'reservation_units.unitID', 'reservation_units.numberOfPax', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'units.unitNumber', 'services.serviceName',
+                 'services.price')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '<', '6')
+        ->get();
+
+        $additionalCharges = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->get();
+
+        $additionalServices = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+                 'charges.remarks', 'charges.reservationID', 'charges.unitID',
+                 'services.*')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->get();
+
+        //return $additionalServices;
+
+        return view('lodging.viewGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices);
+    }
+
+    public function saveGlampingReservation(Request $request)
+    {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+            'firstName' => 'required|max:30',
+            'lastName' => 'required|max:30'
+        ]);
+
+        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
+        
+        $reservation = Reservations::find($request->input('reservationID'));
+        $reservation->update([
+            'lastName' => $request->input('lastName'),
+            'firstName' => $request->input('firstName'),
+            'numberOfPax' => $request->input('numberOfPaxGlamping'),
+            'numberOfUnits' => $request->input('numberOfUnits'),    
+            'contactNumber' => $request->input('contactNumber'),
+        ]);
+
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two            
+            $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+            $checkinDate = 'checkinDate'.$unitNumbers[$count];
+            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+            
+            $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+            $units = DB::table('reservation_units')
+            ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+            ->update(array(
+                //'unitID' => $unit[0]->id,
+                'checkinDatetime' => $request->input($checkinDate).' '.'14:00',
+                'checkoutDatetime' => $request->input($checkoutDate).' '.'12:00',
+                'numberOfPax' => $request->input($accommodationPackage),
+                'serviceID' => $request->input($accommodationPackage)
+            ));
+        }
+    }
+
+    /**
+     * Display checkin form from reservation.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showCheckinForm($unitID, $reservationID)
     {        
         $unit = DB::table('units')
@@ -492,7 +608,6 @@ class ReservationsController extends Controller
         $accommodationUnit->save();
 
         return redirect('/transient-backpacker');
-
     }
 }
 

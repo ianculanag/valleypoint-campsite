@@ -19,7 +19,7 @@ class Reservations extends Model
      * @var array
      */
     protected $fillable = [
-        'status'
+        'status', 'lastName', 'firstName', 'numberOfPax', 'numberOfUnits', 'contactNumber'
     ];    
     
     // Foreign Key to

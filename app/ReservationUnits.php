@@ -15,7 +15,7 @@ class ReservationUnits extends Model
      * @var array
      */
     protected $fillable = [
-        'status'
+        'status', 'unitID', 'checkinDatetime', 'checkoutDatetime', 'numberOfPax', 'serviceID'
     ];    
    
     protected $primaryKey = array('reservationID', 'unitID');

@@ -89,7 +89,7 @@ jQuery(document).ready(function(){
                     htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkinDatetime).format('LLLL') + "</td></tr>";
                     htmlString += "<tr><td>Check-out: </td>";
                     htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[count].checkoutDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
+                    htmlString += "<tr><td class='pt-3' colspan='3'><a href='/view-reservation-details/"+data[0].unitID+"/"+data[count].reservationID+"' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
                     htmlString += "<a href='/checkin/"+data[0].unitID+"/"+data[count].reservationID+"' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>"
                 }
             }
@@ -962,9 +962,9 @@ jQuery(document).ready(function(){
             htmlString += "<tr><td style='width:28%'>Service: </td>";
             htmlString += "<td>" + data[0].serviceName + "</td></tr>";
             htmlString += "<tr><td style='width:28%'>Check-in: </td>";
-            htmlString += "<td style='color:green; font-syle:italic;'>" + data[0].checkinDatetime + "</td></tr>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkinDatetime).format('LLLL') + "</td></tr>";
             htmlString += "<tr><td style='width:28%'>Check-out: </td>";
-            htmlString += "<td style='color:green; font-syle:italic;'>" + data[0].checkoutDatetime + "</td></tr></table></div></div>";
+            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div></div>";
 
             jQuery('#cancelReservationModalBody').html(htmlString);
             jQuery("#confirmCancel").attr("href", "/cancel-reservation/"+data[0].reservationID);

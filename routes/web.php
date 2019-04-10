@@ -91,6 +91,10 @@ Route::get('/checkin-backpacker', function() {
 Route::get('/view-reservations', 'ReservationsController@viewReservations');
 //Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
+//View Reservation Details
+Route::get('/view-reservation-details/{unitID}/{reservationID}', 'ReservationsController@viewReservationDetails');
+Route::post('/save-glamping-reservation-details', 'ReservationsController@saveGlampingReservation');
+
 //CancelReservations
 Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
 
