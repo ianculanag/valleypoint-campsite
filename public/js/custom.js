@@ -1005,20 +1005,20 @@ jQuery(document).ready(function(){
             htmlString += "<td>₱ " + data[0].peakPrice + "</td></tr></table></div></div>";
 
             jQuery('#deleteServiceModalBody').html(htmlString);
-            //jQuery("#confirmServiceDeletion").attr("href", "/confirm-service-deletion/"+data[0].serviceID);
+            jQuery("#confirmServiceDeletion").attr("href", "/confirm-service-deletion/"+data[0].serviceID);
         })
     });
 }); 
 
-/*jQuery(document).ready(function(){
-    jQuery('.delete-service-modal').click(function(){
-        jQuery.get('/delete-service-modal/'+$(this).attr('id'), function(data){
+jQuery(document).ready(function(){
+    jQuery('.delete-unit-modal').click(function(){
+        jQuery.get('/delete-unit-modal/'+$(this).attr('id'), function(data){
             
             console.log(data);
 
             var htmlString = "";
 
-            htmlString += "<p class='mx-3'><strong>Warning!</strong> Are you sure you want to delete this unit?</p>";
+            htmlString += "<p class='mx-3'><strong>Warning!</strong> Are you sure you want to delete " + data[0].unitNumber + "?</p>";
             htmlString += "<div class='card'><div class='card-body'><table class='table table-sm borderless mb-0'>";
             htmlString += "<tr><td style='width:28%'>Unit type: </td>";
             htmlString += "<td>" + data[0].unitType + "</td></tr>";
@@ -1027,8 +1027,8 @@ jQuery(document).ready(function(){
             htmlString += "<tr><td style='width:28%'>Check-in: </td>";
             htmlString += "<td>" + data[0].capacity + "</td></tr></table></div></div>";
 
-            jQuery('#deleteServiceModalBody').html(htmlString);
-            //jQuery("#confirmServiceDeletion").attr("href", "/confirm-service-deletion/"+data[0].serviceID);
+            jQuery('#deleteUnitModalBody').html(htmlString);
+            jQuery("#confirmUnitDeletion").attr("href", "/confirm-unit-deletion/"+data[0].unitID);
         })
     });
-});*/
+});

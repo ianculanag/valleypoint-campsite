@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-12">
         <!--button class="btn btn-md btn-success mb-2">Add unit</button-->
-        <table data-order='[[ 0, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact text-center" cellspacing="0">
+        <table data-order='[[ 0, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   
                     <th>ID</th>
@@ -30,18 +30,40 @@
                     <td>{{$unit->id}}</td>
                     <td>{{$unit->unitType}}</td>
                     <td>{{$unit->unitNumber}}</td>
-                    <td class="text-center">{{$unit->capacity}}</td>
+                    <td>{{$unit->capacity}}</td>
                     <td>
                         <a href="edit-unit/{{$unit->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>
                         <a>
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <a id="{{$unit->id}}" class="delete-unit-modal" data-toggle="modal" data-target="#deleteUnitModal">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </a>
                     </td>
                 </tr>
                     @endforeach
                     @endif
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Delete unit modal -->
+<div class="modal fade" id="deleteUnitModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Unit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="deleteUnitModalBody">
+            </div>
+            <div class="modal-footer">
+                <a href="" id="confirmUnitDeletion"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

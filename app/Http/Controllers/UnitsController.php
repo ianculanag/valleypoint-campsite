@@ -400,6 +400,21 @@ class UnitsController extends Controller
     }
 
     /**
+     * Delete unit modal
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteUnitModal($unitID)
+    {   
+        $units = DB::table('units')
+        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity')
+        ->where('units.id', '=', $unitID)
+        ->get();
+
+        return $units;
+    }
+
+    /**
      * Get accommodation and reservation dates on units.
      *
      * @return \Illuminate\Http\Response

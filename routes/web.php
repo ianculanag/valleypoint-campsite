@@ -133,6 +133,9 @@ Route::post('/unit-added', 'UnitsController@addUnit');
 Route::get('/edit-unit/{unitID}', 'UnitsController@viewUnitDetails');
 Route::post('/update-unit', 'UnitsController@updateUnit');
 
+//Delete unit
+Route::get('/delete-unit-modal/{unitID}', 'UnitsController@deleteUnitModal');
+
 //View services
 Route::get('/view-services', 'ServicesController@viewServices');
 
@@ -146,3 +149,4 @@ Route::post('/update-service', 'ServicesController@updateService');
 
 //Delete service
 Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
+//Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');

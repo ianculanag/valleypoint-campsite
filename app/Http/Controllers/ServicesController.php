@@ -106,7 +106,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Delete service details
+     * Delete service modal
      *
      * @return \Illuminate\Http\Response
      */
@@ -118,5 +118,18 @@ class ServicesController extends Controller
         ->get();
 
         return $services;
+    }
+
+    /**
+     * Delete service
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteService($serviceID)
+    {   
+        $services = Services::find($serviceID);
+        $services->delete();
+
+        return redirect('/view-services');
     }
 }
