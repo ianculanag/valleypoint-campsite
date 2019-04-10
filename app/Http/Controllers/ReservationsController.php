@@ -36,7 +36,7 @@ class ReservationsController extends Controller
         ->orderBy('reservations.id')
         ->get();
         
-        $reservations =  $reservations->unique('reservationID');
+        //$reservations =  $reservations->unique('reservationID');
 
         //return $reservations;
 
@@ -120,6 +120,7 @@ class ReservationsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('reservation_units.unitID', '!=', $unitID)
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit->checkinDatetime)
         ->get();
 
         $allReservedUnits = DB::table('reservation_units')
@@ -236,13 +237,15 @@ class ReservationsController extends Controller
         ->join('services', 'services.id', 'reservation_units.serviceID')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)
-        ->where('reservation_units.unitID', '!=', $unitID)
+        ->where('reservation_units.unitID', '!=', $unitID)        
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
         ->get();
 
         $allReservedUnits = DB::table('reservation_units')
         ->join('services', 'services.id', 'reservation_units.serviceID')
         ->join('units', 'units.id', 'reservation_units.unitID')
-        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.reservationID', '=', $reservationID)        
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
         //->orderByRaw($unitID)
         ->get();
 
@@ -262,12 +265,16 @@ class ReservationsController extends Controller
                  'services.price')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '<', '6')
+        ->where('charges.remarks', '=', 'unpaid')
+        ->orWhere('charges.remarks', '=', 'partial')
         ->get();
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '>', '5')
+        ->where('charges.remarks', '=', 'unpaid')
+        ->orWhere('charges.remarks', '=', 'partial')
         ->get();
 
         $additionalServices = DB::table('charges')
@@ -375,122 +382,254 @@ class ReservationsController extends Controller
 
         //return ReservationUnits::find($request->input('reservationID'));
 
-        $accommodation = new Accommodation;    
+        $existingGuest = DB::table('reservation_units')
+        ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+        ->where('reservation_units.status', '=', 'checkedin')
+        ->get();
+
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
-        $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');
-        $accommodation->numberOfUnits = $request->input('numberOfUnits');
-        $accommodation->userID = Auth::user()->id;
-        $accommodation->save();
+        //return sizeof($unitNumbers);
+        //return $existingGuest;
 
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->accommodationID = $accommodation->id;   
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save(); 
+        if(count($existingGuest) > 0) {
+            $chargesCount = 0;
+            $chargesArray = array();
 
-        $chargesCount = 0;
-        $chargesArray = array();
-
-        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two
-            
-            $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
-            $checkinDate = 'checkinDate'.$unitNumbers[$count];
-            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
-            $chargeID = 'charge'.$unitNumbers[$count];
-
-            $totalPrice = 'totalPrice'.$unitNumbers[$count];
-
-            $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
-
-            $accommodationUnit = new AccommodationUnits;
-            $accommodationUnit->accommodationID = $accommodation->id;
-            $accommodationUnit->unitID = $unit[0]->id;
-            $accommodationUnit->status = 'ongoing';
-            $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
-            $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
-            $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
-            $accommodationUnit->serviceID =  $request->input($accommodationPackage);
-            $accommodationUnit->save();
-
-            $units = DB::table('reservation_units')
+            $checkedinUnit = DB::table('reservation_units')
+            ->select('reservation_units.unitID')
             ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
-            ->update(array('status' => 'checkedin'));
+            ->where('reservation_units.status', '=', 'checkedin')
+            ->get();
 
-            if($request->input($chargeID)) {
-                $charge = Charges::find($request->input($chargeID));
-                $charge->update([                    
-                    'quantity' => $request->input($accommodationPackage),
-                    'totalPrice' => $request->input($totalPrice),
-                    'remarks' => 'unpaid',
-                    'accommodationID' => $accommodation->id,
-                    'serviceID' => $request->input($accommodationPackage)
-                ]);                
-                $chargesCount++;
-                array_push($chargesArray, $request->input($chargeID));
-            } else {
-                $charges = new Charges;
-                $charges->quantity = $request->input($accommodationPackage);
-                $charges->totalPrice = $request->input($totalPrice);
-                $charges->remarks = 'unpaid';
-                $charges->accommodationID = $accommodation->id;
-                $charges->serviceID = $request->input($accommodationPackage);
-                $charges->save();
-                $chargesCount++;
-                array_push($chargesArray, $charges->id);
+            //return $checkedinUnit[0]->unitID;
+
+            $accommodationID = DB::table('accommodation_units')
+            ->select('accommodation_units.unitID')
+            ->where('accommodation_units.unitID', '=', $checkedinUnit[0]->unitID)
+            ->where('status', '=', 'ongoing')
+            ->get();
+
+            //return $accommodationID[0]->unitID;
+
+            for($count = 0; $count < sizeof($unitNumbers); $count++) { //for loop two
+                
+                $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+                $chargeID = 'charge'.$unitNumbers[$count];
+
+                $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+                $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodationID[0]->unitID;
+                $accommodationUnit->unitID = $unit[0]->id;
+                $accommodationUnit->status = 'ongoing';
+                $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+                $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+                $accommodationUnit->save();
+
+                $units = DB::table('reservation_units')
+                ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+                ->where('reservation_units.unitID', '=', $unit[0]->id)
+                ->update(array('status' => 'checkedin'));
+
+                if($request->input($chargeID)) {
+                    $charge = Charges::find($request->input($chargeID));
+                    $charge->update([                    
+                        'quantity' => $request->input($accommodationPackage),
+                        'totalPrice' => $request->input($totalPrice),
+                        'remarks' => 'unpaid',
+                        'accommodationID' => $accommodationID[0]->unitID,
+                        'serviceID' => $request->input($accommodationPackage)
+                    ]);                
+                    $chargesCount++;
+                    array_push($chargesArray, $request->input($chargeID));
+                } else {
+                    $charges = new Charges;
+                    $charges->quantity = $request->input($accommodationPackage);
+                    $charges->totalPrice = $request->input($totalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $accommodationID[0]->unitID;
+                    $charges->serviceID = $request->input($accommodationPackage);
+                    $charges->save();
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
+                }
             }
-        }
 
-        if($request->input('additionalServicesCount') > 0) {
-            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
-                $additionalServiceID = 'additionalServiceID'.$count;
-                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
-                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
-                $chargeID = 'charge'.$count;
-                if($request->input($additionalServiceID)) {
-                    if($request->input($chargeID)) {
-                        $charge = Charges::find($request->input($chargeID));
-                        $charge->update([                    
-                            'quantity' => $request->input($additionalServiceNumberOfPax),
-                            'totalPrice' => $request->input($additionalTotalPrice),
-                            'remarks' => 'unpaid',
-                            'accommodationID' => $accommodation->id,
-                            'serviceID' => $request->input($additionalServiceID)
-                        ]);                
-                        $chargesCount++;
-                        array_push($chargesArray, $request->input($chargeID));
-                    } else {
-                        $charges = new Charges;                    
-                        $charges->quantity = $request->input($additionalServiceNumberOfPax);
-                        $charges->totalPrice = $request->input($additionalTotalPrice);
-                        $charges->remarks = 'unpaid';
-                        $charges->accommodationID = $accommodation->id;
-                        $charges->serviceID = $request->input($additionalServiceID);
-                        $charges->save();
-                        $chargesCount++;
-                        array_push($chargesArray, $charges->id);
+            if($request->input('additionalServicesCount') > 0) {
+                for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                    $additionalServiceID = 'additionalServiceID'.$count;
+                    $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                    $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                    $chargeID = 'charge'.$count;
+                    if($request->input($additionalServiceID)) {
+                        if($request->input($chargeID)) {
+                            $charge = Charges::find($request->input($chargeID));
+                            $charge->update([                    
+                                'quantity' => $request->input($additionalServiceNumberOfPax),
+                                'totalPrice' => $request->input($additionalTotalPrice),
+                                'remarks' => 'unpaid',
+                                'accommodationID' => $accommodationID[0]->unitID,
+                                'serviceID' => $request->input($additionalServiceID)
+                            ]);                
+                            $chargesCount++;
+                            array_push($chargesArray, $request->input($chargeID));
+                        } else {
+                            $charges = new Charges;                    
+                            $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                            $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->remarks = 'unpaid';
+                            $charges->accommodationID = $accommodationID[0]->unitID;
+                            $charges->serviceID = $request->input($additionalServiceID);
+                            $charges->save();
+                            $chargesCount++;
+                            array_push($chargesArray, $charges->id);
+                        }
                     }
+                }
+            }
+
+            for($count = 0; $count < $chargesCount; $count++) {
+                $paymentEntry = 'payment'.$count;
+                if($request->input($paymentEntry)) {
+                    $payment = new Payments;
+                    $payment->paymentDatetime = Carbon::now();
+                    $payment->amount = $request->input($paymentEntry);
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'full'
+                    ]);
+                }
+            }
+        } else {
+            $accommodation = new Accommodation;   
+            $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');
+            $accommodation->numberOfUnits = $request->input('numberOfUnits');
+            $accommodation->userID = Auth::user()->id;
+            $accommodation->save();
+
+            $guest = new Guests;
+            $guest->lastName = $request->input('lastName');
+            $guest->firstName = $request->input('firstName');
+            $guest->accommodationID = $accommodation->id;   
+            $guest->contactNumber = $request->input('contactNumber');
+            $guest->save(); 
+
+            $chargesCount = 0;
+            $chargesArray = array();
+
+            for($count = 0; $count < sizeof($unitNumbers); $count++) { //for loop two
+                
+                $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+                $chargeID = 'charge'.$unitNumbers[$count];
+
+                $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+                $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodation->id;
+                $accommodationUnit->unitID = $unit[0]->id;
+                $accommodationUnit->status = 'ongoing';
+                $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+                $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+                $accommodationUnit->save();
+
+                $units = DB::table('reservation_units')
+                ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+                ->where('reservation_units.unitID', '=', $unit[0]->id)
+                ->update(array('status' => 'checkedin'));
+
+                if($request->input($chargeID)) {
+                    $charge = Charges::find($request->input($chargeID));
+                    $charge->update([                    
+                        'quantity' => $request->input($accommodationPackage),
+                        'totalPrice' => $request->input($totalPrice),
+                        'remarks' => 'unpaid',
+                        'accommodationID' => $accommodation->id,
+                        'serviceID' => $request->input($accommodationPackage)
+                    ]);                
+                    $chargesCount++;
+                    array_push($chargesArray, $request->input($chargeID));
+                } else {
+                    $charges = new Charges;
+                    $charges->quantity = $request->input($accommodationPackage);
+                    $charges->totalPrice = $request->input($totalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $accommodation->id;
+                    $charges->serviceID = $request->input($accommodationPackage);
+                    $charges->save();
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
+                }
+            }
+
+            if($request->input('additionalServicesCount') > 0) {
+                for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                    $additionalServiceID = 'additionalServiceID'.$count;
+                    $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                    $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                    $chargeID = 'charge'.$count;
+                    if($request->input($additionalServiceID)) {
+                        if($request->input($chargeID)) {
+                            $charge = Charges::find($request->input($chargeID));
+                            $charge->update([                    
+                                'quantity' => $request->input($additionalServiceNumberOfPax),
+                                'totalPrice' => $request->input($additionalTotalPrice),
+                                'remarks' => 'unpaid',
+                                'accommodationID' => $accommodation->id,
+                                'serviceID' => $request->input($additionalServiceID)
+                            ]);                
+                            $chargesCount++;
+                            array_push($chargesArray, $request->input($chargeID));
+                        } else {
+                            $charges = new Charges;                    
+                            $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                            $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->remarks = 'unpaid';
+                            $charges->accommodationID = $accommodation->id;
+                            $charges->serviceID = $request->input($additionalServiceID);
+                            $charges->save();
+                            $chargesCount++;
+                            array_push($chargesArray, $charges->id);
+                        }
+                    }
+                }
+            }
+
+            for($count = 0; $count < $chargesCount; $count++) {
+                $paymentEntry = 'payment'.$count;
+                if($request->input($paymentEntry)) {
+                    $payment = new Payments;
+                    $payment->paymentDatetime = Carbon::now();
+                    $payment->amount = $request->input($paymentEntry);
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'full'
+                    ]);
                 }
             }
         }
 
-        for($count = 0; $count < $chargesCount; $count++) {
-            $paymentEntry = 'payment'.$count;
-            if($request->input($paymentEntry)) {
-                $payment = new Payments;
-                $payment->paymentDatetime = Carbon::now();
-                $payment->amount = $request->input($paymentEntry);
-                $payment->paymentStatus = 'full';
-                $payment->chargeID = $chargesArray[$count];
-                $payment->save();
-
-                $charge = Charges::find($chargesArray[$count]);
-                $charge->update([
-                    'remarks' => 'full'
-                ]);
-            }
-        }
+        
 
         return redirect('/glamping');
     }
