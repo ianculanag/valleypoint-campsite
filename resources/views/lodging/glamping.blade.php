@@ -109,20 +109,20 @@
                             <p></p>
                         @endif--}}
                     @php
-                        $reservationCount = 0;   
+                        $reservationCount = 0; 
                         $today = \Carbon\Carbon::today();
                         $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
-                        $currentReservation = 0;
                     @endphp
                     @foreach($reservations as $reservation)
                         @if($reservation->id == $unit->unitID)
-                            @php                                
+                            @php                                  
                                 $reservationCount++;
                             @endphp
                         @else
                         @endif
                         @if(\Carbon\Carbon::parse($reservation->checkinDatetime)->format('Y-m-d') == $currentDate)
                             @php
+                                $currentReservation = 0;
                                 $currentReservation++;
                                 $firstName = $reservation->firstName;
                                 $lastName = $reservation->lastName;
