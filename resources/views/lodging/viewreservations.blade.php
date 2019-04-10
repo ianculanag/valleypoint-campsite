@@ -20,7 +20,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Contact No.</th>
-                    <th>No. of Pax</th>
+                    <th>Unit Number</th>
                     <th>Check-in Date</th>
                     <th>Action</th>
                 </tr>
@@ -31,11 +31,11 @@
                 <tr>
                 {{--<td class="text-center">{{$reservations->unitID}}</td>
                 <td>{{$reservation->serviceName}}</td>--}}                
-                <td>{{$reservation->id}}</td>
+                <td>{{$reservation->reservationID}}</td>
                 <td>{{$reservation->firstName}}</td>
                 <td>{{$reservation->lastName}}</td>
                 <td>{{$reservation->contactNumber}}</td>
-                <td>{{$reservation->numberOfPax}}</td>
+                <td>{{$reservation->unitNumber}}</td>
                 <td>{{$reservation->checkinDatetime}}</td>
                 <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>

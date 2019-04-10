@@ -32,6 +32,7 @@ class ReservationsController extends Controller
             $join->on('reservation_units.reservationID', '=', 'reservations.id')
                  ->where('status', '=','reserved');
         })
+        ->join('units', 'units.id', 'reservation_units.unitID')
         ->orderBy('reservations.id')
         ->get();
         
