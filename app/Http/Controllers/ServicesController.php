@@ -104,4 +104,19 @@ class ServicesController extends Controller
         
         return redirect('/view-services');
     }
+
+    /**
+     * Delete service details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteServiceModal($serviceID)
+    {   
+        $services = DB::table('services')
+        ->select('services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price', 'services.leanPrice', 'services.peakPrice')
+        ->where('services.id', '=', $serviceID)
+        ->get();
+
+        return $services;
+    }
 }

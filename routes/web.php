@@ -143,3 +143,6 @@ Route::post('/service-added', 'ServicesController@addService');
 //Edit service
 Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
 Route::post('/update-service', 'ServicesController@updateService');
+
+//Delete service
+Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');

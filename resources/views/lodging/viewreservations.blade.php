@@ -39,7 +39,7 @@
                 <td>{{$reservation->checkinDatetime}}</td>
                 <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>
-                    <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#remove-reservation-modal">
+                    <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
                         <button class="btn btn-sm btn-danger">Cancel</button>
                     </a>
                     </td>
@@ -50,7 +50,9 @@
         </table>
     </div>
 </div>
-<div class="modal fade" id="remove-reservation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+
+<!-- Cancel reservation modal -->
+<div class="modal fade" id="removeReservationModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header">
