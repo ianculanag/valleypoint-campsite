@@ -202,6 +202,22 @@ class UnitsController extends Controller
     {
         //
     }
+    /**
+     * Return all unit numbers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadTents()
+    {
+        return $units = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        //$units = Units::sortable()->paginate(8);
+        //return view('admin.viewunits',compact('units'))->with('units', $units);
+    }
 
     /**
      * Show the form for editing the specified resource.

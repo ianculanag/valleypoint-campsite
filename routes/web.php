@@ -24,6 +24,7 @@ Route::get('/calendar', 'UnitsController@calendar');
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 
 //Route::resource('staff', 'StaffController');
+Route::get('/load-tents', 'unitsController@loadTents');
 
 //
 Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
