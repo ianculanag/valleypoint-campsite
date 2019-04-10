@@ -96,8 +96,7 @@ jQuery(document).ready(function(){
 
             jQuery('#modal-body-empty').html(htmlString);
             jQuery('#modal-head2').html(data[0].unitNumber);
-
-            //jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);            
+          
             jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
             jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
             jQuery("#checkin-backpacker").attr("href", "checkin-backpacker/"+data[0].unitID);
