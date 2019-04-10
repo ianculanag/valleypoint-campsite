@@ -160,7 +160,15 @@ jQuery(document).ready(function(){
         jQuery('#numberOfBunks').val(numOfBunks);
     });
 
+    //number of bunks cannot exceed number of pax
+    jQuery(document).on('change', '#numberOfBunks', function(){
+        currentBunks = jQuery(this).val();
+        numOfBunks = jQuery('.numberOfPaxBackpacker').val();
+        if(jQuery(this).val() > jQuery('.numberOfPaxBackpacker').val()){
+            jQuery(this).val(numOfBunks);
+        }
 
+    });
 
 });
 /*
