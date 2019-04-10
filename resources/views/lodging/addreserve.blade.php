@@ -3,25 +3,25 @@
 @section('content')
 @if(count($unit) > 0)
     @foreach($unit as $unit)
-    <div class="container">
-        <div class="pt-3 pb-3 text-center">
-            <a href="/transient-backpacker">
-                <span style="float:left;">
-                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                    <strong>Back</strong>
-                </span>
-            </a>
-            <h3>Reservation Form</h3>
-        </div>   
-        <form method="POST" action="/reservation2">
+<div class="container">
+    <div class="pt-3 pb-3 text-center">
+        <a href="/transient-backpacker">
+            <span style="float:left;">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                <strong>Back</strong>
+            </span>
+        </a>
+        <h3>Backpacker Reservation Form</h3>
+    </div>
+
+    <form method="POST" action="/checkinBackpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-        <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
-                    <table class="table table-striped" style="font-size:.88em;">
+                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Invoice</h4>
+                    <table class="table table-striped" style="font-size:.83em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:40%">Description</th>
@@ -31,34 +31,29 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                            <tr id="invoiceUnit{{$unit->unitNumber}}">
+                        <tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
+                            <td class="invoiceDescriptions" id="invoiceDescription{{$unit->unitNumber}}">Backpacker</td>
+                            <td class="invoiceQuantities" id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;">1</td>
+                            <td class="invoiceUnitPrices" id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;">750</td>
+                            <td class="invoicePrices" id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
-                            <!--tr>
-                                <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                            <tr>
+                            <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
-                            </tr-->
-                            {{--<tr>
-                                <th colspan="1">Amount Paid:</th>
-                                <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                </th>
-                            </tr>--}}
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
-            </div>
+            </div>                
+
             <div class="col-md-8 order-md-1">
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                 <div class="form-group row">
@@ -136,7 +131,7 @@
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="1" min="1" max="20">
+                            <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="" min="1" max="20">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -234,6 +229,62 @@
     </div> 
 </div>
 </div>
+    <!-- charges modal -->
+    <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
+            <div class="modal-dialog" role="document" style="width:70%">
+                <div class="modal-content">
+                    <div id="selectedPayments" style="display:none;">
+                    </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Charges</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body my-0">
+                        <!--form class="card my-0"-->
+                            <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th scope="col" style="width:40%">
+                                            <input class="form-check-input" type="checkbox" id="selectAll" checked>
+                                            Description
+                                        </th>
+                                        <th scope="col">Qty.</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="chargesRows">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th colspan="3" scope="row">Amount due:</th>
+                                        <th id="chargesGrandTotal" style="text-align:right;">1500</th>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th scope="row">Amount paid:</th>
+                                        <th style="text-align:right;"  colspan="3">
+                                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="savePayments" class="btn btn-success" data-dismiss="modal">Save Changes</button>
+                        <!--button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of charges modal -->  
 @endforeach  
 @endif
 @endsection

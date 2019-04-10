@@ -100,7 +100,8 @@ jQuery(document).ready(function(){
             //jQuery("#checkin").attr("href", "checkin/"+data[0].unitID);            
             jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
             jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
-            jQuery("#checkin-backpacker").attr("href", "checkin-backpacker/"+data[0].unitID);              
+            jQuery("#checkin-backpacker").attr("href", "checkin-backpacker/"+data[0].unitID);
+            jQuery("#reserveBackpackerEmpty").attr("href", "reserve-backpacker/"+data[0].unitID);
         })
     });
 }); 

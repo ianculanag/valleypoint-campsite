@@ -315,7 +315,7 @@
                 <a href="" id="checkin-backpacker">
                     <button type="button" class="btn btn-primary">Check-in</button>
                 </a>
-                <a href="" id="reserve">
+                <a href="" id="reserveBackpackerEmpty">
                     <button type="button" class="btn btn-secondary">Add reservation</button>
                 </a>
             </div>

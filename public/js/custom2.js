@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
         htmlString +="<i class='fa fa-bed' aria-hidden='true'></i>";
         htmlString +="</span>";
         htmlString +="</div>";
-        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='20'>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='10'>";
         htmlString +="</div>";
         htmlString +="</div>";
         htmlString +="<div class='col-md-7 mb-1'>";

@@ -131,7 +131,7 @@
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="1" min="1" max="20">
+                            <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="" min="1" max="20">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
