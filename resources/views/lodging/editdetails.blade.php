@@ -133,9 +133,9 @@
                                             <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
                                             <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @if($pending->remarks == 'unpaid')
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->balance), 2, '.', ''))}}</td>
                                             @else
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($balance), 2, '.', '')}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($pending->balance), 2, '.', '')}}</td>
                                             @endif
                                         </tr>
                                         @endforeach

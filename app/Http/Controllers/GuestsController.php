@@ -258,7 +258,7 @@ class GuestsController extends Controller
             $query->where('remarks', '=','unpaid')
                 ->orWhere('remarks', '=','partial');
         })
-        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
                  'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
