@@ -113,20 +113,44 @@ class AccommodationsController extends Controller
             }
         }
 
+        $amountPaid = $request->input('amountPaid');
+
+        if($request->input('amountPaid') == '') {
+            $amountPaid = 0;
+        }
+
         for($count = 0; $count < $chargesCount; $count++) {
             $paymentEntry = 'payment'.$count;
             if($request->input($paymentEntry)) {
                 $payment = new Payments;
                 $payment->paymentDatetime = Carbon::now();
-                $payment->amount = $request->input($paymentEntry);
-                $payment->paymentStatus = 'full';
-                $payment->chargeID = $chargesArray[$count];
-                $payment->save();
+                
+                $chargePrice = $request->input($paymentEntry);
 
-                $charge = Charges::find($chargesArray[$count]);
-                $charge->update([
-                    'remarks' => 'full'
-                ]);
+                if(($amountPaid - $chargePrice) >= 0) {
+                    $amountPaid -= $chargePrice;
+                    $payment->amount = $chargePrice;
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+    
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'full'
+                    ]);
+                    
+                } else if(($amountPaid - $chargePrice) < 0) {
+                    $payment->amount = $amountPaid;
+                    $payment->paymentStatus = 'partial';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+    
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'partial'
+                    ]);
+                    
+                }
             }
         }
 
