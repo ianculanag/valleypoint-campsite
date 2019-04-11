@@ -561,6 +561,18 @@ function removeRow(unitNumber) {
     jQuery(divCheckoutDate).remove();
 }
 
+function checkDateSeparation() {
+    if(jQuery('.checkoutDates').length > 1) {
+        for (var count = 0; count < jQuery('.checkoutDates').length-1; count++) {    
+            if(jQuery('.checkoutDates').eq(count).val() >= jQuery('.checkinDates').eq(count+1).val()) {
+                console.log('Intersects');
+            } else {
+                console.log('Lolnot');
+            }
+        }
+    }
+}
+
 function checkDateValidity() {
     console.log(jQuery('.checkoutDates').length);
     var invalidCount = 0;
@@ -643,6 +655,7 @@ jQuery(document).ready(function(){
             
             //document.getElementById('stayDuration').value = daysDiff;       
             checkAvailability(); 
+            checkDateSeparation();
             updateTotal();
         }
     });
@@ -650,6 +663,7 @@ jQuery(document).ready(function(){
     jQuery(document).on('change', '.checkinDates', function() {
         if (checkDateValidity() == false) {
             checkAvailability();
+            checkDateSeparation();
         }
     });
 
