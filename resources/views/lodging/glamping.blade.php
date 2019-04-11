@@ -43,7 +43,7 @@
                     @if($unit->unitType == 'tent')   
                         @if($unit->status == 'ongoing')
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>       
-                        <div class="card mx-2" style="width:16rem;height:7.5em;">
+                        <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('tent.png')}}); background-size:cover; background-repeat:no-repeat;">
                             <div class="card-body">
                             <h5 class="card-title">
                                 {{$unit->unitNumber}}
@@ -52,8 +52,8 @@
                             <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                             <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
                         @else
-                            <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>       
-                            <div class="card mx-2" style="width:16rem;height:7.5em;">
+                            <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important;" class="load-glamping-available-unit" id={{$unit->unitID}}>       
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('tent-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -150,9 +150,9 @@
                                 <input class="form-control" type="number" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
-                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh">
+                        <h5 class="text-center mb-3">Available Units</h5>
+                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:30vh">
                             <div class="card-body">
-                                <h5 class="text-center">Available Units</h5>
                                 <div class="availableUnitsList px-3" style="font-size:1.1em">
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit1">
@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pt-4">
+                        <div class="pt-2">
                             <a href="" id="checkinSelectedTents">
                                 <button type="button" class="btn btn-secondary" style="width:9em; float:right;">Checkin</button>
                             </a> 
