@@ -8,12 +8,12 @@ jQuery(document).ready(function(){
         htmlString +="<div class='col-md-3 mb-1'>";
         //htmlString +="<label for='unitID'> No. of bunk/s</label>";
         htmlString +="<div class='input-group'>";
-        htmlString +="<div class='input-group-prepend'>";
-        htmlString +="<span class='input-group-text'>";
+        htmlString +="<div class='input-group-prepend2'>";
+        htmlString +="<span class='input-group-text' name='WAWITS'>";
         htmlString +="<i class='fa fa-bed' id='icon' aria-hidden='true'></i>";
         htmlString +="</span>";
         htmlString +="</div>";
-        htmlString +="<input class='form-control' type='number' id='numberOfBunks{{$unit->unitNumber}} name='numberOfBunks' required placeholder='' value='1' min='1' max='10'>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='10'>";
         htmlString +="</div>";
         htmlString +="</div>";
         htmlString +="<div class='col-md-7 mb-1'>";
@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
         htmlString +="</select>";
         htmlString +="</div>";
         htmlString += "<div id='divButton'>"
-        htmlString += "<div class='input-group'>";
+        htmlString += "<div class='input-group ulul'>";
         htmlString += "<button type='button' id='divButton' value='' class='btn btn-danger removeBedForm'>";
         htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
         htmlString += "</button>";
@@ -59,10 +59,11 @@ jQuery(document).on('click', '.removeBedForm', function(){
     var roomNumber='#room'+id;
     var divButton='#divButton'+id;
 
-    jQuery(icon).remove();
+
     jQuery(numberOfBunks).remove();
     jQuery(roomNumber).remove();
     jQuery(divButton).remove();
+    jQuery('.input-group-prepend2').remove();
 
     //console.log("Hello");
 });
