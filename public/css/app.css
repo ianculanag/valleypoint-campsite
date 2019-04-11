@@ -9922,6 +9922,18 @@ body {
   border: none !important;
 }
 
+/* Dashboard: Unit finder */
+#unitFinder {
+  z-index: 100;
+  min-height: 100%;
+  max-width: 24%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-top: 7em !important;
+  padding-right: 1.5em !important;
+}
+
 /* 
 .wrapper {
     display: flex;

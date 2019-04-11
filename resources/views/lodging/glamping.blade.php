@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid row">
-        <div class="col-md-9 m-0">
+    <div class="row">
+        <div class="container-fluid col-md-9 mx-2">
             {{--<div class="col-md-12 text-center lodging-tabs">
                 <nav class="nav nav-pills centered-pills">
                     <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
@@ -25,7 +25,7 @@
             </div>
             <h3 class="px-3 pt-2">Dashboard</h3>--}}
             <div class="container lodging-tabs">
-                <ul class="nav nav-tabs w-100 pt-0">
+                <ul class="nav nav-tabs pt-0" style="width:93%">
                     <li class="nav-item">
                         <a class="nav-link active" href="/glamping/">Glamping</a>
                     </li>
@@ -117,7 +117,73 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 m-0 p-0" id="unitFinder" {{--style="background-color:aliceblue;"--}}>
+        <div class="container-fluid col-md-3 m-0 p-0" id="unitFinder" style="padding-top:15em;">
+            <div class="card p-0 mx-0" style="font-size:0.9em">
+                <div class="card-body">
+                    <h4 class="text-center py-2">Unit Finder</h4>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-3 mb-0 mt-2" for="checkin" style="padding-right:0;">Check-in</label>
+                            <div class="input-group mb-1 col-sm-9">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="date" name="checkin" maxlength="15" placeholder="" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 mb-0 mt-2" for="checkout" style="padding-right:0;">Check-out</label>
+                            <div class="input-group mb-1 col-sm-9">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="date" name="checkout" maxlength="15" placeholder="" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-5 mb-0 mt-2" for="unitCount">Number of units</label>
+                            <div class="input-group mb-1 col-sm-7">
+                                <input class="form-control" type="number" name="unitCount" maxlength="15" placeholder="" value="" required>
+                            </div>
+                        </div>
+                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh">
+                            <div class="card-body">
+                                <h5 class="text-center">Available Units</h5>
+                                <div class="availableUnitsList px-3" style="font-size:1.1em">
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="availableUnit1">
+                                        <label class="custom-control-label" for="availableUnit1">Tent 1</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="availableUnit2">
+                                        <label class="custom-control-label" for="availableUnit2">Tent 2</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="availableUnit3">
+                                        <label class="custom-control-label" for="availableUnit3">Tent 3</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="availableUnit4">
+                                        <label class="custom-control-label" for="availableUnit4">Tent 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <a href="" id="checkinSelectedTents">
+                                <button type="button" class="btn btn-secondary" style="width:9em; float:right;">Checkin</button>
+                            </a> 
+                            <a href="" id="reserveSelectedTents">
+                                <button type="button" class="btn btn-primary" style="width:9em; float:left;">Add Reservation</button>
+                            </a> 
+                        </div>
+                    <form>
+                </div>
+            </div>
         </div>
     </div>
 

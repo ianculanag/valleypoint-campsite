@@ -188,6 +188,19 @@ body {
     border: none !important;
 }
 
+/* Dashboard: Unit finder */
+#unitFinder {
+	//background-color: rgba(209, 222, 223, 0.432);
+	z-index: 100; 
+	min-height: 100%; 
+	max-width: 24%; 
+	position: fixed; 
+	top:0; 
+	right: 0;
+	padding-top:7em !important; 
+	padding-right:1.5em !important;
+}
+
 /* 
 .wrapper {
     display: flex;
