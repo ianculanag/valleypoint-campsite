@@ -8,10 +8,10 @@ jQuery(document).ready(function(){
         htmlString +="<div class='input-group'>";
         htmlString +="<div class='input-group-prepend'>";
         htmlString +="<span class='input-group-text'>";
-        htmlString +="<i class='fa fa-bed' aria-hidden='true'></i>";
+        htmlString +="<i class='fa fa-bed' id='icon' aria-hidden='true'></i>";
         htmlString +="</span>";
         htmlString +="</div>";
-        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='10'>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='20'>";
         htmlString +="</div>";
         htmlString +="</div>";
         htmlString +="<div class='col-md-7 mb-1'>";
@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
         htmlString +="</div>";
         htmlString += "<div id='divButton'>"
         htmlString += "<div class='input-group'>";
-        htmlString += "<button type='button' id='' value='' class='btn btn-danger'>";
+        htmlString += "<button type='button' id='divButton' value='' class='btn btn-danger removeBedForm'>";
         htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
         htmlString += "</button>";
         htmlString += "</div>";
@@ -47,6 +47,23 @@ jQuery(document).ready(function(){
         jQuery('#unitDetails').append(htmlString);
 
     });
+});
+
+//Remove bunks
+jQuery(document).on('click', '.removeBedForm', function(){
+
+    var id = jQuery(this).attr('id').slice(13);
+    var icon='#icon'+id;
+    var numberOfBunks='#numberOfBunks'+id;
+    var roomNumber='#room'+id;
+    var divButton='#divButton'+id;
+
+    jQuery(icon).remove();
+    jQuery(numberOfBunks).remove();
+    jQuery(roomNumber).remove();
+    jQuery(divButton).remove();
+
+    //console.log("Hello");
 });
 
 //Price depending on the numberOfPaxBackpacker

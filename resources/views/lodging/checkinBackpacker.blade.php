@@ -135,9 +135,9 @@
                             <input class="form-control" type="number" id="numberOfBunks" name="numberOfBunks" required placeholder="" value="" min="1" max="20">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-1">
+                        <div class="col-md-7 mb-1">
                             <label for="roomNumber">Room/s</label>
-                            <select name="roomNumber" class="form-control" id="room">
+                            <select name="roomNumber" class="form-control">
                                 <option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
                                 <option value="3">Room 3</option>
@@ -147,9 +147,7 @@
                                 <option value="7">Room 7</option>
                                 <option value="8">Room 8</option>
                                 <option value="9">Room 9</option>
-                            </select>
-
-                            
+                            </select>                            
                         </div>
                         <div style="margin-top:2em;">
                             <div class="input-group">
