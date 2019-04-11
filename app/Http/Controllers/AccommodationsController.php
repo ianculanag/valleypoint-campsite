@@ -86,6 +86,7 @@ class AccommodationsController extends Controller
             $charges = new Charges;
             $charges->quantity = $request->input($accommodationPackage);
             $charges->totalPrice = $request->input($totalPrice);
+            $charges->balance = $request->input($totalPrice);
             $charges->remarks = 'unpaid';
             $charges->accommodationID = $accommodation->id;
             $charges->serviceID = $request->input($accommodationPackage);
@@ -103,6 +104,7 @@ class AccommodationsController extends Controller
                     $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
@@ -127,29 +129,35 @@ class AccommodationsController extends Controller
                 
                 $chargePrice = $request->input($paymentEntry);
 
-                if(($amountPaid - $chargePrice) >= 0) {
-                    $amountPaid -= $chargePrice;
-                    $payment->amount = $chargePrice;
-                    $payment->paymentStatus = 'full';
-                    $payment->chargeID = $chargesArray[$count];
-                    $payment->save();
-    
-                    $charge = Charges::find($chargesArray[$count]);
-                    $charge->update([
-                        'remarks' => 'full'
-                    ]);
-                    
-                } else if(($amountPaid - $chargePrice) < 0) {
-                    $payment->amount = $amountPaid;
-                    $payment->paymentStatus = 'partial';
-                    $payment->chargeID = $chargesArray[$count];
-                    $payment->save();
-    
-                    $charge = Charges::find($chargesArray[$count]);
-                    $charge->update([
-                        'remarks' => 'partial'
-                    ]);
-                    
+                if(!($amountPaid == 0)) {
+                    if(($amountPaid - $chargePrice) >= 0) {
+                        $amountPaid -= $chargePrice;
+                        $payment->amount = $chargePrice;
+                        $payment->paymentStatus = 'full';
+                        $payment->chargeID = $chargesArray[$count];
+                        $payment->save();
+        
+                        $charge = Charges::find($chargesArray[$count]);
+                        $charge->update([
+                            'remarks' => 'full',
+                            'balance' => '0'
+                        ]);
+                        
+                    } else if(($amountPaid - $chargePrice) < 0) {
+                        $payment->amount = $amountPaid;
+                        $payment->paymentStatus = 'partial';
+                        $payment->chargeID = $chargesArray[$count];
+                        $payment->save();
+
+                        $balance = $chargePrice - $amountPaid;
+        
+                        $charge = Charges::find($chargesArray[$count]);
+                        $charge->update([
+                            'remarks' => 'partial',
+                            'balance' => $balance
+                        ]);    
+                        $amountPaid = 0;                    
+                    }
                 }
             }
         }
@@ -383,6 +391,7 @@ class AccommodationsController extends Controller
                     $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $request->input('accommodationID');
                     $charges->serviceID = $request->input($additionalServiceID);

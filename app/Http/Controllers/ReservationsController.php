@@ -339,6 +339,7 @@ class ReservationsController extends Controller
             $charges = new Charges;
             $charges->quantity = $request->input($accommodationPackage);
             $charges->totalPrice = $request->input($totalPrice);
+            $charges->balance = $request->input($totalPrice);
             $charges->remarks = 'unpaid';
             $charges->reservationID = $reservation->id;
             $charges->unitID = $reservationUnit->unitID;
@@ -356,6 +357,7 @@ class ReservationsController extends Controller
                     $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->reservationID = $reservation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
@@ -453,6 +455,7 @@ class ReservationsController extends Controller
                     $charges = new Charges;
                     $charges->quantity = $request->input($accommodationPackage);
                     $charges->totalPrice = $request->input($totalPrice);
+                    $charges->balance = $request->input($totalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $accommodationID[0]->unitID;
                     $charges->serviceID = $request->input($accommodationPackage);
@@ -484,6 +487,7 @@ class ReservationsController extends Controller
                             $charges = new Charges;                    
                             $charges->quantity = $request->input($additionalServiceNumberOfPax);
                             $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->balance = $request->input($additionalTotalPrice);
                             $charges->remarks = 'unpaid';
                             $charges->accommodationID = $accommodationID[0]->unitID;
                             $charges->serviceID = $request->input($additionalServiceID);
@@ -569,6 +573,7 @@ class ReservationsController extends Controller
                     $charges = new Charges;
                     $charges->quantity = $request->input($accommodationPackage);
                     $charges->totalPrice = $request->input($totalPrice);
+                    $charges->balance = $request->input($totalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($accommodationPackage);
@@ -600,6 +605,7 @@ class ReservationsController extends Controller
                             $charges = new Charges;                    
                             $charges->quantity = $request->input($additionalServiceNumberOfPax);
                             $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->balance = $request->input($additionalTotalPrice);
                             $charges->remarks = 'unpaid';
                             $charges->accommodationID = $accommodation->id;
                             $charges->serviceID = $request->input($additionalServiceID);

@@ -172,6 +172,7 @@ class GuestsController extends Controller
                     $charges = new Charges;                    
                     $charges->quantity = $request->input($additionalServiceNumberOfPax);
                     $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $request->input('accommodationID');
                     $charges->serviceID = $request->input($additionalServiceID);
