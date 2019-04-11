@@ -130,7 +130,7 @@
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="date" name="checkin" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control finderInputs" id="finderCheckinDate" type="date" name="checkin" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -141,24 +141,24 @@
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="date" name="checkout" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control finderInputs" type="date" id="finderCheckoutDate" name="checkout" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-5 mb-0 mt-2" for="unitCount">Number of units</label>
                             <div class="input-group mb-1 col-sm-7">
-                                <input class="form-control" type="number" name="unitCount" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
-                        <h5 class="text-center mb-3">Available Units</h5>
-                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:30vh">
-                            <div class="card-body">
+                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh">
+                            <div class="card-body" id="AvailableUnitsContainer" style="display:none;">
+                                <h5 class="text-center">Available Units</h5>
                                 <div class="availableUnitsList px-3" style="font-size:1.1em">
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit1">
                                         <label class="custom-control-label" for="availableUnit1">Tent 1</label>
                                     </div>
-                                    <div class="custom-control custom-checkbox mb-1">
+                                    {{--<div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit2">
                                         <label class="custom-control-label" for="availableUnit2">Tent 2</label>
                                     </div>
@@ -169,16 +169,16 @@
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit4">
                                         <label class="custom-control-label" for="availableUnit4">Tent 4</label>
-                                    </div>
+                                    </div>--}}
                                 </div>
                             </div>
                         </div>
                         <div class="pt-2">
                             <a href="" id="checkinSelectedTents">
-                                <button type="button" class="btn btn-secondary" style="width:9em; float:right;">Checkin</button>
+                                <button type="button" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
                             </a> 
                             <a href="" id="reserveSelectedTents">
-                                <button type="button" class="btn btn-primary" style="width:9em; float:left;">Add Reservation</button>
+                                <button type="button" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
                             </a> 
                         </div>
                     <form>

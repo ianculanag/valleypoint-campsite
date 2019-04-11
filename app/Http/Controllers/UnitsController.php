@@ -220,6 +220,22 @@ class UnitsController extends Controller
     }
 
     /**
+     * Return all unit ids with unit numbers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getGlampingTents()
+    {
+        return $units = DB::table('units')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        //$units = Units::sortable()->paginate(8);
+        //return view('admin.viewunits',compact('units'))->with('units', $units);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
