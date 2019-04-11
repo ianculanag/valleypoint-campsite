@@ -292,7 +292,21 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         removeRow(e.attrs.value);
         removeInvoiceEntry(e.attrs.value);
-        checkAvailability();
+        //checkAvailability();
+        var checkoutDatesComplete = true;
+            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
+                if(jQuery('.checkoutDates').eq(count).val() == '') {
+                    checkoutDatesComplete = false;
+                }
+            }
+
+            //console.log(checkout);
+            if(checkoutDatesComplete) {    
+                if(checkDateSeparation() == false) {
+                    checkAvailability();
+                    updateTotal();
+                }      
+            }
     });
 
     jQuery('#tokenfield').on('tokenfield:createdtoken', function (e) {
@@ -302,7 +316,21 @@ jQuery(document).ready(function(){
         makeRow(e.attrs.value);
         makeInvoiceEntry(e.attrs.value);
         if(jQuery('#checkoutDate'+e.attrs.value).val() >= jQuery('#checkinDate'+e.attrs.value).val()){
-            checkAvailability(); 
+            //checkAvailability(); 
+            var checkoutDatesComplete = true;
+            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
+                if(jQuery('.checkoutDates').eq(count).val() == '') {
+                    checkoutDatesComplete = false;
+                }
+            }
+
+            //console.log(checkout);
+            if(checkoutDatesComplete) {    
+                if(checkDateSeparation() == false) {
+                    checkAvailability();
+                    updateTotal();
+                }      
+            }
         }
         //checkAvailability();
     });
@@ -562,14 +590,29 @@ function removeRow(unitNumber) {
 }
 
 function checkDateSeparation() {
+    var hit = false;
     if(jQuery('.checkoutDates').length > 1) {
         for (var count = 0; count < jQuery('.checkoutDates').length-1; count++) {    
             if(jQuery('.checkoutDates').eq(count).val() >= jQuery('.checkinDates').eq(count+1).val()) {
-                console.log('Intersects');
+                //console.log('Intersects');
             } else {
-                console.log('Lolnot');
+                hit = true;
             }
         }
+    }
+
+    if(hit) {        
+        jQuery('#alertContainer').css('display', 'none');
+        jQuery('#dateAlertContainer').css('display', 'none');
+        jQuery('#dateGapContainer').css('display', 'block');
+        
+        jQuery('#checkinButton').prop('disabled', true);
+        return true;
+    } else {        
+        jQuery('#dateGapContainer').css('display', 'none');
+        
+        jQuery('#checkinButton').prop('disabled', false);
+        return false;
     }
 }
 
@@ -653,17 +696,42 @@ jQuery(document).ready(function(){
                         
             jQuery(hiddenTotalPrice).val(totalPrice);   
             
-            //document.getElementById('stayDuration').value = daysDiff;       
-            checkAvailability(); 
-            checkDateSeparation();
-            updateTotal();
+            //document.getElementById('stayDuration').value = daysDiff;   
+            var checkoutDatesComplete = true;
+            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
+                if(jQuery('.checkoutDates').eq(count).val() == '') {
+                    checkoutDatesComplete = false;
+                }
+            }
+
+            //console.log(checkout);
+            if(checkoutDatesComplete) {    
+                if(checkDateSeparation() == false) {
+                    checkAvailability();
+                    updateTotal();
+                }      
+            }
+            //checkAvailability(); 
+            //checkDateSeparation();
         }
     });
 
     jQuery(document).on('change', '.checkinDates', function() {
         if (checkDateValidity() == false) {
-            checkAvailability();
-            checkDateSeparation();
+            var checkoutDatesComplete = true;
+            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
+                //console.log(jQuery('.checkoutDates').eq(count).val()+'fuck');
+                if(jQuery('.checkoutDates').eq(count).val() == '') {
+                    checkoutDatesComplete = false;
+                }
+            }
+
+            console.log(checkoutDatesComplete);
+            if(checkoutDatesComplete) {   
+                if(checkDateSeparation() == false) {
+                    checkAvailability();
+                }             
+            }
         }
     });
 

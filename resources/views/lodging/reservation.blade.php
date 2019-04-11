@@ -207,6 +207,11 @@
                         </div>
                     </div>
 
+                    <div id="dateGapContainer" class="alert alert-warning mt-2" style="display:none;">
+                        <a href="#" class="close">&times;</a>
+                        <span id="dateGapMessage"><strong>Invalid Dates!</strong> Accommodation dates must be consecutive.</span>
+                    </div>
+                    
                     <div id="dateAlertContainer" class="alert alert-warning mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
                         <span id="dateAlertMessage"><strong>Invalid Date!</strong> Please select a check-out date after the check-in date.</span>
