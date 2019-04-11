@@ -20,7 +20,7 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Contact No.</th>
-                    <th>Unit Number</th>
+                    <th>Unit No.</th>
                     <th>Check-in Date</th>
                     <th>Action</th>
                 </tr>
@@ -36,7 +36,7 @@
                 <td>{{$reservation->lastName}}</td>
                 <td>{{$reservation->contactNumber}}</td>
                 <td>{{$reservation->unitNumber}}</td>
-                <td>{{$reservation->checkinDatetime}}</td>
+                <td>{{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('M j, Y')}}</td>
                 <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>
                     <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
