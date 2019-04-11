@@ -151,14 +151,14 @@
                             </div>
                         </div>
                         <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh">
-                            <div class="card-body" id="AvailableUnitsContainer" style="display:none;">
+                            <div class="card-body" id="AvailableUnitsContainer" style="display:block;">
                                 <h5 class="text-center">Available Units</h5>
-                                <div class="availableUnitsList px-3" style="font-size:1.1em">
-                                    <div class="custom-control custom-checkbox mb-1">
+                                <div class="availableUnitsList px-3" id="divAvailableUnitsList" style="font-size:1.1em">
+                                    {{--<div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit1">
                                         <label class="custom-control-label" for="availableUnit1">Tent 1</label>
                                     </div>
-                                    {{--<div class="custom-control custom-checkbox mb-1">
+                                    {<div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit2">
                                         <label class="custom-control-label" for="availableUnit2">Tent 2</label>
                                     </div>

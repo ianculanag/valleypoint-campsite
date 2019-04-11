@@ -70,6 +70,17 @@ function displayUnitNumbers(availableUnitIDs, availableUnitNumbers, numberOfUnit
     console.log(availableUnitIDs);
     console.log(availableUnitNumbers);
     console.log(numberOfUnits);
+
+    htmlString = "";
+
+    for(var index = 0; index < availableUnitNumbers.length; index++) {
+        htmlString += "<div class='custom-control custom-checkbox mb-1'>";
+        htmlString += "<input type='checkbox' class='custom-control-input unitCheckboxes' id='availableUnit"+availableUnitIDs[index]+"'>";
+        htmlString += "<label class='custom-control-label' for='availableUnit"+availableUnitIDs[index]+"'>"+availableUnitNumbers[index]+"</label>";
+        htmlString += "</div>";
+    }
+
+    jQuery('#divAvailableUnitsList').html(htmlString);
 }
 
 
