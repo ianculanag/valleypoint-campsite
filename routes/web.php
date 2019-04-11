@@ -22,7 +22,6 @@ Route::get('/glamping', 'UnitsController@glamping');
 Route::get('/calendar', 'UnitsController@calendar'); 
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
-
 //Route::resource('staff', 'StaffController');
 Route::get('/load-tents', 'unitsController@loadTents');
 
@@ -75,11 +74,12 @@ Route::post('/updateDetails', 'GuestsController@updateDetails');
 
 //Check-out guests
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
+Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
 
 //AddReservation
 //Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
 //Route::post('/addReservation','AccommodationsController@addReservation');
-
+ 
 //ViewGuests
 Route::get('/view-guests', 'GuestsController@viewguests');
 

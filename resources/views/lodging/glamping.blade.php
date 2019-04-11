@@ -84,12 +84,12 @@
                             @if($reservationCount > 0)   
                                 @if($currentReservation = 1)
                                     @if($reservationCount == 1)
-                                        <p class="card-text" style="color:lightseagreen; font-style:italic; font-weight:bold;">{{$firstName}} {{$lastName}} checks-in today!</p>                     
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$firstName}} {{$lastName}} checks-in today!</p>                     
                                     @elseif($reservationCount == 2)
-                                        <p class="card-text" style="color:lightseagreen; font-style:italic; font-weight:bold;">{{$firstName}} {{$lastName}} checks-in today!</p>
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$firstName}} {{$lastName}} checks-in today!</p>
                                         <p class="card-text" style="color:lightseagreen; font-style:italic;">1 other reservation</p>    
                                     @else
-                                        <p class="card-text" style="color:lightseagreen; font-style:italic; font-weight:bold;">{{$firstName}} {{$lastName}} checks-in today!</p>
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$firstName}} {{$lastName}} checks-in today!</p>
                                         <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$reservationCount-1}} other reservations</p>                        
                                     @endif
                                 @else          

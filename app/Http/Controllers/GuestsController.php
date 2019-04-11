@@ -355,10 +355,14 @@ class GuestsController extends Controller
                  'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
-       // return $pendingPayments;    
-        //return $charges;
-        //return view('lodging.editdetails')->with('guest', $guest);
-        //return view('lodging.editdetails')->with('guest', $guest)->with('accompanyingGuest', $accompanyingGuest)->with('charges', $charges);
+        /*$dueToday = DB::table('accommodation_units')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->whereDate('accommodation_units.checkoutDatetime', '=', Carbon::now())
+        ->where('status', 'ongoing')
+        ->where('units.id', '=', $unitID)
+        ->get();*/
+
+        return $dueToday;
         if($guest[0]->numberOfUnits > 1) {
             $otherUnits = DB::table('accommodation_units')
             ->join('units', 'units.id', 'accommodation_units.unitID')
@@ -366,12 +370,70 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->get();
 
-            //return $otherUnits;
-
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
+            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits)/*->with('dueToday', $dueToday)*/;
         } else {
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
+            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)/*->with('dueToday', $dueToday)*/;
         }  
+    }
+
+    /**
+     * Show the check out form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCheckoutFormDueToday($unitID)
+    {
+
+        $guest = DB::table('units')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing')
+                 ->whereDate('accommodation_units.checkoutDatetime', '=', Carbon::now());
+        })
+
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodations.id AS accommodationID', 'accommodations.numberOfPax',
+                 'accommodations.numberOfUnits', 'accommodation_units.checkinDatetime', 'accommodation_units.checkoutDatetime',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
+                 'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
+        ->where('units.id', '=', $unitID)
+        ->get();
+
+        $payments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where('remarks', '=','full')
+        ->get();
+
+        $pendingPayments = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where(function ($query) {
+            $query->where('remarks', '=','unpaid')
+                ->orWhere('remarks', '=','partial');
+        })
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+                 'charges.remarks','services.*', 'accommodations.*' )
+        ->get();
+
+        if($guest[0]->numberOfUnits > 1) {
+            $otherUnits = DB::table('accommodation_units')
+            ->join('units', 'units.id', 'accommodation_units.unitID')
+            ->join('services', 'services.id', 'accommodation_units.serviceID')
+            ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
+            ->whereDate('accommodation_units.checkoutDatetime', '=', Carbon::now())
+            ->get();
+
+            return view('lodging.checkoutDueToday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
+        } else {
+            return view('lodging.checkoutDueToday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
+        } 
     }
 
     /**
@@ -395,3 +457,4 @@ class GuestsController extends Controller
     }
 }
 
+ 

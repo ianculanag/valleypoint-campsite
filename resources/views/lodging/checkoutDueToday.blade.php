@@ -13,7 +13,7 @@
             <h3>Check-out Form</h3>
         </div>
         
-        <form method="POST" action="/checkoutGlamping">
+        <form method="POST" action="/checkoutDueTodayGlamping">
         <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
                 <!-- Payment Transactions Accordion -->
@@ -54,8 +54,6 @@
                                             </tr>
                                         @php
                                             $total += $payment->totalPrice;
-                                            //$totalPayment += $payment->amount;
-                                            //$balance = $total - $totalPayment;
                                         @endphp
                                         @endforeach
                                     </tbody>
@@ -115,9 +113,9 @@
                                             <td id="invoiceQuantity{{$identifier}}"style="text-align:right;" class="invoiceQuantities">{{$pending->quantity}}</td>
                                             <td id="invoicePrice{{$identifier}}"style="text-align:right;" class="invoicePrices">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @if($pending->remarks == 'unpaid')
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->balance), 2, '.', ''))}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @else
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)$pending->balance), 2, '.', '')}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($balance), 2, '.', '')}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -160,13 +158,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="invoiceRows" style="">
-                                        <!--tr>
-                                            <td ></td>
-                                            <td style="text-align:right;"></td>
-                                            <td style="text-align:right;"></td>
-                                            <td style="text-align:right;" class="invoicePrices"></td>
-                                            <td style="text-align:right;"></td>
-                                        </tr-->
                                         <tr>
                                             <td colspan="5" id="noPendingPayments" class="text-center">
                                                 No pending payments to show
@@ -206,19 +197,16 @@
                 <!-- End of Payment Transactions Accordion -->
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
-            @if(count($dueToday) > 0)
                 <div class="container glamping-accomodation-tabs pb-4 px-0">
                     <ul class="nav nav-tabs pt-0" style="width:100%">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">All</a>
+                            <a class="nav-link" style="color:#505050;" href="/checkout/{{$guestDetails->unitID}}">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:#505050;" href="/checkout-due-today/{{$guestDetails->unitID}}">Due today</a>
+                            <a class="nav-link active" href="#">Due today</a>
                         </li>
                     </ul>
                 </div>
-            @else
-            @endif
                 <div>
                     @csrf
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
@@ -291,11 +279,7 @@
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
-                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                        <option>{{$units->serviceName}}</option>
-                                    </select>--}}
                                     <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-
                                     @endforeach
                                 </div>
                                 <div class="col-md-3 mb-1">
@@ -329,11 +313,7 @@
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
-                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                        <option>{{$guestDetails->serviceName}}</option>
-                                    </select>--}}
                                     <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
@@ -407,21 +387,14 @@
                                 </button>
                             </div>
                         </div>
-
-                        
                         <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
                     </div>
                 
-                    {{--<input class="form-control" type="number" name="numberOfAdditionalCharges" value="1" style="display:none; position:absolute;">
-                    <input class="form-control" type="text" name="serviceID1" value="6" style="display:none; position:absolute;">
-                    <input class="form-control" type="number" name="numberOfPaxAdditional1" value="5" style="display:none; position:absolute;">
-                    <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
-
                     <div class="mt-3" style="float:right;">
                     @if(count($pendingPayments) > 0)
-                        <button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                        <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
                     @else
-                        <button id="checkoutButton" class="btn btn-success" style="width:10em;">Check-out</button>
+                        <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;">Check-out</button>
                     @endif
                         <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
