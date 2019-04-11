@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-12 text-center lodging-tabs pb-0">
+<div class="container-fluid row">
+        <div class="col-md-9 m-0">
+    <!-- <div class="col-md-12 text-center lodging-tabs pb-0">
         <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link active" style="background-color:#505050" href="#">Physical View</a>
             <a class="nav-item nav-link" style="color:#505050" href="#">Calendar View</a>
         </nav>
-    </div>
-    <div class="container" style="position:absolute;">
+    </div> -->
+    <!-- <div class="container" style="position:absolute;">
         <form style="float:right; padding-right:3em;">
             <div class="form-group row mb-0">
                 <label for="staticEmail" class="col-md-5 col-form-label" style="padding-left:0; padding-right:.5;">Sort by:</label>
@@ -20,7 +22,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> -->
     <div class="container lodging-tabs">
         <ul class="nav nav-tabs w-100 pt-0">
             <li class="nav-item">

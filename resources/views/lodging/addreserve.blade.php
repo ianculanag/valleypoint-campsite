@@ -45,7 +45,8 @@
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
                             <tr>
-                            <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                            <tr>
+                                <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
                             </tr>
@@ -218,7 +219,7 @@
                     <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
                     
                     <div style="float:right;">
-                        <button class="btn btn-success" style="width:10em;" type="submit">Check-in</button>
+                        <button class="btn btn-success" style="width:10em;" type="submit">Make Reservation</button>
                         <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>

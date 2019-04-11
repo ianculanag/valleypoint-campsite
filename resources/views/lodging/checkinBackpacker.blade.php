@@ -45,7 +45,8 @@
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
                             <tr>
-                            <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                            <tr>
+                                <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
                             </tr>
