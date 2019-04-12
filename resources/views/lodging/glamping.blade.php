@@ -201,6 +201,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" id="checkedUnits" name="checkedUnits" value="hello">
                         <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto; overflow-x:auto;">
                             <div class="card-body p-0" id="unavailableUnitsContainer" style="display:block;">
                                 <div class="unavailable-units-list" id="divUnavailableUnitsList" style="font-size:1.1em">

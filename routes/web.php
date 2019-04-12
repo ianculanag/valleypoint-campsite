@@ -53,6 +53,12 @@ Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showChe
 //Find Package
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
+//Unit Finder
+Route::get('/checkin-finder', 'AccommodationsController@showCheckinFromFinder');
+Route::get('/reserve-finder', 'ReservationsController@showReserveFromFinder');
+
+
+
 
 //Make reservation
 Route::get('/reservation/{unitID}', 'ReservationsController@showReservationForm');

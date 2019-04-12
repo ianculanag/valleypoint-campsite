@@ -62,8 +62,11 @@ jQuery(document).on('change', '.finderInputs', function() {
                 //console.log(availableUnitNumbers);
 
                 displayUnitNumbers(availableUnitIDs, availableUnitNumbers, jQuery('#finderUnitCount').val());
+                getCheckedUnits();
 
-
+                jQuery('#finderCheckin').prop('disabled', false);
+                jQuery('#finderReserve').prop('disabled', false);
+                
                 //console.log(unitIDs);
                 //console.log(unitNumbers);
                 //console.log(unitAvailability);
@@ -73,15 +76,15 @@ jQuery(document).on('change', '.finderInputs', function() {
 });
 
 function displayUnitNumbers(availableUnitIDs, availableUnitNumbers, numberOfUnits) {
-    console.log(availableUnitIDs);
-    console.log(availableUnitNumbers);
-    console.log(numberOfUnits);
+    //console.log(availableUnitIDs);
+    //console.log(availableUnitNumbers);
+    //console.log(numberOfUnits);
 
     htmlString = "";
 
     for(var index = 0; index < availableUnitNumbers.length; index++) {
         htmlString += "<div class='custom-control custom-checkbox mb-1'>";
-        htmlString += "<input type='checkbox' class='custom-control-input unitCheckboxes' id='availableUnit"+availableUnitIDs[index]+"'>";
+        htmlString += "<input type='checkbox' class='custom-control-input unitCheckboxes' value='"+availableUnitIDs[index]+"' id='availableUnit"+availableUnitIDs[index]+"'>";
         htmlString += "<label class='custom-control-label' for='availableUnit"+availableUnitIDs[index]+"'>"+availableUnitNumbers[index]+"</label>";
         htmlString += "</div>";
     }
@@ -90,7 +93,30 @@ function displayUnitNumbers(availableUnitIDs, availableUnitNumbers, numberOfUnit
 
     for(var count = 0; count < numberOfUnits; count++) {
         jQuery('.unitCheckboxes').eq(count).prop('checked', true);
-        console.log( jQuery('.unitCheckboxes').eq(count).attr('id'));
+        //console.log( jQuery('.unitCheckboxes').eq(count).attr('id'));
         //return 'works';
     }
+}
+
+jQuery(document).on('change', '.unitCheckboxes', function() {
+    getCheckedUnits();
+});
+
+jQuery('#finderUnitCount').change(function() {
+    getCheckedUnits();
+});
+
+
+function getCheckedUnits() {
+    var checkedUnits = new Array();
+    for(var count = 0; count < jQuery('.unitCheckboxes').length; count++) {
+        if(jQuery('.unitCheckboxes').eq(count).prop('checked') ==  true) {
+            checkedUnits.push(jQuery('.unitCheckboxes').eq(count).val());
+        }
+    }
+    checkedUnits = checkedUnits.toString();
+
+    //console.log(checkedUnits);
+
+    jQuery('#checkedUnits').val(checkedUnits);
 }

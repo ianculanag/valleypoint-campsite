@@ -32,6 +32,19 @@ class AccommodationsController extends Controller
     }
 
     /**
+     * Show the check in form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCheckinFromFinder(Request $request)
+    {
+        $unit = DBs::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+        return view('lodging.checkinGlamping')->with('unit', $unit);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
