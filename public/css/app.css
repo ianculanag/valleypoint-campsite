@@ -9730,10 +9730,6 @@ h3 {
     border-color: #dee2e6;
   }
 }
-body {
-  padding-bottom: 5em;
-}
-
 /* Sidebar */
 .sidebar {
   z-index: 100;
@@ -9868,12 +9864,11 @@ body {
 .main-content {
   padding-top: 3em;
   float: left;
-  min-height: 100vh;
 }
 
 /* Sidebar & Main Content */
 .sidebarMainContent {
-  margin-top: 2em;
+  padding-top: 2em;
   min-height: 100vh;
 }
 
@@ -9926,12 +9921,28 @@ body {
 #unitFinder {
   z-index: 100;
   min-height: 100%;
-  max-width: 24%;
+  max-width: 25%;
   position: fixed;
   top: 0;
   right: 0;
-  padding-top: 7em !important;
-  padding-right: 1.5em !important;
+  padding-top: 4em !important;
+  padding-right: 1em !important;
+}
+
+.scrollbar-near-moon::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+  border-radius: 0px;
+}
+
+.scrollbar-near-moon::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #F5F5F5;
+}
+
+.scrollbar-near-moon::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-image: linear-gradient(to top, #5ee7de88 0%, #59f79b88 100%);
 }
 
 /* 
