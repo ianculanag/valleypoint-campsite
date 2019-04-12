@@ -63,8 +63,23 @@
                                 $reservationCount = 0; 
                                 $today = \Carbon\Carbon::today();
                                 $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
+                                $unitArray = array();
                             @endphp
-                            @foreach($reservations as $reservation)
+
+                            @if(count($reservations) > 0)
+                                @foreach($reservations as $reservation)
+                                    @if(($reservation->id == $unit->unitID) && (\Carbon\Carbon::parse($reservation->checkinDatetime)->format('Y-m-d') == $currentDate))
+                                    <p class="card-text">{{$reservation->firstName}} {{$reservation->lastName}}</p>
+                                    <p class="card-text" style="color:lightseagreen; font-style:italic;">Checks-in today!</p>
+                                    @elseif($reservation->id == $unit->unitID)
+                                        @if(array_search($unit->unitID, $unitArray) != false)
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">Next checkin:<br> {{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')}}</p>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            @endif
+
+                           {{--@foreach($reservations as $reservation)
                                 @if($reservation->id == $unit->unitID)
                                     @php                                  
                                         $reservationCount++;
@@ -80,8 +95,8 @@
                                     @endif
                                 @else
                                 @endif
-                            @endforeach
-                            @if($reservationCount > 0)   
+                            @endforeach--}}
+                            {{--@if($reservationCount > 0)   
                                 @if($currentReservation = 1)
                                     @if($reservationCount == 1)
                                         <p class="card-text" style="color:lightseagreen; font-style:italic;">{{$firstName}} {{$lastName}} checks-in today!</p>                     
@@ -101,7 +116,7 @@
                                 @endif
                             @else
                                         <p class="card-text" style="color:lightseagreen; font-style:italic;">No Reservations</p>
-                            @endif
+                            @endif--}}
                         @endif
                                 </div>
                             </div>
