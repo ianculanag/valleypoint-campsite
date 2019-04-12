@@ -117,7 +117,7 @@
                                             @if($pending->remarks == 'unpaid')
                                             <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->balance), 2, '.', ''))}}</td>
                                             @else
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)$pending->balance), 2, '.', '')}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($pending->balance), 2, '.', '')}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -206,7 +206,11 @@
                 <!-- End of Payment Transactions Accordion -->
             </div>
             <div class="col-md-8 order-md-1 check-out-form">
-            @if(count($dueToday) > 0)
+        @if(count($dueToday) > 0)
+            @foreach($dueToday as $due)
+                
+            @endforeach
+            @if($due)
                 <div class="container glamping-accomodation-tabs pb-4 px-0">
                     <ul class="nav nav-tabs pt-0" style="width:100%">
                         <li class="nav-item">
@@ -219,6 +223,7 @@
                 </div>
             @else
             @endif
+        @endif
                 <div>
                     @csrf
                     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    

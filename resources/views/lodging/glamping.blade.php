@@ -150,9 +150,9 @@
                                 <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
-                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh">
+                        <h5 class="text-center">Available Units</h5>
+                        <div class="card p-0 mx-0" style="font-size:0.9em; min-height:34vh; max-height:34vh; overflow-y:auto;">
                             <div class="card-body" id="AvailableUnitsContainer" style="display:block;">
-                                <h5 class="text-center">Available Units</h5>
                                 <div class="availableUnitsList px-3" id="divAvailableUnitsList" style="font-size:1.1em">
                                     {{--<div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit1">
