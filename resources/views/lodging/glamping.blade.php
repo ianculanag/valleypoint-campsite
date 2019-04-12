@@ -39,6 +39,11 @@
                 <div class="container">
                     <div class="row">  
 
+                @php                    
+                    $unitArray = array(); 
+                    array_push($unitArray, 0);   
+                @endphp
+
                 @foreach($units as $unit)
                     @if($unit->unitType == 'tent')   
                         @if($unit->status == 'ongoing')
@@ -63,17 +68,24 @@
                                 $reservationCount = 0; 
                                 $today = \Carbon\Carbon::today();
                                 $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
-                                $unitArray = array();
                             @endphp
 
                             @if(count($reservations) > 0)
                                 @foreach($reservations as $reservation)
                                     @if(($reservation->id == $unit->unitID) && (\Carbon\Carbon::parse($reservation->checkinDatetime)->format('Y-m-d') == $currentDate))
-                                    <p class="card-text">{{$reservation->firstName}} {{$reservation->lastName}}</p>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;">Checks-in today!</p>
+                                        @if(array_search($unit->unitID, $unitArray) == false)
+                                        <p class="card-text">{{$reservation->firstName}} {{$reservation->lastName}}</p>
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">Checks-in today!</p>
+                                        @php
+                                            array_push($unitArray, $unit->unitID);
+                                        @endphp
+                                        @endif
                                     @elseif($reservation->id == $unit->unitID)
-                                        @if(array_search($unit->unitID, $unitArray) != false)
-                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">Next checkin:<br> {{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')}}</p>
+                                        @if(array_search($unit->unitID, $unitArray) == false)
+                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">Next checkin:<br>{{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')}}</p>
+                                        @php
+                                            array_push($unitArray, $unit->unitID);
+                                        @endphp
                                         @endif
                                     @endif
                                 @endforeach

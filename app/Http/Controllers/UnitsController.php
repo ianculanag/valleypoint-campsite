@@ -128,6 +128,7 @@ class UnitsController extends Controller
                  ->where('status', 'reserved');
         })
         ->join('units', 'units.id', 'reservation_units.unitID')
+        ->orderBy('reservation_units.checkinDatetime')
         ->get();
         
         //return $reservations;
