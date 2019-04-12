@@ -281,12 +281,30 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         @if($guestDetails->numberOfUnits > 1)
-                                <div class="col-md-1 mb-1" id="divUnitNumber">
+                                {{--<div class="col-md-1 mb-1" id="divUnitNumberCheckbox">
+                                    <input type='checkbox' class='custom-control-input unitNumberCheckboxes'>
+                                    @foreach($otherUnits as $units)
+                                    <input type='checkbox' class='custom-control-input unitNumberCheckboxes'>
+                                    @endforeach
+                                </div>--}}
+                                <div class="col-md-1 mb-1" id="divUnitCheckoutCheckboxes">    
+                                    <div class="custom-control custom-checkbox">
+                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckboxes">
+                                        <label class="custom-control-label" for="unitCheckoutCheckboxes" style="text-align:center; font-weight:bold;"></label>
+                                    </div>
+                                    @foreach($otherUnits as $units)
+                                    <div class="custom-control custom-checkbox my-3">
+                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$loop->iteration}}">
+                                        <label class="custom-control-label" for="unitCheckoutCheckbox{{$loop->iteration}}" style="text-align:center; font-weight:bold;">{{$loop->iteration}}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                {{--<div class="col-md-1 mb-1" id="divUnitNumber">
                                     <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
                                     @foreach($otherUnits as $units)
                                     <input type="text" readonly class="form-control-plaintext mb-1" style="text-align:center; font-weight:bold;" value="{{$loop->iteration}}">
                                     @endforeach
-                                </div>
+                                </div>--}}
                                 <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
                                     <label for="unitNumber">Unit no.</label>
                                     @foreach($otherUnits as $units)
@@ -296,11 +314,16 @@
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
-                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                        <option>{{$units->serviceName}}</option>
-                                    </select>--}}
+                                    {{--@if($guestDetails->serviceName = 'Glamping Solo')
+                                        <input class="form-control mb-1" value="Solo" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 2 pax')
+                                        <input class="form-control mb-1" value="2 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 3 pax')
+                                        <input class="form-control mb-1" value="3 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 4 pax')
+                                        <input class="form-control mb-1" value="4 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @endif--}}
                                     <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-
                                     @endforeach
                                 </div>
                                 <div class="col-md-3 mb-1">
@@ -337,8 +360,15 @@
                                     {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$guestDetails->serviceName}}</option>
                                     </select>--}}
-                                    <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-
+                                    @if($guestDetails->serviceName = 'Glamping Solo')
+                                        <input class="form-control mb-1" value="Solo" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 2 pax')
+                                        <input class="form-control mb-1" value="2 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 3 pax')
+                                        <input class="form-control mb-1" value="3 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @elseif($guestDetails->serviceName = 'Glamping 4 pax')
+                                        <input class="form-control mb-1" value="4 pax" name="accommodationType" id="accommodationType" readonly>
+                                    @endif
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
