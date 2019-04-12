@@ -174,7 +174,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 mb-0 mt-2" for="unitCount">Number of units</label>
                             <div class="input-group mb-1 col-sm-7">
-                                <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" min="1" max="20" placeholder="" value="" required>
                             </div>
                         </div>
                         <h5 class="text-center">Available Units</h5>

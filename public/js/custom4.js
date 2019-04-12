@@ -40,7 +40,13 @@ jQuery(document).on('change', '.finderInputs', function() {
                     var currentCheckoutDate = moment(dates[index].checkoutDatetime).format('L')
                     
 
-                    if((selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) || (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate)) {
+                    if(
+                        (selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) ||
+                        (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate) || 
+                        (selectedCheckinDate > currentCheckinDate && selectedCheckinDate < currentCheckoutDate) ||
+                        (selectedCheckoutDate > currentCheckinDate && selectedCheckoutDate < currentCheckoutDate)
+                        )
+                    {
                         var arrayIndex = dates[index].unitID - 1;
                         unitAvailability[arrayIndex] = true;
                     }

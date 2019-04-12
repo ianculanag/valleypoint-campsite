@@ -1003,7 +1003,13 @@ function checkAvailability() {
                 currentUnit = data[index].unitNumber;
                 currentCheckinDate = moment(data[index].checkinDatetime).format('L');
                 currentCheckoutDate = moment(data[index].checkoutDatetime).format('L');
-                if(selectedUnit == currentUnit && ((selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) || (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate))) {
+                if(selectedUnit == currentUnit && (
+                    (selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) ||
+                    (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate) || 
+                    (selectedCheckinDate > currentCheckinDate && selectedCheckinDate < currentCheckoutDate) ||
+                    (selectedCheckoutDate > currentCheckinDate && selectedCheckoutDate < currentCheckoutDate)
+                    )
+                ) {
                     if(data[index].accommodationID) {                        
                         occupiedUnits++;
                         occupiedUnitNumbers.push(currentUnit);
