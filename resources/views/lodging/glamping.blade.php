@@ -283,13 +283,9 @@
                             </div>
                         </div>
                         <div class="pt-2">
-                            <a href="" id="checkinSelectedTents">
-                                <button type="button" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;">Checkin</button>
-                            </a> 
-                            <a href="" id="reserveSelectedTents">
-                                <button type="button" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;">Add Reservation</button>
-                            </a> 
-                        </div>
+                            <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;">Checkin</button>
+                            <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;">Add Reservation</button>
+                         </div>
                     <form>
                 </div>
             </div>
