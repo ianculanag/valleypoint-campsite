@@ -148,7 +148,9 @@
             <div class="card p-0 mx-0" style="font-size:0.9em">
                 <div class="card-body">
                     <h4 class="text-center pb-1">Unit Finder</h4>
-                    <form>
+                    <form method="POST">
+                        @csrf
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                         <div class="form-group row">
                             <label class="col-sm-4 mb-0 mt-2" for="checkin" style="padding-right:0;">Check-in date</label>
                             <div class="input-group input-group-sm mb-1 col-sm-8">

@@ -4,7 +4,7 @@
 @if(isset($unit))
 @if(count($unit) > 0)
     @foreach($unit as $unit)
-    <div class="container">
+    <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
@@ -170,147 +170,11 @@
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
-                    </div>
-
-                    <div id="dateGapContainer" class="alert alert-warning mt-2" style="display:none;">
-                        <a href="#" class="close">&times;</a>
-                        <span id="dateGapMessage"><strong>Invalid Dates!</strong> Accommodation dates must be consecutive.</span>
-                    </div>
-                    
-                    <div id="dateAlertContainer" class="alert alert-warning mt-2" style="display:none;">
-                        <a href="#" class="close">&times;</a>
-                        <span id="dateAlertMessage"><strong>Invalid Date!</strong> Please select a check-out date after the check-in date.</span>
-                    </div>
-
-                    <div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
-                        <a href="#" class="close">&times;</a>
-                        <span id="alertMessage"><strong>Occupied!</strong> Tent 3 is occupied from March 25 to March 27.</span>
-                    </div>
-                    
-                    <hr class="mb-4">
-                    <div class="form-group row pb-3" id="divAdditionalServices">
-                        <div class="col-md-12 mb-1">
-                            <h5 style="margin-bottom:.80em;">Additional Services</h5>
-                        </div>
-                        <input type="hidden" {{--name="additionalServiceAccommodationID" value="" {{--form="serviceForm"--}}>
-                        <div class="col-md-3 mb-1" id="divServiceName">
-                            <label for="additionalServiceName">Service name</label>
-                            <select name="additionalServiceName" id="serviceSelect" class="form-control serviceSelect" {{--form="serviceForm"--}}>
-                                <option value="choose" selected disabled >Choose...</option>
-                                <option value="6">Airsoft</option>
-                                <option value="7">Archery</option>                                
-                                <option value="15">Pillow</option>
-                                <option value="16">Bedsheet</option>
-                                <option value="17">Blanket</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 mb-1" id="divQuantity">
-                            <label for="additionalServiceNumberOfPax">Quantity</label>
-                            <input class="form-control paxSelect" type="number" id="additionalServiceNumberOfPax" {{--name="additionalServiceNumberOfPax"--}} placeholder="" value="" min="1" max="10" {{--form="serviceForm"--}}>
-                        </div>
-                        <div class="col-md-3 mb-1" id="divUnitPrice">
-                            <label for="additionalServiceUnitPrice">Unit price</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control additionalServiceUnitPrice" type="text" id="additionalServiceUnitPrice" name="additionalServiceUnitPrice" placeholder="" value="" disabled>
-                                <input class="form-control additionalServiceUnitPrice" type="text" style="display:none;float:left;" id="additionalServiceUnitPrice" {{--name="additionalServiceUnitPrice"--}} placeholder="" value="" {{--form="serviceForm"--}}>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-1" id="divTotalPrice">
-                            <label for="additionalServiceTotalPrice">Total price</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">₱</span>
-                                </div>
-                                <input class="form-control additionalServiceTotalPrice" type="text" id="additionalServiceTotalPrice" name="additionalServiceTotalPrice" placeholder="" value="" disabled>
-                                <input class="form-control additionalServiceTotalPrice" type="text" style="display:none;float:left;" id="additionalServiceTotalPrice" {{--name="additionalServiceTotalPrice"--}} placeholder="" value="" {{--form="serviceForm"--}}>
-                            </div>
-                        </div>
-
-                        <div style="margin-top:2em;" id="divButton">
-                            <div class="input-group">
-                                <button type="button" id="additionalServiceFormAdd" class="btn btn-primary additionalServiceFormAdd" {{--form="serviceForm"--}}disabled>
-                                    <span class="fa fa-plus" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
-                    </div>
-                    
-                    <div class="pt-4" style="float:right;">   
-                        {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
-                        {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
-                        {{--</a>--}}
-                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
-                        <a href="/glamping" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
-                        </a>
-                    </div>
-            </div>
-        </div>
-    <!-- charges modal -->
-    <div class="modal fade" id="chargesModal" tabindex="-1" role="dialog" aria-labelledby="chargesModal" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width:70%">
-            <div class="modal-content">
-                <div id="selectedPayments" style="display:none;">
-                </div>
-                <div class="modal-header">
-                    <h5 class="modal-title">Charges</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body my-0">
-                    <!--form class="card my-0"-->
-                        <table class="table table-striped m-0 display nowrap transactionTable" style="font-size:1em;">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th scope="col" style="width:40%">
-                                        <input class="form-check-input" type="checkbox" id="selectAll" checked>
-                                        Description
-                                    </th>
-                                    <th scope="col">Qty.</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Total</th> 
-                                </tr>
-                            </thead>
-                            <tbody id="chargesRows">
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th colspan="3" scope="row">Amount due:</th>
-                                    <th id="chargesGrandTotal" style="text-align:right;">1500</th>
-                                </tr>
-                                <tr>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <th scope="row">Amount paid:</th>
-                                    <th style="text-align:right;"  colspan="3">
-                                        <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
-                                    </th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="savePayments" class="btn btn-success" data-dismiss="modal">Save Changes</button>
-                    <!--button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end of charges modal -->                     
+                    </div>                     
         @endforeach  
     @endif
 @else
-<div class="container">
+<div class="container pb-5">
     <div class="pt-3 pb-3 text-center">
         <a href="/glamping">
             <span style="float:left;">
@@ -339,18 +203,25 @@
                     </thead>
                     <tbody id="invoiceRows">
                         @if(count($charges) > 0)
+                        @php
+                           $totalPrice = 0; 
+                        @endphp
                         @foreach($charges as $charge)
                         @php
                             $checkin = new DateTime($givenCheckinDate);
                             $checkout = new DateTime($givenCheckoutDate);
-                            $stayDuration = date_diff($checkin, $checkout)->days+1;
+                            $stayDuration = date_diff($checkin, $checkout)->days;
+
+                            $invoicePrice = 1350 * $stayDuration;
+
+                            $totalPrice += $invoicePrice;
                         @endphp
                         <tr id="invoiceUnit{{$charge->unitNumber}}">
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
                             <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
+                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$invoicePrice}}</td>
                         </tr>
                         @endforeach
                         @endif
@@ -358,7 +229,7 @@
                         <tfoot>
                         <tr>
                             <th colspan="3" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
                         </tr>
                         <tr>
                             <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
@@ -429,15 +300,29 @@
                                     <i class="fa fa-campground" aria-hidden="true"></i>
                                 </span>
                             </div>
-                        <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{count($unitIDs)}}" min="1" max="80" readonly>
+                        <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{count($unitNumber)}}" min="1" max="80" readonly>
                         </div>
                     </div>
+                    @if(count($unitNumber) > 0)
+                        @php
+                            $unitNumbers = "";
+                        @endphp
+                        @foreach($unitNumber as $unitNum)
+                        @php
+                            if($loop->iteration == count($unitNumber)){
+                                $unitNumbers .= $unitNum." ";
+                            } else {
+                                $unitNumbers .= $unitNum.", ";
+                            }
+                        @endphp
+                        @endforeach
+                        @endif
                     <div class="col-md-10 mb-1">
                         <label for="unitNumber">Unit/s</label>
-                        <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
-                        <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
+                        {{--<input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="">--}}
+                        <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unitNumbers}}" required>
                         
-                        <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
+                        {{--<input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="">--}}
                         
                         <!-- relocated    div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">
                             <a href="#" class="close">&times;</a>
@@ -446,10 +331,20 @@
                     </div>
                 </div>
                 <div class="form-group row" id="divUnits">
+                    @if(count($units) > 0)
+                    @foreach($units as $unit)
+                    @php                        
+                        $checkin = new DateTime($givenCheckinDate);
+                        $checkout = new DateTime($givenCheckoutDate);
+                        $stayDuration = date_diff($checkin, $checkout)->days;
+
+                        $unitTotalPrice = 1350 * $stayDuration;
+                    @endphp
+                    @if($loop->iteration == 1)
                     <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                         <label for="unitNumber">Unit number</label>
                         <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                     </div>
                     <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                         <label for="additionalServiceUnitPrice">Package</label>
@@ -469,7 +364,7 @@
                                     <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
+                            <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="{{$givenCheckinDate}}">
                         </div>
                     </div>
 
@@ -481,12 +376,51 @@
                                     <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
+                            <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="{{$givenCheckoutDate}}">
                             {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                         </div>
                     </div>
-                </div>
+                    @else
+                    <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
+                        <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
+                    </div>
+                    <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
+                        <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
+                            <option value="1">Solo</option>
+                            <option value="2">2 Pax</option>
+                            <option value="3">3 pax</option>
+                            <option value="4">4 pax</option>
+                        </select>
+                    </div>
 
+                    <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="{{$givenCheckinDate}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="{{$givenCheckoutDate}}">
+                            {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
+                        </div>
+                    </div>
+                    @endif
+                    @endforeach
+                    @endif
+                </div>
+@endif
                 <div id="dateGapContainer" class="alert alert-warning mt-2" style="display:none;">
                     <a href="#" class="close">&times;</a>
                     <span id="dateGapMessage"><strong>Invalid Dates!</strong> Accommodation dates must be consecutive.</span>
@@ -621,5 +555,4 @@
         </div>
     </div>
 </div>
-@endif
 @endsection

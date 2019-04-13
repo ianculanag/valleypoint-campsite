@@ -54,7 +54,7 @@ Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showChe
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
 //Unit Finder
-Route::get('/checkin-finder', 'AccommodationsController@showCheckinFromFinder');
+Route::post('/checkin-finder', 'AccommodationsController@showCheckinFromFinder');
 Route::get('/reserve-finder', 'ReservationsController@showReserveFromFinder');
 
 

@@ -173,8 +173,12 @@
                     </div>
                     @if(count($reservedUnit) > 0)
                     @foreach($reservedUnit as $reservedUnit)
-                    @php
-                        $unitTotalPrice = $reservedUnit->price * $reservedUnit->numberOfPax;
+                    @php                        
+                        $checkin = new DateTime($reservedUnit->checkinDatetime);
+                        $checkout = new DateTime($reservedUnit->checkoutDatetime);
+                        $stayDuration = date_diff($checkin, $checkout)->days+1;
+
+                        $unitTotalPrice = $reservedUnit->price * $reservedUnit->numberOfPax * $stayDuration;
                     @endphp
                     <div class="form-group row" id="divUnits">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
