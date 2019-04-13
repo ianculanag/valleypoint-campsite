@@ -38,10 +38,25 @@ class AccommodationsController extends Controller
      */
     public function showCheckinFromFinder(Request $request)
     {
-        $unit = DBs::table('units')
-        ->where('id', '=', $unitID)
-        ->get();
-        return view('lodging.checkinGlamping')->with('unit', $unit);
+        $unitIDs =  explode(',', $request->input('checkedUnits'));
+
+        $units = array();
+
+        for($count = 0; $count < count($unitIDs); $count++) {
+            $unit = DB::table('units')
+            ->where('id', '=',$unitIDs[$count])
+            ->get();
+
+            array_push($units, $unit[0]);
+        }
+
+        //return $units;
+        $charges = $units;
+
+        $givenCheckinDate =  $request->input('checkin');
+        $givenCheckoutDate = $request->input('checkout');
+
+        return view('lodging.checkinGlamping')->with('unitIDs', $unitIDs)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate);
     }
 
     /**
