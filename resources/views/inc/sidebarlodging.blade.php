@@ -78,11 +78,11 @@
                         </button>
                         <div class="dropdown-container">
                             <a class="dropdown-item" href="/view-payments">
-                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <i class="fa fa-receipt" aria-hidden="true"></i>
                                 Payments
                             </a>
                             <a class="dropdown-item" href="/view-charges">
-                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                 Charges
                             </a>
                         </div>
