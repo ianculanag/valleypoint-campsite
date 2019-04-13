@@ -289,12 +289,12 @@
                                 </div>--}}
                                 <div class="col-md-1 mb-1" id="divUnitCheckoutCheckboxes">    
                                     <div class="custom-control custom-checkbox">
-                                        <input type='checkbox' class='custom-control-input' id="selectAllUnitCheckoutCheckboxes">
+                                        <input type='checkbox' class='custom-control-input' id="selectAllUnitCheckoutCheckboxes" checked>
                                         <label class="custom-control-label" for="selectAllUnitCheckoutCheckboxes" style="text-align:center; font-weight:bold;"></label>
                                     </div>
                                     @foreach($otherUnits as $units)
                                     <div class="custom-control custom-checkbox my-3">
-                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$loop->iteration}}">
+                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$loop->iteration}}" checked>
                                         <label class="custom-control-label" for="unitCheckoutCheckbox{{$loop->iteration}}" style="text-align:center; font-weight:bold;">{{$loop->iteration}}</label>
                                     </div>
                                     @endforeach
@@ -526,7 +526,7 @@
                                 <tr>
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
-                                    <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;">FUck</th>
+                                    <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;"></th>
                                     <th></th>
                                 </tr>
                                 <tr>

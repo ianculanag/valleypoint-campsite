@@ -229,7 +229,7 @@ jQuery('#saveAllPayments').click(function() {
         }
     }
     jQuery('#selectedAdditionalPayments').html(htmlString);
-    checkUnpaid();
+    //checkUnpaid();
 });
 
 function checkUnpaid() {
@@ -238,6 +238,15 @@ function checkUnpaid() {
     } else {
         jQuery('#checkoutButton').prop('disabled', true);
     }
+    /*if(jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false)){
+        jQuery('#checkoutButton').prop('disabled', false);
+    } else {
+        if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
+            jQuery('#checkoutButton').prop('disabled', false);
+        } else {
+            jQuery('#checkoutButton').prop('disabled', true);
+        }
+    }*/
 }
 
 
@@ -327,7 +336,16 @@ function checkToggledCheckoutCheckboxes(){
     }
     if (hit == 0) {
         jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', true);
+        if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
+            jQuery('#checkoutButton').prop('disabled', true);
+        } else {
+            jQuery('#checkoutButton').prop('disabled', false);
+        }
+    } else if(hit == (jQuery('.unitCheckoutCheckboxes').length)) {
+        jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false);
+        jQuery('#checkoutButton').prop('disabled', true);
     } else {
         jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false);
-    }
+        jQuery('#checkoutButton').prop('disabled', false);
+    } 
 }
