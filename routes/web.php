@@ -104,8 +104,11 @@ Route::post('/save-glamping-reservation-details', 'ReservationsController@saveGl
 //CancelReservations
 Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
 
-//Payment Transactions
+//View payment transactions
 Route::get('/view-payments', 'PaymentsController@viewLodgingSales');
+
+//View charges
+Route::get('/view-charges', 'ChargesController@viewLodgingCharges');
 
 //Select Service	
 Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
