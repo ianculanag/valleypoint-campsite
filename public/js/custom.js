@@ -385,8 +385,12 @@ jQuery('#proceedToPayment').click(function() {
 });
 
 jQuery('#selectAll').change(function() {
-    var checkboxes = jQuery(this).closest('form').find(':checkbox');
-    checkboxes.prop('checked', jQuery(this).is(':checked'));
+    //var checkboxes = jQuery(this).closest('form').find(':checkbox');
+    //checkboxes.prop('checked', jQuery(this).is(':checked'));
+
+    for(var count = 0; count < jQuery('.paymentCheckboxes').length; count++) {
+        jQuery('.paymentCheckboxes').eq(count).prop('checked', jQuery(this).is(':checked'));
+    }
 
     updateChargesTotal();
 });

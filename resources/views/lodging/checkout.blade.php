@@ -289,8 +289,8 @@
                                 </div>--}}
                                 <div class="col-md-1 mb-1" id="divUnitCheckoutCheckboxes">    
                                     <div class="custom-control custom-checkbox">
-                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckboxes">
-                                        <label class="custom-control-label" for="unitCheckoutCheckboxes" style="text-align:center; font-weight:bold;"></label>
+                                        <input type='checkbox' class='custom-control-input' id="selectAllUnitCheckoutCheckboxes">
+                                        <label class="custom-control-label" for="selectAllUnitCheckoutCheckboxes" style="text-align:center; font-weight:bold;"></label>
                                     </div>
                                     @foreach($otherUnits as $units)
                                     <div class="custom-control custom-checkbox my-3">

@@ -148,8 +148,11 @@ jQuery(document).on('click', '#showChargesModal', function() {
 });
 
 jQuery('#selectAllBalances').change(function() {
-    var checkboxes = jQuery(this).closest('body').find(':checkbox');
-    checkboxes.prop('checked', jQuery(this).is(':checked'));
+    //var checkboxes = jQuery(this).closest('body').find(':checkbox');
+    //checkboxes.prop('checked', jQuery(this).is(':checked'));
+    for(var count = 0; count < jQuery('.balancePaymentCheckboxes').length; count++) {
+        jQuery('.balancePaymentCheckboxes').eq(count).prop('checked', jQuery(this).is(':checked'));
+    }
 
     updateBalancesTotal();
 });
@@ -297,10 +300,34 @@ window.onbeforeunload = function() {
     return 'message';
 }*/
 
-/***RESERVATIONS TABLE */
+/* RESERVATIONS TABLE */
 jQuery('.load-reservation-details').click(function() {
     var reservationID = jQuery(this).attr('id');
     //console.log(reservationID);
     jQuery('#confirmCancel').attr('href', '/cancel-reservation/'+reservationID);
 });
-        
+   
+
+jQuery('#selectAllUnitCheckoutCheckboxes').change(function() {
+    for(var count = 0; count < jQuery('.unitCheckoutCheckboxes').length; count++) {
+        jQuery('.unitCheckoutCheckboxes').eq(count).prop('checked', jQuery(this).is(':checked'));
+    }
+});
+
+jQuery('.unitCheckoutCheckboxes').change(function() {
+    checkToggledCheckoutCheckboxes();
+});
+
+function checkToggledCheckoutCheckboxes(){
+    var hit = 0;
+    for (var count = 0; count < jQuery('.unitCheckoutCheckboxes').length; count++) {
+        if(jQuery('.unitCheckoutCheckboxes').eq(count).prop('checked') == false) {
+            hit++;
+        }
+    }
+    if (hit == 0) {
+        jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', true);
+    } else {
+        jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false);
+    }
+}
