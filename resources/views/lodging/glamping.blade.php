@@ -208,22 +208,10 @@
                             <div class="card-body p-0" id="unavailableUnitsContainer" style="display:block;">
                                 <div class="unavailable-units-list" id="divUnavailableUnitsList" style="font-size:1.1em">
                                     <table class="table table-bordered table-sm nowrap m-0" style="border-collapse: collapse;">
-                                        <thread>
-                                            <td scope="col"></td>
-                                            <td>18</td>
-                                            <td>19</td>
-                                            <td>20</td>
-                                            <td>21</td>
-                                            <td>22</td>
-                                            <td>23</td>
-                                            <td>24</td>
-                                            <td>25</td>
-                                            <td>26</td>
-                                            <td>27</td>
-                                            <td>28</td>
-                                        </thread>
-                                        <tbody>
-                                            <tr>
+                                        <thead id="calendarHead">
+                                        </thead>
+                                        <tbody id="calendarBody">
+                                            <!--tr>
                                                 <td>Tent7</td>
                                                 <td></td>
                                                 <td></td>
@@ -278,7 +266,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                            </tr>
+                                            </tr-->
                                         </tbody>
                                     </table>
                                 </div>

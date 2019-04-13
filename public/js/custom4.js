@@ -23,6 +23,7 @@ jQuery(document).on('change', '.finderInputs', function() {
 
         jQuery.get('/getDates', function(dates) {
             //console.log(data);
+
             jQuery.get('/get-glamping-tents', function(units) {
                 //console.log(dates);
                 //console.log(units);
@@ -62,7 +63,8 @@ jQuery(document).on('change', '.finderInputs', function() {
                 //console.log(availableUnitNumbers);
 
                 displayUnitNumbers(availableUnitIDs, availableUnitNumbers, jQuery('#finderUnitCount').val());
-                getCheckedUnits();
+                getCheckedUnits();              
+                populateCalendar(dates);
 
                 jQuery('#finderCheckin').prop('disabled', false);
                 jQuery('#finderReserve').prop('disabled', false);
@@ -119,4 +121,48 @@ function getCheckedUnits() {
     //console.log(checkedUnits);
 
     jQuery('#checkedUnits').val(checkedUnits);
+}
+
+function populateCalendar(dates) {
+    for(var count = 0; count < dates.length; count++) {
+        console.log(dates[count]);
+    }
+    
+    var selectedCheckinDate = moment(jQuery('#finderCheckinDate').val()).format('M-D');
+    var selectedCheckoutDate = moment(jQuery('#finderCheckoutDate').val()).format('M-D');
+
+    console.log(selectedCheckinDate);
+    console.log(selectedCheckoutDate);
+
+    var htmlString = "<td scope='col'></td>";
+    var columns = 0;
+
+    for(var checkin = moment(selectedCheckinDate).format('D'); checkin <= moment(selectedCheckoutDate).format('D'); checkin++){
+        htmlString += "<td>"+checkin+"</td>";
+        columns++;
+    }
+
+    var unitNumbers = new Array();
+    
+    for(var count = 0; count < dates.length; count++) {
+        if(jQuery.inArray(dates[count].unitNumber, unitNumbers)) {
+            unitNumbers.push(dates[count].unitNumber);
+            console.log('Hit');
+        } else {            
+        }
+    }
+
+    var bodyString = "";
+
+    for(var index = 0; index < unitNumbers.length; index++) {
+        bodyString += "<tr>";
+        bodyString += "<td>"+unitNumbers[index]+"</td>";
+        for(var columnCount = 0; columnCount < columns; columnCount++) {
+            bodyString += "<td></td>";
+        }
+        bodyString += "</tr>";
+    }
+
+    jQuery('#calendarBody').html(bodyString);
+    jQuery('#calendarHead').html(htmlString);
 }

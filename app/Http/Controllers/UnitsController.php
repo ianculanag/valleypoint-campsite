@@ -444,6 +444,7 @@ class UnitsController extends Controller
         ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
                  'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
         ->where('accommodation_units.status', '=', 'ongoing')
+        ->orderBy('units.id')
         ->get()
         ->toArray();
 
@@ -453,6 +454,7 @@ class UnitsController extends Controller
         ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
                  'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
         ->where('reservation_units.status', '=', 'reserved')
+        ->orderBy('units.id')
         ->get()
         ->toArray();
 
