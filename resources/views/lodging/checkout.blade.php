@@ -329,6 +329,7 @@
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
+                                    
                                     {{--@if($guestDetails->serviceName = 'Glamping Solo')
                                         <input class="form-control mb-1" value="Solo" name="accommodationType" id="accommodationType" readonly>
                                     @elseif($guestDetails->serviceName = 'Glamping 2 pax')
@@ -365,9 +366,10 @@
                                     </div>
                                     @endforeach
                                 </div>
-                        @else 
+                        @else   
+                                <input type="number" style="display:none;float:left;" id="checkOutOneUnit" name="checkOutOneUnit" value="{{$guestDetails->numberOfUnits}}">
                                 <div class="col-md-3 mb-1" id="divUnitNumber">
-                                    <label for="unitNumber">Unit no.</label>
+                                    <label for="unitNumber">Unit no.</label>   
                                     <input type="text" class="form-control mb-1" value="{{$guestDetails->unitNumber}}" disabled>
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">

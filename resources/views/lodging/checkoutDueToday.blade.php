@@ -102,7 +102,7 @@
                                         @foreach($pendingPayments as $pending)
                                         @php
                                             $total += $pending->totalPrice;
-                                            $totalBalance = $total - $totalPayment;
+                                            $totalBalance += $pending->balance;
 
                                             $identifier = 'Pending'.$loop->iteration;
                                         @endphp
@@ -115,7 +115,7 @@
                                             @if($pending->remarks == 'unpaid')
                                             <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{(number_format((float)($pending->totalPrice), 2, '.', ''))}}</td>
                                             @else
-                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($balance), 2, '.', '')}}</td>
+                                            <td id="invoiceBalance{{$identifier}}" style="text-align:right;" class="invoiceBalances">{{number_format((float)($pending->balance), 2, '.', '')}}</td>
                                             @endif
                                         </tr>
                                         @endforeach
@@ -264,6 +264,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         @if($guestDetails->numberOfUnits > 1)
+                            <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$guestDetails->numberOfUnits}}">
                                 <div class="col-md-1 mb-1" id="divUnitNumber">
                                     <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
                                     @foreach($otherUnits as $units)
@@ -272,9 +273,23 @@
                                 </div>
                                 <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
                                     <label for="unitNumber">Unit no.</label>
-                                    @foreach($otherUnits as $units)
+
+                                    @php
+                                        $unitNumbers = array();
+                                        $unitsDueToday = 0;
+                                    @endphp
+
+                                    @foreach($otherUnits as $units)  
+                                    @php
+                                        array_push($unitNumbers, $units->unitID);
+                                        $unitsDueToday++;
+                                    @endphp
                                     <input type="text" class="form-control mb-1" value="{{$units->unitNumber}}" disabled>
                                     @endforeach
+
+                                    @php
+                                        $unitNumbers = implode(",", $unitNumbers);
+                                    @endphp
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
@@ -391,11 +406,24 @@
                     </div>
                 
                     <div class="mt-3" style="float:right;">
+                    
+                @if($guestDetails->numberOfUnits > 1)
+                    @if($guestDetails->numberOfUnits == $unitsDueToday)
+                        @if(count($pendingPayments) > 0)
+                            <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                        @else
+                            <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;">Check-out</button>
+                    @endif
+                    @else
+                        <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;">Check-out</button>
+                    @endif
+                @else
                     @if(count($pendingPayments) > 0)
                         <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
                     @else
                         <button id="checkoutDueTodayButton" class="btn btn-success" style="width:10em;">Check-out</button>
                     @endif
+                @endif
                         <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
                         </a>

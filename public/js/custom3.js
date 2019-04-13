@@ -229,7 +229,7 @@ jQuery('#saveAllPayments').click(function() {
         }
     }
     jQuery('#selectedAdditionalPayments').html(htmlString);
-    //checkUnpaid();
+    checkUnpaid();
 });
 
 function checkUnpaid() {
