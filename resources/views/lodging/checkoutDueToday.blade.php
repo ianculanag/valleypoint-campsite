@@ -2,8 +2,8 @@
 
 @section('content')
     @foreach ($guest as $guestDetails)
-    <div class="container">
-        <div class="pt-5 pb-3 text-center">
+    <div class="container pb-5">
+        <div class="pt-3 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>

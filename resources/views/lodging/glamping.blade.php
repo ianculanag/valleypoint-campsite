@@ -150,8 +150,8 @@
                     <h4 class="text-center pb-1">Unit Finder</h4>
                     <form>
                         <div class="form-group row">
-                            <label class="col-sm-3 mb-0 mt-2" for="checkin" style="padding-right:0;">Check-in</label>
-                            <div class="input-group input-group-sm mb-1 col-sm-9">
+                            <label class="col-sm-4 mb-0 mt-2" for="checkin" style="padding-right:0;">Check-in date</label>
+                            <div class="input-group input-group-sm mb-1 col-sm-8">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
@@ -161,8 +161,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 mb-0 mt-2" for="checkout" style="padding-right:0;">Check-out</label>
-                            <div class="input-group input-group-sm mb-1 col-sm-9">
+                            <label class="col-sm-4 mb-0 mt-2" for="checkout" style="padding-right:0;">Check-out date</label>
+                            <div class="input-group input-group-sm mb-1 col-sm-8">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
@@ -172,8 +172,8 @@
                             </div>
                         </div>
                         <div class="form-group row mb-0">
-                            <label class="col-sm-5 mb-0 mt-2" for="unitCount">Number of units</label>
-                            <div class="input-group input-group-sm mb-1 col-sm-7">
+                            <label class="col-sm-4 mb-0 mt-2" for="unitCount">No. of units</label>
+                            <div class="input-group input-group-sm mb-1 col-sm-8">
                                 <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
