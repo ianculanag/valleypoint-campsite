@@ -81,10 +81,6 @@ Route::get('load-backpacker-details/');
 Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');
 Route::post('/updateDetails', 'GuestsController@updateDetails');
 
-//Check-out guests
-Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
-Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
-
 //AddReservation
 //Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
 //Route::post('/addReservation','AccommodationsController@addReservation');
@@ -120,7 +116,11 @@ Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 Route::get('/getDates', 'UnitsController@getDates');
 
 //Check-out guests
+Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
+
+Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
+Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
 /* Admin */
 

@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($guest as $guestDetails)
     <div class="container pb-5">
-        <div class="pt-3 pb-3 text-center">
+        <div class="py-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -281,6 +281,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         @if($guestDetails->numberOfUnits > 1)
+                            <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$guestDetails->numberOfUnits}}">
                                 {{--<div class="col-md-1 mb-1" id="divUnitNumberCheckbox">
                                     <input type='checkbox' class='custom-control-input unitNumberCheckboxes'>
                                     @foreach($otherUnits as $units)
@@ -292,12 +293,26 @@
                                         <input type='checkbox' class='custom-control-input' id="selectAllUnitCheckoutCheckboxes" checked>
                                         <label class="custom-control-label" for="selectAllUnitCheckoutCheckboxes" style="text-align:center; font-weight:bold;"></label>
                                     </div>
+                                    
+                                    @php
+                                        $unitNumbers = array();
+                                    @endphp
+
                                     @foreach($otherUnits as $units)
+                                    @php
+                                        array_push($unitNumbers, $units->unitID);
+                                    @endphp
                                     <div class="custom-control custom-checkbox my-3">
-                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$units->unitID}}" checked>
+                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' name="unitCheckoutCheckbox{{$units->unitID}}" value="{{$units->unitID}}" id="unitCheckoutCheckbox{{$units->unitID}}" checked>
                                         <label class="custom-control-label" for="unitCheckoutCheckbox{{$units->unitID}}" style="text-align:center; font-weight:bold;">{{$loop->iteration}}</label>
                                     </div>
                                     @endforeach
+
+                                    @php
+                                        $unitNumbers = implode(",", $unitNumbers);
+                                    @endphp
+                                    
+                                    <input type="hidden" name="unitCheckout" id="unitCheckout" value="{{$unitNumbers}}">
                                 </div>
                                 {{--<div class="col-md-1 mb-1" id="divUnitNumber">
                                     <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>

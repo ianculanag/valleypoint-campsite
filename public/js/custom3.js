@@ -321,11 +321,21 @@ jQuery('.unitCheckoutCheckboxes').change(function() {
 
 function checkToggledCheckoutCheckboxes(){
     var hit = 0;
+    var unitIDs = new Array();
+
     for (var count = 0; count < jQuery('.unitCheckoutCheckboxes').length; count++) {
         if(jQuery('.unitCheckoutCheckboxes').eq(count).prop('checked') == false) {
             hit++;
+        } else {
+            var unitID = jQuery('.unitCheckoutCheckboxes').eq(count).attr('id').slice(20);
+            //console.log(unitID);
+            unitIDs.push(unitID);
         }
     }
+    
+    unitIDs = unitIDs.toString();
+    jQuery('#unitCheckout').val(unitIDs);
+
     if (hit == 0) {
         jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', true);
         if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){

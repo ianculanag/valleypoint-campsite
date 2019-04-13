@@ -373,7 +373,6 @@ class AccommodationsController extends Controller
      */
     public function checkoutGlamping(Request $request)
     {
-
         for($count = 0; $count < $request->input('chargesCount'); $count++) {
             $existingCharge = 'charge'.$count;
             $paymentEntry = 'payment'.$count;
@@ -435,12 +434,23 @@ class AccommodationsController extends Controller
             }
         }
         
-        //for($count = 0;  $count <= $request->input('unitID'); $count++)
-        $units = DB::table('accommodation_units')
-        ->where('accommodation_units.uniID', '=', $request->input('unitID'))
+        /*$units = DB::table('accommodation_units')
+        ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
         ->update(array('status' => 'finished'));
+
+        $units = DB::table('reservation_units')
+        ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+        ->where('reservation_units.unitID', '=', $unit[0]->id)
+        ->update(array('status' => 'checkedin'));*/
+           
+        $unitIDs = explode(',', $request->input('unitCheckout'));
+        for($count = 0; $count < count($unitIDs); $count++) {
+            $units = DB::table('accommodation_units')
+            ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+            ->where('accommodation_units.unitID', '=', $unitIDs[$count])
+            ->update(array('status' => 'finished'));
+        }
 
         return redirect('/glamping');
     }
-
 }
