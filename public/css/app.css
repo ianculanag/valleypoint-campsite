@@ -9751,16 +9751,19 @@ h3 {
   padding-left: 0.5em !important;
 }
 
-.nav-list li .nav-link.active,
-.dropdown-container a.active {
+.nav-list li .nav-link.active {
   border-left: 0.4em solid;
   padding-left: 0.5em !important;
   border-left-color: #a7faec;
 }
 
-.nav-list li .nav-link.active,
-.dropdown-container a.active {
+.nav-list li .nav-link.active {
   background-color: rgba(224, 248, 242, 0.436);
+}
+
+.dropdown-container a.active {
+  background-color: inherit !important;
+  color: white;
 }
 
 .nav-list li .nav-link.active:hover,
@@ -9816,7 +9819,7 @@ h3 {
   color: lightgray !important;
 }
 
-.dropdown-item:focus, .dropdown-item:hover {
+.dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
   background-color: inherit !important;
   color: white !important;
 }

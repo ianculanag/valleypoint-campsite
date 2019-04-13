@@ -71,10 +71,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view-payments">
+                        <button class="dropdown-btn nav-link" href="">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             Transactions
-                        </a>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-container">
+                            <a class="dropdown-item" href="/view-payments">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                Payments
+                            </a>
+                            <a class="dropdown-item" href="/view-charges">
+                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                Charges
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">

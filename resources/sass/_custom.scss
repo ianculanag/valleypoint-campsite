@@ -19,15 +19,19 @@
 	  padding-left: .5em !important;
   }
   
-  .nav-list li .nav-link.active, 
-  .dropdown-container a.active {
+  .nav-list li .nav-link.active {
 	  border-left: .4em solid;
 	  padding-left: .5em !important;
 	  border-left-color:  rgb(167, 250, 236);
   }
-  .nav-list li .nav-link.active,
-  .dropdown-container a.active {
+
+  .nav-list li .nav-link.active {
 	background-color: rgba(224, 248, 242, 0.436);
+  }
+  
+  .dropdown-container a.active {
+	background-color: inherit !important;
+	color: white;
   }
   
   .nav-list li .nav-link.active:hover,
@@ -82,7 +86,7 @@
 	color: rgb(211, 211, 211) !important;
   }
   
-  .dropdown-item:focus, .dropdown-item:hover {
+  .dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
 	background-color: inherit !important;
 	color: white !important;
   }

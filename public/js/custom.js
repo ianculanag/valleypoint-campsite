@@ -1115,6 +1115,16 @@ jQuery(document).ready(function() {
 	jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
 })
 
+jQuery(document).ready(function() {
+	var pathname = window.location.pathname;
+	if(jQuery('.nav-list > li > div > a[href="'+pathname+'"]')) {
+        jQuery('.nav-list > li > button').addClass('active');
+        jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > text').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    }
+})
+
 jQuery(document).ready(function(){
     jQuery('.cancel-reservation-modal').click(function(){
         jQuery.get('/cancel-reservation-modal/'+$(this).attr('id'), function(data){
