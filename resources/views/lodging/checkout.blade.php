@@ -294,8 +294,8 @@
                                     </div>
                                     @foreach($otherUnits as $units)
                                     <div class="custom-control custom-checkbox my-3">
-                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$loop->iteration}}" checked>
-                                        <label class="custom-control-label" for="unitCheckoutCheckbox{{$loop->iteration}}" style="text-align:center; font-weight:bold;">{{$loop->iteration}}</label>
+                                        <input type='checkbox' class='custom-control-input unitCheckoutCheckboxes' id="unitCheckoutCheckbox{{$units->unitID}}" checked>
+                                        <label class="custom-control-label" for="unitCheckoutCheckbox{{$units->unitID}}" style="text-align:center; font-weight:bold;">{{$loop->iteration}}</label>
                                     </div>
                                     @endforeach
                                 </div>

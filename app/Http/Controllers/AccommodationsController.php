@@ -435,8 +435,9 @@ class AccommodationsController extends Controller
             }
         }
         
+        //for($count = 0;  $count <= $request->input('unitID'); $count++)
         $units = DB::table('accommodation_units')
-        ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+        ->where('accommodation_units.uniID', '=', $request->input('unitID'))
         ->update(array('status' => 'finished'));
 
         return redirect('/glamping');

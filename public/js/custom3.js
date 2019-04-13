@@ -238,15 +238,6 @@ function checkUnpaid() {
     } else {
         jQuery('#checkoutButton').prop('disabled', true);
     }
-    /*if(jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false)){
-        jQuery('#checkoutButton').prop('disabled', false);
-    } else {
-        if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
-            jQuery('#checkoutButton').prop('disabled', false);
-        } else {
-            jQuery('#checkoutButton').prop('disabled', true);
-        }
-    }*/
 }
 
 
@@ -321,6 +312,7 @@ jQuery('#selectAllUnitCheckoutCheckboxes').change(function() {
     for(var count = 0; count < jQuery('.unitCheckoutCheckboxes').length; count++) {
         jQuery('.unitCheckoutCheckboxes').eq(count).prop('checked', jQuery(this).is(':checked'));
     }
+    checkToggledCheckoutCheckboxes();
 });
 
 jQuery('.unitCheckoutCheckboxes').change(function() {
@@ -337,9 +329,9 @@ function checkToggledCheckoutCheckboxes(){
     if (hit == 0) {
         jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', true);
         if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
-            jQuery('#checkoutButton').prop('disabled', true);
-        } else {
             jQuery('#checkoutButton').prop('disabled', false);
+        } else {
+            jQuery('#checkoutButton').prop('disabled', true);
         }
     } else if(hit == (jQuery('.unitCheckoutCheckboxes').length)) {
         jQuery('#selectAllUnitCheckoutCheckboxes').prop('checked', false);
