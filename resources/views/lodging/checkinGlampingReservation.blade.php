@@ -5,7 +5,7 @@
     @if(count($reservation) > 0)
     @foreach($unit as $unit)
     @foreach($reservation as $reservation)
-    <div class="container">
+    <div class="container pb-3">
         <div class="pt-3 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">

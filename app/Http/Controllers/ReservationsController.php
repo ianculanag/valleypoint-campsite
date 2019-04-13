@@ -86,7 +86,37 @@ class ReservationsController extends Controller
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.reservation')->with('unit', $unit);
+        return view('lodging.reservationGlamping')->with('unit', $unit);
+    }
+
+    /**
+     * Show the check in form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showReserveFromFinder(Request $request)
+    {
+        $unitsSelected =  explode(',', $request->input('checkedUnits'));
+
+        $units = array();
+        $unitNumber = array();
+
+        for($count = 0; $count < count($unitsSelected); $count++) {
+            $unit = DB::table('units')
+            ->where('id', '=',$unitsSelected[$count])
+            ->get();
+
+            array_push($units, $unit[0]);
+            array_push($unitNumber, $unit[0]->unitNumber);
+        }
+
+        //return $units;
+        $charges = $units;
+
+        $givenCheckinDate =  $request->input('checkin');
+        $givenCheckoutDate = $request->input('checkout');
+
+        return view('lodging.reservationGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate);
     }
 
     /**

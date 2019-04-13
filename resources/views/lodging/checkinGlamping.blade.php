@@ -304,19 +304,19 @@
                         </div>
                     </div>
                     @if(count($unitNumber) > 0)
-                        @php
-                            $unitNumbers = "";
-                        @endphp
-                        @foreach($unitNumber as $unitNum)
-                        @php
-                            if($loop->iteration == count($unitNumber)){
-                                $unitNumbers .= $unitNum." ";
-                            } else {
-                                $unitNumbers .= $unitNum.", ";
-                            }
-                        @endphp
-                        @endforeach
-                        @endif
+                    @php
+                        $unitNumbers = "";
+                    @endphp
+                    @foreach($unitNumber as $unitNum)
+                    @php
+                        if($loop->iteration == count($unitNumber)){
+                            $unitNumbers .= $unitNum." ";
+                        } else {
+                            $unitNumbers .= $unitNum.", ";
+                        }
+                    @endphp
+                    @endforeach
+                    @endif
                     <div class="col-md-10 mb-1">
                         <label for="unitNumber">Unit/s</label>
                         {{--<input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="">--}}
