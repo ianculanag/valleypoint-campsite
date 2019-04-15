@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="roomNumber">Room/s</label>
-                            <input type="text" name="roomNumber" class="form-control" id="room">
+                        <input type="text" name="roomNumber" class="form-control" id="room" value="{{$unit->unitNumber}}">
                                 {{--<option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
                                 <option value="3">Room 3</option>
