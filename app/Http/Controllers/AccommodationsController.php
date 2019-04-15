@@ -455,14 +455,14 @@ class AccommodationsController extends Controller
         if($oneUnit = 1) {
             $units = DB::table('accommodation_units')
             ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
-            ->update(array('status' => 'finished'));
+            ->update(array('status' => 'finished','checkoutDatetime' => Carbon::now()));
         } else {
             $unitIDs = explode(',', $request->input('unitCheckout'));
             for($count = 0; $count < count($unitIDs); $count++) {
                 $units = DB::table('accommodation_units')
                 ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
                 ->where('accommodation_units.unitID', '=', $unitIDs[$count])
-                ->update(array('status' => 'finished'));
+                ->update(array('status' => 'finished','checkoutDatetime' => Carbon::now()));
             }
         } 
 

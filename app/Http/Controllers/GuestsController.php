@@ -343,7 +343,7 @@ class GuestsController extends Controller
         ->where('remarks', '=','full')
         ->get();
 
-        $pendingPayments = DB::table('charges')
+        $pendingPayments = DB::table('charges') 
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
@@ -419,7 +419,7 @@ class GuestsController extends Controller
             $query->where('remarks', '=','unpaid')
                 ->orWhere('remarks', '=','partial');
         })
-        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
                  'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
