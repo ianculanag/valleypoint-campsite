@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
         var counter = null; 
         console.log("Gumana");
         var htmlString ="";
+        
         //htmlString += "<div class='form-group row'>";
         htmlString +="<div class='col-md-3 mb-1'>";
         //htmlString +="<label for='unitID'> No. of bunk/s</label>";
@@ -38,6 +39,7 @@ jQuery(document).ready(function(){
         console.log(htmlString);
 
         jQuery('#unitDetails').append(htmlString);
+        counter++;
     });
 });
 var source=["Room1","Room2","Room3","Room4","Room5","Room6","Room7","Room8","Room9"];
