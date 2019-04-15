@@ -1,7 +1,8 @@
 jQuery(document).ready(function(){
     jQuery('#additionalbed').click(function(){
-        
-        var counter = null;
+        var bunkNumber = jQuery('.numBunks').attr('id').slice(17);
+        //alert(bunkNumber);
+        var counter = null; 
         console.log("Gumana");
         var htmlString ="";
         //htmlString += "<div class='form-group row'>";
@@ -13,12 +14,12 @@ jQuery(document).ready(function(){
         htmlString +="<i class='fa fa-bed' id='icon' aria-hidden='true'></i>";
         htmlString +="</span>";
         htmlString +="</div>";
-        htmlString +="<input class='form-control' type='number' id='numberOfBunks' name='numberOfBunks' required placeholder='' value='1' min='1' max='10'>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks"+bunkNumber+"' name='numberOfBunks"+bunkNumber+"' required placeholder='' value='1' min='1' max='10'>";
         htmlString +="</div>";
         htmlString +="</div>";
         htmlString +="<div class='col-md-7 mb-1'>";
         //htmlString +="<label for='roomNumber'>Room/s</label>";
-        htmlString +="<select name='roomNumber' class='form-control' id='room'>";
+        htmlString +="<select name='roomNumber"+bunkNumber+"' class='form-control' id='room"+bunkNumber+"'>";
         htmlString +="<option value='1'>Room 1 </option>";
         htmlString +="<option value='2'>Room 2 </option>";
         htmlString +="<option value='3'>Room 3 </option>";
@@ -32,7 +33,7 @@ jQuery(document).ready(function(){
         htmlString +="</div>";
         htmlString += "<div id='divButton'>"
         htmlString += "<div class='input-group ulul'>";
-        htmlString += "<button type='button' id='divButton' value='' class='btn btn-danger removeBedForm'>";
+        htmlString += "<button type='button' id='divButton"+bunkNumber+"' value='"+bunkNumber+"' class='btn btn-danger removeBedForm'>";
         htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
         htmlString += "</button>";
         htmlString += "</div>";
@@ -53,8 +54,7 @@ jQuery(document).ready(function(){
 //Remove bunks
 jQuery(document).on('click', '.removeBedForm', function(){
 
-    var id = jQuery(this).attr('id').slice(13);
-    var icon='#icon'+id;
+    var id = jQuery('.numBunks').attr('id').slice(17);
     var numberOfBunks='#numberOfBunks'+id;
     var roomNumber='#room'+id;
     var divButton='#divButton'+id;

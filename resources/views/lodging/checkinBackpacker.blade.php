@@ -132,7 +132,7 @@
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfBunks{{$unit->unitNumber}}" name="numberOfBunks" required placeholder="" value="" min="1" max="20">
+                            <input class="form-control numBunks" type="number" id="numberOfBunks{{$unit->unitNumber}}" name="numberOfBunks" required placeholder="" value="" min="1" max="20">
                             </div>
                         </div>
                         <div class="col-md-7 mb-1">
