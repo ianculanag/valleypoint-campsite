@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     jQuery('#additionalbed').click(function(){
         var bunkNumber = jQuery('.numBunks').attr('id').slice(17);
-        //alert(bunkNumber);
+        alert(bunkNumber);
         var counter = null; 
         console.log("Gumana");
         var htmlString ="";
