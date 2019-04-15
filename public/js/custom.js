@@ -732,6 +732,51 @@ jQuery(document).ready(function(){
 
     jQuery(document).on('change', '.checkinDates', function() {
         if (checkDateValidity() == false) {
+
+            var daysDiff = 0;
+            var unitNumber = jQuery(this).attr('id').slice(12);
+
+
+            var checkinDate = '#checkinDate'+unitNumber;
+            var checkoutDate = '#checkoutDate'+unitNumber;
+
+            var checkin = Date.parse(jQuery(checkinDate).val());
+            var checkout = Date.parse(jQuery(checkoutDate).val());
+
+            var timeDiff = checkout-checkin;
+            daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+
+            //console.log(daysDiff);
+            var invoiceQuantity;
+            var numberOfPaxGlamping;
+
+            var packagePrice;
+            var totalPrice;
+
+            var invoiceUnitPrice;
+            var invoiceTotalPrice;
+
+            var hiddenTotalPrice;
+
+            invoiceQuantity = '#invoiceQuantity'+unitNumber;
+            accommodationPackage = '#accommodationPackage'+unitNumber;
+            invoiceUnitPrice = '#invoiceUnitPrice'+unitNumber;
+            invoiceTotalPrice = '#invoiceTotalPrice'+unitNumber;
+
+            hiddenTotalPrice = '#totalPrice'+unitNumber;
+
+            jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
+
+            packagePrice = jQuery(invoiceUnitPrice).html();  
+
+            console.log(packagePrice);
+            totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
+            
+            jQuery(invoiceUnitPrice).html(packagePrice);            
+            jQuery(invoiceTotalPrice).html(totalPrice);   
+                        
+            jQuery(hiddenTotalPrice).val(totalPrice);   
+            
             var checkoutDatesComplete = true;
             for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
                 //console.log(jQuery('.checkoutDates').eq(count).val()+'fuck');
