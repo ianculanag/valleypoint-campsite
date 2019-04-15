@@ -507,8 +507,10 @@ class GuestsController extends Controller
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
-        ->where('remarks', '=','full')
+        ->where('payments.paymentStatus', '=','full')
         ->get();
+
+        //return $payments;
 
         $pendingPayments = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
