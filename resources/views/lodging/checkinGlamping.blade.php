@@ -140,7 +140,7 @@
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                            <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="$unitTotalPrice">
+                            <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">Package</label>
