@@ -390,6 +390,8 @@ class AccommodationsController extends Controller
      */
     public function checkoutGlamping(Request $request)
     {
+
+        $fuark = DBs::table('luha');
         for($count = 0; $count < $request->input('chargesCount'); $count++) {
             $existingCharge = 'charge'.$count;
             $paymentEntry = 'payment'.$count;
