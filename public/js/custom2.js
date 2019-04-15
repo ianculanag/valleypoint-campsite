@@ -51,7 +51,7 @@ jQuery('#room').tokenfield({
     },
     showAutocompleteOnFocus: false
     });
-    jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
+    jQuery('#room').on('tokenfield:createtoken', function (event) {
         var existingTokens = $(this).tokenfield('getTokens');
         jQuery.each(existingTokens, function(index, token) {
             if (token.value === event.attrs.value)
