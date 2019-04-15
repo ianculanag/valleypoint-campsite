@@ -734,7 +734,7 @@ jQuery(document).ready(function(){
         if (checkDateValidity() == false) {
 
             var daysDiff = 0;
-            var unitNumber = jQuery(this).attr('id').slice(12);
+            var unitNumber = jQuery(this).attr('id').slice(11);
 
 
             var checkinDate = '#checkinDate'+unitNumber;
