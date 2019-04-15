@@ -391,7 +391,7 @@ class AccommodationsController extends Controller
     public function checkoutGlamping(Request $request)
     {
 
-        $fuark = DBs::table('luha');
+        //$fuark = DBs::table('luha');
         for($count = 0; $count < $request->input('chargesCount'); $count++) {
             $existingCharge = 'charge'.$count;
             $paymentEntry = 'payment'.$count;
@@ -454,12 +454,13 @@ class AccommodationsController extends Controller
         }
 
         $oneUnit = $request->input('checkOutOneUnit');
-        if($oneUnit = 1) {
+        if($oneUnit == 1) {
             $units = DB::table('accommodation_units')
             ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
             ->update(array('status' => 'finished','checkoutDatetime' => Carbon::now()));
         } else {
             $unitIDs = explode(',', $request->input('unitCheckout'));
+            //return $unitIDs;
             for($count = 0; $count < count($unitIDs); $count++) {
                 $units = DB::table('accommodation_units')
                 ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
