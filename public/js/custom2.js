@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     jQuery('#additionalbed').click(function(){
         var bunkNumber = jQuery('.numBunks').attr('id').slice(17);
-        alert(bunkNumber);
+        //alert(bunkNumber);
         var counter = null; 
         console.log("Gumana");
         var htmlString ="";
@@ -19,17 +19,7 @@ jQuery(document).ready(function(){
         htmlString +="</div>";
         htmlString +="<div class='col-md-7 mb-1'>";
         //htmlString +="<label for='roomNumber'>Room/s</label>";
-        htmlString +="<select name='roomNumber"+bunkNumber+"' class='form-control' id='room"+bunkNumber+"'>";
-        htmlString +="<option value='1'>Room 1 </option>";
-        htmlString +="<option value='2'>Room 2 </option>";
-        htmlString +="<option value='3'>Room 3 </option>";
-        htmlString +="<option value='4'>Room 4 </option>";
-        htmlString +="<option value='5'>Room 5 </option>";
-        htmlString +="<option value='6'>Room 6 </option>";
-        htmlString +="<option value='7'>Room 7 </option>";
-        htmlString +="<option value='8'>Room 8 </option>";
-        htmlString +="<option value='9'>Room 9 </option>";
-        htmlString +="</select>";
+        htmlString +="<input type='text' name='roomNumber"+bunkNumber+"' class='form-control' id='rooms"+bunkNumber+"'>";
         htmlString +="</div>";
         htmlString += "<div id='divButton'>"
         htmlString += "<div class='input-group ulul'>";
@@ -50,14 +40,93 @@ jQuery(document).ready(function(){
         jQuery('#unitDetails').append(htmlString);
     });
 });
+var source=["Room1","Room2","Room3","Room4","Room5","Room6","Room7","Room8","Room9"];
+
+jQuery('#room').tokenfield({
+    autocomplete: {
+        source: source,
+        delay: 100
+    },
+    showAutocompleteOnFocus: false
+    });
+    jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
+        var existingTokens = $(this).tokenfield('getTokens');
+        jQuery.each(existingTokens, function(index, token) {
+            if (token.value === event.attrs.value)
+                event.preventDefault();
+        });
+
+        var exists = false;
+        jQuery.each(source, function(index, value) {
+                if (event.attrs.value === value) {
+                    exists = true;
+                }
+        });
+        if(!exists) {
+                event.preventDefault(); //prevents creation of token
+                alert('Please select the unit from the choices.')
+        }
+
+        /*var available_tokens = bloodhound_tokens.index.datums
+        var exists = true;
+        jQuery.each(available_tokens, function(index, token) {
+            if (token.value === event.attrs.value)
+                exists = false;
+        });
+        if(exists === true)
+            event.preventDefault();*/
+    });
+
+    jQuery('#room').on('tokenfield:createdtoken', function (e){
+        console.log(e.attrs.value);
+        addRowBunks(e.attrs.value);
+    })
+//})
+function addRowBunks(bunkNumber){
+    var htmlString ="";
+        //htmlString += "<div class='form-group row'>";
+        htmlString +="<div class='col-md-3 mb-1'>";
+        //htmlString +="<label for='unitID'> No. of bunk/s</label>";
+        htmlString +="<div class='input-group'>";
+        htmlString +="<div class='input-group-prepend2'>";
+        htmlString +="<span class='input-group-text' name='WAWITS'>";
+        htmlString +="<i class='fa fa-bed' id='icon' aria-hidden='true'></i>";
+        htmlString +="</span>";
+        htmlString +="</div>";
+        htmlString +="<input class='form-control' type='number' id='numberOfBunks"+bunkNumber+"' name='numberOfBunks"+bunkNumber+"' required placeholder='' value='1' min='1' max='10'>";
+        htmlString +="</div>";
+        htmlString +="</div>";
+        htmlString +="<div class='col-md-7 mb-1'>";
+        //htmlString +="<label for='roomNumber'>Room/s</label>";
+        htmlString +="<input='text' name='roomNumber"+bunkNumber+"' class='form-control' id='rooms"+bunkNumber+"'>";
+        htmlString +="</div>";
+        htmlString += "<div id='divButton'>"
+        htmlString += "<div class='input-group ulul'>";
+        htmlString += "<button type='button' id='divButton"+bunkNumber+"' value='"+bunkNumber+"' class='btn btn-danger removeBedForm'>";
+        htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
+        htmlString += "</button>";
+        htmlString += "</div>";
+        htmlString += "</div>";
+        //htmlString +="</div>";
+        //htmlString +="</div>";
+        htmlString +="";
+        htmlString +="";
+        htmlString +="";
+
+
+        console.log(htmlString);
+
+        jQuery('#unitDetails').append(htmlString);
+}
 
 //Remove bunks
 jQuery(document).on('click', '.removeBedForm', function(){
 
     var id = jQuery('.numBunks').attr('id').slice(17);
     var numberOfBunks='#numberOfBunks'+id;
-    var roomNumber='#room'+id;
+    var roomNumber='#rooms'+id;
     var divButton='#divButton'+id;
+    
 
 
     jQuery(numberOfBunks).remove();

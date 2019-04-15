@@ -137,8 +137,8 @@
                         </div>
                         <div class="col-md-7 mb-1">
                             <label for="roomNumber">Room/s</label>
-                            <select name="roomNumber" class="form-control">
-                                <option value="1">Room 1</option>
+                            <input type="text" name="roomNumber" class="form-control" id="room">
+                                {{--<option value="1">Room 1</option>
                                 <option value="2">Room 2</option>
                                 <option value="3">Room 3</option>
                                 <option value="4">Room 4</option>
@@ -146,8 +146,8 @@
                                 <option value="6">Room 6</option>
                                 <option value="7">Room 7</option>
                                 <option value="8">Room 8</option>
-                                <option value="9">Room 9</option>
-                            </select>                            
+                                <option value="9">Room 9</option>--}}
+
                         </div>
                         <div style="margin-top:2em;">
                             <div class="input-group">
