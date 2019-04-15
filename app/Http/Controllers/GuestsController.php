@@ -346,6 +346,7 @@ class GuestsController extends Controller
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->where('remarks', '=','full')
         ->get();
+        //return $guest;
 
         $pendingPayments = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
@@ -527,6 +528,7 @@ class GuestsController extends Controller
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
             ->whereDate('accommodation_units.checkoutDatetime', '=', Carbon::now())
             ->get();
+            //return $otherUnits;
 
             return view('lodging.checkoutDueToday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {

@@ -264,7 +264,6 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         @if($guestDetails->numberOfUnits > 1)
-                            <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$guestDetails->numberOfUnits}}">
                                 <div class="col-md-1 mb-1" id="divUnitNumber">
                                     <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
                                     @foreach($otherUnits as $units)
@@ -290,6 +289,8 @@
                                     @php
                                         $unitNumbers = implode(",", $unitNumbers);
                                     @endphp
+                                    <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$unitsDueToday}}">
+                                    <input type="text" style="display:none;float:left;" id="unitCheckout" name="unitCheckout" value="{{$unitNumbers}}">
                                 </div>
                                 <div class="col-md-3 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
