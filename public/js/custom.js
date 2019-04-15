@@ -1116,14 +1116,22 @@ jQuery(document).ready(function() {
 })
 
 jQuery(document).ready(function() {
-	var pathname = window.location.pathname;
-	if(jQuery('.nav-list > li > div > a[href="'+pathname+'"]')) {
-        jQuery('.nav-list > li > button').addClass('active');
+    var pathname = window.location.pathname;
+    if(jQuery('.nav-list > li > a[href="'+pathname+'"]').class('active')) {
+        jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
+    } else {
+        jQuery('.nav-list > li > #transactionsTab').addClass('active');
         jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > text').css('color', 'white !important');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
     }
-})
+	/*if(jQuery('.nav-list > li > div > .dropdown-item[href="'+pathname+'"]')) {
+        jQuery('.nav-list > li > #transactionsTab').addClass('active');
+        jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > text').css('color', 'white !important');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    }*/
+}) 
 
 jQuery(document).ready(function(){
     jQuery('.cancel-reservation-modal').click(function(){

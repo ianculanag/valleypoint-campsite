@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link" href="">
+                        <button class="dropdown-btn nav-link" id="transactionsTab" href="/view-payments">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             Transactions
                             <i class="fa fa-caret-down"></i>
