@@ -211,7 +211,7 @@ class GuestsController extends Controller
         $additionalChargesCount = 0;
         $additionalChargesArray = array();
 
-        if($request->input('additionalServicesCount') > 0) {
+        /*if($request->input('additionalServicesCount') > 0) {
             for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
                 $additionalServiceID = 'additionalServiceID'.$count;
                 $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
@@ -229,7 +229,7 @@ class GuestsController extends Controller
                     array_push($additionalChargesArray, $charges->id);
                 }
             }
-        }
+        }*/
 
         $firstAdditionalCharge = $request->input('chargesCount'); //get index of newly added charges
 
