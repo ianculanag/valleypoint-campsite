@@ -466,6 +466,7 @@ class GuestsController extends Controller
             ->join('units', 'units.id', 'accommodation_units.unitID')
             ->join('services', 'services.id', 'accommodation_units.serviceID')
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
+            ->where('status', '=', 'ongoing')
             ->get();
 
             //return $otherUnits;
