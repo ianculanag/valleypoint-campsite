@@ -28,7 +28,17 @@ class AccommodationsController extends Controller
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.checkinGlamping')->with('unit', $unit);
+
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+        //->toArray();
+
+        //return $unitSource;
+
+        return view('lodging.checkinGlamping')->with('unit', $unit)->with('unitSource', $unitSource);
     }
 
     /**
@@ -56,9 +66,15 @@ class AccommodationsController extends Controller
         $charges = $units;
 
         $givenCheckinDate =  $request->input('checkin');
-        $givenCheckoutDate = $request->input('checkout');
+        $givenCheckoutDate = $request->input('checkout');        
 
-        return view('lodging.checkinGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate);
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.checkinGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate)->with('unitSource', $unitSource);
     }
 
     /**

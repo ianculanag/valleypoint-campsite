@@ -117,11 +117,20 @@
                             <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
                             </div>
                         </div>
+                        @php
+                            //$source = implode(',', array($unitSource->unitNumber));
+                            $source = array();
+                            foreach($unitSource as $unitSource) {
+                                array_push($source, $unitSource->unitNumber);
+                            }
+
+                            $source = implode(',', $source);
+                        @endphp
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
-                            
+                            <input type="hidden" id="unitSource" value="{{$source}}">
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
                             
                             <!-- relocated    div id="alertContainer" class="alert alert-danger mt-2" style="display:none;">

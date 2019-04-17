@@ -86,7 +86,14 @@ class ReservationsController extends Controller
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.reservationGlamping')->with('unit', $unit);
+
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.reservationGlamping')->with('unit', $unit)->with('unitSource', $unitSource);
     }
 
     /**
@@ -116,7 +123,13 @@ class ReservationsController extends Controller
         $givenCheckinDate =  $request->input('checkin');
         $givenCheckoutDate = $request->input('checkout');
 
-        return view('lodging.reservationGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate);
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.reservationGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate)->with('unitSource', $unitSource);
     }
 
     /**
@@ -191,9 +204,15 @@ class ReservationsController extends Controller
         ->where('charges.serviceID', '>', '5')
         ->get();
 
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
         //return $additionalServices;
 
-        return view('lodging.viewGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices);
+        return view('lodging.viewGlampingReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices)->with('unitSource', $unitSource);
     }
 
     public function saveGlampingReservation(Request $request)

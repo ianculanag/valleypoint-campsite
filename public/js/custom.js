@@ -239,27 +239,22 @@ jQuery(document).on('click','.collapse.in',function(e) {
 });
 
 jQuery(document).ready(function(){    
-    /*jQuery.get('/load-tents', function(data){
-        var source = new Array();
+    
+    //var source =["Tent1", "Tent2", "Tent3", "Tent4", "Tent5", "Tent6", "Tent7", "Tent8", "Tent9", "Tent10",
+    //            "Tent11", "Tent12", "Tent13", "Tent14", "Tent15", "Tent16", "Tent17", "Tent18", "Tent19", "Tent20"];
 
-        for(var count = 0; count < data.length; count++) {
-            source.push(data[count].unitNumber);
-        }*/
+    var source = jQuery('#unitSource').val().split(',');
 
-        //console.log(source);
-    //var numberOfUnits = 1;
-    var source =["Tent1", "Tent2", "Tent3", "Tent4", "Tent5", "Tent6", "Tent7", "Tent8", "Tent9", "Tent10",
-                 "Tent11", "Tent12", "Tent13", "Tent14", "Tent15", "Tent16", "Tent17", "Tent18", "Tent19", "Tent20"];
-        //console.log(source);
-        
-        jQuery('#tokenfield').tokenfield({
-            autocomplete: {
-            source: source,
-            delay: 100
-            },
-            showAutocompleteOnFocus: false
-        });
-    //})
+    //console.log(source);
+    //console.log(sourceNew);
+                 
+    jQuery('#tokenfield').tokenfield({
+        autocomplete: {
+        source: source,
+        delay: 100
+        },
+        showAutocompleteOnFocus: false
+    });
 
     jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
         var existingTokens = $(this).tokenfield('getTokens');
