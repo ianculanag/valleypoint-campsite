@@ -365,6 +365,7 @@ class GuestsController extends Controller
             ->join('units', 'units.id', 'accommodation_units.unitID')
             ->join('services', 'services.id', 'accommodation_units.serviceID')
             ->where('accommodation_units.accommodationID', '=', $guest[0]->accommodationID)
+            ->where('accommodation_units.status', '=','ongoing')
             ->get();
 
             return view('lodging.editdetails')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
