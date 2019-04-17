@@ -12,6 +12,7 @@
         <h3 class="text-center">Users</h3>
     </div>
     <div class="col-md-12">
+        <a class="btn btn-sm btn-success mb-2" href="/add-user">Add user</a>
         <table id="usersTable" data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   

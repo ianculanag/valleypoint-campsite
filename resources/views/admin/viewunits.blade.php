@@ -12,7 +12,7 @@
         <h3 class="text-center">Units</h3>
     </div>
     <div class="col-md-12">
-        <!--button class="btn btn-md btn-success mb-2">Add unit</button-->
+        <a class="btn btn-sm btn-success mb-2" href="/add-unit">Add unit</a>
         <table data-order='[[ 0, "asc" ]]' id="unitsTable" class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>                   
