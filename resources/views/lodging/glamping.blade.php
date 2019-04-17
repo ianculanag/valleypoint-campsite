@@ -3,13 +3,13 @@
 @section('content')
     <div class="row">
         <div class="container-fluid col-md-9 mx-1 pb-5 pt-1">
-            {{--<div class="col-md-12 text-center lodging-tabs">
+            <div class="col-md-12 text-center lodging-tabs">
                 <nav class="nav nav-pills centered-pills">
                     <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
                     <a class="nav-item nav-link" style="color:#505050" href="/calendar">Calendar View</a>
                 </nav>
             </div>
-            <div class="container" style="position:absolute;">
+            {{--<div class="container" style="position:absolute;">
                 <form style="float:right; padding-right:3em;">
                     <div class="form-group row mb-0">
                         <label for="staticEmail" class="col-md-5 col-form-label" style="padding-left:0; padding-right:.5;">Sort by:</label>
