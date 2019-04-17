@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="container-fluid col-md-9 mx-1 pb-5 pt-1">
-            <div class="col-md-12 text-center lodging-tabs">
-                <nav class="nav nav-pills centered-pills">
-                    <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
-                    <a class="nav-item nav-link" style="color:#505050" href="/calendar-backpacker">Calendar View</a>
-                </nav>
-            </div>
+    <div class="col-md-12 text-center lodging-tabs mx-1">
+        <nav class="nav nav-pills">
+            <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
+            <a class="nav-item nav-link" style="color:#505050" href="/calendar-backpacker">Calendar View</a>
+        </nav>
+    </div>
+    <div class="container-fluid col-md-9 mx-1 pb-5 pt-1">
+        <div class="row">
             <div class="container lodging-tabs">
                 <ul class="nav nav-tabs pt-0" style="width:93%">
                     <li class="nav-item">

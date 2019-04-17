@@ -2,22 +2,22 @@
 
 @section('content')
     <div class="col-md-12 text-center lodging-tabs">
-        <nav class="nav nav-pills centered-pills">
+        <nav class="nav nav-pills">
             <a class="nav-item nav-link" style="color:#505050" href="/glamping">Physical View</a>
             <a class="nav-item nav-link active" style="background-color:#505050" href="#">Calendar View</a>
         </nav>
     </div>
-    <div class="container lodging-tabs">
+    <div class="container-fluid lodging-tabs">
         <ul class="nav nav-tabs w-100 pt-0">
             <li class="nav-item">
-                <a class="nav-link active" href="/glamping/">Glamping</a>
+                <a class="nav-link active" href="/calendar-glamping">Glamping</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#505050;" href="/transient-backpacker">Backpacker</a>
+                <a class="nav-link" style="color:#505050;" href="/calendar-backpacker">Backpacker</a>
             </li>
         </ul>
     </div>    
-    <div class="container pb-5" style="padding-top:1em;">
+    <div class="container-fluid pb-5" style="padding-top:1em;">
         <table class="table table-sm">
         <thead>
             <tr>
