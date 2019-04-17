@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="container-fluid col-md-9 mx-1">
+        <div class="container-fluid col-md-9 mx-1 pb-5 pt-1">
             {{--<div class="col-md-12 text-center lodging-tabs">
                 <nav class="nav nav-pills centered-pills">
                     <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
@@ -147,7 +147,7 @@
         <div class="container-fluid col-md-3 m-0 p-0" id="unitFinder" style="padding-top:15em;">
             <div class="card p-0 mx-0" style="font-size:0.9em; {{--background-color:#e1fdec66;--}}">
                 <div class="card-body">
-                    <h4 class="text-center pb-1">Unit Finder</h4>
+                    <h4 class="text-center pb-1">Tent Finder</h4>
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -174,13 +174,13 @@
                             </div>
                         </div>
                         <div class="form-group row mb-0">
-                            <label class="col-sm-4 mb-0 mt-2" for="unitCount">No. of units</label>
+                            <label class="col-sm-4 mb-0 mt-2" for="unitCount">No. of tents</label>
                             <div class="input-group input-group-sm mb-1 col-sm-8">
                                 <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <hr class="my-3">
-                        <h6 class="text-center mb-1">Available Units</h6>
+                        <h6 class="text-center mb-1">Available Tents</h6>
                         <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto;">
                             <div class="card-body pb-0" id="availableUnitsContainer" style="display:block;">
                                 <div class="available-units-list" id="divAvailableUnitsList" style="font-size:1.1em">
@@ -207,66 +207,11 @@
                         <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto; overflow-x:auto;">
                             <div class="card-body p-0" id="unavailableUnitsContainer" style="display:block;">
                                 <div class="unavailable-units-list" id="divUnavailableUnitsList" style="font-size:1.1em">
-                                    <table class="table table-bordered table-sm nowrap m-0" style="border-collapse: collapse;">
+                                    <table class="table table-bordered table-sm nowrap m-0" style="border-collapse:collapse;">
                                         <thead id="calendarHead">
                                         </thead>
                                         <tbody id="calendarBody">
-                                            <!--tr>
-                                                <td>Tent7</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tent8</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tent9</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tent10</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr-->
+                                            
                                         </tbody>
                                     </table>
                                 </div>
