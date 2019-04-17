@@ -11509,6 +11509,7 @@ a.ui-button:active,
 .dataTables_paginate span a.paginate_button.current:hover {
   border: 1px solid #979797 !important;
   background: inherit !important;
+  transition: none;
 }
 
 .dataTables_paginate span a.paginate_button {
@@ -11522,6 +11523,11 @@ a.ui-button:active,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   border: 1px solid #979797 !important;
   background: #979797 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+  border: transparent !important;
+  background: transparent !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {

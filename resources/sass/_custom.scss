@@ -1644,6 +1644,11 @@ a.ui-button:active,
 	background: #979797 !important;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+	border: transparent !important;
+	background: transparent !important;
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
 	border: inherit !important;
 	background: inherit !important;
