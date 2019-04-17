@@ -24,7 +24,7 @@
             <th scope="col">Unit No.</th>            
             @if(count($dates) > 0)
             @foreach($dates as $date)
-                <th scope="col">{{$date}}</th>
+                <th scope="col" colspan="2">{{\Carbon\Carbon::parse($date)->format('M j')}}</th>
             @endforeach
             @endif
             </tr>
@@ -41,7 +41,8 @@
                 <tr>
                 <td scope="row">{{$unit->unitNumber}}</td>
                 @foreach($dates as $date)
-                <td scope="col" id="{{$unit->unitNumber}}{{(string)$date}}"></td>
+                <td scope="col" id="{{$unit->unitNumber}}{{(string)$date}}AM"></td>                
+                <td scope="col" id="{{$unit->unitNumber}}{{(string)$date}}PM"></td>
                 @endforeach
                 </tr>
             @endforeach
