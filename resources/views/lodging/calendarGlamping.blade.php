@@ -21,10 +21,11 @@
         <table class="table table-sm table-bordered">
         <thead>
             <tr>
-            <th scope="col">Unit No.</th>            
+            <th scope="col"></th>            
             @if(count($dates) > 0)
             @foreach($dates as $date)
-                <th scope="col" colspan="2">{{\Carbon\Carbon::parse($date)->format('M j')}}</th>
+                <td style="text-align: center;" scope="col" colspan="2">{{\Carbon\Carbon::parse($date)->format('D')}}
+                                        <hr class="py-0 my-0">{{\Carbon\Carbon::parse($date)->format('M j')}}</td>
             @endforeach
             @endif
             </tr>
@@ -39,10 +40,14 @@
             @if(count($units) > 0)
             @foreach($units as $unit)
                 <tr>
-                <td scope="row">{{$unit->unitNumber}}</td>
+                <td scope="row" style="text-align: center;">{{$unit->unitNumber}}</td>
                 @foreach($dates as $date)
-                <td scope="col" id="{{$unit->unitNumber}}{{(string)$date}}AM"></td>                
-                <td scope="col" id="{{$unit->unitNumber}}{{(string)$date}}PM"></td>
+                @php
+                    $idAM = $unit->unitNumber.(string)$date.'AM';
+                    $idPM = $unit->unitNumber.(string)$date.'PM';
+                @endphp
+                <td scope="col" id="{{$idAM}}"></td>                
+                <td scope="col" id="{{$idPM}}""></td>
                 @endforeach
                 </tr>
             @endforeach

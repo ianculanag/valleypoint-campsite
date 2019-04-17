@@ -89,9 +89,38 @@ class UnitsController extends Controller
             array_push($days, Carbon::now()->addDays($index)->format('Y-m-d'));
         }
 
-        //return $days;
+        $accommodationDates = DB::table('accommodation_units')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
+                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
+        ->where('accommodation_units.status', '=', 'ongoing')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();
 
-        return view('lodging.calendarglamping')->with('units', $units)->with('dates', $days);
+        $reservationDates = DB::table('reservation_units')
+        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
+        ->where('reservation_units.status', '=', 'reserved')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();
+
+        $blockDates = array_merge($accommodationDates, $reservationDates);
+
+        $dateStrings = array();
+
+        for($count = 0; $count < count($blockDates); $count++) {
+            $dateString = $blockDates[$count]->unitNumber.Carbon::parse($blockDates[$count]->checkinDatetime)->format('Y-m-d').'AM';
+            array_push($dateStrings, $dateString);
+        }
+
+        //return $dateStrings;
+
+        return view('lodging.calendarglamping')->with('units', $units)->with('dates', $days)->with('blockDates', $blockDates)->with('dateStrings', $dateStrings);
     }
 
     /**
