@@ -18,7 +18,7 @@
         </ul>
     </div>    
     <div class="container" style="padding-top:1em;">
-        <table class="table table-sm ">
+        <table class="table table-sm">
         <thead>
             <tr>
             <th scope="col"></th>            
@@ -51,17 +51,13 @@
 
                     $hit = false;
 
-                    /*for($index = 0; $index < count($dateStrings); $index++) {
-                        if($idPM == $dateStrings[$index]) {
-                            $hit = true;
-                        }
-                    }*/
+                    $occupiedColor = 'rgb(115, 195, 180)';
+                    $reservedColor = 'rgb(106, 224, 180)';
+
+                    $isAccommodation = false;
+                    $isReservation = false;
+
                     for($index = 0; $index < count($blockDates); $index++) {
-                        //if(($unit->unitNumber == $blockDates[$index]->unitNumber)
-                        //   ($date >= \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d') &&
-                        //   ($date <= \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')))) {
-                        //        $hit = true;
-                        //}
 
                         if($unit->unitNumber == $blockDates[$index]->unitNumber) {
                             if($date == \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) {
@@ -72,26 +68,54 @@
                                        ($date < \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')))) {
                                 $hit = true;
                             }
+
+                            if (isset($blockDates[$index]->accommodationID)) {
+                                $isAccommodation = true;
+                            } else if (isset($blockDates[$index]->reservationID)) {
+                                $isReservation = true;
+                            }
                         }
                     }
                 @endphp
-                @if($hitPM)
-                <td scope="col" id="{{$idAM}}"></td>                
-                <td scope="col" id="{{$idPM}}" style="background-color: lightseagreen"></td>
-                
-                @elseif($hitAM)
-                <td scope="col" id="{{$idAM}}" style="background-color: lightseagreen"></td>                
-                <td scope="col" id="{{$idPM}}"></td>
-                
-                @elseif($hit)
-                <td scope="col" id="{{$idAM}}" style="background-color: lightseagreen"></td>                
-                <td scope="col" id="{{$idPM}}" style="background-color: lightseagreen"></td>
+                @if($isAccommodation)
+                    @if($hitPM)
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}"></td>
+                    
+                    @elseif($hitAM)
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}"></td>                
+                    <td scope="col" id="{{$idPM}}"></td>
+                    
+                    @elseif($hit)
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}"></td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}"></td>
 
+                    @else
+                    
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}"></td>
+                    @endif
+                @elseif($isReservation)
+                    @if($hitPM)
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}"></td>
+                    
+                    @elseif($hitAM)
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}"></td>                
+                    <td scope="col" id="{{$idPM}}"></td>
+                    
+                    @elseif($hit)
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}"></td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}"></td>
+
+                    @else
+                    
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}"></td>
+                    @endif
                 @else
-                
-                <td scope="col" id="{{$idAM}}"></td>                
-                <td scope="col" id="{{$idPM}}"></td>
-
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}"></td>
                 @endif
                 @endforeach
                 </tr>
