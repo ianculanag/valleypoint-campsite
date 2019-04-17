@@ -86,15 +86,17 @@ class UnitsController extends Controller
 
         $days = array();
 
-        for($index = 1; $index < 15; $index++){
+        for($index = 0; $index < 15 ; $index++){
             array_push($days, Carbon::now()->addDays($index)->format('Y-m-d'));
         }
 
         $accommodationDates = DB::table('accommodation_units')
         ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
         ->join('units', 'units.id', 'accommodation_units.unitID')
         ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
-                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
+                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID',
+                 'guests.firstName', 'guests.lastName')
         ->where('accommodation_units.status', '=', 'ongoing')
         ->orderBy('units.id')
         ->get()
@@ -104,7 +106,8 @@ class UnitsController extends Controller
         ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
-                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
+                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID',
+                 'reservations.firstName', 'reservations.lastName')
         ->where('reservation_units.status', '=', 'reserved')
         ->orderBy('units.id')
         ->get()

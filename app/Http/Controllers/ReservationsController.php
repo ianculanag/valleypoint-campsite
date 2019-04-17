@@ -150,7 +150,7 @@ class ReservationsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('reservation_units.unitID', '!=', $unitID)
-        ->where('reservation_units.checkinDatetime', '=', $reservedUnit->checkinDatetime)
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
         ->get();
 
         $allReservedUnits = DB::table('reservation_units')
@@ -164,10 +164,6 @@ class ReservationsController extends Controller
         
         $charges = DB::table('charges')
         ->join('reservation_units', 'reservation_units.unitID', 'charges.unitID')
-        /*->join('reservation_units', function($join) {
-            $join->on('reservation_units.reservationID', '=', 'charges.reservationID')
-                 ->where('reservation_units.unitID', '=','charges.unitID');
-        })*/
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.reservationID',
@@ -177,6 +173,8 @@ class ReservationsController extends Controller
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '<', '6')
         ->get();
+
+        //return $charges;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
