@@ -201,7 +201,68 @@ class AccommodationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function checkinBackpacker(Request $request)
+
+     //new checkinBackpacker
+
+     public function checkinBackpacker(Request $request){
+
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+            'checkinDate' => 'required', 'checkoutDate' => 'required',
+        'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
+    ]);
+
+            $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
+            $accommodation->numberOfUnits = $request->input('numberOfBunks');
+            $accommodation->userID = Auth::user()->id;
+            $accommodation->save(); 
+
+            $guest = new Guests;
+            $guest->lastName = $request->input('lastName');
+            $guest->firstName = $request->input('firstName');
+            $guest->accommodationID = $accommodation->id;   
+            $guest->contactNumber = $request->input('contactNumber');
+            $guest->save();
+            
+            $chargesCount = 0;
+        $chargesArray = array();
+
+        for($count = 0; $count < $request->input('numberOfBunks'); $count++) { //for loop two; numberOfUnits changed to numberOfBunks
+            
+            //$accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+            $checkinDate = 'checkinDate'.$unitNumbers[$count];
+            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+
+            $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+            //$unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+            $accommodationUnit = new AccommodationUnits;
+            $accommodationUnit->accommodationID = $accommodation->id;
+            $accommodationUnit->unitID = $unit[0]->id;
+            $accommodationUnit->status = 'ongoing';
+            $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+            $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+            $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+            $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+            $accommodationUnit->save();
+
+            $charges = new Charges;
+            $charges->quantity = $request->input($accommodationPackage);
+            $charges->totalPrice = $request->input($totalPrice);
+            $charges->balance = $request->input($totalPrice);
+            $charges->remarks = 'unpaid';
+            $charges->accommodationID = $accommodation->id;
+            $charges->serviceID = $request->input($accommodationPackage);
+            $charges->save();
+            $chargesCount++;
+            array_push($chargesArray, $charges->id);
+        }
+        return redirect('/transient-backpacker');
+     }
+
+     //old checkinBackpacker
+    /*public function checkinBackpacker(Request $request)
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
@@ -210,7 +271,7 @@ class AccommodationsController extends Controller
     ]);
 
         
-    /*if(count($reservedAccommodations)>0){
+    if(count($reservedAccommodations)>0){
         for($count=0;$count<count($reservedAccommodations);$count+1){
             if($request->input('checkinDate')<=$reservedAccommodations[$count]){
             //return redirect()->back()->withInput();    
@@ -219,7 +280,7 @@ class AccommodationsController extends Controller
                 return("Error pre");
             }
         }
-    }*/
+    }
 
         $BeforeAccommodations = DB::table('accommodations')
         ->select('accommodations.checkinDatetime')
@@ -230,7 +291,7 @@ class AccommodationsController extends Controller
         ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())            
         ->get();
 
-        /*if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
+        if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
         {
             return("Hello");
         }else{
@@ -240,11 +301,11 @@ class AccommodationsController extends Controller
             return redirect()->back()->withInput();
             
         }
-*/
+
         
         //GAC
         $accommodation = new Accommodation;                 
-        $accommodation->numberOfPax = $request->input('numberOfPax');
+        $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
         $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
         $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
         $accommodation->serviceID = 5;
@@ -253,12 +314,28 @@ class AccommodationsController extends Controller
         //$accommodation->paymentStatus = $request->input('paymentStatus');
         $accommodation->save();
 
+        //accomodation
+
+        $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
+        $accommodation->numberOfUnits = $request->input('numberOfBunks');
+        $accommodation->userID = Auth::user()->id;
+        $accommodation->save();
+
         $guest = new Guests;
         $guest->lastName = $request->input('lastName');
         $guest->firstName = $request->input('firstName');
         $guest->accommodationID = $accommodation->id;   
         $guest->contactNumber = $request->input('contactNumber');
         $guest->save();
+
+        //guest
+
+        $guest = new Guests;
+        $guest->lastName = $request->input('lastName');
+        $guest->firstName = $request->input('firstName');
+        $guest->accommodationID = $accommodation->id;   
+        $guest->contactNumber = $request->input('contactNumber');
+        $guest->save(); 
 
         if ($accommodation->numberOfPax > 1) {
             for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
@@ -274,6 +351,47 @@ class AccommodationsController extends Controller
                 $accompanyingGuest->save();
             }
         }
+
+        //for loop based from checkin glamping
+
+        $chargesCount = 0;
+        $chargesArray = array();
+
+        for($count = 0; $count < $request->input('numberOfBunks'); $count++) { //for loop two; numberOfUnits changed to numberOfBunks
+            
+            //$accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+            $checkinDate = 'checkinDate'.$unitNumbers[$count];
+            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+
+            $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+            //$unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+            $accommodationUnit = new AccommodationUnits;
+            $accommodationUnit->accommodationID = $accommodation->id;
+            $accommodationUnit->unitID = $unit[0]->id;
+            $accommodationUnit->status = 'ongoing';
+            $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+            $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+            $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+            $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+            $accommodationUnit->save();
+
+            $charges = new Charges;
+            $charges->quantity = $request->input($accommodationPackage);
+            $charges->totalPrice = $request->input($totalPrice);
+            $charges->balance = $request->input($totalPrice);
+            $charges->remarks = 'unpaid';
+            $charges->accommodationID = $accommodation->id;
+            $charges->serviceID = $request->input($accommodationPackage);
+            $charges->save();
+            $chargesCount++;
+            array_push($chargesArray, $charges->id);
+        }
+
+        
+
+
 
         $service = Services::find(5);
         
@@ -302,7 +420,7 @@ class AccommodationsController extends Controller
 
         return redirect('/transient-backpacker');
 
-    }
+}*/
 
 
 
