@@ -1596,4 +1596,49 @@ a.ui-button:active,
 	filter:Alpha(Opacity=35); /* support: IE8 - See #6059 */
 }
 
+.dataTables_wrapper div label input {
+	padding: .25rem .5rem;
+	font-size: .875rem;
+	line-height: 1.5;
+	color: #495057;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
+.dataTables_length label select {
+	padding: .25rem .5rem;
+	font-size: .875rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+}
+
+.dataTables_info, .paginate_button {
+	font-size: .95em;
+}
+
+.dataTables_paginate span a.paginate_button.current {
+	border: 1px solid #979797 !important;
+}
+
+.dataTables_paginate span a.paginate_button {
+	background: none; 
+	padding: .375rem .75rem !important;
+	line-height: 1.5 !important;
+	border-radius: .25rem !important;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	border: 1px solid #979797 !important;
+	background: #979797 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+	border: none !important;
+	background: inherit !important;
+}

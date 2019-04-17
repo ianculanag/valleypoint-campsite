@@ -11477,6 +11477,53 @@ a.ui-button:active,
   /* support: IE8 - See #6059 */
 }
 
+.dataTables_wrapper div label input {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #495057;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dataTables_length label select {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.dataTables_info, .paginate_button {
+  font-size: 0.95em;
+}
+
+.dataTables_paginate span a.paginate_button.current {
+  border: 1px solid #979797 !important;
+}
+
+.dataTables_paginate span a.paginate_button {
+  background: none;
+  padding: 0.375rem 0.75rem !important;
+  line-height: 1.5 !important;
+  border-radius: 0.25rem !important;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  border: 1px solid #979797 !important;
+  background: #979797 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+  border: none !important;
+  background: inherit !important;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
