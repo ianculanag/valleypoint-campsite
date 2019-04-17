@@ -18,7 +18,7 @@
         </ul>
     </div>    
     <div class="container" style="padding-top:1em;">
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm ">
         <thead>
             <tr>
             <th scope="col"></th>            
@@ -45,9 +45,54 @@
                 @php
                     $idAM = $unit->unitNumber.(string)$date.'AM';
                     $idPM = $unit->unitNumber.(string)$date.'PM';
+
+                    $hitAM = false;
+                    $hitPM = false;
+
+                    $hit = false;
+
+                    /*for($index = 0; $index < count($dateStrings); $index++) {
+                        if($idPM == $dateStrings[$index]) {
+                            $hit = true;
+                        }
+                    }*/
+                    for($index = 0; $index < count($blockDates); $index++) {
+                        //if(($unit->unitNumber == $blockDates[$index]->unitNumber)
+                        //   ($date >= \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d') &&
+                        //   ($date <= \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')))) {
+                        //        $hit = true;
+                        //}
+
+                        if($unit->unitNumber == $blockDates[$index]->unitNumber) {
+                            if($date == \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) {
+                                $hitPM = true;
+                            } else if ($date == \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')) {
+                                $hitAM = true;
+                            } else if (($date > \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d') &&
+                                       ($date < \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')))) {
+                                $hit = true;
+                            }
+                        }
+                    }
                 @endphp
+                @if($hitPM)
                 <td scope="col" id="{{$idAM}}"></td>                
-                <td scope="col" id="{{$idPM}}""></td>
+                <td scope="col" id="{{$idPM}}" style="background-color: lightseagreen"></td>
+                
+                @elseif($hitAM)
+                <td scope="col" id="{{$idAM}}" style="background-color: lightseagreen"></td>                
+                <td scope="col" id="{{$idPM}}"></td>
+                
+                @elseif($hit)
+                <td scope="col" id="{{$idAM}}" style="background-color: lightseagreen"></td>                
+                <td scope="col" id="{{$idPM}}" style="background-color: lightseagreen"></td>
+
+                @else
+                
+                <td scope="col" id="{{$idAM}}"></td>                
+                <td scope="col" id="{{$idPM}}"></td>
+
+                @endif
                 @endforeach
                 </tr>
             @endforeach

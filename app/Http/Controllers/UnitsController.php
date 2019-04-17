@@ -111,10 +111,12 @@ class UnitsController extends Controller
 
         $blockDates = array_merge($accommodationDates, $reservationDates);
 
+        //return $blockDates;
+
         $dateStrings = array();
 
         for($count = 0; $count < count($blockDates); $count++) {
-            $dateString = $blockDates[$count]->unitNumber.Carbon::parse($blockDates[$count]->checkinDatetime)->format('Y-m-d').'AM';
+            $dateString = $blockDates[$count]->unitNumber.Carbon::parse($blockDates[$count]->checkinDatetime)->format('Y-m-d').'PM';
             array_push($dateStrings, $dateString);
         }
 
