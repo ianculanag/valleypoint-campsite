@@ -57,9 +57,15 @@
                     $isAccommodation = false;
                     $isReservation = false;
 
+                    $guestName = '';
+
                     for($index = 0; $index < count($blockDates); $index++) {
 
-                        if($unit->unitNumber == $blockDates[$index]->unitNumber) {
+                        if(($unit->unitNumber == $blockDates[$index]->unitNumber) &&
+                           ($date >= \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) &&
+                           ($date <= \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d'))) {
+                            
+                            $guestName = '';
                             if($date == \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) {
                                 $hitPM = true;
                             } else if ($date == \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')) {
@@ -71,10 +77,12 @@
 
                             if (isset($blockDates[$index]->accommodationID)) {
                                 $isAccommodation = true;
+                                $isReservation = false;
                                 $selectedUnitID = $blockDates[$index]->unitID;
                                 $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
                             } else if (isset($blockDates[$index]->reservationID)) {
-                                $isReservation = true;                                
+                                $isReservation = true;      
+                                $isAccommodation = false;                     
                                 $selectedUnitID = $blockDates[$index]->unitID;
                                 $reservationID = $blockDates[$index]->reservationID;
                                 $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
