@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-12 text-center lodging-tabs">
+    <div class="col-md-12 text-center lodging-tabs pb-5">
         <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link" style="color:#505050" href="/glamping">Physical View</a>
             <a class="nav-item nav-link active" style="background-color:#505050" href="/calendar">Calendar View</a>

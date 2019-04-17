@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="">
+<div class="container pb-5">
     <div class="pt-3 pb-3">
         <a href="/glamping">
             <span style="float:left;">
