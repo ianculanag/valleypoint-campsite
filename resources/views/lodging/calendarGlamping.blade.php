@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="col-md-12 text-center lodging-tabs">
-        <nav class="nav nav-pills">
+        <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link" style="color:#505050" href="/glamping">Physical View</a>
             <a class="nav-item nav-link active" style="background-color:#505050" href="#">Calendar View</a>
         </nav>
     </div>
-    <div class="container-fluid lodging-tabs">
+    <div class="container-fluid lodging-tabs mx-1 pt-1">
         <ul class="nav nav-tabs w-100 pt-0">
             <li class="nav-item">
                 <a class="nav-link active" href="/calendar-glamping">Glamping</a>

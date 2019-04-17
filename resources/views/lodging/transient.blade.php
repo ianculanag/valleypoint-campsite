@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-12 text-center lodging-tabs mx-1">
-        <nav class="nav nav-pills">
+        <nav class="nav nav-pills centered-pills">
             <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
             <a class="nav-item nav-link" style="color:#505050" href="/calendar-backpacker">Calendar View</a>
         </nav>
@@ -204,7 +204,7 @@
                 @endif
             </div>
         </div>
-        <div class="container-fluid col-md-3 m-0 p-0" id="unitFinder" style="padding-top:15em;">
+        <div class="container-fluid col-md-3 m-0 p-0" id="unitFinder" style="padding-top:25em;">
             <div class="card p-0 mx-0" style="font-size:0.9em; {{--background-color:#e1fdec66;--}}">
                 <div class="card-body">
                     <h4 class="text-center pb-1">Room Finder</h4>
@@ -241,7 +241,7 @@
                         </div>
                         <hr class="my-3">
                         <h6 class="text-center mb-1">Available Rooms</h6>
-                        <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto;">
+                        <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:33vh; max-height:20vh; overflow-y:auto;">
                             <div class="card-body pb-0" id="availableUnitsContainer" style="display:block;">
                                 <div class="available-units-list" id="divAvailableUnitsList" style="font-size:1.1em">
                                     {{--<div class="custom-control custom-checkbox mb-1">
@@ -264,7 +264,7 @@
                             </div>
                         </div>
                         <input type="hidden" id="checkedUnits" name="checkedUnits" value="hello">
-                        <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto; overflow-x:auto;">
+                        {{--<div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:20vh; max-height:20vh; overflow-y:auto; overflow-x:auto;">
                             <div class="card-body p-0" id="unavailableUnitsContainer" style="display:block;">
                                 <div class="unavailable-units-list" id="divUnavailableUnitsList" style="font-size:1.1em">
                                     <table class="table table-bordered table-sm nowrap m-0" style="border-collapse:collapse;">
@@ -276,7 +276,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="pt-2">
                             <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;">Checkin</button>
                             <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;">Add Reservation</button>
