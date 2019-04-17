@@ -219,7 +219,7 @@
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control finderInputs" id="finderCheckinDate" type="date" name="checkin" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control roomFinderInputs" id="roomFinderCheckinDate" type="date" name="checkin" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -230,13 +230,13 @@
                                         <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control finderInputs" type="date" id="finderCheckoutDate" name="checkout" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control roomFinderInputs" type="date" id="roomFinderCheckoutDate" name="checkout" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <div class="form-group row mb-0">
                             <label class="col-sm-4 mb-0 mt-2" for="unitCount">No. of rooms</label>
                             <div class="input-group input-group-sm mb-1 col-sm-8">
-                                <input class="form-control finderInputs" type="number" id="finderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
+                                <input class="form-control roomFinderInputs" type="number" id="roomFinderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
                         <hr class="my-3">
@@ -278,8 +278,8 @@
                             </div>
                         </div>--}}
                         <div class="pt-2">
-                            <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;">Checkin</button>
-                            <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;">Add Reservation</button>
+                            <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="roomFinderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
+                            <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="roomFinderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
                          </div>
                     <form>
                 </div>

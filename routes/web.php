@@ -37,9 +37,11 @@ Route::get('/dashboard', 'UnitsController@glamping');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-//Get glamping tents
+//Unit finder: Get glamping tents
 Route::get('/get-glamping-tents', 'UnitsController@getGlampingTents');
 
+//Unit finder: Get backpacker rooms
+Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
 
 //Check-in guests glamping
 //Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');

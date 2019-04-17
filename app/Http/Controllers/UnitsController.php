@@ -325,6 +325,19 @@ class UnitsController extends Controller
     }
 
     /**
+     * Return all unit ids with unit numbers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getBackpackerRooms()
+    {
+        return $units = DB::table('units')
+        ->where('units.unitType', '=', 'room')
+        ->orderBy('id', 'ASC')
+        ->get();
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
