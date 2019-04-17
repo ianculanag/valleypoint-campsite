@@ -72,10 +72,12 @@
                             if (isset($blockDates[$index]->accommodationID)) {
                                 $isAccommodation = true;
                                 $selectedUnitID = $blockDates[$index]->unitID;
+                                $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
                             } else if (isset($blockDates[$index]->reservationID)) {
                                 $isReservation = true;                                
                                 $selectedUnitID = $blockDates[$index]->unitID;
                                 $reservationID = $blockDates[$index]->reservationID;
+                                $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
                             }
                         }
                     }
@@ -84,21 +86,21 @@
                     @if($hitPM)
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     
                     @elseif($hitAM)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     <td scope="col" id="{{$idPM}}"></td>
                     
                     @elseif($hit)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @else
@@ -110,21 +112,21 @@
                     @if($hitPM)
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     
                     @elseif($hitAM)
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}"></td>
                     
                     @elseif($hit)
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @else

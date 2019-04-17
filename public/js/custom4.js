@@ -273,3 +273,9 @@ function getCheckedUnits() {
 
     jQuery('#checkedUnits').val(checkedUnits);
 }
+jQuery(document).ready(function(){
+    jQuery('[data-toggle="tooltip"]').tooltip(); 
+});
+/*jQuery(document).ready(function(){
+jQuery('[data-toggle="tooltip"]').tooltip(options);
+});*/
