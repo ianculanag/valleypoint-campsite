@@ -18,7 +18,7 @@
         </ul>
     </div>    
     <div class="container-fluid pb-5" style="padding-top:1em;">
-        <table class="table table-sm">
+        <table class="table table-sm table-bordered">
         <thead>
             <tr>
             <th scope="col"></th>            
@@ -51,8 +51,8 @@
 
                     $hit = false;
 
-                    $occupiedColor = 'rgb(115, 195, 180)';
-                    $reservedColor = 'rgb(106, 224, 180)';
+                    $occupiedColor = 'rgb(255, 109, 135)';
+                    $reservedColor = 'rgb(47, 228, 180)';
 
                     $isAccommodation = false;
                     $isReservation = false;

@@ -51,8 +51,8 @@
 
                     $hit = false;
 
-                    $occupiedColor = 'rgb(115, 195, 180)';
-                    $reservedColor = 'rgb(106, 224, 180)';
+                    $occupiedColor = 'rgb(255, 109, 135)';
+                    $reservedColor = 'rgb(47, 228, 180)';
 
                     $isAccommodation = false;
                     $isReservation = false;

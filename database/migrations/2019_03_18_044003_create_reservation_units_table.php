@@ -19,6 +19,7 @@ class CreateReservationUnitsTable extends Migration
             $table->primary(['reservationID', 'unitID']);
             $table->enum('status', ['reserved','checkedin', 'canceled']);
             $table->integer('numberOfPax');
+            $table->integer('numberOfBunks')->nullable();
             $table->dateTime('checkinDatetime');            
             $table->dateTime('checkoutDatetime');
             $table->integer('serviceID')->unsigned();            
