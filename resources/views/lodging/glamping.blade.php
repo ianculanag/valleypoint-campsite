@@ -70,7 +70,7 @@
                                 $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
                             @endphp
 
-                            @if(count($reservations) > 0)
+                            @if(count($reservations) > 0) 
                                 @foreach($reservations as $reservation)
                                     @if(($reservation->id == $unit->unitID) && (\Carbon\Carbon::parse($reservation->checkinDatetime)->format('Y-m-d') == $currentDate))
                                         @if(array_search($unit->unitID, $unitArray) == false)

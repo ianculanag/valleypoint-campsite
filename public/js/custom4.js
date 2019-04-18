@@ -226,7 +226,7 @@ jQuery(document).on('change', '.roomFinderInputs', function() {
 
                 displayUnitNumbers(availableUnitIDs, availableUnitNumbers, jQuery('#roomFinderUnitCount').val());
                 getCheckedUnits();              
-                populateCalendar(dates);
+                //populateCalendar(dates);
 
                 jQuery('#roomFinderCheckin').prop('disabled', false);
                 jQuery('#roomFinderReserve').prop('disabled', false);

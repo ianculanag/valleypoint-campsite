@@ -17,8 +17,38 @@
             </li>
         </ul>
     </div>    
+<<<<<<< HEAD
     <div class="container-fluid pb-5" style="padding-top:1em;">
         <table class="table table-sm">
+=======
+    <div class="container-fluid pb-5">
+        <div class="container col-md-6 offset-3 row px-5" style="padding-left:5.5em;">
+            <div class="form-group px-2">
+                <!--label class="mb-0" for="checkin" style="padding-right:0;">Check-in date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input class="form-control glampingCalendarInputs" id="glampingCalendarFrom" type="date" name="glampingCalendarFrom" maxlength="15" placeholder="" value="" required>
+                </div>
+            </div>
+            <span>-</span>
+            <div class="form-group px-2">
+                <!--label class="mb-0" for="checkout" style="padding-right:0;">Check-out date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input class="form-control glampingCalendarInputs" type="date" id="glampingCalendarTo" name="glampingCalendarTo" maxlength="15" placeholder="" value="" required>
+                </div>
+            </div>
+        </div>
+        <table class="table table-sm table-bordered">
+>>>>>>> Added input for dates to calendar view
         <thead>
             <tr>
             <th scope="col"></th>            
