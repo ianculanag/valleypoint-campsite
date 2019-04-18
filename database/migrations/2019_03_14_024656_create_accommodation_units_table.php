@@ -18,6 +18,7 @@ class CreateAccommodationUnitsTable extends Migration
             $table->integer('unitID')->unsigned();         
             $table->primary(['accommodationID', 'unitID']);
             $table->integer('numberOfPax');
+            $table->integer('numberOfBunks')->nullable();
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
             $table->integer('serviceID')->default(5);
