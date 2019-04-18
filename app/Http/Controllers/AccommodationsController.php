@@ -225,11 +225,11 @@ class AccommodationsController extends Controller
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
             'checkinDate' => 'required', 'checkoutDate' => 'required',
-        'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
+            'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
     ]);
 
             $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
-            $accommodation->numberOfUnits = $request->input('numberOfBunks');
+            $accommodation->numberOfBunks = $request->input('numberOfBunks');
             $accommodation->userID = Auth::user()->id;
             $accommodation->save(); 
 
@@ -241,7 +241,7 @@ class AccommodationsController extends Controller
             $guest->save();
             
             $chargesCount = 0;
-        $chargesArray = array();
+            $chargesArray = array();
 
         for($count = 0; $count < $request->input('numberOfBunks'); $count++) { //for loop two; numberOfUnits changed to numberOfBunks
             
@@ -278,6 +278,7 @@ class AccommodationsController extends Controller
      }
 
      //old checkinBackpacker
+
     /*public function checkinBackpacker(Request $request)
     {
         $this->validate($request, [

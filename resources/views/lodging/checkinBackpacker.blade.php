@@ -14,7 +14,7 @@
         <h3>Check-in Form</h3>
     </div>
 
-    <form method="POST" action="/checkinBackpacker">
+    <form method="POST" action="/checkin-backpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
@@ -117,7 +117,7 @@
                                         </span>
                                     </div>
                                 <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control backpackerCheckoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
-                                    <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
+                                    <!--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">-->
                                 </div>
                             </div>
                         </div>
