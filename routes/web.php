@@ -150,7 +150,8 @@ Route::post('/update-unit', 'UnitsController@updateUnit');
 
 //Delete unit
 Route::get('/delete-unit-modal/{unitID}', 'UnitsController@deleteUnitModal');
-
+Route::post('/confirm-unit-deletion/{unitID}', 'UnitsController@deleteUnit');
+ 
 //View services
 Route::get('/view-services', 'ServicesController@viewServices');
 

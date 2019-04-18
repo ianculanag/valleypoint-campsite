@@ -17,40 +17,51 @@
             </li>
         </ul>
     </div>    
-    <div class="container col-md-6 offset-3 row px-5" style="padding-left:5.5em;">
-        <div class="form-group px-2">
-            <!--label class="mb-0" for="checkin" style="padding-right:0;">Check-in date</label-->
-            <div class="input-group input-group-sm mb-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                    </span>
+    <form>
+        <div class="container col-md-6 offset-3 row px-5" style="padding-left:5.5em;">
+            <div class="form-group px-2">
+                <!--label class="mb-0" for="checkin" style="padding-right:0;">Check-in date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input class="form-control glampingCalendarInputs" id="glampingCalendarFrom" type="date" name="glampingCalendarFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
                 </div>
-                <input class="form-control glampingCalendarInputs" id="glampingCalendarFrom" type="date" name="glampingCalendarFrom" maxlength="15" placeholder="" value="" required>
+            </div>
+            <span>-</span>
+            <div class="form-group px-2">
+                <!--label class="mb-0" for="checkout" style="padding-right:0;">Check-out date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input class="form-control glampingCalendarInputs" type="date" id="glampingCalendarTo" name="glampingCalendarTo" maxlength="15" placeholder="" value="" required>
+                </div>
+            </div>
+            <div>
+                <a id="loadCalendarGlamping">
+                    <button class="btn btn-sm btn-success">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </a>
             </div>
         </div>
-        <span>-</span>
-        <div class="form-group px-2">
-            <!--label class="mb-0" for="checkout" style="padding-right:0;">Check-out date</label-->
-            <div class="input-group input-group-sm mb-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <input class="form-control glampingCalendarInputs" type="date" id="glampingCalendarTo" name="glampingCalendarTo" maxlength="15" placeholder="" value="" required>
-            </div>
-        </div>
-    </div>
+    </form>
     <div class="container-fluid" style="overflow-y:auto; height:62vh; overflow-x:auto;">
         <table class="table table-sm table-bordered">
-        <thead>
+        <thead id="glampingCalendarHead">
             <tr class="pt-5">
             <th style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100;"></th>            
             @if(count($dates) > 0)
             @foreach($dates as $date)
-                <td style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239);" scope="col" colspan="2">{{\Carbon\Carbon::parse($date)->format('D')}}
-                    <hr class="py-0 my-0">{{\Carbon\Carbon::parse($date)->format('M j')}}
+                <td style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239);" scope="col" colspan="2">
+                    {{\Carbon\Carbon::parse($date)->format('D')}}
+                    <hr class="py-0 my-0">
+                    {{\Carbon\Carbon::parse($date)->format('M j')}}
                 </td>
             @endforeach
             @endif

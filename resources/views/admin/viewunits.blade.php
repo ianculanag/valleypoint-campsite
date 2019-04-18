@@ -35,8 +35,11 @@
                         <a href="edit-unit/{{$unit->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>
                         <a>
-                        <a id="{{$unit->id}}" class="delete-unit-modal" data-toggle="modal" data-target="#deleteUnitModal">
+                        {{--<a id="{{$unit->id}}" class="delete-unit-modal" data-toggle="modal" data-target="#deleteUnitModal">
                             <button class="btn btn-sm btn-danger">Delete</button>
+                        </a>--}}
+                        <a id="{{$unit->id}}" class="delete-unit-modal" href="/confirm-unit-deletion/{{$unit->id}}">
+                            <button class="btn btn-sm btn-danger">Del</button>
                         </a>
                     </td>
                 </tr>

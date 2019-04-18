@@ -1242,6 +1242,8 @@ jQuery(document).ready(function(){
             htmlString += "<tr><td style='width:28%'>Check-in: </td>";
             htmlString += "<td>" + data[0].capacity + "</td></tr></table></div></div>";
 
+            htmlString += "<input type='hidden' name='thisUnit' value='"+ data[0].unitID +"'>";
+
             jQuery('#deleteUnitModalBody').html(htmlString);
             jQuery("#confirmUnitDeletion").attr("href", "/confirm-unit-deletion/"+data[0].unitID);
         })

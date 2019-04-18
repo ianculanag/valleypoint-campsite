@@ -279,3 +279,60 @@ jQuery(document).ready(function(){
 /*jQuery(document).ready(function(){
 jQuery('[data-toggle="tooltip"]').tooltip(options);
 });*/
+
+jQuery('#loadCalendarGlamping').click(function(){
+    var glampingCalendarInputsComplete = true;
+    for (var count = 0; count < jQuery('.glampingCalendarInputs').length; count++) {
+        if(jQuery('.glampingCalendarInputs').eq(count).val() == '') {
+            glampingCalendarInputsComplete = false;
+            console.log('1');
+        }
+    }
+
+    if(glampingCalendarInputsComplete) {  
+        console.log('2');
+        refreshCalendar(dates);   
+    }
+});
+
+function refreshCalendar(dates) {
+    for(var count = 0; count < dates.length; count++) {
+        console.log(dates[count]);
+    }
+    
+    var glampingCalendarFrom = moment(jQuery('#glampingCalendarFrom').val()).format('M-D');
+    var glampingCalendarTo = moment(jQuery('#glampingCalendarTo').val()).format('M-D');
+
+    console.log(glampingCalendarFrom);
+    console.log(glampingCalendarTo);
+
+    var htmlString = "<th style='text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100;'></th>";
+    var columns = 0;
+
+    for(var checkin = glampingCalendarFrom; checkin <= moment(glampingCalendarTo).format('D'); checkin++){
+        htmlString += "<td style='text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239);' scope='col' colspan='2'>"+checkin+";
+        htmlString += moment(checkin).format('D') + "<hr class='py-0 my-0'>" + moment(checkin).format('M j') + "</td>";
+        columns++;
+    }
+
+    var unitNumbers = new Array();
+    
+    for(var count = 0; count < dates.length; count++) {
+        if(jQuery.inArray(dates[count].unitNumber, unitNumbers)) {
+            unitNumbers.push(dates[count].unitNumber);
+            console.log('Hit');
+        } else {            
+        }
+    }
+
+    for(var index = 0; index < unitNumbers.length; index++) {
+        bodyString += "<tr>";
+        bodyString += "<td>"+unitNumbers[index]+"</td>";
+        for(var columnCount = 0; columnCount < columns; columnCount++) {
+            bodyString += "<td></td>";
+        }
+        bodyString += "</tr>";
+    }
+
+    jQuery('#glampingCalendarHead').html(htmlString);
+}

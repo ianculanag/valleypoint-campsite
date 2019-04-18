@@ -533,6 +533,19 @@ class UnitsController extends Controller
     }
 
     /**
+     * Delete unit
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteUnit(Request $request)
+    {   
+        $unit = Units::find($request->input('thisUnit'));
+        $unit->delete();
+
+        return redirect('/view-units');
+    }
+
+    /**
      * Get accommodation and reservation dates on units.
      *
      * @return \Illuminate\Http\Response
