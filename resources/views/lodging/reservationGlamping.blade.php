@@ -143,7 +143,6 @@
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
                             <label for="unitID">No. of units</label>
-                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -153,11 +152,20 @@
                             <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
                             </div>
                         </div>
+                        @php
+                            //$source = implode(',', array($unitSource->unitNumber));
+                            $source = array();
+                            foreach($unitSource as $unitSource) {
+                                array_push($source, $unitSource->unitNumber);
+                            }
+
+                            $source = implode(',', $source);
+                        @endphp
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
                             <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
-                            
+                            <input type="hidden" id="unitSource" value="{{$source}}">
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
                                                
                             {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
@@ -365,7 +373,6 @@
                 <div class="form-group row">
                     <div class="col-md-2 mb-1">
                         <label for="unitID">No. of units</label>
-                        {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -375,6 +382,15 @@
                         <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{count($unitNumber)}}" min="1" max="80" readonly>
                         </div>
                     </div>
+                    @php
+                        //$source = implode(',', array($unitSource->unitNumber));
+                        $source = array();
+                        foreach($unitSource as $unitSource) {
+                            array_push($source, $unitSource->unitNumber);
+                        }
+
+                        $source = implode(',', $source);
+                    @endphp
                     @if(count($unitNumber) > 0)
                     @php
                         $unitNumbers = "";
@@ -392,9 +408,7 @@
                     <div class="col-md-10 mb-1">
                         <label for="unitNumber">Unit/s</label>
                         <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unitNumbers}}" required>
-                                            
-                        {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                                    
-                        
+                        <input type="hidden" id="unitSource" value="{{$source}}">                     
                     </div>
                 </div>
                 <div class="form-group row" id="divUnits">
