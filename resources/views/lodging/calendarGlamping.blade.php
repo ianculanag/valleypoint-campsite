@@ -52,7 +52,7 @@
         </div>
     </form>
     <div class="container-fluid" style="overflow-y:auto; height:62vh; overflow-x:auto;">
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm">
         <thead id="glampingCalendarHead">
             <tr class="pt-5">
             <th style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100;"></th>            
