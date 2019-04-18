@@ -18,7 +18,7 @@
         </ul>
     </div>    
     <div class="container-fluid pb-5" style="padding-top:1em;">
-        <table class="table table-sm table-bordered">
+        <table class="table table-sm">
         <thead>
             <tr>
             <th scope="col"></th>            
@@ -46,16 +46,28 @@
                     $idAM = $unit->unitNumber.(string)$date.'AM';
                     $idPM = $unit->unitNumber.(string)$date.'PM';
 
-                    $hitAM = false;
-                    $hitPM = false;
+                    //$hitAM = false;
+                    //$hitPM = false;
+                    //$hit = false;
 
-                    $hit = false;
+                    $withCheckin = false;
+                    $withCheckout = false;
+                    $withBoth = false;
+                    $inBetween = false;
+
+                    $guestNameToCheckin = '';
+                    $guestNameToCheckout = '';
+
+                    $guestNameInBetween = '';
 
                     $occupiedColor = 'rgb(255, 109, 135)';
                     $reservedColor = 'rgb(47, 228, 180)';
 
-                    $isAccommodation = false;
-                    $isReservation = false;
+                    $occupiedStartColor = 'rgb(215, 69, 95)';
+                    $reservedStartColor = 'rgb(7, 198, 140)';
+
+                    $checkinIsAccommodation = false;
+                    $checkoutIsAccommodation = false;
 
                     $guestName = '';
 
@@ -65,50 +77,120 @@
                            ($date >= \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) &&
                            ($date <= \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d'))) {
                             
-                            $guestName = '';
+                            //$guestName = '';
+                            
+                            $selectedUnitID = $blockDates[$index]->unitID;  
+                            
                             if($date == \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d')) {
-                                $hitPM = true;
+                                $withCheckin = true;
+                                $guestNameToCheckin = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
+
+                                if (isset($blockDates[$index]->accommodationID)) {
+                                    $checkinIsAccommodation = true;
+                                } else if (isset($blockDates[$index]->reservationID)) {
+                                    $checkinIsAccommodation = false;
+                                    $checkinReservationID =  $blockDates[$index]->reservationID;
+                                }
+
                             } else if ($date == \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')) {
-                                $hitAM = true;
+                                $withCheckout = true;
+                                $guestNameToCheckout = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
+
+                                if (isset($blockDates[$index]->accommodationID)) {
+                                    $checkoutIsAccommodation = true;
+                                } else if (isset($blockDates[$index]->reservationID)) {
+                                    $checkoutIsAccommodation = false;                                          
+                                    $checkoutReservationID =  $blockDates[$index]->reservationID;
+                                }
+
                             } else if (($date > \Carbon\Carbon::parse($blockDates[$index]->checkinDatetime)->format('Y-m-d') &&
                                        ($date < \Carbon\Carbon::parse($blockDates[$index]->checkoutDatetime)->format('Y-m-d')))) {
-                                $hit = true;
+                                $inBetween = true;
+                                $guestNameInBetween = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
+
+                                if (isset($blockDates[$index]->accommodationID)) {
+                                    $checkinIsAccommodation = true;
+                                } else if (isset($blockDates[$index]->reservationID)) {
+                                    $checkinIsAccommodation = false;                                          
+                                    $reservationID =  $blockDates[$index]->reservationID;
+                                }
                             }
 
-                            if (isset($blockDates[$index]->accommodationID)) {
+                            /*if (isset($blockDates[$index]->accommodationID)) {
                                 $isAccommodation = true;
                                 $isReservation = false;
                                 $selectedUnitID = $blockDates[$index]->unitID;
-                                $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
                             } else if (isset($blockDates[$index]->reservationID)) {
                                 $isReservation = true;      
                                 $isAccommodation = false;                     
                                 $selectedUnitID = $blockDates[$index]->unitID;
                                 $reservationID = $blockDates[$index]->reservationID;
-                                $guestName = $blockDates[$index]->firstName.' '.$blockDates[$index]->lastName;
-                            }
+                            }*/
+                            
                         }
                     }
+
+                    if($withCheckin && $withCheckout) {
+                        $withBoth = true;
+                        $withCheckin = false;
+                        $withCheckout = false;
+                    }
                 @endphp
-                @if($isAccommodation)
-                    @if($hitPM)
+                {{--@if($isAccommodation)--}}
+                    @if($withCheckin && $checkinIsAccommodation)
                     <td scope="col" id="{{$idAM}}"></td>                
-                    <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedStartColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
+
+                    @elseif($withCheckin && !($checkinIsAccommodation))
+                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     
-                    @elseif($hitAM)                
+                    @elseif($withCheckout && $checkoutIsAccommodation)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
+                    <td scope="col" id="{{$idPM}}"></td>
+
+                    @elseif($withCheckout && !($checkoutIsAccommodation))               
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     <td scope="col" id="{{$idPM}}"></td>
                     
-                    @elseif($hit)                
+                    @elseif($inBetween && $checkinIsAccommodation)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
+
+                    @elseif($inBetween && !($checkinIsAccommodation))              
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
+
+                    @elseif($withBoth && $checkoutIsAccommodation && !($checkinIsAccommodation))                
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
+
+                    @elseif($withBoth && !($checkoutIsAccommodation) && !($checkinIsAccommodation))                
+                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>                
+                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
+                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @else
@@ -116,7 +198,7 @@
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}"></td>
                     @endif
-                @elseif($isReservation)
+                {{--@elseif($isReservation)
                     @if($hitPM)
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
@@ -141,11 +223,11 @@
                     
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}"></td>
-                    @endif
-                @else
+                    @endif--}}
+                {{--@else
                     <td scope="col" id="{{$idAM}}"></td>                
                     <td scope="col" id="{{$idPM}}"></td>
-                @endif
+                @endif--}}
                 @endforeach
                 </tr>
             @endforeach
