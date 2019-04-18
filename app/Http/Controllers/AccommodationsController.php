@@ -222,16 +222,22 @@ class AccommodationsController extends Controller
 
      public function checkinBackpacker(Request $request){
 
+        //$fuck = DBs::table('gago)');
+        
+        
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
-            'checkinDate' => 'required', 'checkoutDate' => 'required',
-            'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
+            'firstName' => 'required|max:30', 
+            'lastName' => 'required|max:30'
     ]);
 
+            $accommodation = new Accommodation; 
             $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
-            $accommodation->numberOfBunks = $request->input('numberOfBunks');
+            
             $accommodation->userID = Auth::user()->id;
             $accommodation->save(); 
+
+            //
 
             $guest = new Guests;
             $guest->lastName = $request->input('lastName');
@@ -255,6 +261,7 @@ class AccommodationsController extends Controller
 
             $accommodationUnit = new AccommodationUnits;
             $accommodationUnit->accommodationID = $accommodation->id;
+            $accommodationUnit->numberOfBunks = $request->input('numberOfBunks');
             $accommodationUnit->unitID = $unit[0]->id;
             $accommodationUnit->status = 'ongoing';
             $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
