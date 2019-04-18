@@ -87,7 +87,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker{{$unit->unitNumber}}" type="number" placeholder="" value="" min="1" max="10">
+                                <input class="form-control numberOfPaxBackpacker" id="PaxBackpacker{{$unit->unitNumber}}" name="numberOfPaxBackpacker" type="number" placeholder="" value="" min="1" max="10">
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
@@ -105,7 +105,7 @@
                                             <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
+                                    <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
                             <div class="col-md-6 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
@@ -116,7 +116,7 @@
                                             <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control backpackerCheckoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
+                                <input type="date" name="checkoutDate" required="required" class="form-control backpackerCheckoutDates" id="checkoutDate{{$unit->unitNumber}}" value="">
                                     <!--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">-->
                                 </div>
                             </div>

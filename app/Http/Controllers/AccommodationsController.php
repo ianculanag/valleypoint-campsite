@@ -224,18 +224,24 @@ class AccommodationsController extends Controller
 
         //$fuck = DBs::table('gago)');
         
-        
+        /*
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
             'firstName' => 'required|max:30', 
             'lastName' => 'required|max:30'
-    ]);
+    ]);*/
+
+    $accommodation = new Accommodation;    
+    $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
             $accommodation = new Accommodation; 
             $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
-            
             $accommodation->userID = Auth::user()->id;
             $accommodation->save(); 
+
+            $unitNumbers = array_map('trim', explode(',', $request->input('roomNumber')));
+
+            //return $unitNumbers;
 
             //
 
@@ -249,38 +255,27 @@ class AccommodationsController extends Controller
             $chargesCount = 0;
             $chargesArray = array();
 
-        for($count = 0; $count < $request->input('numberOfBunks'); $count++) { //for loop two; numberOfUnits changed to numberOfBunks
-            
-            //$accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
-            $checkinDate = 'checkinDate'.$unitNumbers[$count];
-            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
-
-            $totalPrice = 'totalPrice'.$unitNumbers[$count];
-
-            //$unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
-
-            $accommodationUnit = new AccommodationUnits;
-            $accommodationUnit->accommodationID = $accommodation->id;
-            $accommodationUnit->numberOfBunks = $request->input('numberOfBunks');
-            $accommodationUnit->unitID = $unit[0]->id;
-            $accommodationUnit->status = 'ongoing';
-            $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
-            $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
-            $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
-            $accommodationUnit->serviceID =  $request->input($accommodationPackage);
-            $accommodationUnit->save();
-
-            $charges = new Charges;
-            $charges->quantity = $request->input($accommodationPackage);
-            $charges->totalPrice = $request->input($totalPrice);
-            $charges->balance = $request->input($totalPrice);
-            $charges->remarks = 'unpaid';
-            $charges->accommodationID = $accommodation->id;
-            $charges->serviceID = $request->input($accommodationPackage);
-            $charges->save();
-            $chargesCount++;
-            array_push($chargesArray, $charges->id);
-        }
+            $chargesCount = 0;
+            $chargesArray = array();
+    
+            for($count = 0; $count < count($unitNumbers); $count++) { //for loop two
+                
+                //$accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+    
+                $totalPrice = 'totalPrice'.$unitNumbers[$count];
+    
+                $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+    
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodation->id;
+                $accommodationUnit->unitID = $unit[0]->id;
+                $accommodationUnit->numberOfPax = $accommodation->numberOfPax;
+                $accommodationUnit->checkinDateTime = $request->input('checkinDate');
+                $accommodationUnit->checkoutDateTime = $request->input('checkoutDate');
+                $accommodationUnit->save();
+            }
         return redirect('/transient-backpacker');
      }
 
