@@ -32,18 +32,19 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-<script src="{{ asset('js/jquery-ui.min.js') }}"></script>   
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script> 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/datatables.min.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>  
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/custom2.js') }}"></script>
 <script src="{{ asset('js/custom3.js') }}"></script>
 <script src="{{ asset('js/custom4.js') }}"></script>
+<script src="{{ asset('js/custom5.js') }}"></script>
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;

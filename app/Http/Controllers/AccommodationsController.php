@@ -78,6 +78,42 @@ class AccommodationsController extends Controller
     }
 
     /**
+     * Show the check in form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showCheckinFromCalendar($unitID, $checkinDate)
+    {
+        $unitsSelected = explode(',', $unitID);
+
+        $units = array();
+        $unitNumber = array();
+
+        for($count = 0; $count < count($unitsSelected); $count++) {
+            $unit = DB::table('units')
+            ->where('id', '=',$unitsSelected[$count])
+            ->get();
+
+            array_push($units, $unit[0]);
+            array_push($unitNumber, $unit[0]->unitNumber);
+        }
+
+        //return $units;
+        $charges = $units;
+
+        $givenCheckinDate =  $checkinDate;
+        $givenCheckoutDate = Carbon::parse($checkinDate)->addDays(1)->format('Y-m-d');        
+
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.checkinGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate)->with('unitSource', $unitSource);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -274,9 +274,6 @@ function getCheckedUnits() {
     jQuery('#checkedUnits').val(checkedUnits);
 }
 
-//CALENDAAAAR
-
-
 jQuery('#loadCalendarGlamping').click(function(){
     var glampingCalendarInputsComplete = true;
     for (var count = 0; count < jQuery('.glampingCalendarInputs').length; count++) {
@@ -307,7 +304,7 @@ function refreshCalendar(dates) {
     var columns = 0;
 
     for(var checkin = glampingCalendarFrom; checkin <= moment(glampingCalendarTo).format('D'); checkin++){
-        htmlString += "<td style='text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239);' scope='col' colspan='2'>"+checkin+";
+        htmlString += "<td style='text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239);' scope='col' colspan='2'>"+checkin;
         htmlString += moment(checkin).format('D') + "<hr class='py-0 my-0'>" + moment(checkin).format('M j') + "</td>";
         columns++;
     }

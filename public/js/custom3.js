@@ -243,9 +243,9 @@ function checkUnpaid() {
 
 /**/
 
-jQuery(document).ready(function(){
+/*jQuery(document).ready(function(){
     myHTMLNumberInput.onchange = setTwoNumberDecimal;
-});
+});*/
 
 
         /*let tbody = jQuery('#invoiceRows');

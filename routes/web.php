@@ -47,6 +47,7 @@ Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
 //Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
+Route::get('/checkin/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
 Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
 Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
 
