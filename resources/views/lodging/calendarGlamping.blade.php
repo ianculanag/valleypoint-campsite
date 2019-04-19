@@ -164,7 +164,7 @@
                 {{--@if($isAccommodation)--}}
                     @if($withCheckin && $checkinIsAccommodation)
                     <td scope="col" id="{{$idAM}}" style="padding:0;">
-                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        {{--<a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>--}}
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedStartColor}}; padding:0;">
                         <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
@@ -172,7 +172,7 @@
 
                     @elseif($withCheckin && !($checkinIsAccommodation))
                     <td scope="col" id="{{$idAM}}" style="padding:0;">
-                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        {{--<a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>--}}
                     </td>      
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
                         <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>

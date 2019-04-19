@@ -97,7 +97,7 @@ class ReservationsController extends Controller
     }
 
     /**
-     * Show the check in form
+     * Show the reservation form
      *
      * @return \Illuminate\Http\Response
      */
@@ -122,6 +122,42 @@ class ReservationsController extends Controller
 
         $givenCheckinDate =  $request->input('checkin');
         $givenCheckoutDate = $request->input('checkout');
+
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.reservationGlamping')->with('unitNumber', $unitNumber)->with('units', $units)->with('charges', $charges)->with('givenCheckinDate', $givenCheckinDate)->with('givenCheckoutDate', $givenCheckoutDate)->with('unitSource', $unitSource);
+    }
+
+    /**
+     * Show the reservation form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showReserveFromCalendar($unitID, $reservationDate)
+    {
+        $unitsSelected =  explode(',', $unitID);
+
+        $units = array();
+        $unitNumber = array();
+
+        for($count = 0; $count < count($unitsSelected); $count++) {
+            $unit = DB::table('units')
+            ->where('id', '=',$unitsSelected[$count])
+            ->get();
+
+            array_push($units, $unit[0]);
+            array_push($unitNumber, $unit[0]->unitNumber);
+        }
+
+        //return $units;
+        $charges = $units;
+
+        $givenCheckinDate = $reservationDate;
+        $givenCheckoutDate = Carbon::parse($reservationDate)->addDays(1)->format('Y-m-d');
 
         $unitSource = DB::table('units')
         ->select('units.unitNumber')
