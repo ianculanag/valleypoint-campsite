@@ -54,8 +54,20 @@
                                 {{$unit->unitNumber}}
                                 <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
                             </h5>
-                            <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                            <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
+
+                            @php
+                                $today = \Carbon\Carbon::today();
+                                $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
+                            @endphp
+
+                            @if((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') == $currentDate))
+                                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                <p class="card-text" style="color:#fdc000; font-style:italic;">Checks-out today!</p>
+                            @else
+                                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
+                            @endif
+
                         @else
                             <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important;" class="load-glamping-available-unit" id={{$unit->unitID}}>       
                             <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('tent-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
