@@ -537,10 +537,10 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function deleteUnit(Request $request)
+    public function deleteUnit($unitID)
     {   
-        $unit = Units::find($request->input('thisUnit'));
-        $unit->delete();
+        DB::table('units')->where('id', '=', $unitID)
+        ->delete();
 
         return redirect('/view-units');
     }

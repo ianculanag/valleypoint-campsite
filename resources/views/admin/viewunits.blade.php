@@ -35,11 +35,11 @@
                         <a href="edit-unit/{{$unit->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>
                         <a>
-                        {{--<a id="{{$unit->id}}" class="delete-unit-modal" data-toggle="modal" data-target="#deleteUnitModal">
+                        <a id="{{$unit->id}}" class="delete-unit-modal" data-toggle="modal" data-target="#deleteUnitModal">
                             <button class="btn btn-sm btn-danger">Delete</button>
-                        </a>--}}
-                        <a id="{{$unit->id}}" class="delete-unit-modal" href="/confirm-unit-deletion/{{$unit->id}}">
-                            <button class="btn btn-sm btn-danger">Del</button>
+                        </a>
+                        {{--<a id="{{$unit->id}}" class="delete-unit-modal" href="/confirm-unit-deletion/{{$unit->id}}">
+                            <button class="btn btn-sm btn-danger">Del</button>--}}
                         </a>
                     </td>
                 </tr>
@@ -53,20 +53,24 @@
 <!-- Delete unit modal -->
 <div class="modal fade" id="deleteUnitModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Unit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <form id="deleteUnitForm" class="form" method="POST">
+            @csrf
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">   
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Unit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="deleteUnitModalBody">
+                </div>
+                <div class="modal-footer">
+                    <a href=""  id="confirmUnitDeletion"><button type="submit" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                    <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+                </div>
             </div>
-            <div class="modal-body" id="deleteUnitModalBody">
-            </div>
-            <div class="modal-footer">
-                <a href="" id="confirmUnitDeletion"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
-                <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection

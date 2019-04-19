@@ -1246,6 +1246,7 @@ jQuery(document).ready(function(){
 
             jQuery('#deleteUnitModalBody').html(htmlString);
             jQuery("#confirmUnitDeletion").attr("href", "/confirm-unit-deletion/"+data[0].unitID);
+            jQuery('#deleteUnitForm').attr("action", "/confirm-unit-deletion/"+data[0].unitID);
         })
     });
 });
