@@ -127,8 +127,8 @@ class ServicesController extends Controller
      */
     public function deleteService($serviceID)
     {   
-        $services = Services::find($serviceID);
-        $services->delete();
+        DB::table('services')->where('id', '=', $serviceID)
+        ->delete();
 
         return redirect('/view-services');
     }

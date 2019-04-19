@@ -1221,6 +1221,7 @@ jQuery(document).ready(function(){
 
             jQuery('#deleteServiceModalBody').html(htmlString);
             jQuery("#confirmServiceDeletion").attr("href", "/confirm-service-deletion/"+data[0].serviceID);
+            jQuery("#deleteServiceForm").attr("action", "/confirm-service-deletion/"+data[0].serviceID);
         })
     });
 }); 

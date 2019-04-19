@@ -165,4 +165,4 @@ Route::post('/update-service', 'ServicesController@updateService');
 
 //Delete service
 Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
-//Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
+Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');

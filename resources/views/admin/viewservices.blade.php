@@ -54,20 +54,24 @@
 <!-- Delete service modal -->
 <div class="modal fade" id="deleteServiceModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Service</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <form id="deleteServiceForm" class="form" method="POST">
+            @csrf
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">   
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="deleteServiceModalBody">
+                </div>
+                <div class="modal-footer">
+                    <a href="" id="confirmServiceDeletion"><button type="submit" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                    <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+                </div>
             </div>
-            <div class="modal-body" id="deleteServiceModalBody">
-            </div>
-            <div class="modal-footer">
-                <a href="" id="confirmServiceDeletion"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
-                <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection

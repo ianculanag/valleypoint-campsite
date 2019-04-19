@@ -66,7 +66,7 @@
                 <div class="modal-body" id="deleteUnitModalBody">
                 </div>
                 <div class="modal-footer">
-                    <a href=""  id="confirmUnitDeletion"><button type="submit" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                    <a href="" id="confirmUnitDeletion"><button type="submit" class="btn btn-danger" style="width:5em;">Yes</button></a>
                     <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
                 </div>
             </div>
