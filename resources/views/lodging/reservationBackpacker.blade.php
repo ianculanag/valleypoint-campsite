@@ -6,7 +6,7 @@
     @foreach($unit as $unit)
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
-            <a href="/glamping">
+            <a href="/transient-backpacker">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -14,7 +14,7 @@
             </a>
             <h3>Reservation Form</h3>
         </div>   
-        <form method="POST" action="/reserve-glamping">
+        <form method="POST" action="/reserve-transient-backpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
@@ -34,10 +34,10 @@
                         <tbody id="invoiceRows">
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
+                                <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
                                 <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
+                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -79,7 +79,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxGlamping"  required="required" min="1" max="100" name="numberOfPaxGlamping" type="number" placeholder="" value="">
+                                <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
                             </div>
                         </div>
                     </div>  
@@ -96,9 +96,9 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <label for="glamping">Accommodation</label>
+                            <label for="backpacker">Accommodation</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" name="glamping" maxlength="11" placeholder="" value="Glamping" disabled>
+                                <input class="form-control" type="text" name="backpacker" maxlength="11" placeholder="" value="Backpacker" disabled>
                             </div>
                         </div>
                     </div>    
@@ -110,7 +110,7 @@
                         <div class="col-md-4 mb-1 form-group">
                             <label for="accommodationType">Accommodation type</label>
                             <select class="form-control"disabled>
-                                <option>Glamping</option>
+                                <option>Backpacker</option>
                             </select>
                         </div>--}}
                     <!--div class="form-group row">
@@ -220,7 +220,7 @@
 @else
 <div class="container pb-3">
     <div class="pt-3 pb-3 text-center">
-        <a href="/glamping">
+        <a href="/transient-backpacker">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 <strong>Back</strong>
@@ -228,7 +228,7 @@
         </a>
         <h3>Reservation Form</h3>
     </div>   
-    <form method="POST" action="/reserve-glamping">
+    <form method="POST" action="/reserve-backpacker">
     @csrf
     <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     <input type="hidden" name="selectedUnit" id="selectedUnit" value="">
@@ -262,9 +262,9 @@
                         @endphp
                         <tr id="invoiceUnit{{$charge->unitNumber}}">
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                            <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
+                            <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
-                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
+                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
                             <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$invoicePrice}}</td>
                         </tr>
                         @endforeach
@@ -309,7 +309,7 @@
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input class="form-control numberOfPaxGlamping"  required="required" min="1" max="100" name="numberOfPaxGlamping" type="number" placeholder="" value="">
+                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
                         </div>
                     </div>
                 </div>  
@@ -326,9 +326,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <label for="glamping">Accommodation</label>
+                        <label for="backpacker">Accommodation</label>
                         <div class="input-group">
-                            <input class="form-control" type="text" name="glamping" maxlength="11" placeholder="" value="Glamping" disabled>
+                            <input class="form-control" type="text" name="backpacker" maxlength="11" placeholder="" value="Backpacker" disabled>
                         </div>
                     </div>
                 </div>    
@@ -340,7 +340,7 @@
                     <div class="col-md-4 mb-1 form-group">
                         <label for="accommodationType">Accommodation type</label>
                         <select class="form-control"disabled>
-                            <option>Glamping</option>
+                            <option>Backpacker</option>
                         </select>
                     </div>--}}
                 <!--div class="form-group row">
@@ -576,7 +576,7 @@
                         <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         {{--</a>--}}
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Make Reservation</button>
-                        <a href="/glamping" style="text-decoration:none;">
+                        <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
                     </div>

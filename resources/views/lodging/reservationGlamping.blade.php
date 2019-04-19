@@ -14,7 +14,7 @@
             </a>
             <h3>Reservation Form</h3>
         </div>   
-        <form method="POST" action="/reserve-backpacker">
+        <form method="POST" action="/reserve-glamping">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
