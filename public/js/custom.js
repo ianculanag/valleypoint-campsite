@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
             jQuery('#modal-body').html(htmlString);
             jQuery('#modal-head1').html(data[0].unitNumber);
 
-            jQuery("#reserve").attr("href", "reservation/"+data[0].unitID);
+            jQuery("#reserve").attr("href", "reserve-glamping/"+data[0].unitID);
             jQuery("#editDetails").attr("href", "edit-details/"+data[0].unitID);
             jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
         })
@@ -164,7 +164,7 @@ jQuery(document).ready(function(){
             jQuery('#modal-head2').html(data[0].unitNumber);
           
             jQuery("#checkinMain").attr("href", "checkin/"+data[0].unitID);
-            jQuery("#reserveEmpty").attr("href", "reservation/"+data[0].unitID);
+            jQuery("#reserveEmpty").attr("href", "reserve-glamping/"+data[0].unitID);
             jQuery("#checkin-backpacker").attr("href", "checkin-backpacker/"+data[0].unitID);
             jQuery("#reserveBackpackerEmpty").attr("href", "reserve-backpacker/"+data[0].unitID);
         })

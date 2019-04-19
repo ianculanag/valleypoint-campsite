@@ -64,15 +64,15 @@ Route::post('/reserve-finder', 'ReservationsController@showReserveFromFinder');
 
 
 //Make reservation
-Route::get('/reservation/{unitID}', 'ReservationsController@showReservationForm');
-Route::post('/reservation', 'ReservationsController@makeReservation');
+Route::get('/reserve-glamping/{unitID}', 'ReservationsController@showGlampingReservationForm');
+Route::post('/reserve-glamping', 'ReservationsController@reserveGlamping');
 
 //Cancel reservation
 Route::get('/cancel-reservation-modal/{reservationID}', 'ReservationsController@cancelReservationModal');
 Route::post('/cancel-reservation/{reservationID}','ReservationsController@cancelReservation');
 
 //Reservation backpacker
-Route::get('/reserve-backpacker/{unitID}', 'ReservationsController@showReservationBackpackerForm');
+Route::get('/reserve-backpacker/{unitID}', 'ReservationsController@showBackpackerReservationForm');
 Route::post('/reserve-backpacker','ReservationsController@reserveBackpacker');
 
 //Check-in backpacker

@@ -81,7 +81,7 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showReservationForm($unitID)
+    public function showGlampingReservationForm($unitID)
     {        
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
@@ -350,7 +350,7 @@ class ReservationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function makeReservation(Request $request)
+    public function reserveGlamping(Request $request)
     {
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
@@ -686,128 +686,31 @@ class ReservationsController extends Controller
                     ]);
                 }
             }
-        }
-
-        
-
+        }  
         return redirect('/glamping');
     }
 
-    public function showReservationBackpackerForm($unitID)
-    {
+    /**
+     * Display reservationForm.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showBackpackerReservationForm($unitID)
+    {        
         $unit = DB::table('units')
         ->where('id', '=', $unitID)
         ->get();
-        return view('lodging.addreserve')->with('unit', $unit);     
-        
-    }
-        /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function reserveBackpacker(Request $request)
-    {
-        $this->validate($request, [
-            'contactNumber' => 'required|min:11|max:11',
-            'checkinDate' => 'required', 'checkoutDate' => 'required',
-        'firstName' => 'required|max:30', 'lastName' => 'required|max:30'
-    ]);
 
-        
-    /*if(count($reservedAccommodations)>0){
-        for($count=0;$count<count($reservedAccommodations);$count+1){
-            if($request->input('checkinDate')<=$reservedAccommodations[$count]){
-            //return redirect()->back()->withInput();    
-            return("Nakapasok");
-            }else{
-                return("Error pre");
-            }
-        }
-    }*/
-
-        $BeforeAccommodations = DB::table('accommodations')
-        ->select('accommodations.checkinDatetime')
-        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())
-        ->get();
-        $AfterAccommodations = DB::table('accommodations')
-        ->select('accommodations.checkoutDatetime')
-        ->whereDate('accommodations.checkinDatetime', '<>', Carbon::now())            
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'room')
+        ->orderBy('id', 'ASC')
         ->get();
 
-        /*if($request->input('checkinDate') >= $BeforeAccommodations && $request->input('checkinDate') <= $AfterAccommodations)
-        {
-            return("Hello");
-        }else{
-            return $BeforeAccommodations;
-
-        if ($request->input('checkinDate') > $request->input('checkoutDate')){
-            return redirect()->back()->withInput();
-            
-        }
-*/
-        
-        //GAC
-        $accommodation = new Accommodation;                 
-        $accommodation->numberOfPax = $request->input('numberOfPax');
-        $accommodation->checkinDatetime = $request->input('checkinDate').' '.$request->input('checkinTime');
-        $accommodation->checkoutDatetime = $request->input('checkoutDate').' '.$request->input('checkoutTime'); 
-        $accommodation->serviceID = 5;
-        $accommodation->userID = Auth::user()->id;
-        //$accommodation->unitID = $request->input('unitID');
-        //$accommodation->paymentStatus = $request->input('paymentStatus');
-        $accommodation->save();
-
-        $guest = new Guests;
-        $guest->lastName = $request->input('lastName');
-        $guest->firstName = $request->input('firstName');
-        $guest->accommodationID = $accommodation->id;   
-        $guest->contactNumber = $request->input('contactNumber');
-        $guest->save();
-
-        if ($accommodation->numberOfPax > 1) {
-            for ($count = 1; $count < $accommodation->numberOfPax; $count++) {
-                $accompanyingGuest = new Guests;
-
-                $lastName = 'lastName'.$count;
-                $firstName = 'firstName'.$count;
-
-                $accompanyingGuest->lastName = $request->input($lastName);
-                $accompanyingGuest->firstName = $request->input($firstName);
-                $accompanyingGuest->accommodationID = $accommodation->id;
-                $accompanyingGuest->listedUnder = $guest->id;   
-                $accompanyingGuest->save();
-            }
-        }
-
-        $service = Services::find(5);
-        
-        $charge = new Charges;
-        $charge->quantity = $request->input('numberOfPax');
-        $charge->totalPrice = $charge->quantity*$service->price;
-        $charge->remarks = $request->input('paymentStatus');
-        $charge->accommodationID = $accommodation->id;
-        $charge->serviceID = $service->id;
-        $charge->save();
-
-        if($request->input('paymentStatus') != 'unpaid') {
-            $payment = new Payments;
-            $payment->paymentDatetime = Carbon::now();
-            $payment->amount = $request->input('amountPaid');
-            $payment->paymentStatus = $request->input('paymentStatus');
-            $payment->chargeID = $charge->id;
-            $payment->save();
-        }
-
-        $accommodationUnit = new AccommodationUnits;
-        $accommodationUnit->accommodationID = $accommodation->id;
-        $accommodationUnit->unitID = $request->input('unitID');
-        $accommodationUnit->status = 'ongoing';
-        $accommodationUnit->save();
-
-        return redirect('/transient-backpacker');
+        return view('lodging.reservationBackpacker')->with('unit', $unit)->with('unitSource', $unitSource);
     }
+
+    
 }
 
 
