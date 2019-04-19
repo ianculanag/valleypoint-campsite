@@ -51,7 +51,7 @@
             </div>
         </div>
     </form>
-    <div class="container-fluid" style="overflow-y:auto; height:62vh; overflow-x:auto;">
+    <div class="container-fluid scrollbar-near-moon" style="overflow-y:auto; height:62vh; overflow-x:auto;">
         <table class="table table-sm">
         <thead id="glampingCalendarHead">
             <tr class="pt-5">

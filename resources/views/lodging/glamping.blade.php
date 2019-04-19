@@ -36,7 +36,7 @@
             </div>
             @if(count($units) > 0)
             <div class="container" style="padding-top:1em;">
-                <div class="container">
+                <div class="container scrollbar-near-moon pb-4" style="position:fixed; max-height:68.5vh; max-width:55%; overflow-y:auto;">
                     <div class="row">  
 
                 @php                    
