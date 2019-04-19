@@ -64,6 +64,9 @@ jQuery(document).ready(function(){
             }
         })
     });
+
+    
+    jQuery('[data-toggle="tooltip"]').tooltip(); 
 }); 
 
 jQuery(document).ready(function(){

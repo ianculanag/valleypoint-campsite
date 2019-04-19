@@ -151,19 +151,7 @@
                                     $checkinIsAccommodation = false;                                          
                                     $reservationID =  $blockDates[$index]->reservationID;
                                 }
-                            }
-
-                            /*if (isset($blockDates[$index]->accommodationID)) {
-                                $isAccommodation = true;
-                                $isReservation = false;
-                                $selectedUnitID = $blockDates[$index]->unitID;
-                            } else if (isset($blockDates[$index]->reservationID)) {
-                                $isReservation = true;      
-                                $isAccommodation = false;                     
-                                $selectedUnitID = $blockDates[$index]->unitID;
-                                $reservationID = $blockDates[$index]->reservationID;
-                            }*/
-                            
+                            }                            
                         }
                     }
 
@@ -175,102 +163,113 @@
                 @endphp
                 {{--@if($isAccommodation)--}}
                     @if($withCheckin && $checkinIsAccommodation)
-                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idAM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-glamping-available-details" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedStartColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @elseif($withCheckin && !($checkinIsAccommodation))
-                    <td scope="col" id="{{$idAM}}"></td>                
+                    <td scope="col" id="{{$idAM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-glamping-available-details" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>      
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
                     
                     @elseif($withCheckout && $checkoutIsAccommodation)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckout}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>             
+                    <td scope="col" id="{{$idPM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-glamping-available-details" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
-                    <td scope="col" id="{{$idPM}}"></td>
 
                     @elseif($withCheckout && !($checkoutIsAccommodation))               
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckout}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>             
+                    <td scope="col" id="{{$idPM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-glamping-available-details" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
-                    <td scope="col" id="{{$idPM}}"></td>
                     
                     @elseif($inBetween && $checkinIsAccommodation)                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameInBetween}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameInBetween}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @elseif($inBetween && !($checkinIsAccommodation))              
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameInBetween}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameInBetween}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameInBetween}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @elseif($withBoth && $checkoutIsAccommodation && !($checkinIsAccommodation))                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$occupiedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckout}}</b><br><em>Click to view</em>" href="/edit-details/{{$selectedUnitID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @elseif($withBoth && !($checkoutIsAccommodation) && !($checkinIsAccommodation))                
                     <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckout}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckout}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkoutReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>                
                     <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedStartColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestNameToCheckin}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                        <a data-toggle="tooltip" data-placement="bottom" data-html="true" title="<b>{{$guestNameToCheckin}}</b><br><em>Click to view</em>" href="/view-reservation-details/{{$selectedUnitID}}/{{$checkinReservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
                     </td>
 
                     @else
                     
-                    <td scope="col" id="{{$idAM}}"></td>                
-                    <td scope="col" id="{{$idPM}}"></td>
+                    <td scope="col" id="{{$idAM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>                
+                    <td scope="col" id="{{$idPM}}" style="padding:0;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" class="load-calendar-units" style="cursor:pointer;height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
+                    </td>
                     @endif
-                {{--@elseif($isReservation)
-                    @if($hitPM)
-                    <td scope="col" id="{{$idAM}}"></td>                
-                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
-                    </td>
-                    
-                    @elseif($hitAM)
-                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
-                    </td>                
-                    <td scope="col" id="{{$idPM}}"></td>
-                    
-                    @elseif($hit)
-                    <td scope="col" id="{{$idAM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
-                    </td>                
-                    <td scope="col" id="{{$idPM}}" style="background-color:{{$reservedColor}}; padding:0;">
-                        <a data-toggle="tooltip" data-placement="bottom" title="{{$guestName}}" href="/view-reservation-details/{{$selectedUnitID}}/{{$reservationID}}" style="height:100%;width:100%;display: block; text-decoration:none;">&nbsp;</a>
-                    </td>
-
-                    @else
-                    
-                    <td scope="col" id="{{$idAM}}"></td>                
-                    <td scope="col" id="{{$idPM}}"></td>
-                    @endif--}}
-                {{--@else
-                    <td scope="col" id="{{$idAM}}"></td>                
-                    <td scope="col" id="{{$idPM}}"></td>
-                @endif--}}
                 @endforeach
                 </tr>
             @endforeach
             @endif
         </tbody>
         </table>                  
+    </div>
+    <!-- Check-in or reserve modal -->
+    <div class="modal fade right" id="checkin-reserve" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 id="modal-head2"><h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body" id="modal-body-empty">
+                    <!--div class="col-md-12">
+                        <h5 class="text-center mb-4">Choose action:</h5>
+                    </div-->
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-right">
+                    <a href="" id="checkinMain">
+                        <button type="button" class="btn btn-primary">Check-in</button>
+                    </a>
+                    <a href="" id="reserveEmpty">
+                        <button type="button" class="btn btn-secondary">Add reservation</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
  

@@ -33,10 +33,10 @@
     </div>
 </div>
 <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>   
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/jquery-ui.min.js') }}"></script>   
 <script src="{{ asset('js/datatables.min.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-tokenfield.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>

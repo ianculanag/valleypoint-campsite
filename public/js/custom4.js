@@ -273,12 +273,9 @@ function getCheckedUnits() {
 
     jQuery('#checkedUnits').val(checkedUnits);
 }
-jQuery(document).ready(function(){
-    jQuery('[data-toggle="tooltip"]').tooltip(); 
-});
-/*jQuery(document).ready(function(){
-jQuery('[data-toggle="tooltip"]').tooltip(options);
-});*/
+
+//CALENDAAAAR
+
 
 jQuery('#loadCalendarGlamping').click(function(){
     var glampingCalendarInputsComplete = true;
