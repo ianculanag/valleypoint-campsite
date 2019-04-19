@@ -102,42 +102,6 @@
                             </div>
                         </div>
                     </div>    
-                        <!--/div-->
-                        {{--<div class="col-md-3 mb-1">
-                            <label for="numberOfPax">No. of pax</label>
-                            <input class="form-control" type="number" id="numberOfPax" required name="numberOfPax" placeholder="" value="" min="1" max="60">
-                        </div>
-                        <div class="col-md-4 mb-1 form-group">
-                            <label for="accommodationType">Accommodation type</label>
-                            <select class="form-control"disabled>
-                                <option>Backpacker</option>
-                            </select>
-                        </div>--}}
-                    <!--div class="form-group row">
-                        <div class="col-md-6 mb-3">
-                            <label for="checkinDate">Check-in date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <label for="checkoutDate">Check-out date</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
-                                <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
-                            </div>
-                        </div>
-                    </div-->
                     <hr class="mb-4">
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
@@ -146,7 +110,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="fa fa-campground" aria-hidden="true"></i>
+                                        <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
                             <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
@@ -181,7 +145,7 @@
                             <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                         </div>
                         <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
-                            <label for="additionalServiceUnitPrice">Package</label>
+                            <label for="additionalServiceUnitPrice">No. of beds</label>
                             <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
                                 <option value="1">Solo</option>
                                 <option value="2">2 Pax</option>
@@ -275,17 +239,6 @@
                             <th colspan="3" scope="row">TOTAL:</th>
                             <th id="invoiceGrandTotal" style="text-align:right;"></th>
                         </tr>
-                        <!--tr>
-                            <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
-                                Get payment
-                            </button></td>
-                        </tr-->
-                        {{--<tr>
-                            <th colspan="1">Amount Paid:</th>
-                            <th style="text-align:right;"  colspan="3">
-                            <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                            </th>
-                        </tr>--}}
                     </tfoot>
                 </table>
             </div>
@@ -331,52 +284,16 @@
                             <input class="form-control" type="text" name="backpacker" maxlength="11" placeholder="" value="Backpacker" disabled>
                         </div>
                     </div>
-                </div>    
-                    <!--/div-->
-                    {{--<div class="col-md-3 mb-1">
-                        <label for="numberOfPax">No. of pax</label>
-                        <input class="form-control" type="number" id="numberOfPax" required name="numberOfPax" placeholder="" value="" min="1" max="60">
-                    </div>
-                    <div class="col-md-4 mb-1 form-group">
-                        <label for="accommodationType">Accommodation type</label>
-                        <select class="form-control"disabled>
-                            <option>Backpacker</option>
-                        </select>
-                    </div>--}}
-                <!--div class="form-group row">
-                    <div class="col-md-6 mb-3">
-                        <label for="checkinDate">Check-in date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkinDate" required="required" class="form-control" id="checkinDate" value="<?php echo date("Y-m-d");?>">
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-1">
-                        <label for="checkoutDate">Check-out date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkoutDate" required="required" class="form-control" id="checkoutDate" value="">
-                            <input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">
-                        </div>
-                    </div>
-                </div-->
+                </div>   
                 <hr class="mb-4">
                 <h5 style="margin-bottom:.80em;">Unit Details</h5>
                 <div class="form-group row">
                     <div class="col-md-2 mb-1">
-                        <label for="unitID">No. of units</label>
+                        <label for="unitID">No. of rooms</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fa fa-campground" aria-hidden="true"></i>
+                                    <i class="fa fa-bed" aria-hidden="true"></i>
                                 </span>
                             </div>
                         <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{count($unitNumber)}}" min="1" max="80" readonly>
