@@ -52,7 +52,16 @@ jQuery(document).ready(function(){
 
             jQuery("#reserve").attr("href", "reserve-glamping/"+data[0].unitID);
             jQuery("#editDetails").attr("href", "edit-details/"+data[0].unitID);
-            jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+
+            var checkoutDatetime = moment(data[0].checkoutDatetime).format('L');
+            var today = new Date();
+            var currentDate = moment(today).format('L');
+            
+            if(checkoutDatetime == currentDate) {
+                jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
+            } else {
+                jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+            }
         })
     });
 }); 
