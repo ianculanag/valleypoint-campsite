@@ -274,7 +274,7 @@ function getCheckedUnits() {
     jQuery('#checkedUnits').val(checkedUnits);
 }
 
-jQuery('#loadCalendarGlamping').click(function(){
+/*jQuery('#loadCalendarGlamping').click(function(){
     var glampingCalendarInputsComplete = true;
     for (var count = 0; count < jQuery('.glampingCalendarInputs').length; count++) {
         if(jQuery('.glampingCalendarInputs').eq(count).val() == '') {
@@ -285,7 +285,10 @@ jQuery('#loadCalendarGlamping').click(function(){
 
     if(glampingCalendarInputsComplete) {  
         console.log('2');
-        refreshCalendar(dates);   
+
+        jQuery.get('/getDates', function(dates) {
+            refreshCalendar(dates);   
+        })
     }
 });
 
@@ -319,6 +322,8 @@ function refreshCalendar(dates) {
         }
     }
 
+    var bodyString = "";
+
     for(var index = 0; index < unitNumbers.length; index++) {
         bodyString += "<tr>";
         bodyString += "<td>"+unitNumbers[index]+"</td>";
@@ -328,5 +333,6 @@ function refreshCalendar(dates) {
         bodyString += "</tr>";
     }
 
+    jQuery('#glampingCalendarBody').html(bodyString);
     jQuery('#glampingCalendarHead').html(htmlString);
-}
+}*/

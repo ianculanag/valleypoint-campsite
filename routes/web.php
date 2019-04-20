@@ -19,8 +19,12 @@ Route::get('/pos', 'PagesController@pos');
 Route::get('/transient-backpacker', 'UnitsController@transientBackpacker'); 
 Route::get('/glamping', 'UnitsController@glamping'); 
 
+//Dashboard: Calendar view
 Route::get('/calendar-glamping', 'UnitsController@calendarGlamping'); 
 Route::get('/calendar-backpacker', 'UnitsController@calendarBackpacker'); 
+
+//Dashboard: Reload calendar
+Route::post('/reload-calendar-glamping', 'UnitsController@reloadCalendarGlamping'); 
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 //Route::resource('staff', 'StaffController');

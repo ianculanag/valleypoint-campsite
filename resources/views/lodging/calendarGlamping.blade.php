@@ -17,9 +17,11 @@
             </li>
         </ul>
     </div>    
-    <form>
+    <form method="POST" action="/reload-calendar-glamping">
+        @csrf
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="container col-md-6 offset-3 row px-5" style="padding-left:5.5em;">
-            <div class="form-group px-2">
+            <div class="form-group px-2 col-md-5">
                 <!--label class="mb-0" for="checkin" style="padding-right:0;">Check-in date</label-->
                 <div class="input-group input-group-sm mb-1">
                     <div class="input-group-prepend">
@@ -27,11 +29,15 @@
                             <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                         </span>
                     </div>
+                    @if(isset($from))
+                    <input class="form-control glampingCalendarInputs" id="glampingCalendarFrom" type="date" name="glampingCalendarFrom" maxlength="15" placeholder="" value="{{$from}}" required>
+                    @else
                     <input class="form-control glampingCalendarInputs" id="glampingCalendarFrom" type="date" name="glampingCalendarFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                    @endif
                 </div>
             </div>
             <span>-</span>
-            <div class="form-group px-2">
+            <div class="form-group px-2 col-md-5">
                 <!--label class="mb-0" for="checkout" style="padding-right:0;">Check-out date</label-->
                 <div class="input-group input-group-sm mb-1">
                     <div class="input-group-prepend">
@@ -39,15 +45,17 @@
                             <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                         </span>
                     </div>
+                    @if(isset($to))
+                    <input class="form-control glampingCalendarInputs" id="glampingCalendarTo" type="date" name="glampingCalendarTo" maxlength="15" placeholder="" value="{{$to}}" required>
+                    @else
                     <input class="form-control glampingCalendarInputs" type="date" id="glampingCalendarTo" name="glampingCalendarTo" maxlength="15" placeholder="" value="" required>
+                    @endif
                 </div>
             </div>
-            <div>
-                <a id="loadCalendarGlamping">
-                    <button class="btn btn-sm btn-success">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </a>
+            <div class="col-md-1 px-1">
+                <button class="btn btn-sm btn-success" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </form>
