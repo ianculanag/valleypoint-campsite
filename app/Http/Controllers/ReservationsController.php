@@ -261,7 +261,7 @@ class ReservationsController extends Controller
 
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
         
-        $reservation = Reservations::find($request->input('reservationID'));
+        $reservation = Reservationss::find($request->input('reservationID'));
         $reservation->update([
             'lastName' => $request->input('lastName'),
             'firstName' => $request->input('firstName'),
@@ -287,6 +287,8 @@ class ReservationsController extends Controller
                 'serviceID' => $request->input($accommodationPackage)
             ));
         }
+
+        return redirect('/glamping');
     }
 
     /**
@@ -743,7 +745,13 @@ class ReservationsController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('lodging.reservationBackpacker')->with('unit', $unit)->with('unitSource', $unitSource);
+        $beds = DB::table('units')
+        ->where('units.unitType', '=', 'bed')
+        ->where('partOf', '=', $unitID)
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('lodging.reservationBackpacker')->with('unit', $unit)->with('unitSource', $unitSource)->with('beds', $beds);
     }
 
     

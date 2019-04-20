@@ -137,7 +137,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
+                            <label for="unitID">No. of tents</label>
                             {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>--}}
                             <div class="input-group">
                                 <div class="input-group-prepend">

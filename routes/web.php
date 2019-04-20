@@ -172,3 +172,6 @@ Route::post('/update-service', 'ServicesController@updateService');
 //Delete service
 Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
 Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
+
+//Load room capacity
+Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');

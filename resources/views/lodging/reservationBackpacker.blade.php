@@ -106,7 +106,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
+                            <label for="unitID">No. of rooms</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -128,7 +128,7 @@
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
-                            <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unit->unitNumber}}" required>
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfieldBackpacker" value="{{$unit->unitNumber}}" required>
                             <input type="hidden" id="unitSource" value="{{$source}}">
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
                                                
@@ -139,18 +139,17 @@
                         </div>
                     </div>
                     <div class="form-group row" id="divUnits">
-                        <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
+                        <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}} backpackerRoomNumbers">
                             <label for="unitNumber">Unit number</label>
-                            <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
+                            <input type="text" class="form-control" value="{{$unit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
                             <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
                         </div>
-                        <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
+                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
-                            <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
-                                <option value="1">Solo</option>
-                                <option value="2">2 Pax</option>
-                                <option value="3">3 pax</option>
-                                <option value="4">4 pax</option>
+                            <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}" id="numberOfBeds{{$unit->unitNumber}}">
+                                @foreach($beds as $bed)
+                                <option value="{{$unit->unitNumber}}{{$loop->iteration}}">{{$loop->iteration}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -324,7 +323,7 @@
                     @endif
                     <div class="col-md-10 mb-1">
                         <label for="unitNumber">Unit/s</label>
-                        <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unitNumbers}}" required>
+                        <input class="form-control" type="text" name="unitNumber" required id="tokenfieldBackpacker" value="{{$unitNumbers}}" required>
                         <input type="hidden" id="unitSource" value="{{$source}}">                     
                     </div>
                 </div>
@@ -344,13 +343,12 @@
                         <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
                         <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                     </div>
-                    <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
-                        <label for="additionalServiceUnitPrice">Package</label>
-                        <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
-                            <option value="1">Solo</option>
-                            <option value="2">2 Pax</option>
-                            <option value="3">3 pax</option>
-                            <option value="4">4 pax</option>
+                    <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}">
+                        <label for="additionalServiceUnitPrice">No. of beds</label>
+                        <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}" id="numberOfBeds{{$unit->unitNumber}}">
+                            @foreach($beds as $bed)
+                            <option value="{{$unit->unitNumber}}{{$loop->iteration}}">{{$loop->iteration}}</option>
+                            @endforeach
                         </select>
                     </div>
 

@@ -377,6 +377,29 @@ class UnitsController extends Controller
     }
 
     /**
+     * Return room capacity.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadRoomCapacity($unitNumber)
+    {
+        $selectedUnit = DB::table('units')
+        ->where('units.unitNumber', '=', $unitNumber)
+        ->get();
+
+        $beds = DB::table('units')
+        ->where('units.unitType', '=', 'bed')
+        ->where('partOf', '=', $selectedUnit[0]->id)
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return count($beds);
+
+        //$units = Units::sortable()->paginate(8);
+        //return view('admin.viewunits',compact('units'))->with('units', $units);
+    }
+
+    /**
      * Return all unit ids with unit numbers.
      *
      * @return \Illuminate\Http\Response

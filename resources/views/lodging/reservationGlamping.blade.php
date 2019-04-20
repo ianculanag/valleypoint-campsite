@@ -142,7 +142,7 @@
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
                         <div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
+                            <label for="unitID">No. of tents</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
