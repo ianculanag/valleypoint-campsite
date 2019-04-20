@@ -152,8 +152,14 @@ class UnitsController extends Controller
 
         //return $interval; 
 
-        for($index = 0; $index < $interval+1 ; $index++){
-            array_push($days, Carbon::parse($request->input('glampingCalendarFrom'))->addDays($index)->format('Y-m-d'));
+        if($interval < 15) {
+            for($index = 0; $index < 15 ; $index++){
+                array_push($days, Carbon::parse($request->input('glampingCalendarFrom'))->addDays($index)->format('Y-m-d'));
+            }
+        } else {
+            for($index = 0; $index < $interval+1 ; $index++){
+                array_push($days, Carbon::parse($request->input('glampingCalendarFrom'))->addDays($index)->format('Y-m-d'));
+            }
         }
 
         $accommodationDates = DB::table('accommodation_units')
