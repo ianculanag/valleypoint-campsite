@@ -21,9 +21,9 @@
             </div>
     
             @if(count($units) > 0)
-            <div class="container">
-                <div class="container">
-                    <h5 class="unit-heading">3 pax</h5> 
+            <div class="container" style="padding-top:1em;">
+                <div class="container scrollbar-near-moon pb-4" style="position:fixed; max-height:68.5vh; max-width:55%; overflow-y:auto;">
+                    <h5 class="unit-heading mb-0">3 pax</h5> 
                     <div class="row"> 
                 
                 @foreach($units as $unit)   
@@ -55,10 +55,10 @@
                     @endif
                 @endforeach
                     </div>
-                </div>     
+                {{--</div>     
                
-                <div class="container">
-                    <h5 class="unit-heading">4 pax</h5> 
+                <div class="container">--}}
+                    <h5 class="unit-heading mb-0">4 pax</h5> 
                     <div class="row"> 
         
                 @foreach($units as $unit)   
@@ -90,10 +90,10 @@
                     @endif
                 @endforeach
                     </div>
-                </div>
+                {{--</div>
 
-                <div class="container">
-                    <h5 class="unit-heading">5 pax</h5> 
+                <div class="container">--}}
+                    <h5 class="unit-heading mb-0">5 pax</h5> 
                     <div class="row"> 
 
                 @foreach($units as $unit)   
@@ -125,10 +125,10 @@
                         @endif
                     @endforeach
                     </div>
-                </div>
+                {{--</div>
 
-                <div class="container">
-                    <h5 class="unit-heading">6 pax</h5> 
+                <div class="container">--}}
+                    <h5 class="unit-heading mb-0">6 pax</h5> 
                     <div class="row"> 
 
                 @foreach($units as $unit)   
@@ -160,10 +160,10 @@
                     @endif
                 @endforeach
                     </div>
-                </div>
+                {{--</div>
 
-                <div class="container">
-                    <h5 class="unit-heading">10 pax</h5> 
+                <div class="container">--}}
+                    <h5 class="unit-heading mb-0">10 pax</h5> 
                     <div class="row"> 
 
                 @foreach($units as $unit)   

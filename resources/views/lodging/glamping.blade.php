@@ -63,6 +63,9 @@
                             @if((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') == $currentDate))
                                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                                 <p class="card-text" style="color:#fdc000; font-style:italic;">Checks-out today!</p>
+                            @elseif((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') < $currentDate))
+                                <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                <p class="card-text" style="color:red; font-style:italic;">Overdue!</p>
                             @else
                                 <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                                 <p class="card-text" style="color:green; font-style:italic;"> {{$unit->serviceName}}</p>
@@ -94,7 +97,18 @@
                                         @endif
                                     @elseif($reservation->id == $unit->unitID)
                                         @if(array_search($unit->unitID, $unitArray) == false)
-                                        <p class="card-text" style="color:lightseagreen; font-style:italic;">Next checkin:<br>{{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')}}</p>
+                                            @if(\Carbon\Carbon::parse($reservation->checkinDatetime)->format('Y-m-d') < $currentDate)
+                                            <p class="card-text">{{$reservation->firstName}} {{$reservation->lastName}}</p>
+                                            <p class="card-text" style="color:red; font-style:italic;">
+                                                Update reservation!
+                                                {{--\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')--}}
+                                            </p>
+                                            @else
+                                            <p class="card-text" style="color:lightseagreen; font-style:italic;">
+                                                Next checkin:<br>
+                                                {{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('F j, Y')}}
+                                            </p>
+                                            @endif
                                         @php
                                             array_push($unitArray, $unit->unitID);
                                         @endphp

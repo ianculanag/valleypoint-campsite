@@ -10,6 +10,8 @@ class Units extends Model
 {
     use softDeletes;
 
+    protected $softDelete = true;
+
     protected $dates = ['deleted_at'];
 
     // Table Name
