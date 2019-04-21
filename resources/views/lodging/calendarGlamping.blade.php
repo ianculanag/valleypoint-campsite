@@ -62,11 +62,12 @@
     <div class="container-fluid scrollbar-near-moon p-0" style="overflow-y:auto; height:62vh; max-width:77vw; overflow-x:auto;">
         <table class="table table-sm m-0">
         <thead id="glampingCalendarHead">
-            <tr class="pt-5">
             <th style="text-align:center; position:fixed; background-color:rgb(233, 236, 239); z-index:101; min-width:6.1em; min-height:3.7em; border:none;"></th>            
+            <tr class="pt-5">
+            <th style="text-align:center; position:sticky; background-color:rgb(233, 236, 239); z-index:101; min-width:6em; min-height:3.7em; border:none;"></th>   
             @if(count($dates) > 0)
             @foreach($dates as $date)
-                <td style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100; min-width:4.5em;" scope="col" colspan="2">
+                <td style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100; min-width:4.3em;" scope="col" colspan="2">
                     {{\Carbon\Carbon::parse($date)->format('D')}}
                     <hr class="py-0 my-0">
                     {{\Carbon\Carbon::parse($date)->format('M j')}}
