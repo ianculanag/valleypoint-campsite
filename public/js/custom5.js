@@ -194,7 +194,7 @@ function addGroupRow(unitNumber) {
     htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+newGroupIdentifier+"'>";
     htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+newGroupIdentifier+"' id='numberOfBeds"+unitNumber+newGroupIdentifier+"'>";
     
-    for(var index = 1; index <= 1; index++) {
+    for(var index = 1; index <= jQuery('#maxCapacity'+unitNumber).val(); index++) {
         htmlString += "<option value='"+index+"'>"+index+"</option>";
     }
 
