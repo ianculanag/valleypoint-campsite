@@ -596,6 +596,7 @@ class UnitsController extends Controller
     public function viewUnits()
     {
         $units = DB::table('units')
+        ->where('units.unitType', '!=', 'bed')
         ->orderBy('id', 'ASC')
         ->get();
 

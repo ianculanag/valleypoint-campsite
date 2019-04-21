@@ -70,9 +70,9 @@
                             Guests
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <button class="dropdown-btn nav-link" id="transactionsTab" href="/view-payments">
-                            <i class="fa fa-book" aria-hidden="true"></i>
+                    <li class="nav-item transactionsTab">
+                        <button class="dropdown-btn nav-link transactionsTab" id="transactionsTab" href="/view-payments">
+                            <i class="fa fa-book transactionsTab" aria-hidden="true"></i>
                             Transactions
                             <i class="fa fa-caret-down"></i>
                         </button>

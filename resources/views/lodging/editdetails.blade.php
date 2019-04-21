@@ -40,10 +40,13 @@
                                     <thead>
                                         <tr>
                                         @if(count($payments) > 0)
+                                            @php
+                                                
+                                            @endphp
                                             <th scope="col" style="width:55%">Desciption</th>
                                             <th scope="col">Qty.</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Total</th> 
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Amount</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,16 +54,22 @@
                                             $total = 0;
                                             $totalPayment = 0;
                                             $balance = 0;
+                                            $amountPaid = 0;
                                         @endphp
                                         @foreach($payments as $payment)
                                         <tr>
                                             <td>{{$payment->serviceName}}</td>
                                             <td style="text-align:right;">{{$payment->quantity}}</td>
-                                            <td style="text-align:right;">{{number_format((float)($payment->price), 2, '.', '')}}</td>
-                                            <td style="text-align:right;" type="number" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00">{{number_format((float)($payment->totalPrice), 2, '.', '')}}</td>
-                                            </tr>
+                                            {{--<td style="text-align:right;">{{number_format((float)($payment->price), 2, '.', '')}}</td>--}}
+                                        @php
+                                            $amountPaid = ($payment->totalPrice) - ($payment->balance);
+                                        @endphp
+                                            <td style="text-align:right;">{{number_format((float)($payment->totalPrice), 2, '.', '')}}</td>
+                                            <td style="text-align:right;">{{number_format((float)($amountPaid), 2, '.', '')}}</td>
+                                        </tr>
                                         @php
                                             $total += $payment->totalPrice;
+                                            $totalPayment += $amountPaid;
                                             //$totalPayment += $payment->amount;
                                             //$balance = $total - $totalPayment;
                                         @endphp
@@ -68,14 +77,15 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th colspan="2" scope="row">TOTAL:</th>
                                             <th style="text-align:right;">{{number_format((float)($total), 2, '.', '')}}</th>
-                                        </tr>
-                                        {{--<tr>
-                                            <th colspan="3" scope="row">Balance:</th>
-                                            <th style="text-align:right;">{{$balance}}</th>
+                                            <th></th>
                                         </tr>
                                         <tr>
+                                            <th colspan="3" scope="row">AMOUNT:</th>
+                                            <th style="text-align:right;">{{number_format((float)($totalPayment), 2, '.', '')}}</th>
+                                        </tr>
+                                        {{--<tr>
                                             <th colspan="1">Amount Paid:</th>
                                             <th style="text-align:right;"  colspan="3">
                                             <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
