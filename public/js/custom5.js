@@ -105,36 +105,37 @@ function makeRowBackpacker(unitNumber) {
     jQuery.get('../load-room-capacity/'+unitNumber, function(data) {
         var htmlString = "";
         htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
-        htmlString += "<input type='text' class='form-control' value='"+unitNumber+"' disabled>";
+        htmlString += "<input type='text' class='form-control roomNumber unit"+unitNumber+"' value='"+unitNumber+"' readonly>";
         htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
         htmlString += "</div>";
-        htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+"'>";
-        htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+"' id='numberOfBeds"+unitNumber+"'>";
+        htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+"-1'>";
+        htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+"-1' id='numberOfBeds"+unitNumber+"-1'>";
         
         for(var index = 1; index <= data; index++) {
             htmlString += "<option value='"+unitNumber+index+"'>"+index+"</option>";
         }
 
         htmlString += "</select>";
+        htmlString += "<input type='hidden' id='maxCapacity"+unitNumber+"' value='"+data+"'>";
         htmlString += "</div>";
-        htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+"'>";
+        htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+"-1'>";
         htmlString += "<div class='input-group'>";
         htmlString += "<div class='input-group-prepend'>";
         htmlString += "<span class='input-group-text'>";
         htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
         htmlString += "</span>";
         htmlString += "</div>";
-        htmlString += "<input type='date' name='checkinDate"+unitNumber+"' required='required' class='form-control checkinDates' id='checkinDate"+unitNumber+"' value='"+jQuery('.checkinDates').val()+"'>";
+        htmlString += "<input type='date' name='checkinDate"+unitNumber+"-1' required='required' class='form-control checkinDates' id='checkinDate"+unitNumber+"-1' value='"+jQuery('.checkinDates').val()+"'>";
         htmlString += "</div>";
         htmlString += "</div>";
-        htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"'>";
+        htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"-1'>";
         htmlString += "<div class='input-group'>";
         htmlString += "<div class='input-group-prepend'>";
         htmlString += "<span class='input-group-text'>";
         htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
         htmlString += "</span>";
         htmlString += "</div>";
-        htmlString += "<input type='date' name='checkoutDate"+unitNumber+"' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+"' value='"+jQuery('.checkoutDates').val()+"'>";
+        htmlString += "<input type='date' name='checkoutDate"+unitNumber+"-1' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+"-1' value='"+jQuery('.checkoutDates').val()+"'>";
         //htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
         htmlString += "</div>";
         htmlString += "</div>";
@@ -145,12 +146,126 @@ function makeRowBackpacker(unitNumber) {
 
 function removeRow(unitNumber) {
     var divUnitNumber = '#divUnitNumber'+unitNumber;
-    var divNumberOfBeds = '#divNumberOfBeds'+unitNumber;
-    var divCheckinDate = '#divCheckinDate'+unitNumber;
-    var divCheckoutDate = '#divCheckoutDate'+unitNumber;
+    var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+'-1';
+    var divCheckinDate = '#divCheckinDate'+unitNumber+'-1';
+    var divCheckoutDate = '#divCheckoutDate'+unitNumber+'-1';
     
     jQuery(divUnitNumber).remove();
     jQuery(divNumberOfBeds).remove();
     jQuery(divCheckinDate).remove();
     jQuery(divCheckoutDate).remove();
+}
+
+jQuery(document).on('click', '.roomNumber', function() {
+    addGroupRow(jQuery(this).val());
+});
+
+jQuery(document).on('click', '.removeSplitButton', function() {
+    var rawString = jQuery(this).attr('id').slice(17);
+    var arrayString = rawString.split('-');
+
+    var unitNumber = arrayString[0];
+    var groupIdentifier = '-'+arrayString[1];
+    
+    removeGroupRow(unitNumber, groupIdentifier);
+});
+
+function addGroupRow(unitNumber) {
+    var roomIdentifier = '.unit'+unitNumber;
+    var numberOfGroups =  jQuery('#numberOfGroupsIn'+unitNumber).val();
+
+    var newGroupIdentifier = '-'+(parseInt(numberOfGroups)+1);
+
+    console.log(numberOfGroups);
+
+    jQuery('#numberOfGroupsIn'+unitNumber).val(newGroupIdentifier.slice(1));
+    
+    var htmlString = "";
+
+    htmlString += "<div class='col-md-2 mb-1' style='float:right' id='divRemoveSplitButton"+unitNumber+newGroupIdentifier+"'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<button type='button' style='margin-left:auto' id='removeSplitButton"+unitNumber+newGroupIdentifier+"' class='btn btn-danger removeSplitButton unit"+unitNumber+"'>";
+    htmlString += "<span class='fa fa-minus' aria-hidden='true'></span>";
+    htmlString += "</button>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+
+
+    htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+newGroupIdentifier+"'>";
+    htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+newGroupIdentifier+"' id='numberOfBeds"+unitNumber+newGroupIdentifier+"'>";
+    
+    for(var index = 1; index <= 1; index++) {
+        htmlString += "<option value='"+index+"'>"+index+"</option>";
+    }
+
+    htmlString += "</select>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+newGroupIdentifier+"'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<div class='input-group-prepend'>";
+    htmlString += "<span class='input-group-text'>";
+    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
+    htmlString += "</span>";
+    htmlString += "</div>";
+    htmlString += "<input type='date' name='checkinDate"+unitNumber+newGroupIdentifier+"' required='required' class='form-control checkinDates' id='checkinDate"+unitNumber+newGroupIdentifier+"' value='"+jQuery('.checkinDates').val()+"'>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+    htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+newGroupIdentifier+"'>";
+    htmlString += "<div class='input-group'>";
+    htmlString += "<div class='input-group-prepend'>";
+    htmlString += "<span class='input-group-text'>";
+    htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
+    htmlString += "</span>";
+    htmlString += "</div>";
+    htmlString += "<input type='date' name='checkoutDate"+unitNumber+newGroupIdentifier+"' required='required' class='form-control checkoutDates' id='checkoutDate"+unitNumber+newGroupIdentifier+"' value='"+jQuery('.checkoutDates').val()+"'>";
+    //htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
+    htmlString += "</div>";
+    htmlString += "</div>";
+
+    jQuery('#divUnits').append(htmlString);
+
+    updateRoomCapacity(unitNumber);
+}
+
+function removeGroupRow(unitNumber, groupIdentifier) {
+    var divSplitButton = '#divRemoveSplitButton'+unitNumber+groupIdentifier;
+    var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+groupIdentifier;
+    var divCheckinDate = '#divCheckinDate'+unitNumber+groupIdentifier;
+    var divCheckoutDate = '#divCheckoutDate'+unitNumber+groupIdentifier;
+    
+    jQuery(divSplitButton).remove();
+    jQuery(divNumberOfBeds).remove();
+    jQuery(divCheckinDate).remove();
+    jQuery(divCheckoutDate).remove();
+
+    updateRoomCapacity(unitNumber);
+}
+
+function updateRoomCapacity(unitNumber){
+    var numberOfGroups = jQuery('.unit'+unitNumber).length;
+    var maximumCapacity = jQuery('#maxCapacity'+unitNumber).val();
+
+    var totalOccupants = 0;
+    var unitIdentifiers = new Array();
+    var setCapacity = new Array();
+
+    if(numberOfGroups == 1) {
+        var htmlString = "";
+        for(var index = 1; index <= maximumCapacity; index++) {            
+            if(jQuery('.numberOfBeds').eq(0).val() == index) {
+                htmlString += "<option value='"+index+"' selected>"+index+"</option>";
+            } else {
+                htmlString += "<option value='"+index+"'>"+index+"</option>";
+            }
+        }
+        jQuery('.numberOfBeds').eq(0).html(htmlString);
+    }/* else {
+        for(var index = 0; index < numberOfGroups; index++){
+            totalOccupants += parseInt(jQuery('.numberOfBeds').eq(index).val());
+            unitIdentifiers.push(jQuery('.numberOfBeds').eq(index).attr('id').slice(12));
+            //console.log(jQuery('.numberOfBeds').eq(index).attr('id').slice(12));
+        }
+
+
+    }    */
 }
