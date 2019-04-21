@@ -25,6 +25,7 @@ Route::get('/calendar-backpacker', 'UnitsController@calendarBackpacker');
 
 //Dashboard: Reload calendar
 Route::post('/reload-calendar-glamping', 'UnitsController@reloadCalendarGlamping'); 
+Route::post('/reload-calendar-backpacker', 'UnitsController@reloadCalendarBackpacker'); 
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 //Route::resource('staff', 'StaffController');

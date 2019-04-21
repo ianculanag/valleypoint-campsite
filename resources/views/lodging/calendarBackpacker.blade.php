@@ -17,15 +17,61 @@
             </li>
         </ul>
     </div>    
-    <div class="container-fluid pb-5" style="padding-top:1em;">
-        <table class="table table-sm">
-        <thead>
-            <tr>
-            <th scope="col"></th>            
+    <form method="POST" action="/reload-calendar-backpacker">
+        @csrf
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+        <div class="container col-md-6 offset-3 row px-5" style="padding-left:5.5em;">
+            <div class="form-group px-2 col-md-5">
+                <!--label class="mb-0" for="checkin" style="padding-right:0;">Check-in date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    @if(isset($from))
+                    <input class="form-control backpackerCalendarInputs" id="backpackerCalendarFrom" type="date" name="backpackerCalendarFrom" maxlength="15" placeholder="" value="{{$from}}" required>
+                    @else
+                    <input class="form-control backpackerCalendarInputs" id="backpackerCalendarFrom" type="date" name="backpackerCalendarFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                    @endif
+                </div>
+            </div>
+            <span>-</span>
+            <div class="form-group px-2 col-md-5">
+                <!--label class="mb-0" for="checkout" style="padding-right:0;">Check-out date</label-->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    @if(isset($to))
+                    <input class="form-control backpackergCalendarInputs" id="backpackerCalendarTo" type="date" name="backpackerCalendarTo" maxlength="15" placeholder="" value="{{$to}}" required>
+                    @else
+                    <input class="form-control backpackerCalendarInputs" type="date" id="backpackerCalendarTo" name="backpackergCalendarTo" maxlength="15" placeholder="" value="" required>
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-1 px-1">
+                <button class="btn btn-sm btn-success" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="container-fluid scrollbar-near-moon p-0" style="overflow-y:auto; max-height:62vh; max-width:77vw; overflow-x:auto;">
+        <table class="table table-sm m-0">
+        <thead id="glampingCalendarHead">
+            <th style="text-align:center; position:fixed; background-color:rgb(233, 236, 239); z-index:101; min-width:6.1em; min-height:3.7em; border:none;"></th>            
+            <tr class="pt-5">
+            <th style="text-align:center; position:sticky; background-color:rgb(233, 236, 239); z-index:101; min-width:6em; min-height:3.7em; border:none;"></th>   
             @if(count($dates) > 0)
             @foreach($dates as $date)
-                <td style="text-align: center;" scope="col" colspan="2">{{\Carbon\Carbon::parse($date)->format('D')}}
-                                        <hr class="py-0 my-0">{{\Carbon\Carbon::parse($date)->format('M j')}}</td>
+                <td style="text-align:center; position:sticky; top:0; background-color:rgb(233, 236, 239); z-index:100; min-width:4.3em;" scope="col" colspan="2">
+                    {{\Carbon\Carbon::parse($date)->format('D')}}
+                    <hr class="py-0 my-0">
+                    {{\Carbon\Carbon::parse($date)->format('M j')}}
+                </td>
             @endforeach
             @endif
             </tr>
@@ -40,7 +86,7 @@
             @if(count($units) > 0)
             @foreach($units as $unit)
                 <tr>
-                <td scope="row" style="text-align: center;">{{$unit->unitNumber}}</td>
+                <td scope="row" style="text-align:center; position:sticky; left:0; background-color:rgb(233, 236, 239); min-width:6em;">{{$unit->unitNumber}}</td>
                 @foreach($dates as $date)
                 @php
                     $idAM = $unit->unitNumber.(string)$date.'AM';

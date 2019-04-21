@@ -251,6 +251,69 @@ class UnitsController extends Controller
     }
 
     /**
+     * Reload clandar view for backpacker
+     * 
+     * @return \Illuminate\Http\Respone
+     */
+    public function reloadCalendarBackpacker(Request $request)
+    {
+        $units = DB::table('units')
+        ->where('units.unitType', '=', 'room')
+        ->get();
+
+        $days = array();
+
+        $from = Carbon::parse($request->input('backpackerCalendarFrom'))->format('Y-m-d');
+        $to = Carbon::parse($request->input('backpackerCalendarTo'))->format('Y-m-d');
+
+        $interval = date_diff(Carbon::parse($request->input('backpackerCalendarFrom')), Carbon::parse($request->input('backpackerCalendarTo')))->days;
+
+        if($interval < 15) {
+            for($index = 0; $index < 15 ; $index++){
+                array_push($days, Carbon::parse($request->input('backpackerCalendarFrom'))->addDays($index)->format('Y-m-d'));
+            }
+        } else {
+            for($index = 0; $index < $interval+1 ; $index++){
+                array_push($days, Carbon::parse($request->input('backpackerCalendarFrom'))->addDays($index)->format('Y-m-d'));
+            }
+        }
+
+        $accommodationDates = DB::table('accommodation_units')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
+                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID',
+                 'guests.firstName', 'guests.lastName')
+        ->where('accommodation_units.status', '=', 'ongoing')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();
+
+        $reservationDates = DB::table('reservation_units')
+        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID',
+                 'reservations.firstName', 'reservations.lastName')
+        ->where('reservation_units.status', '=', 'reserved')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();
+
+        $blockDates = array_merge($accommodationDates, $reservationDates);
+
+        $dateStrings = array();
+
+        for($count = 0; $count < count($blockDates); $count++) {
+            $dateString = $blockDates[$count]->unitNumber.Carbon::parse($blockDates[$count]->checkinDatetime)->format('Y-m-d').'PM';
+            array_push($dateStrings, $dateString);
+        }
+
+        return view('lodging.calendarbackpacker')->with('units', $units)->with('dates', $days)->with('blockDates', $blockDates)->with('dateStrings', $dateStrings)->with('from', $from)->with('to', $to);
+    }
+
+    /**
      * Display all glamping units.
      * 
      * @return \Illuminate\Http\Response
