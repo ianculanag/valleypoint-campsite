@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12 text-center lodging-tabs mx-1">
     <nav class="nav nav-pills centered-pills">
-        <a class="nav-item nav-link active" style="background-color:#505050" href="/glamping">Physical View</a>
+        <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="/glamping">Physical View</a>
         <a class="nav-item nav-link" style="color:#505050" href="/calendar-glamping">Calendar View</a>
     </nav>
 </div>

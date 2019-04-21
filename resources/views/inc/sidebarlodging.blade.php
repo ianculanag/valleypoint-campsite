@@ -31,7 +31,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" style="color: rgb(30,30,30);" href="{{ route('logout') }}"
+                        <a class="dropdown-item" style="color:#505050 !important;" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}

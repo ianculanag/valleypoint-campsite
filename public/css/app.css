@@ -9734,7 +9734,7 @@ h3 {
 .sidebar {
   z-index: 100;
   padding: 2.5em 0 0;
-  background-color: #4b5557;
+  background-color: #060f0ed4;
   transition: all 0.3s;
   min-height: 100%;
   position: fixed !important;
@@ -9754,11 +9754,11 @@ h3 {
 .nav-list li .nav-link.active {
   border-left: 0.4em solid;
   padding-left: 0.5em !important;
-  border-left-color: #a7faec;
+  border-left-color: #00ffc8;
 }
 
 .nav-list li .nav-link.active {
-  background-color: rgba(224, 248, 242, 0.436);
+  background-color: #b4e7ce96;
 }
 
 .dropdown-container a.active {
