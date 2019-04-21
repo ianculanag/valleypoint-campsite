@@ -61,9 +61,13 @@ Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showChe
 //Find Package
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
-//Unit Finder
-Route::post('/checkin-finder', 'AccommodationsController@showCheckinFromFinder');
-Route::post('/reserve-finder', 'ReservationsController@showReserveFromFinder');
+//Unit finder: Tent finder
+Route::post('/checkin-glamping-finder', 'AccommodationsController@showGlampingCheckinFromFinder');
+Route::post('/reserve-glamping-finder', 'ReservationsController@showGlampingReserveFromFinder');
+
+//Unit finder: Room finder
+Route::post('/checkin-backpacker-finder', 'AccommodationsController@showBackpackerCheckinFromFinder');
+Route::post('/reserve-backpacker-finder', 'ReservationsController@showBackpackerReserveFromFinder');
 
 //Calendar
 Route::get('/checkin/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');

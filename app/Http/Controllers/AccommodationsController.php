@@ -46,7 +46,7 @@ class AccommodationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showCheckinFromFinder(Request $request)
+    public function showGlampingCheckinFromFinder(Request $request)
     {
         $unitsSelected =  explode(',', $request->input('checkedUnits'));
 

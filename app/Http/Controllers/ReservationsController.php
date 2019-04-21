@@ -101,7 +101,7 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showReserveFromFinder(Request $request)
+    public function showGlampingReserveFromFinder(Request $request)
     {
         $unitsSelected =  explode(',', $request->input('checkedUnits'));
 

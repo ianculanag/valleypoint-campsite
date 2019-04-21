@@ -276,10 +276,10 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>--}} 
                         <div class="pt-2">
-                            <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="roomFinderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
-                            <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="roomFinderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
+                            <button type="submit" formaction="checkin-backpacker-finder" class="btn btn-secondary" id="roomFinderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
+                            <button type="submit" formaction="reserve-backpacker-finder" class="btn btn-primary" id="roomFinderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
                          </div>
                     <form>
                 </div>

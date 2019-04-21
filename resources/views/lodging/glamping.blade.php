@@ -244,8 +244,8 @@
                             </div>
                         </div>--}}
                         <div class="pt-2">
-                            <button type="submit" formaction="checkin-finder" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
-                            <button type="submit" formaction="reserve-finder" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
+                            <button type="submit" formaction="checkin-glamping-finder" class="btn btn-secondary" id="finderCheckin" style="width:9em; float:right;" disabled>Checkin</button>
+                            <button type="submit" formaction="reserve-glamping-finder" class="btn btn-primary" id="finderReserve" style="width:9em; float:left;" disabled>Add Reservation</button>
                          </div>
                     <form>
                 </div>
