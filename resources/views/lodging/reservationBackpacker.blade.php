@@ -163,7 +163,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$unit->unitNumber}}-1" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}-1" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate{{$unit->unitNumber}}-1" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$unit->unitNumber}}-1" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
 
@@ -175,7 +175,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$unit->unitNumber}}-1" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}-1" value="">
+                                <input type="date" name="checkoutDate{{$unit->unitNumber}}-1" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$unit->unitNumber}}-1" value="">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>

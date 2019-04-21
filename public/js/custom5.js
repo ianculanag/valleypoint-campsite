@@ -79,7 +79,7 @@ jQuery(document).ready(function(){
         numberOfUnits++;
         jQuery('#numberOfUnits').val(numberOfUnits);
         makeRowBackpacker(e.attrs.value);
-        makeInvoiceEntry(e.attrs.value);
+        //makeInvoiceEntry(e.attrs.value);
         if(jQuery('#checkoutDate'+e.attrs.value).val() >= jQuery('#checkinDate'+e.attrs.value).val()){
             //checkAvailability(); 
             var checkoutDatesComplete = true;
@@ -268,4 +268,46 @@ function updateRoomCapacity(unitNumber){
 
 
     }    */
+}
+
+//BACKPACKER DATES
+jQuery(document).on('change', '.checkinDatesBackpacker', function() {
+    updateQuantity();
+});
+
+jQuery(document).on('change', '.checkoutDatesBackpacker', function() {
+    updateQuantity();
+});
+
+jQuery(document).on('change', '.numberOfBeds', function() {
+    updateQuantity();
+});
+
+function updateQuantity() {
+    var checkoutDatesComplete = true;
+    for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+        //console.log(jQuery('.checkoutDates').eq(count).val()+'fuck');
+        if(jQuery('.checkoutDates').eq(count).val() == '') {
+            checkoutDatesComplete = false;
+        }
+    }
+
+    console.log(checkoutDatesComplete);
+    if(checkoutDatesComplete) {   
+        var numberOfBeds = 0;
+        var numberOfDays = 0;
+        for(var count = 0; count < jQuery('.checkinDatesBackpacker').length; count++) {
+            numberOfBeds += parseInt(jQuery('.numberOfBeds').eq(count).val());
+
+            var checkin = Date.parse(jQuery('.checkinDatesBackpacker').eq(count).val());
+            var checkout = Date.parse(jQuery('.checkoutDatesBackpacker').eq(count).val());
+
+            var timeDiff = checkout-checkin;
+            daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
+
+            numberOfDays += daysDiff;
+        }
+
+        jQuery('.invoiceQuantities').eq(0).html(numberOfBeds+'x'+numberOfDays);         
+    }
 }
