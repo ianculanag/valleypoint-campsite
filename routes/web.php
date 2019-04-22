@@ -138,6 +138,8 @@ Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDue
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
 /* Admin */
+//Dashboard
+Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
 
 //View users
 Route::get('/view-users', 'UsersController@viewUsers');

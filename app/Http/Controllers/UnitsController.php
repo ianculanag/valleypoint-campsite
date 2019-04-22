@@ -731,4 +731,44 @@ class UnitsController extends Controller
 
         return array_merge($accommodationDates, $reservationDates);
     }
+
+    /**
+     * Display tents in a calendar
+     * 
+     * @return \Illuminate\Http\Respone
+     */
+    public function loadAdminDashboard()
+    {
+        $admin = DB::table('users')
+        ->where('role', '=', 'admin')
+        ->get();
+
+        $lodging = DB::table('users')
+        ->where('role', '=', 'lodging')
+        ->get();
+
+        $tents = DB::table('units')
+        ->where('unitType', '=', 'tent')
+        ->get();
+
+        $rooms = DB::table('units')
+        ->where('unitType', '=', 'room')
+        ->get();
+
+        $packages = DB::table('services')
+        ->where('serviceType', '=', 'package')
+        ->get();
+
+        $services = DB::table('services')
+        ->where('serviceType', '=', 'service')
+        ->get();
+
+        $damage = DB::table('services')
+        ->where('serviceType', '=', 'damage')
+        ->get();
+
+        return view('lodging.admindashboard')->with('admin', $admin)->with('lodging', $lodging)
+            ->with('tents', $tents)->with('rooms', $rooms)
+            ->with('packages', $packages)->with('services', $services)->with('damage', $damage);
+    }
 }
