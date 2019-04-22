@@ -316,60 +316,65 @@
                                     <input type="text" readonly class="form-control-plaintext mb-1" style="text-align:center; font-weight:bold;" value="{{$loop->iteration}}">
                                     @endforeach
                                 </div>
+                                <div class="form-group row col-md-11 px-0 mx-0">
                                 <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
                                     <label for="unitNumber">Unit no.</label>
                                     @foreach($otherUnits as $units)
                                     <input type="text" class="form-control mb-1" value="{{$units->unitNumber}}" disabled>
                                     @endforeach
                                 </div>
-                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
+                                <div class="col-md-2 mb-1" id="divAccommodationPackage">
                                     <label for="additionalServiceUnitPrice">Package</label>
                                     @foreach($otherUnits as $units)
                                     {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
                                         <option>{{$units->serviceName}}</option>
                                     </select>--}}
-                                    <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-                                    {{--<select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
+                                    {{--<input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>--}}
+                                    <select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
                                         <option value="1">Solo</option>
                                         <option value="2">2 Pax</option>
                                         <option value="3">3 pax</option>
                                         <option value="4">4 pax</option>
-                                    </select>--}}
+                                    </select>
                                     @endforeach
                                 </div>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
                                      @foreach($otherUnits as $units)
                                     <div class="input-group mb-1">
-                                        {{--<div class="input-group-prepend">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
-                                        </div>--}}
+                                        </div>
                                         @php
                                             $checkedIn = new DateTime($units->checkinDatetime);
-                                            $checkedInAt = $checkedIn->format("F j, o");
+                                            //$checkedInAt = $checkedIn->format("F j, o");
+                                            $checkedInAt = $checkedIn->format("Y-m-d");
                                         @endphp
-                                    <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                                        <input class="form-control" type="date" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
                                     </div>
                                     @endforeach
                                 </div>
-                                <div class="col-md-3 mb-1">
+                                <div class="col-md-4 mb-1">
                                     <label for="checkoutDatetime">Check-out date</label>
                                      @foreach($otherUnits as $units)
                                     <div class="input-group mb-1">
-                                        {{--<div class="input-group-prepend">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <i class="fa fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
-                                        </div>--}}
+                                        </div>
                                         @php
                                             $checkOut = new DateTime($units->checkoutDatetime);
-                                            $checkOutAt = $checkOut->format("F j, o");
+                                            //$checkOutAt = $checkedOut->format("F j, o");
+                                            $checkOutAt = $checkOut->format("Y-m-d");
                                         @endphp
-                                    <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
+                                        {{--<input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>--}}
+                                        <input class="form-control" type="date" name="checkOutAt" placeholder="" value="{{$checkOutAt}}">
                                     </div>
                                     @endforeach
+                                </div>
                                 </div>
                             {{--</div>--}}
                         @else 
@@ -383,7 +388,6 @@
                                         <option>{{$guestDetails->serviceName}}</option>
                                     </select>--}}
                                     <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>
