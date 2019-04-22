@@ -302,10 +302,10 @@ function updateQuantity() {
 
     console.log(checkoutDatesComplete);
     if(checkoutDatesComplete) {   
-        var numberOfBeds = 0;
-        var numberOfDays = 0;
+        var numberOfBedsArray = new Array();
+        var stayDurationsArray = new Array();
         for(var count = 0; count < jQuery('.checkinDatesBackpacker').length; count++) {
-            numberOfBeds += parseInt(jQuery('.numberOfBeds').eq(count).val());
+            numberOfBedsArray.push(parseInt(jQuery('.numberOfBeds').eq(count).val()));
 
             console.log(parseInt(jQuery('.numberOfBeds').eq(count).val()));
 
@@ -315,16 +315,21 @@ function updateQuantity() {
             var timeDiff = checkout-checkin;
             daysDiff = Math.floor(timeDiff/(1000 * 60 * 60 *24));
 
-            numberOfDays += daysDiff;
-
+            stayDurationsArray.push(daysDiff);
         }
 
-        totalPrice = parseInt(numberOfBeds*numberOfDays*750);
-        jQuery('.invoiceUnitPrices').html(totalPrice);
-        jQuery('.invoicePrices').html(totalPrice);
-        jQuery('.invoiceQuantities').eq(0).html(numberOfBeds+'x'+numberOfDays);      
+        var priceMultiplier = 0;
 
-        jQuery('#totalPrice').val(parseInt(numberOfBeds*numberOfDays*750));
+        for(var index = 0; index < numberOfBedsArray.length; index++) {
+            priceMultiplier += numberOfBedsArray[index] * stayDurationsArray[index];
+        }
+
+        totalPrice = parseInt(priceMultiplier*750);
+        //jQuery('.invoiceUnitPrices').html('750');
+        jQuery('.invoicePrices').html(totalPrice);
+        jQuery('.invoiceQuantities').eq(0).html(priceMultiplier);      
+
+        jQuery('#totalPrice').val(parseInt(priceMultiplier*750));
         
         updateTotal();
     }

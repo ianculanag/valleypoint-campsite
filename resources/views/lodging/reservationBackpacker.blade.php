@@ -35,7 +35,7 @@
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1</td>
                                 <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
                                 <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
                             </tr>
