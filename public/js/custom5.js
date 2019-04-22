@@ -55,7 +55,7 @@ jQuery(document).ready(function(){
         var numberOfUnits = jQuery('#numberOfUnits').val();
         numberOfUnits--;
         jQuery('#numberOfUnits').val(numberOfUnits);
-        removeRow(e.attrs.value);
+        removeRowBackpacker(e.attrs.value);
         removeInvoiceEntry(e.attrs.value);
         //checkAvailability();
         var checkoutDatesComplete = true;
@@ -149,17 +149,17 @@ function makeRowBackpacker(unitNumber) {
     })
 }
 
-function removeRow(unitNumber) {
+function removeRowBackpacker(unitNumber) {
     var divUnit = '#divUnits'+unitNumber;
-   // var divUnitNumber = '#divUnitNumber'+unitNumber;
-   // var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+'-1';
-    //var divCheckinDate = '#divCheckinDate'+unitNumber+'-1';
-    //var divCheckoutDate = '#divCheckoutDate'+unitNumber+'-1';
+    var divUnitNumber = '#divUnitNumber'+unitNumber;
+    var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+'-1';
+    var divCheckinDate = '#divCheckinDate'+unitNumber+'-1';
+    var divCheckoutDate = '#divCheckoutDate'+unitNumber+'-1';
     
     jQuery(divUnit).remove();
-    //jQuery(divNumberOfBeds).remove();
-    //jQuery(divCheckinDate).remove();
-    //jQuery(divCheckoutDate).remove();
+    jQuery(divNumberOfBeds).remove();
+    jQuery(divCheckinDate).remove();
+    jQuery(divCheckoutDate).remove();
 }
 
 jQuery(document).on('click', '.roomNumber', function() {
