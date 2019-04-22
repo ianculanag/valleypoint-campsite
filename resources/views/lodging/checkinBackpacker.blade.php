@@ -92,11 +92,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-<<<<<<< HEAD
                                 <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
-=======
-                                <input class="form-control" type="text" name="contactNumber" required minlength="11" maxlength="11" placeholder="" value="">
->>>>>>> created a new icon for backpacker dashboard, minor changes in dashboard, minor changes check in form backpacker
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
