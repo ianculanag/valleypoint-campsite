@@ -171,6 +171,7 @@ class AccommodationsController extends Controller
             $charges->balance = $request->input($totalPrice);
             $charges->remarks = 'unpaid';
             $charges->accommodationID = $accommodation->id;
+            $charges->unitID = $accommodationUnit->unitID;
             $charges->serviceID = $request->input($accommodationPackage);
             $charges->save();
             $chargesCount++;

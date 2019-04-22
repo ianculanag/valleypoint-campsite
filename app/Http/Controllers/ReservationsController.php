@@ -432,6 +432,7 @@ class ReservationsController extends Controller
             $charges->totalPrice = $request->input($totalPrice);
             $charges->balance = $request->input($totalPrice);
             $charges->remarks = 'unpaid';
+            $charges->unitID = $reservationUnit->unitID;
             $charges->reservationID = $reservation->id;
             $charges->unitID = $reservationUnit->unitID;
             $charges->serviceID = $request->input($accommodationPackage);
@@ -638,7 +639,7 @@ class ReservationsController extends Controller
             //return $checkedinUnit[0]->unitID;
 
             $accommodationID = DB::table('accommodation_units')
-            ->select('accommodation_units.unitID')
+            ->select('accommodation_units.unitID', 'accommodation_units.accommodationID')
             ->where('accommodation_units.unitID', '=', $checkedinUnit[0]->unitID)
             ->where('status', '=', 'ongoing')
             ->get();
@@ -677,7 +678,7 @@ class ReservationsController extends Controller
                         'quantity' => $request->input($accommodationPackage),
                         'totalPrice' => $request->input($totalPrice),
                         'remarks' => 'unpaid',
-                        'accommodationID' => $accommodationID[0]->unitID,
+                        'accommodationID' => $accommodationID[0]->accommodationID,
                         'serviceID' => $request->input($accommodationPackage)
                     ]);                
                     $chargesCount++;
@@ -688,7 +689,8 @@ class ReservationsController extends Controller
                     $charges->totalPrice = $request->input($totalPrice);
                     $charges->balance = $request->input($totalPrice);
                     $charges->remarks = 'unpaid';
-                    $charges->accommodationID = $accommodationID[0]->unitID;
+                    $charges->accommodationID = $accommodationID[0]->accommodationID;
+                    $charges->unitID = $accommodationUnit->unitID;
                     $charges->serviceID = $request->input($accommodationPackage);
                     $charges->save();
                     $chargesCount++;
@@ -807,6 +809,7 @@ class ReservationsController extends Controller
                     $charges->balance = $request->input($totalPrice);
                     $charges->remarks = 'unpaid';
                     $charges->accommodationID = $accommodation->id;
+                    $charges->unitID = $accommodationUnit->unitID;
                     $charges->serviceID = $request->input($accommodationPackage);
                     $charges->save();
                     $chargesCount++;
@@ -839,6 +842,7 @@ class ReservationsController extends Controller
                             $charges->balance = $request->input($additionalTotalPrice);
                             $charges->remarks = 'unpaid';
                             $charges->accommodationID = $accommodation->id;
+                            $charges->unitID = $accommodationUnit->id;
                             $charges->serviceID = $request->input($additionalServiceID);
                             $charges->save();
                             $chargesCount++;
