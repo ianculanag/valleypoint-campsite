@@ -138,7 +138,8 @@
                             
                         </div>
                     </div>
-                    <div class="form-group row" id="divUnits">
+                <div id="divUnits">
+                    <div class="form-group row mb-0 pb-0" id="divUnits{{$unit->unitNumber}}">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control roomNumber unit{{$unit->unitNumber}}" value="{{$unit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
@@ -180,6 +181,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
         @endforeach
     @endif
 @else

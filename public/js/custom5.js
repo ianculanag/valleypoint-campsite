@@ -104,6 +104,7 @@ jQuery(document).ready(function(){
 function makeRowBackpacker(unitNumber) {
     jQuery.get('../load-room-capacity/'+unitNumber, function(data) {
         var htmlString = "";
+        htmlString += "<div class='form-group row mb-0 pb-0' id='divUnits"+unitNumber+"'>";
         htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
         htmlString += "<input type='text' class='form-control roomNumber unit"+unitNumber+"' value='"+unitNumber+"' readonly>";
         htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
@@ -140,6 +141,7 @@ function makeRowBackpacker(unitNumber) {
         //htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
         htmlString += "</div>";
         htmlString += "</div>";
+        htmlString += "</div>";
     
         jQuery('#divUnits').append(htmlString);
         
@@ -148,15 +150,16 @@ function makeRowBackpacker(unitNumber) {
 }
 
 function removeRow(unitNumber) {
-    var divUnitNumber = '#divUnitNumber'+unitNumber;
-    var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+'-1';
-    var divCheckinDate = '#divCheckinDate'+unitNumber+'-1';
-    var divCheckoutDate = '#divCheckoutDate'+unitNumber+'-1';
+    var divUnit = '#divUnits'+unitNumber;
+   // var divUnitNumber = '#divUnitNumber'+unitNumber;
+   // var divNumberOfBeds = '#divNumberOfBeds'+unitNumber+'-1';
+    //var divCheckinDate = '#divCheckinDate'+unitNumber+'-1';
+    //var divCheckoutDate = '#divCheckoutDate'+unitNumber+'-1';
     
-    jQuery(divUnitNumber).remove();
-    jQuery(divNumberOfBeds).remove();
-    jQuery(divCheckinDate).remove();
-    jQuery(divCheckoutDate).remove();
+    jQuery(divUnit).remove();
+    //jQuery(divNumberOfBeds).remove();
+    //jQuery(divCheckinDate).remove();
+    //jQuery(divCheckoutDate).remove();
 }
 
 jQuery(document).on('click', '.roomNumber', function() {
@@ -227,7 +230,7 @@ function addGroupRow(unitNumber) {
     htmlString += "</div>";
     htmlString += "</div>";
 
-    jQuery('#divUnits').append(htmlString);
+    jQuery('#divUnits'+unitNumber).append(htmlString);
 
     updateRoomCapacity(unitNumber);
 }
