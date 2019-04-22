@@ -58,6 +58,9 @@ Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlam
 //Check-in glamping guests from reservation
 Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showCheckinForm');
 
+//Check-in backpacker guests from reservation
+Route::get('/checkin-backpacker/{unitdID}/{reservationID}', 'ReservationsController@showBackpackerCheckinForm');
+
 //Find Package
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
@@ -101,11 +104,6 @@ Route::post('/updateDetails', 'GuestsController@updateDetails');
  
 //ViewGuests
 Route::get('/view-guests', 'GuestsController@viewguests');
-
-//bruteforce do not touch
-Route::get('/checkin-backpacker', function() {
-    return view('lodging.checkinBackpacker');
-});
 
 //ViewReservations
 Route::get('/view-reservations', 'ReservationsController@viewReservations');

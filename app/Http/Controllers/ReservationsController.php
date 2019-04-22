@@ -383,6 +383,97 @@ class ReservationsController extends Controller
     }
 
     /**
+     * Display checkin form from reservation.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showBackpackerCheckinForm($unitID, $reservationID)
+    {        
+        $unit = DB::table('units')
+        ->where('id', '=', $unitID)
+        ->get();
+
+        $reservation = DB::table('reservations')
+        ->where('id', '=', $reservationID)
+        ->get();
+
+        return $reservation;
+        
+        
+        $reservedUnit = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '=', $unitID)
+        ->get();
+
+        //return $reservedUnit;
+
+        $otherReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('reservation_units.unitID', '!=', $unitID)        
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        ->get();
+
+        $allReservedUnits = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)        
+        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        //->orderByRaw($unitID)
+        ->get();
+
+        //return $otherReservedUnits;
+        
+        $charges = DB::table('charges')
+        ->join('reservation_units', 'reservation_units.unitID', 'charges.unitID')
+        /*->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'charges.reservationID')
+                 ->where('reservation_units.unitID', '=','charges.unitID');
+        })*/
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.reservationID',
+                 'reservation_units.unitID', 'reservation_units.numberOfPax', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'units.unitNumber', 'services.serviceName',
+                 'services.price')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '<', '6')
+        ->where('charges.remarks', '=', 'unpaid')
+        ->orWhere('charges.remarks', '=', 'partial')
+        ->get();
+
+        $additionalCharges = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->where('charges.remarks', '=', 'unpaid')
+        ->orWhere('charges.remarks', '=', 'partial')
+        ->get();
+
+        $additionalServices = DB::table('charges')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice',
+                 'charges.remarks', 'charges.reservationID', 'charges.unitID',
+                 'services.*')
+        ->where('charges.reservationID', '=', $reservationID)
+        ->where('charges.serviceID', '>', '5')
+        ->get();
+
+        $unitSource = DB::table('units')
+        ->select('units.unitNumber')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        //return $additionalServices;
+
+        return view('lodging.checkinBackpackerReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices)->with('unitSource', $unitSource);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

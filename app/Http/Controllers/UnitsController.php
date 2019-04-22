@@ -210,7 +210,7 @@ class UnitsController extends Controller
 
         $days = array();
 
-        for($index = 1; $index < 15; $index++){
+        for($index = 0; $index < 15; $index++){
             array_push($days, Carbon::now()->addDays($index)->format('Y-m-d'));
         }
 
