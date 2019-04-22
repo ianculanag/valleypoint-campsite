@@ -54,7 +54,7 @@
             </div>
             <div class="col-md-1 px-1">
                 <button class="btn btn-sm btn-success" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-calendar-check" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
