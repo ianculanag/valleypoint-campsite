@@ -30,7 +30,7 @@
                     @if($unit->unitType == 'room' && $unit->capacity == 3)                                       
                         @if($unit->status == 'occupied') 
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;"">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -40,7 +40,7 @@
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>    
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -75,7 +75,7 @@
                                         <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -110,7 +110,7 @@
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -145,7 +145,7 @@
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
@@ -180,7 +180,7 @@
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('bunks-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
