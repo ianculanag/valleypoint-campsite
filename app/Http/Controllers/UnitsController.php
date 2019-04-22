@@ -763,12 +763,16 @@ class UnitsController extends Controller
         ->where('serviceType', '=', 'service')
         ->get();
 
+        $extra = DB::table('services')
+        ->where('serviceType', '=', 'extra')
+        ->get();
+
         $damage = DB::table('services')
         ->where('serviceType', '=', 'damage')
         ->get();
 
-        return view('lodging.admindashboard')->with('admin', $admin)->with('lodging', $lodging)
-            ->with('tents', $tents)->with('rooms', $rooms)
-            ->with('packages', $packages)->with('services', $services)->with('damage', $damage);
+        return view('admin.admindashboard')->with('admin', $admin)->with('lodging', $lodging)
+            ->with('tents', $tents)->with('rooms', $rooms)->with('packages', $packages)
+            ->with('services', $services)->with('extra', $extra)->with('damage', $damage);
     }
 }
