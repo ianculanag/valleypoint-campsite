@@ -397,7 +397,7 @@ class ReservationsController extends Controller
         ->where('id', '=', $reservationID)
         ->get();
 
-        return $reservation;
+        //return $reservation;
         
         
         $reservedUnit = DB::table('reservation_units')
@@ -415,43 +415,43 @@ class ReservationsController extends Controller
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('reservation_units.unitID', '!=', $unitID)        
         ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        ->where('units.unitType', '=', 'room')
         ->get();
+
+        //return $otherReservedUnits;
 
         $allReservedUnits = DB::table('reservation_units')
         ->join('services', 'services.id', 'reservation_units.serviceID')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)        
         ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        ->where('units.unitType', '=', 'room')
         //->orderByRaw($unitID)
         ->get();
 
-        //return $otherReservedUnits;
+        //return $allReservedUnits;
         
         $charges = DB::table('charges')
-        ->join('reservation_units', 'reservation_units.unitID', 'charges.unitID')
-        /*->join('reservation_units', function($join) {
-            $join->on('reservation_units.reservationID', '=', 'charges.reservationID')
-                 ->where('reservation_units.unitID', '=','charges.unitID');
-        })*/
-        ->join('units', 'units.id', 'reservation_units.unitID')
         ->join('services', 'services.id', 'charges.serviceID')
-        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.reservationID',
-                 'reservation_units.unitID', 'reservation_units.numberOfPax', 'reservation_units.checkinDatetime',
-                 'reservation_units.checkoutDatetime', 'units.unitNumber', 'services.serviceName',
-                 'services.price')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.remarks',
+                 'charges.reservationID', 'services.serviceName', 'services.price')
         ->where('charges.reservationID', '=', $reservationID)
-        ->where('charges.serviceID', '<', '6')
+        ->where('charges.serviceID', '=', '5')
         ->where('charges.remarks', '=', 'unpaid')
         ->orWhere('charges.remarks', '=', 'partial')
         ->get();
+
+        //return $charges;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('charges.reservationID', '=', $reservationID)
-        ->where('charges.serviceID', '>', '5')
+        ->where('charges.serviceID', '>', '6')
         ->where('charges.remarks', '=', 'unpaid')
         ->orWhere('charges.remarks', '=', 'partial')
         ->get();
+
+        //return $additionalCharges;
 
         $additionalServices = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -459,12 +459,14 @@ class ReservationsController extends Controller
                  'charges.remarks', 'charges.reservationID', 'charges.unitID',
                  'services.*')
         ->where('charges.reservationID', '=', $reservationID)
-        ->where('charges.serviceID', '>', '5')
+        ->where('charges.serviceID', '>', '6')
         ->get();
+
+        //return $additionalServices;
 
         $unitSource = DB::table('units')
         ->select('units.unitNumber')
-        ->where('units.unitType', '=', 'tent')
+        ->where('units.unitType', '=', 'room')
         ->orderBy('id', 'ASC')
         ->get();
 
