@@ -14,7 +14,7 @@
             </a>
             <h3>Reservation Form</h3>
         </div>   
-        <form method="POST" action="/reserve-transient-backpacker">
+        <form method="POST" action="/reserve-backpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
@@ -142,7 +142,7 @@
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control roomNumber unit{{$unit->unitNumber}}" value="{{$unit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
-                            <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="">
+                            <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
                             <input type="hidden" value="1" name="numberOfGroupsIn{{$unit->unitNumber}}" id="numberOfGroupsIn{{$unit->unitNumber}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}-1">
@@ -343,7 +343,7 @@
                     <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                         <label for="unitNumber">Unit number</label>
                         <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
+                        <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                     </div>
                     <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}">
                         <label for="additionalServiceUnitPrice">No. of beds</label>
@@ -381,7 +381,7 @@
                     @else
                     <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                         <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                        <input class="" name="totalPrice{{$unit->unitNumber}}" id="totalPrice{{$unit->unitNumber}}" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
+                        <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
                     </div>
                     <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
                         <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">

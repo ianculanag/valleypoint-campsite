@@ -465,6 +465,146 @@ class ReservationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function reserveBackpacker(Request $request)
+    {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+            'firstName' => 'required|max:30',
+            'lastName' => 'required|max:30'
+        ]);
+
+        $reservation = new Reservations;    
+        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
+
+        $reservation->lastName = $request->input('lastName');
+        $reservation->firstName = $request->input('firstName');
+        $reservation->numberOfPax = $request->input('numberOfPaxBackpacker');
+        $reservation->numberOfUnits = $request->input('numberOfUnits');        
+        $reservation->contactNumber = $request->input('contactNumber');
+        $reservation->save();
+
+        $totalNumberOfBunks= 0;
+
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two
+            
+            $numberOfGroups = 'numberOfGroupsIn'.$unitNumbers[$count];
+
+            $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+            $beds = DB::table('units')
+            ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+            ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
+            ->where('partOf', '=', $unit[0]->id)           
+            ->where('reservation_units.status', '=', null)
+            ->where('accommodation_units.status', '=', null)  
+            ->orWhere('reservation_units.status', '!=', 'reserved')
+            ->orWhere('accommodation_units.status', '!=', 'ongoing')
+            ->where('units.unitType', '=', 'bed')
+            ->orderBy('id', 'ASC')
+            ->get();
+
+            //return $beds;
+
+            $checkinDates = array();
+            $checkoutDates = array();
+
+            $bedCounter = 0;
+
+            for($index = 1; $index <= $request->input($numberOfGroups); $index++) {
+                $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count].'-'.$index;
+                $checkinDate = 'checkinDate'.$unitNumbers[$count].'-'.$index;
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count].'-'.$index;
+
+                for($counter = 0; $counter < $request->input($numberOfBeds); $counter++) {
+                    $reservationUnit = new ReservationUnits;
+                    $reservationUnit->reservationID = $reservation->id;
+                    $reservationUnit->unitID = $beds[$bedCounter]->id;
+                    $reservationUnit->status = 'reserved';
+                    $reservationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                    $reservationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                    $reservationUnit->numberOfPax = 1;
+                    $reservationUnit->numberOfBunks = 1;
+                    $reservationUnit->groupID = $index;
+                    $reservationUnit->serviceID =  '5';
+                    $reservationUnit->save();
+                    $bedCounter++;
+                }
+                
+                $totalNumberOfBunks += $request->input($numberOfBeds);
+
+                array_push($checkinDates, $request->input($checkinDate));
+                array_push($checkoutDates, $request->input($checkoutDate));
+            }
+
+            $reservationUnit = new ReservationUnits;
+            $reservationUnit->reservationID = $reservation->id;
+            $reservationUnit->unitID = $unit[0]->id;
+            $reservationUnit->status = 'reserved';
+
+            //return $checkinDates[0];
+
+            
+            $earliestCheckinDate = '3000-12-25';
+            $latestCheckoutDate = '2000-1-1';
+
+            for($dateIndex = 0; $dateIndex < $request->input($numberOfGroups); $dateIndex++) {
+                if ($checkinDates[$dateIndex] <= $earliestCheckinDate) {
+                    $earliestCheckinDate = $checkinDates[$dateIndex];
+                }
+
+                if ($checkoutDates[$dateIndex] >= $latestCheckoutDate) {
+                    $latestCheckoutDate = $checkoutDates[$dateIndex];
+                }
+            }
+
+            $reservationUnit->checkinDatetime = $earliestCheckinDate.' '.'14:00';
+            $reservationUnit->checkoutDatetime = $latestCheckoutDate.' '.'12:00';
+            $reservationUnit->numberOfGroups = $request->input($numberOfGroups);
+            $reservationUnit->numberOfPax = $bedCounter;
+            $reservationUnit->numberOfBunks = $bedCounter;
+            $reservationUnit->serviceID =  '5';
+            $reservationUnit->save();
+        }       
+
+        $charges = new Charges;
+        $charges->quantity = $totalNumberOfBunks;
+        $charges->totalPrice = $request->input('totalPrice');
+        $charges->balance = $request->input('totalPrice');
+        $charges->remarks = 'unpaid';
+        $charges->reservationID = $reservation->id;
+        //$charges->unitID = $reservationUnit->unitID;
+        $charges->serviceID = '5';
+        $charges->save();
+
+        if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->reservationID = $reservation->id;
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                }
+            }
+        }
+        
+        return redirect('/transient-backpacker');
+    }
+
+    
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function checkinGlamping(Request $request)
     {
         $this->validate($request, [
