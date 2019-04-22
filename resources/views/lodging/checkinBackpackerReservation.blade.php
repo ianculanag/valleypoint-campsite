@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-@if(isset($unit))
 @if(count($unit) > 0)
-    @foreach($unit as $unit)
+    @if(count($reservation) > 0)
+    @foreach($unit as $unit)    
+    @foreach($reservation as $reservation)
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
             <a href="/transient-backpacker">
@@ -18,6 +19,7 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
+        <input type="hidden" name="reservationID" id="reservationID" value="{{$reservation->id}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
@@ -32,18 +34,54 @@
                             </tr>
                         </thead>
                         <tbody id="invoiceRows">
-                            <tr id="invoiceUnit{{$unit->unitNumber}}">
+                                @php
+                                $totalPrice = 0;    
+                            @endphp
+                            @if(count($charges) > 0)
+                            @foreach($charges as $charge)
+                            @php
+                                $checkin = new DateTime($charge->checkinDatetime);
+                                $checkout = new DateTime($charge->checkoutDatetime);
+                                $stayDuration = date_diff($checkin, $checkout)->days+1;
+                            @endphp
+                            <tr id="invoiceUnit{{$charge->unitNumber}}">
+                                <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
+                                <input type="hidden" name="charge{{$charge->unitNumber}}" class="chargeIDs" value="{{$charge->chargeID}}"></td>
+                                <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
+                                <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
+                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
+                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
+                            </tr>
+                            @php
+                                $totalPrice += $charge->totalPrice;    
+                            @endphp
+                            @endforeach
+                            @endif
+
+                            @if(count($additionalServices) > 0)
+                            @foreach($additionalServices as $additionalService)
+                            <tr id="invoiceRow{{$loop->iteration}}">
+                            <td style="display:none;"><input id="invoiceCheckBox{{$loop->iteration}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
+                            <input type="hidden" name="charge{{$loop->iteration}}" class="chargeIDs" value="{{$additionalService->chargeID}}"></td>
+                            <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
+                            <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
+                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
+                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{$additionalService->totalPrice}}</td>
+                            </tr>
+                            @endforeach
+                            @endif
+                            {{--<tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
                                 <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
                                 <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
                                 <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
-                            </tr>
+                            </tr>--}}
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
                             </tr>
                             <tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
@@ -65,11 +103,11 @@
                     <div class="form-group row">
                         <div class="col-md-4 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="">
+                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="{{$reservation->firstName}}">
                         </div>
                         <div class="col-md-5 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="">
+                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="{{$reservation->lastName}}">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
@@ -79,7 +117,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
+                                <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="{{$reservation->numberOfPax}}">
                             </div>
                         </div>
                     </div>  
@@ -92,7 +130,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
+                                <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="{{$reservation->contactNumber}}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -182,245 +220,6 @@
                         </div>
                     </div>
                 </div>
-        @endforeach
-    @endif
-@else
-<div class="container pb-3">
-    <div class="pt-3 pb-3 text-center">
-        <a href="/transient-backpacker">
-            <span style="float:left;">
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                <strong>Back</strong>
-            </span>
-        </a>
-        <h3>Reservation Form</h3>
-    </div>   
-    <form method="POST" action="/reserve-backpacker">
-    @csrf
-    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-    <input type="hidden" name="selectedUnit" id="selectedUnit" value="">
-    <div class="row">
-        <div class="col-md-4 order-md-2 mb-4 mx-0">
-            <div class="card p-0 mx-0">
-                <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
-                <table class="table table-striped" style="font-size:.88em;">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width:40%">Description</th>
-                            <th scope="col">Qty.</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="invoiceRows">
-                        @if(count($charges) > 0)
-                        @php
-                            $totalPrice = 0; 
-                        @endphp
-                        @foreach($charges as $charge)
-                        @php
-                            $checkin = new DateTime($givenCheckinDate);
-                            $checkout = new DateTime($givenCheckoutDate);
-                            $stayDuration = date_diff($checkin, $checkout)->days;
-
-                            $invoicePrice = 1350 * $stayDuration;
-
-                            $totalPrice += $invoicePrice;
-                        @endphp
-                        <tr id="invoiceUnit{{$charge->unitNumber}}">
-                            <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
-                            <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
-                            <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
-                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
-                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$invoicePrice}}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th colspan="3" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;"></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-        <div class="col-md-8 order-md-1 check-in-form">
-            <h5 style="margin-bottom:.80em;">Guest Details</h5>
-                <div class="form-group row">
-                    <div class="col-md-4 mb-1">
-                        <label for="firstName">First name</label>
-                        <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="">
-                    </div>
-                    <div class="col-md-5 mb-1">
-                        <label for="lastName">Last name</label>
-                        <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="">
-                    </div>
-                    <div class="col-md-3 mb-1">
-                        <label for="unitNumberOfPax">No. of pax</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
-                        </div>
-                    </div>
-                </div>  
-                <div class="form-group row">
-                    <div class="col-md-6 mb-1">
-                        <label for="contactNumber">Contact number</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-1">
-                        <label for="backpacker">Accommodation</label>
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="backpacker" maxlength="11" placeholder="" value="Backpacker" disabled>
-                        </div>
-                    </div>
-                </div>   
-                <hr class="mb-4">
-                <h5 style="margin-bottom:.80em;">Unit Details</h5>
-                <div class="form-group row">
-                    <div class="col-md-2 mb-1">
-                        <label for="unitID">No. of rooms</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-bed" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{count($unitNumber)}}" min="1" max="80" readonly>
-                        </div>
-                    </div>
-                    @php
-                        //$source = implode(',', array($unitSource->unitNumber));
-                        $source = array();
-                        foreach($unitSource as $unitSource) {
-                            array_push($source, $unitSource->unitNumber);
-                        }
-
-                        $source = implode(',', $source);
-                    @endphp
-                    @if(count($unitNumber) > 0)
-                    @php
-                        $unitNumbers = "";
-                    @endphp
-                    @foreach($unitNumber as $unitNum)
-                    @php
-                        if($loop->iteration == count($unitNumber)){
-                            $unitNumbers .= $unitNum." ";
-                        } else {
-                            $unitNumbers .= $unitNum.", ";
-                        }
-                    @endphp
-                    @endforeach
-                    @endif
-                    <div class="col-md-10 mb-1">
-                        <label for="unitNumber">Unit/s</label>
-                        <input class="form-control" type="text" name="unitNumber" required id="tokenfieldBackpacker" value="{{$unitNumbers}}" required>
-                        <input type="hidden" id="unitSource" value="{{$source}}">                     
-                    </div>
-                </div>
-                <div class="form-group row" id="divUnits">
-                    @if(count($units) > 0)
-                    @foreach($units as $unit)
-                    @php                        
-                        $checkin = new DateTime($givenCheckinDate);
-                        $checkout = new DateTime($givenCheckoutDate);
-                        $stayDuration = date_diff($checkin, $checkout)->days;
-
-                        $unitTotalPrice = 1350 * $stayDuration;
-                    @endphp
-                    @if($loop->iteration == 1)
-                    <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
-                        <label for="unitNumber">Unit number</label>
-                        <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                        <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
-                    </div>
-                    <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}">
-                        <label for="additionalServiceUnitPrice">No. of beds</label>
-                        <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}" id="numberOfBeds{{$unit->unitNumber}}">
-                            @foreach($beds as $bed)
-                            <option value="{{$unit->unitNumber}}{{$loop->iteration}}">{{$loop->iteration}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
-                        <label for="checkinDate">Check-in date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="{{$givenCheckinDate}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
-                        <label for="checkoutDate">Check-out date</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="{{$givenCheckoutDate}}">
-                            {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
-                        </div>
-                    </div>
-                    @else
-                    <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
-                        <input type="text" class="form-control" value="{{$unit->unitNumber}}" disabled>
-                        <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$unitTotalPrice}}">
-                    </div>
-                    <div class="col-md-2 mb-1" id="divAccommodationPackage{{$unit->unitNumber}}">
-                        <select class="form-control accommodationPackages" name="accommodationPackage{{$unit->unitNumber}}" id="accommodationPackage{{$unit->unitNumber}}">
-                            <option value="1">Solo</option>
-                            <option value="2">2 Pax</option>
-                            <option value="3">3 pax</option>
-                            <option value="4">4 pax</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="{{$givenCheckinDate}}">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDates" id="checkoutDate{{$unit->unitNumber}}" value="{{$givenCheckoutDate}}">
-                            {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
-                        </div>
-                    </div>
-                    @endif
-                    @endforeach
-                    @endif
-                </div>
-@endif
                     <div id="dateGapContainer" class="alert alert-warning mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
                         <span id="dateGapMessage"><strong>Invalid Dates!</strong> Accommodation dates must be consecutive.</span>
@@ -556,4 +355,8 @@
             </div>
         </div>
     </div>
+    @endforeach  
+    @endforeach  
+    @endif
+@endif
 @endsection

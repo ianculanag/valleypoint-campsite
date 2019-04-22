@@ -441,7 +441,13 @@ class ReservationsController extends Controller
         ->orWhere('charges.remarks', '=', 'partial')
         ->get();
 
-        //return $charges;
+        $numberOfUnits = $reservation[0]->numberOfUnits;
+
+        for($index = 0; $index < $numberOfUnits; $index++) {
+            
+        }
+
+        return $numberOfUnits;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -467,6 +473,12 @@ class ReservationsController extends Controller
         $unitSource = DB::table('units')
         ->select('units.unitNumber')
         ->where('units.unitType', '=', 'room')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $beds = DB::table('units')
+        ->where('units.unitType', '=', 'bed')
+        ->where('partOf', '=', $unitID)
         ->orderBy('id', 'ASC')
         ->get();
 
