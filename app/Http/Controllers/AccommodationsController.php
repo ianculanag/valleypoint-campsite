@@ -262,10 +262,10 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodations;    
+        $accommodation = new Accommodation;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
-        $accommodation->numberOfPax = $request->input('numberOfPaxbackpacker');
+        $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->userID = Auth::user()->id;
         $accommodation->save();
@@ -316,7 +316,7 @@ class AccommodationsController extends Controller
                     $accommodationUnit = new AccommodationUnits;
                     $accommodationUnit->accommodationID = $accommodation->id;
                     $accommodationUnit->unitID = $beds[$bedCounter]->id;
-                    $accommodationUnit->status = 'reserved';
+                    $accommodationUnit->status = 'ongoing';
                     $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
                     $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
                     $accommodationUnit->numberOfPax = 1;
@@ -336,7 +336,7 @@ class AccommodationsController extends Controller
             $accommodationUnit = new AccommodationUnits;
             $accommodationUnit->accommodationID = $accommodation->id;
             $accommodationUnit->unitID = $unit[0]->id;
-            $accommodationUnit->status = 'reserved';
+            $accommodationUnit->status = 'ongoing';
 
             //return $checkinDates[0];
 
