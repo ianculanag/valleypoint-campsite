@@ -53,13 +53,14 @@ Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
 //Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
-Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
 
 //Check-in glamping guests from reservation
 Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showCheckinForm');
+Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
 
 //Check-in backpacker guests from reservation
 Route::get('/checkin-backpacker/{unitdID}/{reservationID}', 'ReservationsController@showBackpackerCheckinForm');
+Route::post('/checkin-backpacker-reservation', 'ReservationsController@checkinBackpacker');
 
 //Find Package
 Route::get('/getService/{serviceID}', 'ServicesController@getPrices');

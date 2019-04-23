@@ -155,7 +155,7 @@ jQuery(document).ready(function(){
         jQuery('#invoiceGrandTotal').html(grandTotal);
 
     })*/
-    jQuery(document).on('change','.numberOfPaxBackpacker', function(){
+    jQuery(document).on('change','.numberOfPaxbackpacker', function(){
         var unitNumber = jQuery(this).attr('id').slice(4);
         var roomPriceTotal = null;
         var quantity = jQuery(this).val();
@@ -199,7 +199,7 @@ jQuery(document).ready(function(){
 
 //On Change date
 jQuery(document).ready(function(){
-    jQuery(document).on('change','.checkoutDatesBackpacker', function(){
+    jQuery(document).on('change','.checkoutDatesbackpacker', function(){
         var unitNumber = jQuery('.numberOfPaxBackpacker').attr('id').slice(4);
         var roomPriceTotal = null;
         var quantity = jQuery('.numberOfPaxBackpacker').val();
@@ -244,7 +244,7 @@ jQuery(document).ready(function(){
 
     //numberOfBunks will change depending on numberOfPax
 jQuery(document).ready(function(){
-    jQuery(document).on('change', '.numberOfPaxBackpacker', function(){
+    jQuery(document).on('change', '.numberOfPaxbackpacker', function(){
         numOfBunks = jQuery(this).val();
 
         currentBunks = numOfBunks;

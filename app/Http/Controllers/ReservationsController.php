@@ -1019,6 +1019,278 @@ class ReservationsController extends Controller
         return redirect('/glamping');
     }
 
+/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkinBackpacker(Request $request)
+    {
+        $this->validate($request, [
+            'contactNumber' => 'required|min:11|max:11',
+            'firstName' => 'required|max:30',
+            'lastName' => 'required|max:30'
+        ]);
+
+        //return ReservationUnits::find($request->input('reservationID'));
+
+        $existingGuest = DBs::table('reservation_units')
+        ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+        ->where('reservation_units.status', '=', 'checkedin')
+        ->get();
+
+        $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
+
+        //return sizeof($unitNumbers);
+        //return $existingGuest;
+
+        if(count($existingGuest) > 0) {
+            $chargesCount = 0;
+            $chargesArray = array();
+
+            $checkedinUnit = DB::table('reservation_units')
+            ->select('reservation_units.unitID')
+            ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+            ->where('reservation_units.status', '=', 'checkedin')
+            ->get();
+
+            //return $checkedinUnit[0]->unitID;
+
+            $accommodationID = DB::table('accommodation_units')
+            ->select('accommodation_units.unitID', 'accommodation_units.accommodationID')
+            ->where('accommodation_units.unitID', '=', $checkedinUnit[0]->unitID)
+            ->where('status', '=', 'ongoing')
+            ->get();
+
+            //return $accommodationID[0]->unitID;
+
+            for($count = 0; $count < sizeof($unitNumbers); $count++) { //for loop two
+                
+                $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+                $chargeID = 'charge'.$unitNumbers[$count];
+
+                $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+                $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodationID[0]->unitID;
+                $accommodationUnit->unitID = $unit[0]->id;
+                $accommodationUnit->status = 'ongoing';
+                $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+                $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+                $accommodationUnit->save();
+
+                $units = DB::table('reservation_units')
+                ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+                ->where('reservation_units.unitID', '=', $unit[0]->id)
+                ->update(array('status' => 'checkedin'));
+
+                if($request->input($chargeID)) {
+                    $charge = Charges::find($request->input($chargeID));
+                    $charge->update([                    
+                        'quantity' => $request->input($accommodationPackage),
+                        'totalPrice' => $request->input($totalPrice),
+                        'remarks' => 'unpaid',
+                        'accommodationID' => $accommodationID[0]->accommodationID,
+                        'serviceID' => $request->input($accommodationPackage)
+                    ]);                
+                    $chargesCount++;
+                    array_push($chargesArray, $request->input($chargeID));
+                } else {
+                    $charges = new Charges;
+                    $charges->quantity = $request->input($accommodationPackage);
+                    $charges->totalPrice = $request->input($totalPrice);
+                    $charges->balance = $request->input($totalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $accommodationID[0]->accommodationID;
+                    $charges->unitID = $accommodationUnit->unitID;
+                    $charges->serviceID = $request->input($accommodationPackage);
+                    $charges->save();
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
+                }
+            }
+
+            if($request->input('additionalServicesCount') > 0) {
+                for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                    $additionalServiceID = 'additionalServiceID'.$count;
+                    $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                    $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                    $chargeID = 'charge'.$count;
+                    if($request->input($additionalServiceID)) {
+                        if($request->input($chargeID)) {
+                            $charge = Charges::find($request->input($chargeID));
+                            $charge->update([                    
+                                'quantity' => $request->input($additionalServiceNumberOfPax),
+                                'totalPrice' => $request->input($additionalTotalPrice),
+                                'remarks' => 'unpaid',
+                                'accommodationID' => $accommodationID[0]->unitID,
+                                'serviceID' => $request->input($additionalServiceID)
+                            ]);                
+                            $chargesCount++;
+                            array_push($chargesArray, $request->input($chargeID));
+                        } else {
+                            $charges = new Charges;                    
+                            $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                            $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->balance = $request->input($additionalTotalPrice);
+                            $charges->remarks = 'unpaid';
+                            $charges->accommodationID = $accommodationID[0]->unitID;
+                            $charges->serviceID = $request->input($additionalServiceID);
+                            $charges->save();
+                            $chargesCount++;
+                            array_push($chargesArray, $charges->id);
+                        }
+                    }
+                }
+            }
+
+            for($count = 0; $count < $chargesCount; $count++) {
+                $paymentEntry = 'payment'.$count;
+                if($request->input($paymentEntry)) {
+                    $payment = new Payments;
+                    $payment->paymentDatetime = Carbon::now();
+                    $payment->amount = $request->input($paymentEntry);
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'full'
+                    ]);
+                }
+            }
+        } else {
+            $accommodation = new Accommodation;   
+            $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');
+            $accommodation->numberOfUnits = $request->input('numberOfUnits');
+            $accommodation->userID = Auth::user()->id;
+            $accommodation->save();
+
+            $guest = new Guests;
+            $guest->lastName = $request->input('lastName');
+            $guest->firstName = $request->input('firstName');
+            $guest->accommodationID = $accommodation->id;   
+            $guest->contactNumber = $request->input('contactNumber');
+            $guest->save(); 
+
+            $chargesCount = 0;
+            $chargesArray = array();
+
+            for($count = 0; $count < sizeof($unitNumbers); $count++) { //for loop two
+                
+                $accommodationPackage = 'accommodationPackage'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+                $chargeID = 'charge'.$unitNumbers[$count];
+
+                $totalPrice = 'totalPrice'.$unitNumbers[$count];
+
+                $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
+
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodation->id;
+                $accommodationUnit->unitID = $unit[0]->id;
+                $accommodationUnit->status = 'ongoing';
+                $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                $accommodationUnit->numberOfPax = $request->input($accommodationPackage);
+                $accommodationUnit->serviceID =  $request->input($accommodationPackage);
+                $accommodationUnit->save();
+
+                $units = DB::table('reservation_units')
+                ->where('reservation_units.reservationID', '=', $request->input('reservationID'))
+                ->where('reservation_units.unitID', '=', $unit[0]->id)
+                ->update(array('status' => 'checkedin'));
+
+                if($request->input($chargeID)) {
+                    $charge = Charges::find($request->input($chargeID));
+                    $charge->update([                    
+                        'quantity' => $request->input($accommodationPackage),
+                        'totalPrice' => $request->input($totalPrice),
+                        'remarks' => 'unpaid',
+                        'accommodationID' => $accommodation->id,
+                        'serviceID' => $request->input($accommodationPackage)
+                    ]);                
+                    $chargesCount++;
+                    array_push($chargesArray, $request->input($chargeID));
+                } else {
+                    $charges = new Charges;
+                    $charges->quantity = $request->input($accommodationPackage);
+                    $charges->totalPrice = $request->input($totalPrice);
+                    $charges->balance = $request->input($totalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $accommodation->id;
+                    $charges->unitID = $accommodationUnit->unitID;
+                    $charges->serviceID = $request->input($accommodationPackage);
+                    $charges->save();
+                    $chargesCount++;
+                    array_push($chargesArray, $charges->id);
+                }
+            }
+
+            if($request->input('additionalServicesCount') > 0) {
+                for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                    $additionalServiceID = 'additionalServiceID'.$count;
+                    $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                    $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                    $chargeID = 'charge'.$count;
+                    if($request->input($additionalServiceID)) {
+                        if($request->input($chargeID)) {
+                            $charge = Charges::find($request->input($chargeID));
+                            $charge->update([                    
+                                'quantity' => $request->input($additionalServiceNumberOfPax),
+                                'totalPrice' => $request->input($additionalTotalPrice),
+                                'remarks' => 'unpaid',
+                                'accommodationID' => $accommodation->id,
+                                'serviceID' => $request->input($additionalServiceID)
+                            ]);                
+                            $chargesCount++;
+                            array_push($chargesArray, $request->input($chargeID));
+                        } else {
+                            $charges = new Charges;                    
+                            $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                            $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->balance = $request->input($additionalTotalPrice);
+                            $charges->remarks = 'unpaid';
+                            $charges->accommodationID = $accommodation->id;
+                            $charges->unitID = $accommodationUnit->id;
+                            $charges->serviceID = $request->input($additionalServiceID);
+                            $charges->save();
+                            $chargesCount++;
+                            array_push($chargesArray, $charges->id);
+                        }
+                    }
+                }
+            }
+
+            for($count = 0; $count < $chargesCount; $count++) {
+                $paymentEntry = 'payment'.$count;
+                if($request->input($paymentEntry)) {
+                    $payment = new Payments;
+                    $payment->paymentDatetime = Carbon::now();
+                    $payment->amount = $request->input($paymentEntry);
+                    $payment->paymentStatus = 'full';
+                    $payment->chargeID = $chargesArray[$count];
+                    $payment->save();
+
+                    $charge = Charges::find($chargesArray[$count]);
+                    $charge->update([
+                        'remarks' => 'full'
+                    ]);
+                }
+            }
+        }  
+        return redirect('/glamping');
+    }
+
     /**
      * Display reservationForm.
      *
