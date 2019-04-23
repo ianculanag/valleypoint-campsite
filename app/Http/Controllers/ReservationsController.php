@@ -405,9 +405,32 @@ class ReservationsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('reservation_units.unitID', '=', $unitID)
+        ->where('units.unitType', '=', 'room')
         ->get();
 
-        //return $reservedUnit;
+        /*$reservedBeds = DB::table('reservation_units')
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('units.partOf', '=', $unitID)
+        ->where('units.unitType', '=', 'bed')
+        ->get();
+
+        return $reservedBeds;*/
+
+        $groups = DB::table('reservation_units')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->select('reservation_units.reservationID', 'reservation_units.numberOfBunks', 'reservation_units.status', 'reservation_units.checkinDatetime', 
+                 'reservation_units.checkoutDatetime', 'reservation_units.groupID')
+        ->groupBy('reservation_units.groupID')
+        ->where('reservation_units.reservationID', '=', $reservationID)
+        ->where('units.partOf', '=', $unitID)
+        ->where('units.unitType', '=', 'bed')
+        ->get();
+
+        return $groups;
+
+        //return $reservedBeds;
 
         $otherReservedUnits = DB::table('reservation_units')
         ->join('services', 'services.id', 'reservation_units.serviceID')
@@ -479,7 +502,15 @@ class ReservationsController extends Controller
 
         //return $additionalServices;
 
-        return view('lodging.checkinBackpackerReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices)->with('unitSource', $unitSource)->with('beds', $beds);
+        return view('lodging.checkinBackpackerReservation')
+        ->with('unit', $unit)->with('reservation', $reservation)
+        ->with('reservedUnit', $reservedUnit)
+        ->with('reservedBeds', $reservedBeds)
+        ->with('otherReservedUnits', $otherReservedUnits)
+        ->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)
+        ->with('additionalCharges', $additionalCharges)
+        ->with('additionalServices', $additionalServices)->with('unitSource', $unitSource)
+        ->with('beds', $beds);
     }
 
     /**
@@ -624,7 +655,7 @@ class ReservationsController extends Controller
                     $reservationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
                     $reservationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
                     $reservationUnit->numberOfPax = 1;
-                    $reservationUnit->numberOfBunks = 1;
+                    $reservationUnit->numberOfBunks = $request->input($numberOfBeds);
                     $reservationUnit->groupID = $index;
                     $reservationUnit->serviceID =  '5';
                     $reservationUnit->save();

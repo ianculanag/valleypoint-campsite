@@ -102,7 +102,7 @@ jQuery(document).ready(function(){
 });
 
 function makeRowBackpacker(unitNumber) {
-    jQuery.get('../load-room-capacity/'+unitNumber, function(data) {
+    jQuery.get('/load-room-capacity/'+unitNumber, function(data) {
         var htmlString = "";
         htmlString += "<div class='form-group row mb-0 pb-0' id='divUnits"+unitNumber+"'>";
         htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";

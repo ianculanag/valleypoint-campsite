@@ -320,7 +320,7 @@ class AccommodationsController extends Controller
                     $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
                     $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
                     $accommodationUnit->numberOfPax = 1;
-                    $accommodationUnit->numberOfBunks = 1;
+                    $accommodationUnit->numberOfBunks =  $request->input($numberOfBeds);;
                     $accommodationUnit->groupID = $index;
                     $accommodationUnit->serviceID =  '5';
                     $accommodationUnit->save();

@@ -154,7 +154,7 @@
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="1" min="1" max="80" readonly>
+                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" required placeholder="" value="{{$reservation->numberOfUnits}}" min="1" max="80" readonly>
                             </div>
                         </div>
                         @php
@@ -166,38 +166,51 @@
 
                             $source = implode(',', $source);
                         @endphp
+                        @if(count($allReservedUnits) > 0)
+                        @php
+                            $units = "";
+                        @endphp
+                        @foreach($allReservedUnits as $singleReservedUnit)
+                        @php
+                            if($loop->iteration == count($allReservedUnits)){
+                                $units .= $singleReservedUnit->unitNumber." ";
+                            } else {
+                                $units .= $singleReservedUnit->unitNumber.", ";
+                            }
+                        @endphp
+                        @endforeach
+                        @endif
                         <div class="col-md-10 mb-1">
                             <label for="unitNumber">Unit/s</label>
                             <input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="{{$unit->id}}">
-                            <input class="form-control" type="text" name="unitNumber" required id="tokenfieldBackpacker" value="{{$unit->unitNumber}}" required>
+                            <input class="form-control" type="text" name="unitNumber" required id="tokenfieldBackpacker" value="{{$units}}" required>
                             <input type="hidden" id="unitSource" value="{{$source}}">
                             <input class="form-control" style="display:none;float:left;" type="text" name="unitID" value="{{$unit->id}}">
-                                               
-                            {{--<input type="text" class="form-control" id="tokenfield" value="" />--}}                        
-                            
-                            
-                            
                         </div>
                     </div>
                 <div id="divUnits">
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$unit->unitNumber}}">
-                        <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
+                    @if(count($reservedUnit) > 0)
+                    @if(count($reservedBeds) > 0)
+                    @foreach($reservedUnit as $reservedUnit)
+                    @foreach($reservedBeds as $reservedBeds)
+                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}">
+                        <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
-                            <input type="text" class="form-control roomNumber unit{{$unit->unitNumber}}" value="{{$unit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
+                            <input type="text" class="form-control roomNumber unit{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
                             <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
-                            <input type="hidden" value="1" name="numberOfGroupsIn{{$unit->unitNumber}}" id="numberOfGroupsIn{{$unit->unitNumber}}">
+                            <input type="hidden" value="1" name="numberOfGroupsIn{{$reservedUnit->unitNumber}}" id="numberOfGroupsIn{{$reservedUnit->unitNumber}}">
                         </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}-1">
+                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$reservedUnit->unitNumber}}-1">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}-1" id="numberOfBeds{{$unit->unitNumber}}-1">
+                            <select class="form-control numberOfBeds" name="numberOfBeds{{$reservedUnit->unitNumber}}-1" id="numberOfBeds{{$reservedUnit->unitNumber}}-1">
                                 @foreach($beds as $bed)
                                 <option value="{{$loop->iteration}}">{{$loop->iteration}}</option>
                                 @endforeach
                             </select>
-                            <input type="hidden" id="maxCapacity{{$unit->unitNumber}}" value="{{count($beds)}}">
+                            <input type="hidden" id="maxCapacity{{$reservedUnit->unitNumber}}" value="{{count($beds)}}">
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}-1">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$reservedUnit->unitNumber}}-1">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -205,11 +218,11 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$unit->unitNumber}}-1" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$unit->unitNumber}}-1" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}-1" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$reservedUnit->unitNumber}}-1" value="{{\Carbon\Carbon::parse($reservedUnit->checkinDatetime)->format('Y-m-d')}}">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}-1">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$reservedUnit->unitNumber}}-1">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -217,11 +230,15 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$unit->unitNumber}}-1" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$unit->unitNumber}}-1" value="">
+                                <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}-1" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$reservedUnit->unitNumber}}-1" value="{{\Carbon\Carbon::parse($reservedUnit->checkoutDatetime)->format('Y-m-d')}}">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    @endforeach
+                    @endif
+                    @endif
                 </div>
                     <div id="dateGapContainer" class="alert alert-warning mt-2" style="display:none;">
                         <a href="#" class="close">&times;</a>
@@ -287,9 +304,42 @@
                                 </button>
                             </div>
                         </div>
+                    <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="{{count($additionalCharges)}}">
 
-                        <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
-
+                        @if(count($additionalCharges) > 0)
+                        @foreach($additionalCharges as $additionalCharge)
+                        <input type='text' style='display:none;float:left;' id='additionalServiceID{{$loop->iteration}}' name='additionalServiceID{{$loop->iteration}}' value='{{$additionalCharge->id}}'>
+                        <div class='col-md-3 mb-1' id='divServiceName{{$loop->iteration}}'>
+                            <input class='form-control paxSelect' type='text' name='additionalServiceName{{$loop->iteration}}' value='{{$additionalCharge->serviceName}}' readonly>
+                        </div>
+                        <div class='col-md-2 mb-1' id='divQuantity{{$loop->iteration}}'>
+                            <input class='form-control paxSelect' type='number' id='additionalServiceNumberOfPax' name='additionalServiceNumberOfPax{{$loop->iteration}}' value='{{$additionalCharge->quantity}}' min='1' max='10' {{--form='serviceForm'--}} readonly>
+                        </div>
+                        <div class='col-md-3 mb-1' id='divUnitPrice{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <div class='input-group-prepend'>
+                                    <span class='input-group-text'>₱</span>
+                                </div>
+                            <input class='form-control additionalServiceUnitPrice' type='text' id='additionalServiceUnitPrice' name='additionalServiceUnitPrice{{$loop->iteration}}' placeholder='' value='{{$additionalCharge->price}}' readonly>
+                            </div>
+                        </div>
+                        <div class='col-md-3 mb-1' id='divTotalPrice{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <div class='input-group-prepend'>
+                                    <span class='input-group-text'>₱</span>
+                                </div>
+                            <input class='form-control additionalServiceTotalPrice' type='text' id='additionalServiceTotalPrice' name='additionalServiceTotalPrice{{$loop->iteration}}' placeholder='' value='{{$additionalCharge->totalPrice}}' readonly>
+                            </div>
+                        </div>
+                        <div id='divButton{{$loop->iteration}}'>
+                            <div class='input-group'>
+                                <button type='button' id='additionalServiceFormRemove{{$loop->iteration}}' value='{{$loop->iteration}}' class='btn btn-danger additionalServiceFormRemove'>
+                                    <span class='fa fa-minus' aria-hidden='true'></span>
+                                </button>
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
                     
                     <div class="pt-4" style="float:right;">   
