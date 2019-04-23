@@ -35,7 +35,7 @@
                             <tr id="invoiceUnit{{$unit->unitNumber}}">
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
-                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
+                                <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1</td>
                                 <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
                                 <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">750</td>
                             </tr>
@@ -230,7 +230,7 @@
                         <tr id="invoiceUnit{{$charge->unitNumber}}">
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
-                            <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
+                            <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1</td>
                             <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750</td>
                             <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$invoicePrice}}</td>
                         </tr>
@@ -494,7 +494,7 @@
                         {{--<a href="/getDates" style="text-decoration:none;">              
                         <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         {{--</a>--}}
-                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Make Reservation</button>
+                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
