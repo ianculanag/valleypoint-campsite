@@ -326,7 +326,7 @@ function updateQuantity() {
 
         totalPrice = parseInt(priceMultiplier*750);
         //jQuery('.invoiceUnitPrices').html('750');
-        jQuery('.invoicePrices').html(totalPrice);
+        jQuery('.invoicePrices').eq(0).html(totalPrice);
         jQuery('.invoiceQuantities').eq(0).html(priceMultiplier);      
 
         jQuery('#totalPrice').val(parseInt(priceMultiplier*750));

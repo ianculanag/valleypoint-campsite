@@ -408,27 +408,19 @@ class ReservationsController extends Controller
         ->where('units.unitType', '=', 'room')
         ->get();
 
-        /*$reservedBeds = DB::table('reservation_units')
-        ->join('services', 'services.id', 'reservation_units.serviceID')
-        ->join('units', 'units.id', 'reservation_units.unitID')
-        ->where('reservation_units.reservationID', '=', $reservationID)
-        ->where('units.partOf', '=', $unitID)
-        ->where('units.unitType', '=', 'bed')
-        ->get();
-
-        return $reservedBeds;*/
+        //return $reservedUnit;
 
         $groups = DB::table('reservation_units')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->select('reservation_units.reservationID', 'reservation_units.numberOfBunks', 'reservation_units.status', 'reservation_units.checkinDatetime', 
-                 'reservation_units.checkoutDatetime', 'reservation_units.groupID')
+                 'reservation_units.checkoutDatetime', 'reservation_units.groupID', 'units.partOf')
         ->groupBy('reservation_units.groupID')
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('units.partOf', '=', $unitID)
         ->where('units.unitType', '=', 'bed')
         ->get();
 
-        return $groups;
+        //return $groups;
 
         //return $reservedBeds;
 
@@ -437,9 +429,32 @@ class ReservationsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)
         ->where('reservation_units.unitID', '!=', $unitID)        
-        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        //->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
         ->where('units.unitType', '=', 'room')
         ->get();
+
+        //return $otherReservedUnits;
+
+        $groupArray = array();
+
+        foreach($otherReservedUnits as $otherReservedUnit) {
+            $groups = DB::table('reservation_units')
+            ->join('units', 'units.id', 'reservation_units.unitID')
+            ->select('reservation_units.reservationID', 'reservation_units.numberOfBunks', 'reservation_units.status', 'reservation_units.checkinDatetime', 
+                    'reservation_units.checkoutDatetime', 'reservation_units.groupID', 'units.partOf')
+            ->groupBy('reservation_units.groupID')
+            ->where('reservation_units.reservationID', '=', $reservationID)
+            ->where('units.partOf', '=', $otherReservedUnit->unitID)
+            ->where('units.unitType', '=', 'bed')
+            ->get()
+            ->toArray();
+
+            //return $groups;
+
+            $groupArray = array_merge($groupArray, $groups);
+        }
+
+        //return $groupArray;
 
         //return $otherReservedUnits;
 
@@ -447,7 +462,7 @@ class ReservationsController extends Controller
         ->join('services', 'services.id', 'reservation_units.serviceID')
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->where('reservation_units.reservationID', '=', $reservationID)        
-        ->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
+        //->where('reservation_units.checkinDatetime', '=', $reservedUnit[0]->checkinDatetime)
         ->where('units.unitType', '=', 'room')
         //->orderByRaw($unitID)
         ->get();
@@ -505,7 +520,8 @@ class ReservationsController extends Controller
         return view('lodging.checkinBackpackerReservation')
         ->with('unit', $unit)->with('reservation', $reservation)
         ->with('reservedUnit', $reservedUnit)
-        ->with('reservedBeds', $reservedBeds)
+        ->with('groups', $groups)
+        ->with('otherGroups', $groupArray)
         ->with('otherReservedUnits', $otherReservedUnits)
         ->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)
         ->with('additionalCharges', $additionalCharges)
