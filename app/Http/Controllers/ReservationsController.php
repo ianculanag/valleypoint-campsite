@@ -438,7 +438,7 @@ class ReservationsController extends Controller
         $groupArray = array();
 
         foreach($otherReservedUnits as $otherReservedUnit) {
-            $groups = DB::table('reservation_units')
+            $otherGroup = DB::table('reservation_units')
             ->join('units', 'units.id', 'reservation_units.unitID')
             ->select('reservation_units.reservationID', 'reservation_units.numberOfBunks', 'reservation_units.status', 'reservation_units.checkinDatetime', 
                     'reservation_units.checkoutDatetime', 'reservation_units.groupID', 'units.partOf')
@@ -451,7 +451,7 @@ class ReservationsController extends Controller
 
             //return $groups;
 
-            $groupArray = array_merge($groupArray, $groups);
+            $groupArray = array_merge($groupArray, $otherGroup);
         }
 
         //return $groupArray;

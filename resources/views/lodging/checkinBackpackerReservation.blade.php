@@ -191,9 +191,9 @@
                 <div id="divUnits">
                     @if(count($reservedUnit) > 0)
                     @foreach($reservedUnit as $reservedUnit)
+                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}">                    
                     @foreach($groups as $group)
                     @if($loop->iteration == 1)
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control roomNumber unit{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
@@ -237,10 +237,8 @@
                                 <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkoutDatetime)->format('Y-m-d')}}">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
-                        </div>
-                    </div>    
+                        </div>  
                     @else
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}">
                         <div class="col-md-2 mb-1" style="float:right" id="divRemoveSplitButton{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
                             <div class="input-group">
                                 <button type="button" style="margin-left:auto" id="removeSplitButton{{$reservedUnit->unitNumber}}-{{$group->groupID}}" class="btn btn-danger removeSplitButton unit{{$reservedUnit->unitNumber}}">
@@ -283,18 +281,18 @@
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
-                    </div>
                     @endif                
                     @endforeach
+                    </div>
                     @endforeach
                     @endif
 
                     @if(count($otherReservedUnits) > 0)
-                    @foreach($otherReservedUnits as $otherReservedUnit)
+                    @foreach($otherReservedUnits as $otherReservedUnit)                    
+                    <div class="form-group row mb-0 pb-0" id="divUnits{{$otherReservedUnit->unitNumber}}">
                     @foreach($otherGroups as $group)
                     @if($group->partOf == $otherReservedUnit->unitID)
                     @if($group->groupID == 1)
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$otherReservedUnit->unitNumber}}">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnit->unitNumber}}">
                             <input type="text" class="form-control roomNumber unit{{$otherReservedUnit->unitNumber}}" value="{{$otherReservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
                             <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
@@ -335,9 +333,7 @@
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
-                    </div>    
                     @else
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$otherReservedUnit->unitNumber}}">
                         <div class="col-md-2 mb-1" style="float:right" id="divRemoveSplitButton{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
                             <div class="input-group">
                                 <button type="button" style="margin-left:auto" id="removeSplitButton{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" class="btn btn-danger removeSplitButton unit{{$otherReservedUnit->unitNumber}}">
@@ -380,10 +376,10 @@
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
-                    </div>
                     @endif  
                     @endif                
-                    @endforeach
+                    @endforeach                    
+                    </div>
                     @endforeach
                     @endif
                 </div>
@@ -493,7 +489,7 @@
                         {{--<a href="/getDates" style="text-decoration:none;">              
                         <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         {{--</a>--}}
-                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Make Reservation</button>
+                        <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
                         <a href="/transient-backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
