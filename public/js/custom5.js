@@ -330,6 +330,7 @@ function updateQuantity() {
         jQuery('.invoiceQuantities').eq(0).html(priceMultiplier);      
 
         jQuery('#totalPrice').val(parseInt(priceMultiplier*750));
+        jQuery('#backpackerQuantity').val(priceMultiplier);
         
         updateTotal();
     }

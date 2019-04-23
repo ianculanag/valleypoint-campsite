@@ -39,18 +39,18 @@
                             @endphp
                             @if(count($charges) > 0)
                             @foreach($charges as $charge)
-                            @php
+                            {{--@php
                                 $checkin = new DateTime($charge->checkinDatetime);
                                 $checkout = new DateTime($charge->checkoutDatetime);
                                 $stayDuration = date_diff($checkin, $checkout)->days+1;
-                            @endphp
-                            <tr id="invoiceUnit{{$charge->unitNumber}}">
-                                <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
-                                <input type="hidden" name="charge{{$charge->unitNumber}}" class="chargeIDs" value="{{$charge->chargeID}}"></td>
-                                <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
-                                <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
-                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
-                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
+                            @endphp--}}
+                            <tr id="invoiceUnitBackpacker">
+                                <td style="display:none;"><input id="invoiceCheckBoxBackpacker" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
+                                <input type="hidden" name="chargeBackpacker" class="chargeIDs" value="{{$charge->chargeID}}"></td>
+                                <td id="invoiceDescriptionBackpacker" class="invoiceDescriptions">{{$charge->serviceName}}</td>
+                                <td id="invoiceQuantityBackpacker" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}</td>
+                                <td id="invoiceUnitPriceBackpacker" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
+                                <td id="invoiceTotalPriceBackpacker" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
                             </tr>
                             @php
                                 $totalPrice += $charge->totalPrice;    
@@ -68,6 +68,9 @@
                             <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
                             <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{$additionalService->totalPrice}}</td>
                             </tr>
+                            @php
+                                $totalPrice += $additionalService->totalPrice;    
+                            @endphp
                             @endforeach
                             @endif
                             {{--<tr id="invoiceUnit{{$unit->unitNumber}}">

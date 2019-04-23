@@ -433,6 +433,7 @@ class ReservationsController extends Controller
         
         $charges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
+        //->join('units', 'units.id', 'charges.unitID')
         ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.remarks',
                  'charges.reservationID', 'services.serviceName', 'services.price')
         ->where('charges.reservationID', '=', $reservationID)
@@ -441,13 +442,7 @@ class ReservationsController extends Controller
         ->orWhere('charges.remarks', '=', 'partial')
         ->get();
 
-        $numberOfUnits = $reservation[0]->numberOfUnits;
-
-        for($index = 0; $index < $numberOfUnits; $index++) {
-            
-        }
-
-        return $numberOfUnits;
+        //return $charges;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -484,7 +479,7 @@ class ReservationsController extends Controller
 
         //return $additionalServices;
 
-        return view('lodging.checkinBackpackerReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices)->with('unitSource', $unitSource);
+        return view('lodging.checkinBackpackerReservation')->with('unit', $unit)->with('reservation', $reservation)->with('reservedUnit', $reservedUnit)->with('otherReservedUnits', $otherReservedUnits)->with('allReservedUnits', $allReservedUnits)->with('charges', $charges)->with('additionalCharges', $additionalCharges)->with('additionalServices', $additionalServices)->with('unitSource', $unitSource)->with('beds', $beds);
     }
 
     /**
@@ -673,7 +668,7 @@ class ReservationsController extends Controller
         }       
 
         $charges = new Charges;
-        $charges->quantity = $totalNumberOfBunks;
+        $charges->quantity = $request->input('backpackerQuantity');
         $charges->totalPrice = $request->input('totalPrice');
         $charges->balance = $request->input('totalPrice');
         $charges->remarks = 'unpaid';

@@ -18,6 +18,7 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
+        <input type="hidden" name="backpackerQuantity" id="backpackerQuantity" value="">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
