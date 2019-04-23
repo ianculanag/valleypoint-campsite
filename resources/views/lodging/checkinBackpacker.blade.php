@@ -79,7 +79,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
+                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="" id="{{$unit->unitNumber}}">
                             </div>
                         </div>
                     </div>  

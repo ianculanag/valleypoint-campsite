@@ -51,7 +51,7 @@ jQuery('#room').tokenfield({
     },
     showAutocompleteOnFocus: false
     });
-    jQuery('#room').on('tokenfield:createtoken', function (event) {
+    jQuery('#tokenfield').on('tokenfield:createtoken', function (event) {
         var existingTokens = $(this).tokenfield('getTokens');
         jQuery.each(existingTokens, function(index, token) {
             if (token.value === event.attrs.value)
@@ -156,7 +156,7 @@ jQuery(document).ready(function(){
 
     })*/
     jQuery(document).on('change','.numberOfPaxBackpacker', function(){
-        var unitNumber = jQuery(this).attr('id').slice(17);
+        var unitNumber = jQuery(this).attr('id').slice(4);
         var roomPriceTotal = null;
         var quantity = jQuery(this).val();
         roomPriceTotal = jQuery(this).val() * 750;
@@ -169,8 +169,8 @@ jQuery(document).ready(function(){
         jQuery('#invoiceGrandTotal').html(grandTotal);
 
         var daysDiff = null;
-        var checkinDate = '#checkinDateRoom'+unitNumber;
-        var checkoutDate = '#checkoutDateRoom'+unitNumber;
+        var checkinDate = '#checkinDateRoom'+unitNumber+'-1';
+        var checkoutDate = '#checkoutDateRoom'+unitNumber+'-1';
         
         //alert(jQuery(checkoutDate).val());
 
@@ -199,22 +199,23 @@ jQuery(document).ready(function(){
 
 //On Change date
 jQuery(document).ready(function(){
-    jQuery(document).on('change','.backpackerCheckoutDates', function(){
-        var unitNumber = jQuery(this).attr('id').slice(16);
+    jQuery(document).on('change','.checkoutDatesBackpacker', function(){
+        var unitNumber = jQuery('.numberOfPaxBackpacker').attr('id').slice(4);
         var roomPriceTotal = null;
         var quantity = jQuery('.numberOfPaxBackpacker').val();
-        
         roomPriceTotal = jQuery('.numberOfPaxBackpacker').val() * 750;
-        
+
         jQuery('#invoiceQuantityRoom'+unitNumber).html(quantity);
         jQuery('#invoiceTotalPriceRoom'+unitNumber).html(roomPriceTotal);
 
-        var grandTotal= roomPriceTotal;
+        var grandTotal = roomPriceTotal;
         jQuery('#invoiceGrandTotal').html(grandTotal);
 
         var daysDiff = null;
-        var checkinDate = '#checkinDateRoom'+unitNumber;
-        var checkoutDate = '#checkoutDateRoom'+unitNumber;
+        var checkinDate = '#checkinDateRoom'+unitNumber+'-1';
+        var checkoutDate = '#checkoutDateRoom'+unitNumber+'-1';
+
+        console.log(checkinDate+ ',' +checkoutDate);
         
         //alert(jQuery(checkoutDate).val());
 
