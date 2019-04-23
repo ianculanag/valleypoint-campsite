@@ -8,34 +8,38 @@
         </div>
         <ul class="list-group pb-3">
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{asset('admin.png')}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Administrator </h6>
-                @php
-                    $adminCount = 0;
-                @endphp
-                @foreach ($admin as $admins)
+                <a href="/view-users" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{asset('admin.png')}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Administrator </h6>
                     @php
-                        $adminCount++;
+                        $adminCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$adminCount}}</h3>
+                    @foreach ($admin as $admins)
+                        @php
+                            $adminCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$adminCount}}</h3>
+                </a>
             </li>
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{asset('lodging-manager.png')}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Lodging Manager </h6>
-                @php
-                    $lodgingCount = 0;
-                @endphp
-                @foreach ($lodging as $lodgingManager)
+                <a href="/view-users" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{asset('lodging-manager.png')}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Lodging Manager </h6>
                     @php
-                        $lodgingCount++;
+                        $lodgingCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$lodgingCount}}</h3>
+                    @foreach ($lodging as $lodgingManager)
+                        @php
+                            $lodgingCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$lodgingCount}}</h3>    
+                </a>
             </li>
         </ul>
         {{--<div class="row px-2">
@@ -83,34 +87,38 @@
         </div>
         <ul class="list-group pb-3">
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{asset('tent-list.png')}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Tents </h6>
-                @php
-                    $tentCount = 0;
-                @endphp
-                @foreach ($tents as $tent)
+                <a href="/view-units-tent" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{asset('tent-list.png')}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Tents </h6>
                     @php
-                        $tentCount++;
+                        $tentCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$tentCount}}</h3>
+                    @foreach ($tents as $tent)
+                        @php
+                            $tentCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$tentCount}}</h3>
+                </a>
             </li>
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{asset('room-list.png')}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Rooms </h6>
-                @php
-                    $roomCount = 0;
-                @endphp
-                @foreach ($rooms as $room)
+                <a href="/view-units-room" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{asset('room-list.png')}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Rooms </h6>
                     @php
-                        $roomCount++;
+                        $roomCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$roomCount}}</h3>
+                    @foreach ($rooms as $room)
+                        @php
+                            $roomCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$roomCount}}</h3>
+                </a>
             </li>
         </ul>
         {{--<div class="row px-2">
@@ -159,34 +167,38 @@
         </div>
         <ul class="list-group pb-3">
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{--asset('tent.png')--}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Packages </h6>
-                @php
-                    $packageCount = 0;
-                @endphp
-                @foreach ($packages as $package)
+                <a href="/view-services-package" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{asset('package-list.png')}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Packages </h6>
                     @php
-                        $packageCount++;
+                        $packageCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$packageCount}}</h3>
+                    @foreach ($packages as $package)
+                        @php
+                            $packageCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$packageCount}}</h3>
+                </a>
             </li>
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Services </h6>
-                @php
-                    $serviceCount = 0;
-                @endphp
-                @foreach ($services as $service)
+                <a href="/view-services-service" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Services </h6>
                     @php
-                        $serviceCount++;
+                        $serviceCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$serviceCount}}</h3>
+                    @foreach ($services as $service)
+                        @php
+                            $serviceCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$serviceCount}}</h3>
+                </a>
             </li>
         {{--</ul>
         <div class="container row">
@@ -195,34 +207,38 @@
         </div>
         <ul class="list-group pb-3">--}}
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{--asset('tent.png')--}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Extra Equipment </h6>
-                @php
-                    $extraEquipmentCount = 0;
-                @endphp
-                @foreach ($extra as $extraEquipment)
+                <a href="/view-services-extra" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{--asset('tent.png')--}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Extra Equipment </h6>
                     @php
-                        $extraEquipmentCount++;
+                        $extraEquipmentCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$extraEquipmentCount}}</h3>
+                    @foreach ($extra as $extraEquipment)
+                        @php
+                            $extraEquipmentCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$extraEquipmentCount}}</h3>
+                </a>
             </li>
             <li class="list-group-item">
-                <span style="float:left">
-                    <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
-                </span>
-                <h6 class="pt-3 mb-0 px-3 text-right"> Damages </h6>
-                @php
-                    $damagedEquipmentCount = 0;
-                @endphp
-                @foreach ($damage as $damagedEquipment)
+                <a href="/view-services-damage" style="cursor:pointer; color:inherit; text-decoration:none !important;">
+                    <span style="float:left">
+                        <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
+                    </span>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Damage Fees </h6>
                     @php
-                        $damagedEquipmentCount++;
+                        $damagedEquipmentCount = 0;
                     @endphp
-                @endforeach
-                <h3 class="px-3 text-right" style="color:lightseagreen;">{{$damagedEquipmentCount}}</h3>
+                    @foreach ($damage as $damagedEquipment)
+                        @php
+                            $damagedEquipmentCount++;
+                        @endphp
+                    @endforeach
+                    <h3 class="px-3 text-right" style="color:lightseagreen;">{{$damagedEquipmentCount}}</h3>
+                </a>
             </li>
         </ul>
         {{--<div class="row px-2">

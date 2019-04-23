@@ -33,6 +33,66 @@ class ServicesController extends Controller
     }
 
     /**
+     * Display all packages
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewPackages()
+    {
+        $services = DB::table('services')
+        ->where('services.serviceType', '=', 'package')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewservices')->with('services', $services);
+    }
+
+    /**
+     * Display all services only
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewServicesOnly()
+    {
+        $services = DB::table('services')
+        ->where('services.serviceType', '=', 'service')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewservices')->with('services', $services);
+    }
+
+    /**
+     * Display all extra equipment
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewExtra()
+    {
+        $services = DB::table('services')
+        ->where('services.serviceType', '=', 'extra')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewservices')->with('services', $services);
+    }
+
+    /**
+     * Display all damage fees
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDamageFees()
+    {
+        $services = DB::table('services')
+        ->where('services.serviceType', '=', 'damage')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewservices')->with('services', $services);
+    }
+
+    /**
      * Show the add service form
      *
      * @return \Illuminate\Http\Response

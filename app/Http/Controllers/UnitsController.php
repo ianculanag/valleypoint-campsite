@@ -606,6 +606,36 @@ class UnitsController extends Controller
     }
 
     /**
+     * Display all tents.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewTents()
+    {
+        $units = DB::table('units')
+        ->where('units.unitType', '=', 'tent')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewunits')->with('units', $units);
+    }
+
+    /**
+     * Display all rooms.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewRooms()
+    {
+        $units = DB::table('units')
+        ->where('units.unitType', '=', 'room')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return view('admin.viewunits')->with('units', $units);
+    }
+
+    /**
      * Show the add unit form
      *
      * @return \Illuminate\Http\Response

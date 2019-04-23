@@ -150,6 +150,8 @@ Route::post('user-added', 'UsersController@addUser');
 
 //View units
 Route::get('/view-units', 'UnitsController@viewUnits');
+Route::get('/view-units-tent', 'UnitsController@viewTents');
+Route::get('/view-units-room', 'UnitsController@viewRooms');
 
 //Add unit
 Route::get('/add-unit', 'UnitsController@showAddUnitForm');
@@ -165,6 +167,10 @@ Route::post('/confirm-unit-deletion/{unitID}', 'UnitsController@deleteUnit');
  
 //View services
 Route::get('/view-services', 'ServicesController@viewServices');
+Route::get('/view-services-package', 'ServicesController@viewPackages');
+Route::get('/view-services-service', 'ServicesController@viewServicesOnly');
+Route::get('/view-services-extra', 'ServicesController@viewExtra');
+Route::get('/view-services-damage', 'ServicesController@viewDamageFees');
 
 //Add service
 Route::get('/add-service', 'ServicesController@showAddServiceForm');
