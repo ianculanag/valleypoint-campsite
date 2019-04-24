@@ -21,7 +21,7 @@
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 </head>
-<body>
+<body onload = time();>
 @if(Auth::user()->role == 'admin')
     @include('inc.sidebaradmin')
 @elseif(Auth::user()->role == 'lodging')
@@ -59,6 +59,19 @@
         dropdownContent.style.display = "block";
         }
         });
+    }
+</script>
+<script> 
+    function clock(){
+        var refresh = 1000; 
+        mytime = setTimeout('time()', refresh)
+    }
+
+    function time() {
+        var date = new Date()
+        var today = date;
+        document.getElementById('currentDatetime').innerHTML = today;
+        display = clock();
     }
 </script>
 </body>

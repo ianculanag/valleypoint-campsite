@@ -44,9 +44,18 @@ class CreateUsersTable extends Migration
         $user = new User;
         $user->username = 'jpaquino';
         $user->password = Hash::make('jpaquino');
-        $user->name = 'Jhaypee';
+        $user->name = 'JP Aquino';
         $user->role = 'lodging';
         $user->contactNumber = '09178504634';
+        $user->email = 'jpaquino@valleypoint.com';
+        $user->save();
+
+        $user = new User;
+        $user->username = 'jhaypee';
+        $user->password = Hash::make('jhaypee');
+        $user->name = 'Jhaypee';
+        $user->role = 'admin';
+        $user->contactNumber = '09177777634';
         $user->email = 'jhaypee@valleypoint.com';
         $user->save();
     }

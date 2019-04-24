@@ -8,7 +8,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
-        <ul class="navbar-nav mr-auto"></ul>
+        <ul class="navbar-nav px-5 mx-5">
+            <li class="nav-item px-5 mx-5">
+                {{--<span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span>--}}
+            </li>
+        </ul>
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
@@ -22,13 +26,13 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown px-2">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        {{ Auth::user()->name }} <span class="px-1 caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" style="color: rgb(30,30,30);" href="{{ route('logout') }}"
+                        <a class="dropdown-item" style="color:#505050 !important;" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
