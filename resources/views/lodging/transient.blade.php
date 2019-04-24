@@ -20,25 +20,76 @@
                 </ul>
             </div>
     
-            @if(count($units) > 0)
+            @if(count($rooms) > 0)
             <div class="container" style="padding-top:1em;">
                 <div class="container scrollbar-near-moon pb-4" style="position:fixed; max-height:68.5vh; max-width:55%; overflow-y:auto;">
                 @if(count($capacityArray) > 0) 
                 @foreach($capacityArray as $capacity)
                 <h5 class="unit-heading mb-0">{{$capacity}} pax</h5> 
                     <div class="row"> 
-                        @foreach($units as $unit)
-                        @if($unit->unitType == 'room' && $unit->capacity == $capacity)
-                        @if($unit->status == 'ongoing') 
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>
+                        @foreach($rooms as $room)
+                        @if($room->capacity == $capacity)
+
+                        @php
+                            $nameString = '';
+                            $occupiedBeds = 0;
+                            $notificationCount = 0;
+                            for($index = 0; $index < count($roomAccommodations[$loop->index]); $index++) {
+                                $occupiedBeds += $roomAccommodations[$loop->index][$index]->numberOfPax;
+                            }
+
+                            for($count = 0; $count < count($roomGuestNames[$loop->index]); $count++) {
+                                if($count == count($roomGuestNames[$loop->index])-1) {
+                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName;
+                                } else {                                    
+                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName.', ';
+                                }
+                            }
+
+                            for($counter = 0; $counter < count($roomCheckoutDates[$loop->index]); $counter++) {
+                                if(\Carbon\Carbon::parse($roomCheckoutDates[$loop->index][$counter]->checkoutDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                    $notificationCount++;
+                                }
+                            }
+
+                            //echo $occupiedBeds;
+                        @endphp
+                        @if(count($roomAccommodations[$loop->index]) > 0) 
+                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        {{$unit->unitNumber}} <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                        {{$room->unitNumber}} 
+                                        @if($notificationCount > 0)
+                                        <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
+                                        @endif
                                         {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
                                     </h5>
 
-                                    @php
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$nameString}}</p>
+                                    <p class="card-text" style="color:green; font-style:italic;">{{$occupiedBeds}} out of {{$room->capacity}} occupied</p>
+                                </div>
+                            </div>
+                        </a>
+                        @else
+                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
+                                <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{$room->unitNumber}} <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                            {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                        </h5>
+    
+                                        {{--<p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>--}}
+                                        <p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                                    {{--<p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                    <p class="card-text" style="color:green; font-style:italic;">{{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
+
+                                    {{--@php
                                         $today = \Carbon\Carbon::today();
                                         $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
                                     @endphp
@@ -52,8 +103,8 @@
                                     @else
                                         <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                                         <p class="card-text" style="color:green; font-style:italic;">{{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                                    @endif
-                                </div>
+                                    @endif--}}
+                                {{--</div>
                             </div>
                         </a> 
                         @else
@@ -68,7 +119,7 @@
                                 </div>
                             </div>
                         </a> 
-                        @endif
+                        @endif--}}  
                         @endif
                         @endforeach
                     </div>
