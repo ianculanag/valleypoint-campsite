@@ -200,12 +200,12 @@
                     <h3 class="px-3 text-right" style="color:lightseagreen;">{{$serviceCount}}</h3>
                 </a>
             </li>
-        {{--</ul>
+        </ul>
         <div class="container row">
-            <h4 class="pt-2"> Other services </h4>
+            <h4 class="pt-2"> Utilities </h4>
             <a class="btn btn-sm btn-success my-2 mx-3 " href="/add-service">Add service</a>
         </div>
-        <ul class="list-group pb-3">--}}
+        <ul class="list-group pb-3">
             <li class="list-group-item">
                 <a href="/view-services-extra" style="cursor:pointer; color:inherit; text-decoration:none !important;">
                     <span style="float:left">

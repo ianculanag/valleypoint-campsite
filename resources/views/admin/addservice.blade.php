@@ -24,8 +24,8 @@
                             <select class="custom-select d-block w-100" id="serviceType" name="serviceType" required="required">
                                 <option value="package">Package</option>
                                 <option value="service">Service</option>
-                                <option value="damage">Damage</option>
-                                <option value="extra">Extra</option>
+                                <option value="damage">Damage Fee</option>
+                                <option value="extra">Extra Utility</option>
                             </select>
                         </div>
                         <div class="form-group">
