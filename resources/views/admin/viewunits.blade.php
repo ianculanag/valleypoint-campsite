@@ -9,7 +9,11 @@
                 <strong>Back</strong>
             </span>
         </a>
-        <h3 class="text-center">Units</h3>
+        @if (isset($header)) 
+            <h3 class="text-center">{{$header}}</h3>
+        @else
+            <h3 class="text-center">Units</h3>
+        @endif
     </div>
     <div class="col-md-12">
         <a class="btn btn-sm btn-success mb-2" href="/add-unit">Add unit</a>

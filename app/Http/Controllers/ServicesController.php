@@ -44,7 +44,9 @@ class ServicesController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('admin.viewservices')->with('services', $services);
+        $header = 'Packages';
+
+        return view('admin.viewservices')->with('services', $services)->with('header', $header);;
     }
 
     /**
@@ -74,7 +76,9 @@ class ServicesController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('admin.viewservices')->with('services', $services);
+        $header = 'Extra Utilities';
+
+        return view('admin.viewservices')->with('services', $services)->with('header', $header);;
     }
 
     /**
@@ -89,7 +93,9 @@ class ServicesController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('admin.viewservices')->with('services', $services);
+        $header = 'Damage Fees';
+        
+        return view('admin.viewservices')->with('services', $services)->with('header', $header);;
     }
 
     /**

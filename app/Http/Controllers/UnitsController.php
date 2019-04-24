@@ -617,7 +617,9 @@ class UnitsController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('admin.viewunits')->with('units', $units);
+        $header = 'Tents';
+
+        return view('admin.viewunits')->with('units', $units)->with('header', $header);
     }
 
     /**
@@ -632,7 +634,9 @@ class UnitsController extends Controller
         ->orderBy('id', 'ASC')
         ->get();
 
-        return view('admin.viewunits')->with('units', $units);
+        $header = 'Rooms';
+
+        return view('admin.viewunits')->with('units', $units)->with('header', $header);;
     }
 
     /**

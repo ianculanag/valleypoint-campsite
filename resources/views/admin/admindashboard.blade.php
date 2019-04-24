@@ -186,7 +186,7 @@
             <li class="list-group-item">
                 <a href="/view-services-service" style="cursor:pointer; color:inherit; text-decoration:none !important;">
                     <span style="float:left">
-                        <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
+                        <img src={{asset('service-list.png')}} style="height:5em;" aria-hidden="true"></img>
                     </span>
                     <h6 class="pt-3 mb-0 px-3 text-right"> Services </h6>
                     @php
@@ -209,9 +209,9 @@
             <li class="list-group-item">
                 <a href="/view-services-extra" style="cursor:pointer; color:inherit; text-decoration:none !important;">
                     <span style="float:left">
-                        <img src={{--asset('tent.png')--}} style="height:5em;" aria-hidden="true"></img>
+                        <img src={{asset('extra-list.png')}} style="height:5em;" aria-hidden="true"></img>
                     </span>
-                    <h6 class="pt-3 mb-0 px-3 text-right"> Extra Equipment </h6>
+                    <h6 class="pt-3 mb-0 px-3 text-right"> Extra Utilities </h6>
                     @php
                         $extraEquipmentCount = 0;
                     @endphp
@@ -226,7 +226,7 @@
             <li class="list-group-item">
                 <a href="/view-services-damage" style="cursor:pointer; color:inherit; text-decoration:none !important;">
                     <span style="float:left">
-                        <img src={{--asset('lodging-manager.png')--}} style="height:5em;" aria-hidden="true"></img>
+                        <img src={{asset('damage-list.png')}} style="height:5em;" aria-hidden="true"></img>
                     </span>
                     <h6 class="pt-3 mb-0 px-3 text-right"> Damage Fees </h6>
                     @php
