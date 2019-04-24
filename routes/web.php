@@ -74,7 +74,7 @@ Route::post('/checkin-backpacker-finder', 'AccommodationsController@showBackpack
 Route::post('/reserve-backpacker-finder', 'ReservationsController@showBackpackerReserveFromFinder');
 
 //Calendar
-Route::get('/checkin/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
+Route::get('/checkin-glamping/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
 Route::get('/reserve-glamping/{unitID}/{checkinDate}', 'ReservationsController@showReserveFromCalendar');
 
 

@@ -40,7 +40,7 @@
                             @if(count($charges) > 0)
                             @foreach($charges as $charge)
                             @php
-                                $checkin = new DateTime($charge->checkinDatetime);
+                                $checkin = new DateTime(/*$charge->checkinDatetime*/\Carbon\Carbon::now()->addDays(1));
                                 $checkout = new DateTime($charge->checkoutDatetime);
                                 $stayDuration = date_diff($checkin, $checkout)->days+1;
                             @endphp
@@ -233,7 +233,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($reservedUnit->checkinDatetime)->format('Y-m-d')}}">
+                            <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::now({{--$reservedUnit->checkinDatetime--}})->format('Y-m-d')}}">
                             </div>
                         </div>
 
@@ -303,7 +303,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input type="date" name="checkinDate{{$otherReservedUnits->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$otherReservedUnits->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnits->checkinDatetime)->format('Y-m-d')}}">
+                            <input type="date" name="checkinDate{{$otherReservedUnits->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$otherReservedUnits->unitNumber}}" value="{{\Carbon\Carbon::now({{--$otherReservedUnits->checkinDatetime--}})->format('Y-m-d')}}">
                             </div>
                         </div>
 
