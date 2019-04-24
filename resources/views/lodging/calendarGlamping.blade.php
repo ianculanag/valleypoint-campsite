@@ -59,7 +59,7 @@
             </div>
         </div>
     </form>
-    <div class="container-fluid scrollbar-near-moon p-0" style="overflow-y:auto; height:62vh; max-width:77vw; overflow-x:auto;">
+    <div class="container-fluid scrollbar-near-moon p-0" style="overflow-y:auto; height:57vh; max-width:77vw; overflow-x:auto;">
         <table class="table table-sm m-0">
         <thead id="glampingCalendarHead">
             <th style="text-align:center; position:fixed; background-color:rgb(233, 236, 239); z-index:101; min-width:6.1em; min-height:3.7em; border:none;"></th>            
@@ -279,6 +279,16 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container legend text-center pt-2">
+        <span class="px-5">
+            <i class="fa fa-square" style="color:{{$occupiedColor}}" aria-hidden="true"></i>
+            Occupied
+        </span>
+        <span class="px-5">
+            <i class="fa fa-square" style="color:{{$reservedColor}}" aria-hidden="true"></i>
+            Reserved
+        </span>
     </div>
 @endsection
  
