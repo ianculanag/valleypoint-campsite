@@ -40,7 +40,7 @@
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>    
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
+                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
