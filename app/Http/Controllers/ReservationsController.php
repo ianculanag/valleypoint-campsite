@@ -1305,17 +1305,31 @@ class ReservationsController extends Controller
                     $additionalServiceID = 'additionalServiceID'.$count;
                     $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
                     $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                    $chargeID = 'charge'.$count;
                     if($request->input($additionalServiceID)) {
-                        $charges = new Charges;                    
-                        $charges->quantity = $request->input($additionalServiceNumberOfPax);
-                        $charges->totalPrice = $request->input($additionalTotalPrice);
-                        $charges->balance = $request->input($additionalTotalPrice);
-                        $charges->remarks = 'unpaid';
-                        $charges->accommodationID = $accommodation->id;
-                        $charges->serviceID = $request->input($additionalServiceID);
-                        $charges->save();
-                        $chargesCount++;
-                        array_push($chargesArray, $charges->id);
+                        if($request->input($chargeID)) {
+                            $charge = Charges::find($request->input($chargeID));
+                            $charge->update([                    
+                                'quantity' => $request->input($additionalServiceNumberOfPax),
+                                'totalPrice' => $request->input($additionalTotalPrice),
+                                'remarks' => 'unpaid',
+                                'accommodationID' => $accommodationID[0]->unitID,
+                                'serviceID' => $request->input($additionalServiceID)
+                            ]);                
+                            $chargesCount++;
+                            array_push($chargesArray, $request->input($chargeID));
+                        } else {
+                            $charges = new Charges;                    
+                            $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                            $charges->totalPrice = $request->input($additionalTotalPrice);
+                            $charges->balance = $request->input($additionalTotalPrice);
+                            $charges->remarks = 'unpaid';
+                            $charges->accommodationID = $accommodationID[0]->unitID;
+                            $charges->serviceID = $request->input($additionalServiceID);
+                            $charges->save();
+                            $chargesCount++;
+                            array_push($chargesArray, $charges->id);
+                        }
                     }
                 }
             }
