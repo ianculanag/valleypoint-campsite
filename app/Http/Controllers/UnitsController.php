@@ -85,6 +85,8 @@ class UnitsController extends Controller
         ->orderBy('reservation_units.checkinDatetime')
         ->get();
 
+        //return $reservations;
+
         $capacities = DB::table('units')
         ->select('units.capacity')
         ->where('units.unitType', '=', 'room')

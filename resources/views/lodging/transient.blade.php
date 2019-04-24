@@ -29,16 +29,30 @@
                     <div class="row"> 
                         @foreach($units as $unit)
                         @if($unit->unitType == 'room' && $unit->capacity == $capacity)
-                        @if($unit->status == 'occupied') 
+                        @if($unit->status == 'ongoing') 
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
-                                    </h5> 
-                                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
+                                        {{$unit->unitNumber}} <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                        {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                    </h5>
+
+                                    @php
+                                        $today = \Carbon\Carbon::today();
+                                        $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
+                                    @endphp
+
+                                    @if((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') == $currentDate))
+                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                        <p class="card-text" style="color:#fdc000; font-style:italic;">Checks-out today!</p>
+                                    @elseif((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') < $currentDate))
+                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                        <p class="card-text" style="color:red; font-style:italic;">Overdue!</p>
+                                    @else
+                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
+                                        <p class="card-text" style="color:green; font-style:italic;">{{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
+                                    @endif
                                 </div>
                             </div>
                         </a> 
@@ -48,7 +62,6 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                                     </h5>
                                     <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
                                     <p></p>                                    
