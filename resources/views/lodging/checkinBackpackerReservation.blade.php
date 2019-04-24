@@ -20,6 +20,7 @@
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <input type="hidden" name="selectedUnit" id="selectedUnit" value="{{$unit->unitNumber}}">
         <input type="hidden" name="reservationID" id="reservationID" value="{{$reservation->id}}">
+        <input type="hidden" name="backpackerQuantity" id="backpackerQuantity" value="{{$backpackerQuantity}}">
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4 mx-0">
                 <div class="card p-0 mx-0">
@@ -46,7 +47,8 @@
                             @endphp--}}
                             <tr id="invoiceUnitBackpacker">
                                 <td style="display:none;"><input id="invoiceCheckBoxBackpacker" class="form-check-input invoiceCheckboxes" type="checkbox" checked>
-                                <input type="hidden" name="chargeBackpacker" class="chargeIDs" value="{{$charge->chargeID}}"></td>
+                                <input type="hidden" name="chargeBackpacker" class="chargeIDs" value="{{$charge->chargeID}}">                            
+                                <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$charge->totalPrice}}"></td>
                                 <td id="invoiceDescriptionBackpacker" class="invoiceDescriptions">{{$charge->serviceName}}</td>
                                 <td id="invoiceQuantityBackpacker" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}</td>
                                 <td id="invoiceUnitPriceBackpacker" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
@@ -197,8 +199,7 @@
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
                             <input type="text" class="form-control roomNumber unit{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
-                            <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
-                            <input type="hidden" value="1" name="numberOfGroupsIn{{$reservedUnit->unitNumber}}" id="numberOfGroupsIn{{$reservedUnit->unitNumber}}">
+                            <input type="hidden" value="{{$reservedUnit->numberOfGroups}}" name="numberOfGroupsIn{{$reservedUnit->unitNumber}}" id="numberOfGroupsIn{{$reservedUnit->unitNumber}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divNumberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
@@ -295,8 +296,7 @@
                     @if($group->groupID == 1)
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnit->unitNumber}}">
                             <input type="text" class="form-control roomNumber unit{{$otherReservedUnit->unitNumber}}" value="{{$otherReservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
-                            <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
-                            <input type="hidden" value="1" name="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}" id="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}">
+                            <input type="hidden" value="{{$otherReservedUnit->numberOfGroups}}" name="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}" id="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}">
                         </div>
                         <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
                             <select class="form-control numberOfBeds" name="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" id="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">

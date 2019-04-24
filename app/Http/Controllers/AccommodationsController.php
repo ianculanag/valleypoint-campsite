@@ -364,7 +364,7 @@ class AccommodationsController extends Controller
         }       
 
         $charges = new Charges;
-        $charges->quantity = $totalNumberOfBunks;
+        $charges->quantity = $request->input('backpackerQuantity');
         $charges->totalPrice = $request->input('totalPrice');
         $charges->balance = $request->input('totalPrice');
         $charges->remarks = 'unpaid';
@@ -385,7 +385,7 @@ class AccommodationsController extends Controller
                     $charges->totalPrice = $request->input($additionalTotalPrice);
                     $charges->balance = $request->input($additionalTotalPrice);
                     $charges->remarks = 'unpaid';
-                    $charges->accommodationID = $accommpdation->id;
+                    $charges->accommodationID = $accommodation->id;
                     $charges->serviceID = $request->input($additionalServiceID);
                     $charges->save();
                     $chargesCount++;
