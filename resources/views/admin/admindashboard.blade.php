@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid p-0 m-0">
-    {{--<div class="container mx-2 px-5">
-        <h3 class="px-4 pt-3">Dashboard</h3>
-    </div>--}}
+    <div class="container mx-2 px-5">
+        <h3 class="px-4 pt-3">Welcome, {{ Auth::user()->name }}!</h3>
+    </div>
     <div class="container row pt-3 pb-5 mx-3 px-5">
         <div class="container col-md-6 px-3">
             <div class="container row">
