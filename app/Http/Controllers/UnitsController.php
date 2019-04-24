@@ -44,20 +44,6 @@ class UnitsController extends Controller
     public function transientBackpacker()
     {        
         /*$units = DB::table('units')
-        ->leftJoin('accommodations', 'accommodations.unitID', 'units.id')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
-        ->leftJoin('services', 'services.id', 'accommodations.serviceID')
-        ->select('units.*', 'units.id AS unitID','guests.id AS guestID', 'guests.accommodationID', 
-        'guests.lastName', 'guests.firstName', 'guests.listedUnder', 'guests.contactNumber', 'accommodations.numberOfPax',
-        'accommodations.serviceID', 'accommodations.paymentStatus',
-        'accommodations.checkinDatetime', 'accommodations.checkoutDatetime','accommodations.id AS accommodationsID',
-        'services.id AS serviceID', 'services.serviceName')
-        ->where('guests.listedUnder', '=', null)
-        ->orderBy('unitID')
-        ->get();
-        //return $units;
-        return view('lodging.transient')->with('units', $units);*/
-        $units = DB::table('units')
         ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.ID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
@@ -68,9 +54,53 @@ class UnitsController extends Controller
                  'accommodation_units.checkoutDatetime', 'accommodation_units.serviceID', 'accommodations.userID',
                  'guests.id AS guestID', 'guests.lastName', 'guests.firstName',   'guests.contactNumber')      
         ->orderBy('unitID')
-        ->get(); 
+        ->get(); */
+
+        $units = DB::table('units')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
+                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
+                 'accommodations.id AS accommodationID', 'accommodations.userID', 
+                 'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
+        ->orderBy('unitID')
+        ->get();
+
+        //return $units;
+
+        $reservations = DB::table('reservations')
+        ->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'reservations.id')
+                 ->where('status', 'reserved');
+        })
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->orderBy('reservation_units.checkinDatetime')
+        ->get();
+
+        $capacities = DB::table('units')
+        ->select('units.capacity')
+        ->where('units.unitType', '=', 'room')
+        ->groupBy('units.capacity')
+        ->get();
+
+        $capacityArray = array();
+
+        for($index = 0; $index < count($capacities); $index++) {
+            array_push($capacityArray, $capacities[$index]->capacity);
+        }
         
-        return view('lodging.transient')->with('units', $units);
+        return view('lodging.transient')
+        ->with('units', $units)
+        ->with('capacityArray', $capacityArray)
+        ->with('reservations', $reservations);
     }
 
     /**

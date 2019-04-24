@@ -1313,7 +1313,6 @@ class ReservationsController extends Controller
                                 'quantity' => $request->input($additionalServiceNumberOfPax),
                                 'totalPrice' => $request->input($additionalTotalPrice),
                                 'remarks' => 'unpaid',
-                                'accommodationID' => $accommodationID[0]->unitID,
                                 'serviceID' => $request->input($additionalServiceID)
                             ]);                
                             $chargesCount++;

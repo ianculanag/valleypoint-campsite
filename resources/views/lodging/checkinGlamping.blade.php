@@ -341,7 +341,7 @@
                     @endif
                     <div class="col-md-10 mb-1">
                         <label for="unitNumber">Unit/s</label>
-                        {{--<input type="text" name="unitID" required="required" class="form-control" style="display:none;position:absolute;" value="">--}}
+                        {{--<input type="text" name="unitID" required="required" class="form-controls" style="display:none;position:absolute;" value="">--}}
                         <input class="form-control" type="text" name="unitNumber" required id="tokenfield" value="{{$unitNumbers}}" required>
                         <input type="hidden" id="unitSource" value="{{$source}}">
                     </div>

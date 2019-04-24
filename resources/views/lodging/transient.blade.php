@@ -23,11 +23,12 @@
             @if(count($units) > 0)
             <div class="container" style="padding-top:1em;">
                 <div class="container scrollbar-near-moon pb-4" style="position:fixed; max-height:68.5vh; max-width:55%; overflow-y:auto;">
-                    <h5 class="unit-heading mb-0">3 pax</h5> 
+                @if(count($capacityArray) > 0) 
+                @foreach($capacityArray as $capacity)
+                <h5 class="unit-heading mb-0">{{$capacity}} pax</h5> 
                     <div class="row"> 
-                
-                @foreach($units as $unit)   
-                    @if($unit->unitType == 'room' && $unit->capacity == 3)                                       
+                        @foreach($units as $unit)
+                        @if($unit->unitType == 'room' && $unit->capacity == $capacity)
                         @if($unit->status == 'occupied') 
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$unit->unitID}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
@@ -38,43 +39,11 @@
                                     </h5> 
                                     <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
                                     <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
+                                </div>
+                            </div>
+                        </a> 
                         @else
                         <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>    
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                                    </h5>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>
-                        @endif
-                                </div>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
-                    </div>
-                {{--</div>     
-               
-                <div class="container">--}}
-                    <h5 class="unit-heading mb-0">4 pax</h5> 
-                    <div class="row"> 
-        
-                @foreach($units as $unit)   
-                    @if($unit->unitType == 'room' && $unit->capacity == 4)                                       
-                        @if($unit->status == 'occupied') 
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                            <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
-                                        </h5> 
-                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                        <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
                             <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
@@ -82,119 +51,17 @@
                                         <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
                                     </h5>
                                     <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>
-                        @endif
+                                    <p></p>                                    
                                 </div>
                             </div>
-                        </a>
-                    @endif
-                @endforeach
+                        </a> 
+                        @endif
+                        @endif
+                        @endforeach
                     </div>
-                {{--</div>
-
-                <div class="container">--}}
-                    <h5 class="unit-heading mb-0">5 pax</h5> 
-                    <div class="row"> 
-
-                @foreach($units as $unit)   
-                    @if($unit->unitType == 'room' && $unit->capacity == 5)                                       
-                        @if($unit->status == 'occupied') 
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
-                                    </h5> 
-                                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                                    </h5>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>
-                            @endif
-                                </div>
-                            </div>
-                        </a>
-                        @endif
-                    @endforeach
-                    </div>
-                {{--</div>
-
-                <div class="container">--}}
-                    <h5 class="unit-heading mb-0">6 pax</h5> 
-                    <div class="row"> 
-
-                @foreach($units as $unit)   
-                    @if($unit->unitType == 'room' && $unit->capacity == 6)                               
-                        @if($unit->status == 'occupied') 
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>        
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body"> 
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
-                                    </h5>
-                                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                                    </h5>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>
-                        @endif
-                                </div>
-                            </div>
-                        </a>
-                    @endif
                 @endforeach
-                    </div>
-                {{--</div>
+                @endif   
 
-                <div class="container">--}}
-                    <h5 class="unit-heading mb-0">10 pax</h5> 
-                    <div class="row"> 
-
-                @foreach($units as $unit)   
-                    @if($unit->unitType == 'room' && $unit->capacity == 10)                           
-                        @if($unit->status == 'occupied')  
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-available-unit" id={{$unit->unitID}}>          
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
-                                    </h5>
-                                    <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;"> {{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>   
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                                    </h5>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>
-
-                        @endif
-                                </div>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
                     </div>
                 </div>
             @else
