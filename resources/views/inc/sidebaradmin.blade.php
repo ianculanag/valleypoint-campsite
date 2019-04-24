@@ -49,13 +49,17 @@
             <nav class="d-none d-md-block sidebar">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin-dashboard">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link" href="/view-users">
+                        <a class="nav-link" href="/view-users">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            User management
+                        </a>
+                        {{--<button class="dropdown-btn nav-link" href="" id="usersTab">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             User management
                             <i class="fa fa-caret-down"></i>
@@ -69,39 +73,39 @@
                                 <i class="fa fa-briefcase" aria-hidden="true"></i>
                                 Roles
                             </a>
-                        </div>
+                        </div>--}}
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link" href="#">
+                        <button class="dropdown-btn nav-link-drop" href="#" id="lodgingTab">
                             <i class="fa fa-hotel" aria-hidden="true"></i>
                             Lodging
                             <i class="fa fa-caret-down"></i>
                         </button>
-                        <div class="dropdown-container">
+                        <div class="dropdown-container" id="dropdownLodging">
                             <a class="dropdown-item" href="/view-units">
                                 <i class="fa fa-door-closed" aria-hidden="true"></i>
-                                Units
+                                <span> Units </span>
                             </a>
                             <a class="dropdown-item" href="/view-services">
                                 <i class="fa fa-archive" aria-hidden="true"></i>
-                                Services
+                                <span> Services </span>
                             </a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link" href="#">
+                        <button class="dropdown-btn nav-link-drop" href="#" id="barRestoTab">
                             <i class="fa fa-concierge-bell" aria-hidden="true"></i>
                             Bar and Restaurant
                             <i class="fa fa-caret-down"></i>
                         </button>
-                        <div class="dropdown-container">
+                        <div class="dropdown-container" id="dropdownBarResto">
                             <a class="dropdown-item" href="/view-menu">
                                 <i class="fa fa-utensils" aria-hidden="true"></i>
-                                Menu
+                                <span> Menu </span>
                             </a>
                             <a class="dropdown-item" href="view-recipes">
                                 <i class="fa fa-book" aria-hidden="true"></i>
-                                Recipes
+                                <span> Recipes </span>
                             </a>
                         </div>
                     </li>

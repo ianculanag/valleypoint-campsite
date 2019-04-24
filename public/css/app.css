@@ -9742,23 +9742,29 @@ h3 {
   width: 17%;
 }
 
-.sidebar .nav-link {
+.sidebar .nav-link, .nav-link-drop {
   font-weight: 500;
   color: lightgray;
 }
 
-.nav-link i {
+.sidebar .nav-link i, .nav-link-drop i {
   padding-left: 0.5em !important;
 }
 
-.nav-list li .nav-link.active {
+.sidebar .nav-link.active,
+.nav-link-drop.activeTab {
   border-left: 0.4em solid;
   padding-left: 0.5em !important;
   border-left-color: #00ffc8;
 }
 
-.nav-list li .nav-link.active {
+.sidebar .nav-link.active,
+.nav-link-drop.activeTab {
   background-color: #b4e7ce96;
+}
+
+.nav-link-drop.active {
+  background-color: rgba(224, 248, 242, 0.436);
 }
 
 .dropdown-container a.active {
@@ -9766,25 +9772,25 @@ h3 {
   color: white;
 }
 
-.nav-list li .nav-link.active:hover,
+.nav-link-drop.activeClass:hover,
 .dropdown-container a.active:hover {
   background-color: rgba(224, 248, 242, 0.436);
 }
 
-.sidebar .nav-link i {
+.sidebar .nav-link i, .nav-link-drop i {
   margin-right: 4px;
   color: lightgray;
 }
 
-.sidebar .nav-link.active {
+.sidebar .nav-link.active, .nav-link-drop.activeClass {
   color: #fdfeff;
 }
 
-.sidebar .nav-link.active i {
+.sidebar .nav-link.active i, .nav-link-drop.activeClass i {
   color: inherit;
 }
 
-.nav-list li .nav-link:hover {
+.sidebar .nav-link:hover, .nav-link-drop:hover {
   background-color: rgba(214, 248, 242, 0.336);
 }
 

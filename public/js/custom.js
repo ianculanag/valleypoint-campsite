@@ -1113,27 +1113,46 @@ function checkAvailability() {
 });*/
 
 jQuery(document).ready(function() {
-	var pathname = window.location.pathname;
-	jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
+    var pathname = window.location.pathname;
+    
+    if(pathname == '/view-payments' || pathname == '/view-charges') {
+        jQuery('#transactionsTab').addClass('activeTab');
+        jQuery('#dropdownTransactions').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else if(pathname == '/view-units' || pathname == '/view-services') {
+        jQuery('#lodgingTab').addClass('activeTab');
+        jQuery('#dropdownLodging').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else if(pathname == '/view-menu' || pathname == '/view-recipes') {
+        jQuery('#barRestoTab').addClass('activeTab');
+        jQuery('#dropdownBarResto').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else {
+        jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
+    }
 })
 
-jQuery(document).ready(function() {
+/*jQuery(document).ready(function() {
     var pathname = window.location.pathname;
-    if(jQuery('.nav-list > li > a[href="'+pathname+'"]').class('active')) {
+    alert(pathname);
+    if(jQuery('.nav-list > li > a[href="'+pathname+'"]')) {
         jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
     } else {
         jQuery('.nav-list > li > #transactionsTab').addClass('active');
         jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > text').css('color', 'white !important');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
-    }
+    } 
 	/*if(jQuery('.nav-list > li > div > .dropdown-item[href="'+pathname+'"]')) {
         jQuery('.nav-list > li > #transactionsTab').addClass('active');
         jQuery('.nav-list > li > .dropdown-container').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > text').css('color', 'white !important');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
-    }*/
-}) 
+    }
+}) */
 
 jQuery(document).ready(function(){
     jQuery('.cancel-reservation-modal').click(function(){

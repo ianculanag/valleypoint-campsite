@@ -71,19 +71,19 @@
                         </a>
                     </li>
                     <li class="nav-item transactionsTab">
-                        <button class="dropdown-btn nav-link transactionsTab" id="transactionsTab" href="/view-payments">
+                        <button class="dropdown-btn nav-link-drop transactionsTab" id="transactionsTab">
                             <i class="fa fa-book transactionsTab" aria-hidden="true"></i>
                             Transactions
                             <i class="fa fa-caret-down"></i>
                         </button>
-                        <div class="dropdown-container">
+                        <div class="dropdown-container" id="dropdownTransactions">
                             <a class="dropdown-item" href="/view-payments">
                                 <i class="fa fa-receipt" aria-hidden="true"></i>
-                                Payments
+                                <span> Payments </span>
                             </a>
                             <a class="dropdown-item" href="/view-charges">
                                 <i class="fa fa-file-invoice" aria-hidden="true"></i>
-                                Charges
+                                <span> Charges </span>
                             </a>
                         </div>
                     </li>
