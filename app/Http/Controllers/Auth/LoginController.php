@@ -27,7 +27,16 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/glamping';
+
+    protected function redirectTo()
+    {    
+        if(Auth::user()->role=='admin'){
+            return '/admin-dashboard';
+        }elseif(Auth::user()->role=='lodging'){
+            return '/glamping';
+        }       
+    }
+   // protected $redirectTo = '/glamping';
 
     /**
      * Create a new controller instance.
