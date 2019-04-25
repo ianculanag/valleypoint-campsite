@@ -82,10 +82,46 @@ class UnitsController extends Controller
             array_push($roomCheckoutDates, $checkoutAccommodations);
         }
 
-        //return $roomGuestNames;
-        //return $roomAccommodations;
+        $roomReservations = array();
+        $roomReservationNames = array();
+        $roomCheckinDates = array();
 
-        //return $roomCheckoutDates;
+        for($index = 0; $index < count($rooms); $index++) {
+            $bedReservations = DB::table('reservation_units')
+            ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+            ->join('units', 'units.id', 'reservation_units.unitID')
+            ->where('status', 'reserved')
+            ->where('partOf', $rooms[$index]->id)
+            //->groupBy('accommodation_units.accommodationID')
+            ->get();
+
+            //return $bedReservations;
+
+            $bedNameReservations = DB::table('reservation_units')
+            ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+            ->join('units', 'units.id', 'reservation_units.unitID')
+            ->where('status', 'reserved')
+            ->where('partOf', $rooms[$index]->id)
+            ->groupBy('reservation_units.reservationID')
+            ->get();
+            
+
+            $checkinReservations = DB::table('reservation_units')
+            ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+            ->join('units', 'units.id', 'reservation_units.unitID')
+            ->where('status', 'reserved')
+            ->where('partOf', $rooms[$index]->id)
+            ->groupBy('reservation_units.reservationID', 'reservation_units.groupID')
+            ->orderBy('reservation_units.checkinDatetime')
+            ->get();
+            array_push($roomReservations, $bedReservations);
+            array_push($roomReservationNames, $bedNameReservations);
+            array_push($roomCheckinDates, $checkinReservations);
+        }
+
+        //return $roomReservations;
+        //return $roomReservationNames;
+        //return $roomCheckinDates;
 
         $capacities = DB::table('units')
         ->select('units.capacity')
@@ -104,6 +140,9 @@ class UnitsController extends Controller
         ->with('roomAccommodations', $roomAccommodations)
         ->with('roomGuestNames', $roomGuestNames)
         ->with('roomCheckoutDates', $roomCheckoutDates)
+        ->with('roomReservations', $roomReservations)
+        ->with('roomReservationNames', $roomReservationNames)
+        ->with('roomCheckinDates', $roomCheckinDates)
         ->with('capacityArray', $capacityArray);
         //->with('reservations', $reservations);
     }

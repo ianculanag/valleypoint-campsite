@@ -29,7 +29,7 @@
                     <div class="row"> 
                         @foreach($rooms as $room)
                         @if($room->capacity == $capacity)
-
+                        @if(count($roomAccommodations[$loop->index]) > 0) 
                         @php
                             $nameString = '';
                             $occupiedBeds = 0;
@@ -39,22 +39,25 @@
                             }
 
                             for($count = 0; $count < count($roomGuestNames[$loop->index]); $count++) {
-                                if($count == count($roomGuestNames[$loop->index])-1) {
-                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName;
-                                } else {                                    
-                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName.', ';
-                                }
+                                if(count($roomGuestNames[$loop->index]) == 1) {                                    
+                                    $nameString .= $roomGuestNames[$loop->index][$count]->firstName.' '.$roomGuestNames[$loop->index][$count]->lastName;
+                                } else {
+                                    if($count == count($roomGuestNames[$loop->index])-1) {
+                                        $nameString .= $roomGuestNames[$loop->index][$count]->lastName;
+                                    } else {                                    
+                                        $nameString .= $roomGuestNames[$loop->index][$count]->lastName.', ';
+                                    }
+                                }                                
                             }
 
                             for($counter = 0; $counter < count($roomCheckoutDates[$loop->index]); $counter++) {
-                                if(\Carbon\Carbon::parse($roomCheckoutDates[$loop->index][$counter]->checkoutDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                if(\Carbon\Carbon::parse($roomCheckoutDates[$loop->index][$counter]->checkoutDatetime)->format('Y-m-d') <= \Carbon\Carbon::now()->format('Y-m-d')) {
                                     $notificationCount++;
                                 }
                             }
 
                             //echo $occupiedBeds;
                         @endphp
-                        @if(count($roomAccommodations[$loop->index]) > 0) 
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
@@ -68,6 +71,56 @@
 
                                     <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$nameString}}</p>
                                     <p class="card-text" style="color:green; font-style:italic;">{{$occupiedBeds}} out of {{$room->capacity}} occupied</p>
+                                </div>
+                            </div>
+                        </a>
+                        @elseif(count($roomReservations[$loop->index]) > 0)
+                        @php
+                            $nameString = '';
+                            //$reservedBeds = 0;
+                            $notificationCount = 0;
+                            /*for($index = 0; $index < count($roomReservations[$loop->index]); $index++) {
+                                $occupiedBeds += $roomReservations[$loop->index][$index]->numberOfPax;
+                            }
+
+                            for($count = 0; $count < count($roomGuestNames[$loop->index]); $count++) {
+                                if($count == count($roomGuestNames[$loop->index])-1) {
+                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName;
+                                } else {                                    
+                                    $nameString .= $roomGuestNames[$loop->index][$count]->lastName.', ';
+                                }
+                            }*/
+
+                            $withCheckinToday = false;
+
+                            $earliestCheckin = \Carbon\Carbon::parse($roomCheckinDates[$loop->index][0]->checkinDatetime)->format('Y-m-d');
+
+                            for($counter = 0; $counter < count($roomCheckinDates[$loop->index]); $counter++) {
+                                if(\Carbon\Carbon::parse($roomCheckinDates[$loop->index][$counter]->checkoutDatetime)->format('Y-m-d') >= \Carbon\Carbon::now()->format('Y-m-d')) {
+                                    $notificationCount++;
+                                }
+                            }
+
+                            if($earliestCheckin == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                $withCheckinToday = true;
+                            }
+                            
+
+                            //echo $occupiedBeds;
+                        @endphp
+                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
+                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{$room->unitNumber}} 
+                                        @if($notificationCount > 0)
+                                        <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
+                                        @endif
+                                        {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                    </h5>
+
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color:lightseagreen; font-style:italic;">Next check-in:<br>{{\Carbon\Carbon::parse($earliestCheckin)->format('F j, Y')}}</p>
+                                    {{--<p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>--}}
                                 </div>
                             </div>
                         </a>
