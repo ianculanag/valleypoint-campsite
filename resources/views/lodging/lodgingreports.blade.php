@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div>
-                        <h6> Guest Arrivals Today </h6>
+                        <h6> Today's Guest Arrivals </h6>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
@@ -98,10 +98,6 @@
                             <thread>
                             <tbody>
                                 <tr>
-                                    <!--th class="text-center"> Tent no. </th>
-                                    <th class="text-center"> Guest name </th>
-                                    <th class="text-center"> Package availed </th>
-                                    <th class="text-center"> Status </th-->
                                     <td class="text-center"> Tent no. </td>
                                     <td class="text-center"> Guest name </td>
                                     <td class="text-center"> Package availed </td>
@@ -123,16 +119,40 @@
                             <thread>
                             <tbody>
                                 <tr>
-                                    <!--th class="text-center"> Tent no. </th>
-                                    <th class="text-center"> Guest name </th>
-                                    <th class="text-center"> Package availed </th>
-                                    <th class="text-center"> Status </th-->
                                     <td class="text-center"> Room no. </td>
                                     <td class="text-center"> Guest name </td>
                                     <td class="text-center"> No. of pax </td>
                                     <td class="text-center"> Status </td>
                                 </tr>
                                 <tr>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h6> Today's Transactions </h6>
+                        <table class="table table-sm table-bordered" style="font-size:.90em;">
+                            <!--thread>
+                                <tr>
+                                    <th class="text-center" colspan="6"> Glamping Accommodation </th>
+                                </tr>
+                            <thread-->
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"> Guest name </td>
+                                    <td class="text-center"> Accommodation </td>
+                                    <td class="text-center"> Package availed </td>
+                                    <td class="text-center"> Quantity </td>
+                                    <td class="text-center"> Amount paid </td>
+                                    <td class="text-center"> Balance </td>
+                                </tr>
+                                <tr>
+                                    <td> </td>
+                                    <td> </td>
                                     <td> </td>
                                     <td> </td>
                                     <td> </td>
