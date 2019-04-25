@@ -32,9 +32,12 @@ Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
 //Route::resource('staff', 'StaffController');
 Route::get('/load-tents', 'unitsController@loadTents');
 
-//
+//Modals
 Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
 Route::get('/load-glamping-available-unit/{id}', 'UnitsController@loadGlampingAvailableUnit');
+
+Route::get('/load-backpacker-details/{id}', 'UnitsController@loadBackpackerUnit');
+Route::get('/load-backpacker-available-unit/{id}', 'UnitsController@loadBackpackerAvailableUnit');
 
 Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();
@@ -94,7 +97,6 @@ Route::post('/reserve-backpacker','ReservationsController@reserveBackpacker');
 //Check-in backpacker
 Route::get('/checkin-backpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
 Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');
-Route::get('load-backpacker-details/');
 
 //Edit guest details
 Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');

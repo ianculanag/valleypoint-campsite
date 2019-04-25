@@ -629,6 +629,53 @@ class UnitsController extends Controller
     }
 
     /**
+     * Return room details.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadBackpackerUnit($id)
+    {
+        /*$units = DB::table('units')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
+                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
+                 'accommodations.id AS accommodationID', 'accommodations.userID', 
+                 'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
+        ->where('unitID', '=', $id)
+        ->get()
+        ->toArray(); */
+
+        $units = DB::table('units')
+        ->leftJoin('accommodation_units', function($join) {
+            $join->on('accommodation_units.unitID', '=', 'units.ID')
+                 ->where('status', 'ongoing');
+        })
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
+                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
+                 'accommodations.id AS accommodationID', 'accommodations.userID', 
+                 'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
+        ->where('unitID', '=', $id)
+        ->get();
+
+        return $units;
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

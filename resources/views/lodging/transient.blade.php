@@ -70,7 +70,7 @@
 
                             //echo $occupiedBeds;
                         @endphp
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
+                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-backpacker-details" id={{$room->id}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
@@ -145,7 +145,7 @@
                         
                             //echo $occupiedBeds;
                         @endphp
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
+                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-details" id={{$room->id}}>
                             <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
@@ -173,7 +173,7 @@
                             </div>
                         </a>
                         @else
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
+                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-details" id={{$room->id}}>
                                 <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -187,40 +187,6 @@
                                 </div>
                             </a>
                         @endif
-                                    {{--<p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;">{{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-
-                                    {{--@php
-                                        $today = \Carbon\Carbon::today();
-                                        $currentDate = \Carbon\Carbon::parse($today)->format('Y-m-d');
-                                    @endphp
-
-                                    @if((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') == $currentDate))
-                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                        <p class="card-text" style="color:#fdc000; font-style:italic;">Checks-out today!</p>
-                                    @elseif((\Carbon\Carbon::parse($unit->checkoutDatetime)->format('Y-m-d') < $currentDate))
-                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                        <p class="card-text" style="color:red; font-style:italic;">Overdue!</p>
-                                    @else
-                                        <p class="card-text">{{$unit->firstName}} {{$unit->lastName}}</p>
-                                        <p class="card-text" style="color:green; font-style:italic;">{{$unit->numberOfPax}} out of {{$unit->capacity}} occupied</p>
-                                    @endif--}}
-                                {{--</div>
-                            </div>
-                        </a> 
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer; text-decoration:none !important" class="load-glamping-available-unit" id={{$unit->unitID}}>    
-                            <div class="card mx-2" style="width:16rem; height:7.5em; background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$unit->unitNumber}}
-                                    </h5>
-                                    <p class="card-text" style="color:lightseagreen; font-style:italic;"> 0 out of {{$unit->capacity}} occupied</p>
-                                    <p></p>                                    
-                                </div>
-                            </div>
-                        </a> 
-                        @endif--}}  
                         @endif
                         @endforeach
                     </div>
@@ -325,28 +291,6 @@
 
 <!-- Details Modal -->
 <div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
-            <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header">
-                <!--p class="heading lead">Tent 1</p-->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="white-text">×</span>
-                </button>
-            </div>
-            <!--Body-->
-            <div class="modal-body" id="modal-body">
-            </div>
-            <!--Footer-->
-            <div class="modal-footer justify-content-right">
-                <button type="button" class="btn btn-info">Edit</button>
-                <button type="button" class="btn btn-danger">Check-out</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Check-in or reserve modal -->
-<div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
         <div class="modal-content">
             <!--Header-->
@@ -375,7 +319,6 @@
         </div>
     </div>
 </div>
-
 <!-- Check-in or reserve modal -->
 <div class="modal fade right" id="checkin-reserve" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
