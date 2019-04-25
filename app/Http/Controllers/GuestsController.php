@@ -559,6 +559,19 @@ class GuestsController extends Controller
 
         return view('lodging.viewguests')->with('guest', $guest);
     }
+
+    /**
+     * Show lodging reports
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lodgingReports()
+    {
+        $guest = DB::table('guests')
+        ->get();
+
+        return view('lodging.lodgingreports')->with('guest', $guest);
+    }
 }
 
  

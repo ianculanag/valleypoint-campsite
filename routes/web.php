@@ -15,7 +15,8 @@ Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
 Route::get('/pos', 'PagesController@pos');
 
-//Route::resource('guests', 'GuestsController');
+/* Lodging */
+//Dashboard: Physical view
 Route::get('/transient-backpacker', 'UnitsController@transientBackpacker'); 
 Route::get('/glamping', 'UnitsController@glamping'); 
 
@@ -38,7 +39,7 @@ Route::get('/load-glamping-available-unit/{id}', 'UnitsController@loadGlampingAv
 Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();
 
-Route::get('/dashboard', 'UnitsController@glamping');
+//Route::get('/dashboard', 'UnitsController@glamping');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
@@ -137,6 +138,9 @@ Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 
 Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
+
+//Lodging reports
+Route::get('/lodging-reports', 'GuestsController@lodgingReports');
 
 /* Admin */
 //Dashboard
