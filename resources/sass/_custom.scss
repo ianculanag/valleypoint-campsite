@@ -345,6 +345,11 @@
     font-size: 0.90em;
 }
 
+/* Reports tab */
+.reports-tabs:hover {
+	background-color: rgba(132, 156, 145, 0.1);
+}
+
 /* Modals */
 .modal-body {
   max-height: 70vh;

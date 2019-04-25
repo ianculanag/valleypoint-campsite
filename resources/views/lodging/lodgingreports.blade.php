@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pb-5">
+    <div class="container row pb-5 pt-3">
         <!--div class="pt-3 pb-3 text-center">
             <a href="/glamping">
                 <span style="float:left;">
@@ -10,18 +10,42 @@
                 </span>
             </a>
         </div--> 
-        <nav class="nav nav-pills centered-pills">
-            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Daily</a>
-            <a class="nav-item nav-link" style="color:#505050" href="#">Weekly</a>
-            <a class="nav-item nav-link" style="color:#505050" href="#">Monthly</a>
-        </nav>
-        <div class="container">
+        <div class="col-md-2 float-right mx-5 pl-5 pt-2" style="position:fixed; right:0;">
+            <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
+                <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="#">Weekly</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="#">Monthly</a>
+            </nav>
+            <div class="card mt-5 py-3 px-0 mx-0">
+                <form method="POST" action="#">
+                    @csrf
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <h6 class="text-center pb-1 mb-0"> Date </h6>
+                    <div class="form-group px-2 py-1 my-0">
+                        <!--label class="mb-1 text-center" for="checkin" style="">Date</label-->
+                        <div class="input-group input-group-sm my-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                                 </span>
+                            </div>
+                            @if(isset($display))
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$display}}" required>
+                            @else
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container col-md-10">
             <div class="card col-md-10 offset-md-1 py-4 ">
                 <div class="row">
-                    <div class="col-md-8 col-sm-4">
+                    <div class="col-md-7 col-sm-4">
                         <img src={{asset('logo.jpg')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
                     </div>
-                    <div class="col-md-4 col-sm-8 px-5 pt-3">
+                    <div class="col-md-5 col-sm-8 px-5 pt-3">
                         <h6>Valleypoint Campsite</h6>
                         <h6>{{\Carbon\Carbon::now()->format('F j, o')}}</h6>
                     </div>
@@ -97,7 +121,7 @@
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
-                                    <th class="text-center" colspan="6"> Glamping Accommodation </th>
+                                    <th colspan="6"> Glamping Accommodation </th>
                                 </tr>
                             <thread>
                             <tbody>
@@ -118,7 +142,7 @@
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
-                                    <th class="text-center" colspan="6"> Backpacker Accommodation </th>
+                                    <th colspan="6"> Backpacker Accommodation </th>
                                 </tr>
                             <thread>
                             <tbody>
@@ -167,6 +191,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
 @endsection

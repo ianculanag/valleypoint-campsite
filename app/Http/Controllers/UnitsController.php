@@ -952,10 +952,31 @@ class UnitsController extends Controller
      */
     public function lodgingReports()
     {
-        $units = DB::table('units')
+        $guests = DB::table('guests')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'guests.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->select('units.id AS unitID', 'units.unitType', 'units.unitNumber', 'units.capacity', 'units.partOf',
+                 'accommodation_units.status', 'accommodations.id AS accommodationID', 'accommodations.numberOfPax',
+                 'accommodations.numberOfUnits', 'accommodation_units.checkinDatetime', 'accommodation_units.checkoutDatetime',
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
+                 'services.id AS serviceID', 'services.serviceType', 'services.serviceName', 'services.price')
+        ->where('accommodation_units.status', 'ongoing')
         ->get();
 
-        $guests = DB::table('guests')
+        $units = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->get();
+
+        $tents = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->where('units.unitType', '=', 'tent')
+        ->get();
+
+        $rooms = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->where('units.unitType', '=', 'room')
         ->get();
 
         return view('lodging.lodgingreports')->with('units', $units)->with('guests', $guests);
