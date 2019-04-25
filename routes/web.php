@@ -142,7 +142,7 @@ Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDue
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
 //Lodging reports
-Route::get('/lodging-reports', 'UnitsController@lodgingReports');
+Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
 
 /* Admin */
 //Dashboard

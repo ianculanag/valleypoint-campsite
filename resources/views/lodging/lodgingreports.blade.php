@@ -39,8 +39,8 @@
                 </form>
             </div>
         </div>
-        <div class="container col-md-10">
-            <div class="card col-md-10 offset-md-1 py-4 ">
+        <div class="container col-md-10 col-sm-12">
+            <div class="card col-md-10 offset-md-1 col-sm-12 py-4 ">
                 <div class="row">
                     <div class="col-md-7 col-sm-4">
                         <img src={{asset('logo.jpg')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
@@ -190,17 +190,22 @@
                             <thread>
                             <tbody>
                                 <tr>
+                                    <td class="text-center" style="width:5%;"> No. </td>
                                     <td class="text-center"> Tent no. </td>
                                     <td class="text-center"> Guest name </td>
                                     <td class="text-center"> Package availed </td>
-                                    <td class="text-center"> Status </td>
                                 </tr>
+                                @php
+                                    $glampingArrivalsCounter = 1;
+                                @endphp
+                                @foreach ($glampingArrivals as $glampingArrival)
                                 <tr>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
+                                    <td class="text-right"> {{$glampingArrivalsCounter++}}</td>
+                                    <td> {{$glampingArrival->unitNumber}} </td>
+                                    <td> {{$glampingArrival->firstName}} {{$glampingArrival->lastName}} </td>
+                                    <td> {{$glampingArrival->serviceName}} </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
