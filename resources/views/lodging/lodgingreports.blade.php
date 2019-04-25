@@ -190,14 +190,15 @@
                             <thread>
                             <tbody>
                                 <tr>
-                                    <td class="text-center" style="width:5%;"> No. </td>
-                                    <td class="text-center"> Tent no. </td>
-                                    <td class="text-center"> Guest name </td>
+                                    <td class="text-center" style="width:6%;"> No. </td>
+                                    <td class="text-center" style="width:20%;"> Tent no. </td>
+                                    <td class="text-center" style="width:45%;"> Guest name </td>
                                     <td class="text-center"> Package availed </td>
                                 </tr>
                                 @php
                                     $glampingArrivalsCounter = 1;
                                 @endphp
+                                @if(count($glampingArrivals) > 0)
                                 @foreach ($glampingArrivals as $glampingArrival)
                                 <tr>
                                     <td class="text-right"> {{$glampingArrivalsCounter++}}</td>
@@ -206,6 +207,11 @@
                                     <td> {{$glampingArrival->serviceName}} </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="4" class="text-center" style="font-style:italic;"> No accommodations to show </td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
@@ -216,14 +222,15 @@
                             <thread>
                             <tbody>
                                 <tr>
-                                    <td class="text-center"> Room no. </td>
-                                    <td class="text-center"> Guest name </td>
+                                    <td class="text-center" style="width:6%;"> No. </td>
+                                    <td class="text-center" style="width:20%;"> Room no. </td>
+                                    <td class="text-center" style="width:45%;"> Guest name </td>
                                     <td class="text-center"> No. of pax </td>
-                                    <td class="text-center"> Status </td>
                                 </tr>
                                 @php
                                     $backpackerArrivalsCounter = 1;
                                 @endphp
+                                @if(count($backpackerArrivals) > 0)
                                 @foreach ($backpackerArrivals as $backpackerArrival)
                                 <tr>
                                     <td class="text-right"> {{$backpackerArrivalsCounter++}}</td>
@@ -232,6 +239,11 @@
                                     <td> {{$backpackerArrival->serviceName}} </td>
                                 </tr>
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="4" class="text-center" style="font-style:italic;"> No accommodations to show </td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -245,21 +257,32 @@
                             <thread-->
                             <tbody>
                                 <tr>
+                                    <td class="text-center" style="width:6%;"> No. </td>
                                     <td class="text-center"> Guest name </td>
-                                    <td class="text-center"> Accommodation </td>
                                     <td class="text-center"> Package availed </td>
                                     <td class="text-center"> Quantity </td>
-                                    <td class="text-center"> Amount paid </td>
-                                    <td class="text-center"> Balance </td>
+                                    <td class="text-center" style="width:15%;"> Amount paid </td>
+                                    <td class="text-center" style="width:15%;"> Balance </td>
                                 </tr>
+                                @php
+                                    $paymentsCounter = 1;
+                                @endphp
+                                @if(count($payments) > 0)
+                                @foreach ($payments as $payment)
                                 <tr>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
+                                    <td> {{$paymentsCounter++}} </td>
+                                    <td> {{$payment->firstName}} {{$payment->lastName}} </td>
+                                    <td> {{$payment->serviceName}} </td>
+                                    <td class="text-right"> {{$payment->quantity}} </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($payment->amount), 2, '.', '')}} </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($payment->balance), 2, '.', '')}} </td>
                                 </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="6" class="text-center" style="font-style:italic;"> No payments to show </td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

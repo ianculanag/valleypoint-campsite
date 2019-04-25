@@ -1030,12 +1030,20 @@ class UnitsController extends Controller
         ->where('accommodation_units.checkoutDatetime', '=', Carbon::now()->format('Y-m-d 12:00'))
         ->get();
 
+        $payments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->get();
+
         return view('lodging.lodgingreports')->with('units', $units)
             ->with('glampingAccommodations', $glampingAccommodations)->with('tents', $tents)
             ->with('occupiedTents', $occupiedTents)->with('glampingArrivals', $glampingArrivals)
             ->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerAccommodations', $backpackerAccommodations)->with('rooms', $rooms)
             ->with('occupiedRooms', $occupiedRooms)->with('backpackerArrivals', $backpackerArrivals)
-            ->with('backpackerDepartures', $backpackerDepartures);
+            ->with('backpackerDepartures', $backpackerDepartures)->with('payments', $payments);
     }
 }
