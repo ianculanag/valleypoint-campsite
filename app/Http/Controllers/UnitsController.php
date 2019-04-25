@@ -897,4 +897,20 @@ class UnitsController extends Controller
             ->with('tents', $tents)->with('rooms', $rooms)->with('packages', $packages)
             ->with('services', $services)->with('extra', $extra)->with('damage', $damage);
     }
+    
+    /**
+     * Show lodging reports
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lodgingReports()
+    {
+        $units = DB::table('units')
+        ->get();
+
+        $guests = DB::table('guests')
+        ->get();
+
+        return view('lodging.lodgingreports')->with('units', $units)->with('guests', $guests);
+    }
 }

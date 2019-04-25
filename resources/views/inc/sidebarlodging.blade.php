@@ -50,7 +50,7 @@
 
 <div class="container-fluid">
     <div class="row sidebarMainContent">
-        <div class="container col md-2" style="margin:0; padding:0;">
+        <div class="container col-md-2" style="margin:0; padding:0;">
             <nav class="d-none d-md-block sidebar">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
