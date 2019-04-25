@@ -221,12 +221,17 @@
                                     <td class="text-center"> No. of pax </td>
                                     <td class="text-center"> Status </td>
                                 </tr>
+                                @php
+                                    $backpackerArrivalsCounter = 1;
+                                @endphp
+                                @foreach ($backpackerArrivals as $backpackerArrival)
                                 <tr>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
+                                    <td class="text-right"> {{$backpackerArrivalsCounter++}}</td>
+                                    <td> {{$backpackerArrival->unitNumber}} </td>
+                                    <td> {{$backpackerArrival->firstName}} {{$backpackerArrival->lastName}} </td>
+                                    <td> {{$backpackerArrival->serviceName}} </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
