@@ -10,8 +10,12 @@
                 </span>
             </a>
         </div--> 
+        <nav class="nav nav-pills centered-pills">
+            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Daily</a>
+            <a class="nav-item nav-link" style="color:#505050" href="#">Weekly</a>
+            <a class="nav-item nav-link" style="color:#505050" href="#">Monthly</a>
+        </nav>
         <div class="container">
-
             <div class="card col-md-10 offset-md-1 py-4 ">
                 <div class="row">
                     <div class="col-md-8 col-sm-4">
