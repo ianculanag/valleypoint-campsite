@@ -85,6 +85,7 @@ class UnitsController extends Controller
         $roomReservations = array();
         $roomReservationNames = array();
         $roomCheckinDates = array();
+        $roomCheckinsToday = array();
 
         for($index = 0; $index < count($rooms); $index++) {
             $bedReservations = DB::table('reservation_units')
@@ -114,14 +115,26 @@ class UnitsController extends Controller
             ->groupBy('reservation_units.reservationID', 'reservation_units.groupID')
             ->orderBy('reservation_units.checkinDatetime')
             ->get();
+
+            $checkinsToday = DB::table('reservation_units')
+            ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+            ->join('units', 'units.id', 'reservation_units.unitID')
+            ->where('status', 'reserved')
+            ->where('partOf', $rooms[$index]->id)
+            ->where('checkinDatetime', '=', Carbon::now()->format('Y-m-d 14:00'))
+            ->groupBy('reservation_units.reservationID')
+            
+            ->get();
             array_push($roomReservations, $bedReservations);
             array_push($roomReservationNames, $bedNameReservations);
             array_push($roomCheckinDates, $checkinReservations);
+            array_push($roomCheckinsToday, $checkinsToday);
         }
 
         //return $roomReservations;
         //return $roomReservationNames;
         //return $roomCheckinDates;
+        //return $roomCheckinsToday;
 
         $capacities = DB::table('units')
         ->select('units.capacity')
@@ -142,6 +155,7 @@ class UnitsController extends Controller
         ->with('roomCheckoutDates', $roomCheckoutDates)
         ->with('roomReservations', $roomReservations)
         ->with('roomReservationNames', $roomReservationNames)
+        ->with('roomCheckinsToday', $roomCheckinsToday)
         ->with('roomCheckinDates', $roomCheckinDates)
         ->with('capacityArray', $capacityArray);
         //->with('reservations', $reservations);

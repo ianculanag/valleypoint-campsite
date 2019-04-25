@@ -56,6 +56,18 @@
                                 }
                             }
 
+                            $reservationCount = 0;
+
+                            //$earliestCheckin = \Carbon\Carbon::parse($roomCheckinDates[$loop->index][0]->checkinDatetime)->format('Y-m-d');
+
+                            for($indexer = 0; $indexer < count($roomCheckinDates[$loop->index]); $indexer++) {
+                                if(\Carbon\Carbon::parse($roomCheckinDates[$loop->index][$indexer]->checkinDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                    $reservationCount++;
+                                }
+                            }
+
+                            //echo $reservationCount;
+
                             //echo $occupiedBeds;
                         @endphp
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
@@ -64,7 +76,12 @@
                                     <h5 class="card-title">
                                         {{$room->unitNumber}} 
                                         @if($notificationCount > 0)
-                                        <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
+                                        <span class="badge badge-danger float-right ml-1" ><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
+
+                                        @endif
+                                        @if($reservationCount > 0)
+                                        <span class="badge badge-info float-right"><i class="fa fa-bell"></i>  {{$reservationCount}}</span>
+                                        
                                         @endif
                                         {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
                                     </h5>
@@ -92,20 +109,40 @@
                             }*/
 
                             $withCheckinToday = false;
+                            
+                            $needsAttentionCount = 0;
 
                             $earliestCheckin = \Carbon\Carbon::parse($roomCheckinDates[$loop->index][0]->checkinDatetime)->format('Y-m-d');
+                            $earliestCheckout = \Carbon\Carbon::parse($roomCheckinDates[$loop->index][0]->checkoutDatetime)->format('Y-m-d');
 
                             for($counter = 0; $counter < count($roomCheckinDates[$loop->index]); $counter++) {
-                                if(\Carbon\Carbon::parse($roomCheckinDates[$loop->index][$counter]->checkoutDatetime)->format('Y-m-d') >= \Carbon\Carbon::now()->format('Y-m-d')) {
+                                if(\Carbon\Carbon::parse($roomCheckinDates[$loop->index][$counter]->checkinDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
                                     $notificationCount++;
                                 }
                             }
 
                             if($earliestCheckin == \Carbon\Carbon::now()->format('Y-m-d')) {
                                 $withCheckinToday = true;
+                                for($count = 0; $count < count($roomCheckinsToday[$loop->index]); $count++) {
+                                    if(count($roomCheckinsToday[$loop->index]) == 1) {                                    
+                                        $nameString .= $roomCheckinsToday[$loop->index][$count]->firstName.' '.$roomCheckinsToday[$loop->index][$count]->lastName;
+                                    } else {
+                                        if($count == count($roomCheckinsTodays[$loop->index])-1) {
+                                            $nameString .= $roomCheckinsToday[$loop->index][$count]->lastName;
+                                        } else {                                    
+                                            $nameString .= $roomCheckinsToday[$loop->index][$count]->lastName.', ';
+                                        }
+                                    }                                
+                                }
                             }
-                            
 
+                            $withExpiredReservation = false;
+                            if($earliestCheckout < \Carbon\Carbon::now()->format('Y-m-d')) {
+                                $withExpiredReservation = true;
+                                $nameString .= $roomCheckinDates[$loop->index][0]->firstName.' '.$roomCheckinDates[$loop->index][0]->lastName;
+                                $needsAttentionCount++;
+                            }
+                        
                             //echo $occupiedBeds;
                         @endphp
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-glamping-details" id={{$room->id}}>
@@ -113,13 +150,24 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$room->unitNumber}} 
+                                        @if($needsAttentionCount > 0)
+                                        <span class="badge badge-danger float-right ml 1-"><i class="fa fa-bell"></i>  {{$needsAttentionCount}}</span>
+                                        @endif
                                         @if($notificationCount > 0)
-                                        <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
+                                        <span class="badge badge-info float-right"><i class="fa fa-bell"></i>  {{$notificationCount}}</span>
                                         @endif
                                         {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
                                     </h5>
 
+                                    @if($withCheckinToday)
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$nameString}}</p> 
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color:lightseagreen; font-style:italic;">Check-ins today!</p>
+                                    @elseif($withExpiredReservation)
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$nameString}}</p> 
+                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color:red; font-style:italic;">Update reservation!</p>
+                                    @else
                                     <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color:lightseagreen; font-style:italic;">Next check-in:<br>{{\Carbon\Carbon::parse($earliestCheckin)->format('F j, Y')}}</p>
+                                    @endif
                                     {{--<p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>--}}
                                 </div>
                             </div>

@@ -261,7 +261,7 @@ class ReservationsController extends Controller
 
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
         
-        $reservation = Reservationss::find($request->input('reservationID'));
+        $reservation = Reservations::find($request->input('reservationID'));
         $reservation->update([
             'lastName' => $request->input('lastName'),
             'firstName' => $request->input('firstName'),
