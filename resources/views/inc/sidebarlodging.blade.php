@@ -74,7 +74,7 @@
                     <li class="nav-item transactionsTab">
                         <button class="dropdown-btn nav-link-drop transactionsTab" id="transactionsTab">
                             <i class="fa fa-book transactionsTab" aria-hidden="true"></i>
-                            Transactions
+                            <span> Transactions </span>
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" id="dropdownTransactions">

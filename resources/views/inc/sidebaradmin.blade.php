@@ -81,7 +81,7 @@
                     <li class="nav-item">
                         <button class="dropdown-btn nav-link-drop" href="#" id="lodgingTab">
                             <i class="fa fa-hotel" aria-hidden="true"></i>
-                            Lodging
+                            <span> Lodging </span>
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" id="dropdownLodging">
@@ -98,7 +98,7 @@
                     <li class="nav-item">
                         <button class="dropdown-btn nav-link-drop" href="#" id="barRestoTab">
                             <i class="fa fa-concierge-bell" aria-hidden="true"></i>
-                            Bar and Restaurant
+                            <span> Bar and Restaurant </span>
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" id="dropdownBarResto">

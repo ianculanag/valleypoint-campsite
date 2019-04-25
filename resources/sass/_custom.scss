@@ -36,6 +36,7 @@
 
   .nav-link-drop.active {
 	background-color: rgba(224, 248, 242, 0.436);
+	color: rgb(211, 211, 211);
   }
   
   .dropdown-container a.active {
@@ -43,9 +44,11 @@
 	color: white;
   }
   
-  .nav-link-drop.activeClass:hover,
+  .nav-link-drop.activeTab:hover,
+  .nav-link-drop.activeTab:hover span
   .dropdown-container a.active:hover {
 	background-color: rgba(224, 248, 242, 0.436);
+	color: white !important;
   }
   
   .sidebar .nav-link i, .nav-link-drop i {
@@ -53,11 +56,11 @@
 	color: rgb(211, 211, 211);
   }
   
-  .sidebar .nav-link.active, .nav-link-drop.activeClass {
+  .sidebar .nav-link.active, .nav-link-drop.activeTab {
 	color: rgb(253, 254, 255);
   }
   
-  .sidebar .nav-link.active i, .nav-link-drop.activeClass i {
+  .sidebar .nav-link.active i, .nav-link-drop.activeTab i {
 	color: inherit;
   }
   
