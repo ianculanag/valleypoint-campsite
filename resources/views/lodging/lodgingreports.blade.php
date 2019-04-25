@@ -64,7 +64,7 @@
                                     @php
                                         $occupiedTentCount = 0;
                                         $totalTents = 0;
-                                        $totalGuests = 0;
+                                        $totalGlampingGuests = 0;
                                         $glampingArrivalCount = 0;
                                         $glampingDepartureCount = 0;
                                     @endphp
@@ -88,12 +88,12 @@
                                     </tr>
                                     <tr>
                                         <td> Checked-in guests </td>
-                                        @foreach ($accommodations as $accommodation)
+                                        @foreach ($glampingAccommodations as $glampingAccommodation)
                                             @php
-                                                $totalGuests += $accommodation->numberOfPax;
+                                                $totalGlampingGuests += $glampingAccommodation->numberOfPax;
                                             @endphp
                                         @endforeach
-                                        <td class="text-right"> {{$totalGuests}} </td>
+                                        <td class="text-right"> {{$totalGlampingGuests}} </td>
                                     </tr>
                                     <tr>
                                         <td> Arrivals </td>
@@ -124,25 +124,57 @@
                                     </tr>
                                 <thread>
                                 <tbody>
+                                    @php
+                                        $occupiedRoomCount = 0;
+                                        $totalRooms = 0;
+                                        $totalBackpackerGuests = 0;
+                                        $backpackerArrivalCount = 0;
+                                        $backpackerDepartureCount = 0;
+                                    @endphp
                                     <tr>
                                         <td> Occupied rooms </td>
-                                        <td> </td>
+                                        @foreach ($occupiedRooms as $roomsOccupied)
+                                            @php
+                                                $occupiedRoomCount++;
+                                            @endphp
+                                        @endforeach
+                                        <td class="text-right"> {{$occupiedRoomCount}} </td>
                                     </tr>
                                     <tr>
                                         <td> Unoccupied rooms </td>
-                                        <td> </td>
+                                        @foreach ($rooms as $room)
+                                            @php
+                                                $totalRoomss++;
+                                            @endphp
+                                        @endforeach
+                                        <td class="text-right"> {{$totalRooms-$occupiedRoomCount}} </td>
                                     </tr>
                                     <tr>
                                         <td> Checked-in guests </td>
-                                        <td> </td>
+                                        @foreach ($backpackerAccommodations as $backpackerAccommodation)
+                                            @php
+                                                $totalBackpackerGuests += $backpackerAccommodation->numberOfPax;
+                                            @endphp
+                                        @endforeach
+                                        <td class="text-right"> {{$totalBackpackerGuests}} </td>
                                     </tr>
                                     <tr>
                                         <td> Arrivals </td>
-                                        <td> </td>
+                                        @foreach ($backpackerArrivals as $backpackerArrival)
+                                            @php
+                                                $backpackerArrivalCount++;
+                                            @endphp
+                                        @endforeach
+                                        <td class="text-right"> {{$backpackerArrivalCount}} </td>
                                     </tr>
                                     <tr>
                                         <td> Departures </td>
-                                        <td> </td>
+                                        @foreach ($backpackerDepartures as $backpackerDeparture)
+                                            @php
+                                                $backpackerDepartureCount++;
+                                            @endphp
+                                        @endforeach
+                                        <td class="text-right"> {{$backpackerDepartureCount}} </td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -965,11 +965,14 @@ class UnitsController extends Controller
         ->where('accommodation_units.status', 'ongoing')
         ->get();
 
-        $accommodations = DB::table('accommodations')
-        ->get();
-
         $units = DB::table('units')
         ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->get();
+        
+        $glampingAccommodations = DB::table('accommodations')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('services.serviceName', 'like', '%Glamping%')
         ->get();
 
         $tents = DB::table('units')
@@ -996,13 +999,41 @@ class UnitsController extends Controller
         ->where('accommodation_units.checkoutDatetime', '=', Carbon::now()->format('Y-m-d 12:00'))
         ->get();
 
+        $backpackerAccommodations = DB::table('accommodations')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('services.serviceName', '=', 'Backpacker')
+        ->get();
+
         $rooms = DB::table('units')
         ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
         ->where('units.unitType', '=', 'room')
         ->get();
 
-        return view('lodging.lodgingreports')->with('accommodations', $accommodations)->with('guests', $guests)
-            ->with('units', $units)->with('tents', $tents)->with('occupiedTents', $occupiedTents)
-            ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures);
+        $occupiedRooms = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->where('units.unitType', '=', 'room')
+        ->where('accommodation_units.status', '=', 'ongoing')
+        ->get();
+
+        $backpackerArrivals = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->where('units.unitType', '=', 'room')
+        ->where('accommodation_units.checkinDatetime', '=', Carbon::now()->format('Y-m-d 14:00'))
+        ->get();
+
+        $backpackerDepartures = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->where('units.unitType', '=', 'room')
+        ->where('accommodation_units.checkoutDatetime', '=', Carbon::now()->format('Y-m-d 12:00'))
+        ->get();
+
+        return view('lodging.lodgingreports')->with('guests', $guests)->with('units', $units)
+            ->with('glampingAccommodations', $glampingAccommodations)->with('tents', $tents)
+            ->with('occupiedTents', $occupiedTents)->with('glampingArrivals', $glampingArrivals)
+            ->with('glampingDepartures', $glampingDepartures)
+            ->with('backpackerAccommodations', $backpackerAccommodations)->with('rooms', $rooms)
+            ->with('occupiedRooms', $occupiedRooms)->with('backpackerArrivals', $backpackerArrivals)
+            ->with('backpackerDepartures', $backpackerDepartures);
     }
 }
