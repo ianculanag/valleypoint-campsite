@@ -36,10 +36,10 @@
                         <img src={{asset('logo.jpg')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
-                        @if(isset($displayfrom))
-                        <h6 class="text-right">Dates: {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        @if(isset($display))
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($display)->format('F o')}} </h6>
                         @else
-                        <h6 class="text-right">Dates: {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F o')}} </h6>
                         @endif
                     </div>
                 </div>
