@@ -1264,7 +1264,7 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function reloadWeeklyLodgingReport()
+    public function reloadWeeklyLodgingReport(Request $request)
     {
         $displayfrom = Carbon::parse($request->input('lodgingReportDate'))->format('Y-m-d');
         $displayto = Carbon::parse($request->input('lodgingReportDate'))->addDays(6)->format('Y-m-d');

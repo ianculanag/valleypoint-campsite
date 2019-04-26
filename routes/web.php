@@ -149,6 +149,10 @@ Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingR
 Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
 Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgingReport');
 
+//Monthly lodging reports
+Route::get('/this-months-lodging-report', 'UnitsController@thisMonthsLodgingReport');
+Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodgingReport');
+
 /* Admin */
 //Dashboard
 Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
