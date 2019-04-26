@@ -147,6 +147,7 @@ Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingR
 
 //Weekly lodging reports
 Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
+Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgingReport');
 
 /* Admin */
 //Dashboard
