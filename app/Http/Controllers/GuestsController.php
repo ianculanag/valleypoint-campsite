@@ -339,6 +339,8 @@ class GuestsController extends Controller
         ->where('units.id', '=', $unitID)
         ->get();
 
+        //return $guest;
+
         $payments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')

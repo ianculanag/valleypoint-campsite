@@ -479,8 +479,9 @@
                     <input class="form-control" type="text" name="paymentStatus1" value="paid" style="display:none; position:absolute;">--}}
 
                     <div class="mt-3" style="float:right;">
+                    <button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>
                     @if(count($pendingPayments) > 0)
-                        <button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                        <button id="checkoutButton" class="btn btn-success" style="width:10em;display:none;" disabled>Check-out</button>
                     @else
                         <button id="checkoutButton" class="btn btn-success" style="width:10em;">Check-out</button>
                     @endif
@@ -579,7 +580,7 @@
     </div>
     <!-- end of charges modal -->
     <!-- unsaved changes modal -->
-    <div class="modal fade" id="unsavedChagesModal" tabindex="-1" role="dialog" aria-labelledby="unsavedChagesModal" aria-hidden="true">
+    <div class="modal fade" id="unsavedChangesModal" tabindex="-1" role="dialog" aria-labelledby="unsavedChagesModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -599,6 +600,27 @@
         </div>
     </div>
     <!-- unsaved changes modal -->
+    <!-- unpaid charges modal -->
+    <div class="modal fade" id="unpaidChargesModal" tabindex="-1" role="dialog" aria-labelledby="unpaidChargesModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Unpaid Charges</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>There are charges left unpaid in this accommodation. What would you like to do?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger">Override charges</button>
+                        <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- unnpaid charges modal -->
     @endforeach
 @endsection
  

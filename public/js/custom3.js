@@ -8,8 +8,8 @@ jQuery('#additionalServiceFormAddExtra').click(function(){
         htmlStringRow += "<td style='display:none;'><input id='invoiceCheckBox"+additionalServices+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
         htmlStringRow += "<td id='invoiceDescription"+additionalServices+"' class='invoiceDescriptions'>"+data[0].serviceName+"</td>";
         htmlStringRow += "<td id='invoiceQuantity"+additionalServices+"' style='text-align:right;' class='invoiceQuantities'>"+jQuery('#additionalServiceNumberOfPax').val()+"</td>";
-        htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"</td>";
-        htmlStringRow += "<td id='invoiceTotalBalance"+additionalServices+"' style='text-align:right;' class='invoiceBalances'>"+document.getElementsByClassName('additionalServiceTotalPrice')[0].value+"</td>";
+        htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+parseInt(document.getElementsByClassName('additionalServiceTotalPrice')[0].value).toFixed(2)+"</td>";
+        htmlStringRow += "<td id='invoiceTotalBalance"+additionalServices+"' style='text-align:right;' class='invoiceBalances'>"+parseInt(document.getElementsByClassName('additionalServiceTotalPrice')[0].value).toFixed(2)+"</td>";
         htmlStringRow += "</tr>";
         
         jQuery('#invoiceRows').append(htmlStringRow);
@@ -100,7 +100,13 @@ function updateBalance() {
     for (var index = 0; index < balance.length; index++) {
         totalBalance += parseInt(balance.eq(index).html());
     }
-    jQuery('#invoiceTotalBalance').html(totalBalance);
+
+    //console.log(jQuery('#rowAmountPaid').css('display'));
+
+    if(!(jQuery('#rowAmountPaid').css('display') == 'none')) {
+        totalBalance -= parseInt(jQuery('#invoiceAmountPaid').html());
+    }
+    jQuery('#invoiceTotalBalance').html(totalBalance.toFixed(2));
     checkUnpaid();
 }
 
@@ -144,7 +150,7 @@ jQuery(document).on('click', '#showChargesModal', function() {
     for (var index = 0; index < balance.length; index++) {
         totalBalance += parseInt(balance.eq(index).html());
     }*/
-    jQuery('#invoiceTotalBalanceModal').html(balancesGrandTotal);
+    jQuery('#invoiceTotalBalanceModal').html(parseInt(balancesGrandTotal).toFixed(2));
 });
 
 jQuery('#selectAllBalances').change(function() {
@@ -214,7 +220,12 @@ jQuery('#saveAdditionalPayments').click(function() {
         //console.log('fuck');
         }
     }
-    jQuery('#selectedAdditionalPayments').html(htmlString);
+    jQuery('#selectedAdditionalPayments').html(htmlString);    
+
+    jQuery('#rowAmountPaid').css('display', '');
+    jQuery('#invoiceAmountPaid').html(parseFloat(jQuery('#amount').val()).toFixed(2));
+
+    updateBalance();
 });
 
 //CHECK OUT
@@ -234,7 +245,13 @@ jQuery('#saveAllPayments').click(function() {
 
 function checkUnpaid() {
     if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
-        jQuery('#checkoutButton').prop('disabled', false);
+        console.log(jQuery('#amount').val());
+        console.log(jQuery('#invoiceTotalBalance').html());
+        if(parseFloat(jQuery('#amount').val()) >= parseFloat(jQuery('#invoiceTotalBalance').html())) {
+            jQuery('#checkoutButton').prop('disabled', false);
+        } else {
+            //jQuery('#checkoutButton')
+        }
     } else {
         jQuery('#checkoutButton').prop('disabled', true);
     }
