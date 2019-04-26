@@ -37,9 +37,9 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         @if(isset($displayfrom))
-                        <h6 class="text-right">Date: {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        <h6 class="text-right">Dates: {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
                         @else
-                        <h6 class="text-right">Date: {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        <h6 class="text-right">Dates: {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
                         @endif
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                         $glampingArrivalCount = 0;
                                         $glampingDepartureCount = 0;
                                     @endphp
-                                    <tr>
+                                    {{--<tr>
                                         <td> Occupied tents </td>
                                         @foreach ($occupiedTents as $tentsOccupied)
                                             @php
@@ -80,14 +80,14 @@
                                         <td class="text-right"> {{$totalTents-$occupiedTentCount}} </td>
                                     </tr>
                                     <tr>
-                                        <td> Checked-in guests </td>
+                                        <td> Total guests </td>
                                         @foreach ($glampingAccommodations as $glampingAccommodation)
                                             @php
                                                 $totalGlampingGuests += $glampingAccommodation->numberOfPax;
                                             @endphp
                                         @endforeach
                                         <td class="text-right"> {{$totalGlampingGuests}} </td>
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td> Arrivals </td>
                                         @foreach ($glampingArrivals as $glampingArrival)
@@ -124,7 +124,7 @@
                                         $backpackerArrivalCount = 0;
                                         $backpackerDepartureCount = 0;
                                     @endphp
-                                    <tr>
+                                    {{--<tr>
                                         <td> Occupied rooms </td>
                                         @foreach ($occupiedRooms as $roomsOccupied)
                                             @php
@@ -143,14 +143,14 @@
                                         <td class="text-right"> {{$totalRooms-$occupiedRoomCount}} </td>
                                     </tr>
                                     <tr>
-                                        <td> Checked-in guests </td>
+                                        <td> Total guests </td>
                                         @foreach ($backpackerAccommodations as $backpackerAccommodation)
                                             @php
                                                 $totalBackpackerGuests += $backpackerAccommodation->numberOfPax;
                                             @endphp
                                         @endforeach
                                         <td class="text-right"> {{$totalBackpackerGuests}} </td>
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td> Arrivals </td>
                                         @foreach ($backpackerArrivals as $backpackerArrival)
@@ -243,6 +243,51 @@
                     <div>
                         <h6> This Week's Transactions </h6>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
+                            <thread>
+                                <tr>
+                                    <th colspan="6"> Glamping Accommodation </th>
+                                </tr>
+                            <thread>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" style="width:6%;"> No. </td>
+                                    <td class="text-center"> Guest name </td>
+                                    <td class="text-center"> Package availed </td>
+                                    <td class="text-center"> Quantity </td>
+                                    <td class="text-center" style="width:15%;"> Amount paid </td>
+                                    <td class="text-center" style="width:15%;"> Balance </td>
+                                </tr>
+                                @php
+                                    $paymentsCounter = 1;
+                                @endphp
+                                @if(count($payments) > 0)
+                                @foreach ($payments as $payment)
+                                <tr>
+                                    <td> {{$paymentsCounter++}} </td>
+                                    <td> {{$payment->firstName}} {{$payment->lastName}} </td>
+                                    <td> {{$payment->serviceName}} </td>
+                                    <td class="text-right"> {{$payment->quantity}} </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($payment->amount), 2, '.', '')}} </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($payment->balance), 2, '.', '')}} </td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="4"> TOTAL EARNINGS: </td>
+                                    <td colspan="2"> </td>
+                                </tr>
+                                @else
+                                <tr>
+                                    <td colspan="6" class="text-center" style="font-style:italic;"> No payments to show </td>
+                                </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                        <table class="table table-sm table-bordered" style="font-size:.90em;">
+                            <thread>
+                                <tr>
+                                    <th colspan="6"> Backpacker Accommodation </th>
+                                </tr>
+                            <thread>
                             <tbody>
                                 <tr>
                                     <td class="text-center" style="width:6%;"> No. </td>
