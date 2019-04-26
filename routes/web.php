@@ -143,6 +143,7 @@ Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamp
 
 //Lodging reports
 Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
+Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingReport');
 
 /* Admin */
 //Dashboard
