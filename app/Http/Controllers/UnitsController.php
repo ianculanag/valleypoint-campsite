@@ -1205,18 +1205,31 @@ class UnitsController extends Controller
         ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
         ->get();
 
-        $payments = DB::table('payments')
+        $glampingPayments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
-        ->whereDate('payments.paymentDatetime', '=', Carbon::now()->format('Y-m-d'))
+        ->where('services.serviceName', 'like', '%Glamping%')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
+        ->get();
+        
+        $backpackerPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->where('services.serviceName', '=', 'Backpacker')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
         ->get();
 
         return view('lodging.weeklylodgingreports')->with('units', $units)->with('displayto', $displayto)
             ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
-            ->with('payments', $payments);
+            ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);
     }
 }

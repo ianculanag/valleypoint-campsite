@@ -254,26 +254,32 @@
                                     <td class="text-center"> Guest name </td>
                                     <td class="text-center"> Package availed </td>
                                     <td class="text-center"> Quantity </td>
+                                    <td class="text-center"> Payment date </td>
                                     <td class="text-center" style="width:15%;"> Amount paid </td>
-                                    <td class="text-center" style="width:15%;"> Balance </td>
+                                    {{--<td class="text-center" style="width:15%;"> Balance </td>--}}
                                 </tr>
                                 @php
-                                    $paymentsCounter = 1;
+                                    $glampingPaymentsCounter = 1;
+                                    $totalGlampingEarnings = 0;
                                 @endphp
-                                @if(count($payments) > 0)
-                                @foreach ($payments as $payment)
+                                @if(count($glampingPayments) > 0)
+                                @foreach ($glampingPayments as $glampingPayment)
                                 <tr>
-                                    <td> {{$paymentsCounter++}} </td>
-                                    <td> {{$payment->firstName}} {{$payment->lastName}} </td>
-                                    <td> {{$payment->serviceName}} </td>
-                                    <td class="text-right"> {{$payment->quantity}} </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($payment->amount), 2, '.', '')}} </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($payment->balance), 2, '.', '')}} </td>
+                                    <td> {{$glampingPaymentsCounter++}} </td>
+                                    <td> {{$glampingPayment->firstName}} {{$glampingPayment->lastName}} </td>
+                                    <td> {{$glampingPayment->serviceName}} </td>
+                                    <td class="text-right"> {{$glampingPayment->quantity}} </td>
+                                    <td> {{$glampingPayment->paymentDatetime}}</td>
+                                    <td class="text-right"> ₱ {{number_format((float)($glampingPayment->amount), 2, '.', '')}} </td>
+                                    {{--<td class="text-right"> ₱ {{number_format((float)($glampingPayment->balance), 2, '.', '')}} </td>--}}
                                 </tr>
+                                @php
+                                    $totalGlampingEarnings += $glampingPayment->amount;
+                                @endphp
                                 @endforeach
                                 <tr>
-                                    <td colspan="4"> TOTAL EARNINGS: </td>
-                                    <td colspan="2"> </td>
+                                    <td colspan="5"> TOTAL EARNINGS: </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($totalGlampingEarnings), 2, '.', '')}}</td>
                                 </tr>
                                 @else
                                 <tr>
@@ -294,23 +300,33 @@
                                     <td class="text-center"> Guest name </td>
                                     <td class="text-center"> Package availed </td>
                                     <td class="text-center"> Quantity </td>
+                                    <td class="text-center"> Payment date </td>
                                     <td class="text-center" style="width:15%;"> Amount paid </td>
-                                    <td class="text-center" style="width:15%;"> Balance </td>
+                                    {{--<td class="text-center" style="width:15%;"> Balance </td>--}}
                                 </tr>
                                 @php
-                                    $paymentsCounter = 1;
+                                    $backpackerPaymentsCounter = 1;
+                                    $totalBackpackerEarnings = 0;
                                 @endphp
-                                @if(count($payments) > 0)
-                                @foreach ($payments as $payment)
+                                @if(count($backpackerPayments) > 0)
+                                @foreach ($backpackerPayments as $backpackerPayment)
                                 <tr>
-                                    <td> {{$paymentsCounter++}} </td>
-                                    <td> {{$payment->firstName}} {{$payment->lastName}} </td>
-                                    <td> {{$payment->serviceName}} </td>
-                                    <td class="text-right"> {{$payment->quantity}} </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($payment->amount), 2, '.', '')}} </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($payment->balance), 2, '.', '')}} </td>
+                                    <td> {{$backpackerPaymentsCounter++}} </td>
+                                    <td> {{$backpackerPayment->firstName}} {{$backpackerPayment->lastName}} </td>
+                                    <td> {{$backpackerPayment->serviceName}} </td>
+                                    <td class="text-right"> {{$backpackerPayment->quantity}} </td>
+                                    <td> {{$backpackerPayment->paymentDatetime}}</td>
+                                    <td class="text-right"> ₱ {{number_format((float)($backpackerPayment->amount), 2, '.', '')}} </td>
+                                    {{--<td class="text-right"> ₱ {{number_format((float)($backpackerPayment->balance), 2, '.', '')}} </td>--}}
                                 </tr>
+                                @php
+                                    $totalBackpackerEarnings += $backpackerPayment->amount;
+                                @endphp
                                 @endforeach
+                                <tr>
+                                    <td colspan="5"> TOTAL EARNINGS: </td>
+                                    <td class="text-right"> ₱ {{number_format((float)($totalBackpackerEarnings), 2, '.', '')}}</td>
+                                </tr>
                                 @else
                                 <tr>
                                     <td colspan="6" class="text-center" style="font-style:italic;"> No payments to show </td>
