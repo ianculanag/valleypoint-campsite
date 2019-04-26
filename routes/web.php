@@ -141,9 +141,12 @@ Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
-//Lodging reports
+//Daily lodging reports
 Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
 Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingReport');
+
+//Weekly lodging reports
+Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
 
 /* Admin */
 //Dashboard

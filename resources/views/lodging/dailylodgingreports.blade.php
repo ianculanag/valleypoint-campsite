@@ -13,7 +13,7 @@
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
             <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>
-                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="#">Weekly</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-weeks-lodging-report">Weekly</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="#">Monthly</a>
             </nav>
             <!--div class="card mt-5 py-3 px-0 mx-0"-->
@@ -67,7 +67,11 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <!--h6>Company name: Valleypoint Campsite</h6-->
+                        @if(isset($display))
+                        <h6 class="text-right">Date: {{\Carbon\Carbon::parse($display)->format('F j, o')}} </h6>
+                        @else
                         <h6 class="text-right">Date: {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
