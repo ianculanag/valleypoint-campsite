@@ -43,7 +43,7 @@
                                             @php
                                                 
                                             @endphp
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Total</th>
                                             <th scope="col">Amount</th> 
@@ -116,7 +116,7 @@
                                     <thead>
                                         @if(count($pendingPayments) > 0)
                                         <tr>
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Total</th> 
                                             <th scope="col">Balance</th>
@@ -182,7 +182,7 @@
                                     </tfoot>
                                     @else
                                         <tr style="">
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
@@ -331,10 +331,31 @@
                                     </select>--}}
                                     {{--<input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>--}}
                                     <select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
-                                        <option value="1">Solo</option>
+                                        @if($units->serviceID == 1)                                
+                                        <option value="1" selected>Solo</option>
                                         <option value="2">2 Pax</option>
                                         <option value="3">3 pax</option>
                                         <option value="4">4 pax</option>
+        
+                                        @elseif($units->serviceID == 2)                                
+                                        <option value="1">Solo</option>
+                                        <option value="2" selected>2 Pax</option>
+                                        <option value="3">3 pax</option>
+                                        <option value="4">4 pax</option>
+                                        
+                                        @elseif($units->serviceID == 3)
+                                        <option value="1">Solo</option>
+                                        <option value="2">2 Pax</option>
+                                        <option value="3" selected>3 pax</option>   
+                                        <option value="4">4 pax</option>
+                                        
+                                        @elseif($units->serviceID == 4)
+                                        <option value="1">Solo</option>
+                                        <option value="2">2 Pax</option>
+                                        <option value="3">3 pax</option>
+                                        <option value="4" selected>4 pax</option>
+        
+                                        @endif
                                     </select>
                                     @endforeach
                                 </div>

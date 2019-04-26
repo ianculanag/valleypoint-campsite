@@ -33,7 +33,7 @@
                                     <thead>
                                         <tr>
                                         @if(count($payments) > 0)
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Total</th>
                                             <th scope="col">Amount</th> 
@@ -95,7 +95,7 @@
                                     <thead>
                                         @if(count($pendingPayments) > 0)
                                         <tr>
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Total</th> 
                                             <th scope="col">Balance</th>
@@ -159,7 +159,7 @@
                                     </tfoot>
                                     @else
                                         <tr style="">
-                                            <th scope="col" style="width:55%">Desciption</th>
+                                            <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
                                             <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
