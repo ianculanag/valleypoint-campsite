@@ -135,6 +135,10 @@
                                             <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($total), 2, '.', '')}}</th>
                                             <th></th>
                                         </tr>
+                                        <tr id="rowAmountPaid" style="display:none">
+                                            <th colspan="3" scope="row">AMOUNT PAID:</th>
+                                            <th id="invoiceAmountPaid" style="text-align:right;"></th>
+                                        </tr>    
                                         <tr>
                                             <th colspan="3" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
@@ -161,30 +165,33 @@
                                         <tr style="">
                                             <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
-                                            <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
                                             <th scope="col">Balance</th>
                                         </tr>
                                     </thead>
                                     <tbody id="invoiceRows" style="">
                                         <tr>
-                                            <td colspan="5" id="noPendingPayments" class="text-center">
+                                            <td colspan="4" id="noPendingPayments" class="text-center">
                                                 No pending payments to show
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot style="">
                                         <tr>
-                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th colspan="2" scope="row">TOTAL:</th>
                                             <th id="invoiceGrandTotal" style="text-align:right;"></th>
                                             <th></th>
                                         </tr>
+                                        <tr id="rowAmountPaid" style="display:none">
+                                            <th colspan="3" scope="row">AMOUNT PAID:</th>
+                                            <th id="invoiceAmountPaid" style="text-align:right;"></th>
+                                        </tr>    
                                         <tr>
-                                            <th colspan="4" scope="row">BALANCE:</th>
+                                            <th colspan="3" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;"></th>
                                         </tr> 
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="4">
                                             @if(count($pendingPayments) > 0)
                                             <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                                                 Get payment
@@ -465,7 +472,6 @@
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Balance</th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -503,7 +509,6 @@
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
                                     <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;">FUck</th>
-                                    <th></th>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -513,7 +518,6 @@
                                     <th style="text-align:right;"  colspan="2">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
                                     </th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>                        

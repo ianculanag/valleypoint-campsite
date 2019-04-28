@@ -33,10 +33,12 @@ class ReservationsController extends Controller
                  ->where('status', '=','reserved');
         })
         ->join('units', 'units.id', 'reservation_units.unitID')
+        ->where('units.unitType', '=', 'room')
+        ->orWhere('units.unitType', '=', 'tent')
         ->orderBy('reservations.id')
         ->get();
         
-        //$reservations =  $reservations->unique('reservationID');
+        $reservations =  $reservations->unique('reservationID');
 
         //return $reservations;
 

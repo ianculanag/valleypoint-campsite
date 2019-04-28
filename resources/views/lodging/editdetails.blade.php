@@ -188,7 +188,6 @@
                                         <tr style="">
                                             <th scope="col" style="width:55%">Description</th>
                                             <th scope="col">Qty.</th>
-                                            <th scope="col">Price</th>
                                             <th scope="col">Total</th> 
                                             <th scope="col">Balance</th>
                                         </tr>
@@ -209,16 +208,20 @@
                                     </tbody>
                                     <tfoot style="">
                                         <tr>
-                                            <th colspan="3" scope="row">TOTAL:</th>
+                                            <th colspan="2" scope="row">TOTAL:</th>
                                             <th id="invoiceGrandTotal" style="text-align:right;"></th>
                                             <th></th>
                                         </tr>
+                                        <tr id="rowAmountPaid" style="display:none">
+                                            <th colspan="3" scope="row">AMOUNT PAID:</th>
+                                            <th id="invoiceAmountPaid" style="text-align:right;"></th>
+                                        </tr>  
                                         <tr>
-                                            <th colspan="4" scope="row">BALANCE:</th>
+                                            <th colspan="3" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;"></th>
                                         </tr>
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="4">
                                             @if(count($pendingPayments) > 0)
                                             <button type="button" class="btn btn-primary btn-block" id="showChargesModal" data-toggle="modal" data-target="#chargesModal">
                                                 Get payment
@@ -542,7 +545,6 @@
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Balance</th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="chargesRows">
@@ -572,19 +574,13 @@
                                     </td>
                                     <td style="text-align:right;">2</td>
                                     <td style="text-align:right;" class="chargesPrices">1500</td>
-                                    <td>
-                                        <button type="button" id="deleteCharge1" class="btn btn-sm btn-danger deleteCharge">
-                                            <span class="fa fa-minus" aria-hidden="true"></span>
-                                        </button>
-                                    </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th></th>
                                     <th colspan="3" scope="row">Amount due:</th>
-                                    <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;">FUck</th>
-                                    <th></th>
+                                    <th id="invoiceTotalBalanceModal" class="invoiceTotalBalance" style="text-align:right;"></th>
                                 </tr>
                                 <tr>
                                 </tr>
@@ -594,7 +590,6 @@
                                     <th style="text-align:right;"  colspan="2">
                                         <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount">
                                     </th>
-                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

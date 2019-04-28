@@ -36,15 +36,19 @@
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                                 <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350.00</td>
+                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350.00</td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
                                 <th id="invoiceGrandTotal" style="text-align:right;"></th>
-                            </tr>
+                            </tr>                            
+                            <tr id="rowAmountPaid" style="display:none">
+                                <th colspan="3" scope="row">AMOUNT PAID:</th>
+                                <th id="invoiceAmountPaid" style="text-align:right;"></th>
+                            </tr>   
                             <tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
@@ -168,7 +172,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDates" id="checkinDate{{$unit->unitNumber}}" value="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
                             </div>
                         </div>
 
@@ -234,8 +238,8 @@
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
-                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350</td>
-                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$invoicePrice}}</td>
+                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350.00</td>
+                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($invoicePrice), 2, '.', '')}}</td>
                         </tr>
                         @endforeach
                         @endif
@@ -243,8 +247,12 @@
                         <tfoot>
                         <tr>
                             <th colspan="3" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
-                        </tr>
+                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPrice), 2, '.', '')}}</th>
+                        </tr>                        
+                        <tr id="rowAmountPaid" style="display:none">
+                            <th colspan="3" scope="row">AMOUNT PAID:</th>
+                            <th id="invoiceAmountPaid" style="text-align:right;"></th>
+                        </tr>   
                         <tr>
                             <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                 Get payment

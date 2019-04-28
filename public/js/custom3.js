@@ -99,14 +99,18 @@ function updateBalance() {
 
     for (var index = 0; index < balance.length; index++) {
         totalBalance += parseInt(balance.eq(index).html());
+        console.log(totalBalance);
     }
 
     //console.log(jQuery('#rowAmountPaid').css('display'));
 
     if(!(jQuery('#rowAmountPaid').css('display') == 'none')) {
         totalBalance -= parseInt(jQuery('#invoiceAmountPaid').html());
+        //console.log('tumatama');
     }
-    jQuery('#invoiceTotalBalance').html(totalBalance.toFixed(2));
+
+    //console.log(totalBalance);
+    jQuery('#invoiceTotalBalance').html(parseFloat(totalBalance).toFixed(2));
     checkUnpaid();
 }
 
@@ -134,7 +138,7 @@ jQuery(document).on('click', '#showChargesModal', function() {
         htmlString += "<td style='text-align:right;' class='chargeQuantities'>"+jQuery('.invoiceQuantities').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargePrices'>"+jQuery('.invoicePrices').eq(index).html()+"</td>";
         htmlString += "<td style='text-align:right;' class='chargeBalances'>"+jQuery('.invoiceBalances').eq(index).html()+"</td>";
-        htmlString += "<td><button type='button' id='deleteCharge' class='btn btn-sm btn-danger deleteCharge'><span class='fa fa-minus' aria-hidden='true'></span></button></td>";
+        //htmlString += "<td><button type='button' id='deleteCharge' class='btn btn-sm btn-danger deleteCharge'><span class='fa fa-minus' aria-hidden='true'></span></button></td>";
         htmlString += "</tr>";
         
         if(jQuery('.invoiceCheckboxes').eq(index).prop('checked') == true) {
@@ -240,6 +244,10 @@ jQuery('#saveAllPayments').click(function() {
         }
     }
     jQuery('#selectedAdditionalPayments').html(htmlString);
+
+    jQuery('#rowAmountPaid').css('display', '');
+    jQuery('#invoiceAmountPaid').html(parseFloat(jQuery('#amount').val()).toFixed(2));
+
     checkUnpaid();
 });
 
@@ -249,11 +257,13 @@ function checkUnpaid() {
         console.log(jQuery('#invoiceTotalBalance').html());
         if(parseFloat(jQuery('#amount').val()) >= parseFloat(jQuery('#invoiceTotalBalance').html())) {
             jQuery('#checkoutButton').prop('disabled', false);
+            jQuery('#checkoutDueTodayButton').prop('disabled', false);
         } else {
             //jQuery('#checkoutButton')
         }
     } else {
         jQuery('#checkoutButton').prop('disabled', true);
+        jQuery('#checkoutDueTodayButton').prop('disabled', false);
     }
 }
 
