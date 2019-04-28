@@ -354,7 +354,10 @@ class ReservationsController extends Controller
         ->where('charges.serviceID', '<', '6')
         ->where('charges.remarks', '=', 'unpaid')
         ->orWhere('charges.remarks', '=', 'partial')
+        ->groupBy('chargeID')
         ->get();
+
+        //return $charges;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
