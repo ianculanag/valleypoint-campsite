@@ -14,11 +14,20 @@
                 <div class="row px-3">
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
-                            @if(isset($displayfrom))
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
-                            @else
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
-                            @endif
+                            <select class="form-control">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option selected>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">
