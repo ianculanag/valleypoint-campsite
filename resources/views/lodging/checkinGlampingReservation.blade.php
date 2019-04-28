@@ -49,8 +49,8 @@
                                 <input type="hidden" name="charge{{$charge->unitNumber}}" class="chargeIDs" value="{{$charge->chargeID}}"></td>
                                 <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
                                 <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
-                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
-                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
+                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($charge->price), 2, '.', '')}}</td>
+                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
                             </tr>
                             @php
                                 $totalPrice += $charge->totalPrice;    
@@ -74,7 +74,7 @@
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPrice), 2, '.', '')}}</th>
                             </tr>                        
                             <tr id="rowAmountPaid" style="display:none">
                                 <th colspan="3" scope="row">AMOUNT PAID:</th>
