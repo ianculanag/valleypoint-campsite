@@ -68,9 +68,9 @@
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <!--h6>Company name: Valleypoint Campsite</h6-->
                         @if(isset($display))
-                        <h6 class="text-right">Date: {{\Carbon\Carbon::parse($display)->format('F j, o')}} </h6>
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($display)->format('F j, o')}} </h6>
                         @else
-                        <h6 class="text-right">Date: {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
                         @endif
                     </div>
                 </div>

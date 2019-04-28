@@ -21,7 +21,7 @@ class CreateUnitsTable extends Migration
             $table->integer('capacity')->default(1);
             $table->integer('partOf')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
         });
 
         $unit1 = new Units;

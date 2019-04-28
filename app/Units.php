@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\softDeletes;
+//use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Model;
 //use Kyslik\ColumnSortable\Sortable;
 
 class Units extends Model
 {
-    use softDeletes;
+    //use softDeletes;
 
     protected $softDelete = true;
 
