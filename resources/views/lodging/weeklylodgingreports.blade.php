@@ -37,9 +37,9 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         @if(isset($displayfrom))
-                        <h6 class="text-right">Dates: {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
                         @else
-                        <h6 class="text-right">Dates: {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
                         @endif
                     </div>
                 </div>

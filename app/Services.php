@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\softDeletes;
+//use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Services extends Model
 {
-    use softDeletes;
+    //use softDeletes;
 
     protected $dates = ['deleted_at'];
 
