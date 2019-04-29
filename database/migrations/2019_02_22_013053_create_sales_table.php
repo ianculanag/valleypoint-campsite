@@ -21,9 +21,9 @@ class CreateSalesTable extends Migration
             $table->integer('orderID')->unsigned()->nullable();
             $table->integer('accommodationID')->unsigned()->nullable();                    
             $table->integer('serviceID')->unsigned()->nullable();
-            $table->foreign('orderID')->references('id')->on('Orders');
-            $table->foreign('accommodationID')->references('id')->on('Accommodation');   
-            $table->foreign('serviceID')->references('id')->on('Services');    
+            //$table->foreign('orderID')->references('id')->on('Orders');
+            //$table->foreign('accommodationID')->references('id')->on('Accommodation');   
+            //$table->foreign('serviceID')->references('id')->on('Services');    
             $table->timestamps();
         });
     }

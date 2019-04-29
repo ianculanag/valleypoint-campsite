@@ -17,8 +17,8 @@ class CreateRecipesTable extends Migration
             $table->integer('productID')->unsigned();
             $table->integer('ingredientID')->unsigned();
             $table->double('quantity', 8, 2);
-            $table->foreign('productID')->references('id')->on('Products');
-            $table->foreign('ingredientID')->references('id')->on('Ingredients');
+            //$table->foreign('productID')->references('id')->on('Products');
+            //$table->foreign('ingredientID')->references('id')->on('Ingredients');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateGuestsTable extends Migration
             $table->string('firstName',25);
             $table->string('contactNumber', 11)->nullable();
             $table->integer('accommodationID')->unsigned();
-            $table->foreign('accommodationID')->references('id')->on('Accommodation');
+           // $table->foreign('accommodationID')->references('id')->on('Accommodation');
             $table->timestamps();
         });
     }

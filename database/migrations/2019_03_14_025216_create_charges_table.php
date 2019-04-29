@@ -23,10 +23,10 @@ class CreateChargesTable extends Migration
             $table->integer('accommodationID')->unsigned()->nullable(); 
             $table->integer('reservationID')->unsigned()->nullable(); 
             $table->integer('unitID')->unsigned()->nullable();
-            $table->foreign('serviceID')->references('id')->on('Service');
-            $table->foreign('accommodationID')->references('id')->on('Accommodations');
-            $table->foreign('reservationID')->references('id')->on('Reservations');
-            $table->foreign('unitID')->references('id')->on('Units');
+            //$table->foreign('serviceID')->references('id')->on('Service');
+            //$table->foreign('accommodationID')->references('id')->on('Accommodations');
+            //$table->foreign('reservationID')->references('id')->on('Reservations');
+            //$table->foreign('unitID')->references('id')->on('Units');
             $table->timestamps();
         });
     }

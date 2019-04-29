@@ -19,7 +19,7 @@ class CreateShiftsTable extends Migration
             $table->datetime('shiftEnd');
             $table->double('cashStart', 8, 2);
             $table->integer('userID')->unsigned();
-            $table->foreign('userID')->references('id')->on('User');
+            //$table->foreign('userID')->references('id')->on('User');
             $table->timestamps();
         });
     }
