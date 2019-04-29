@@ -34,7 +34,7 @@ class CreateAccommodationsTable extends Migration
             //$table->integer('serviceID')->unsigned();  
             $table->integer('userID')->unsigned();
             //$table->foreign('serviceID')->references('id')->on('Services');
-            $table->foreign('userID')->references('id')->on('User');
+            //$table->foreign('userID')->references('id')->on('User');
             $table->timestamps();
         });
     }
