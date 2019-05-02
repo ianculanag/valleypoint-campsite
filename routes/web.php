@@ -155,6 +155,7 @@ Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodg
 
 //Custom lodging reports
 Route::get('/custom-lodging-report', 'UnitsController@customLodgingReport');
+Route::post('/reload-custom-lodging-report', 'UnitsController@reloadCustomLodgingReport');
 
 //View Guest Payments
 Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');

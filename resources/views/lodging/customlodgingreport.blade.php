@@ -9,22 +9,32 @@
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-months-lodging-report">Monthly</a>
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Custom</a>
             </nav>
-            <form method="POST" action="/reload-weekly-lodging-report">
+            <form method="POST" action="/reload-custom-lodging-report">
                 @csrf
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                <div class="row px-3">
-                    <div class="form-group col-md-9 px-0 mx-1">
-                        <div class="input-group input-group-sm">
+                <div class="px-1">
+                    <div class="form-group row px-0 mx-0">
+                        <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
+                        <div class="input-group input-group-sm col-md-9 px-0 mx-0">
                             @if(isset($displayfrom))
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
                             @else
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-2 px-0 mx-1">
-                        <button class="btn btn-sm btn-success" type="submit">
-                            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+                    <div class="form-group row px-0 mx-0">
+                        <label for="displayTo" class="col-md-3 mb-0 mt-2 p-0">To:</label>
+                        <div class="input-group input-group-sm col-md-9 px-0 mx-0">
+                            @if(isset($displayto))
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="{{$displayto}}" required>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="px-0 mx-0">
+                        <button class="btn btn-sm btn-block btn-success" type="submit">
+                            <!--i class="fa fa-calendar-check" aria-hidden="true"></i-->
+                            Load
                         </button>
                     </div>
                 </div>
@@ -62,33 +72,6 @@
                                         $glampingArrivalCount = 0;
                                         $glampingDepartureCount = 0;
                                     @endphp
-                                    {{--<tr>
-                                        <td> Occupied tents </td>
-                                        @foreach ($occupiedTents as $tentsOccupied)
-                                            @php
-                                                $occupiedTentCount++;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$occupiedTentCount}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Unoccupied tents </td>
-                                        @foreach ($tents as $tent)
-                                            @php
-                                                $totalTents++;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$totalTents-$occupiedTentCount}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Total guests </td>
-                                        @foreach ($glampingAccommodations as $glampingAccommodation)
-                                            @php
-                                                $totalGlampingGuests += $glampingAccommodation->numberOfPax;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$totalGlampingGuests}} </td>
-                                    </tr>--}}
                                     <tr>
                                         <td> Arrivals </td>
                                         @foreach ($glampingArrivals as $glampingArrival)
@@ -125,33 +108,6 @@
                                         $backpackerArrivalCount = 0;
                                         $backpackerDepartureCount = 0;
                                     @endphp
-                                    {{--<tr>
-                                        <td> Occupied rooms </td>
-                                        @foreach ($occupiedRooms as $roomsOccupied)
-                                            @php
-                                                $occupiedRoomCount++;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$occupiedRoomCount}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Unoccupied rooms </td>
-                                        @foreach ($rooms as $room)
-                                            @php
-                                                $totalRooms++;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$totalRooms-$occupiedRoomCount}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td> Total guests </td>
-                                        @foreach ($backpackerAccommodations as $backpackerAccommodation)
-                                            @php
-                                                $totalBackpackerGuests += $backpackerAccommodation->numberOfPax;
-                                            @endphp
-                                        @endforeach
-                                        <td class="text-right"> {{$totalBackpackerGuests}} </td>
-                                    </tr>--}}
                                     <tr>
                                         <td> Arrivals </td>
                                         @foreach ($backpackerArrivals as $backpackerArrival)
@@ -257,7 +213,6 @@
                                     <td class="text-center"> Quantity </td>
                                     <td class="text-center"> Payment date </td>
                                     <td class="text-center" style="width:15%;"> Amount paid </td>
-                                    {{--<td class="text-center" style="width:15%;"> Balance </td>--}}
                                 </tr>
                                 @php
                                     $glampingPaymentsCounter = 1;
@@ -272,7 +227,6 @@
                                     <td class="text-right"> {{$glampingPayment->quantity}} </td>
                                     <td> {{$glampingPayment->paymentDatetime}}</td>
                                     <td class="text-right"> ₱ {{number_format((float)($glampingPayment->amount), 2, '.', '')}} </td>
-                                    {{--<td class="text-right"> ₱ {{number_format((float)($glampingPayment->balance), 2, '.', '')}} </td>--}}
                                 </tr>
                                 @php
                                     $totalGlampingEarnings += $glampingPayment->amount;
@@ -303,7 +257,6 @@
                                     <td class="text-center"> Quantity </td>
                                     <td class="text-center"> Payment date </td>
                                     <td class="text-center" style="width:15%;"> Amount paid </td>
-                                    {{--<td class="text-center" style="width:15%;"> Balance </td>--}}
                                 </tr>
                                 @php
                                     $backpackerPaymentsCounter = 1;
@@ -318,7 +271,6 @@
                                     <td class="text-right"> {{$backpackerPayment->quantity}} </td>
                                     <td> {{$backpackerPayment->paymentDatetime}}</td>
                                     <td class="text-right"> ₱ {{number_format((float)($backpackerPayment->amount), 2, '.', '')}} </td>
-                                    {{--<td class="text-right"> ₱ {{number_format((float)($backpackerPayment->balance), 2, '.', '')}} </td>--}}
                                 </tr>
                                 @php
                                     $totalBackpackerEarnings += $backpackerPayment->amount;
