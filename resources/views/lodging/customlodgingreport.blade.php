@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h6> This Week's Figures </h6>
+                    <h6> Figures </h6>
                     <div class="row">
                         <div class="col-md-6">
                             <table class="table table-sm table-bordered" style="font-size:.90em;">
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <div>
-                        <h6> This Week's Guest Arrivals </h6>
+                        <h6> Guest Arrivals </h6>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
@@ -198,7 +198,7 @@
                         </table>
                     </div>
                     <div>
-                        <h6> This Week's Transactions </h6>
+                        <h6> Transactions </h6>
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
