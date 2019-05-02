@@ -155,3 +155,16 @@ body {
   font-size: 0.90em;
   width: 6em;
 }
+
+
+/*POS*/
+.pos-tabs {
+  margin-top: 5em;
+  margin-bottom: 1em;
+  margin-left: 10em;
+}
+
+.left-pills { 
+  display: flex;
+  justify-content: center;
+}
