@@ -83,4 +83,8 @@ class SalesController extends Controller
         //
     }
 
+    public function showCheckOutBillForm()
+    {
+        return view('lodging.checkoutBill');
+    }
 }

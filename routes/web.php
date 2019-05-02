@@ -209,3 +209,6 @@ Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteS
 
 //Load room capacity
 Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
+
+//Bar and restaurant checkout Bill
+Route::get('/checkoutBill', 'SalesController@showCheckOutBillForm');
