@@ -212,3 +212,6 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 
 //Bar and restaurant checkout Bill
 Route::get('/checkoutBill', 'SalesController@showCheckOutBillForm');
+
+//Bar and Restaurant Sales Report
+Route::get('/salesreport', 'SalesController@showSalesReport');

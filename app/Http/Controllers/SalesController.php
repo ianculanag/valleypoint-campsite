@@ -87,4 +87,9 @@ class SalesController extends Controller
     {
         return view('lodging.checkoutBill');
     }
+    
+    public function showSalesReport()
+    {
+        return view('restaurant.salesreport');
+    }
 }
