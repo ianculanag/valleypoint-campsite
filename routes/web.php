@@ -153,6 +153,9 @@ Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgin
 Route::get('/this-months-lodging-report', 'UnitsController@thisMonthsLodgingReport');
 Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodgingReport');
 
+//Custom lodging reports
+Route::get('/custom-lodging-report', 'UnitsController@customLodgingReport');
+
 //View Guest Payments
 Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');
 

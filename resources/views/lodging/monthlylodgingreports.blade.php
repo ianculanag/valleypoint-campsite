@@ -7,6 +7,7 @@
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/todays-lodging-report">Daily</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-weeks-lodging-report">Weekly</a>
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Monthly</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/custom-lodging-report">Custom</a>
             </nav>
             <form method="POST" action="/reload-monthly-lodging-report">
                 @csrf

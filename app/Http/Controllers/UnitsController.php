@@ -1260,7 +1260,7 @@ class UnitsController extends Controller
     }
 
     /**
-     * Show this week's lodging report
+     * Show weekly lodging report based on date input
      *
      * @return \Illuminate\Http\Response
      */
@@ -1427,7 +1427,7 @@ class UnitsController extends Controller
     }
 
     /**
-     * Show this month's lodging report
+     * Show monthly lodging report based on month and year input
      *
      * @return \Illuminate\Http\Response
      */
@@ -1508,6 +1508,169 @@ class UnitsController extends Controller
         ->get();
 
         return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)
+            ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
+            ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
+            ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);
+    }
+
+    /**
+     * Show custom lodging report
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customLodgingReport()
+    {
+        $displayto = Carbon::now()->addDays(1)->format('Y-m-d');
+
+        $units = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->get();
+
+        $glampingArrivals = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'tent')
+        ->whereDate('accommodation_units.checkinDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkinDatetime', '<=', $displayto)
+        ->get();
+
+        $glampingDepartures = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'tent')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
+        ->get();
+
+        $backpackerArrivals = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'room')
+        ->whereDate('accommodation_units.checkinDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkinDatetime', '<=', $displayto)
+        ->get();
+
+        $backpackerDepartures = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'room')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
+        ->get();
+
+        $glampingPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->where('services.serviceName', 'like', '%Glamping%')
+        ->whereDate('payments.paymentDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('payments.paymentDatetime', '<=', $displayto)
+        ->get();
+        
+        $backpackerPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->where('services.serviceName', '=', 'Backpacker')
+        ->whereDate('payments.paymentDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('payments.paymentDatetime', '<=', $displayto)
+        ->get();
+
+        return view('lodging.customlodgingreports')->with('units', $units)->with('displayto', $displayto)
+            ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
+            ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
+            ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);
+    }
+
+    /**
+     * Show custom lodging report
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reloadCustomLodgingReport()
+    {
+        $displayfrom = Carbon::parse($request->input('lodgingReportDate'))->format('Y-m-d');
+        $displayto = Carbon::parse($request->input('lodgingReportDate'))->addDays(6)->format('Y-m-d');
+
+        $units = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->get();
+
+        $glampingArrivals = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'tent')
+        ->whereDate('accommodation_units.checkinDatetime', '>=', $displayfrom)
+        ->whereDate('accommodation_units.checkinDatetime', '<=', $displayto)
+        ->get();
+
+        $glampingDepartures = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'tent')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', $displayfrom)
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
+        ->get();
+
+        $backpackerArrivals = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'room')
+        ->whereDate('accommodation_units.checkinDatetime', '>=', $displayfrom)
+        ->whereDate('accommodation_units.checkinDatetime', '<=', $displayto)
+        ->get();
+
+        $backpackerDepartures = DB::table('units')
+        ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodations.id')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->where('units.unitType', '=', 'room')
+        ->whereDate('accommodation_units.checkoutDatetime', '>=', $displayfrom)
+        ->whereDate('accommodation_units.checkoutDatetime', '<=', $displayto)
+        ->get();
+
+        $glampingPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->where('services.serviceName', 'like', '%Glamping%')
+        ->whereDate('payments.paymentDatetime', '>=', $displayfrom)
+        ->whereDate('payments.paymentDatetime', '<=', $displayto)
+        ->get();
+        
+        $backpackerPayments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+        ->where('services.serviceName', '=', 'Backpacker')
+        ->whereDate('payments.paymentDatetime', '>=', $displayfrom)
+        ->whereDate('payments.paymentDatetime', '<=', $displayto)
+        ->get();
+
+        return view('lodging.customlodgingreports')->with('units', $units)->with('displayfrom', $displayfrom)->with('displayto', $displayto)
             ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
             ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);

@@ -15,6 +15,7 @@
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-weeks-lodging-report">Weekly</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-months-lodging-report">Monthly</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/custom-lodging-report">Custom</a>
             </nav>
             <!--div class="card mt-5 py-3 px-0 mx-0"-->
                 <form method="POST" action="/reload-daily-lodging-report">

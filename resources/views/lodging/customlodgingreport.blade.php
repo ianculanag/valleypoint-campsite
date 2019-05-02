@@ -5,9 +5,9 @@
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
             <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/todays-lodging-report">Daily</a>
-                <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Weekly</a>
+                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-weeks-lodging-report">Weekly</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-months-lodging-report">Monthly</a>
-                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/custom-lodging-report">Custom</a>
+                <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Custom</a>
             </nav>
             <form method="POST" action="/reload-weekly-lodging-report">
                 @csrf
