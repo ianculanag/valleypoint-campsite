@@ -374,3 +374,22 @@ function refreshCalendar(dates) {
     jQuery('#glampingCalendarBody').html(bodyString);
     jQuery('#glampingCalendarHead').html(htmlString);
 }*/
+
+/*View guest details highlight*/
+jQuery('.guestChargesRows').click(function(){
+    var id = jQuery(this).attr('id');
+
+    console.log(jQuery('.guestChargesRows').length);
+    for(var index = 0; index < jQuery('.guestChargesRows').length; index++) {
+        jQuery('.guestChargesRows').eq(index).css('background-color', 'white');
+    }
+
+    
+    for(var index = 0; index < jQuery('.guestPaymentsRows').length; index++) {
+        jQuery('.guestPaymentsRows').eq(index).css('background-color', 'white');
+    }
+
+    jQuery(this).css('background-color', '#c2ffde');
+    jQuery('.'+id).css('background-color', '#c2ffde');
+    //c2ffde
+});

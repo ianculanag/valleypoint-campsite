@@ -386,7 +386,30 @@ class GuestsController extends Controller
      */
     public function viewGuestsPayments($accommodationID)
     {
-        return view('lodging.guestspayments');  
+        $charges = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $accommodationID)
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks','services.*')
+        ->get();
+
+        //return $charges;
+
+        $payments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')        
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks','services.*', 'payments.*')
+        ->where('accommodationID', '=', $accommodationID)
+        ->get();
+
+        //return $payments;
+
+        return view('lodging.guestspayments')
+        ->with('charges', $charges)
+        ->with('payments', $payments);  
     }
 
     //View Details backpacker
