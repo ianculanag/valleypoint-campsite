@@ -85,7 +85,7 @@ class SalesController extends Controller
 
     public function showCheckOutBillForm()
     {
-        return view('lodging.checkoutBill');
+        return view('restaurant.checkoutBill');
     }
     
     public function showSalesReport()

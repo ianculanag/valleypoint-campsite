@@ -213,5 +213,10 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 //Bar and restaurant checkout Bill
 Route::get('/checkoutBill', 'SalesController@showCheckOutBillForm');
 
+<<<<<<< HEAD
 //Bar and Restaurant Sales Report
 Route::get('/salesreport', 'SalesController@showSalesReport');
+=======
+//Cashier shift report
+Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
+>>>>>>> Added Cashier Shift Reports UI
