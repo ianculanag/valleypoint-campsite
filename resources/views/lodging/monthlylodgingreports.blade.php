@@ -14,20 +14,22 @@
                 <div class="row px-3">
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
-                            <select class="form-control">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option selected>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
+                        @if(isset($month))
+                            <select class="form-control" name="selectMonth">
+                                <option value="01" {{$month == 01 ? 'selected' : '' }}>January</option>
+                                <option value="02" {{$month == 02 ? 'selected' : '' }}>February</option>
+                                <option value="03" {{$month == 03 ? 'selected' : '' }}>March</option>
+                                <option value="04" {{$month == 04 ? 'selected' : '' }}>April</option>
+                                <option value="05" {{$month == 05 ? 'selected' : '' }}>May</option>
+                                <option value="06" {{$month == 06 ? 'selected' : '' }}>June</option>
+                                <option value="07" {{$month == 07 ? 'selected' : '' }}>July</option>
+                                <option value="08" {{$month == 08 ? 'selected' : '' }}>August</option>
+                                <option value="09" {{$month == 09 ? 'selected' : '' }}>September</option>
+                                <option value="10" {{$month == 10 ? 'selected' : '' }}>October</option>
+                                <option value="11" {{$month == 11 ? 'selected' : '' }}>November</option>
+                                <option value="12" {{$month == 12 ? 'selected' : '' }}>December</option>
                             </select>
+                        @endif
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">

@@ -1364,6 +1364,8 @@ class UnitsController extends Controller
         ->whereYear('accommodation_units.checkinDatetime', '=', Carbon::now()->format('Y'))
         ->get();
 
+        $month = Carbon::now()->format('m');
+
         $glampingDepartures = DB::table('units')
         ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
         ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
@@ -1416,7 +1418,7 @@ class UnitsController extends Controller
         ->whereYear('payments.paymentDatetime', '=', Carbon::now()->format('Y'))
         ->get();
 
-        return view('lodging.monthlylodgingreports')->with('units', $units)/*->with('displayto', $displayto)*/
+        return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)/*->with('displayto', $displayto)*/
             ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
             ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);
