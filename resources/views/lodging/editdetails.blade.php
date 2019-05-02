@@ -181,6 +181,10 @@
                                                 Get payment
                                             </button> 
                                             @endif
+                                            <a href="/view-guests-payments/{{$guestDetails->accommodationID}}" style="text-decoration: none">
+                                            <button type="button" class="btn btn-info btn-block mt-1" id="viewGuestPaymentsButton">
+                                                View full payment details
+                                            </button></a> 
                                             </td>
                                             </tr>
                                     </tfoot>

@@ -379,6 +379,16 @@ class GuestsController extends Controller
         }  
     }
 
+    /**
+     * Show the guests' charges and payments
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewGuestsPayments($accommodationID)
+    {
+        return view('lodging.guestspayments');  
+    }
+
     //View Details backpacker
 
     /**
