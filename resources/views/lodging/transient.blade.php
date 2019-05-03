@@ -145,8 +145,8 @@
                         
                             //echo $occupiedBeds;
                         @endphp
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-details" id={{$room->id}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
+                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-unit" id={{$room->id}}>
+                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$room->unitNumber}} 
@@ -173,7 +173,7 @@
                             </div>
                         </a>
                         @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-details" id={{$room->id}}>
+                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-unit" id={{$room->id}}>
                                 <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -338,7 +338,7 @@
             </div>
             <!--Footer-->
             <div class="modal-footer justify-content-right">
-                <a href="" id="checkin-backpacker">
+                <a href="" id="checkinBackpacker">
                     <button type="button" class="btn btn-primary">Check-in</button>
                 </a>
                 <a href="" id="reserveBackpackerEmpty">

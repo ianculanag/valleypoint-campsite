@@ -676,6 +676,32 @@ class UnitsController extends Controller
     }
 
     /**
+     * Load empty or available room details
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function loadBackpackerAvailableUnit($id)
+     {
+         return DB::table('units')
+         ->leftJoin('reservation_units', function($join) {
+             $join->on('reservation_units.unitID', '=', 'units.id')
+                  ->where('status', 'reserved');
+         })
+         ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
+         ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
+         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity',
+                  'reservations.id AS reservationID', 'reservations.lastName AS lastName', 
+                  'reservations.firstName AS firstName', 'reservations.numberOfPax AS numberOfPax',
+                  'reservations.numberOfUnits AS numberOfUnits', 'reservations.contactNumber AS contactNumber',
+                  'reservation_units.status AS status', 'reservation_units.checkinDatetime AS checkinDatetime', 
+                  'reservation_units.checkoutDatetime AS checkoutDatetime', 'services.id AS serviceID',
+                  'services.serviceType AS serviceType', 'services.serviceName AS serviceName')
+         ->where('units.id', '=', $id)
+         ->get();
+     }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
