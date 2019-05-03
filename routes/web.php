@@ -13,7 +13,7 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
-Route::get('/pos', 'PagesController@pos');
+Route::get('/pos', 'PagesController@showPosDashboard');
 
 /* Lodging */
 //Dashboard: Physical view

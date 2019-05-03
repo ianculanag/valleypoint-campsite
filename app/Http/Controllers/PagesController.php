@@ -32,8 +32,8 @@ class PagesController extends Controller
         return view('pages.lodging')->with($data);
     }
 
-    public function pos(){
-        return view('restaurant.pos'); 
+    public function showPosDashboard(){
+        return view('pos.posDashboard'); 
     }
 
     /*
