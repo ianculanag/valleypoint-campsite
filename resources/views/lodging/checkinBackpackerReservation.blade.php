@@ -51,8 +51,8 @@
                                 <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="{{$charge->totalPrice}}"></td>
                                 <td id="invoiceDescriptionBackpacker" class="invoiceDescriptions">{{$charge->serviceName}}</td>
                                 <td id="invoiceQuantityBackpacker" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}</td>
-                                <td id="invoiceUnitPriceBackpacker" style="text-align:right;" class="invoiceUnitPrices">{{$charge->price}}</td>
-                                <td id="invoiceTotalPriceBackpacker" style="text-align:right;" class="invoicePrices">{{$charge->totalPrice}}</td>
+                                <td id="invoiceUnitPriceBackpacker" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($charge->price), 2, '.', '')}}</td>
+                                <td id="invoiceTotalPriceBackpacker" style="text-align:right;" class="invoicePrices">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
                             </tr>
                             @php
                                 $totalPrice += $charge->totalPrice;    
@@ -67,8 +67,8 @@
                             <input type="hidden" name="charge{{$loop->iteration}}" class="chargeIDs" value="{{$additionalService->chargeID}}"></td>
                             <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
                             <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
-                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
-                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{$additionalService->totalPrice}}</td>
+                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($additionalService->price), 2, '.', '')}}</td>
+                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($additionalService->totalPrice), 2, '.', '')}}</td>
                             </tr>
                             @php
                                 $totalPrice += $additionalService->totalPrice;    
@@ -86,10 +86,10 @@
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;">{{$totalPrice}}</th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPrice), 2, '.', '')}}</th>
                             </tr>
                             <tr>
-                                <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
+                                <td colspan="4"><button type="button" class="btn btn-primary w-100" style="text-align:center" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
                                     Get payment
                                 </button></td>
                             </tr>
@@ -193,19 +193,16 @@
                 <div id="divUnits">
                     @if(count($reservedUnit) > 0)
                     @foreach($reservedUnit as $reservedUnit)
-                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}">                    
-                    @foreach($groups as $group)
-                    @if($loop->iteration == 1)
+                    <div class="form-group row mb-0 pb-0" id="divUnits{{$reservedUnit->unitNumber}}"> 
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$reservedUnit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
-                            <input type="text" class="form-control roomNumber unit{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
-                            <input type="hidden" value="{{$reservedUnit->numberOfGroups}}" name="numberOfGroupsIn{{$reservedUnit->unitNumber}}" id="numberOfGroupsIn{{$reservedUnit->unitNumber}}">
+                            <input type="text" class="form-control unit{{$reservedUnit->unitNumber}}" value="{{$reservedUnit->unitNumber}}" readonly>
                         </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$reservedUnit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}" id="numberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
+                            <select class="form-control numberOfBeds" name="numberOfBeds{{$reservedUnit->unitNumber}}" id="numberOfBeds{{$reservedUnit->unitNumber}}">
                                 @for($index = 1; $index <= $reservedUnit->capacity; $index++)
-                                @if($group->numberOfBunks == $index)
+                                @if($reservedUnit->numberOfBunks == $index)
                                 <option value="{{$index}}" selected>{{$index}}</option>
                                 @else
                                 <option value="{{$index}}">{{$index}}</option>
@@ -215,7 +212,7 @@
                             <input type="hidden" id="maxCapacity{{$reservedUnit->unitNumber}}" value="{{count($beds)}}">
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$reservedUnit->unitNumber}}">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -223,11 +220,11 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkinDatetime)->format('Y-m-d')}}">
+                                <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($reservedUnit->checkinDatetime)->format('Y-m-d')}}">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$reservedUnit->unitNumber}}">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -235,55 +232,10 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkoutDatetime)->format('Y-m-d')}}">
+                                <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$reservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($reservedUnit->checkoutDatetime)->format('Y-m-d')}}">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>  
-                    @else
-                        <div class="col-md-2 mb-1" style="float:right" id="divRemoveSplitButton{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <button type="button" style="margin-left:auto" id="removeSplitButton{{$reservedUnit->unitNumber}}-{{$group->groupID}}" class="btn btn-danger removeSplitButton unit{{$reservedUnit->unitNumber}}">
-                                    <span class="fa fa-minus" aria-hidden="true"></span>
-                               </button>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}" id="numberOfBeds{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
-                                @for($index = 1; $index <= $reservedUnit->capacity; $index++)
-                                @if($group->numberOfBunks == $index)
-                                <option value="{{$index}}" selected>{{$index}}</option>
-                                @else
-                                <option value="{{$index}}">{{$index}}</option>
-                                @endif
-                                @endfor
-                            </select>
-                            <input type="hidden" id="maxCapacity{{$reservedUnit->unitNumber}}" value="{{count($beds)}}">
-                        </div>
-
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkinDatetime)->format('Y-m-d')}}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$reservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkoutDatetime)->format('Y-m-d')}}">
-                                {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
-                            </div>
-                        </div>
-                    @endif                
-                    @endforeach
                     </div>
                     @endforeach
                     @endif
@@ -291,17 +243,13 @@
                     @if(count($otherReservedUnits) > 0)
                     @foreach($otherReservedUnits as $otherReservedUnit)                    
                     <div class="form-group row mb-0 pb-0" id="divUnits{{$otherReservedUnit->unitNumber}}">
-                    @foreach($otherGroups as $group)
-                    @if($group->partOf == $otherReservedUnit->unitID)
-                    @if($group->groupID == 1)
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnit->unitNumber}}">
-                            <input type="text" class="form-control roomNumber unit{{$otherReservedUnit->unitNumber}}" value="{{$otherReservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
-                            <input type="hidden" value="{{$otherReservedUnit->numberOfGroups}}" name="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}" id="numberOfGroupsIn{{$otherReservedUnit->unitNumber}}">
+                            <input type="text" class="form-control unit{{$otherReservedUnit->unitNumber}}" value="{{$otherReservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
                         </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" id="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherReservedUnit->unitNumber}}">
+                            <select class="form-control numberOfBeds" name="numberOfBeds{{$otherReservedUnit->unitNumber}}" id="numberOfBeds{{$otherReservedUnit->unitNumber}}">
                                 @for($index = 1; $index <= $otherReservedUnit->capacity; $index++)
-                                @if($group->numberOfBunks == $index)
+                                @if($otherReservedUnit->numberOfBunks == $index)
                                 <option value="{{$index}}" selected>{{$index}}</option>
                                 @else
                                 <option value="{{$index}}">{{$index}}</option>
@@ -311,74 +259,27 @@
                             <input type="hidden" id="maxCapacity{{$otherReservedUnit->unitNumber}}" value="{{count($beds)}}">
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$otherReservedUnit->unitNumber}}">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkinDatetime)->format('Y-m-d')}}">
+                                <input type="date" name="checkinDate{{$otherReservedUnit->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$otherReservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnit->checkinDatetime)->format('Y-m-d')}}">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherReservedUnit->unitNumber}}">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkoutDatetime)->format('Y-m-d')}}">
-                                {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
+                                <input type="date" name="checkoutDate{{$otherReservedUnit->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$otherReservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnit->checkoutDatetime)->format('Y-m-d')}}">
                             </div>
-                        </div>
-                    @else
-                        <div class="col-md-2 mb-1" style="float:right" id="divRemoveSplitButton{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <button type="button" style="margin-left:auto" id="removeSplitButton{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" class="btn btn-danger removeSplitButton unit{{$otherReservedUnit->unitNumber}}">
-                                    <span class="fa fa-minus" aria-hidden="true"></span>
-                               </button>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" id="numberOfBeds{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                                @for($index = 1; $index <= $otherReservedUnit->capacity; $index++)
-                                @if($group->numberOfBunks == $index)
-                                <option value="{{$index}}" selected>{{$index}}</option>
-                                @else
-                                <option value="{{$index}}">{{$index}}</option>
-                                @endif
-                                @endfor
-                            </select>
-                            <input type="hidden" id="maxCapacity{{$otherReservedUnit->unitNumber}}" value="{{count($beds)}}">
-                        </div>
-
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkinDatetime)->format('Y-m-d')}}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input type="date" name="checkoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$otherReservedUnit->unitNumber}}-{{$group->groupID}}" value="{{\Carbon\Carbon::parse($group->checkoutDatetime)->format('Y-m-d')}}">
-                                {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
-                            </div>
-                        </div>
-                    @endif  
-                    @endif                
-                    @endforeach                    
+                        </div>                  
                     </div>
                     @endforeach
                     @endif
