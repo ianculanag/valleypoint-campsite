@@ -1118,7 +1118,9 @@ function checkAvailability() {
 jQuery(document).ready(function() {
     var pathname = window.location.pathname;
     
-    if(pathname == '/view-payments' || pathname == '/view-charges') {
+    if(pathname == '/transient-backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker') {
+        jQuery('#lodgingDashboard').addClass('active');
+    } else if(pathname == '/view-payments' || pathname == '/view-charges') {
         jQuery('#transactionsTab').addClass('activeTab');
         jQuery('#dropdownTransactions').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');

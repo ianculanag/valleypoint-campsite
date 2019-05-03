@@ -54,7 +54,7 @@
             <nav class="d-none d-md-block sidebar">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
-                        <a class="nav-link" href="/glamping">
+                        <a class="nav-link" id="lodgingDashboard" href="/glamping">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             Dashboard
                         </a>

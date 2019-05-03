@@ -302,7 +302,7 @@
                 </button>
             </div>
             <!--Body-->
-            <div class="modal-body" id="modal-body">
+            <div class="modal-body scrollbar-near-moon-wide" id="modal-body">
             </div>
             <!--Footer-->
             <div class="modal-footer justify-content-right" id="availableRoomModalFooter">

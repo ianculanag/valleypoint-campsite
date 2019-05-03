@@ -9955,6 +9955,22 @@ h3 {
   background-image: linear-gradient(to top, #5ee7de88 0%, #59f79b88 100%);
 }
 
+.scrollbar-near-moon-wide::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+  border-radius: 0px;
+}
+
+.scrollbar-near-moon-wide::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #F5F5F5;
+}
+
+.scrollbar-near-moon-wide::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-image: linear-gradient(to top, #5ee7de88 0%, #59f79b88 100%);
+}
+
 /* 
 .wrapper {
     display: flex;
