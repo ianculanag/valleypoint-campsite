@@ -63,7 +63,11 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
                     <h6> This Month's Figures </h6>
+                    @else
+                    <h6> Figures </h6>
+                    @endif
                     <div class="row">
                         <div class="col-md-6">
                             <table class="table table-sm table-bordered" style="font-size:.90em;">
@@ -193,7 +197,11 @@
                         </div>
                     </div>
                     <div>
+                        @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
                         <h6> This Month's Guest Arrivals </h6>
+                        @else
+                        <h6> Guest Arrivals </h6>
+                        @endif
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
@@ -260,7 +268,11 @@
                         </table>
                     </div>
                     <div>
+                        @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
                         <h6> This Month's Transactions </h6>
+                        @else
+                        <h6> Transactions </h6>
+                        @endif
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
