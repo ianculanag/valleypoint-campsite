@@ -306,9 +306,18 @@
             </div>
             <!--Footer-->
             <div class="modal-footer justify-content-right">
+                {{--@if($bedAccommodations->numberOfPax == $room->capacity)--}}
                 <a href="" id="reserve">
                     <button type="button" class="btn btn-success">Add Reservation</button>
                 </a>
+                {{--@else
+                <a href="" id="addCheckin">
+                    <button type="button" class="btn btn-primary">Check-in</button>
+                </a>
+                <a href="" id="reserve">
+                    <button type="button" class="btn btn-secondary">Add reservation</button>
+                </a>
+                @endif--}}
                 <!--a href="" id="editDetails">
                     <button type="button" class="btn btn-info">View Details</button>
                 </a>
