@@ -33,7 +33,7 @@ class PagesController extends Controller
     }
 
     public function pos(){
-        return view('pages.pos'); 
+        return view('restaurant.pos'); 
     }
 
     /*
