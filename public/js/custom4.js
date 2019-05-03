@@ -376,20 +376,33 @@ function refreshCalendar(dates) {
 }*/
 
 /*View guest details highlight*/
-jQuery('.guestChargesRows').click(function(){
-    var id = jQuery(this).attr('id');
+jQuery('.guestChargesRows').hover(
+    function(){
+        var id = jQuery(this).attr('id');
 
-    console.log(jQuery('.guestChargesRows').length);
-    for(var index = 0; index < jQuery('.guestChargesRows').length; index++) {
-        jQuery('.guestChargesRows').eq(index).css('background-color', 'white');
+        console.log(jQuery('.guestChargesRows').length);
+        for(var index = 0; index < jQuery('.guestChargesRows').length; index++) {
+            jQuery('.guestChargesRows').eq(index).css('background-color', 'white');
+            //jQuery('.guestChargesRows').eq(index).css('font-weight', '100');
+        }
+
+        
+        for(var index = 0; index < jQuery('.guestPaymentsRows').length; index++) {
+            jQuery('.guestPaymentsRows').eq(index).css('background-color', 'white');
+            //jQuery('.guestPaymentsRows').eq(index).css('font-weight', '100');
+        }
+
+        jQuery(this).css('background-color', '#c2ffde');
+        jQuery('.'+id).css('background-color', '#c2ffde');
+
+        //jQuery(this).css('font-weight', '600');
+        //jQuery('.'+id).css('font-weight', '600');
+        //c2ffde
+    },
+    function() {        
+        var id = jQuery(this).attr('id');
+        
+        jQuery(this).css('background-color', 'white');
+        jQuery('.'+id).css('background-color', 'white');
     }
-
-    
-    for(var index = 0; index < jQuery('.guestPaymentsRows').length; index++) {
-        jQuery('.guestPaymentsRows').eq(index).css('background-color', 'white');
-    }
-
-    jQuery(this).css('background-color', '#c2ffde');
-    jQuery('.'+id).css('background-color', '#c2ffde');
-    //c2ffde
-});
+);

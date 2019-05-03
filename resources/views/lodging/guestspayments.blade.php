@@ -32,11 +32,7 @@
                     </thead>
                     <tbody>
                         @foreach($charges as $charge)
-                        @if($charge->remarks == 'unpaid')
                         <tr class="guestChargesRows" id="{{$charge->chargeID}}">
-                        @else
-                        <tr class="guestChargesRows" id="{{$charge->chargeID}}" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to highlight payments." style="cursor:pointer">
-                        @endif
                         <th scope="row">{{$charge->chargeID}}</th>
                         <td scope="row">{{$charge->serviceName}}</td>
                         <td scope="row" style="text-align:right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
@@ -67,7 +63,7 @@
                         <td style="text-align:right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
                         <td style="text-align:center">{{$payment->paymentStatus}}</td>
                         <td>{{$payment->chargeID}}</td>
-                        <td>{{\Carbon\Carbon::parse($payment->paymentDatetime)->format('F j, Y G:iA')}}</td>
+                        <td>{{\Carbon\Carbon::parse($payment->paymentDatetime)->format('F j, Y h:iA')}}</td>
                         </tr>
                         @endforeach
                     </tbody>
