@@ -7,8 +7,11 @@ jQuery(document).ready(function(){
             var today = new Date();
             var currentDate = moment(today).format('L');
             var number = 0;
-
+            var capacity = data[0].capacity;
+            var occupied = 0;
+            var remaining = 0;
             var htmlString = "";
+            var footer = "";
 
             htmlString += "<h5 class='text-center'>Unit Details</h5>";
             htmlString += "<div class='container'>";
@@ -29,6 +32,7 @@ jQuery(document).ready(function(){
                 number++;
 
                 if(checkinDatetime <= currentDate && checkoutDatetime >= currentDate) {
+                    occupied += data[index].numberOfPax;
                     //console.log(2);
                     htmlString += "<div class='container'>";
                     htmlString += "<table class='table table-sm borderless'>";
@@ -45,18 +49,28 @@ jQuery(document).ready(function(){
                     htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
                 }
                 if(checkoutDatetime == currentDate) {
-                    console.log(3);
+                    //console.log(3);
                     jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
                 } else {
                     jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
                 }
             }
 
+            remaining = capacity - occupied;
+            console.log(remaining == 0);
+            if(remaining == 0) {
+                footer += "<a href='' id='reserve'><button type='button' class='btn btn-success'>Add Reservation</button></a>";
+            } else {
+                footer += "<a href='' id='addCheckin'><button type='button' class='btn btn-primary'>Check-in</button></a>";
+                footer += "<a href='' id='reserve'><button type='button' class='btn btn-secondary'>Add Reservation</button></a>";
+            }
+
+            jQuery('#availableRoomModalFooter').html(footer);
             jQuery('#modal-body').html(htmlString);
             jQuery('#modal-header').html(data[0].unitNumber);
-
-            jQuery("#reserve").attr("href", "reserve-backpacker/"+data[0].unitID);
+            
             jQuery("#addCheckin").attr("href", "checkin-backpacker/"+data[0].unitID);
+            jQuery("#reserve").attr("href", "reserve-backpacker/"+data[0].unitID);
         })
     });
 }); 
@@ -82,8 +96,8 @@ jQuery(document).ready(function(){
                 var checkinDatetime = moment(data[0].checkinDatetime).format('L');
                 var today = new Date();
                 var currentDate = moment(today).format('L');
-                console.log(checkinDatetime);
-                console.log(currentDate);
+                //console.log(checkinDatetime);
+                //console.log(currentDate);
 
                 if(checkinDatetime == currentDate) {
                     console.log('OH YEA');
@@ -134,7 +148,7 @@ jQuery(document).ready(function(){
 
             jQuery('#modal-body-empty').html(htmlString);
             jQuery('#modal-head2').html(data[0].unitNumber);
-          
+
             jQuery("#checkinBackpacker").attr("href", "checkin-backpacker/"+data[0].unitID);
             jQuery("#reserveBackpackerEmpty").attr("href", "reserve-backpacker/"+data[0].unitID);
         })

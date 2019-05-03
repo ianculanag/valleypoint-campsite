@@ -672,6 +672,11 @@ class UnitsController extends Controller
         ->where('unitID', '=', $id)
         ->get();
 
+        /*$numberOfPaxArray = array();
+        for($index = 0; $index < count($units); $index++) {
+            array_push($numberOfPaxArray, $units[$index]->numberOfPax);
+        }*/
+
         return $units;
     }
 
