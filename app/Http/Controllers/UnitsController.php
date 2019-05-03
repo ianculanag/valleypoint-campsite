@@ -437,11 +437,16 @@ class UnitsController extends Controller
         ->join('units', 'units.id', 'reservation_units.unitID')
         ->orderBy('reservation_units.checkinDatetime')
         ->get();
+
+        $charges = DB::table('charges')
+        ->get();
+
+        //return $charges;
         
         //return $reservations;
         //return $units;
         
-        return view('lodging.glamping')->with('units', $units)->with('reservations', $reservations);
+        return view('lodging.glamping')->with('units', $units)->with('reservations', $reservations)->with('charges', $charges);
     }
 
     /**

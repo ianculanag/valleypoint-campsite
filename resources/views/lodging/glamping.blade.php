@@ -52,7 +52,23 @@
                             <div class="card-body">
                             <h5 class="card-title">
                                 {{$unit->unitNumber}}
-                                <span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>
+                                @php
+                                    $withPendingCharges = false;
+                                @endphp
+                                @foreach ($charges as $charge)
+                                    @if($charge->accommodationID == $unit->accommodationID)
+                                        @if($charge->balance > 0)
+                                            @php
+                                                $withPendingCharges = true;
+                                            @endphp 
+                                        @endif
+                                    @endif
+                                @endforeach
+                                @if($withPendingCharges == true)
+                                <span class="badge badge-info float-right" style="font-size:.55em; width:5em;">Pending</span>   
+                                @else
+                                <span class="badge badge-success float-right" style="font-size:.55em; width:5em;">Paid</span>  
+                                @endif
                             </h5>
 
                             @php
@@ -77,7 +93,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{$unit->unitNumber}}
-                                        <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
+                                        {{--<span class="badge badge-success float-right" style="font-size:.55em;">Available</span>--}}
                                     </h5>
                             @php
                                 $reservationCount = 0; 
