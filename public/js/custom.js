@@ -961,7 +961,7 @@ function updateTotal() {
     document.getElementById('invoiceGrandTotal').innerHTML="";
     //document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
 
-    jQuery('#invoiceGrandTotal').html(totalPrice.toFixed(2));
+    jQuery('#invoiceGrandTotal').html(parseFloat(totalPrice).toFixed(2));
 }
 
 jQuery(document).on('click','.collapse.in',function(e) {

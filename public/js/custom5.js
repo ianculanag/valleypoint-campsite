@@ -57,6 +57,9 @@ jQuery(document).ready(function(){
         jQuery('#numberOfUnits').val(numberOfUnits);
         removeRowBackpacker(e.attrs.value);
         removeInvoiceEntry(e.attrs.value);
+
+        
+        //updateTotal();
         //checkAvailability();
         var checkoutDatesComplete = true;
             for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
@@ -106,12 +109,12 @@ function makeRowBackpacker(unitNumber) {
         var htmlString = "";
         htmlString += "<div class='form-group row mb-0 pb-0' id='divUnits"+unitNumber+"'>";
         htmlString += "<div class='col-md-2 mb-1' id='divUnitNumber"+unitNumber+"'>";
-        htmlString += "<input type='text' class='form-control roomNumber unit"+unitNumber+"' value='"+unitNumber+"' readonly>";
+        htmlString += "<input type='text' class='form-control unit"+unitNumber+"' value='"+unitNumber+"' readonly>";
         htmlString += "<input class='' name='totalPrice"+unitNumber+"' id='totalPrice"+unitNumber+"' type='number' style='display:none;position:absolute' value=''>";
         htmlString += "</div>";
-        htmlString += "<input type='hidden' value='1' name='numberOfGroupsIn"+unitNumber+"' id='numberOfGroupsIn"+unitNumber+"'>";
-        htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+"-1'>";
-        htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+"-1' id='numberOfBeds"+unitNumber+"-1'>";0
+        //htmlString += "<input type='hidden' value='1' name='numberOfGroupsIn"+unitNumber+"' id='numberOfGroupsIn"+unitNumber+"'>";
+        htmlString += "<div class='col-md-2 mb-1' id='divNumberOfBeds"+unitNumber+"'>";
+        htmlString += "<select class='form-control numberOfBeds' name='numberOfBeds"+unitNumber+"' id='numberOfBeds"+unitNumber+"'>";0
         
         for(var index = 1; index <= data; index++) {
             htmlString += "<option value='"+index+"'>"+index+"</option>";
@@ -120,24 +123,24 @@ function makeRowBackpacker(unitNumber) {
         htmlString += "</select>";
         htmlString += "<input type='hidden' id='maxCapacity"+unitNumber+"' value='"+data+"'>";
         htmlString += "</div>";
-        htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+"-1'>";
+        htmlString += "<div class='col-md-4 mb-1' id='divCheckinDate"+unitNumber+"'>";
         htmlString += "<div class='input-group'>";
         htmlString += "<div class='input-group-prepend'>";
         htmlString += "<span class='input-group-text'>";
         htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
         htmlString += "</span>";
         htmlString += "</div>";
-        htmlString += "<input type='date' name='checkinDate"+unitNumber+"-1' required='required' class='form-control checkinDatesBackpacker' id='checkinDate"+unitNumber+"-1' value='"+jQuery('.checkinDatesBackpacker').eq(0).val()+"'>";
+        htmlString += "<input type='date' name='checkinDate"+unitNumber+"' required='required' class='form-control checkinDatesBackpacker' id='checkinDate"+unitNumber+"' value='"+jQuery('.checkinDatesBackpacker').eq(0).val()+"'>";
         htmlString += "</div>";
         htmlString += "</div>";
-        htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"-1'>";
+        htmlString += "<div class='col-md-4 mb-1' id='divCheckoutDate"+unitNumber+"'>";
         htmlString += "<div class='input-group'>";
         htmlString += "<div class='input-group-prepend'>";
         htmlString += "<span class='input-group-text'>";
         htmlString += "<i class='far fa-calendar-alt' aria-hidden='true'></i>";
         htmlString += "</span>";
         htmlString += "</div>";
-        htmlString += "<input type='date' name='checkoutDate"+unitNumber+"-1' required='required' class='form-control checkoutDatesBackpacker' id='checkoutDate"+unitNumber+"-1' value='"+jQuery('.checkoutDatesBackpacker').eq(0).val()+"'>";
+        htmlString += "<input type='date' name='checkoutDate"+unitNumber+"' required='required' class='form-control checkoutDatesBackpacker' id='checkoutDate"+unitNumber+"' value='"+jQuery('.checkoutDatesBackpacker').eq(0).val()+"'>";
         //htmlString += "<input type='text' name='stayDuration"+unitNumber+"' id='stayDuration"+unitNumber+"' required='required' style='display:none;position:absolute;' value=''>";
         htmlString += "</div>";
         htmlString += "</div>";
@@ -160,6 +163,8 @@ function removeRowBackpacker(unitNumber) {
     jQuery(divNumberOfBeds).remove();
     jQuery(divCheckinDate).remove();
     jQuery(divCheckoutDate).remove();
+
+    updateQuantity();
 }
 
 jQuery(document).on('click', '.roomNumber', function() {
@@ -326,10 +331,10 @@ function updateQuantity() {
 
         totalPrice = parseInt(priceMultiplier*750);
         //jQuery('.invoiceUnitPrices').html('750');
-        jQuery('.invoicePrices').eq(0).html(totalPrice);
+        jQuery('.invoicePrices').eq(0).html(parseFloat(totalPrice).toFixed(2));
         jQuery('.invoiceQuantities').eq(0).html(priceMultiplier);      
 
-        jQuery('#totalPrice').val(parseInt(priceMultiplier*750));
+        jQuery('#totalPrice').val(parseFloat(parseInt(priceMultiplier*750)).toFixed(2));
         jQuery('#backpackerQuantity').val(priceMultiplier);
         
         updateTotal();

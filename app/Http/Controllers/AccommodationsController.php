@@ -279,12 +279,7 @@ class AccommodationsController extends Controller
 
         $chargesCount = 0;
         $chargesArray = array();
-
-        $totalNumberOfBunks= 0;
-
-        for($count = 0; $count < $request->input('numberOfUnits'); $count++) { //for loop two
-            
-            $numberOfGroups = 'numberOfGroupsIn'.$unitNumbers[$count];
+        for($count = 0; $count < $request->input('numberOfUnits'); $count++) {
 
             $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
 
@@ -300,63 +295,34 @@ class AccommodationsController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-            //return $beds;
-
-            $checkinDates = array();
-            $checkoutDates = array();
-
             $bedCounter = 0;
 
-            for($index = 1; $index <= $request->input($numberOfGroups); $index++) {
-                $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count].'-'.$index;
-                $checkinDate = 'checkinDate'.$unitNumbers[$count].'-'.$index;
-                $checkoutDate = 'checkoutDate'.$unitNumbers[$count].'-'.$index;
+            $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count];
+            $checkinDate = 'checkinDate'.$unitNumbers[$count];
+            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
 
-                for($counter = 0; $counter < $request->input($numberOfBeds); $counter++) {
-                    $accommodationUnit = new AccommodationUnits;
-                    $accommodationUnit->accommodationID = $accommodation->id;
-                    $accommodationUnit->unitID = $beds[$bedCounter]->id;
-                    $accommodationUnit->status = 'ongoing';
-                    $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
-                    $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
-                    $accommodationUnit->numberOfPax = 1;
-                    $accommodationUnit->numberOfBunks =  $request->input($numberOfBeds);;
-                    $accommodationUnit->groupID = $index;
-                    $accommodationUnit->serviceID =  '5';
-                    $accommodationUnit->save();
-                    $bedCounter++;
-                }
-                
-                $totalNumberOfBunks += $request->input($numberOfBeds);
-
-                array_push($checkinDates, $request->input($checkinDate));
-                array_push($checkoutDates, $request->input($checkoutDate));
+            for($counter = 0; $counter < $request->input($numberOfBeds); $counter++) {
+                $accommodationUnit = new AccommodationUnits;
+                $accommodationUnit->accommodationID = $accommodation->id;
+                $accommodationUnit->unitID = $beds[$bedCounter]->id;
+                $accommodationUnit->status = 'ongoing';
+                $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+                $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+                $accommodationUnit->numberOfPax = 1;
+                $accommodationUnit->numberOfBunks =  $request->input($numberOfBeds);;
+                //$accommodationUnit->groupID = $index;
+                $accommodationUnit->serviceID =  '5';
+                $accommodationUnit->save();
+                $bedCounter++;
             }
 
             $accommodationUnit = new AccommodationUnits;
             $accommodationUnit->accommodationID = $accommodation->id;
             $accommodationUnit->unitID = $unit[0]->id;
             $accommodationUnit->status = 'ongoing';
-
-            //return $checkinDates[0];
-
-            
-            $earliestCheckinDate = '3000-12-25';
-            $latestCheckoutDate = '2000-1-1';
-
-            for($dateIndex = 0; $dateIndex < $request->input($numberOfGroups); $dateIndex++) {
-                if ($checkinDates[$dateIndex] <= $earliestCheckinDate) {
-                    $earliestCheckinDate = $checkinDates[$dateIndex];
-                }
-
-                if ($checkoutDates[$dateIndex] >= $latestCheckoutDate) {
-                    $latestCheckoutDate = $checkoutDates[$dateIndex];
-                }
-            }
-
-            $accommodationUnit->checkinDatetime = $earliestCheckinDate.' '.'14:00';
-            $accommodationUnit->checkoutDatetime = $latestCheckoutDate.' '.'12:00';
-            $accommodationUnit->numberOfGroups = $request->input($numberOfGroups);
+            $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
+            $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
+            //$accommodationUnit->numberOfGroups = $request->input($numberOfGroups);
             $accommodationUnit->numberOfPax = $bedCounter;
             $accommodationUnit->numberOfBunks = $bedCounter;
             $accommodationUnit->serviceID =  '5';

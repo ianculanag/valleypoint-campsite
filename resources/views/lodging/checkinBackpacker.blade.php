@@ -143,9 +143,9 @@
                     <div class="form-group row mb-0 pb-0" id="divUnits{{$unit->unitNumber}}">
                         <div class="col-md-2 mb-1" id="divUnitNumber{{$unit->unitNumber}}">
                             <label for="unitNumber">Unit number</label>
-                            <input type="text" class="form-control roomNumber unit{{$unit->unitNumber}}" value="{{$unit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
+                            <input type="text" class="form-control unit{{$unit->unitNumber}}" value="{{$unit->unitNumber}}" readonly {{--data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer"--}}>
                             <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
-                            <input type="hidden" value="1" name="numberOfGroupsIn{{$unit->unitNumber}}" id="numberOfGroupsIn{{$unit->unitNumber}}">
+                            {{--<input type="hidden" value="1" name="numberOfGroupsIn{{$unit->unitNumber}}" id="numberOfGroupsIn{{$unit->unitNumber}}">--}}
                         </div>
                         <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}-1">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
