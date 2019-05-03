@@ -49,7 +49,7 @@
                        </div>
                 </div>  
 
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em">
+                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em;">
                     <div class="card-body">
                         <h5 class="card-title">Table 4
                             <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
@@ -59,7 +59,7 @@
                         </div>
                 </div> 
 
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em">
+                <div class="card" style="width: 16rem; height: 8em; margin: 1em">
                     <div class="card-body">
                         <h5 class="card-title">Table 5
                             <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
@@ -79,7 +79,7 @@
                         </div>
                 </div>  
 
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em">
+                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em;">
                     <div class="card-body">
                         <h5 class="card-title">Table 7 
                             <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
@@ -99,7 +99,7 @@
                         </div>
                 </div>  
 
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em">
+                <div class="card" style="width: 16rem; height: 8em; margin: 1em">
                     <div class="card-body">
                         <h5 class="card-title">Table 9
                             <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
@@ -109,7 +109,7 @@
                         </div>
                 </div>
 
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em">
+                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em;">
                     <div class="card-body">
                         <h5 class="card-title">Table 10
                             <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
