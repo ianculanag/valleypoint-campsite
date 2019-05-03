@@ -1390,6 +1390,8 @@ class UnitsController extends Controller
 
         $thisYear = Carbon::now()->format('Y');
 
+        $display = Carbon::now()->format('M Y');
+
         $units = DB::table('units')
         ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
         ->get();
@@ -1456,7 +1458,7 @@ class UnitsController extends Controller
         ->whereYear('payments.paymentDatetime', '=', $year)
         ->get();
 
-        return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)
+        return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)->with('display', $display)
             ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
             ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);
@@ -1475,7 +1477,11 @@ class UnitsController extends Controller
         $yearString = '22-12-'.$request->input('selectYear');
         $year = Carbon::parse($yearString)->format('Y');
 
+        $dateInput = '22-'.$month.'-'.$year;
+
         $thisYear = Carbon::now()->format('Y');
+
+        $display = Carbon::parse($dateInput)->format('M Y');
 
         $units = DB::table('units')
         ->join('accommodation_units', 'accommodation_units.unitID', 'units.id')
@@ -1543,7 +1549,7 @@ class UnitsController extends Controller
         ->whereYear('payments.paymentDatetime', '=', $year)
         ->get();
 
-        return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)
+        return view('lodging.monthlylodgingreports')->with('units', $units)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)->with('display', $display)
             ->with('glampingArrivals', $glampingArrivals)->with('glampingDepartures', $glampingDepartures)
             ->with('backpackerArrivals', $backpackerArrivals)->with('backpackerDepartures', $backpackerDepartures)
             ->with('glampingPayments', $glampingPayments)->with('backpackerPayments', $backpackerPayments);

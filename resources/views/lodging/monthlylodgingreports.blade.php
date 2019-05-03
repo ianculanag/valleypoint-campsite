@@ -56,14 +56,14 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         @if(isset($display))
-                        <h6 class="text-right"> {{\Carbon\Carbon::parse($display)->format('F o')}} </h6>
+                        <h6 class="text-right"> {{$display}} </h6>
                         @else
                         <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F o')}} </h6>
                         @endif
                     </div>
                 </div>
                 <div class="card-body">
-                    @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
+                    @if($display == \Carbon\Carbon::now()->format('F o')) 
                     <h6> This Month's Figures </h6>
                     @else
                     <h6> Figures </h6>
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                     <div>
-                        @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
+                        @if($display == \Carbon\Carbon::now()->format('F o')) 
                         <h6> This Month's Guest Arrivals </h6>
                         @else
                         <h6> Guest Arrivals </h6>
@@ -268,7 +268,7 @@
                         </table>
                     </div>
                     <div>
-                        @if(\Carbon\Carbon::parse($display) == \Carbon\Carbon::now()) 
+                        @if($display == \Carbon\Carbon::now()->format('F o')) 
                         <h6> This Month's Transactions </h6>
                         @else
                         <h6> Transactions </h6>
