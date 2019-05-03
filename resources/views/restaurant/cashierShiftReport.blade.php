@@ -3,7 +3,7 @@
 @section('content')
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
-            <a href="/transient-backpacker">
+            <a href="/pos">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>

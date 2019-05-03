@@ -7,9 +7,12 @@
         <div class="container lodging-tabs">
             <ul class="nav nav-tabs pt-0" style="width:93%">
                 <li class="nav-item">
-                    <a class="nav-link active" href="">New Orders</a>
+                    <a class="nav-link active" href="">View Tables</a>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:#505050"; href=""">View Sales</a>
+                        <a class="nav-link" style="color:#505050"; href="/MakeOrder">New order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color:#505050"; href="/CashierShiftReport">View Sales</a>
                     </li>
                 </li>
             </ul>

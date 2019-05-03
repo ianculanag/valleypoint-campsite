@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
 Route::get('/pos', 'PagesController@showPosDashboard');
+Route::get('/MakeOrder', 'posController@showMakeOrder');
 
 /* Lodging */
 //Dashboard: Physical view
