@@ -318,7 +318,7 @@ class ReservationsController extends Controller
         ->where('reservation_units.unitID', '=', $unitID)
         ->get();
 
-        return $reservedUnit;
+        //return $reservedUnit;
 
         $otherReservedUnits = DB::table('reservation_units')
         ->join('services', 'services.id', 'reservation_units.serviceID')
