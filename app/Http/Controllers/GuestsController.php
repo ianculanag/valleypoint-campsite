@@ -341,7 +341,7 @@ class GuestsController extends Controller
 
         //return $guest;
 
-        $payments = DB::table('payments')
+        /*$payments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -350,8 +350,20 @@ class GuestsController extends Controller
             $query->where('remarks', '=','full')
                 ->orWhere('remarks', '=','partial');
         })
-        ->get();
+        ->get();*/
         //return $payments;
+
+        $payments = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where(function ($query) {
+            $query->where('remarks', '=','full')
+                ->orWhere('remarks', '=','partial');
+        })
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks','services.*', 'accommodations.*' )
+        ->get();
 
         $pendingPayments = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
@@ -386,6 +398,10 @@ class GuestsController extends Controller
      */
     public function viewGuestsPayments($accommodationID)
     {
+        $guest = DB::table('guests')
+        ->where('accommodationID', '=', $accommodationID)
+        ->get();
+
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
@@ -408,6 +424,7 @@ class GuestsController extends Controller
         //return $payments;
 
         return view('lodging.guestspayments')
+        ->with('guest', $guest)
         ->with('charges', $charges)
         ->with('payments', $payments);  
     }
@@ -472,12 +489,24 @@ class GuestsController extends Controller
         ->where('units.id', '=', $unitID)
         ->get();
 
-        $payments = DB::table('payments')
+        /*$payments = DB::table('payments')
         ->join('charges', 'charges.id', 'payments.chargeID')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('accommodationID', '=', $guest[0]->accommodationID)
         ->where('remarks', '=','full')
+        ->get();*/
+
+        $payments = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where(function ($query) {
+            $query->where('remarks', '=','full')
+                ->orWhere('remarks', '=','partial');
+        })
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks','services.*', 'accommodations.*' )
         ->get();
 
         $pendingPayments = DB::table('charges') 

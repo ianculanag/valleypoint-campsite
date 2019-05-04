@@ -15,8 +15,9 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
         {{--<input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">--}}
-
-        <h5 style="margin-bottom:.80em;">Margaret "Peggy" Carter</h5>
+        @foreach($guest as $guest)
+        <h5 style="margin-bottom:.80em;">{{$guest->firstName}} {{$guest->lastName}}</h5>
+        @endforeach
         <div class="row">
             <div class="col-md-5 card p-0">
                 <h5 style="text-align:center;padding-top:0.5em;">Charges</h5>
