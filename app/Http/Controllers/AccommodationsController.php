@@ -265,6 +265,8 @@ class AccommodationsController extends Controller
         $accommodation = new Accommodation;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
+        //return $unitNumbers;
+
         $accommodation->numberOfPax = $request->input('numberOfPaxBackpacker');
         $accommodation->numberOfUnits = $request->input('numberOfUnits');
         $accommodation->userID = Auth::user()->id;
@@ -285,15 +287,19 @@ class AccommodationsController extends Controller
 
             $beds = DB::table('units')
             ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
-            ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
-            ->where('partOf', '=', $unit[0]->id)           
+            ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')                    
+            ->where('partOf', '=', $unit[0]->id)    
             ->where('reservation_units.status', '=', null)
             ->where('accommodation_units.status', '=', null)  
-            ->orWhere('reservation_units.status', '!=', 'reserved')
-            ->orWhere('accommodation_units.status', '!=', 'ongoing')
-            ->where('units.unitType', '=', 'bed')
+            ->orWhere(function($query) {
+                $query->where('reservation_units.status', '!=', 'reserved')
+                      ->where('accommodation_units.status', '!=', 'ongoing');
+            })
+            ->where('units.unitType', '=', 'bed')           
             ->orderBy('id', 'ASC')
             ->get();
+
+            //return $beds;
 
             $bedCounter = 0;
 

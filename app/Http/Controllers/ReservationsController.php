@@ -318,7 +318,7 @@ class ReservationsController extends Controller
         ->where('reservation_units.unitID', '=', $unitID)
         ->get();
 
-        //return $reservedUnit;
+        return $reservedUnit;
 
         $otherReservedUnits = DB::table('reservation_units')
         ->join('services', 'services.id', 'reservation_units.serviceID')
@@ -1136,7 +1136,7 @@ class ReservationsController extends Controller
         return redirect('/glamping');
     }
 
-/**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -1334,7 +1334,7 @@ class ReservationsController extends Controller
                     $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
                     $accommodationUnit->numberOfPax = 1;
                     $accommodationUnit->numberOfBunks =  $request->input($numberOfBeds);;
-                    $accommodationUnit->groupID = $index;
+                    //$accommodationUnit->groupID = $index;
                     $accommodationUnit->serviceID =  '5';
                     $accommodationUnit->save();
                     $bedCounter++;
@@ -1351,7 +1351,7 @@ class ReservationsController extends Controller
                 $accommodationUnit->status = 'ongoing';
                 $accommodationUnit->checkinDatetime = $request->input($checkinDate).' '.'14:00';
                 $accommodationUnit->checkoutDatetime = $request->input($checkoutDate).' '.'12:00';
-                $accommodationUnit->numberOfGroups = $request->input($numberOfGroups);
+                //$accommodationUnit->numberOfGroups = $request->input($numberOfGroups);
                 $accommodationUnit->numberOfPax = $bedCounter;
                 $accommodationUnit->numberOfBunks = $bedCounter;
                 $accommodationUnit->serviceID =  '5';
@@ -1398,7 +1398,7 @@ class ReservationsController extends Controller
                             $charges->totalPrice = $request->input($additionalTotalPrice);
                             $charges->balance = $request->input($additionalTotalPrice);
                             $charges->remarks = 'unpaid';
-                            $charges->accommodationID = $accommodationID[0]->unitID;
+                            $charges->accommodationID = $accommodation->accommodationID;
                             $charges->serviceID = $request->input($additionalServiceID);
                             $charges->save();
                             $chargesCount++;
