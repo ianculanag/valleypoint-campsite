@@ -218,3 +218,6 @@ Route::get('/checkoutBill', 'SalesController@showCheckOutBillForm');
 Route::get('/salesreport', 'SalesController@showSalesReport');
 //Cashier shift report
 Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
+
+//Pos Dashboard
+Route::get('/posDashboard', 'posController@showPosDashboard');

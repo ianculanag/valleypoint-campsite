@@ -87,4 +87,9 @@ class posController extends Controller
     {
         return view('pos.makeOrder');
     }
+
+    public function showPosDashboard()
+    {
+        return view('pos.posDashboard');
+    }
 }
