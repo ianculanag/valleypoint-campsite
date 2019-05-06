@@ -1140,6 +1140,11 @@ jQuery(document).ready(function() {
         jQuery('#dropdownBarResto').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else if(pathname == '/cashier-shift-report') {
+        jQuery('#restoReportsTab').addClass('activeTab');
+        jQuery('#dropdownRestoReports').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
     } else {
         jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
     }

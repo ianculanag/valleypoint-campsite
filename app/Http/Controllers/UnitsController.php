@@ -1097,7 +1097,7 @@ class UnitsController extends Controller
     /**
      * Show daily lodging report depending on date input
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function reloadDailyLodgingReport(Request $request)
     {

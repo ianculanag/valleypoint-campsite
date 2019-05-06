@@ -219,8 +219,14 @@ Route::get('/make-order', 'PosController@showMakeOrder');
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 
-//Bar and Restaurant Sales Report
-Route::get('/sales-report', 'SalesController@showSalesReport');
-
 //Cashier shift report
 Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
+
+//Daily restaurant reports
+Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
+
+//Weekly restaurant reports
+Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestaurantReport');
+
+//Monthly restaurant reports
+Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');

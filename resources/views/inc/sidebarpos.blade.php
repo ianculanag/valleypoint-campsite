@@ -75,16 +75,21 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cashier-shift-report" id="cashierShiftReports">
-                            <i class="fa fa-cash-register" aria-hidden="true"></i>
-                            Shift Reports
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="restoReports">
-                            <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                            Sales Reports
-                        </a>
+                        <button class="dropdown-btn nav-link-drop" id="restoReportsTab">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                            <span> Reports </span>
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-container" id="dropdownRestoReports">
+                            <a class="dropdown-item" href="/cashier-shift-report">
+                                <i class="fa fa-cash-register" aria-hidden="true"></i>
+                                <span> Shift Reports </span>
+                            </a>
+                            <a class="dropdown-item" href="/todays-restaurant-report">
+                                <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                                <span> Sales Reports </span>
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </nav>

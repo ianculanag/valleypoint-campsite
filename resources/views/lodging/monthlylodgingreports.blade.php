@@ -55,6 +55,7 @@
                         <img src={{asset('logo.jpg')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
+                        <h6 class="text-right"> Lodging Sales Report </h6>
                         @if(isset($display))
                         <h6 class="text-right"> {{$display}} </h6>
                         @else

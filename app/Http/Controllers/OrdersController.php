@@ -81,4 +81,31 @@ class OrdersController extends Controller
     {
         //
     }
+
+    /**
+     * Show daily restaurant report 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function todaysRestaurantReport() {
+        return view('pos.dailyrestaurantreports');
+    }
+
+    /**
+     * Show weekly restaurant report 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function thisWeeksRestaurantReport() {
+        return view('pos.weeklyrestaurantreports');
+    }
+
+    /**
+     * Show monthly restaurant report 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function thisMonthsRestaurantReport() {
+        return view('pos.monthlyrestaurantreports');
+    }
 }
