@@ -52,7 +52,7 @@
             <nav class="d-none d-md-block sidebar">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/pos-dashboard">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             Dashboard
                         </a>
@@ -75,8 +75,8 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="cashierShiftReports">
-                            <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                        <a class="nav-link" href="/cashier-shift-report" id="cashierShiftReports">
+                            <i class="fa fa-cash-register" aria-hidden="true"></i>
                             Shift Reports
                         </a>
                     </li>

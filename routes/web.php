@@ -210,6 +210,12 @@ Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteS
 Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
 
 /* Restaurant */
+//POS Dashboard
+Route::get('/pos-dashboard', 'PosController@showPosDashboard');
+
+//Make Order POS
+Route::get('/make-order', 'PosController@showMakeOrder');
+
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 
@@ -218,10 +224,3 @@ Route::get('/sales-report', 'SalesController@showSalesReport');
 
 //Cashier shift report
 Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
-
-/* POS */
-//Pos Dashboard
-Route::get('/pos', 'PosController@showPosDashboard');
-
-//Make Order POS
-Route::get('/make-order', 'PosController@showMakeOrder');
