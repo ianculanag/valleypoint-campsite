@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> 
         <div class="container col-md-10 col-sm-12">
             <div class="card col-md-10 offset-md-1 col-sm-12 py-4 ">
                 <div class="row">
@@ -45,7 +45,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if(isset($displayfrom))
+                    @if(\Carbon\Carbon::parse($displayfrom)->format('F j, o') == \Carbon\Carbon::now()->format('F j, o'))
                     <h6> This Week's Figures </h6>
+                    @else
+                    <h6> Figures </h6>
+                    @endif
+                    @else
+                    <h6> This Week's Figures </h6>
+                    @endif
                     <div class="row">
                         <div class="col-md-6">
                             <table class="table table-sm table-bordered" style="font-size:.90em;">
@@ -175,7 +183,15 @@
                         </div>
                     </div>
                     <div>
+                        @if(isset($displayfrom))
+                        @if(\Carbon\Carbon::parse($displayfrom)->format('F j, o') == \Carbon\Carbon::now()->format('F j, o'))
                         <h6> This Week's Guest Arrivals </h6>
+                        @else
+                        <h6> Guest Arrivals </h6>
+                        @endif
+                        @else
+                        <h6> This Week's Guest Arrivals </h6>
+                        @endif
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
@@ -242,7 +258,15 @@
                         </table>
                     </div>
                     <div>
+                        @if(isset($displayfrom))
+                        @if(\Carbon\Carbon::parse($displayfrom)->format('F j, o') == \Carbon\Carbon::now()->format('F j, o'))
                         <h6> This Week's Transactions </h6>
+                        @else
+                        <h6> Transactions </h6>
+                        @endif
+                        @else
+                        <h6> This Week's Transactions </h6>
+                        @endif
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                 <tr>
