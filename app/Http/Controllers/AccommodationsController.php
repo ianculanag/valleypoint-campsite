@@ -413,7 +413,7 @@ class AccommodationsController extends Controller
             }
         }
         
-        return redirect('/transient-backpacker');        
+        return redirect('/backpacker');        
     }
 
     /**

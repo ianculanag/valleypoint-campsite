@@ -16,7 +16,7 @@ Route::get('/lodging', 'PagesController@lodging');
 
 /* Lodging */
 //Dashboard: Physical view
-Route::get('/transient-backpacker', 'UnitsController@transientBackpacker'); 
+Route::get('/backpacker', 'UnitsController@backpacker'); 
 Route::get('/glamping', 'UnitsController@glamping'); 
 
 //Dashboard: Calendar view

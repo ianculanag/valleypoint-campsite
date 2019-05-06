@@ -41,7 +41,7 @@ class UnitsController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function transientBackpacker()
+    /*public function transientBackpacker()
     {        
         $rooms = DB::table('units')
         ->where('units.unitType', 'room')
@@ -159,6 +159,16 @@ class UnitsController extends Controller
         ->with('roomCheckinDates', $roomCheckinDates)
         ->with('capacityArray', $capacityArray);
         //->with('reservations', $reservations);
+    }*/
+
+    /**
+     * Display all backpacker units
+     * 
+     * @return \Illuminate\Http\Response 
+     */
+    public function backpacker()
+    {
+        
     }
 
     /**

@@ -1118,7 +1118,7 @@ function checkAvailability() {
 jQuery(document).ready(function() {
     var pathname = window.location.pathname;
     
-    if(pathname == '/transient-backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker'
+    if(pathname == '/backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker'
         || pathname == '/reload-calendar-glamping' || pathname == '/reload-calendar-backpacker') {
         jQuery('#lodgingDashboard').addClass('active');
     } else if(pathname == '/todays-lodging-report' || pathname == '/this-weeks-lodging-report' || pathname == '/this-months-lodging-report'

@@ -751,7 +751,7 @@ class ReservationsController extends Controller
             }
         }
         
-        return redirect('/transient-backpacker');
+        return redirect('/backpacker');
     }  OLD METHOD*/ 
 
     /**
@@ -860,7 +860,7 @@ class ReservationsController extends Controller
             }
         }
         
-        return redirect('/transient-backpacker');
+        return redirect('/backpacker');
     }
     
 
@@ -1574,7 +1574,7 @@ class ReservationsController extends Controller
                 }
             }*/
         } 
-        return redirect('/transient-backpacker');
+        return redirect('/backpacker');
     }
 
     /**

@@ -6,7 +6,7 @@
     @foreach($unit as $unit)
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
-            <a href="/transient-backpacker">
+            <a href="/backpacker">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -188,7 +188,7 @@
 @else
 <div class="container pb-3">
     <div class="pt-3 pb-3 text-center">
-        <a href="/transient-backpacker">
+        <a href="/backpacker">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 <strong>Back</strong>
@@ -496,7 +496,7 @@
                         <button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>
                         {{--</a>--}}
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Make Reservation</button>
-                        <a href="/transient-backpacker" style="text-decoration:none;">
+                        <a href="/backpacker" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
                     </div>
