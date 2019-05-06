@@ -89,7 +89,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/todays-lodging-report">
+                        <a class="nav-link" href="/todays-lodging-report" id="lodgingReports">
                             <i class="fa fa-print" aria-hidden="true"></i>
                             Reports
                         </a>

@@ -1118,8 +1118,13 @@ function checkAvailability() {
 jQuery(document).ready(function() {
     var pathname = window.location.pathname;
     
-    if(pathname == '/transient-backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker') {
+    if(pathname == '/transient-backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker'
+        || pathname == '/reload-calendar-glamping' || pathname == '/reload-calendar-backpacker') {
         jQuery('#lodgingDashboard').addClass('active');
+    } else if(pathname == '/todays-lodging-report' || pathname == '/this-weeks-lodging-report' || pathname == '/this-months-lodging-report'
+        || pathname == '/reload-daily-lodging-report' || pathname == '/reload-weekly-lodging-report' || pathname == '/reload-monthly-lodging-report'
+        || pathname == '/custom-lodging-report' || pathname == '/reload-custom-lodging-report') {
+        jQuery('#lodgingReports').addClass('active');
     } else if(pathname == '/view-payments' || pathname == '/view-charges') {
         jQuery('#transactionsTab').addClass('activeTab');
         jQuery('#dropdownTransactions').css('display', 'block');
