@@ -110,7 +110,7 @@
                                 <i class="fa fa-book" aria-hidden="true"></i>
                                 <span> Recipes </span>
                             </a>
-                            <a class="dropdown-item" href="/salesreport">
+                            <a class="dropdown-item" href="/sales-report">
                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                 <span> Sales Report </span>
                             </a>

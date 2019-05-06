@@ -211,17 +211,17 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 
 /* Restaurant */
 //Bar and restaurant checkout Bill
-Route::get('/checkoutBill', 'SalesController@showCheckOutBillForm');
+Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 
 //Bar and Restaurant Sales Report
-Route::get('/salesreport', 'SalesController@showSalesReport');
+Route::get('/sales-report', 'SalesController@showSalesReport');
 
 //Cashier shift report
-Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
+Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
 
 /* POS */
 //Pos Dashboard
 Route::get('/pos', 'PosController@showPosDashboard');
 
 //Make Order POS
-Route::get('/MakeOrder', 'PosController@showMakeOrder');
+Route::get('/make-order', 'PosController@showMakeOrder');
