@@ -108,4 +108,13 @@ class OrdersController extends Controller
     public function thisMonthsRestaurantReport() {
         return view('pos.monthlyrestaurantreports');
     }
+
+    /**
+     * Show custom restaurant report 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function customRestaurantReport() {
+        return view('pos.customrestaurantreport');
+    }
 }

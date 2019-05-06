@@ -230,3 +230,6 @@ Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestauran
 
 //Monthly restaurant reports
 Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');
+
+//Custom restaurant reports
+Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport');
