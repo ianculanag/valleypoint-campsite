@@ -65,19 +65,25 @@
                         </button>
                         <div class="dropdown-container" id="dropdownRestoTransactions">
                             <a class="dropdown-item" href="#">
-                                <i class="fa fa-invoice" aria-hidden="true"></i>
+                                <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                 <span> Orders </span>
                             </a>
                             <a class="dropdown-item" href="#">
-                                <i class="fa fa-file-receipt" aria-hidden="true"></i>
+                                <i class="fa fa-receipt" aria-hidden="true"></i>
                                 <span> Payments </span>
                             </a>
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#" id="cashierShiftReports">
+                            <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                            Shift Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#" id="restoReports">
                             <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                            Reports
+                            Sales Reports
                         </a>
                     </li>
                 </ul>
