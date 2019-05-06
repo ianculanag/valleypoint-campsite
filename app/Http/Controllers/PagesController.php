@@ -32,9 +32,6 @@ class PagesController extends Controller
         return view('pages.lodging')->with($data);
     }
 
-    public function showPosDashboard(){
-        return view('pos.posDashboard'); 
-    }
 
     /*
     public function addusers(){

@@ -13,8 +13,6 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
-Route::get('/pos', 'PagesController@showPosDashboard');
-Route::get('/MakeOrder', 'posController@showMakeOrder');
 
 /* Lodging */
 //Dashboard: Physical view
@@ -222,4 +220,7 @@ Route::get('/salesreport', 'SalesController@showSalesReport');
 Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
 
 //Pos Dashboard
-Route::get('/posDashboard', 'posController@showPosDashboard');
+Route::get('/pos', 'posController@showPosDashboard');
+
+//Make Order POS
+Route::get('/MakeOrder', 'posController@showMakeOrder');
