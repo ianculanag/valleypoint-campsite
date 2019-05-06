@@ -219,6 +219,7 @@ Route::get('/salesreport', 'SalesController@showSalesReport');
 //Cashier shift report
 Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
 
+/* POS */
 //Pos Dashboard
 Route::get('/pos', 'PosController@showPosDashboard');
 
