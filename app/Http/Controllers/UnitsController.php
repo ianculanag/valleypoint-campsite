@@ -168,7 +168,43 @@ class UnitsController extends Controller
      */
     public function backpacker()
     {
-        
+        $rooms = DB::table('units')
+        ->where('units.unitType', 'room')
+        ->get();
+
+        $capacities = DB::table('units')
+        ->select('units.capacity')
+        ->where('units.unitType', '=', 'room')
+        ->groupBy('units.capacity')
+        ->get();
+
+        $capacityArray = array();
+
+        for($index = 0; $index < count($capacities); $index++) {
+            array_push($capacityArray, $capacities[$index]->capacity);
+        }
+
+        $roomAccommodations = array();
+
+        for($index = 0; $index < count($rooms); $index++) {
+            $bedAccommodations = DB::table('accommodations')
+            ->leftJoin('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+            ->leftJoin('units', 'units.id', 'accommodation_units.unitID')
+            ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
+            ->where('status', 'ongoing')
+            ->where('units.unitType', 'room')
+            ->where('units.id', $rooms[$index]->id)
+            ->get();
+
+            array_push($roomAccommodations, $bedAccommodations);
+        }
+
+        //return $roomAccommodations;
+
+        return view('lodging.backpacker')
+        ->with('rooms', $rooms)
+        ->with('capacityArray', $capacityArray)
+        ->with('roomAccommodations', $roomAccommodations);
     }
 
     /**

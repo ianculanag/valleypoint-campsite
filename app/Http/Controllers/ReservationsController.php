@@ -784,7 +784,7 @@ class ReservationsController extends Controller
 
             $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
 
-            $beds = DB::table('units')
+            /*$beds = DB::table('units')
             ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
             ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
             ->where('partOf', '=', $unit[0]->id)           
@@ -793,6 +793,20 @@ class ReservationsController extends Controller
             ->orWhere('reservation_units.status', '!=', 'reserved')
             ->orWhere('accommodation_units.status', '!=', 'ongoing')
             ->where('units.unitType', '=', 'bed')
+            ->orderBy('id', 'ASC')
+            ->get();*/
+
+            $beds = DB::table('units')
+            ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+            ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')                    
+            ->where('partOf', '=', $unit[0]->id)    
+            ->where('reservation_units.status', '=', null)
+            ->where('accommodation_units.status', '=', null)  
+            ->orWhere(function($query) {
+                $query->where('reservation_units.status', '!=', 'reserved')
+                      ->where('accommodation_units.status', '!=', 'ongoing');
+            })
+            ->where('units.unitType', '=', 'bed')           
             ->orderBy('id', 'ASC')
             ->get();
 
@@ -1307,13 +1321,27 @@ class ReservationsController extends Controller
 
                 $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
 
-                $beds = DB::table('units')
+                /*$beds = DB::table('units')
                 ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
                 ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
                 ->where('partOf', '=', $unit[0]->id)           
                 ->where('accommodation_units.status', '=', null)  
                 ->orWhere('accommodation_units.status', '!=', 'ongoing')
                 ->where('units.unitType', '=', 'bed')
+                ->orderBy('id', 'ASC')
+                ->get();*/
+
+                $beds = DB::table('units')
+                ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
+                ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')                    
+                ->where('partOf', '=', $unit[0]->id)    
+                ->where('reservation_units.status', '=', null)
+                ->where('accommodation_units.status', '=', null)  
+                ->orWhere(function($query) {
+                    $query->where('reservation_units.status', '!=', 'reserved')
+                        ->where('accommodation_units.status', '!=', 'ongoing');
+                })
+                ->where('units.unitType', '=', 'bed')           
                 ->orderBy('id', 'ASC')
                 ->get();
 

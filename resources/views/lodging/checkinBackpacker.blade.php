@@ -147,9 +147,9 @@
                             <input class="" name="totalPrice" id="totalPrice" type="number" style="display:none;position:absolute" value="">
                             {{--<input type="hidden" value="1" name="numberOfGroupsIn{{$unit->unitNumber}}" id="numberOfGroupsIn{{$unit->unitNumber}}">--}}
                         </div>
-                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}-1">
+                        <div class="col-md-2 mb-1" id="divNumberOfBeds{{$unit->unitNumber}}">
                             <label for="additionalServiceUnitPrice">No. of beds</label>
-                            <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}-1" id="numberOfBeds{{$unit->unitNumber}}-1">
+                            <select class="form-control numberOfBeds" name="numberOfBeds{{$unit->unitNumber}}" id="numberOfBeds{{$unit->unitNumber}}">
                                 @foreach($beds as $bed)
                                 <option value="{{$loop->iteration}}">{{$loop->iteration}}</option>
                                 @endforeach
@@ -157,7 +157,7 @@
                             <input type="hidden" id="maxCapacity{{$unit->unitNumber}}" value="{{count($beds)}}">
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}-1">
+                        <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
                             <label for="checkinDate">Check-in date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -165,11 +165,11 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkinDate{{$unit->unitNumber}}-1" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$unit->unitNumber}}-1" value="<?php echo date("Y-m-d");?>">
+                                <input type="date" name="checkinDate{{$unit->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$unit->unitNumber}}" value="<?php echo date("Y-m-d");?>">
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}-1">
+                        <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
                             <label for="checkoutDate">Check-out date</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -177,7 +177,7 @@
                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input type="date" name="checkoutDate{{$unit->unitNumber}}-1" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$unit->unitNumber}}-1" value="">
+                                <input type="date" name="checkoutDate{{$unit->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$unit->unitNumber}}" value="">
                                 {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                             </div>
                         </div>
