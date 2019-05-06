@@ -11,6 +11,6 @@ class CashierController extends Controller
 
     public function showCashierReport()
     {
-        return view('restaurant.cashierShiftReport');
+        return view('pos.cashierShiftReport');
     }
 }

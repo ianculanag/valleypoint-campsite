@@ -85,11 +85,11 @@ class SalesController extends Controller
 
     public function showCheckOutBillForm()
     {
-        return view('restaurant.checkoutBill');
+        return view('pos.checkoutBill');
     }
     
     public function showSalesReport()
     {
-        return view('restaurant.salesreport');
+        return view('pos.salesreport');
     }
 }
