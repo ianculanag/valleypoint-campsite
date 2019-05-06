@@ -185,6 +185,7 @@ class UnitsController extends Controller
         }
 
         $roomAccommodations = array();
+        $roomReservations = array();
 
         for($index = 0; $index < count($rooms); $index++) {
             $bedAccommodations = DB::table('accommodations')
@@ -196,15 +197,26 @@ class UnitsController extends Controller
             ->where('units.id', $rooms[$index]->id)
             ->get();
 
+            $bedReservations = DB::table('reservations')
+            ->leftJoin('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+            ->leftJoin('units', 'units.id', 'reservation_units.unitID')
+            ->where('status', 'reserved')
+            ->where('units.unitType', 'room')
+            ->where('units.id', $rooms[$index]->id)
+            ->get();
+
             array_push($roomAccommodations, $bedAccommodations);
+            array_push($roomReservations, $bedReservations);
         }
 
         //return $roomAccommodations;
+        //return $roomReservations;
 
         return view('lodging.backpacker')
         ->with('rooms', $rooms)
         ->with('capacityArray', $capacityArray)
-        ->with('roomAccommodations', $roomAccommodations);
+        ->with('roomAccommodations', $roomAccommodations)
+        ->with('roomReservations', $roomReservations);
     }
 
     /**
@@ -715,7 +727,7 @@ class UnitsController extends Controller
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
                  'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
-                 'accommodation_units.numberOfPax', 'accommodation_units.serviceID AS serviceID',
+                 'accommodation_units.numberOfBunks', 'accommodation_units.serviceID AS serviceID',
                  'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
                  'accommodations.id AS accommodationID', 'accommodations.userID', 
                  'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',

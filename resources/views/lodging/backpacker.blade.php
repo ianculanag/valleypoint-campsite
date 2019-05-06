@@ -29,72 +29,121 @@
                     <div class="row"> 
                         @foreach($rooms as $room)
                         @if($room->capacity == $capacity)
+                            @php
+                            $withAccommodation = false;
+                            $withReservation = false;   
+                            @endphp
+                            @if(count($roomAccommodations[$loop->index]) > 0)
+                                @php
+                                    $withAccommodation = true;
+                                    $currentRoom = $roomAccommodations[$loop->index];
+                                    $guestNames = '';
+                                    $checkinBell = 0;
+                                    $checkoutBell = 0;
+                                    $updateReservationBell = 0;
+                                    $occupiedBeds = 0;
 
-                        @if(count($roomAccommodations[$loop->index]) > 0)
-                        @php
-                            $currentRoom = $roomAccommodations[$loop->index];
-                            $guestNames = '';
-                            $checkinBell = 0;
-                            $checkoutBell = 0;
-                            $occupiedBeds = 0;
+                                    for($index = 0; $index < count($currentRoom); $index++) {
+                                        $thisRoom = $currentRoom[$index];
+                                        if(count($currentRoom) == 1) {
+                                            $guestNames .= $thisRoom->firstName.' '.$thisRoom->lastName;
+                                        } else {
+                                            if($index + 1 == count($currentRoom)) {
+                                                $guestNames .= $thisRoom->lastName;
+                                            } else {
+                                                $guestNames .= $thisRoom->lastName.', ';
+                                            }
+                                        }
 
-                            for($index = 0; $index < count($currentRoom); $index++) {
-                                $thisRoom = $currentRoom[$index];
-                                if(count($currentRoom) == 1) {
-                                    $guestNames .= $thisRoom->firstName.' '.$thisRoom->lastName;
-                                } else {
-                                    if($index + 1 == count($currentRoom)) {
-                                        $guestNames .= $thisRoom->lastName;
-                                    } else {
-                                        $guestNames .= $thisRoom->lastName.', ';
+                                        $occupiedBeds += $thisRoom->numberOfBunks;
+
+                                        if(\Carbon\Carbon::parse($thisRoom->checkoutDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                            $checkoutBell++;
+                                        }
                                     }
-                                }
+                                @endphp
+                            @endif
+                            @if(count($roomReservations[$loop->index]) > 0)
+                                @php
+                                    $withReservation = true;
+                                    $currentRoom = $roomReservations[$loop->index];
+                                    $checkinBell = 0;
+                                    $updateReservationBell = 0;
 
-                                $occupiedBeds += $thisRoom->numberOfBunks;
+                                    for($index = 0; $index < count($currentRoom); $index++) {
+                                        $thisRoom = $currentRoom[$index];
+                                        
+                                        
+                                        //echo \Carbon\Carbon::parse($thisRoom->checkinDatetime)->format('Y-m-d');
+                                        //echo \Carbon\Carbon::now()->format('Y-m-d');
 
-                                /*if(\Carbon\Carbon::parse($thisRoom->checkinDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
-                                    $checkinBell++;
-                                }*/
+                                        if(\Carbon\Carbon::parse($thisRoom->checkinDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
+                                            $checkinBell++;
+                                            //echo 'FUCK';
+                                        } else if(\Carbon\Carbon::parse($thisRoom->checkinDatetime)->format('Y-m-d') < \Carbon\Carbon::now()->format('Y-m-d')) {
+                                            $updateReservationBell++;
+                                        }
+                                    }
+                                @endphp
+                            @endif
+                            @if($withAccommodation)
+                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-backpacker-details" id={{$room->id}}>
+                                <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room.png')}}); background-size:cover; background-repeat:no-repeat;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{$room->unitNumber}}
+                                            @if($checkinBell > 0)
+                                            <span class="badge badge-primary float-right"><i class="fa fa-bell"></i>  {{$checkinBell}}</span>
+                                            @endif
 
-                                if(\Carbon\Carbon::parse($thisRoom->checkoutDatetime)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d')) {
-                                    $checkoutBell++;
-                                }
-                            }
-                        @endphp
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-backpacker-details" id={{$room->id}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$room->unitNumber}}
-                                        @if($checkinBell > 0)
-                                        @endif
+                                            @if($updateReservationBell > 0)
+                                            <span class="badge badge-warning float-right"><i class="fa fa-bell"></i>  {{$updateReservationBell}}</span>
+                                            @endif
 
-                                        @if($checkoutBell > 0)
-                                        <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$checkoutBell}}</span>
-                                        @endif
-                                        <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
-                                        {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
-                                    </h5>
-                                    <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$guestNames}}</p>
-                                    <p class="card-text" style="color:green; font-style:italic;">{{$occupiedBeds}} out of {{$room->capacity}} occupied</p>
+                                            @if($checkoutBell > 0)
+                                            <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$checkoutBell}}</span>
+                                            @endif
+                                            <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                            {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                        </h5>
+                                        <p class="card-text" style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{$guestNames}}</p>
+                                        <p class="card-text" style="color:green; font-style:italic;">{{$occupiedBeds}} out of {{$room->capacity}} occupied</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                        @elseif(false)
-                        @else
-                        <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-unit" id={{$room->id}}>
-                            <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{$room->unitNumber}} <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
-                                        {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
-                                    </h5>
-                                    <p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>
-                                </div>
-                            </div>
-                        </a>
-                        @endif
+                            </a>
+                            @elseif($withReservation)
+                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-backpacker-details" id={{$room->id}}>
+                                <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{$room->unitNumber}}
+                                            @if($checkinBell > 0)
+                                            <span class="badge badge-primary float-right"><i class="fa fa-bell"></i>  {{$checkinBell}}</span>
+                                            @endif
 
+                                            @if($updateReservationBell > 0)
+                                            <span class="badge badge-warning float-right"><i class="fa fa-bell"></i>  {{$updateReservationBell}}</span>
+                                            @endif
+                                            <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                            {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                        </h5>
+                                        <p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>
+                                    </div>
+                                </div>
+                            </a>
+                            @else
+                            <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-unit" id={{$room->id}}>
+                                <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{$room->unitNumber}} <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
+                                            {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}
+                                        </h5>
+                                        <p class="card-text" style="color:green; font-style:italic;">0 out of {{$room->capacity}} occupied</p>
+                                    </div>
+                                </div>
+                            </a>
+                            @endif
                         @endif
                         @endforeach
                     </div>

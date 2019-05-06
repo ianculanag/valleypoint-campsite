@@ -776,7 +776,7 @@ class ReservationsController extends Controller
         $reservation->numberOfPax = $request->input('numberOfPaxBackpacker');
         $reservation->numberOfUnits = $request->input('numberOfUnits');        
         $reservation->contactNumber = $request->input('contactNumber');
-        $reservation->save();
+        //$reservation->save();
 
         $totalNumberOfBunks= 0;
 
@@ -784,17 +784,9 @@ class ReservationsController extends Controller
 
             $unit = DB::table('units')->where('unitNumber', '=', $unitNumbers[$count])->select('units.*')->get();
 
-            /*$beds = DB::table('units')
-            ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
-            ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')
-            ->where('partOf', '=', $unit[0]->id)           
-            ->where('reservation_units.status', '=', null)
-            ->where('accommodation_units.status', '=', null)  
-            ->orWhere('reservation_units.status', '!=', 'reserved')
-            ->orWhere('accommodation_units.status', '!=', 'ongoing')
-            ->where('units.unitType', '=', 'bed')
-            ->orderBy('id', 'ASC')
-            ->get();*/
+            $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count];
+            $checkinDate = 'checkinDate'.$unitNumbers[$count];
+            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
 
             $beds = DB::table('units')
             ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
@@ -802,21 +794,37 @@ class ReservationsController extends Controller
             ->where('partOf', '=', $unit[0]->id)    
             ->where('reservation_units.status', '=', null)
             ->where('accommodation_units.status', '=', null)  
-            ->orWhere(function($query) {
-                $query->where('reservation_units.status', '!=', 'reserved')
-                      ->where('accommodation_units.status', '!=', 'ongoing');
+            ->orWhere(function($query) use ($request, $checkinDate, $unit) {
+                $query->where('accommodation_units.checkoutDatetime', '<=', $request->input($checkinDate).' 12:00:00')
+                      ->where('accommodation_units.status', '!=', 'ongoing')
+                      ->where('partOf', '=', $unit[0]->id);
+            })
+            ->orWhere(function($query) use ($request, $unit, $checkoutDate) {
+                $query->where('accommodation_units.checkinDatetime', '>=', $request->input($checkoutDate).' 14:00:00')
+                      ->where('accommodation_units.status', '!=', 'ongoing')
+                      ->where('partOf', '=', $unit[0]->id);
+            })        
+            ->orWhere(function($query) use ($request, $checkinDate, $unit) {
+                $query->where('reservation_units.checkoutDatetime', '<=', $request->input($checkinDate).' 12:00:00')
+                    ->where('partOf', '=', $unit[0]->id)
+                    ->orWhere(function($queryB) {
+                        $queryB->where('reservation_units.status', '=', 'canceled');
+                    });
+            })
+            ->orWhere(function($query) use ($request, $unit, $checkoutDate) {
+                $query->where('reservation_units.checkinDatetime', '>=', $request->input($checkoutDate).' 14:00:00')
+                    ->where('partOf', '=', $unit[0]->id)
+                    ->orWhere(function($queryB) {
+                        $queryB->where('reservation_units.status', '=', 'canceled');
+                    });
             })
             ->where('units.unitType', '=', 'bed')           
             ->orderBy('id', 'ASC')
             ->get();
 
-            //return $beds;
+            return $beds;
 
             $bedCounter = 0;
-
-            $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count];
-            $checkinDate = 'checkinDate'.$unitNumbers[$count];
-            $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
 
             for($counter = 0; $counter < $request->input($numberOfBeds); $counter++) {
                 //FOR BEDS
@@ -1331,15 +1339,39 @@ class ReservationsController extends Controller
                 ->orderBy('id', 'ASC')
                 ->get();*/
 
+                $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count];
+                $checkinDate = 'checkinDate'.$unitNumbers[$count];
+                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
+
                 $beds = DB::table('units')
                 ->leftJoin('reservation_units', 'reservation_units.unitID', 'units.id')
                 ->leftJoin('accommodation_units', 'accommodation_units.unitID', 'units.id')                    
                 ->where('partOf', '=', $unit[0]->id)    
                 ->where('reservation_units.status', '=', null)
                 ->where('accommodation_units.status', '=', null)  
-                ->orWhere(function($query) {
-                    $query->where('reservation_units.status', '!=', 'reserved')
-                        ->where('accommodation_units.status', '!=', 'ongoing');
+                ->orWhere(function($query) use ($request, $checkinDate, $unit) {
+                    $query->where('accommodation_units.checkoutDatetime', '<=', $request->input($checkinDate).' 12:00:00')
+                        ->where('partOf', '=', $unit[0]->id);
+                })
+                ->orWhere(function($query) use ($request, $unit, $checkoutDate) {
+                    $query->where('accommodation_units.checkinDatetime', '>=', $request->input($checkoutDate).' 14:00:00')
+                        ->where('partOf', '=', $unit[0]->id);
+                })
+                ->orWhere(function($query) use ($request, $checkinDate, $unit) {
+                    $query->where('reservation_units.checkoutDatetime', '<=', $request->input($checkinDate).' 12:00:00')
+                        ->orWhere('reservationID', $request->input('reservationID'))
+                        ->where('partOf', '=', $unit[0]->id)
+                        ->orWhere(function($queryB) {
+                            $queryB->where('reservation_units.status', '=', 'canceled');
+                        });
+                })
+                ->orWhere(function($query) use ($request, $unit, $checkoutDate) {
+                    $query->where('reservation_units.checkinDatetime', '>=', $request->input($checkoutDate).' 14:00:00')
+                        ->orWhere('reservationID', $request->input('reservationID'))
+                        ->where('partOf', '=', $unit[0]->id)
+                        ->orWhere(function($queryB) {
+                            $queryB->where('reservation_units.status', '=', 'canceled');
+                        });
                 })
                 ->where('units.unitType', '=', 'bed')           
                 ->orderBy('id', 'ASC')
@@ -1348,10 +1380,6 @@ class ReservationsController extends Controller
                 //return $beds;
 
                 $bedCounter = 0;
-
-                $numberOfBeds = 'numberOfBeds'.$unitNumbers[$count];
-                $checkinDate = 'checkinDate'.$unitNumbers[$count];
-                $checkoutDate = 'checkoutDate'.$unitNumbers[$count];
 
                 for($counter = 0; $counter < $request->input($numberOfBeds); $counter++) {
                     $accommodationUnit = new AccommodationUnits;

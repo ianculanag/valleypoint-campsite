@@ -39,8 +39,8 @@ jQuery(document).ready(function(){
                     htmlString += "<tr><td rowspan='6' style='font-weight:bold; width:7%'>" + number + "</td>";
                     htmlString += "<tr><td style='width:30%'>Guest Name: </td>";
                     htmlString += "<td>" + data[index].firstName + " " + data[index].lastName + "</td></tr>";
-                    htmlString += "<tr><td style='width:30%'>Service: </td>";
-                    htmlString += "<td>" + data[index].serviceName + "</td></tr>";
+                    htmlString += "<tr><td style='width:30%'>Occupied Beds: </td>";
+                    htmlString += "<td>" + data[index].numberOfBunks + "</td></tr>";
                     htmlString += "<tr><td>Checked-in: </td>";
                     htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkinDatetime).format('LLLL') + "</td></tr>";
                     htmlString += "<tr><td>Check-out: </td>";
