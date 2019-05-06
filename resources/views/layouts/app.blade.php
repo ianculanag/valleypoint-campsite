@@ -28,6 +28,8 @@
     @include('inc.sidebaradmin')
 @elseif(Auth::user()->role == 'lodging')
     @include('inc.sidebarlodging')
+@elseif(Auth::user()->role == 'cashier')
+    @include('inc.sidebarpos')
 @endif
         <div class="container main-content col-md-10">
             @yield('content')
