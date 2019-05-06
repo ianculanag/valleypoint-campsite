@@ -220,7 +220,7 @@ Route::get('/salesreport', 'SalesController@showSalesReport');
 Route::get('/CashierShiftReport', 'CashierController@showCashierReport');
 
 //Pos Dashboard
-Route::get('/pos', 'posController@showPosDashboard');
+Route::get('/pos', 'PosController@showPosDashboard');
 
 //Make Order POS
-Route::get('/MakeOrder', 'posController@showMakeOrder');
+Route::get('/MakeOrder', 'PosController@showMakeOrder');

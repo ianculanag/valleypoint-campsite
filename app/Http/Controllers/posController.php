@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class posController extends Controller
+class PosController extends Controller
 {
     /**
      * Display a listing of the resource.
