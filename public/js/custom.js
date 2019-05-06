@@ -1125,6 +1125,13 @@ jQuery(document).ready(function() {
         || pathname == '/reload-daily-lodging-report' || pathname == '/reload-weekly-lodging-report' || pathname == '/reload-monthly-lodging-report'
         || pathname == '/custom-lodging-report' || pathname == '/reload-custom-lodging-report') {
         jQuery('#lodgingReports').addClass('active');
+    } else if(pathname == '/todays-restaurant-report' || pathname == '/this-weeks-restaurant-report' || pathname == '/this-months-restaurant-report'
+        || pathname == '/reload-daily-restaurant-report' || pathname == '/reload-weekly-restaurant-report' || pathname == '/reload-monthly-restaurant-report'
+        || pathname == '/custom-restaurant-report' || pathname == '/reload-custom-restaurant-report') {
+        jQuery('#restoReportsTab').addClass('activeTab');
+        jQuery('#dropdownRestoReports').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > #restaurantReports > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > #restaurantReports > i').css('color', 'white');
     } else if(pathname == '/view-payments' || pathname == '/view-charges') {
         jQuery('#transactionsTab').addClass('activeTab');
         jQuery('#dropdownTransactions').css('display', 'block');

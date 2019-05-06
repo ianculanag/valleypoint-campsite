@@ -85,7 +85,7 @@
                                 <i class="fa fa-cash-register" aria-hidden="true"></i>
                                 <span> Shift Reports </span>
                             </a>
-                            <a class="dropdown-item" href="/todays-restaurant-report">
+                            <a class="dropdown-item" href="/todays-restaurant-report" id="restaurantReports">
                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                 <span> Sales Reports </span>
                             </a>
