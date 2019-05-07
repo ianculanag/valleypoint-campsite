@@ -357,6 +357,8 @@ function checkBedAvailability() {
 
         var roomDates;
 
+        var selectedUnitAvailableBeds = new Array();
+
         /**
          * 1. Get the units from tokenfield
          * 2. For every unit, get the number of available beds within the date
@@ -366,7 +368,6 @@ function checkBedAvailability() {
 
          for(var count = 0; count < selectedUnits.length; count++) {             
             selectedUnit = selectedUnits[count].value; 
-            selectedUnitAvailableBeds = new Array();
             maxCapacity = jQuery('#maxCapacity'+selectedUnit).val();   
             availableBeds = maxCapacity;  
             //console.log(availableBeds);
@@ -385,7 +386,7 @@ function checkBedAvailability() {
                    (selectedCheckinDate > currentCheckinDate && selectedCheckinDate < currentCheckoutDate) ||
                    (selectedCheckoutDate > currentCheckinDate && selectedCheckoutDate < currentCheckoutDate)
                    ) {
-                    availableBeds -= roomDates[index].numberOfBunks;            
+                    availableBeds -= parseInt(roomDates[index].numberOfBunks);            
                 }
             }            
             selectedUnitAvailableBeds.push(availableBeds);
