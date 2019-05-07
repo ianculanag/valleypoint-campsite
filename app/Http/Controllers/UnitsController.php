@@ -720,8 +720,13 @@ class UnitsController extends Controller
         $units = DB::table('units')
         ->leftJoin('accommodation_units', function($join) {
             $join->on('accommodation_units.unitID', '=', 'units.ID')
-                 ->where('status', 'ongoing');
+                 ->where('accommodation_units.status', 'ongoing');
         })
+        ->leftJoin('reservation_units', function($join) {
+            $join->on('reservation_units.unitID', '=', 'units.ID')
+                 ->where('reservation_units.status', 'reserved');
+        })
+        ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
         ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
         ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
         ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
@@ -731,8 +736,13 @@ class UnitsController extends Controller
                  'accommodation_units.checkoutDatetime AS checkoutDatetime', 'services.serviceName',
                  'accommodations.id AS accommodationID', 'accommodations.userID', 
                  'accommodations.numberOfPax AS totalNumberOfPax', 'accommodations.numberOfUnits',
-                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber')
-        ->where('unitID', '=', $id)
+                 'guests.id AS guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber',
+                 'reservations.id AS reservationID', 'reservations.lastName AS reservationLastName', 
+                 'reservations.firstName AS reservationFirstName', 'reservation_units.numberOfBunks AS reservationNumberOfBunks',
+                 'reservations.numberOfUnits AS reservationNumberOfUnits', 'reservations.contactNumber AS reservationContactNumber',
+                 'reservation_units.status AS reservationStatus', 'reservation_units.checkinDatetime AS reservationCheckinDatetime', 
+                 'reservation_units.checkoutDatetime AS reservationCheckoutDatetime')
+        ->where('units.id', '=', $id)
         ->get();
 
         /*$numberOfPaxArray = array();
@@ -760,7 +770,7 @@ class UnitsController extends Controller
          ->leftJoin('services', 'services.id', 'reservation_units.serviceID')
          ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity',
                   'reservations.id AS reservationID', 'reservations.lastName AS lastName', 
-                  'reservations.firstName AS firstName', 'reservations.numberOfPax AS numberOfPax',
+                  'reservations.firstName AS firstName', 'reservation_units.numberOfBunks AS numberOfBunks',
                   'reservations.numberOfUnits AS numberOfUnits', 'reservations.contactNumber AS contactNumber',
                   'reservation_units.status AS status', 'reservation_units.checkinDatetime AS checkinDatetime', 
                   'reservation_units.checkoutDatetime AS checkoutDatetime', 'services.id AS serviceID',

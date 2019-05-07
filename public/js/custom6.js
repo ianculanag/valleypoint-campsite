@@ -6,7 +6,8 @@ jQuery(document).ready(function(){
             
             var today = new Date();
             var currentDate = moment(today).format('L');
-            var number = 0;
+            var numberAccommodation = 0;
+            var numberReservation = 0;
             var capacity = data[0].capacity;
             var occupied = 0;
             var remaining = 0;
@@ -29,14 +30,14 @@ jQuery(document).ready(function(){
                 //console.log(1);
                 var checkinDatetime = moment(data[index].checkinDatetime).format('L');
                 var checkoutDatetime = moment(data[index].checkoutDatetime).format('L');
-                number++;
+                numberAccommodation++;
 
                 if(checkinDatetime <= currentDate && checkoutDatetime >= currentDate) {
                     occupied += data[index].numberOfPax;
                     //console.log(2);
                     htmlString += "<div class='container'>";
                     htmlString += "<table class='table table-sm borderless'>";
-                    htmlString += "<tr><td rowspan='6' style='font-weight:bold; width:7%'>" + number + "</td>";
+                    htmlString += "<tr><td rowspan='6' style='font-weight:bold; width:7%'>" + numberAccommodation + "</td>";
                     htmlString += "<tr><td style='width:30%'> Guest Name: </td>";
                     htmlString += "<td>" + data[index].firstName + " " + data[index].lastName + "</td></tr>";
                     htmlString += "<tr><td style='width:30%'> Beds: </td>";
@@ -48,11 +49,40 @@ jQuery(document).ready(function(){
                     htmlString += "<tr><td class='pt-3'f colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
                     htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
                 }
+                
                 if(checkoutDatetime == currentDate) {
                     //console.log(3);
                     jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
                 } else {
                     jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+                }
+            }
+            
+            for(var index = 0; index < data.length; index++) {            
+                var reservationCheckinDatetime = moment(data[index].reservationCheckinDatetime).format('L');
+
+                if(reservationCheckinDatetime == currentDate) {
+                    htmlString += "<hr><h5 class='text-center'> Checks-in today </h5>";
+                    for(var index = 0; index < data.length; index++) {
+                        var checkinDatetime = moment(data[index].reservationCheckinDatetime).format('L');
+                        if(checkinDatetime == currentDate) {         
+                            numberReservation++;
+                            console.log('OH YEA');
+                            htmlString += "<div class='container'>";
+                            htmlString += "<table class='table table-sm borderless'>";
+                            htmlString += "<tr><td rowspan='4' style='font-weight:bold; width:7%'>" + numberReservation + "</td>";
+                            htmlString += "<td style='width:30%'>Guest name: </td>";
+                            htmlString += "<td>" + data[index].reservationFirstName + " " + data[index].reservationLastName + "</td></tr>";
+                            htmlString += "<tr><td style='width:30%'> Beds: </td>";
+                            htmlString += "<td>" + data[index].reservationNumberOfBunks + "</td></tr>";
+                            htmlString += "<tr><td>Check-in: </td>";
+                            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].reservationCheckinDatetime).format('LLLL') + "</td></tr>";
+                            htmlString += "<tr><td>Check-out: </td>";
+                            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].reservationCheckoutDatetime).format('LLLL') + "</td></tr>";
+                            htmlString += "<tr><td class='pt-3' colspan='3'><a href='/view-reservation-details/"+data[index].unitID+"/"+data[index].reservationID+"' id='editResrvationDetails'><button type='button' class='btn btn-info' style='float:right'>View Details</button></a>";
+                            htmlString += "<a href='/checkin-backpacker/"+data[index].unitID+"/"+data[index].reservationID+"' id='checkin'><button type='button' class='btn btn-success mx-2' style='float:right'>Check-in</button></a></td></tr></table></div>"
+                        }
+                    }
                 }
             }
 
