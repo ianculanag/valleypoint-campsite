@@ -286,14 +286,17 @@ function updateRoomCapacity(unitNumber){
 //BACKPACKER DATES
 jQuery(document).on('change', '.checkinDatesBackpacker', function() {
     updateQuantity();
+    checkBedAvailability();
 });
 
 jQuery(document).on('change', '.checkoutDatesBackpacker', function() {
     updateQuantity();
+    checkBedAvailability();
 });
 
 jQuery(document).on('change', '.numberOfBeds', function() {
     updateQuantity();
+    checkBedAvailability();
 });
 
 function updateQuantity() {
@@ -339,4 +342,57 @@ function updateQuantity() {
         
         updateTotal();
     }
+}
+
+function checkBedAvailability() {    
+    var selectedUnits = jQuery('#tokenfieldBackpacker').tokenfield('getTokens');
+    jQuery.get('/get-room-dates', function(data) {
+        var alertMessage = "";
+
+        var selectedUnit;
+        var selectedCheckinDate;
+        var selectedCheckoutDate;
+        var maxCapacity = 0;
+        var availableBeds = 0;
+
+        var roomDates;
+
+        /**
+         * 1. Get the units from tokenfield
+         * 2. For every unit, get the number of available beds within the date
+         * 3. Compare the user input
+         * 4. Build the alert message
+         */
+
+         for(var count = 0; count < selectedUnits.length; count++) {             
+            selectedUnit = selectedUnits[count].value; 
+            selectedUnitAvailableBeds = new Array();
+            maxCapacity = jQuery('#maxCapacity'+selectedUnit).val();   
+            availableBeds = maxCapacity;  
+            //console.log(availableBeds);
+            selectedCheckinDate = moment(jQuery('#checkinDate'+selectedUnit).val()).format('L');
+            selectedCheckoutDate = moment(jQuery('#checkoutDate'+selectedUnit).val()).format('L');
+
+            unitArrayIndex = parseInt(selectedUnit.replace(/[^\d]/g, '')) - 1;
+            
+            roomDates = data[0][unitArrayIndex];
+
+            for(var index = 0; index < roomDates.length; index++) {
+                currentCheckinDate = moment(roomDates[index].checkinDatetime).format('L');
+                currentCheckoutDate = moment(roomDates[index].checkoutDatetime).format('L');
+                if((selectedCheckinDate >= currentCheckinDate && selectedCheckoutDate <= currentCheckoutDate) ||
+                   (selectedCheckinDate <= currentCheckinDate && selectedCheckoutDate >= currentCheckoutDate) || 
+                   (selectedCheckinDate > currentCheckinDate && selectedCheckinDate < currentCheckoutDate) ||
+                   (selectedCheckoutDate > currentCheckinDate && selectedCheckoutDate < currentCheckoutDate)
+                   ) {
+                    availableBeds -= roomDates[index].numberOfBunks;            
+                }
+            }            
+            selectedUnitAvailableBeds.push(availableBeds);
+         }
+
+         console.log(selectedUnitAvailableBeds);
+
+        //jQuery('#alertMessage').html(alertMessage);
+    })
 }
