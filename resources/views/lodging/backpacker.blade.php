@@ -112,7 +112,7 @@
                                 </div>
                             </a>
                             @elseif($withReservation)
-                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-backpacker-details" id={{$room->id}}>
+                            <a data-toggle="modal" data-target="#checkin-reserve" style="cursor:pointer" class="load-backpacker-available-unit" id={{$room->id}}>
                                 <div class="card mx-2" style="width:16rem; height:7.5em;  background-image:url({{asset('room-empty.png')}}); background-size:cover; background-repeat:no-repeat;">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -297,7 +297,7 @@
                 </button>
             </div>
             <!--Body-->
-            <div class="modal-body" id="modal-body-empty">
+            <div class="modal-body scrollbar-near-moon-wide" id="modal-body-empty">
                 <!--div class="col-md-12">
                     <h5 class="text-center mb-4">Choose action:</h5>
                 </div-->

@@ -247,7 +247,7 @@
                     </button>
                 </div>
                 <!--Body-->
-                <div class="modal-body" id="modal-body">
+                <div class="modal-body scrollbar-near-moon-wide" id="modal-body">
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-right">
@@ -277,7 +277,7 @@
                     </button>
                 </div>
                 <!--Body-->
-                <div class="modal-body" id="modal-body-empty">
+                <div class="modal-body scrollbar-near-moon-wide" id="modal-body-empty">
                     <!--div class="col-md-12">
                         <h5 class="text-center mb-4">Choose action:</h5>
                     </div-->
