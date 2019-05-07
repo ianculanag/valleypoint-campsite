@@ -776,7 +776,7 @@ class ReservationsController extends Controller
         $reservation->numberOfPax = $request->input('numberOfPaxBackpacker');
         $reservation->numberOfUnits = $request->input('numberOfUnits');        
         $reservation->contactNumber = $request->input('contactNumber');
-        //$reservation->save();
+        $reservation->save();
 
         $totalNumberOfBunks= 0;
 
@@ -822,7 +822,7 @@ class ReservationsController extends Controller
             ->orderBy('id', 'ASC')
             ->get();
 
-            return $beds;
+            //return $beds;
 
             $bedCounter = 0;
 

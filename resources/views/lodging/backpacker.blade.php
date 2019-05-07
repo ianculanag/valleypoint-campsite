@@ -93,15 +93,15 @@
                                         <h5 class="card-title">
                                             {{$room->unitNumber}}
                                             @if($checkinBell > 0)
-                                            <span class="badge badge-primary float-right"><i class="fa fa-bell"></i>  {{$checkinBell}}</span>
+                                            <span class="badge badge-primary float-right ml-1"><i class="fa fa-bell"></i>  {{$checkinBell}}</span>
                                             @endif
 
                                             @if($updateReservationBell > 0)
-                                            <span class="badge badge-warning float-right"><i class="fa fa-bell"></i>  {{$updateReservationBell}}</span>
+                                            <span class="badge badge-warning float-right ml-1"><i class="fa fa-bell"></i>  {{$updateReservationBell}}</span>
                                             @endif
 
                                             @if($checkoutBell > 0)
-                                            <span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  {{$checkoutBell}}</span>
+                                            <span class="badge badge-danger float-right ml-1"><i class="fa fa-bell"></i>  {{$checkoutBell}}</span>
                                             @endif
                                             <!--span class="badge badge-danger float-right"><i class="fa fa-bell"></i>  1</span-->
                                             {{--<span class="badge badge-dark float-right" style="font-size:.55em;">Occupied</span>--}}

@@ -976,6 +976,7 @@ class UnitsController extends Controller
         ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
                  'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
         ->where('accommodation_units.status', '=', 'ongoing')
+        ->where('units.unitType', '=', 'tent')
         ->orderBy('units.id')
         ->get()
         ->toArray();
@@ -986,6 +987,7 @@ class UnitsController extends Controller
         ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
                  'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
         ->where('reservation_units.status', '=', 'reserved')
+        ->where('units.unitType', '=', 'tent')
         ->orderBy('units.id')
         ->get()
         ->toArray();
@@ -993,6 +995,82 @@ class UnitsController extends Controller
         //return $reservationDates;
 
         return array_merge($accommodationDates, $reservationDates);
+    }
+
+    /**
+     * Get accommodation and reservation dates on units.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getRoomDates()
+    {
+        /*$accommodationDates = DB::table('accommodation_units')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('units', 'units.id', 'accommodation_units.unitID')
+        ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.checkinDatetime',
+                 'accommodation_units.checkoutDatetime', 'accommodations.id AS accommodationID')
+        ->where('accommodation_units.status', '=', 'ongoing')
+        ->where('units.unitType', '!=', 'tent')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();
+
+        $reservationDates = DB::table('reservation_units')
+        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('units', 'units.id', 'reservation_units.unitID')
+        ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
+                 'reservation_units.checkoutDatetime', 'reservations.id AS reservationID')
+        ->where('reservation_units.status', '=', 'reserved')
+        ->where('units.unitType', '!=', 'tent')
+        ->orderBy('units.id')
+        ->get()
+        ->toArray();*/
+
+        $rooms = DB::table('units')
+        ->where('units.unitType', 'room')
+        ->get();
+
+        $roomAccommodations = array();
+        $roomReservations = array();
+
+        $roomDates = array();
+
+        for($index = 0; $index < count($rooms); $index++) {
+            $bedAccommodations = DB::table('accommodations')
+            ->leftJoin('accommodation_units', 'accommodation_units.accommodationID', 'accommodations.id')
+            ->leftJoin('units', 'units.id', 'accommodation_units.unitID')
+            ->leftJoin('guests', 'guests.accommodationID', 'accommodations.id')
+            ->select('accommodation_units.unitID', 'units.unitNumber', 'accommodation_units.numberOfBunks',
+                     'accommodation_units.checkinDatetime', 'accommodation_units.checkoutDatetime')
+            ->where('status', 'ongoing')
+            ->where('units.unitType', 'room')
+            ->where('units.id', $rooms[$index]->id)
+            ->get()
+            ->toArray();
+
+            $bedReservations = DB::table('reservations')
+            ->leftJoin('reservation_units', 'reservation_units.reservationID', 'reservations.id')
+            ->leftJoin('units', 'units.id', 'reservation_units.unitID')
+            ->select('reservation_units.unitID', 'units.unitNumber', 'reservation_units.checkinDatetime',
+                     'reservation_units.checkoutDatetime', 'reservations.id AS reservationID',
+                     'reservation_units.numberOfBunks')
+            ->where('status', 'reserved')
+            ->where('units.unitType', 'room')
+            ->where('units.id', $rooms[$index]->id)
+            ->get()
+            ->toArray();
+
+            array_push($roomAccommodations, $bedAccommodations);
+            array_push($roomReservations, $bedReservations);
+
+            array_push($roomDates, array_merge($bedAccommodations, $bedReservations));
+        }
+
+        //return $reservationDates;
+
+        return array($roomDates);
+
+        //return array_merge($accommodationDates, $reservationDates);
     }
 
     /**

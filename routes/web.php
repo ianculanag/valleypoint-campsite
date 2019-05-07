@@ -132,6 +132,7 @@ Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices');
 Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
 Route::get('/getDates', 'UnitsController@getDates');
+Route::get('/get-room-dates', 'UnitsController@getRoomDates');
 
 //Check-out guests
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');

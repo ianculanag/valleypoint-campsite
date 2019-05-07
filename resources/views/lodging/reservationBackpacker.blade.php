@@ -355,6 +355,7 @@
                             <option value="{{$unit->unitNumber}}{{$loop->iteration}}">{{$loop->iteration}}</option>
                             @endforeach
                         </select>
+                        <input type="hidden" id="maximumCapacity{{$unit->unitNumber}}" value="{{count($beds)}}">
                     </div>
 
                     <div class="col-md-4 mb-1" id="divCheckinDate{{$unit->unitNumber}}">
