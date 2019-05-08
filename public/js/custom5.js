@@ -399,7 +399,7 @@ function checkBedAvailability() {
             selectedUnitAvailableBed = selectedUnitAvailableBeds[count];
             bedRequestCount = jQuery('#numberOfBeds'+selectedUnit).val();
 
-            //var translator = new T2W("EN_US");
+            var translator = new T2W("EN_US");
             // one thousand two hundred thirty-four
             //translator.toWords(1234)
 
@@ -410,9 +410,9 @@ function checkBedAvailability() {
                 if(selectedUnitAvailableBed == 0) {
                     alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
                 } else if(selectedUnitAvailableBed == 1) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+selectedUnitAvailableBed+' available bed during the specified dates.';
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates.';
                 } else {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+selectedUnitAvailableBed+' available beds during the specified dates.';       
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates.';       
                 }
                 
                 jQuery('#alertContainer').removeClass('alert-danger');
@@ -421,9 +421,9 @@ function checkBedAvailability() {
                 if(selectedUnitAvailableBed == 0) {
                     alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
                 } else if(selectedUnitAvailableBed == 1) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+selectedUnitAvailableBed+' available bed during the specified dates.';
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates.';
                 } else {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+selectedUnitAvailableBed+' available beds during the specified dates.';       
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates.';       
                 }
                 jQuery('#alertContainer').removeClass('alert-success');
                 jQuery('#alertContainer').addClass('alert-danger');
