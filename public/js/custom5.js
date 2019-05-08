@@ -393,6 +393,9 @@ function checkBedAvailability() {
          }
 
          console.log(selectedUnitAvailableBeds);
+         
+         var withAvailable = false;
+         var withUnavailable = false;
 
          for(var count = 0; count < selectedUnits.length; count++) {             
             selectedUnit = selectedUnits[count].value; 
@@ -407,27 +410,41 @@ function checkBedAvailability() {
             console.log(bedRequestCount);
 
             if(bedRequestCount <= selectedUnitAvailableBed) {
-                if(selectedUnitAvailableBed == 0) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
-                } else if(selectedUnitAvailableBed == 1) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates.';
+                //if(selectedUnitAvailableBed == 0) {
+                alertMessage += '<strong>'+selectedUnit+'</strong> has available beds during the specified dates. <span class="fa fa-check"></span><br>';
+                /*} else if(selectedUnitAvailableBed == 1) {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates. <br>';
                 } else {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates.';       
-                }
-                
-                jQuery('#alertContainer').removeClass('alert-danger');
-                jQuery('#alertContainer').addClass('alert-success');
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates. <br>';       
+                }*/
+                withAvailable = true;
             } else {
                 if(selectedUnitAvailableBed == 0) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates. <span class="fa fa-times"></span><br>';
                 } else if(selectedUnitAvailableBed == 1) {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates.';
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available bed during the specified dates. <span class="fa fa-times"></span><br>';
                 } else {
-                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates.';       
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+translator.toWords(selectedUnitAvailableBed)+' ('+selectedUnitAvailableBed+')'+' available beds during the specified dates. <span class="fa fa-times"></span><br>';       
                 }
-                jQuery('#alertContainer').removeClass('alert-success');
-                jQuery('#alertContainer').addClass('alert-danger');
+                withUnavailable = true
             }
+        }
+
+        if(withAvailable && !withUnavailable) {       
+            jQuery('#alertContainer').removeClass('alert-danger');
+            jQuery('#alertContainer').removeClass('alert-warning')
+            jQuery('#alertContainer').addClass('alert-success');
+            jQuery('#checkinButton').prop('disabled', false);
+        } else if(withUnavailable && !withAvailable) {
+            jQuery('#alertContainer').addClass('alert-danger');
+            jQuery('#alertContainer').removeClass('alert-warning')
+            jQuery('#alertContainer').removeClass('alert-success');
+            jQuery('#checkinButton').prop('disabled', true);
+        } else if(withAvailable && withUnavailable) {
+            jQuery('#alertContainer').removeClass('alert-danger');
+            jQuery('#alertContainer').addClass('alert-warning')
+            jQuery('#alertContainer').removeClass('alert-success');
+            jQuery('#checkinButton').prop('disabled', true);
         }
 
         jQuery('#alertMessage').html(alertMessage);        
