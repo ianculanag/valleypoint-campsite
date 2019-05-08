@@ -368,7 +368,7 @@ function checkBedAvailability() {
 
          for(var count = 0; count < selectedUnits.length; count++) {             
             selectedUnit = selectedUnits[count].value; 
-            maxCapacity = jQuery('#maxCapacity'+selectedUnit).val();   
+            maxCapacity = parseInt(jQuery('#maxCapacity'+selectedUnit).val());   
             availableBeds = maxCapacity;  
             //console.log(availableBeds);
             selectedCheckinDate = moment(jQuery('#checkinDate'+selectedUnit).val()).format('L');
@@ -394,6 +394,15 @@ function checkBedAvailability() {
 
          console.log(selectedUnitAvailableBeds);
 
-        //jQuery('#alertMessage').html(alertMessage);
+         for(var count = 0; count < selectedUnits.length; count++) {             
+            selectedUnit = selectedUnits[count].value; 
+            selectedUnitAvailableBed = selectedUnitAvailableBeds[count];
+
+            alertMessage += '<strong>'+selectedUnit+'</strong>'+ has '+selectedUnitAvailableBed+' available beds in the specified dates.';
+         }
+
+        jQuery('#alertMessage').html(alertMessage);        
+        jQuery('#alertContainer').css('display', 'block');
+
     })
 }
