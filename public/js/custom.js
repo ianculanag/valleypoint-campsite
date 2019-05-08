@@ -1116,7 +1116,7 @@ function checkAvailability() {
 });*/
 
 jQuery(document).ready(function() {
-    var pathname = window.location.pathname;
+    var pathname = window.location.pathname; 
     
     if(pathname == '/backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker'
         || pathname == '/reload-calendar-glamping' || pathname == '/reload-calendar-backpacker') {
@@ -1132,7 +1132,7 @@ jQuery(document).ready(function() {
         jQuery('#dropdownRestoReports').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > #restaurantReports > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > #restaurantReports > i').css('color', 'white');
-    } else if(pathname == '/view-payments' || pathname == '/view-charges') {
+    } else if(pathname == '/view-payments' || pathname == '/view-charges' || pathname == '/side-by-side/charges-payments') {
         jQuery('#transactionsTab').addClass('activeTab');
         jQuery('#dropdownTransactions').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');

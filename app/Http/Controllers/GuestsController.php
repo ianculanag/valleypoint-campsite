@@ -405,9 +405,10 @@ class GuestsController extends Controller
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')
+        ->leftJoin('units', 'units.id', 'charges.unitID')
         ->where('accommodationID', '=', $accommodationID)
         ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
-                 'charges.remarks','services.*')
+                 'charges.remarks', 'services.*', 'units.*')
         ->get();
 
         //return $charges;
@@ -439,9 +440,10 @@ class GuestsController extends Controller
         $charges = DB::table('charges')
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->leftJoin('units', 'units.id', 'charges.unitID')
         ->join('services', 'services.id', 'charges.serviceID')
         ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
-                 'charges.remarks','services.*', 'accommodations.*', 'guests.*')
+                 'charges.remarks','services.*', 'accommodations.*', 'guests.*', 'units.*')
         ->get();
 
         $payments = DB::table('payments')
@@ -449,7 +451,7 @@ class GuestsController extends Controller
         ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
         ->join('services', 'services.id', 'charges.serviceID')        
         ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
-                 'charges.remarks', 'charges.accommodationID', 'services.*', 'payments.*', 'accommodations.*')
+                 'charges.remarks', 'charges.accommodationID', 'services.*', 'payments.id AS paymentID', 'payments.*', 'accommodations.*')
         ->get();
 
         //return $charges;
