@@ -26,46 +26,51 @@ jQuery(document).ready(function(){
             
             htmlString += "<hr><h5 class='text-center'>Guest Details</h5>";
 
-            for(var index = 0; index < data.length; index++) {
-                //console.log(1);
-                var checkinDatetime = moment(data[index].checkinDatetime).format('L');
-                var checkoutDatetime = moment(data[index].checkoutDatetime).format('L');
-                numberAccommodation++;
+            //console.log(1);
+            var firstCheckinDatetime = moment(data[0].checkinDatetime).format('L');
+            var firstCheckoutDatetime = moment(data[0].checkoutDatetime).format('L');
 
-                if(checkinDatetime <= currentDate && checkoutDatetime >= currentDate) {
-                    occupied += data[index].numberOfPax;
-                    //console.log(2);
-                    htmlString += "<div class='container'>";
-                    htmlString += "<table class='table table-sm borderless'>";
-                    htmlString += "<tr><td rowspan='6' style='font-weight:bold; width:7%'>" + numberAccommodation + "</td>";
-                    htmlString += "<tr><td style='width:30%'> Guest Name: </td>";
-                    htmlString += "<td>" + data[index].firstName + " " + data[index].lastName + "</td></tr>";
-                    htmlString += "<tr><td style='width:30%'> Beds: </td>";
-                    htmlString += "<td>" + data[index].numberOfBunks + "</td></tr>";
-                    htmlString += "<tr><td>Checked-in: </td>";
-                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkinDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td>Check-out: </td>";
-                    htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkoutDatetime).format('LLLL') + "</td></tr>";
-                    htmlString += "<tr><td class='pt-3'f colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
-                    htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
+            if(firstCheckinDatetime <= currentDate && firstCheckoutDatetime >= currentDate) {
+                for(var index = 0; index < data.length; index++) {
+                    if(data[index].accommodationID) {
+                        numberAccommodation++;
+                        var checkinDatetime = moment(data[index].checkinDatetime).format('L');
+                        var checkoutDatetime = moment(data[index].checkoutDatetime).format('L');
+                        if(checkinDatetime <= currentDate && checkoutDatetime >= currentDate) {
+                            occupied += data[index].numberOfPax;
+                            //console.log(2);
+                            htmlString += "<div class='container'>";
+                            htmlString += "<table class='table table-sm borderless'>";
+                            htmlString += "<tr><td rowspan='6' style='font-weight:bold; width:7%'>" + numberAccommodation + "</td>";
+                            htmlString += "<tr><td style='width:30%'> Guest Name: </td>";
+                            htmlString += "<td>" + data[index].firstName + " " + data[index].lastName + "</td></tr>";
+                            htmlString += "<tr><td style='width:30%'> Beds: </td>";
+                            htmlString += "<td>" + data[index].numberOfBunks + "</td></tr>";
+                            htmlString += "<tr><td>Checked-in: </td>";
+                            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkinDatetime).format('LLLL') + "</td></tr>";
+                            htmlString += "<tr><td>Check-out: </td>";
+                            htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkoutDatetime).format('LLLL') + "</td></tr>";
+                            htmlString += "<tr><td class='pt-3'f colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
+                            htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
+                        }
+                        if(checkoutDatetime == currentDate) {
+                            //console.log(3);
+                            jQuery("#checkout").attr("href", "checkout-due-today/"+data[index].unitID);
+                        } else {
+                            jQuery("#checkout").attr("href", "checkout/"+data[index].unitID);
+                        } 
+                    }
                 }
-                
-                if(checkoutDatetime == currentDate) {
-                    //console.log(3);
-                    jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
-                } else {
-                    jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
-                }
-            }
-            
-            for(var index = 0; index < data.length; index++) {            
-                var reservationCheckinDatetime = moment(data[index].reservationCheckinDatetime).format('L');
+            }      
 
-                if(reservationCheckinDatetime == currentDate) {
-                    htmlString += "<hr><h5 class='text-center'> Checks-in today </h5>";
-                    for(var index = 0; index < data.length; index++) {
-                        var checkinDatetime = moment(data[index].reservationCheckinDatetime).format('L');
-                        if(checkinDatetime == currentDate) {         
+            var firstReservationCheckinDatetime = moment(data[0].reservationCheckinDatetime).format('L');
+
+            if(firstReservationCheckinDatetime == currentDate) {
+                htmlString += "<hr><h5 class='text-center'> Checks-in today </h5>";
+                for(var index = 0; index < data.length; index++) {
+                    if(data[index].accommodationID) {
+                        var reservationCheckinDatetime = moment(data[index].reservationCheckinDatetime).format('L');
+                        if(reservationCheckinDatetime == currentDate) {         
                             numberReservation++;
                             console.log('OH YEA');
                             htmlString += "<div class='container'>";

@@ -3,12 +3,12 @@
 @section('content')
 <div class="container pb-5">
     <div class="pt-3 pb-3">
-        <a href="/glamping">
+        {{--<a href="/glamping">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 <strong>Back</strong>
             </span>
-        </a>
+        </a>--}}
         <h3 class="text-center">Charges</h3>
     </div>
     <div class="col-md-12">
@@ -21,7 +21,7 @@
                     <th>Last Name</th>   
                     <th>Service Name</th>             
                     <th>Quantity</th>                            
-                    <th>Total Price</th>
+                    <th>Price</th>
                     <th>Balance</th>
                 </tr>
             </thead>
@@ -33,9 +33,9 @@
                     <td>{{$charge->firstName}}</td>                              
                     <td>{{$charge->lastName}}</td>    
                     <td>{{$charge->serviceName}}</td>                           
-                    <td>{{$charge->quantity}}</td>                                     
-                    <td>{{$charge->totalPrice}}</td>                            
-                    <td>{{$charge->balance}}</td>
+                    <td class="text-right">{{$charge->quantity}}</td>                                     
+                    <td class="text-right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>                            
+                    <td class="text-right">{{number_format((float)($charge->balance), 2, '.', '')}}</td>
                 </tr>
                 @endforeach
             </tbody>

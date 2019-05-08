@@ -718,18 +718,18 @@ class UnitsController extends Controller
         ->toArray(); */
 
         $units = DB::table('units')
-        ->leftJoin('accommodation_units', function($join) {
+        ->join('accommodation_units', function($join) {
             $join->on('accommodation_units.unitID', '=', 'units.ID')
                  ->where('accommodation_units.status', 'ongoing');
         })
-        ->leftJoin('reservation_units', function($join) {
+        ->join('reservation_units', function($join) {
             $join->on('reservation_units.unitID', '=', 'units.ID')
                  ->where('reservation_units.status', 'reserved');
         })
-        ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
-        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
-        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
-        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
+        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->join('services', 'services.id', 'accommodation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
                  'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
                  'accommodation_units.numberOfBunks', 'accommodation_units.serviceID AS serviceID',

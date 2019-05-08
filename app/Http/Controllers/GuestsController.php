@@ -429,6 +429,37 @@ class GuestsController extends Controller
         ->with('payments', $payments);  
     }
 
+    /**
+     * Show all the guests' charges and payments
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewAllGuestsPayments()
+    {
+        $charges = DB::table('charges')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('guests', 'guests.accommodationID', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks','services.*', 'accommodations.*', 'guests.*')
+        ->get();
+
+        $payments = DB::table('payments')
+        ->join('charges', 'charges.id', 'payments.chargeID')
+        ->join('accommodations', 'accommodations.id', 'charges.accommodationID')
+        ->join('services', 'services.id', 'charges.serviceID')        
+        ->select('charges.id AS chargeID', 'charges.quantity', 'charges.totalPrice', 'charges.balance',
+                 'charges.remarks', 'charges.accommodationID', 'services.*', 'payments.*', 'accommodations.*')
+        ->get();
+
+        //return $charges;
+        //return $payments;
+
+        return view('lodging.viewallguestspayments')
+        ->with('charges', $charges)
+        ->with('payments', $payments);  
+    }
+
     //View Details backpacker
 
     /**

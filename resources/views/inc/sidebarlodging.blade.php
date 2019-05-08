@@ -86,6 +86,10 @@
                                 <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                 <span> Charges </span>
                             </a>
+                            <a class="dropdown-item" href="/side-by-side/charges-payments">
+                                <i class="fa fa-exchange-alt" aria-hidden="true"></i>
+                                <span> Side by side </span>
+                            </a>
                         </div>
                     </li>
                     <li class="nav-item">

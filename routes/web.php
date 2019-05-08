@@ -160,6 +160,9 @@ Route::post('/reload-custom-lodging-report', 'UnitsController@reloadCustomLodgin
 //View Guest Payments
 Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');
 
+//View side by side charges-payments
+Route::get('/side-by-side/charges-payments', 'GuestsController@viewAllGuestsPayments');
+
 /* Admin */
 //Dashboard
 Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
