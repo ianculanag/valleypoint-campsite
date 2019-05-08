@@ -397,9 +397,38 @@ function checkBedAvailability() {
          for(var count = 0; count < selectedUnits.length; count++) {             
             selectedUnit = selectedUnits[count].value; 
             selectedUnitAvailableBed = selectedUnitAvailableBeds[count];
+            bedRequestCount = jQuery('#numberOfBeds'+selectedUnit).val();
 
-            alertMessage += '<strong>'+selectedUnit+'</strong>'+ has '+selectedUnitAvailableBed+' available beds in the specified dates.';
-         }
+            //var translator = new T2W("EN_US");
+            // one thousand two hundred thirty-four
+            //translator.toWords(1234)
+
+
+            console.log(bedRequestCount);
+
+            if(bedRequestCount <= selectedUnitAvailableBed) {
+                if(selectedUnitAvailableBed == 0) {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
+                } else if(selectedUnitAvailableBed == 1) {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+selectedUnitAvailableBed+' available bed during the specified dates.';
+                } else {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has '+selectedUnitAvailableBed+' available beds during the specified dates.';       
+                }
+                
+                jQuery('#alertContainer').removeClass('alert-danger');
+                jQuery('#alertContainer').addClass('alert-success');
+            } else {
+                if(selectedUnitAvailableBed == 0) {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> has no available beds during the specified dates.';
+                } else if(selectedUnitAvailableBed == 1) {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+selectedUnitAvailableBed+' available bed during the specified dates.';
+                } else {
+                    alertMessage += '<strong>'+selectedUnit+'</strong> only has '+selectedUnitAvailableBed+' available beds during the specified dates.';       
+                }
+                jQuery('#alertContainer').removeClass('alert-success');
+                jQuery('#alertContainer').addClass('alert-danger');
+            }
+        }
 
         jQuery('#alertMessage').html(alertMessage);        
         jQuery('#alertContainer').css('display', 'block');
