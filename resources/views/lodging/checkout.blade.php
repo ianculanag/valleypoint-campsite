@@ -113,7 +113,7 @@
                                         @foreach($pendingPayments as $pending)
                                         @php
                                             $total += $pending->totalPrice;
-                                            $totalBalance = $total - $totalPayment;
+                                            $totalBalance += $pending->balance;
 
                                             $identifier = 'Pending'.$loop->iteration;
                                         @endphp
