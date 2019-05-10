@@ -27,7 +27,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" required="required" class="form-control" name="unitNumber" placeholder="Unit Number" minlength=5 maxlength=10>
+                            <input type="text" required="required" class="form-control" name="unitNumber" placeholder="Unit Number" minlength=3 maxlength=10>
                         </div>
                         <div class="form-group pb-3">
                             <input type="number" required="required" class="form-control" name="capacity" placeholder="Capacity" min=1 max=20>

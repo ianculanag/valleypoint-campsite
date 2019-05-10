@@ -234,7 +234,7 @@
                                 @endphp
                                 @endforeach
                                 <tr>
-                                    <td colspan="5"> TOTAL EARNINGS: </td>
+                                    <td colspan="5"> TOTAL GROSS SALES: </td>
                                     <td class="text-right"> ₱ {{number_format((float)($totalGlampingEarnings), 2, '.', '')}}</td>
                                 </tr>
                                 @else
@@ -278,7 +278,7 @@
                                 @endphp
                                 @endforeach
                                 <tr>
-                                    <td colspan="5"> TOTAL EARNINGS: </td>
+                                    <td colspan="5"> TOTAL GROSS SALES: </td>
                                     <td class="text-right"> ₱ {{number_format((float)($totalBackpackerEarnings), 2, '.', '')}}</td>
                                 </tr>
                                 @else
