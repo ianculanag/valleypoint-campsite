@@ -15,7 +15,7 @@ class CreateFoodsTable extends Migration
     public function up()
     {
         Schema::create('foods', function (Blueprint $table) {
-            $table->integer('productID')->unsigned();
+            $table->increments('id');
             $table->enum('foodCategory',['breakfast','appetizers','noodles','bread','rice bowls', 'group meals', 'soup']);
             $table->string('foodName');
             $table->double('price', 8, 2);
@@ -68,7 +68,7 @@ class CreateFoodsTable extends Migration
             $food8 = new Foods;
             $food8->foodCategory = 'appetizers';
             $food8->foodName = 'Wings';
-            $food1->price = '199.00';
+            $food8->price = '199.00';
             $food8->save();
 
             $food9 = new Foods;
