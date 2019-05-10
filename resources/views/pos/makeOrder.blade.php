@@ -61,14 +61,14 @@
                             <div class="col-md-14" style="margin-top: 3em;">
                                 <div class="list-group">
                     
-                                    <a href="#" class='list-group-item active'>Appetizer</a>
-                                    <a href="#" class='list-group-item'>Bread</a>
-                                    <a href="#" class='list-group-item'>Breakfast</a>
-                                    <a href="#" class='list-group-item'>Group Meals</a>
-                                    <a href="#" class='list-group-item'>Noodles</a>
-                                    <a href="#" class='list-group-item'>Rice Bowl</a>
-                                    <a href="#" class='list-group-item'>Soup</a>
-                                    <a href="#" class='list-group-item'>Beverages </a>
+                                    <a href="#" class='list-group-item list-group-item-primary' style="color:black">Appetizer</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Bread</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Breakfast</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Group Meals</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Noodles</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Rice Bowl</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Soup</a>
+                                    <a href="#" class='list-group-item list-group-item' style="color:black">Beverages </a>
                                 </div>
                             </div>
 
