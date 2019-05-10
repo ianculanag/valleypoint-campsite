@@ -437,7 +437,9 @@
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
-                        <button class="btn btn-danger" style="width:10em;" type="button"> Release </button>
+                        <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
+                            <button class="btn btn-danger" style="width:10em;"> Release </button>
+                        </a>
                         <a href="/glamping" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:10em;" type="button">Cancel</button>
                         </a>
@@ -499,7 +501,27 @@
             </div>
         </div>
     </div>
-    <!-- end of charges modal -->                     
+    <!-- end of charges modal -->   
+    <!-- cancel reservation modal -->
+    <div class="modal fade" id="removeReservationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cancel Reservation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="cancelReservationModalBody">
+                </div>
+                <div class="modal-footer">
+                    <a href="" id="confirmCancel"><button type="button" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                    <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>     
+    <!-- end of cancel reservation modal -->                     
         @endforeach  
         @endforeach  
         @endif
