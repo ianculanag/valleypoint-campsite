@@ -716,20 +716,19 @@ class UnitsController extends Controller
         ->where('unitID', '=', $id)
         ->get()
         ->toArray(); */
-
         $units = DB::table('units')
-        ->join('accommodation_units', function($join) {
+        ->leftJoin('accommodation_units', function($join) {
             $join->on('accommodation_units.unitID', '=', 'units.ID')
                  ->where('accommodation_units.status', 'ongoing');
         })
-        ->join('reservation_units', function($join) {
+        ->leftJoin('reservation_units', function($join) {
             $join->on('reservation_units.unitID', '=', 'units.ID')
                  ->where('reservation_units.status', 'reserved');
         })
-        ->join('reservations', 'reservations.id', 'reservation_units.reservationID')
-        ->join('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
-        ->join('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
-        ->join('services', 'services.id', 'accommodation_units.serviceID')
+        ->leftJoin('reservations', 'reservations.id', 'reservation_units.reservationID')
+        ->leftJoin('accommodations', 'accommodations.id', 'accommodation_units.accommodationID')
+        ->leftJoin('guests', 'guests.accommodationID', 'accommodation_units.accommodationID')
+        ->leftJoin('services', 'services.id', 'accommodation_units.serviceID')
         ->select('units.id AS unitID', 'units.unitNumber', 'units.unitType','units.capacity', 'units.partOf',
                  'accommodation_units.status', 'accommodation_units.checkinDatetime AS checkinDatetime', 
                  'accommodation_units.numberOfBunks', 'accommodation_units.serviceID AS serviceID',
@@ -744,15 +743,12 @@ class UnitsController extends Controller
                  'reservation_units.checkoutDatetime AS reservationCheckoutDatetime')
         ->where('units.id', '=', $id)
         ->get();
-
         /*$numberOfPaxArray = array();
         for($index = 0; $index < count($units); $index++) {
             array_push($numberOfPaxArray, $units[$index]->numberOfPax);
         }*/
-
         return $units;
     }
-
     /**
      * Load empty or available room details
      *

@@ -162,7 +162,7 @@
         <div class="container-fluid col-md-3 m-0 p-0" id="unitFinder" style="padding-top:25em;">
             <div class="card p-0 mx-0" style="font-size:0.9em; {{--background-color:#e1fdec66;--}}">
                 <div class="card-body">
-                    <h4 class="text-center pb-1">Room Finder</h4>
+                    <h4 class="text-center pb-1">Bed Finder</h4>
                     <form method="POST">
                         @csrf
                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -188,14 +188,8 @@
                                 <input class="form-control roomFinderInputs" type="date" id="roomFinderCheckoutDate" name="checkout" maxlength="15" placeholder="" value="" required>
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
-                            <label class="col-sm-4 mb-0 mt-2" for="unitCount">No. of rooms</label>
-                            <div class="input-group input-group-sm mb-1 col-sm-8">
-                                <input class="form-control roomFinderInputs" type="number" id="roomFinderUnitCount" name="unitCount" maxlength="15" placeholder="" value="" required>
-                            </div>
-                        </div>
                         <hr class="my-3">
-                        <h6 class="text-center mb-1">Available Rooms</h6>
+                        <h6 class="text-center mb-1">Available beds in rooms</h6>
                         <div class="card p-0 mx-0 scrollbar-near-moon" style="font-size:0.9em; min-height:33vh; max-height:20vh; overflow-y:auto;">
                             <div class="card-body pb-0" id="availableUnitsContainer" style="display:block;">
                                 <div class="available-units-list" id="divAvailableUnitsList" style="font-size:1.1em">

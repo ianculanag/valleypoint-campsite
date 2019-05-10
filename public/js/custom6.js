@@ -51,7 +51,7 @@ jQuery(document).ready(function(){
                             htmlString += "<tr><td>Check-out: </td>";
                             htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkoutDatetime).format('LLLL') + "</td></tr>";
                             htmlString += "<tr><td class='pt-3'f colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
-                            htmlString += "<a href='' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
+                            htmlString += "<a href='edit-backpacker-details/"+data[index].unitID+"/"+data[index].accommodationID+"' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
                         }
                         if(checkoutDatetime == currentDate) {
                             //console.log(3);
