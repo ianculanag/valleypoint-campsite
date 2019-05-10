@@ -16,7 +16,7 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('unitType',['room','bed','tent']);
+            $table->enum('unitType',['room','bed','tent','table']);
             $table->string('unitNumber');
             $table->integer('capacity')->default(1);
             $table->integer('partOf')->nullable();
@@ -553,7 +553,67 @@ class CreateUnitsTable extends Migration
         $unit81->unitType = 'bed';
         $unit81->capacity = '1';
         $unit81->partOf = '29';
-        $unit81->save();   
+        $unit81->save(); 
+        
+        $unit82 = new Units;
+        $unit82->unitNumber = 'Table1';
+        $unit82->unitType = 'table';
+        $unit82->save();
+
+        $unit83 = new Units;
+        $unit83->unitNumber = 'Table2';
+        $unit83->unitType = 'table';
+        $unit83->save();
+
+        $unit84 = new Units;
+        $unit84->unitNumber = 'Table3';
+        $unit84->unitType = 'table';
+        $unit84->save();
+
+        $unit85 = new Units;
+        $unit85->unitNumber = 'Table4';
+        $unit85->unitType = 'table';
+        $unit85->save();
+
+        $unit86 = new Units;
+        $unit86->unitNumber = 'Table5';
+        $unit86->unitType = 'table';
+        $unit86->save();
+
+        $unit87 = new Units;
+        $unit87->unitNumber = 'Table6';
+        $unit87->unitType = 'table';
+        $unit87->save();
+
+        $unit88 = new Units;
+        $unit88->unitNumber = 'Table7';
+        $unit88->unitType = 'table';
+        $unit88->save();
+
+        $unit89 = new Units;
+        $unit89->unitNumber = 'Table8';
+        $unit89->unitType = 'table';
+        $unit89->save();
+
+        $unit90 = new Units;
+        $unit90->unitNumber = 'Table9';
+        $unit90->unitType = 'table';
+        $unit90->save();
+
+        $unit91 = new Units;
+        $unit91->unitNumber = 'Table10';
+        $unit91->unitType = 'table';
+        $unit91->save();
+
+        $unit92 = new Units;
+        $unit92->unitNumber = 'Table11';
+        $unit92->unitType = 'table';
+        $unit92->save();
+
+        $unit93 = new Units;
+        $unit93->unitNumber = 'Table12';
+        $unit93->unitType = 'table';
+        $unit93->save();
     }
 
     /**
