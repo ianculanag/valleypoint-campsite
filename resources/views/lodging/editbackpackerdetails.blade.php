@@ -10,9 +10,9 @@
                     <strong>Back</strong>
                 </span>
             </a>
-            <h3>Edit Transaction Details</h3>
+            <h3>Guest Details</h3>
         </div>        
-        <form class="form" method="POST" action="/updateDetails">
+        <form class="form" method="POST" action="/update-backpacker-details">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
         <input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">
@@ -274,7 +274,7 @@
                                             <i class="fa fa-users" aria-hidden="true"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control numberOfPaxGlamping" name="numberOfPaxGlamping" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" required>
+                                    <input class="form-control numberOfPaxBackpacker" name="numberOfPaxBackpacker" type="number" placeholder="" value="{{$guestDetails->numberOfPax}}" required>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +293,7 @@
                             <div class="col-md-6 mb-1">
                                 <label for="glamping">Accommodation</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="glamping" maxlength="11" placeholder="" value="Glamping" disabled>
+                                    <input class="form-control" type="text" name="glamping" maxlength="11" placeholder="" value="Backpacker" disabled>
                                 </div>
                             </div>
                         </div>
@@ -311,229 +311,155 @@
 
                     <h5 style="margin-bottom:.80em;">Unit Details</h5>
                     <div class="form-group row">
-                        {{--<div class="col-md-2 mb-1">
-                            <label for="unitID">No. of units</label>
-                            {{--<input class="form-control" style="display:none;float:left;" type="number" name="numberOfUnits" placeholder="" value="1" min="1" max="10" disabled>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fa fa-campground" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            <input class="form-control" type="number" id="numberOfUnits" name="numberOfUnits" placeholder="" value="{{$guestDetails->numberOfUnits}}" min="1" max="80" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-10 mb-1" id="divUnits">--}}
-                        @if($guestDetails->numberOfUnits > 1)
+                        <div class="container" id="divUnits">
+                            <div class="form-group row mb-0 pb-0" id="divUnits{{$guestDetails->unitNumber}}"> 
                                 <div class="col-md-1 mb-1" id="divUnitNumberCount">
-                                    <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
-                                    @foreach($otherUnits as $units)
-                                    <input type="text" readonly class="form-control-plaintext mb-1" style="text-align:center; font-weight:bold;" value="{{$loop->iteration}}">
-                                    @endforeach
+                                    <input type="text" readonly class="form-control-plaintext pt-0 my-0" style="text-align:center;" value="" disabled>
+                                    <input type="text" readonly class="form-control-plaintext mb-0" style="text-align:center; font-weight:bold;" value="1">
                                 </div>
-                                <div class="form-group row col-md-11 px-0 mx-0">
-                                <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
-                                    <label for="unitNumber">Unit no.</label>
-                                    @foreach($otherUnits as $units)
-                                    <input type="text" class="form-control mb-1" value="{{$units->unitNumber}}" disabled>
-                                    @endforeach
+                                <div class="form-group row col-md-11 px-0 mx-0 my-0">
+                                <div class="col-md-2 mb-1" id="divUnitNumber{{$guestDetails->unitNumber}}">
+                                    <label for="unitNumber">Unit number</label>
+                                    <input type="text" class="form-control unit{{$guestDetails->unitNumber}}" value="{{$guestDetails->unitNumber}}" readonly>
                                 </div>
-                                <div class="col-md-2 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Package</label>
-                                    @foreach($otherUnits as $units)
-                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                        <option>{{$units->serviceName}}</option>
-                                    </select>--}}
-                                    {{--<input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>--}}
-                                    <select class="form-control mb-1" name="accommodationPackage{{$units->unitNumber}}" id="accommodationPackage{{$units->unitNumber}}" class="accommodationPackages">
-                                        @if($units->serviceID == 1)                                
-                                        <option value="1" selected>Solo</option>
-                                        <option value="2">2 Pax</option>
-                                        <option value="3">3 pax</option>
-                                        <option value="4">4 pax</option>
-        
-                                        @elseif($units->serviceID == 2)                                
-                                        <option value="1">Solo</option>
-                                        <option value="2" selected>2 Pax</option>
-                                        <option value="3">3 pax</option>
-                                        <option value="4">4 pax</option>
-                                        
-                                        @elseif($units->serviceID == 3)
-                                        <option value="1">Solo</option>
-                                        <option value="2">2 Pax</option>
-                                        <option value="3" selected>3 pax</option>   
-                                        <option value="4">4 pax</option>
-                                        
-                                        @elseif($units->serviceID == 4)
-                                        <option value="1">Solo</option>
-                                        <option value="2">2 Pax</option>
-                                        <option value="3">3 pax</option>
-                                        <option value="4" selected>4 pax</option>
-        
+                                <div class="col-md-2 mb-1" id="divNumberOfBeds{{$guestDetails->unitNumber}}">
+                                    <label for="additionalServiceUnitPrice">No. of beds</label>
+                                    <select class="form-control numberOfBeds" name="numberOfBeds{{$guestDetails->unitNumber}}" id="numberOfBeds{{$guestDetails->unitNumber}}">
+                                        @for($index = 1; $index <= $guestDetails->capacity; $index++)
+                                        @if($guestDetails->numberOfBunks == $index)
+                                        <option value="{{$index}}" selected>{{$index}}</option>
+                                        @else
+                                        <option value="{{$index}}">{{$index}}</option>
                                         @endif
+                                        @endfor
                                     </select>
-                                    @endforeach
+                                    <input type="hidden" id="maxCapacity{{$guestDetails->unitNumber}}" value="{{$guestDetails->capacity}}">
                                 </div>
-                                <div class="col-md-4 mb-1">
-                                    <label for="checkInDatetime">Check-in date</label>
-                                     @foreach($otherUnits as $units)
-                                    <div class="input-group mb-1">
+        
+                                <div class="col-md-4 mb-1" id="divCheckinDate{{$guestDetails->unitNumber}}">
+                                    <label for="checkinDate">Check-in date</label>
+                                    <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
                                         </div>
-                                        @php
-                                            $checkedIn = new DateTime($units->checkinDatetime);
-                                            //$checkedInAt = $checkedIn->format("F j, o");
-                                            $checkedInAt = $checkedIn->format("Y-m-d");
-                                        @endphp
-                                        <input class="form-control" type="date" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                                        <input type="date" name="checkinDate{{$guestDetails->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$guestDetails->unitNumber}}" value="{{\Carbon\Carbon::parse($guestDetails->checkinDatetime)->format('Y-m-d')}}" readonly>
                                     </div>
-                                    @endforeach
                                 </div>
-                                <div class="col-md-4 mb-1">
-                                    <label for="checkoutDatetime">Check-out date</label>
-                                     @foreach($otherUnits as $units)
-                                    <div class="input-group mb-1">
+        
+                                <div class="col-md-4 mb-0" id="divCheckoutDate{{$guestDetails->unitNumber}}">
+                                    <label for="checkoutDate">Check-out date</label>
+                                    <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
                                         </div>
-                                        @php
-                                            $checkOut = new DateTime($units->checkoutDatetime);
-                                            //$checkOutAt = $checkedOut->format("F j, o");
-                                            $checkOutAt = $checkOut->format("Y-m-d");
-                                        @endphp
-                                        {{--<input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>--}}
-                                        <input class="form-control" type="date" name="checkOutAt" placeholder="" value="{{$checkOutAt}}">
+                                        <input type="date" name="checkoutDate{{$guestDetails->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$guestDetails->unitNumber}}" value="{{\Carbon\Carbon::parse($guestDetails->checkoutDatetime)->format('Y-m-d')}}">
+                                        {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                                     </div>
-                                    @endforeach
+                                </div>  
+                            </div>
+                            </div>
+
+                            @if(count($otherUnits) > 0)
+                            @foreach($otherUnits as $otherUnit)
+                            <div class="form-group row mb-0 pb-0" id="divUnits{{$otherUnit->unitNumber}}"> 
+                                <div class="col-md-1 mb-0" id="divUnitNumberCount">
+                                    <input type="text" readonly class="form-control-plaintext mb-0" style="text-align:center; font-weight:bold;" value="{{(int)$loop->iteration + 1}}">
                                 </div>
+                                <div class="form-group row col-md-11 px-0 mx-0 my-0">
+                                <div class="col-md-2 mb-1" id="divUnitNumber{{$otherUnit->unitNumber}}">
+                                    <input type="text" class="form-control unit{{$otherUnit->unitNumber}}" value="{{$otherUnit->unitNumber}}" readonly>
                                 </div>
-                            {{--</div>--}}
-                        @else 
-                                <div class="col-md-1 mb-1" id="divUnitNumberCount">
-                                    <input type="text" readonly class="form-control-plaintext" style="text-align:center;" value="" disabled>
-                                    <input type="text" readonly class="form-control-plaintext mb-1" style="text-align:center; font-weight:bold;" value="1">
+                                <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherUnit->unitNumber}}">
+                                    <select class="form-control numberOfBeds" name="numberOfBeds{{$otherUnit->unitNumber}}" id="numberOfBeds{{$otherUnit->unitNumber}}">
+                                        @for($index = 1; $index <= $otherUnit->capacity; $index++)
+                                        @if($otherUnit->numberOfBunks == $index)
+                                        <option value="{{$index}}" selected>{{$index}}</option>
+                                        @else
+                                        <option value="{{$index}}">{{$index}}</option>
+                                        @endif
+                                        @endfor
+                                    </select>
+                                    <input type="hidden" id="maxCapacity{{$otherUnit->unitNumber}}" value="{{$otherUnit->capacity}}">
                                 </div>
-                                <div class="form-group row col-md-11 px-0 mx-0">
-                                    <div class="col-md-2 mb-1" style="margin-left=0; padding-left:0;" id="divUnitNumber">
-                                        <label for="unitNumber">Unit no.</label>
-                                        <input type="text" class="form-control mb-1" value="{{$guestDetails->unitNumber}}" disabled>
-                                    </div>
-                                    <div class="col-md-2 mb-1" id="divAccommodationPackage">
-                                        <label for="additionalServiceUnitPrice">Package</label>
-                                        {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                            <option>{{$guestDetails->serviceName}}</option>
-                                        </select>--}}
-                                        {{--<input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>--}}
-                                        <select class="form-control mb-1" name="accommodationPackage{{$guestDetails->unitNumber}}" id="accommodationPackage{{$guestDetails->unitNumber}}" class="accommodationPackages">
-                                            @if($guestDetails->serviceID == 1)                                
-                                            <option value="1" selected>Solo</option>
-                                            <option value="2">2 Pax</option>
-                                            <option value="3">3 pax</option>
-                                            <option value="4">4 pax</option>
-            
-                                            @elseif($guestDetails->serviceID == 2)                                
-                                            <option value="1">Solo</option>
-                                            <option value="2" selected>2 Pax</option>
-                                            <option value="3">3 pax</option>
-                                            <option value="4">4 pax</option>
-                                            
-                                            @elseif($guestDetails->serviceID == 3)
-                                            <option value="1">Solo</option>
-                                            <option value="2">2 Pax</option>
-                                            <option value="3" selected>3 pax</option>   
-                                            <option value="4">4 pax</option>
-                                            
-                                            @elseif($guestDetails->serviceID == 4)
-                                            <option value="1">Solo</option>
-                                            <option value="2">2 Pax</option>
-                                            <option value="3">3 pax</option>
-                                            <option value="4" selected>4 pax</option>
-            
-                                            @endif
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 mb-1">
-                                        <label for="checkInDatetime">Check-in date</label>
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            @php
-                                                $checkedIn = new DateTime($guestDetails->checkinDatetime);
-                                                //$checkedInAt = $checkedIn->format("F j, o");
-                                                $checkedInAt = $checkedIn->format("Y-m-d");
-                                            @endphp
-                                            <input class="form-control" type="date" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-1">
-                                        <label for="checkoutDatetime">Check-out date</label>
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                                                </span>
-                                            </div>
-                                            @php
-                                                $checkOut = new DateTime($guestDetails->checkoutDatetime);
-                                                //$checkOutAt = $checkedOut->format("F j, o");
-                                                $checkOutAt = $checkOut->format("Y-m-d");
-                                            @endphp
-                                            {{--<input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>--}}
-                                            <input class="form-control" type="date" name="checkOutAt" placeholder="" value="{{$checkOutAt}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                {{--<div class="col-md-3 mb-1" id="divUnitNumber">
-                                    <label for="unitNumber">Unit no.</label>
-                                    <input type="text" class="form-control mb-1" value="{{$guestDetails->unitNumber}}" disabled>
-                                </div>
-                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Package</label>
-                                    {{--<select class="form-control mb-1" name="accommodationType" id="accommodationType" readonly>
-                                        <option>{{$guestDetails->serviceName}}</option>
-                                    </select>--}
-                                    <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
-                                </div>
-                                <div class="col-md-3 mb-1">
-                                    <label for="checkInDatetime">Check-in date</label>
-                                    <div class="input-group mb-1">
-                                        {{--<div class="input-group-prepend">
+        
+                                <div class="col-md-4 mb-1" id="divCheckinDate{{$otherUnit->unitNumber}}">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
-                                        </div>--}
-                                        @php
-                                            $checkedIn = new DateTime($guestDetails->checkinDatetime);
-                                            $checkedInAt = $checkedIn->format("F j, o");
-                                        @endphp
-                                    <input class="form-control" type="text" name="checkedInAt" placeholder="" value="{{$checkedInAt}}" disabled>
+                                        </div>
+                                        <input type="date" name="checkinDate{{$otherUnit->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$otherUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherUnit->checkinDatetime)->format('Y-m-d')}}" readonly>
                                     </div>
                                 </div>
-                                <div class="col-md-3 mb-1">
-                                    <label for="checkoutDatetime">Check-out date</label>
-                                    <div class="input-group mb-1">
-                                        {{--<div class="input-group-prepend">
+        
+                                <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherUnit->unitNumber}}">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                             </span>
-                                        </div>--}
-                                        @php
-                                            $checkOut = new DateTime($guestDetails->checkoutDatetime);
-                                            $checkOutAt = $checkOut->format("F j, o");
-                                        @endphp
-                                    <input class="form-control" type="text" name="checkOutAt" placeholder="" value="{{$checkOutAt}}" disabled>
+                                        </div>
+                                        <input type="date" name="checkoutDate{{$otherUnit->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$otherUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherUnit->checkoutDatetime)->format('Y-m-d')}}">
+                                        {{--<input type="text" name="stayDuration" id="stayDuration" required="required" style="display:none;position:absolute;" value="">--}}
                                     </div>
-                                </div>--}}
-                        @endif
+                                </div>  
+                            </div>
+                            </div>
+
+                            @endforeach
+                            @endif
+        
+                            {{--@if(count($otherReservedUnits) > 0)
+                            @foreach($otherReservedUnits as $otherReservedUnit)                    
+                            <div class="form-group row mb-0 pb-0" id="divUnits{{$otherReservedUnit->unitNumber}}">
+                                <div class="col-md-2 mb-1" id="divUnitNumber{{$otherReservedUnit->unitNumber}}">
+                                    <input type="text" class="form-control unit{{$otherReservedUnit->unitNumber}}" value="{{$otherReservedUnit->unitNumber}}" readonly data-toggle="tooltip" data-placement="bottom" data-html="true" title="Click to split dates." style="cursor:pointer">
+                                </div>
+                                <div class="col-md-2 mb-1" id="divNumberOfBeds{{$otherReservedUnit->unitNumber}}">
+                                    <select class="form-control numberOfBeds" name="numberOfBeds{{$otherReservedUnit->unitNumber}}" id="numberOfBeds{{$otherReservedUnit->unitNumber}}">
+                                        @for($index = 1; $index <= $otherReservedUnit->capacity; $index++)
+                                        @if($otherReservedUnit->numberOfBunks == $index)
+                                        <option value="{{$index}}" selected>{{$index}}</option>
+                                        @else
+                                        <option value="{{$index}}">{{$index}}</option>
+                                        @endif
+                                        @endfor
+                                    </select>
+                                    <input type="hidden" id="maxCapacity{{$otherReservedUnit->unitNumber}}" value="{{count($beds)}}">
+                                </div>
+        
+                                <div class="col-md-4 mb-1" id="divCheckinDate{{$otherReservedUnit->unitNumber}}">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input type="date" name="checkinDate{{$otherReservedUnit->unitNumber}}" required="required" class="form-control checkinDatesBackpacker" id="checkinDate{{$otherReservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnit->checkinDatetime)->format('Y-m-d')}}">
+                                    </div>
+                                </div>
+        
+                                <div class="col-md-4 mb-1" id="divCheckoutDate{{$otherReservedUnit->unitNumber}}">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input type="date" name="checkoutDate{{$otherReservedUnit->unitNumber}}" required="required" class="form-control checkoutDatesBackpacker" id="checkoutDate{{$otherReservedUnit->unitNumber}}" value="{{\Carbon\Carbon::parse($otherReservedUnit->checkoutDatetime)->format('Y-m-d')}}">
+                                    </div>
+                                </div>                  
+                            </div>
+                            @endforeach
+                            @endif--}}
                         {{--</div>--}}
+                        
+                        </div>
                     </div>
                     <hr class="mb-4 mt-4">
                     <div class="form-group row pb-3" id="divAdditionalServices">

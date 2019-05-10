@@ -62,19 +62,19 @@ jQuery(document).ready(function(){
         //updateTotal();
         //checkAvailability();
         var checkoutDatesComplete = true;
-            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
-                if(jQuery('.checkoutDates').eq(count).val() == '') {
-                    checkoutDatesComplete = false;
-                }
+        for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+            if(jQuery('.checkoutDatesBackpacker').eq(count).val() == '') {
+                checkoutDatesComplete = false;
             }
+        }
 
-            //console.log(checkout);
-            if(checkoutDatesComplete) {    
-                if(checkDateSeparation() == false) {
-                    checkAvailability();
-                    updateTotal();
-                }      
-            }
+        //console.log(checkout);
+        if(checkoutDatesComplete) {    
+            if(checkDateSeparation() == false) {
+                checkBedAvailability();
+                updateTotal();
+            }      
+        }
     });
 
     jQuery('#tokenfieldBackpacker').on('tokenfield:createdtoken', function (e) {
@@ -86,8 +86,8 @@ jQuery(document).ready(function(){
         if(jQuery('#checkoutDate'+e.attrs.value).val() >= jQuery('#checkinDate'+e.attrs.value).val()){
             //checkAvailability(); 
             var checkoutDatesComplete = true;
-            for (var count = 0; count < jQuery('.checkoutDates').length; count++) {
-                if(jQuery('.checkoutDates').eq(count).val() == '') {
+            for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+                if(jQuery('.checkoutDatesBackpacker').eq(count).val() == '') {
                     checkoutDatesComplete = false;
                 }
             }
@@ -95,7 +95,7 @@ jQuery(document).ready(function(){
             //console.log(checkout);
             if(checkoutDatesComplete) {    
                 if(checkDateSeparation() == false) {
-                    checkAvailability();
+                    checkBedAvailability();
                     updateTotal();
                 }      
             }
@@ -286,17 +286,56 @@ function updateRoomCapacity(unitNumber){
 //BACKPACKER DATES
 jQuery(document).on('change', '.checkinDatesBackpacker', function() {
     updateQuantity();
-    checkBedAvailability();
+    var checkoutDatesComplete = true;
+    for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+        if(jQuery('.checkoutDatesBackpacker').eq(count).val() == '') {
+            checkoutDatesComplete = false;
+        }
+    }
+
+    //console.log(checkout);
+    if(checkoutDatesComplete) {    
+        if(checkDateSeparation() == false) {
+            checkBedAvailability();
+            updateTotal();
+        }      
+    }
 });
 
 jQuery(document).on('change', '.checkoutDatesBackpacker', function() {
     updateQuantity();
-    checkBedAvailability();
+    var checkoutDatesComplete = true;
+    for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+        if(jQuery('.checkoutDatesBackpacker').eq(count).val() == '') {
+            checkoutDatesComplete = false;
+        }
+    }
+
+    //console.log(checkout);
+    if(checkoutDatesComplete) {    
+        if(checkDateSeparation() == false) {
+            checkBedAvailability();
+            updateTotal();
+        }      
+    }
 });
 
 jQuery(document).on('change', '.numberOfBeds', function() {
     updateQuantity();
-    checkBedAvailability();
+    var checkoutDatesComplete = true;
+    for (var count = 0; count < jQuery('.checkoutDatesBackpacker').length; count++) {
+        if(jQuery('.checkoutDatesBackpacker').eq(count).val() == '') {
+            checkoutDatesComplete = false;
+        }
+    }
+
+    //console.log(checkout);
+    if(checkoutDatesComplete) {    
+        if(checkDateSeparation() == false) {
+            checkBedAvailability();
+            updateTotal();
+        }      
+    }
 });
 
 function updateQuantity() {

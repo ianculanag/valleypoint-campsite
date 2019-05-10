@@ -100,6 +100,10 @@ Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');
 //Edit guest details
 Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');
 Route::post('/updateDetails', 'GuestsController@updateDetails');
+Route::post('/update-backpacker-details', 'GuestsController@updateBackpackerDetails');
+
+//Edit backpacker guests
+Route::get('/edit-backpacker-details/{unitID}/{accommodationID}', 'GuestsController@viewBackpackerGuestDetails');
 
 //AddReservation
 //Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
