@@ -82,6 +82,39 @@ class ReservationsController extends Controller
     }
 
     /**
+     * Cancel all reservations made by this guest modal
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelGuestReservationModal($reservationID)
+    {
+        $reservations = DB::table('reservations')
+        ->join('reservation_units', function($join) {
+            $join->on('reservation_units.reservationID', '=', 'reservations.id')
+                 ->where('status', '=','reserved');
+        })
+        ->join('services', 'services.id', 'reservation_units.serviceID')
+        ->where('reservations.id', '=', $reservationID)
+        ->get();
+
+        return $reservations;
+    }
+    
+    /**
+     * Cancel all reservations made by this guest
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelGuestReservation($reservationID)
+    {
+        DB::table('reservation_units')
+        ->where('reservationID', '=', $reservationID)
+        ->update(array('status' => 'canceled'));
+
+        return redirect('/view-reservations');
+    }
+
+    /**
      * Display reservationForm.
      *
      * @return \Illuminate\Http\Response
