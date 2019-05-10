@@ -16,7 +16,7 @@ class CreateFoodsTable extends Migration
         Schema::create('foods', function (Blueprint $table) {
             $table->integer('productID')->unsigned();
             $table->enum('foodCategory',['breakfast','appetizers','noodles','bread','rice bowls', 'group meals', 'soup']);
-            $table->enum('foodName');
+            $table->string('foodName');
             $table->double('price', 8, 2);
             //$table->foreign('productID')->references('id')->on('Products');
             $table->timestamps();
