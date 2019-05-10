@@ -139,7 +139,7 @@
                                             <th colspan="3" scope="row">AMOUNT PAID:</th>
                                             <th id="invoiceAmountPaid" style="text-align:right;"></th>
                                         </tr>    
-                                        <tr>
+                                        <tr> 
                                             <th colspan="3" scope="row">BALANCE:</th>
                                             <th id="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
                                         </tr>

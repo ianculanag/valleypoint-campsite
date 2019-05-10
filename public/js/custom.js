@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
             console.log(data);
             
             var htmlString = "";
-
+ 
             htmlString += "<h5 class='text-center'>Unit Details</h5>";
             htmlString += "<div class='container'>";
             htmlString += "<table class='table table-sm borderless'>";
@@ -38,8 +38,9 @@ jQuery(document).ready(function(){
             var checkoutDatetime = moment(data[0].checkoutDatetime).format('L');
             var today = new Date();
             var currentDate = moment(today).format('L');
+            var aviledUnits = data[0].numberOfUnits;
             
-            if(checkoutDatetime == currentDate) {
+            if(checkoutDatetime == currentDate && availedUnits != 1) {
                 jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
             } else {
                 jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
