@@ -38,7 +38,7 @@ class ReservationsController extends Controller
         ->orderBy('reservations.id')
         ->get();
         
-        $reservations =  $reservations->unique('reservationID');
+        //$reservations =  $reservations->unique('reservationID');
 
         //return $reservations;
 
@@ -50,7 +50,7 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancelReservationModal($reservationID)
+    public function cancelReservationModal($reservationID, $unitID)
     {
         $reservations = DB::table('reservations')
         ->join('reservation_units', function($join) {
@@ -59,6 +59,8 @@ class ReservationsController extends Controller
         })
         ->join('services', 'services.id', 'reservation_units.serviceID')
         ->where('reservations.id', '=', $reservationID)
+        ->where('unitID', '=', $unitID)
+
         ->get();
 
         return $reservations;
@@ -69,10 +71,11 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancelReservation($reservationID)
+    public function cancelReservation($reservationID, $unitID)
     {
         DB::table('reservation_units')
-        ->where('reservationID', $reservationID)
+        ->where('reservationID', '=', $reservationID)
+        ->where('unitID', '=', $unitID)
         ->update(array('status' => 'canceled'));
 
         return redirect('/view-reservations');

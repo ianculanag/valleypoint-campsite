@@ -86,8 +86,8 @@ Route::get('/reserve-glamping/{unitID}', 'ReservationsController@showGlampingRes
 Route::post('/reserve-glamping', 'ReservationsController@reserveGlamping');
 
 //Cancel reservation
-Route::get('/cancel-reservation-modal/{reservationID}', 'ReservationsController@cancelReservationModal');
-Route::post('/cancel-reservation/{reservationID}','ReservationsController@cancelReservation');
+Route::get('/cancel-reservation-modal/{reservationID}/{unitID}', 'ReservationsController@cancelReservationModal');
+Route::get('/cancel-reservation/{reservationID}/{unitID}','ReservationsController@cancelReservation');
 
 //Reservation backpacker
 Route::get('/reserve-backpacker/{unitID}', 'ReservationsController@showBackpackerReservationForm');

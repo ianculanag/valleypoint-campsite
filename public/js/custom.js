@@ -1179,7 +1179,10 @@ jQuery(document).ready(function() {
 
 jQuery(document).ready(function(){
     jQuery('.cancel-reservation-modal').click(function(){
-        jQuery.get('/cancel-reservation-modal/'+jQuery(this).attr('id'), function(data){
+        var id = jQuery(this).attr('id').split('-');
+        var reservationID = id[0];
+        var unitID = id[1];
+        jQuery.get('/cancel-reservation-modal/' + reservationID + '/' + unitID, function(data){
             
             console.log(data);
 
@@ -1197,7 +1200,7 @@ jQuery(document).ready(function(){
             htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[0].checkoutDatetime).format('LLLL') + "</td></tr></table></div></div>";
 
             jQuery('#cancelReservationModalBody').html(htmlString);
-            jQuery("#confirmCancel").attr("href", "/cancel-reservation/"+data[0].reservationID);
+            jQuery("#confirmCancel").attr('href', '/cancel-reservation/' + data[0].reservationID + '/' + data[0].unitID);
         })
     });
 }); 

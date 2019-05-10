@@ -437,7 +437,7 @@
                         {{--<button class="btn btn-info" id="checkAvailability" style="width:10em;" type="button">Check Availability</button>--}}
                         {{--</a>--}}
                         <button class="btn btn-success" id="checkinButton" style="width:10em;" type="submit">Check-in</button>
-                        <a id="{{$reservation->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
+                        <a id="{{$reservation->id}}-{{$unit->id}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
                             <button class="btn btn-danger" style="width:10em;"> Release </button>
                         </a>
                         <a href="/glamping" style="text-decoration:none;">

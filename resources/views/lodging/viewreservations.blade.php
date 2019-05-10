@@ -39,7 +39,7 @@
                 <td>{{\Carbon\Carbon::parse($reservation->checkinDatetime)->format('M j, Y')}}</td>
                 <td><a href="/checkin/{{$reservation->unitID}}/{{$reservation->id}}"><button class="btn btn-sm btn-success">Check-in</button></a>
                         <button class="btn btn-sm btn-info">Edit</button>
-                    <a id="{{$reservation->reservationID}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
+                    <a id="{{$reservation->reservationID}}-{{$reservation->unitID}}" class="cancel-reservation-modal" data-toggle="modal" data-target="#removeReservationModal">
                         <button class="btn btn-sm btn-danger">Cancel</button>
                     </a>
                     </td>
