@@ -688,7 +688,24 @@ class UnitsController extends Controller
         ->get()
         ->toArray(); 
 
-        return array_merge($units, $reservations);
+        $remainingAvailed = DB::table('accommodation_units')
+        ->leftJoin('units', 'units.id', 'accommodation_units.unitID')
+        ->where('accommodationID', '=', $units[0]->accommodationID)
+        ->where('status', 'ongoing')
+        ->select('accommodation_units.accommodationID AS remainingAccommodations')
+        ->get()
+        ->toArray();
+
+        $remainingArray = array();
+        $remaining = 0;
+
+        foreach ($remainingAvailed as $availed) {
+            $remaining++;
+        }
+
+        array_push($remainingArray, $remaining);
+
+        return array_merge($units, $reservations, $remainingAvailed, $remainingArray);
     }
 
     /**

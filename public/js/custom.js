@@ -38,10 +38,11 @@ jQuery(document).ready(function(){
             var checkoutDatetime = moment(data[0].checkoutDatetime).format('L');
             var today = new Date();
             var currentDate = moment(today).format('L');
-            var aviledUnits = data[0].numberOfUnits;
+            var availedUnits = data[data.length-1];
             
+            console.log(availedUnits);
             if(checkoutDatetime == currentDate && availedUnits != 1) {
-                jQuery("#checkout").attr("href", "checkout-due-today/"+data[0].unitID);
+                jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
             } else {
                 jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
             }

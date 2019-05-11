@@ -742,6 +742,32 @@ class GuestsController extends Controller
         ->where('units.id', '=', $unitID)
         ->get();
 
+        $remainingAvailed = DB::table('accommodation_units')
+        ->leftJoin('units', 'units.id', 'accommodation_units.unitID')
+        ->where('accommodationID', '=', $guest[0]->accommodationID)
+        ->where('status', 'ongoing')
+        ->select('accommodation_units.accommodationID AS remainingAccommodations')
+        ->get()
+        ->toArray();
+
+        $remainingArray = array();
+        $remaining = 0;
+
+        foreach ($remainingAvailed as $availed) {
+            $remaining++;
+        }
+
+        //return $remaining;
+        /*$dueCount = 0;
+
+        foreach ($dueToday as $due) {
+            $dueCount++;
+        }
+
+        return $dueCount;*/
+
+        //return $dueToday;
+
         //return $dueToday;
         if($guest[0]->numberOfUnits > 1) {
             $otherUnits = DB::table('accommodation_units')
@@ -752,9 +778,9 @@ class GuestsController extends Controller
             ->get();
 
             //return $otherUnits;
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits)->with('dueToday', $dueToday);
+            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits)->with('dueToday', $dueToday)->with('remaining', $remaining);
         } else {
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('dueToday', $dueToday);
+            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('dueToday', $dueToday)->with('remaining', $remaining);
         }  
     }
 

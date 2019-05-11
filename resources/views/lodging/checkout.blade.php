@@ -226,7 +226,7 @@
             @foreach($dueToday as $due)
                 
             @endforeach
-            @if($due)
+            @if($due && $remaining > 1)
                 <div class="container glamping-accomodation-tabs pb-4 px-0">
                     <ul class="nav nav-tabs pt-0" style="width:100%">
                         <li class="nav-item">
