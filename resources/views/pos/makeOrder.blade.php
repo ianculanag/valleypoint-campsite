@@ -72,19 +72,23 @@
                                 </div>
                             </div>
 
-                         <div class="card row" id="Menu"style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
+                         <div class="card" style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
+                            <div class="row p-3" id="Menu">
                             @foreach ($foods as $food)
                             @if($food->foodCategory == 'appetizers')
-                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="px-1 mx-1" id="">       
-                                <div class="card mx-2" style="width:7rem; height:5em;">
-                                    <div class="card-body">
-                                    <h6 class="card-title">
-                                        {{$food->foodName}}
-                                    </h6>
+                                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="px-1 mx-1" id="">       
+                                    <div class="card px-0 mx-1" style="width:8.3rem; height:5em;">
+                                        <div class="card-body  px-2 py-2 mx-0">
+                                        <h6 class="card-title text-center">
+                                            {{$food->foodName}}
+                                        </h6>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </a>
                             @endif
-
+                            @endforeach
+                            </div>
+                        </div>
                                 {{-- @if($food->$foodCategory == 'bread')
                                 <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">       
                                     <div class="card mx-2" style="width:7rem; height:5em;">
@@ -94,11 +98,7 @@
                                         </h6>
                                         </div>
                                     </div></a>
-                                @endif --}}
-
-                            @endforeach
-
-                           
+                                @endif --}}     
                 </div>
             </div>
         </div>
