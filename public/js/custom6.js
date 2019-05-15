@@ -50,15 +50,17 @@ jQuery(document).ready(function(){
                             htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkinDatetime).format('LLLL') + "</td></tr>";
                             htmlString += "<tr><td>Check-out: </td>";
                             htmlString += "<td style='color:green; font-syle:italic;'>" + moment(data[index].checkoutDatetime).format('LLLL') + "</td></tr>";
-                            htmlString += "<tr><td class='pt-3'f colspan='2'><a href='' id='checkout'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
-                            htmlString += "<a href='edit-backpacker-details/"+data[index].unitID+"/"+data[index].accommodationID+"' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";
+   
+                            if(checkoutDatetime == currentDate) {
+                                htmlString += "<tr><td class='pt-3'f colspan='2'><a href='checkout-backpacker-due-today/"+data[index].unitID+"' id='checkoutBackpacker'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
+                                htmlString += "<a href='edit-backpacker-details/"+data[index].unitID+"/"+data[index].accommodationID+"' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";    
+                                //jQuery("#checkoutBackpacker").attr("href", "checkout-backpacker-due-today/"+data[index].unitID);
+                            } else {
+                                htmlString += "<tr><td class='pt-3'f colspan='2'><a href='checkout-backpacker/"+data[index].unitID+"' id='checkoutBackpacker'><button type='button' class='btn btn-secondary' style='float:right'>Check-out</button></a>";
+                                htmlString += "<a href='edit-backpacker-details/"+data[index].unitID+"/"+data[index].accommodationID+"' id='editDetails'><button type='button' class='btn btn-info mx-2' style='float:right'>View Details</button></a></td></tr></table></div>";    
+                                //jQuery("#checkoutBackpacker").attr("href", "checkout-backpacker/"+data[index].unitID);
+                            } 
                         }
-                        if(checkoutDatetime == currentDate) {
-                            //console.log(3);
-                            jQuery("#checkout").attr("href", "checkout-due-today/"+data[index].unitID);
-                        } else {
-                            jQuery("#checkout").attr("href", "checkout/"+data[index].unitID);
-                        } 
                     }
                 }
             }      
