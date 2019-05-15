@@ -151,8 +151,10 @@ Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamp
 
 //Check-out backpacker guests
 Route::get('/checkout-backpacker/{unitID}', 'GuestsController@showBackpackerCheckoutForm');
+Route::post('/checkoutBackpacker', 'AccommodationsController@checkoutBackpacker');
 
 Route::get('/checkout-backpacker-due-today/{unitID}', 'GuestsController@showBackpackerCheckoutFormDueToday');
+Route::post('/checkoutDueTodayBackpacker', 'AccommodationsController@checkoutBackpacker');
 
 //Daily lodging reports
 Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');

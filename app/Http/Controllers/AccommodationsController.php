@@ -612,4 +612,93 @@ class AccommodationsController extends Controller
 
         return redirect('/glamping');
     }
+
+    /**
+     * Checkout glamping guests
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkoutBackpacker(Request $request)
+    {
+        for($count = 0; $count < $request->input('chargesCount'); $count++) {
+            $existingCharge = 'charge'.$count;
+            $paymentEntry = 'payment'.$count;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $request->input($existingCharge);
+                $payment->save();
+
+                $charge = Charges::find($request->input($existingCharge));
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+
+        $additionalChargesCount = 0;
+        $additionalChargesArray = array();
+
+        if($request->input('additionalServicesCount') > 0) {
+            for($count = 1; $count <= $request->input('additionalServicesCount'); $count++) {
+                $additionalServiceID = 'additionalServiceID'.$count;
+                $additionalServiceNumberOfPax = 'additionalServiceNumberOfPax'.$count;
+                $additionalTotalPrice = 'additionalServiceTotalPrice'.$count;
+                if($request->input($additionalServiceID)) {
+                    $charges = new Charges;                    
+                    $charges->quantity = $request->input($additionalServiceNumberOfPax);
+                    $charges->totalPrice = $request->input($additionalTotalPrice);
+                    $charges->balance = $request->input($additionalTotalPrice);
+                    $charges->remarks = 'unpaid';
+                    $charges->accommodationID = $request->input('accommodationID');
+                    $charges->serviceID = $request->input($additionalServiceID);
+                    $charges->save();
+                    $additionalChargesCount++;
+                    array_push($additionalChargesArray, $charges->id);
+                }
+            }
+        }
+
+        $firstAdditionalCharge = $request->input('chargesCount'); 
+
+        for($count = 0; $count < $additionalChargesCount; $count++) {
+            $index = $count+$firstAdditionalCharge;
+            $paymentEntry = 'payment'.$index;
+            if($request->input($paymentEntry)) {
+                $payment = new Payments;
+                $payment->paymentDatetime = Carbon::now();
+                $payment->amount = $request->input($paymentEntry);
+                $payment->paymentStatus = 'full';
+                $payment->chargeID = $additionalChargesArray[$count];
+                $payment->save();
+
+                $charge = Charges::find($additionalChargesArray[$count]);
+                $charge->update([
+                    'remarks' => 'full'
+                ]);
+            }
+        }
+
+        $oneUnit = $request->input('checkOutOneUnit');
+        if($oneUnit == 1) {
+            $units = DB::table('accommodation_units')
+            ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+            ->update(array('status' => 'finished','checkoutDatetime' => Carbon::now()));
+        } else {
+            $unitIDs = explode(',', $request->input('unitCheckout'));
+            for($count = 0; $count < count($unitIDs); $count++) {
+                $units = DB::table('accommodation_units')
+                ->join('units', 'units.id', 'accommodation_units.accommodationID')
+                ->where('accommodation_units.accommodationID', '=', $request->input('accommodationID'))
+                ->where('accommodation_units.unitID', '=', $unitIDs[$count])
+                ->orWhere('units.partOf', '=', $unitIDs[$count])
+                ->update(array('status' => 'finished','checkoutDatetime' => Carbon::now()));
+            }
+        } 
+
+        return redirect('/backpacker');
+    }
 }
