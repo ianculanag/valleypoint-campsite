@@ -778,9 +778,9 @@ class GuestsController extends Controller
             ->get();
 
             //return $otherUnits;
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits)->with('dueToday', $dueToday)->with('remaining', $remaining);
+            return view('lodging.checkoutglamping')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits)->with('dueToday', $dueToday)->with('remaining', $remaining);
         } else {
-            return view('lodging.checkout')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('dueToday', $dueToday)->with('remaining', $remaining);
+            return view('lodging.checkoutglamping')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('dueToday', $dueToday)->with('remaining', $remaining);
         }  
     }
 
@@ -925,9 +925,9 @@ class GuestsController extends Controller
             ->get();
             //return $otherUnits;
 
-            return view('lodging.checkoutDueToday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
+            return view('lodging.checkoutglampingduetoday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments)->with('otherUnits', $otherUnits);
         } else {
-            return view('lodging.checkoutDueToday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
+            return view('lodging.checkoutglampingduetoday')->with('guest', $guest)->with('pendingPayments', $pendingPayments)->with('payments', $payments);
         } 
     }
 
