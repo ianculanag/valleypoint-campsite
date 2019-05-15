@@ -64,11 +64,11 @@
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container" id="dropdownRestoTransactions">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="view-orders">
                                 <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                 <span> Orders </span>
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="view-payments">
                                 <i class="fa fa-receipt" aria-hidden="true"></i>
                                 <span> Payments </span>
                             </a>
