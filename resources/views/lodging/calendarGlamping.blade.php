@@ -290,5 +290,36 @@
             Reserved
         </span>
     </div>
+
+    <!-- Guest details modal -->
+    <div class="modal fade right" id="view-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 id="modal-head1"><h4>
+                    <!--p class="heading lead">Tent 1</p-->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body scrollbar-near-moon-wide" id="modal-body">
+                </div>
+                <!--Footer-->
+                <div class="modal-footer justify-content-right">
+                    <a href="" id="reserve">
+                        <button type="button" class="btn btn-success">Add Reservation</button>
+                    </a>
+                    <!--a href="" id="editDetails">
+                        <button type="button" class="btn btn-info">View Details</button>
+                    </a>
+                    <a href="" id="checkout">
+                        <button type="button" class="btn btn-danger">Check-out</button>
+                    </a-->
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
  

@@ -9,7 +9,7 @@
                 <strong>Back</strong>
             </span>
         </a>--}}
-        <h3 class="text-center">Charges</h3>
+        <h3 class="text-center">Transaction Charges</h3>
     </div>
     <div class="col-md-12">
         <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0" id="chargesTable">

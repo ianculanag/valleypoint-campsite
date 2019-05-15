@@ -288,12 +288,6 @@
                     <div class="form-group row">
                         @if($guestDetails->numberOfUnits > 1)
                             <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$guestDetails->numberOfUnits}}">
-                                {{--<div class="col-md-1 mb-1" id="divUnitNumberCheckbox">
-                                    <input type='checkbox' class='custom-control-input unitNumberCheckboxes'>
-                                    @foreach($otherUnits as $units)
-                                    <input type='checkbox' class='custom-control-input unitNumberCheckboxes'>
-                                    @endforeach
-                                </div>--}}
                                 <div class="col-md-1 mb-1" id="divUnitCheckoutCheckboxes">    
                                     <div class="custom-control custom-checkbox">
                                         <input type='checkbox' class='custom-control-input' id="selectAllUnitCheckoutCheckboxes" checked>
@@ -562,25 +556,25 @@
     <!-- unsaved changes modal -->
     <!-- unpaid charges modal -->
     <div class="modal fade" id="unpaidChargesModal" tabindex="-1" role="dialog" aria-labelledby="unpaidChargesModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Unpaid Charges</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>There are charges left unpaid in this accommodation. What would you like to do?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger">Override charges</button>
-                        <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">Back</button>
-                    </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Unpaid Charges</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>There are charges left unpaid in this accommodation. What would you like to do?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">Override charges</button>
+                    <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
-        <!-- unnpaid charges modal -->
+    </div>
+    <!-- unnpaid charges modal -->
     @endforeach
 @endsection
  

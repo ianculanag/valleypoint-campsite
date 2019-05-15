@@ -35,7 +35,14 @@
                   <td>{{str_limit($guest->lastName, $limit = 10, $end = '...')}}</td>
                   <td>{{$guest->contactNumber}}</td>                    
                   <td>{{$guest->serviceName}}</td>
+                  {{--@if($guest->unitType == 'bed')
+                  @foreach ($partOf as $partOf)
+                      
+                  @endforeach
+                  <td>{{$partOf->unitNumber}}
+                  @else--}}
                   <td>{{$guest->unitNumber}}</td>
+                  {{--@endif--}}
                   <td>{{$guest->numberOfUnits}}</td>
                 </tr>
                 @endforeach

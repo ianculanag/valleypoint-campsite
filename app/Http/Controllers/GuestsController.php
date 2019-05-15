@@ -1006,7 +1006,8 @@ class GuestsController extends Controller
         ->join('services', 'services.id', 'accommodation_units.serviceID')
         ->join('units', 'units.id', 'accommodation_units.unitID')
         ->select('guests.id as guestID', 'guests.lastName', 'guests.firstName', 'guests.contactNumber', 
-        'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber', 'guests.accommodationID')
+        'services.serviceName', 'accommodations.numberOfUnits', 'units.unitNumber', 'guests.accommodationID', 
+        'units.partOf', 'unitType')
         ->where('accommodation_units.status', '=', 'ongoing')
         ->get();
 

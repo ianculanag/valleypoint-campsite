@@ -202,7 +202,7 @@
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="availableUnit4">
                                         <label class="custom-control-label" for="availableUnit4">Tent 4</label>
-                                    </div>--}}
+                                    </div>--}} 
                                 </div>
                             </div>
                         </div>
