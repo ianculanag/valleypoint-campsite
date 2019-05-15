@@ -92,5 +92,71 @@ class FoodsController extends Controller
             return view ('pos.makeOrder')
             ->with ('foods', $food);
     }
+
+    public function viewAppetizers(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'appetizers')
+        ->get();
+
+        return $food;
+    }
+    public function viewBreads(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'bread')
+        ->get();
+
+        return $food; 
+    }
+    public function viewBreakfast(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'breakfast')
+        ->get();
+
+        return $food;
+    }
+    public function viewGroupmeals(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'group meals')
+        ->get();
+
+        return $food;
+    }
+    public function viewNoodles(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'noodles')
+        ->get();
+
+        return $food;
+    }
+    public function viewRicebowl(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'rice bowls')
+        ->get();
+
+        return $food;
+    }
+    public function viewSoup(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'soup')
+        ->get();
+
+        return $food;
+    }
+    public function viewBeverages(){
+        $food = DB::table('foods')
+        ->select('foodCategory', 'foodName')
+        ->where('foodCategory', '=', 'beverages')
+        ->get();
+
+        return $food;
+    }
+
 }
 

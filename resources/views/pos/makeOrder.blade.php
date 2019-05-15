@@ -61,21 +61,21 @@
                             <div class="col-md-14" style="margin-top: 3em;">
                                 <div class="list-group">
                     
-                                    <a href="#" class='list-group-item list-group-item-primary' style="color:black">Appetizer</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Bread</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Breakfast</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Group Meals</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Noodles</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Rice Bowl</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Soup</a>
-                                    <a href="#" class='list-group-item list-group-item' style="color:black">Beverages </a>
+                                    <a href="#" id="appetizer" class='list-group-item list-group-item makeorder' style="color:black">Appetizer</a>
+                                    <a href="#" id="bread" class='list-group-item list-group-item makeorder' style="color:black">Bread</a>
+                                    <a href="#" id="breakfast" class='list-group-item list-group-item makeorder' style="color:black">Breakfast</a>
+                                    <a href="#" id="groupMeals" class='list-group-item list-group-item makeorder' style="color:black">Group Meals</a>
+                                    <a href="#" id="noodles" class='list-group-item list-group-item makeorder' style="color:black">Noodles</a>
+                                    <a href="#" id="riceBowl" class='list-group-item list-group-item makeorder' style="color:black">Rice Bowl</a>
+                                    <a href="#" id="soup" class='list-group-item list-group-item makeorder' style="color:black">Soup</a>
+                                    <a href="#" id="beverages" class='list-group-item list-group-item makeorder' style="color:black">Beverages </a>
                                 </div>
                             </div>
 
-                         <div class="card" style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
+                         <div class="card row" id="Menu"style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
                             @foreach ($foods as $food)
                             @if($food->foodCategory == 'appetizers')
-                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">       
+                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="px-1 mx-1" id="">       
                                 <div class="card mx-2" style="width:7rem; height:5em;">
                                     <div class="card-body">
                                     <h6 class="card-title">

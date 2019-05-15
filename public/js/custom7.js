@@ -51,3 +51,103 @@ jQuery(document).ready(function(){
 
     });
 });
+
+jQuery(document).ready(function(){
+    jQuery(document).on('click', '.makeorder', function(){
+        var foodCategory = jQuery(this).attr('id');
+
+        var htmlString = "";
+
+        if(foodCategory == 'bread'){
+            //alert("bread ito");
+            jQuery.get('/view-breads', function(data){
+                for(var index = 0; index<data.length; index++){
+                htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='' id=''>";
+                htmlString +="<div class='card mx-2' style='width:7rem; height:5em;'>";
+                htmlString+="<div class='card-body'>";
+                htmlString+="<h6 class='card-title'>"+data[index].foodName;
+                htmlString +="</h6> </div> </div> </a>";
+
+                jQuery('#Menu').html(htmlString);
+                }
+         })
+         jQuery('.makeorder').removeClass('active');
+         jQuery('#bread').addClass('active');
+        }
+        else if(foodCategory == 'breakfast'){
+            //alert("bfast");
+
+            jQuery.get('/view-breakfast', function(data){
+                for(var index = 0; index<data.length; index++){
+                htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='' id=''>";
+                htmlString +="<div class='card mx-2' style='width:7rem; height:5em;'>";
+                htmlString+="<div class='card-body'>";
+                htmlString+="<h6 class='card-title'>"+data[index].foodName;
+                htmlString +="</h6> </div> </div> </a>";
+
+                jQuery('#Menu').html(htmlString);
+                }
+         })
+         jQuery('.makeorder').removeClass('active');
+         jQuery('#breakfast').addClass('active');
+        }else if(foodCategory == 'appetizer'){
+            jQuery.get('/view-appetizers', function(data){
+                for(var index = 0; index<data.length; index++){
+                htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='' id=''>";
+                htmlString +="<div class='card mx-2' style='width:7rem; height:5em;'>";
+                htmlString+="<div class='card-body'>";
+                htmlString+="<h6 class='card-title'>"+data[index].foodName;
+                htmlString +="</h6> </div> </div> </a>";
+
+                jQuery('#Menu').html(htmlString);
+                }
+         })
+         jQuery('.makeorder').removeClass('active');
+         jQuery('#appetizer').addClass('active');
+        }else if(foodCategory == 'groupMeals'){
+            jQuery.get('/view-group-meals', function(data){
+                for(var index = 0; index<data.length; index++){
+                htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='' id=''>";
+                htmlString +="<div class='card mx-2' style='width:7rem; height:5em;'>";
+                htmlString+="<div class='card-body'>";
+                htmlString+="<h6 class='card-title'>"+data[index].foodName;
+                htmlString +="</h6> </div> </div> </a>";
+
+                jQuery('#Menu').html(htmlString);
+                }
+         })
+         jQuery('.makeorder').removeClass('active');
+         jQuery('#groupMeals').addClass('active');
+        }else if(foodCategory == 'noodles'){
+            jQuery.get('/view-noodles', function(data){
+                for(var index = 0; index<data.length; index++){
+                htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='' id=''>";
+                htmlString +="<div class='card mx-2' style='width:7rem; height:5em;'>";
+                htmlString+="<div class='card-body'>";
+                htmlString+="<h6 class='card-title'>"+data[index].foodName;
+                htmlString +="</h6> </div> </div> </a>";
+
+                jQuery('#Menu').html(htmlString);
+                }
+         })
+         jQuery('.makeorder').removeClass('active');
+         jQuery('#noodles').addClass('active');
+        }else if(foodCategory == 'riceBowl'){
+            alert("kanin at mangkok");
+
+            jQuery('.makeorder').removeClass('active');
+            jQuery('#riceBOwl').addClass('active');  
+        }else if(foodCategory == 'soup'){
+            alert("sabaw");
+
+            jQuery('.makeorder').removeClass('active');
+            jQuery('#soup').addClass('active');   
+        }else if (foodCategory == 'beverages'){
+            alert("drinks");
+            
+            jQuery('.makeorder').removeClass('active');
+            jQuery('#beverages').addClass('active');
+        }
+
+    })
+});

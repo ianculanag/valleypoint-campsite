@@ -18,7 +18,7 @@
             </ul>
         </div>
 
-        <div class="container-center">
+        <div class="container-center" style="float:left;">
             <div class="row">
                 @for($index = 1; $index <=12; $index++) 
                 <a data-toggle="modal" data-target="#exampleModal" style="cursor:pointer">
