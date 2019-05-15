@@ -241,7 +241,7 @@
                             <a class="nav-link active" href="#">All</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color:#505050;" href="/checkout-due-today/{{$guestDetails->unitID}}">Due today</a>
+                            <a class="nav-link" style="color:#505050;" href="/checkout-glamping-due-today/{{$guestDetails->unitID}}">Due today</a>
                         </li>
                     </ul>
                 </div>

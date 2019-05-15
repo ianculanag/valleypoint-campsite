@@ -4,7 +4,7 @@
     @foreach ($guest as $guestDetails)
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
-            <a href="{{ URL::previous() }}">
+            <a href="/backbacker">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -13,7 +13,7 @@
             <h3>Check-out Form</h3>
         </div>
         
-        <form method="POST" action="/checkoutDueTodayGlamping">
+        <form method="POST" action="/checkoutDueTodayBackpacker">
         <div class="row" role="tablist" aria-multiselectable="true">
             <div class="col-md-4 order-md-2 mb-4 mx-0 px-0">
                 <!-- Payment Transactions Accordion -->
@@ -158,10 +158,6 @@
                                                 Get payment
                                             </button> 
                                             @endif
-                                            <a href="/view-guests-payments/{{$guestDetails->accommodationID}}" style="text-decoration: none">
-                                            <button type="button" class="btn btn-info btn-block mt-1" id="viewGuestPaymentsButton">
-                                                View full payment details
-                                            </button></a> 
                                             </td>
                                             </tr>
                                     </tfoot>
@@ -205,10 +201,6 @@
                                                 Get payment
                                             </button> 
                                             @endif
-                                            <a href="/view-guests-payments/{{$guestDetails->accommodationID}}" style="text-decoration: none">
-                                            <button type="button" class="btn btn-info btn-block mt-1" id="viewGuestPaymentsButton">
-                                                View full payment details
-                                            </button></a> 
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -316,10 +308,10 @@
                                     <input type="number" style="display:none;float:left;" id="unitCheckoutCount" name="unitCheckoutCount" value="{{$unitsDueToday}}">
                                     <input type="text" style="display:none;float:left;" id="unitCheckout" name="unitCheckout" value="{{$unitNumbers}}">
                                 </div>
-                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Package</label>
+                                <div class="col-md-3 mb-1" id="divNumberOfBeds">
+                                    <label for="numberofBeds">No. of beds</label>
                                     @foreach($otherUnits as $units)
-                                    <input class="form-control mb-1" value="{{$units->serviceName}}" name="accommodationType" id="accommodationType" readonly>
+                                    <input class="form-control mb-1" value="{{$units->numberOfBunks}}" name="numberOfBeds" id="numberOfBeds" readonly>
                                     @endforeach
                                 </div>
                                 <div class="col-md-3 mb-1">
@@ -351,9 +343,9 @@
                                     <label for="unitNumber">Unit no.</label>
                                     <input type="text" class="form-control mb-1" value="{{$guestDetails->unitNumber}}" disabled>
                                 </div>
-                                <div class="col-md-3 mb-1" id="divAccommodationPackage">
-                                    <label for="additionalServiceUnitPrice">Package</label>
-                                    <input class="form-control mb-1" value="{{$guestDetails->serviceName}}" name="accommodationType" id="accommodationType" readonly>
+                                <div class="col-md-3 mb-1" id="divNumberOfBeds">
+                                    <label for="numberOfBeds">No. of beds</label>
+                                    <input class="form-control mb-1" value="{{$guestDetails->numberOfBunks}}" name="numberOfBeds" id="numberOfBeds" readonly>
                                 </div>
                                 <div class="col-md-3 mb-1">
                                     <label for="checkInDatetime">Check-in date</label>

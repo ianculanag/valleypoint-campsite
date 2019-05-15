@@ -42,9 +42,9 @@ jQuery(document).ready(function(){
             
             console.log(availedUnits);
             if(checkoutDatetime == currentDate && availedUnits != 1) {
-                jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+                jQuery("#checkout").attr("href", "checkout-glamping/"+data[0].unitID);
             } else {
-                jQuery("#checkout").attr("href", "checkout/"+data[0].unitID);
+                jQuery("#checkout").attr("href", "checkout-glamping/"+data[0].unitID);
             }
         })
     });

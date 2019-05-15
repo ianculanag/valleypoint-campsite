@@ -143,14 +143,16 @@ Route::get('/getDates', 'UnitsController@getDates');
 Route::get('/get-room-dates', 'UnitsController@getRoomDates');
 
 //Check-out glamping guests
-Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
+Route::get('/checkout-glamping/{unitID}', 'GuestsController@showGlampingCheckoutForm');
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 
-Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
+Route::get('/checkout-glamping-due-today/{unitID}', 'GuestsController@showGlampingCheckoutFormDueToday');
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
 //Check-out backpacker guests
 Route::get('/checkout-backpacker/{unitID}', 'GuestsController@showBackpackerCheckoutForm');
+
+Route::get('/checkout-backpacker-due-today/{unitID}', 'GuestsController@showBackpackerCheckoutFormDueToday');
 
 //Daily lodging reports
 Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
