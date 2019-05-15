@@ -142,12 +142,15 @@ Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 Route::get('/getDates', 'UnitsController@getDates');
 Route::get('/get-room-dates', 'UnitsController@getRoomDates');
 
-//Check-out guests
+//Check-out glamping guests
 Route::get('/checkout/{unitID}', 'GuestsController@showCheckoutForm');
 Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 
 Route::get('/checkout-due-today/{unitID}', 'GuestsController@showCheckoutFormDueToday');
 Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
+
+//Check-out backpacker guests
+Route::get('/checkout-backpacker/{unitID}', 'GuestsController@showBackpackerCheckoutForm');
 
 //Daily lodging reports
 Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
