@@ -24,7 +24,9 @@ jQuery(document).ready(function(){
          htmlString+="<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
          //htmlString+="<a href=''>";
          htmlString+="<button type='button' name='button"+nameSliced+"' class='btn btn-primary occupyButton' data-dismiss='modal'>Occupy</button>";
-         //htmlString+="</a>";
+         htmlString+="<a href='/make-order'>";
+         htmlString+="<button type='button' name='button"+nameSliced+"' class='btn btn-primary occupyButton' data-='modal'>Occupy & Make Order</button>";
+         htmlString+="</a>";
          htmlString+="</div>";
          htmlString+="</div>";
          htmlString+="</div>";
