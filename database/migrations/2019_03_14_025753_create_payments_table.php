@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->dateTime('paymentDatetime');
             $table->double('amount', 8, 2);
+            $table->double('changeDue', 8, 2);
             $table->enum('paymentStatus', ['partial', 'full']);
             $table->integer('chargeID')->unsigned();
             //$table->foreign('chargeID')->references('id')->on('Charge');
