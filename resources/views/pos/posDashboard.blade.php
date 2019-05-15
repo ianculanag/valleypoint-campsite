@@ -9,145 +9,53 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="">View Tables</a>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:#505050"; href="/MakeOrder">New order</a>
+                        <a class="nav-link" style="color:#505050"; href="/make-order">New order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color:#505050"; href="/CashierShiftReport">View Sales</a>
+                        <a class="nav-link" style="color:#505050"; href="/cashier-shift-report">View Sales</a>
                     </li>
                 </li>
             </ul>
         </div>
-        <div class="container-center" style="float:left;">
+
+        <div class="container-center">
             <div class="row">
-              <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="load-restaurant-details" id=>
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em; background-image:url({{asset('table.png')}});">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 1
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                     </div>
-                </div>  </a>
+                @for($index = 1; $index <=12; $index++) 
+                <a data-toggle="modal" data-target="#exampleModal" style="cursor:pointer">
+                    <div class="card mx-2 restaurant-tables" id="table{{$index}}" style="width:16rem; height:7.5em; background-image:url({{asset('table.png')}}); background-size:cover; background-repeat:no-repeat;">
+                        <div class="card-body">
+                            <h5 class="card-title">Table {{$index}}
+                            <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;" id="badge{{$index}}">Available</span>
+                            </h5>
+                            <p class="card-text">Status: </p>
+                            <p class="card-text">Amount: </p>
+                         </div>
+                    </div> 
+                </a>
+                @endfor 
+                </div>
 
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 2
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
+         <!-- Modal -->
+    <div class="dynamicModal">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Table #{{$index}}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
-                </div> </a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 3
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                       </div>
-                </div> </a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 4
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div> </a>
-                
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 5
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                       </div>
-                </div> </a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 6
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div></a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 7 
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div> </a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 8
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div></a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 9
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div></a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; margin-left: 5em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 10
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                        </div>
-                </div></a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 11
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                       </div>
-                </div></a>
-
-                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">
-                <div class="card" style="width: 16rem; height: 8em; margin: 1em; background-image:url({{asset('table.png')}})">
-                    <div class="card-body">
-                        <h5 class="card-title">Table 12
-                            <span class="badge badge-success float-right" style="font-size:.55em;">Available</span>
-                        </h5>
-                        <p class="card-text">Status: </p>
-                        <p class="card-text">Amount: </p>
-                     </div>
-                </div></a>
+                    <div class="modal-body">
+                    <strong>Table status:</strong> Available<br>
+                    <strong>Capacity:</strong> 4pax    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Occupy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
 @endsection
