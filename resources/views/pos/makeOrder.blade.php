@@ -84,6 +84,18 @@
                                     </div>
                                 </div></a>
                             @endif
+
+                                {{-- @if($food->$foodCategory == 'bread')
+                                <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">       
+                                    <div class="card mx-2" style="width:7rem; height:5em;">
+                                        <div class="card-body">
+                                        <h6 class="card-title">
+                                            {{$food->foodName}}
+                                        </h6>
+                                        </div>
+                                    </div></a>
+                                @endif --}}
+
                             @endforeach
 
                            

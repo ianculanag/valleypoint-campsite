@@ -245,3 +245,6 @@ Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaur
 
 //Custom restaurant reports
 Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport');
+
+//View orders for restaurant 
+Route::get('/view-orders', 'OrdersController@viewOrders');

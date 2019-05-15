@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class OrdersController extends Controller
 {
@@ -116,5 +117,14 @@ class OrdersController extends Controller
      */
     public function customRestaurantReport() {
         return view('pos.customrestaurantreport');
+    }
+
+    public function viewOrders(){
+        $order = DB::table('orders')
+        ->select('orders.ID as orderID ', 'orders.orderNumber', 'orders.paymentStatus', 'orders.orderDatetime')
+        ->get();
+        
+        return view('pos.viewOrders')
+        ->with ('orders', $order);
     }
 }
