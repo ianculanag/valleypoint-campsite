@@ -83,10 +83,19 @@ class PosController extends Controller
         //
     }
     
-    public function showMakeOrder()
-    {
-        return view('pos.makeOrder');
-    }
+
+    
+// public function showMakeOrder()
+// {
+//     $food = DB::table('foods')
+//         ->where ('foods.foodCategory', 'foods.foodName')
+//         ->get();
+        
+//         return view ('pos.makeOrder')
+//         ->with ('foods', $food);
+// }
+    
+   
 
     public function showPosDashboard()
     {

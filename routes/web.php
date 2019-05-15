@@ -226,7 +226,7 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 Route::get('/pos-dashboard', 'PosController@showPosDashboard');
 
 //Make Order POS
-Route::get('/make-order', 'PosController@showMakeOrder');
+Route::get('/make-order', 'FoodsController@showMakeOrder');
 
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');

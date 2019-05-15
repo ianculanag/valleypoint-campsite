@@ -72,30 +72,21 @@
                                 </div>
                             </div>
 
-                    <div class="card" style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
-                        <div class="list-content" id="">
-                            <div class="card" style="width: 7rem; height: 5em;">
-                                <div class="card-body">
-                                    <p class="card-title">Sizzling Pork Sisig</p>
-                                </div>
-                            </div> 
-                            <div class="card" style="width: 7rem; height: 5em; margin: 1em;">
-                                <div class="card-body">
-                                    <p class="card-title">Sizzling Tuna</p>
-                                </div>
-                            </div>
-                            <div class="card" style="width: 7rem; height: 5em; margin:1em;">
-                                <div class="card-body">
-                                    <p class="card-title">Nachos</p>
-                                </div>
-                            </div>  
-                            <div class="card" style="width: 7rem; height: 5em; margin: 1em;">
-                                <div class="card-body">
-                                    <p class="card-title">Dynamite</p>
-                                </div>
-                            </div>     
-                        </div>
-                    </div>
+                         <div class="card" style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
+                            @foreach ($foods as $food)
+                            @if($food->foodCategory == 'appetizers')
+                            <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="" id="">       
+                                <div class="card mx-2" style="width:7rem; height:5em;">
+                                    <div class="card-body">
+                                    <h6 class="card-title">
+                                        {{$food->foodName}}
+                                    </h6>
+                                    </div>
+                                </div></a>
+                            @endif
+                            @endforeach
+
+                           
                 </div>
             </div>
         </div>
