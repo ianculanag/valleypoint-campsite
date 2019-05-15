@@ -249,6 +249,7 @@ jQuery('#saveAllPayments').click(function() {
     jQuery('#invoiceAmountPaid').html(parseFloat(jQuery('#amount').val()).toFixed(2));
 
     checkUnpaid();
+    updateBalance();
 });
 
 function checkUnpaid() {

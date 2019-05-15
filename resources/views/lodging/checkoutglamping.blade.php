@@ -4,7 +4,7 @@
     @foreach ($guest as $guestDetails)
     <div class="container pb-5">
         <div class="py-3 text-center">
-            <a href="/glamping">
+            <a href="{{ URL::previous() }}">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -160,6 +160,10 @@
                                                 Get payment
                                             </button> 
                                             @endif
+                                            <a href="/view-guests-payments/{{$guestDetails->accommodationID}}" style="text-decoration: none">
+                                            <button type="button" class="btn btn-info btn-block mt-1" id="viewGuestPaymentsButton">
+                                                View full payment details
+                                            </button></a> 
                                             </td>
                                             </tr>
                                     </tfoot>
@@ -210,6 +214,10 @@
                                                 Get payment
                                             </button> 
                                             @endif
+                                            <a href="/view-guests-payments/{{$guestDetails->accommodationID}}" style="text-decoration: none">
+                                            <button type="button" class="btn btn-info btn-block mt-1" id="viewGuestPaymentsButton">
+                                                View full payment details
+                                            </button></a> 
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -488,7 +496,8 @@
                     <div class="mt-3" style="float:right;">
                     {{--<button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>--}}
                     @if(count($pendingPayments) > 0)
-                        <button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>
+                        {{--<button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>--}}
+                        <button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>
                     @else
                         <button id="checkoutButton" class="btn btn-success" style="width:10em;">Check-out</button>
                     @endif
@@ -619,7 +628,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger">Override charges</button>
-                        <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">Back</button>
+                        <button type="button" class="btn btn-primary" style="width:8em;" data-dismiss="modal">Go Back</button>
                     </div>
                 </div>
             </div>

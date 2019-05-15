@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="container row pb-5 pt-3">
-        <!--div class="pt-3 pb-3 text-center">
-            <a href="/glamping">
+        {{--<div class="pt-3 pb-3 text-center">
+            <a href="{{ URL::previous() }}">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
                 </span>
             </a>
-        </div--> 
+        </div>--}}
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
             <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>

@@ -4,7 +4,7 @@
     @foreach ($guest as $guestDetails)
     <div class="container pb-5">
         <div class="py-3 text-center">
-            <a href="/glamping">
+            <a href="{{ URL::previous() }}">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>

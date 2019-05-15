@@ -6,7 +6,7 @@
     @foreach($unit as $unit)
     <div class="container pb-5">
         <div class="pt-3 pb-3 text-center">
-            <a href="/backpacker">
+            <a href="{{ URL::previous() }}">
                 <span style="float:left;">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
@@ -188,7 +188,7 @@
 @else
 <div class="container pb-3">
     <div class="pt-3 pb-3 text-center">
-        <a href="/backpacker">
+        <a href="{{ URL::previous() }}">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 <strong>Back</strong>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="/pos-dashboard">
+<a href="{{ URL::previous() }}">
     <span style="float:left;">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
         <strong>Back</strong>
