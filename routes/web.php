@@ -263,3 +263,6 @@ Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport
 
 //View orders for restaurant 
 Route::get('/view-orders', 'OrdersController@viewOrders');
+
+//View payments for restaurant
+Route::get('/restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
