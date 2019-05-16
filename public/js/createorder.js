@@ -36,10 +36,12 @@ function removeItemEntries() {
 function addRowInOrderSlip() {
     htmlString = "";
 
-    htmlString += "<tr>";
+    htmlString += "<tr class='items'>";
+    //htmlString += "<a data-toggle='tooltip' title='Click to remove'>";
     htmlString += "<td>"+jQuery('#itemDescription').val()+"</td>";
-    htmlString += "<td style='text-align:right class='orderItem>"+jQuery('#itemQuantity').val()+"</td>";
-    htmlString += "<td style='text-align:right' class='orderItem'>"+parseFloat(jQuery('#itemUnitPrice').val()).toFixed(2)+"</td>";
+    //htmlString += "</a>";
+    htmlString += "<td style='text-align:right class='orderItemQuantity>"+jQuery('#itemQuantity').val()+"</td>";
+    htmlString += "<td style='text-align:right' class='orderItemUnitPrice'>"+parseFloat(jQuery('#itemUnitPrice').val()).toFixed(2)+"</td>";
     htmlString += "<td style='text-align:right' class='orderItemPrice'>"+parseFloat(jQuery('#itemTotalPrice').val()).toFixed(2)+"</td>";
     htmlString += "</tr>";
 
@@ -76,3 +78,11 @@ function updateOrderTotal(){
     document.getElementById('ordersGrandTotal').innerHTML="";
     jQuery('#ordersGrandTotal').html(parseFloat(totalPrice).toFixed(2));
 }
+
+//remove item in the order slip
+jQuery(document).ready(function(){
+    jQuery(document).on('click', '.items', function(){
+        jQuery(this).remove();
+        updateOrderTotal();
+    });
+});
