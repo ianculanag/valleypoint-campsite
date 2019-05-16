@@ -38,13 +38,15 @@ function addRowInOrderSlip() {
 
     htmlString += "<tr>";
     htmlString += "<td>"+jQuery('#itemDescription').val()+"</td>";
-    htmlString += "<td style='text-align:right'>"+jQuery('#itemQuantity').val()+"</td>";
-    htmlString += "<td style='text-align:right'>"+parseFloat(jQuery('#itemUnitPrice').val()).toFixed(2)+"</td>";
-    htmlString += "<td style='text-align:right'>"+parseFloat(jQuery('#itemTotalPrice').val()).toFixed(2)+"</td>";
+    htmlString += "<td style='text-align:right class='orderItem>"+jQuery('#itemQuantity').val()+"</td>";
+    htmlString += "<td style='text-align:right' class='orderItem'>"+parseFloat(jQuery('#itemUnitPrice').val()).toFixed(2)+"</td>";
+    htmlString += "<td style='text-align:right' class='orderItemPrice'>"+parseFloat(jQuery('#itemTotalPrice').val()).toFixed(2)+"</td>";
     htmlString += "</tr>";
 
     jQuery('#emptyEntryHolder').remove();
     jQuery('#orderSlip').append(htmlString);
+    
+    updateOrderTotal();
 }
 
 function getFoodItem(foodID) {
@@ -60,4 +62,17 @@ function updateItemPrice() {
     var unitPrice = jQuery('#itemUnitPrice').val();
     var quantity = jQuery('#itemQuantity').val();
     jQuery('#itemTotalPrice').val(unitPrice * quantity);
+}
+
+function updateOrderTotal(){
+    var totalPrice = 0;
+
+    var prices = document.getElementsByClassName('orderItemPrice');
+
+    for(var index = 0; index<prices.length; index++){
+        totalPrice += parseInt(prices[index].innerHTML);
+    }
+
+    document.getElementById('ordersGrandTotal').innerHTML="";
+    jQuery('#ordersGrandTotal').html(parseFloat(totalPrice).toFixed(2));
 }
