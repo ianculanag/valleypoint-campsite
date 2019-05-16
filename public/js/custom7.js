@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     jQuery(document).on('click', '.restaurant-tables', function(){
         var name = jQuery(this).attr('id');
-        console.log(name);
+        //console.log(name);
 
         var nameSliced =jQuery(this).attr('id').slice(5);
 
