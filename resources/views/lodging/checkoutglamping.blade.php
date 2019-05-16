@@ -496,10 +496,11 @@
                     <div class="mt-3" style="float:right;">
                     {{--<button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>--}}
                     @if(count($pendingPayments) > 0)
-                        {{--<button id="checkoutButton" class="btn btn-success" style="width:10em;" disabled>Check-out</button>--}}
+                        <button id="checkoutButton" class="btn btn-success" style="width:10em;display:none">Check-out</button>
                         <button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>
                     @else
                         <button id="checkoutButton" class="btn btn-success" style="width:10em;">Check-out</button>
+                        <button type="button" class="btn btn-success" id="checkoutWarning" style="width:10em;display:none" data-toggle="modal" data-target="#unpaidChargesModal">Check-out</button>
                     @endif
                         <a style="text-decoration:none;">
                             <button class="btn btn-secondary" style="width:11em;" type="button" id="cancelChanges">Cancel</button>
@@ -624,10 +625,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>There are charges left unpaid in this accommodation. What would you like to do?</p>
+                        <p>There are charges left unpaid in this accommodation. Either go back and get the full payment or modify the transaction. What would you like to do?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger">Override charges</button>
+                        <button type="button" class="btn btn-danger">Modify transaction</button>
                         <button type="button" class="btn btn-primary" style="width:8em;" data-dismiss="modal">Go Back</button>
                     </div>
                 </div>

@@ -256,14 +256,19 @@ function checkUnpaid() {
     if(jQuery('.paymentRecords').length == jQuery('.invoiceBalances').length){
         console.log(jQuery('#amount').val());
         console.log(jQuery('#invoiceTotalBalance').html());
-        if(parseFloat(jQuery('#amount').val()) >= parseFloat(jQuery('#invoiceTotalBalance').html())) {
-            jQuery('#checkoutButton').prop('disabled', false);
+        if(/*parseFloat(jQuery('#amount').val()) >= */parseFloat(jQuery('#invoiceTotalBalance').html()) <= 0) {
+            //jQuery('#checkoutButton').prop('disabled', false);            
+            jQuery('#checkoutButton').css('display', 'inline-block');
+            jQuery('#checkoutWarning').css('display', 'none');
             jQuery('#checkoutDueTodayButton').prop('disabled', false);
         } else {
-            //jQuery('#checkoutButton')
+            jQuery('#checkoutButton').css('display', 'none');
+            jQuery('#checkoutWarning').css('display', 'inline-block');
         }
     } else {
-        jQuery('#checkoutButton').prop('disabled', true);
+        jQuery('#checkoutButton').css('display', 'none');
+        jQuery('#checkoutWarning').css('display', 'inline-block');
+        //jQuery('#checkoutButton').prop('disabled', true);
         jQuery('#checkoutDueTodayButton').prop('disabled', false);
     }
 }

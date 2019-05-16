@@ -9,7 +9,7 @@
                     <strong>Back</strong>
                 </span>
             </a>
-            <h3>View Payment Details</h3>
+            <h3>Payment Details</h3>
         </div>        
         <form class="form" method="POST" action="/updateDetails">
         @csrf
@@ -32,6 +32,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalCharges = 0;
+                            $totalBalance = 0;
+                            $chargeStatus = 'unpaid';
+                        @endphp
                         @foreach($charges as $charge)
                         <tr class="guestChargesRows" id="{{$charge->chargeID}}">
                         <th scope="row">{{$charge->chargeID}}</th>
@@ -39,9 +44,38 @@
                         <td scope="row" style="text-align:right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
                         <td scope="row" style="text-align:right">{{number_format((float)($charge->balance), 2, '.', '')}}</td>
                         <td scope="row" style="text-align:center">{{$charge->remarks}}</td>
-                        </tr>                        
+                        </tr>   
+                        @php
+                            $totalCharges += $charge->totalPrice;
+                            $totalBalance += $charge->balance;
+                        @endphp                     
                         @endforeach
+                        @php
+                            if($totalBalance <= 0) {
+                                $chargeStatus = 'Fully Paid';
+                            } else if($totalBalance == $totalCharges) {
+                                $chargeStatus = 'Unpaid';
+                            } else {
+                                $chargeStatus = 'Pending';
+                            }
+                        @endphp
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2" scope="row">TOTAL:</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalCharges), 2, '.', '')}}</th>
+                            <th colspan="3"></th>
+                        </tr>  
+                        <tr>
+                            <th colspan="3" scope="row">BALANCE:</th>
+                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
+                            <th colspan="2"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" scope="row">STATUS:</th>
+                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:center;">{{$chargeStatus}}</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
     
@@ -51,26 +85,47 @@
                     <thead>
                         <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">ChargeID</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Remarks</th>
-                        <th scope="col">ChargeID</th>
                         <th scope="col">Date & Time</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalPayments = 0;
+                        @endphp
+                        @if(count($payments) > 0)
                         @foreach($payments as $payment)
                         <tr class="{{$payment->chargeID}} guestPaymentsRows">
-                        <th scope="row">{{$payment->id}}</th>
+                        <th scope="row">{{$payment->id}}</th>                        
+                        <td>{{$payment->chargeID}}</td>
                         <td style="text-align:right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
                         <td style="text-align:center">{{$payment->paymentStatus}}</td>
-                        <td>{{$payment->chargeID}}</td>
                         <td>{{\Carbon\Carbon::parse($payment->paymentDatetime)->format('F j, Y h:iA')}}</td>
                         </tr>
+                        @php
+                            $totalPayments += $payment->amount;
+                        @endphp
                         @endforeach
+                        @else
+                        <td colspan="5" style="text-align:center;">There are no payments to show.</td>
+                        @endif
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2" scope="row">TOTAL:</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPayments), 2, '.', '')}}</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
         </div>
+        <button type="button" class="btn btn-primary">Get Payment</button>
+        <button type="button" class="btn btn-info">Refund Payment</button>
+        <button type="button" class="btn btn-secondary">Add Negative Charge</button>
+        <button type="button" class="btn btn-danger">Void Transaction</button>
     </div>          
 @endsection
