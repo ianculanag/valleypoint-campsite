@@ -9,7 +9,7 @@
     </div>
     <div class="container-fluid col-md-12 pb-5 pt-4 px-5">
         <div class="row">
-            <div class="col-md-4 mb-4 mx-0">
+            <div class="col-md-4 order-md-12 mb-4 mx-0">
                 <div class="card p-0 m-0">
                     <h4 class="text-muted text-center py-3">Order Slip</h4>
                     <table class="table table-sm table-striped" style="font-size:.88em;">
@@ -52,7 +52,7 @@
                         <a href="#" id="appetizer" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">Appetizer</a>
                         <a href="#" id="bread" class='rounded-0 list-group-item makeorder' style="color:black">Bread</a>
                         <a href="#" id="breakfast" class='rounded-0 list-group-item makeorder' style="color:black">Breakfast</a>
-                        <a href="#" id="groupMeals" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
+                        <a href="#" id="group meals" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
                         <a href="#" id="noodles" class='rounded-0 list-group-item makeorder' style="color:black">Noodles</a>
                         <a href="#" id="riceBowl" class='rounded-0 list-group-item makeorder' style="color:black">Rice Bowl</a>
                         <a href="#" id="soup" class='rounded-0 list-group-item makeorder' style="color:black">Soup</a>
@@ -60,21 +60,41 @@
                     </div>
                 </div>
 
-                <div class="card col-md-9 m-0 ml-0 border-left-0 rounded-0"> 
-                    <div class="row p-3" id="Menu">
-                    @foreach ($foods as $food)
-                    @if($food->foodCategory == 'appetizers')
-                        <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="px-1 mx-1" id="">       
-                            <div class="card px-0 mx-1" style="width:9.3rem; height:5em;">
-                                <div class="card-body text-center align-self-center px-2 py-2 mx-0">
+                <div class="col-md-9 px-0">
+                    <div class="card m-0 ml-0 border-left-0 rounded-0"> 
+                        <div class="row p-3" id="Menu">
+                        @foreach ($foods as $food)
+                        @if($food->foodCategory == 'appetizers')
+                            <a class="px-1 mx-1">       
+                                <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$food->id}}">
+                                    <div class="card-body text-center px-2 py-2 mx-0">
                                     <h6 class="card-text">{{$food->foodName}}</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    @endif
-                    @endforeach
+                            </a>
+                        @endif
+                        @endforeach
+                        </div>    
                     </div>
+                    
+                    <div class="row">
+                        <div class="form-group row mt-2 col-sm-6">
+                            <label class="col-sm-4" for="itemQuantity">Quantity:</label>
+                            <div class="input-group input-group-sm col-sm-4">
+                                <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" placeholder="1" value="" required>
+                            </div>
+                        </div>
+                        </div class="col-sm-4 mt-2 mr-0 pr-0">
+                            <button id="addItemButton" class="btn btn-success" style="width:10em;" type="button">Add Item</button>
+                        </div>
+                    </div>
+                    
                 </div>
+            </div>
+            <div id="orderInputs" style="display:none">
+                <input type="hidden" id="itemDescription" value="">
+                <input type="hidden" id="itemUnitPrice" value="">
+                <input type="hidden" id="itemTotalPrice" value="">
             </div>
         </div>
 @endsection
