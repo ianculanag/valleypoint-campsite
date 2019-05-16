@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody id="orderSlip">
-                            <tr>
+                            <tr id="emptyEntryHolder">
                                 <td style="text-align:center" colspan="4">Add items from the menu</td>
                                 {{--<td>Tapsilog</td>
                                 <td>1</td>
@@ -98,5 +98,7 @@
                 <input type="hidden" id="itemUnitPrice" value="">
                 <input type="hidden" id="itemTotalPrice" value="">
             </div>
+
+            <div id="snackbar"></div>
         </div>
 @endsection
