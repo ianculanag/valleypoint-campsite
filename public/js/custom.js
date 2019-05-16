@@ -1154,6 +1154,8 @@ jQuery(document).ready(function() {
         jQuery('#dropdownRestoReports').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else if(pathname == '/view-tables') {
+        jQuery('#POSDashboard').addClass('active');
     } else {
         jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
     }

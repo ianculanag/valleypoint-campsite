@@ -7,8 +7,8 @@
             <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">View Tables</a>
         </nav>
     </div>
-    <div class="container-fluid col-md-12 mx-5 pb-5 pt-3">
-        <div class="container" style="float:left;">
+    <div class="container-fluid col-md-12 mx-4 pb-5 pt-3">
+        <div class="container">
             <div class="row">
                 @for($index = 1; $index <=12; $index++) 
                 <a data-toggle="modal" data-target="#exampleModal" style="cursor:pointer">
