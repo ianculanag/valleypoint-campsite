@@ -230,10 +230,10 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 
 /* Restaurant */
 //POS Dashboard
-Route::get('/pos-dashboard', 'PosController@showPosDashboard');
+Route::get('/view-tables', 'PosController@viewTables');
 
 //Make Order POS
-Route::get('/make-order', 'FoodsController@showMakeOrder');
+Route::get('/create-order', 'FoodsController@createOrder');
 Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
 Route::get('/view-breads', 'FoodsController@viewBreads');
 Route::get('/view-breakfast', 'FoodsController@viewBreakfast');

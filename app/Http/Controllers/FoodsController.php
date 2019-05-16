@@ -83,14 +83,13 @@ class FoodsController extends Controller
         //
     }
     
-    public function showMakeOrder()
+    public function createOrder()
     {
         $food = DB::table('foods')
-            ->select('foodCategory', 'foodName')
-            ->get();
+        ->select('foodCategory', 'foodName')
+        ->get();
             
-            return view ('pos.makeOrder')
-            ->with ('foods', $food);
+        return view ('pos.createorder')->with ('foods', $food);
     }
 
     public function viewAppetizers(){

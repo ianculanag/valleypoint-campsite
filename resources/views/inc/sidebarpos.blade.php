@@ -52,7 +52,7 @@
             <nav class="d-none d-md-block sidebar">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
-                        <a class="nav-link" href="/pos-dashboard">
+                        <a class="nav-link" href="/create-order">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             Dashboard
                         </a>
