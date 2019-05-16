@@ -509,9 +509,9 @@
                             </button>
                         </div>
                     </div>
-                    
                     <input type="number" style="display:none;float:left;" id="additionalServicesCount" name="additionalServicesCount" value="0">
                 </div>
+                <button type="reset" id="divAdditionalServices" style="width:5em;" class="btn btn-primary divAdditionalServices">Clear</button>
                 
                 <div class="pt-4" style="float:right;">   
                     {{--<a href="/getDates" style="text-decoration:none;"> --}}                 
