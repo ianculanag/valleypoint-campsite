@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class RestaurantPaymentsController extends Controller
+class restaurantPaymentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -120,11 +120,11 @@ class RestaurantPaymentsController extends Controller
     }
 
     public function viewRestaurantPayments(){
-        $restaurantPayment = DB::table('restaurantPayments')
-        ->select('restaurantPayments.ID as restaurantPaymentID ', 'restaurantPayments.paymentTableNumber', 'restaurantPayments.paymentStatus', 'restaurantPayments.paymetDateTime')
+        $restaurantPayment = DB::table('payments')
+        ->select('payments.ID as paymentID ', 'payments.paymentStatus', 'payments.amount','payments.paymentDatetime')
         ->get();
         
         return view('pos.viewRestaurantPayments')
-        ->with ('restaurantPayments', $restaurantPayment);
+        ->with ('payments', $restaurantPayment);
     }
 }

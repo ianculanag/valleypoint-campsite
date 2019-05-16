@@ -68,7 +68,7 @@
                                 <i class="fa fa-file-invoice" aria-hidden="true"></i>
                                 <span> Orders </span>
                             </a>
-                            <a class="dropdown-item" href="view-payments">
+                            <a class="dropdown-item" href="view-restaurant-payments">
                                 <i class="fa fa-receipt" aria-hidden="true"></i>
                                 <span> Payments </span>
                             </a>

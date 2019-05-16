@@ -265,4 +265,4 @@ Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport
 Route::get('/view-orders', 'OrdersController@viewOrders');
 
 //View payments for restaurant
-Route::get('/restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
+Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');

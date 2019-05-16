@@ -12,7 +12,7 @@
                 <tr class="">
                   <th>Order ID</th>
                   <th>Table Number</th>
-                  <th>Products</th>
+                  <th>Orders</th>
                   <th>Payment Status</th>
                   <th>Date</th>
                 </tr>
