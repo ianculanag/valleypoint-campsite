@@ -15,7 +15,7 @@
                     <table class="table table-sm table-striped" style="font-size:.88em;">
                         <thead>
                             <tr>
-                                <th scope="col" style="width:40%">Item Description</th>
+                                <th scope="col" style="width:40%">Description</th>
                                 <th scope="col">Qty.</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Total</th>
@@ -47,20 +47,20 @@
                 </div>
             </div>
             <div class="row col-md-8">
-                <div class="col-md-3 pr-0">
-                    <div class="list-group">            
-                        <a href="#" id="appetizer" class='list-group-item list-group-item makeorder' style="color:black">Appetizer</a>
-                        <a href="#" id="bread" class='list-group-item list-group-item makeorder' style="color:black">Bread</a>
-                        <a href="#" id="breakfast" class='list-group-item list-group-item makeorder' style="color:black">Breakfast</a>
-                        <a href="#" id="groupMeals" class='list-group-item list-group-item makeorder' style="color:black">Group Meals</a>
-                        <a href="#" id="noodles" class='list-group-item list-group-item makeorder' style="color:black">Noodles</a>
-                        <a href="#" id="riceBowl" class='list-group-item list-group-item makeorder' style="color:black">Rice Bowl</a>
-                        <a href="#" id="soup" class='list-group-item list-group-item makeorder' style="color:black">Soup</a>
-                        <a href="#" id="beverages" class='list-group-item list-group-item makeorder' style="color:black">Beverages </a>
+                <div class="col-md-3 pr-0 rounded-0">
+                    <div class="list-group rounded-0">            
+                        <a href="#" id="appetizer" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">Appetizer</a>
+                        <a href="#" id="bread" class='rounded-0 list-group-item makeorder' style="color:black">Bread</a>
+                        <a href="#" id="breakfast" class='rounded-0 list-group-item makeorder' style="color:black">Breakfast</a>
+                        <a href="#" id="groupMeals" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
+                        <a href="#" id="noodles" class='rounded-0 list-group-item makeorder' style="color:black">Noodles</a>
+                        <a href="#" id="riceBowl" class='rounded-0 list-group-item makeorder' style="color:black">Rice Bowl</a>
+                        <a href="#" id="soup" class='rounded-0 list-group-item makeorder' style="color:black">Soup</a>
+                        <a href="#" id="beverages" class='rounded-0 list-group-item makeorder' style="color:black">Beverages </a>
                     </div>
                 </div>
 
-                <div class="card col-md-9 m-0 ml-0" style="height:24.5em; width: 30em;"> 
+                <div class="card col-md-9 m-0 ml-0 border-left-0 rounded-0" style="height:24.5em; width: 30em;"> 
                     <div class="row p-3" id="Menu">
                     @foreach ($foods as $food)
                     @if($food->foodCategory == 'appetizers')

@@ -1691,6 +1691,22 @@ a.ui-button:active,
 	background: inherit !important;
 }
 
+.makeorder.active {
+	border-right: 0;
+	background-color: white !important;
+	border-color: rgb(223,223,223) !important;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+
+.makeorder {
+	background-color: rgb(223,223,223) !important;
+	text-decoration: none !important;
+}
+.makeorder:hover {
+	text-decoration: none !important;
+}
+
 /*side nav*/
 /*  bhoechie tab */
 div.bhoechie-tab-container{
