@@ -3,14 +3,14 @@
 @section('content')
     <div class="col-md-12 text-center lodging-tabs mx-1">
         <nav class="nav nav-pills centered-pills py-2">
-            <a class="nav-item nav-link" style="color:#505050" href="/calendar-glamping">Create Order</a>
-            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="/glamping">View Tables</a>
+            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Create Order</a>
+            <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
     <div class="container-fluid col-md-12 mx-5 pb-5 pt-3">
         <div class="row">
-            <div class="col-md-4 order-md-8 mb-4 mx-0" style="margin-top: 2.5em;">
-                <div class="card p-0 mx-0">
+            <div class="col-md-4 order-md-8 mb-4 mx-0">
+                <div class="card p-0 m-0">
                     <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
                     <table class="table table-sm" style="font-size:.88em;">
                         <thead>
@@ -56,7 +56,7 @@
                 </div>
             </div>             
             <div class="row">
-                <div class="col-md-14" style="margin-top: 3em;">
+                <div class="col-md-14">
                     <div class="list-group">
         
                         <a href="#" id="appetizer" class='list-group-item list-group-item makeorder' style="color:black">Appetizer</a>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="height:24.5em; width: 30em; margin-left: 1em; margin-top: 3em;"> 
+                <div class="card my-0" style="height:55vh; width:30em; margin-left: 1em;"> 
                     <div class="row p-3" id="Menu">
                     @foreach ($foods as $food)
                     @if($food->foodCategory == 'appetizers')

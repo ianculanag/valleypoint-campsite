@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-md-12 text-center lodging-tabs mx-1">
         <nav class="nav nav-pills centered-pills py-2">
-            <a class="nav-item nav-link" style="color:#505050" href="/calendar-glamping">Create Order</a>
+            <a class="nav-item nav-link" style="color:#505050" href="/create-order">Create Order</a>
             <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">View Tables</a>
         </nav>
     </div>
