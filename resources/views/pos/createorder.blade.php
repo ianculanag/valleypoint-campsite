@@ -61,12 +61,12 @@
                 </div>
 
                 <div class="col-md-9 px-0">
-                    <div class="card m-0 ml-0 border-left-0 rounded-0" style="height:24.5em; width: 30em;"> 
+                    <div class="card m-0 ml-0 border-left-0 rounded-0 px-3" style="height:24.5em;"> 
                         <div class="row p-3" id="Menu">
                         @foreach ($foods as $food)
                         @if($food->foodCategory == 'appetizers')
                             <a class="px-1 mx-1">       
-                                <div class="card px-0 mx-1 menu-item" style="width:8.3rem; height:5em; cursor:pointer" id="{{$food->id}}">
+                                <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$food->id}}">
                                     <div class="card-body text-center px-2 py-2 mx-0">
                                     <h6 class="card-text">
                                         {{$food->foodName}}
