@@ -60,16 +60,14 @@
                     </div>
                 </div>
 
-                <div class="card col-md-9 m-0 ml-0 border-left-0 rounded-0" style="height:24.5em; width: 30em;"> 
+                <div class="card col-md-9 m-0 ml-0 border-left-0 rounded-0"> 
                     <div class="row p-3" id="Menu">
                     @foreach ($foods as $food)
                     @if($food->foodCategory == 'appetizers')
                         <a data-toggle="modal" data-target="#view-details" style="cursor:pointer" class="px-1 mx-1" id="">       
-                            <div class="card px-0 mx-1" style="width:8.3rem; height:5em;">
-                                <div class="card-body  px-2 py-2 mx-0">
-                                <h6 class="card-title text-center">
-                                    {{$food->foodName}}
-                                </h6>
+                            <div class="card px-0 mx-1" style="width:9.3rem; height:5em;">
+                                <div class="card-body text-center align-self-center px-2 py-2 mx-0">
+                                    <h6 class="card-text">{{$food->foodName}}</h6>
                                 </div>
                             </div>
                         </a>

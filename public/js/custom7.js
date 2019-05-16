@@ -61,12 +61,17 @@ jQuery(document).ready(function(){
         if(foodCategory == 'bread'){
             //alert("bread ito");
             jQuery.get('/view-breads', function(data){
-                for(var index = 0; index<data.length; index++){
-                    htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='px-1 mx-1' id=''>";
-                    htmlString +="<div class='card  px-0 mx-1' style='width:8.3rem; height:5em;'>";
-                    htmlString+="<div class='card-body px-2 py-2 mx-0'>";
-                    htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
-                    htmlString +="</h6> </div> </div> </a>";
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
                     jQuery('#Menu').html(htmlString);
                 }
             })
@@ -77,12 +82,17 @@ jQuery(document).ready(function(){
             //alert("bfast");
 
             jQuery.get('/view-breakfast', function(data){
-                for(var index = 0; index<data.length; index++){
-                    htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='px-1 mx-1' id=''>";
-                    htmlString +="<div class='card  px-0 mx-1' style='width:8.3rem; height:5em;'>";
-                    htmlString+="<div class='card-body px-2 py-2 mx-0'>";
-                    htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
-                    htmlString +="</h6> </div> </div> </a>";
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
                     jQuery('#Menu').html(htmlString);
                 }
             })
@@ -90,12 +100,17 @@ jQuery(document).ready(function(){
             jQuery('#breakfast').addClass('active');
         } else if(foodCategory == 'appetizer'){
             jQuery.get('/view-appetizers', function(data){
-                for(var index = 0; index<data.length; index++){
-                    htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='px-1 mx-1' id=''>";
-                    htmlString +="<div class='card  px-0 mx-1' style='width:8.3rem; height:5em;'>";
-                    htmlString+="<div class='card-body px-2 py-2 mx-0'>";
-                    htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
-                    htmlString +="</h6> </div> </div> </a>";
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
                     jQuery('#Menu').html(htmlString);
                 }
             })
@@ -103,12 +118,17 @@ jQuery(document).ready(function(){
             jQuery('#appetizer').addClass('active');
         } else if(foodCategory == 'groupMeals'){
             jQuery.get('/view-group-meals', function(data){
-                for(var index = 0; index<data.length; index++){
-                    htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='px-1 mx-1' id=''>";
-                    htmlString +="<div class='card  px-0 mx-1' style='width:8.3rem; height:5em;'>";
-                    htmlString+="<div class='card-body px-2 py-2 mx-0'>";
-                    htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
-                    htmlString +="</h6> </div> </div> </a>";
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
                     jQuery('#Menu').html(htmlString);
                 }
             })
@@ -116,33 +136,76 @@ jQuery(document).ready(function(){
             jQuery('#groupMeals').addClass('active');
         }else if(foodCategory == 'noodles'){
             jQuery.get('/view-noodles', function(data){
-                for(var index = 0; index<data.length; index++){
-                    htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='px-1 mx-1' id=''>";
-                    htmlString +="<div class='card  px-0 mx-1' style='width:8.3rem; height:5em;'>";
-                    htmlString+="<div class='card-body px-2 py-2 mx-0'>";
-                    htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
-                    htmlString +="</h6> </div> </div> </a>";
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
                     jQuery('#Menu').html(htmlString);
                 }
             })
             jQuery('.makeorder').removeClass('active');
             jQuery('#noodles').addClass('active');
         }else if(foodCategory == 'riceBowl'){
-            alert("kanin at mangkok");
-
+            jQuery.get('/view-rice-bowl', function(data){
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
+                    jQuery('#Menu').html(htmlString);
+                }
+            })
             jQuery('.makeorder').removeClass('active');
             jQuery('#riceBOwl').addClass('active');  
         }else if(foodCategory == 'soup'){
-            alert("sabaw");
-
+            jQuery.get('/view-soup', function(data){
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
+                    jQuery('#Menu').html(htmlString);
+                }
+            })
             jQuery('.makeorder').removeClass('active');
             jQuery('#soup').addClass('active');   
         }else if (foodCategory == 'beverages'){
-            alert("drinks");
-            
+            jQuery.get('/view-beverages', function(data){
+                if(data.length > 0) {
+                    for(var index = 0; index<data.length; index++){
+                        htmlString +="<a data-toggle='modal' data-target='#view-details' style='cursor:pointer' class='menu-item px-1 mx-1' id='" + data[0].id + "'>";
+                        htmlString +="<div class='card  px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                        htmlString+="<div class='card-body px-2 py-2 mx-0'>";
+                        htmlString+="<h6 class='card-title text-center'>"+data[index].foodName;
+                        htmlString +="</h6> </div> </div> </a>";
+                        jQuery('#Menu').html(htmlString);
+                    }
+                } else {
+                    htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
+                    jQuery('#Menu').html(htmlString);
+                }
+            })
             jQuery('.makeorder').removeClass('active');
             jQuery('#beverages').addClass('active');
         }
-
     })
 });
