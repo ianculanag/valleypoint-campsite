@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ URL::previous() }}">
-    <span style="float:left;">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        <strong>Back</strong>
-    </span>
-</a>
     <div class="container pb-5">
             <div class="card col-md-8 offset-md-2 col-sm-12 py-4 ">
                 <div class="row">
