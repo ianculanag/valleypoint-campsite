@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->integer('productID')->unsigned();
             $table->integer('quantity');
             $table->double('totalPrice', 8, 2);
+            $table->enum('paymentStatus',['pending','paid', 'cancelled']);
             //$table->foreign('orderID')->references('id')->on('Orders');
             //$table->foreign('productID')->references('id')->on('Products');
         });
