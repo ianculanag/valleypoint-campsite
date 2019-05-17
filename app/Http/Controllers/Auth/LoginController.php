@@ -34,6 +34,8 @@ class LoginController extends Controller
             return '/admin-dashboard';
         } elseif(Auth::user()->role == 'lodging') {
             return '/glamping';
+        } elseif(Auth::user()->role == 'cashier') {
+            return '/create-order';
         }       
     }
    // protected $redirectTo = '/glamping';

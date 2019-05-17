@@ -62,7 +62,7 @@
             </div>
             <!--Ends here-->
             <div class="col-md-8">
-                <div class="container row py-2">
+                <div class="container row pt-2 pb-1">
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">
                             <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
@@ -127,9 +127,9 @@
                         </div>    
                     </div>
 
-                    <div class="container row offset-7 px-2 float-right">
+                    <div class="container row offset-7 px-2 pt-2 float-right">
                         <div class="form-group row mt-2 pr-4">
-                            <label class="col-sm-3" for="itemQuantity">Quantity:</label>
+                            <label class="col-sm-3 pt-1" for="itemQuantity">Quantity:</label>
                             <div class="input-group input-group-sm col-sm-4">
                                 <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="50" placeholder="1" value="1" required>
                             </div>
