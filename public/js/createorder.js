@@ -196,5 +196,7 @@ jQuery(document).ready(function () {
 
 		alert("You removed" + this);
 		console.log(this.attr('class'));
+		jQuery(this).remove();
+		updateOrderTotal();
 	});
 });
