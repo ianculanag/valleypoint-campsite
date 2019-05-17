@@ -148,4 +148,7 @@
             <div id="snackbar"></div>
             </form>            
         </div>
+
+        <div class="itemRemovalModal">
+        </div>
 @endsection
