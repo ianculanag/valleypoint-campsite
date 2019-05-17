@@ -63,34 +63,31 @@
                     </div>
                 </div>
 
-                <div class="col-md-9 px-0">
-                    <div class="card m-0 ml-0 border-left-0 rounded-0 px-3"> 
-                        <div class="row p-3 scrollbar-near-moon" id="menu" style="overflow-y:auto;">
-                        @foreach ($products as $product)
-                        @if($product->productCategory == 'appetizer')
-                            <a class="px-1 mx-1">       
-                                <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$product->id}}">
-                                    <div class="card-body text-center px-2 py-2 mx-0">
-                                    <h6 class="card-text">
-                                        {{$product->productName}}
-                                    </h6>
-                                    </div>
+                <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3"> 
+                    <div class="row p-3 scrollbar-near-moon" id="menu" style="overflow-y:auto;">
+                    @foreach ($products as $product)
+                    @if($product->productCategory == 'appetizer')
+                        <a class="px-1 mx-1">       
+                            <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$product->id}}">
+                                <div class="card-body text-center px-2 py-2 mx-0">
+                                <h6 class="card-text">
+                                    {{$product->productName}}
+                                </h6>
                                 </div>
-                            </a>
-                        @endif
-                        @endforeach
-                        </div>    
-                    </div>
+                            </div>
+                        </a>
+                    @endif
+                    @endforeach
+                    </div>    
                 </div>
-                <div class="row">
-                    <div class="form-group row mt-2 col-sm-6">
-                        <label class="col-sm-4" for="itemQuantity">Quantity:</label>
+
+                <div class="container row offset-7 px-2 float-right">
+                    <div class="form-group row mt-2 pr-4">
+                        <label class="col-sm-3" for="itemQuantity">Quantity:</label>
                         <div class="input-group input-group-sm col-sm-4">
                             <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" placeholder="1" value="" required>
                         </div>
-                    </div>
-                    </div class="col-sm-4 mt-2 mr-0 pr-0">
-                        <button id="addItemButton" class="btn btn-success" style="width:10em;" type="button" disabled>Add Item</button>
+                        <button id="addItemButton" class="btn btn-sm btn-success mb-3 col-sm-5" style="width:10em;" type="button" disabled>Add Item</button>
                     </div>
                 </div>
             </div>
