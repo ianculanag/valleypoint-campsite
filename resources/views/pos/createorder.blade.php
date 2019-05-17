@@ -24,16 +24,12 @@
                         <tbody id="orderSlip">
                             <tr id="emptyEntryHolder">
                                 <td style="text-align:center" colspan="4">Add items from the menu</td>
-                                {{--<td>Tapsilog</td>
-                                <td>1</td>
-                                <td>99.00</td>
-                                <td>99.00</td>--}}
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="ordersGrandTotal" style="text-align:right;"></th>
+                                <th id="ordersGrandTotal" style="text-align:right;">0.00</th>
                             </tr>
                             <tr>
                                 <td colspan="4">

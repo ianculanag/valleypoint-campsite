@@ -110,5 +110,16 @@ jQuery(document).ready(function(){
     jQuery(document).on('click', '.items', function(){
         jQuery(this).remove();
         updateOrderTotal();
+
+        //Gac
+        if(jQuery('.items').length == 0) {
+            htmlString = "";
+            
+            htmlString += "<tr id='emptyEntryHolder'>";
+            htmlString += "<td style='text-align:center' colspan='4'>Add items from the menu</td>";
+            htmlString += "</tr>";
+
+            jQuery('#orderSlip').html(htmlString);
+        }
     });
 });
