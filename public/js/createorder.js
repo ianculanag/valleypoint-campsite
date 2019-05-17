@@ -4,6 +4,7 @@ jQuery(document).ready(function() {
         jQuery(this).css('background-color', 'rgb(119, 232, 255)');
 
         getFoodItem(jQuery(this).attr('id'));
+        jQuery('#addItemButton').attr('disabled', false);
     });
 
     jQuery('#itemQuantity').change(function() {
@@ -13,6 +14,10 @@ jQuery(document).ready(function() {
     jQuery('#addItemButton').click(function() {
         showItemAddedMessage();
         addRowInOrderSlip();
+        removeItemEntries();
+    })
+
+    jQuery('.makeorder').click(function() {
         removeItemEntries();
     })
 });
@@ -31,6 +36,7 @@ function removeItemEntries() {
     jQuery('#itemUnitPrice').val('');
     jQuery('#itemTotalPrice').val('');
     jQuery('.menu-item').css('background-color', 'white');
+    jQuery('#addItemButton').attr('disabled', true);
 }
 
 function addRowInOrderSlip() {

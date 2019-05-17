@@ -12,7 +12,7 @@
             <div class="col-md-4 order-md-12 mb-4 mx-0">
                 <div class="card p-0 m-0">
                     <h4 class="text-muted text-center py-3">Order Slip</h4>
-                    <table class="table table-sm table-striped" style="font-size:.88em;">
+                    <table class="table table-striped" style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:40%">Description</th>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         </div class="col-sm-4 mt-2 mr-0 pr-0">
-                            <button id="addItemButton" class="btn btn-success" style="width:10em;" type="button">Add Item</button>
+                            <button id="addItemButton" class="btn btn-success" style="width:10em;" type="button" disabled>Add Item</button>
                         </div>
                     </div>
                     
