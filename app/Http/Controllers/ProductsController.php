@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -81,4 +82,88 @@ class ProductsController extends Controller
     {
         //
     }
+
+    public function getFoodItem($foodID) {
+        $foodItem = DB::table('foods')
+        ->leftJoin('beverages')
+        ->where('id', '=', $foodID)
+        ->get();
+
+        return $foodItem;
+    }
+    
+    public function createOrder()
+    {
+        $products = DB::table('products')
+        ->get();
+        
+        return view ('pos.createorder')->with ('products', $products);
+    }
+
+    public function viewMenu($foodCategory){
+        $products = DB::table('products')
+        ->where('foodCategory', '=', $foodCategory)
+        ->get();
+
+        return $products;
+    }
+
+    /*public function viewAppetizers(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'appetizers')
+        ->get();
+
+        return $food;
+    }
+    public function viewBreads(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'bread')
+        ->get();
+
+        return $food; 
+    }
+    public function viewBreakfast(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'breakfast')
+        ->get();
+
+        return $food;
+    }
+    public function viewGroupmeals(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'group meals')
+        ->get();
+
+        return $food;
+    }
+    public function viewNoodles(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'noodles')
+        ->get();
+
+        return $food;
+    }
+    public function viewRicebowl(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'rice bowls')
+        ->get();
+
+        return $food;
+    }
+    public function viewSoup(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'soup')
+        ->get();
+
+        return $food;
+    }
+    public function viewBeverages(){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', 'beverages')
+        ->get();
+
+        return $food;
+    }*/
+
 }
+

@@ -233,8 +233,8 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 Route::get('/view-tables', 'PosController@viewTables');
 
 //Make Order POS
-Route::get('/create-order', 'FoodsController@createOrder');
-Route::get('/view-menu/{foodCategory}', 'FoodsController@viewMenu');
+Route::get('/create-order', 'ProductsController@createOrder');
+Route::get('/view-menu/{foodCategory}', 'ProductsController@viewMenu');
 /*Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
 Route::get('/view-breads', 'FoodsController@viewBreads');
 Route::get('/view-breakfast', 'FoodsController@viewBreakfast');
@@ -244,7 +244,7 @@ Route::get('/view-rice-bowl', 'FoodsController@viewRicebowl' );
 Route::get('/view-soup', 'FoodsController@viewSoup');
 Route::get('/view-beverages', 'FoodsController@viewBeverages');*/
 
-Route::get('/get-food-item/{foodID}', 'FoodsController@getFoodItem');
+Route::get('/get-food-item/{foodID}', 'ProductsController@getFoodItem');
 
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
