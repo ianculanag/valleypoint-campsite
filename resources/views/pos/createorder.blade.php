@@ -82,15 +82,30 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 pr-0 rounded-0">
-                        <div class="list-group rounded-0">            
-                            <a href="#" id="appetizer" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">Appetizer</a>
-                            <a href="#" id="bread" class='rounded-0 list-group-item makeorder' style="color:black">Bread</a>
-                            <a href="#" id="breakfast" class='rounded-0 list-group-item makeorder' style="color:black">Breakfast</a>
-                            <a href="#" id="groupmeal" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
-                            <a href="#" id="noodles" class='rounded-0 list-group-item makeorder' style="color:black">Noodles</a>
-                            <a href="#" id="ricebowl" class='rounded-0 list-group-item makeorder' style="color:black">Rice Bowl</a>
-                            <a href="#" id="soup" class='rounded-0 list-group-item makeorder' style="color:black">Soup</a>
-                            <a href="#" id="beverage" class='rounded-0 list-group-item makeorder' style="color:black">Beverages </a>
+                        <div class="list-group rounded-0">
+                            @foreach($categories as $category)
+                            @php
+                                $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($category)); 
+                                $displayName = '';
+
+                                for($index = 0; $index < count($displayNameSplit); $index++) {
+                                    if(($index) + 1 == count($displayNameSplit)) {
+                                        $displayName .= $displayNameSplit[$index];
+                                    } else {
+                                        $displayName .= $displayNameSplit[$index].' ';                                        
+                                    }
+                                }
+
+                                if(!(substr($displayName, -1) == 's')) {
+                                    $displayName .= 's';
+                                }
+                            @endphp
+                            @if($loop->iteration == 1)
+                            <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">{{$displayName}}</a>
+                            @else
+                            <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder' style="color:black">{{$displayName}}</a>
+                            @endif                            
+                            @endforeach
                         </div>
                     </div>
 

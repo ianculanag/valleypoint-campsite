@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Products extends Model
 {
@@ -20,4 +21,14 @@ class Products extends Model
     protected $fillable = [
         'productCategory', 'productName', 'price'
     ];
+
+    public static function getAllCategories(){
+        $productCategory = DB::select(DB::raw('SHOW COLUMNS FROM products WHERE Field = "productCategory"'))[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $productCategory, $matches);
+        $values = array();
+        foreach(explode(',', $matches[1]) as $value){
+            $values[] = trim($value, "'");
+        }
+        return $values;
+    }
 }

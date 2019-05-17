@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Products;
 use DB;
 
 class ProductsController extends Controller
@@ -95,8 +96,15 @@ class ProductsController extends Controller
     {
         $products = DB::table('products')
         ->get();
+
+        $categories = Products::getAllCategories();
+        //sort($categories, SORT_STRING);
+
+        //return $categories;
         
-        return view ('pos.createorder')->with ('products', $products);
+        return view ('pos.createorder')
+        ->with('products', $products)
+        ->with('categories', $categories);
     }
 
     public function viewMenu($productCategory){

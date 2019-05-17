@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('productCategory',['breakfast','appetizer','noodles','bread','ricebowl', 'groupmeal', 'soup', 'beverage']);
+            $table->enum('productCategory',['appetizer','bread','breakfast','groupMeal','noodles','riceBowl', 'soup', 'beverage']);
             $table->string('productName');
             $table->double('price', 8, 2);
             //$table->foreign('productID')->references('id')->on('Products');
@@ -186,37 +186,37 @@ class CreateProductsTable extends Migration
             $product27->save();
 
             $product28 = new Products;
-            $product28->productCategory = 'ricebowl';
+            $product28->productCategory = 'riceBowl';
             $product28->productName = 'Special Fried Rice';
             $product28->price = '99.00';
             $product28->save();
 
             $product29 = new Products;
-            $product29->productCategory = 'ricebowl';
+            $product29->productCategory = 'riceBowl';
             $product29->productName = 'Lumpia Fried Rice';
             $product29->price = '129.00';
             $product29->save();
 
             $product30 = new Products;
-            $product30->productCategory = 'ricebowl';
+            $product30->productCategory = 'riceBowl';
             $product30->productName = 'Siomai Fried Rice';
             $product30->price = '129.00';
             $product30->save();
 
             $product31 = new Products;
-            $product31->productCategory = 'ricebowl';
+            $product31->productCategory = 'riceBowl';
             $product31->productName = 'Porkchop Fried Rice';
             $product31->price = '149.00';
             $product31->save();
 
             $product32 = new Products;
-            $product32->productCategory = 'ricebowl';
+            $product32->productCategory = 'riceBowl';
             $product32->productName = 'Chicken Fried Rice';
             $product32->price = '149.00';
             $product32->save();
 
             $product33 = new Products;
-            $product33->productCategory = 'ricebowl';
+            $product33->productCategory = 'riceBowl';
             $product33->productName = 'Fried Rice Silog Meal';
             $product33->price = '149.00';
             $product33->save();
