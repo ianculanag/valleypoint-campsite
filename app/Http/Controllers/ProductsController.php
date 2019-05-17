@@ -85,7 +85,6 @@ class ProductsController extends Controller
 
     public function getFoodItem($foodID) {
         $foodItem = DB::table('foods')
-        ->leftJoin('beverages')
         ->where('id', '=', $foodID)
         ->get();
 
@@ -100,9 +99,9 @@ class ProductsController extends Controller
         return view ('pos.createorder')->with ('products', $products);
     }
 
-    public function viewMenu($foodCategory){
+    public function viewMenu($productCategory){
         $products = DB::table('products')
-        ->where('foodCategory', '=', $foodCategory)
+        ->where('productCategory', '=', $productCategory)
         ->get();
 
         return $products;

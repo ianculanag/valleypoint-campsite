@@ -234,7 +234,7 @@ Route::get('/view-tables', 'PosController@viewTables');
 
 //Make Order POS
 Route::get('/create-order', 'ProductsController@createOrder');
-Route::get('/view-menu/{foodCategory}', 'ProductsController@viewMenu');
+Route::get('/view-menu/{productCategory}', 'ProductsController@viewMenu');
 /*Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
 Route::get('/view-breads', 'FoodsController@viewBreads');
 Route::get('/view-breakfast', 'FoodsController@viewBreakfast');
