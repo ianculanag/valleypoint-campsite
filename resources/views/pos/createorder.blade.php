@@ -46,7 +46,7 @@
                                 Get payment
                             </button>
                             <button type="button" class="btn btn-success btn-block" style="text-align:center;">
-                                Save
+                                Save order
                             </button>
                         </div>
                     </div>
@@ -61,6 +61,24 @@
             </div>
             <!--Ends here-->
             <div class="col-md-8">
+                <div class="container row py-2">
+                    <div class="col-md-3 px-0 ml-0 mr-4">
+                        <div class="form-group my-1 row pr-4">
+                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table number:</label>
+                            <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 px-0 ml-0 mr-4">
+                        <div class="form-group my-1 row pr-4">
+                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="cueNumber">Cue number:</label>
+                            <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                <input class="form-control" type="number" name="cueNumber" id="cueNumber" min="1" max="50" placeholder="" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3 pr-0 rounded-0">
                         <div class="list-group rounded-0">            
@@ -97,7 +115,7 @@
                         <div class="form-group row mt-2 pr-4">
                             <label class="col-sm-3" for="itemQuantity">Quantity:</label>
                             <div class="input-group input-group-sm col-sm-4">
-                                <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" placeholder="1" value="" required>
+                                <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="50" placeholder="1" value="1" required>
                             </div>
                             <button id="addItemButton" class="form-control btn btn-sm btn-success col-sm-5" style="width:10em;" type="button" disabled>Add Item</button>
                         </div>
