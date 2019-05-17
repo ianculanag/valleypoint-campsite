@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->integer('orderID')->unsigned();
             $table->integer('productID')->unsigned();
             $table->integer('quantity');
-            $table->double('unitPrice', 8, 2);
+            $table->double('totalPrice', 8, 2);
             //$table->foreign('orderID')->references('id')->on('Orders');
             //$table->foreign('productID')->references('id')->on('Products');
         });

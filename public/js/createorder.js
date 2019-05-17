@@ -13,7 +13,9 @@ jQuery(document).ready(function() {
 
     jQuery('#addItemButton').click(function() {
         showItemAddedMessage();
-        addRowInOrderSlip();
+        addRowInOrderSlip();        
+        addOrderEntry(); //adds the order as hidden input
+
         removeItemEntries();
     })
 
@@ -42,6 +44,20 @@ jQuery(document).ready(function() {
     })
 });
 
+function addOrderEntry() {
+    htmlString = "";
+
+    orderIdentifier = jQuery('#numberOfOrders').val();
+
+    htmlString += "<div id='itemOrderDiv"+orderIdentifier+"'>";
+    htmlString += "<input type='number' value='"+jQuery('#itemID').val()+"' id='productID"+orderIdentifier+"' name='productID"+orderIdentifier+"'>";
+    htmlString += "<input type='number' value='"+jQuery('#itemQuantity').val()+"' id='quantity"+orderIdentifier+"' name='quantity"+orderIdentifier+"'>";
+    htmlString += "<input type='number' value='"+jQuery('#itemTotalPrice').val()+"' id='productID"+orderIdentifier+"' name='totalPrice"+orderIdentifier+"'>";
+    htmlString += "</div>"
+
+    jQuery('#ordersContainer').append(htmlString);    
+}
+
 function showItemAddedMessage() {
     var translator = new T2W("EN_US");
     jQuery('#snackbar').html('Order of '+translator.toWords(parseInt(jQuery('#itemQuantity').val()))+' ('+jQuery('#itemQuantity').val()+') '+jQuery('#itemDescription').val()+' added!');
@@ -51,6 +67,7 @@ function showItemAddedMessage() {
   }
 
 function removeItemEntries() {    
+    jQuery('#itemID').val('');
     jQuery('#itemDescription').val('');
     jQuery('#itemQuantity').val(1);
     jQuery('#itemUnitPrice').val('');
@@ -60,9 +77,13 @@ function removeItemEntries() {
 }
 
 function addRowInOrderSlip() {
+    newOrderCount = parseInt(jQuery('#numberOfOrders').val()) + 1;
+    jQuery('#numberOfOrders').val(newOrderCount);    
+    orderIdentifier = jQuery('#numberOfOrders').val();
+
     htmlString = "";
 
-    htmlString += "<tr class='items'>";
+    htmlString += "<tr class='items' id='orderSlipItem"+orderIdentifier+"'>";
     //htmlString += "<a data-toggle='tooltip' title='Click to remove'>";
     htmlString += "<td>"+jQuery('#itemDescription').val()+"</td>";
     //htmlString += "</a>";
@@ -80,6 +101,7 @@ function addRowInOrderSlip() {
 function getFoodItem(productID) {
     jQuery.get('/get-product-item/'+productID, function(data) {
         console.log(data);
+        jQuery('#itemID').val(data[0].id);
         jQuery('#itemDescription').val(data[0].productName);
         jQuery('#itemUnitPrice').val(data[0].price);
         updateItemPrice();
@@ -108,7 +130,9 @@ function updateOrderTotal(){
 //remove item in the order slip
 jQuery(document).ready(function(){
     jQuery(document).on('click', '.items', function(){
-        jQuery(this).remove();
+        //jQuery(this).remove(); GAC
+        jQuery('#orderSlipItem'+jQuery(this).attr('id').slice(13)).remove(); //GAC
+        jQuery('#itemOrderDiv'+jQuery(this).attr('id').slice(13)).remove();
         updateOrderTotal();
 
         //Gac

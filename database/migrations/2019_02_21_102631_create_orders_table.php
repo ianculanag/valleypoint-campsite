@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('orderNumber');
+            $table->integer('queueNumber');
             $table->enum('paymentStatus',['pending','paid']);
             $table->dateTime('orderDatetime');
             $table->integer('productID')->unsigned();

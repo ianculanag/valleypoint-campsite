@@ -7,7 +7,10 @@
             <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
-    <div class="container-fluid col-md-12 pb-5 pt-4 px-5">
+    <div class="container-fluid col-md-12 pb-5 pt-4 px-5">        
+        <form method="POST" action="/save-order">
+        @csrf
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
             <div class="col-md-4 order-md-12 mb-4 mx-0">
                 <div class="card p-0 m-0">
@@ -45,6 +48,7 @@
             <!--Code below records the orders that has been listed in the order slip, although hidden-->
             <!--Starts here-->
             <div id="ordersContainer" style="display:none;">
+                <input id="numberOfOrders" name="numberOfOrders" type="number" value="0">
                 <!--the insertOrderEntry() function in createorder.js handles this part of the code-->
                 <!--it inserts hidden inputs containing the orders-->
             </div>
@@ -85,18 +89,20 @@
                     <div class="form-group row mt-2 pr-4">
                         <label class="col-sm-3" for="itemQuantity">Quantity:</label>
                         <div class="input-group input-group-sm col-sm-4">
-                            <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" placeholder="1" value="" required>
+                            <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" value="1" required>
                         </div>
                         <button id="addItemButton" class="btn btn-sm btn-success mb-3 col-sm-5" style="width:10em;" type="button" disabled>Add Item</button>
                     </div>
                 </div>
             </div>
             <div id="orderInputs" style="display:none">
+                <input type="hidden" id="itemID" value="">
                 <input type="hidden" id="itemDescription" value="">
                 <input type="hidden" id="itemUnitPrice" value="">
                 <input type="hidden" id="itemTotalPrice" value="">
             </div>
 
-            <div id="snackbar"></div>            
+            <div id="snackbar"></div>
+            </form>            
         </div>
 @endsection
