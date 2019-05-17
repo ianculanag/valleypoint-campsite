@@ -77,10 +77,10 @@ function addRowInOrderSlip() {
     updateOrderTotal();
 }
 
-function getFoodItem(foodID) {
-    jQuery.get('/get-food-item/'+foodID, function(data) {
+function getFoodItem(productID) {
+    jQuery.get('/get-product-item/'+productID, function(data) {
         console.log(data);
-        jQuery('#itemDescription').val(data[0].foodName);
+        jQuery('#itemDescription').val(data[0].productName);
         jQuery('#itemUnitPrice').val(data[0].price);
         updateItemPrice();
     })

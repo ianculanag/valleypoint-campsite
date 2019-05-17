@@ -244,7 +244,7 @@ Route::get('/view-rice-bowl', 'FoodsController@viewRicebowl' );
 Route::get('/view-soup', 'FoodsController@viewSoup');
 Route::get('/view-beverages', 'FoodsController@viewBeverages');*/
 
-Route::get('/get-food-item/{foodID}', 'ProductsController@getFoodItem');
+Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');

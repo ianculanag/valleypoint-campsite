@@ -83,12 +83,12 @@ class ProductsController extends Controller
         //
     }
 
-    public function getFoodItem($foodID) {
-        $foodItem = DB::table('foods')
-        ->where('id', '=', $foodID)
+    public function getProductItem($productID) {
+        $productItem = DB::table('products')
+        ->where('id', '=', $productID)
         ->get();
 
-        return $foodItem;
+        return $productItem;
     }
     
     public function createOrder()
