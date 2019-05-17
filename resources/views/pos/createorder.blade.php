@@ -4,6 +4,7 @@
     <div class="col-md-12 text-center pos-tabs pb-1">
         <nav class="nav nav-pills centered-pills py-2">
             <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Create Order</a>
+            <a class="nav-item nav-link" style="color:#505050" href="/view-order-slips">Order Slips</a>
             <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
@@ -64,7 +65,7 @@
                 <div class="container row py-2">
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">
-                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table number:</label>
+                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
                             </div>
@@ -72,9 +73,9 @@
                     </div>
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">
-                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="cueNumber">Cue number:</label>
+                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                <input class="form-control" type="number" name="cueNumber" id="cueNumber" min="1" max="50" placeholder="" value="">
+                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="">
                             </div>
                         </div>
                     </div>
@@ -99,10 +100,10 @@
                         @if($product->productCategory == 'appetizer')
                             <a class="px-1 mx-1">       
                                 <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$product->id}}">
-                                    <div class="card-body text-center px-2 py-2 mx-0">
-                                    <h6 class="card-text">
-                                        {{$product->productName}}
-                                    </h6>
+                                    <div class="card-body text-center my-auto">
+                                        <h6 class="card-text">
+                                            {{$product->productName}}
+                                        </h6>
                                     </div>
                                 </div>
                             </a>

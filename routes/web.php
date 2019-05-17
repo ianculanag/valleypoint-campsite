@@ -229,11 +229,12 @@ Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteS
 Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
 
 /* Restaurant */
-//POS Dashboard
+//POS Dashboard Pages
+Route::get('/create-order', 'ProductsController@createOrder');
 Route::get('/view-tables', 'PosController@viewTables');
+Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
 
 //Make Order POS
-Route::get('/create-order', 'ProductsController@createOrder');
 Route::get('/view-menu/{productCategory}', 'ProductsController@viewMenu');
 /*Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
 Route::get('/view-breads', 'FoodsController@viewBreads');

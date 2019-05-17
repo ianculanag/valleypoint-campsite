@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
                 for(var index = 0; index<data.length; index++){
                     htmlString += "<a class='px-1 mx-1'>";
                     htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em; cursor:pointer;' id='" + data[index].id + "'>";
-                    htmlString += "<div class='card-body text-center px-2 py-2 mx-0'>";
+                    htmlString += "<div class='card-body text-center my-auto'>";
                     htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6></div> </div> </a>";
                     jQuery('#menu').html(htmlString);
                 }

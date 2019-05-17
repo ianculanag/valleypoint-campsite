@@ -127,4 +127,13 @@ class OrdersController extends Controller
         return view('pos.viewOrders')
         ->with ('orders', $order);
     }
+
+    /**
+     * Show custom restaurant report 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewOrderSlips() {
+        return view('pos.vieworderslips');
+    }
 }
