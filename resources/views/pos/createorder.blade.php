@@ -42,6 +42,13 @@
                     </table>
                 </div>
             </div>
+            <!--Code below records the orders that has been listed in the order slip, although hidden-->
+            <!--Starts here-->
+            <div id="ordersContainer" style="display:none;">
+                <!--the insertOrderEntry() function in createorder.js handles this part of the code-->
+                <!--it inserts hidden inputs containing the orders-->
+            </div>
+            <!--Ends here-->
             <div class="row col-md-8">
                 <div class="col-md-3 pr-0 rounded-0">
                     <div class="list-group rounded-0">            
@@ -93,6 +100,6 @@
                 <input type="hidden" id="itemTotalPrice" value="">
             </div>
 
-            <div id="snackbar"></div>
+            <div id="snackbar"></div>            
         </div>
 @endsection
