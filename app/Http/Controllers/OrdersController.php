@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Orders;
+use App\Items;
+use App\Products;
+use Carbon\Carbon;
 use DB;
 
 class OrdersController extends Controller
@@ -117,6 +121,43 @@ class OrdersController extends Controller
      */
     public function customRestaurantReport() {
         return view('pos.customrestaurantreport');
+    }
+
+    /**
+     *  Save orders from create order page
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function saveOrder(Request $request) {
+        $numberOfOrders = $request->input('numberOfOrders');
+        
+        $order = new Orders;
+        $order->queueNumber = $request->input('queueNumber');
+        $order->tableNumber = $request->input('tableNumber');
+        $order->status = 'ongoing'; //BRUTE FORCE
+        $order->orderDatetime = Carbon::now();
+        $order->shiftID = '1';
+        $order->save();
+
+        for($index = 1; $index <= $numberOfOrders; $index++) {
+            $productID = 'productID'.$index;
+            $quantity = 'quantity'.$index;
+            $totalPrice = 'totalPrice'.$index;
+            $paymentStatus = 'pending'; //BRUTE FORCE
+            
+            if($request->input($productID)) {
+                $item = new Items;
+                $item->orderID = $order->id;
+                $item->productID = $request->input($productID);
+                $item->quantity = $request->input($quantity);
+                $item->totalPrice = $request->input($totalPrice);
+                $item->paymentStatus = $paymentStatus;
+                $item->save();
+            } 
+        }
+
+        return redirect ('/create-order');
     }
 
     public function viewOrders(){

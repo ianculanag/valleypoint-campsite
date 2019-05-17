@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->enum('paymentStatus',['pending','paid', 'cancelled']);
             //$table->foreign('orderID')->references('id')->on('Orders');
             //$table->foreign('productID')->references('id')->on('Products');
+            $table->timestamps();
         });
     }
 

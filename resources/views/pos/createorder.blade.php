@@ -46,7 +46,7 @@
                             <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
                                 Get payment
                             </button>
-                            <button type="button" class="btn btn-success btn-block" style="text-align:center;">
+                            <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
                                 Save order
                             </button>
                         </div>

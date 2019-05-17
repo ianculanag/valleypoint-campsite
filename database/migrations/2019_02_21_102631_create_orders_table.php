@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->integer('tableNumber')->nullable();
             $table->enum('status',['ongoing','finished', 'cancelled']);
             $table->dateTime('orderDatetime');
-            $table->integer('productID')->unsigned();
             $table->integer('shiftID')->unsigned();
            // $table->foreign('productID')->references('id')->on('Products');
             //$table->foreign('shiftID')->references('id')->on('Shifts');
