@@ -57,8 +57,26 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
     jQuery(document).on('click', '.makeorder', function(){
         var foodCategory = jQuery(this).attr('id');
-
         var htmlString = "";
+
+        jQuery.get('/view-menu/' + foodCategory, function(data){
+            if(data.length > 0) {
+                for(var index = 0; index<data.length; index++){
+                    htmlString += "<a class='px-1 mx-1' id='" + data[0].id + "'>";
+                    htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                    htmlString += "<div class='card-body text-center px-2 py-2 mx-0'>";
+                    htmlString += "<h6 class='card-text'>" + data[index].foodName + "</h6></div> </div> </a>";
+                    jQuery('#menu').html(htmlString);
+                }
+            } else {
+                htmlString += "<div class='container'> <p style='font-style:italic;'> No food available </p></div>";
+                jQuery('#menu').html(htmlString);
+            }
+        })
+        jQuery('.makeorder').removeClass('active');
+        jQuery('#bread').addClass('active');
+
+        /*var htmlString = "";
 
         if(foodCategory == 'bread'){
             //alert("bread ito");
@@ -208,6 +226,6 @@ jQuery(document).ready(function(){
             })
             jQuery('.makeorder').removeClass('active');
             jQuery('#beverages').addClass('active');
-        }
+        }*/
     })
 });

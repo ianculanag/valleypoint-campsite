@@ -16,7 +16,7 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('foodCategory',['breakfast','appetizers','noodles','bread','rice bowls', 'group meals', 'soup']);
+            $table->enum('foodCategory',['breakfast','appetizer','noodles','bread','ricebowl', 'groupmeal', 'soup', 'beverage']);
             $table->string('foodName');
             $table->double('price', 8, 2);
             //$table->foreign('productID')->references('id')->on('Products');
@@ -24,49 +24,49 @@ class CreateFoodsTable extends Migration
         });
 
             $food1 = new Foods;
-            $food1->foodCategory = 'appetizers';
+            $food1->foodCategory = 'appetizer';
             $food1->foodName = 'Sizzling Sisig';
             $food1->price = '159.00';
             $food1->save();
 
             $food2 = new Foods;
-            $food2->foodCategory = 'appetizers';
+            $food2->foodCategory = 'appetizer';
             $food2->foodName = 'Sizzling Tuna';
             $food2->price = '159.00';
             $food2->save();
 
             $food3 = new Foods;
-            $food3->foodCategory = 'appetizers';
+            $food3->foodCategory = 'appetizer';
             $food3->foodName = 'Sizzling Tofu';
             $food3->price = '159.00';
             $food3->save();
 
             $food4 = new Foods;
-            $food4->foodCategory = 'appetizers';
+            $food4->foodCategory = 'appetizer';
             $food4->foodName = 'Nachos';
             $food4->price = '149.00';
             $food4->save();
 
             $food5 = new Foods;
-            $food5->foodCategory = 'appetizers';
+            $food5->foodCategory = 'appetizer';
             $food5->foodName = 'Dynamite';
             $food5->price = '159.00';
             $food5->save();
 
             $food6 = new Foods;
-            $food6->foodCategory = 'appetizers';
+            $food6->foodCategory = 'appetizer';
             $food6->foodName = 'Lumpiang Shanghai';
             $food6->price = '159.00';
             $food6->save();
 
             $food7 = new Foods;
-            $food7->foodCategory = 'appetizers';
+            $food7->foodCategory = 'appetizer';
             $food7->foodName = 'Besuto';
             $food7->price = '50.00';
             $food7->save();
 
             $food8 = new Foods;
-            $food8->foodCategory = 'appetizers';
+            $food8->foodCategory = 'appetizer';
             $food8->foodName = 'Wings';
             $food8->price = '199.00';
             $food8->save();
@@ -186,37 +186,37 @@ class CreateFoodsTable extends Migration
             $food27->save();
 
             $food28 = new Foods;
-            $food28->foodCategory = 'rice bowls';
+            $food28->foodCategory = 'ricebowl';
             $food28->foodName = 'Special Fried Rice';
             $food28->price = '99.00';
             $food28->save();
 
             $food29 = new Foods;
-            $food29->foodCategory = 'rice bowls';
+            $food29->foodCategory = 'ricebowl';
             $food29->foodName = 'Lumpia Fried Rice';
             $food29->price = '129.00';
             $food29->save();
 
             $food30 = new Foods;
-            $food30->foodCategory = 'rice bowls';
+            $food30->foodCategory = 'ricebowl';
             $food30->foodName = 'Siomai Fried Rice';
             $food30->price = '129.00';
             $food30->save();
 
             $food31 = new Foods;
-            $food31->foodCategory = 'rice bowls';
+            $food31->foodCategory = 'ricebowl';
             $food31->foodName = 'Porkchop Fried Rice';
             $food31->price = '149.00';
             $food31->save();
 
             $food32 = new Foods;
-            $food32->foodCategory = 'rice bowls';
+            $food32->foodCategory = 'ricebowl';
             $food32->foodName = 'Chicken Fried Rice';
             $food32->price = '149.00';
             $food32->save();
 
             $food33 = new Foods;
-            $food33->foodCategory = 'rice bowls';
+            $food33->foodCategory = 'ricebowl';
             $food33->foodName = 'Fried Rice Silog Meal';
             $food33->price = '149.00';
             $food33->save();

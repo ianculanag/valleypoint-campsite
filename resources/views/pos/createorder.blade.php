@@ -52,11 +52,11 @@
                         <a href="#" id="appetizer" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">Appetizer</a>
                         <a href="#" id="bread" class='rounded-0 list-group-item makeorder' style="color:black">Bread</a>
                         <a href="#" id="breakfast" class='rounded-0 list-group-item makeorder' style="color:black">Breakfast</a>
-                        <a href="#" id="group meals" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
+                        <a href="#" id="groupmeal" class='rounded-0 list-group-item makeorder' style="color:black">Group Meals</a>
                         <a href="#" id="noodles" class='rounded-0 list-group-item makeorder' style="color:black">Noodles</a>
-                        <a href="#" id="riceBowl" class='rounded-0 list-group-item makeorder' style="color:black">Rice Bowl</a>
+                        <a href="#" id="ricebowl" class='rounded-0 list-group-item makeorder' style="color:black">Rice Bowl</a>
                         <a href="#" id="soup" class='rounded-0 list-group-item makeorder' style="color:black">Soup</a>
-                        <a href="#" id="beverages" class='rounded-0 list-group-item makeorder' style="color:black">Beverages </a>
+                        <a href="#" id="beverage" class='rounded-0 list-group-item makeorder' style="color:black">Beverages </a>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                     <div class="card m-0 ml-0 border-left-0 rounded-0 px-3" style="height:24.5em;"> 
                         <div class="row p-3" id="Menu">
                         @foreach ($foods as $food)
-                        @if($food->foodCategory == 'appetizers')
+                        @if($food->foodCategory == 'appetizer')
                             <a class="px-1 mx-1">       
                                 <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$food->id}}">
                                     <div class="card-body text-center px-2 py-2 mx-0">

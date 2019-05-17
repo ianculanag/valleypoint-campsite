@@ -99,7 +99,15 @@ class FoodsController extends Controller
         return view ('pos.createorder')->with ('foods', $food);
     }
 
-    public function viewAppetizers(){
+    public function viewMenu($foodCategory){
+        $food = DB::table('foods')
+        ->where('foodCategory', '=', $foodCategory)
+        ->get();
+
+        return $food;
+    }
+
+    /*public function viewAppetizers(){
         $food = DB::table('foods')
         ->where('foodCategory', '=', 'appetizers')
         ->get();
@@ -154,7 +162,7 @@ class FoodsController extends Controller
         ->get();
 
         return $food;
-    }
+    }*/
 
 }
 
