@@ -62,8 +62,8 @@ jQuery(document).ready(function(){
         jQuery.get('/view-menu/' + foodCategory, function(data){
             if(data.length > 0) {
                 for(var index = 0; index<data.length; index++){
-                    htmlString += "<a class='px-1 mx-1' id='" + data[0].id + "'>";
-                    htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em;'>";
+                    htmlString += "<a class='px-1 mx-1'>";
+                    htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em; cursor:pointer;' id='" + data[index].id + "'>";
                     htmlString += "<div class='card-body text-center px-2 py-2 mx-0'>";
                     htmlString += "<h6 class='card-text'>" + data[index].foodName + "</h6></div> </div> </a>";
                     jQuery('#menu').html(htmlString);
@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
             }
         })
         jQuery('.makeorder').removeClass('active');
-        jQuery('#bread').addClass('active');
+        jQuery(this).addClass('active');
 
         /*var htmlString = "";
 
