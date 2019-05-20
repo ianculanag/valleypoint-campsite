@@ -16,6 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylehseet">
     <!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous"-->
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
@@ -43,6 +44,7 @@
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>  
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
 <script src="{{ asset('js/numbers2words.min.js') }}"></script>
 <script src="{{ asset('js/numeral.min.js') }}"></script>

@@ -38,11 +38,11 @@
                             <thead>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
-                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱0.00</td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
-                                    <th class="py-2" id="discount" style="text-align:right;">₱0.00</th>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱0.00</td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
@@ -51,14 +51,19 @@
                             </thead>
                         </table>
                         <div class="row mx-2">
-                            <div class="col-md-4 px-1">
-                                <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
-                                    Cash
+                            <div class="col-md-12 mb-1 px-1">
+                                <button class="btn btn-primary btn-block" style="text-align:center;" id="getPayment">
+                                    Get Cash Payment
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
                                 <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
                                     Save
+                                </button>
+                            </div>
+                            <div class="col-md-4 px-1">
+                                <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-info btn-block" style="text-align:center;">
+                                    Discount
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
@@ -167,5 +172,26 @@
         </div>
 
         <div class="itemRemovalModal">
+        </div>
+
+        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="checkbox" checked data-toggle="toggle" data-on="₱" data-off="%" data-onstyle="success" data-offstyle="primary">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
 @endsection

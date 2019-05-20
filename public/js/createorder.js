@@ -100,7 +100,7 @@ function addRowInOrderSlip() {
 	jQuery('#emptyEntryHolder').remove();
 	jQuery('#orderSlip').append(htmlString);
 
-	updateOrderTotal();
+	updateOrderSubtotal();
 }
 
 function getFoodItem(productID) {
@@ -119,7 +119,7 @@ function updateItemPrice() {
 	jQuery('#itemTotalPrice').val(unitPrice * quantity);
 }
 
-function updateOrderTotal() {
+function updateOrderSubtotal() {
 	var totalPrice = 0;
 
 	var prices = document.getElementsByClassName('orderItemPrice');
@@ -128,8 +128,20 @@ function updateOrderTotal() {
 		totalPrice += numeral(prices[index].innerHTML).value();
 	}
 
-	document.getElementById('ordersGrandTotal').innerHTML = '';
-	jQuery('#ordersGrandTotal').html(toPeso(numeral(totalPrice).format('0,0.00')));
+	document.getElementById('ordersSubtotal').innerHTML = '';
+	jQuery('#ordersSubtotal').html(toPeso(numeral(totalPrice).format('0,0.00')));
+
+	updateOrderTotal();
+}
+
+function updateOrderTotal() {
+	var subtotal = numeral(jQuery('#ordersSubtotal').html()).value();
+	var discount = numeral(jQuery('#ordersDiscount').html()).value();
+
+	var grandTotal = subtotal - discount;
+
+	jQuery('#ordersGrandTotal').html('');
+	jQuery('#ordersGrandTotal').html(toPeso(numeral(grandTotal).format('0,0.00')));
 }
 
 //remove item in the order slip
@@ -138,7 +150,7 @@ jQuery(document).ready(function () {
 		//jQuery(this).remove(); GAC
 		jQuery('#orderSlipItem' + jQuery(this).attr('id').slice(13)).remove(); //GAC
 		jQuery('#itemOrderDiv' + jQuery(this).attr('id').slice(13)).remove();
-		updateOrderTotal();
+		updateOrderSubtotal();
 
 		//Gac
 		if (jQuery('.items').length == 0) {
@@ -157,13 +169,13 @@ jQuery(document).ready(function () {
 		x.className = "show";
 		setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 		jQuery(this).remove();
-		updateOrderTotal();
+		updateOrderSubtotal();
 	});
 
 	//remove with clear button
 	jQuery(document).on('click', '#clearItems', function () {
 		jQuery('.items').remove();
-		updateOrderTotal();
+		updateOrderSubtotal();
 		jQuery('#snackbar').html('ALL ITEMS HAS BEEN REMOVED');
 		var x = document.getElementById("snackbar");
 		x.className = "show";
