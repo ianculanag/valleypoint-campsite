@@ -194,8 +194,7 @@ jQuery(document).ready(function () {
 		}
 		//end
 
-		alert("You removed" + this);
-		console.log(this.attr('class'));
+		alert("You removed an item");
 		jQuery(this).remove();
 		updateOrderTotal();
 	});
