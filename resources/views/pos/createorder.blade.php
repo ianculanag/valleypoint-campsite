@@ -49,6 +49,9 @@
                             <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
                                 Save order
                             </button>
+                            <button class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
+                                    Clear order
+                                </button>
                         </div>
                     </div>
                 </div>

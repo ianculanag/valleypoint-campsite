@@ -1,49 +1,3 @@
-<<<<<<< HEAD
-jQuery(document).ready(function() {
-    jQuery(document).on('click', '.menu-item', function() {
-        jQuery('.menu-item').css('background-color', 'white');
-        jQuery(this).css('background-color', 'rgb(119, 232, 255)');
-
-        getFoodItem(jQuery(this).attr('id'));
-        jQuery('#addItemButton').attr('disabled', false);
-    });
-
-    jQuery('#itemQuantity').change(function() {
-        updateItemPrice();
-    })
-
-    jQuery('#addItemButton').click(function() {
-        showItemAddedMessage();
-        addRowInOrderSlip();        
-        addOrderEntry(); //adds the order as hidden input
-
-        removeItemEntries();
-    })
-
-    jQuery('.makeorder').click(function() {
-        removeItemEntries();
-        
-        var productCategory = jQuery(this).attr('id');
-        var htmlString = "";
-
-        jQuery.get('/view-menu/' + productCategory, function(data){
-            if(data.length > 0) {
-                for(var index = 0; index<data.length; index++){
-                    htmlString += "<a class='px-1 mx-1'>";
-                    htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em; cursor:pointer;' id='" + data[index].id + "'>";
-                    htmlString += "<div class='card-body text-center my-auto'>";
-                    htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6></div> </div> </a>";
-                    jQuery('#menu').html(htmlString);
-                }
-            } else {
-                htmlString += "<div class='container'> <p style='font-style:italic;'> No product available </p></div>";
-                jQuery('#menu').html(htmlString);
-            }
-        })
-        jQuery('.makeorder').removeClass('active');
-        jQuery(this).addClass('active');
-    })
-=======
 jQuery(document).ready(function () {
 	jQuery(document).on('click', '.menu-item', function () {
 		jQuery('.menu-item').css('background-color', 'white');
@@ -76,7 +30,7 @@ jQuery(document).ready(function () {
 				for (var index = 0; index < data.length; index++) {
 					htmlString += "<a class='px-1 mx-1'>";
 					htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5em; cursor:pointer;' id='" + data[index].id + "'>";
-					htmlString += "<div class='card-body text-center px-2 py-2 mx-0'>";
+					htmlString += "<div class='card-body text-center my-auto'>";
 					htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6></div> </div> </a>";
 					jQuery('#menu').html(htmlString);
 				}
@@ -88,7 +42,6 @@ jQuery(document).ready(function () {
 		jQuery('.makeorder').removeClass('active');
 		jQuery(this).addClass('active');
 	})
->>>>>>> unfinished alert warning for removing an item
 });
 
 function addOrderEntry() {
@@ -194,8 +147,23 @@ jQuery(document).ready(function () {
 		}
 		//end
 
-		alert("You removed an item");
+		jQuery('#snackbar').html('Removed succesfully');
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+		setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 		jQuery(this).remove();
 		updateOrderTotal();
+		showItemRemovedMessage();
 	});
+
+	//remove with clear button
+	jQuery(document).on('click', '#clearItems', function () {
+		jQuery('.items').remove();
+		updateOrderTotal();
+		jQuery('#snackbar').html('ALL ITEMS HAS BEEN REMOVED');
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+		setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+	})
+
 });
