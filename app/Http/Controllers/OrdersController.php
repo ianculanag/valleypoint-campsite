@@ -175,6 +175,24 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function viewOrderSlips() {
-        return view('pos.vieworderslips');
+        $orders = DB::table('orders')
+        ->where('status', '=', 'ongoing')
+        ->orderBy('orderDatetime', 'ASC')
+        ->get();
+
+        $orderItems = array();
+
+        for($index = 0; $index < count($orders); $index++) {
+            $items = DB::table('orders')
+            ->join('items', 'items.orderID', 'orders.id')
+            ->join('products', 'products.id', 'items.productID')
+            ->where('orders.id', '=', $orders[$index]->id)
+            ->get();
+
+            array_push($orderItems, $items);
+        }
+
+        //return $orderItems;
+        return view('pos.vieworderslips')->with('orders', $orders)->with('items', $orderItems);
     }
 }
