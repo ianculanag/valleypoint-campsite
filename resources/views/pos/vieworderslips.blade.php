@@ -23,11 +23,14 @@
                 <div class="card p-0 m-0" style="min-height:70vh; max-height:70vh;">
                     <div class="row pt-2 pb-1 px-3">
                         <div class="col-md-6">
-                            <div class="form-group my-1 row pr-4">
-                                <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
+                            <div class="form-group my-1 row">
+                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
-                                </div>
+                                    <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->tableNumber}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
+                                </div>                                    
+                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
+                                    <i class="fa fa-pencil-alt"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6">
