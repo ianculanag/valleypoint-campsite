@@ -38,7 +38,7 @@
                             <thead>
                                 <tr>
                                     <th colspan="3" scope="row">TOTAL:</th>
-                                    <th id="ordersGrandTotal" style="text-align:right;">0.00</th>
+                                    <th id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
                                 </tr>
                             </thead>
                         </table>

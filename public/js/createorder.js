@@ -44,6 +44,11 @@ jQuery(document).ready(function () {
 	})
 });
 
+function toPeso(valueString) {
+	console.log('₱'+valueString);
+	return '₱'+valueString;
+}
+
 function addOrderEntry() {
 	htmlString = "";
 
@@ -88,8 +93,8 @@ function addRowInOrderSlip() {
 	htmlString += "<td>" + jQuery('#itemDescription').val() + "</td>";
 	//htmlString += "</a>";
 	htmlString += "<td style='text-align:right class='orderItemQuantity>" + jQuery('#itemQuantity').val() + "</td>";
-	htmlString += "<td style='text-align:right' class='orderItemUnitPrice'>" + parseFloat(jQuery('#itemUnitPrice').val()).toFixed(2) + "</td>";
-	htmlString += "<td style='text-align:right' class='orderItemPrice'>" + parseFloat(jQuery('#itemTotalPrice').val()).toFixed(2) + "</td>";
+	htmlString += "<td style='text-align:right' class='orderItemUnitPrice'>" + numeral(jQuery('#itemUnitPrice').val()).format('0,0.00') + "</td>";
+	htmlString += "<td style='text-align:right' class='orderItemPrice'>" + numeral(jQuery('#itemTotalPrice').val()).format('0,0.00') + "</td>";
 	htmlString += "</tr>";
 
 	jQuery('#emptyEntryHolder').remove();
@@ -120,11 +125,11 @@ function updateOrderTotal() {
 	var prices = document.getElementsByClassName('orderItemPrice');
 
 	for (var index = 0; index < prices.length; index++) {
-		totalPrice += parseInt(prices[index].innerHTML);
+		totalPrice += numeral(prices[index].innerHTML).value();
 	}
 
 	document.getElementById('ordersGrandTotal').innerHTML = '';
-	jQuery('#ordersGrandTotal').html(parseFloat(totalPrice).toFixed(2));
+	jQuery('#ordersGrandTotal').html(toPeso(numeral(totalPrice).format('0,0.00')));
 }
 
 //remove item in the order slip
@@ -153,7 +158,6 @@ jQuery(document).ready(function () {
 		setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 		jQuery(this).remove();
 		updateOrderTotal();
-		showItemRemovedMessage();
 	});
 
 	//remove with clear button
