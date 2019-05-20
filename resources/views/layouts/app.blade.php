@@ -45,6 +45,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
 <script src="{{ asset('js/numbers2words.min.js') }}"></script>
+<script src="{{ asset('js/numeral.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 {{--<script src="{{ asset('js/custom2.js') }}"></script>--}}
 <script src="{{ asset('js/custom3.js') }}"></script>
