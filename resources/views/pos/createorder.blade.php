@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-4 order-md-12 mb-4 mx-0" >
                 <div class="card p-0 m-0" style="min-height:67vh; max-height:67vh;">
-                    <h4 class="text-muted text-center py-3">Order Slip</h4>
+                    <h5 class="text-muted text-center pt-3 pb-2" style="font-size:1.2em;">Order Slip</h5>
                     <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
                         <table class="table table-striped" style="font-size:.88em;">
                             <thead>
@@ -28,7 +28,7 @@
                             </thead>
                             <tbody id="orderSlip">
                                 <tr id="emptyEntryHolder">
-                                    <td style="text-align:center" colspan="4">Add items from the menu</td>
+                                    <td class="py-2" style="text-align:center" colspan="4">Add items from the menu</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -37,21 +37,35 @@
                         <table class="table table-striped" style="font-size:.88em;">
                             <thead>
                                 <tr>
-                                    <th colspan="3" scope="row">TOTAL:</th>
-                                    <th id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
+                                    <th class="py-2" colspan="3" scope="row">Subtotal:</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
+                                </tr>
+                                <tr>
+                                    <th class="py-2" colspan="3" scope="row">Discount:</th>
+                                    <th class="py-2" id="discount" style="text-align:right;">₱0.00</th>
+                                </tr>
+                                <tr>
+                                    <th class="py-2" colspan="3" scope="row">TOTAL:</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
                                 </tr>
                             </thead>
                         </table>
-                        <div class="mx-2">
-                            <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
-                                Get payment
-                            </button>
-                            <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
-                                Save order
-                            </button>
-                            <button class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
-                                    Clear order
+                        <div class="row mx-2">
+                            <div class="col-md-4 px-1">
+                                <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
+                                    Cash
                                 </button>
+                            </div>
+                            <div class="col-md-4 px-1">
+                                <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
+                                    Save
+                                </button>
+                            </div>
+                            <div class="col-md-4 px-1">
+                                <button class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
+                                    Clear
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

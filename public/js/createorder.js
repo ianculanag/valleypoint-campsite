@@ -90,11 +90,11 @@ function addRowInOrderSlip() {
 
 	htmlString += "<tr class='items' id='orderSlipItem" + orderIdentifier + "'>";
 	//htmlString += "<a data-toggle='tooltip' title='Click to remove'>";
-	htmlString += "<td>" + jQuery('#itemDescription').val() + "</td>";
+	htmlString += "<td class='py-2'>" + jQuery('#itemDescription').val() + "</td>";
 	//htmlString += "</a>";
-	htmlString += "<td style='text-align:right class='orderItemQuantity>" + jQuery('#itemQuantity').val() + "</td>";
-	htmlString += "<td style='text-align:right' class='orderItemUnitPrice'>" + numeral(jQuery('#itemUnitPrice').val()).format('0,0.00') + "</td>";
-	htmlString += "<td style='text-align:right' class='orderItemPrice'>" + numeral(jQuery('#itemTotalPrice').val()).format('0,0.00') + "</td>";
+	htmlString += "<td style='text-align:right' class='orderItemQuantity py-2'>" + jQuery('#itemQuantity').val() + "</td>";
+	htmlString += "<td style='text-align:right' class='orderItemUnitPrice py-2'>" + numeral(jQuery('#itemUnitPrice').val()).format('0,0.00') + "</td>";
+	htmlString += "<td style='text-align:right' class='orderItemPrice py-2'>" + numeral(jQuery('#itemTotalPrice').val()).format('0,0.00') + "</td>";
 	htmlString += "</tr>";
 
 	jQuery('#emptyEntryHolder').remove();
@@ -145,7 +145,7 @@ jQuery(document).ready(function () {
 			htmlString = "";
 
 			htmlString += "<tr id='emptyEntryHolder'>";
-			htmlString += "<td style='text-align:center' colspan='4'>Add items from the menu</td>";
+			htmlString += "<td class='py-2' style='text-align:center' colspan='4'>Add items from the menu</td>";
 			htmlString += "</tr>";
 
 			jQuery('#orderSlip').html(htmlString);
