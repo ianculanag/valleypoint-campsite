@@ -179,7 +179,7 @@ class OrdersController extends Controller
         ->orderBy('orderDatetime', 'ASC')
         ->get();
 
-        $orderItems = array();
+        $items = array();
 
         for($index = 0; $index < count($orders); $index++) {
             $items = DB::table('orders')
@@ -188,11 +188,11 @@ class OrdersController extends Controller
             ->where('orders.id', '=', $orders[$index]->id)
             ->get();
 
-            array_push($orderItems, $items);
+            array_push($items, $items);
         }
 
-        //return $orderItems;
-        return view('pos.vieworderslips')->with('orders', $orders)->with('items', $orderItems);
+        //return $items;
+        return view('pos.vieworderslips')->with('orders', $orders)->with('items', $items);
     }
 
     /**
@@ -230,6 +230,24 @@ class OrdersController extends Controller
         $tables = DB::table('restaurant_tables')
         ->get();
 
-        return view('pos.tableview')->with('tables', $tables);
+        $firstTable = DB::table('restaurant_tables')
+        ->first();
+
+        $items = DB::table('orders')
+        ->join('items', 'items.orderID', 'orders.id')
+        ->join('products', 'products.id', 'items.productID')
+        ->where('status', '=', 'ongoing')
+        ->where('tableNumber', '=', $firstTable->id)
+        ->get();
+
+        if(count($items) > 0) {
+            $orderQueueNumber = $items->queueNumber;
+
+            return view('pos.tableview')->with('tables', $tables)->with('firstTable', $firstTable)
+                ->with('items', $items)->with('orderQueueNumber', $orderQueueNumber);
+        } else {
+            return view('pos.tableview')->with('tables', $tables)->with('firstTable', $firstTable)
+                ->with('items', $items);
+        }
     }
 }

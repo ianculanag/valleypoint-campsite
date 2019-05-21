@@ -180,6 +180,8 @@ jQuery(document).ready(function () {
 			console.log('No orders');
 		} else {*/
 			jQuery.get('load-table-order-slip/'+jQuery(this).attr('id'), function(data){
+				jQuery('.hidden-elements').show();
+				jQuery('#billOut').prop('disabled', false);
 				jQuery('#orderTableNumber').val(data[0][0].tableNumber);
 				jQuery('#orderQueueNumber').val(data[0][0].queueNumber);
 

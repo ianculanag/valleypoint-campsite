@@ -65,17 +65,17 @@
     <div class="container-fluid row col-md-12 px-5 pt-3 mx-0">
         <div class="col-md-7 scrollbar-near-moon" style="max-height:74vh; overflow-y:auto;">
             <div class="row">
-                @for($index = 1; $index <=12; $index++) 
+                @foreach ($tables as $table)
                 <a class="restaurant-tables" style="cursor:pointer">
-                    <div class="card mx-2 restaurant-tables" id="{{$index}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
+                    <div class="card mx-2 restaurant-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
                         <div class="card-body">
-                            <h5 class="card-title">Table {{$index}}
-                            <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;" id="badge{{$index}}">Available</span>
+                            <h5 class="card-title"> {{$table->tableNumber}}
+                            <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
                             </h5>
                         </div>
                     </div> 
                 </a>
-                @endfor 
+                @endforeach 
             </div>
         </div>
         <div class="col-md-5" id="tableOrders">
@@ -86,18 +86,32 @@
                             <div class="form-group my-1 row">
                                 <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="tableNumber" id="orderTableNumber" min="1" max="30" placeholder="" value="{{--$tables->id--}}" disabled>
-                                </div>                                    
+                                    <input class="form-control" type="number" name="tableNumber" id="orderTableNumber" min="1" max="30" placeholder="" value="{{$firstTable->id}}" disabled>
+                                </div>        
+                                @if(count($items) > 0)                            
                                 <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
                                     <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
+                                @else                                
+                                <span class="col-sm-1 input-group-addon px-2 mx-0 hidden-elements" onclick="" style="display:none;">
+                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                </span>
+                                @endif
                             </div>
                         </div>
+                        @if(count($items) > 0)
                         <div class="col-md-6">
+                        @else
+                        <div class="hidden-elements col-md-6" style="display:none;">
+                        @endif
                             <div class="form-group my-1 row">
                                 <label class="col-sm-6 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="{{--$order->queueNumber--}}" disabled>
+                                @if(isset($orderQueueNumber))
+                                    <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="{{$orderQueueNumber}}" disabled>
+                                @else
+                                    <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="" disabled>   
+                                @endif
                                 </div>                                  
                                 <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
                                     <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
@@ -117,24 +131,28 @@
                                 </tr>
                             </thead>
                             <tbody id="orderSlip">
-                                {{--@php 
+                                @php 
                                    $grandTotal = 0; 
                                 @endphp
 
-                                @foreach ($items[$loop->index] as $item)
-
-                                @php 
-                                   $grandTotal += $item->totalPrice; 
-                                @endphp--}}
-
-                                <tr>
-                                    <td class="py-2">{{--$item->productName--}}</td>
-                                    <td class="py-2">{{--$item->quantity--}}</td>
-                                    <td class="py-2">{{--number_format((float)($item->price), 2, '.', '')--}}</td>
-                                    <td class="py-2">{{--number_format((float)($item->totalPrice), 2, '.', '')--}}</td>
-                                    <td class="py-2"></td>
-                                </tr>
-                                {{--@endforeach--}}
+                                @if(count($items) > 0)
+                                    @foreach ($items as $item)
+                                    @php 
+                                    $grandTotal += $item->totalPrice; 
+                                    @endphp
+                                    <tr>
+                                        <td class="py-2">{{$item->productName}}</td>
+                                        <td class="py-2">{{$item->quantity}}</td>
+                                        <td class="py-2">{{number_format((float)($item->price), 2, '.', '')}}</td>
+                                        <td class="py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                        <td class="py-2"></td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td class="py-2 text-center" colspan="5"> No order items to show </td> 
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -143,7 +161,7 @@
                             <thead>
                                 <tr>
                                     <th colspan="3" scope="row" class="py-2">TOTAL:</th>
-                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">₱{{--number_format((float)($grandTotal), 2, '.', '')--}}</th>
+                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">₱{{number_format((float)($grandTotal), 2, '.', '')}}</th>
                                 </tr>
                                 <tr>
                                     <th colspan="3" scope="row" class="py-2">Tendered:</th>
@@ -155,17 +173,25 @@
                                 </tr>
                             </thead>
                         </table>
-                        <div class="row mx-1">
+                        <div class="row mx-1" id="orderSlipButtons">
                             <div class="col-md-6 px-1">
                                 <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
                                     Add Order
                                 </button>
                             </div>
+                            @if(count($items) > 0)
                             <div class="col-md-6 px-1">
-                                <button type="button" class="btn btn-success btn-block" style="text-align:center;">
+                                <button type="button" class="btn btn-success btn-block" id="billOut" style="text-align:center;">
                                     Bill Out
                                 </button>
                             </div>
+                            @else
+                            <div class="col-md-6 px-1">
+                                <button type="button" class="btn btn-success btn-block" id="billOut" style="text-align:center;" disabled>
+                                    Bill Out
+                                </button>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
