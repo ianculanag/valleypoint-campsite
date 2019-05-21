@@ -8,15 +8,15 @@
             <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
-    <div class="col-md-3 offset-9 pb-2 px-4">
+    <div class="col-md-3 offset-9 pb-2 px-5">
         <div class="form-group my-0 row">
             <label class="col-sm-4 pr-0 mr-0 pt-1" for="searchOrder">Search</label>
-            <div class="input-group input-group-sm col-sm-8 pl-0 pr-3 mx-0">
+            <div class="input-group input-group-sm col-sm-8 pl-0 pr-4 mx-0">
                 <input class="form-control" type="text" name="searchOrder" id="searchOrder" minlength="1" maxlength="20" placeholder="" value="">
             </div>
         </div>
     </div>  
-    <div class="container-fluid col-md-12 pb-2 pt-0 px-4 scrollbar-near-moon" style="max-height:73vh; overflow-x:auto;">      
+    <div class="container-fluid col-md-12 pb-2 pt-0 px-5 scrollbar-near-moon-wide" style="max-height:73vh; overflow-x:auto;">      
         <div class="row">
             @foreach ($orders as $order)
             <div class="col-md-4 order-md-12 mb-4 mx-0" >
@@ -26,19 +26,22 @@
                             <div class="form-group my-1 row">
                                 <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->tableNumber}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
+                                    <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}" disabled>
                                 </div>                                    
                                 <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
-                                    <i class="fa fa-pencil-alt"></i>
+                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group my-1 row pr-4">
-                                <label class="col-sm-8 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
+                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="{{$order->queueNumber}}">
-                                </div>
+                                    <input class="form-control" type="number" name="queueNumber" id="queueNumber{{$order->id}}" min="1" max="50" placeholder="" value="{{$order->queueNumber}}" disabled>
+                                </div>                                  
+                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
+                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                </span>
                             </div>
                         </div>
                     </div>

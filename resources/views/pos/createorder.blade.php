@@ -131,7 +131,7 @@
                         @foreach ($products as $product)
                         @if($product->productCategory == 'appetizer')
                             <a class="px-1 mx-1">       
-                                <div class="card px-0 mx-1 menu-item" style="width:9.3rem; height:5em; cursor:pointer" id="{{$product->id}}">
+                                <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5em; cursor:pointer" id="{{$product->id}}">
                                     <div class="card-body text-center my-auto">
                                         <h6 class="card-text">
                                             {{$product->productName}}
