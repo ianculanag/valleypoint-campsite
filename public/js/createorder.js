@@ -183,8 +183,8 @@ jQuery(document).ready(function () {
 
 jQuery(document).ready(function () {
 	jQuery(document).on('click', '.restaurant-tables', function () {
-		var tableNumber = jQuery(this).attr('id');
-		/*if(jQuery.get('load-table-order-slip/'+jQuery(this).attr('id')) === 'undefined') {
+		/*var tableNumber = jQuery(this).attr('id');
+		if(jQuery.get('load-table-order-slip/'+jQuery(this).attr('id')) === 'undefined') {
 			jQuery('#orderTableNumber').val(tableNumber);
 			console.log('No orders');
 		} else {*/
@@ -201,10 +201,12 @@ jQuery(document).ready(function () {
 					htmlString += "<tr><td class='py-2'>" + data[1][index].productName + "</td>";
 					htmlString += "<td class='py-2'>" + data[1][index].quantity + "</td>";
 					htmlString += "<td class='py-2'>" + (numeral(data[1][index].price).format('0,0.00')) + "</td>";
-					htmlString += "<td class='py-2'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
+					htmlString += "<td class='py-2 orderItemPrice'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
 					htmlString += "<td class='py-2'>" + data[1][index].paymentStatus + "</td></tr>";
 					jQuery('#orderSlip').html(htmlString);
 				}
+
+				updateOrderTotal();
 			})
 		//}
 	})

@@ -70,7 +70,11 @@
                     <div class="card mx-2 restaurant-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
                         <div class="card-body">
                             <h5 class="card-title"> {{$table->tableNumber}}
+                            @if($table->status == 'available') 
                             <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
+                            @elseif($table->status == 'occupied')
+                            <span class="badge badge-dark float-right badgeStatus" style="font-size:.55em;">Occupied</span>
+                            @endif
                             </h5>
                         </div>
                     </div> 

@@ -179,7 +179,7 @@ class OrdersController extends Controller
         ->orderBy('orderDatetime', 'ASC')
         ->get();
 
-        $items = array();
+        $orderItems = array();
 
         for($index = 0; $index < count($orders); $index++) {
             $items = DB::table('orders')
@@ -188,11 +188,11 @@ class OrdersController extends Controller
             ->where('orders.id', '=', $orders[$index]->id)
             ->get();
 
-            array_push($items, $items);
+            array_push($orderItems, $items);
         }
 
         //return $items;
-        return view('pos.vieworderslips')->with('orders', $orders)->with('items', $items);
+        return view('pos.vieworderslips')->with('orders', $orders)->with('items', $orderItems);
     }
 
     /**
