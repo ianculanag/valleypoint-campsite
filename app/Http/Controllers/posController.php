@@ -95,8 +95,8 @@ class PosController extends Controller
 //         ->with ('foods', $food);
 // }
     
-    public function viewTables()
+/*    public function viewTables()
     {
         return view('pos.tableview');
-    }
+    }*/
 }

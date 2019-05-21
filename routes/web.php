@@ -231,7 +231,7 @@ Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity
 /* Restaurant */
 //POS Dashboard Pages
 Route::get('/create-order', 'ProductsController@createOrder');
-Route::get('/view-tables', 'PosController@viewTables');
+Route::get('/view-tables', 'OrdersController@viewTables');
 Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
 
 //Make Order POS

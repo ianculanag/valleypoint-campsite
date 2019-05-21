@@ -219,4 +219,17 @@ class OrdersController extends Controller
 
         return $tableOrder;
     }
+
+    /**
+     * Table View 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewTables()
+    {
+        $tables = DB::table('restauranttables')
+        ->get();
+
+        return view('pos.tableview')->with('tables', $tables);
+    }
 }
