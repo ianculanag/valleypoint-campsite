@@ -227,7 +227,7 @@ class OrdersController extends Controller
      */
     public function viewTables()
     {
-        $tables = DB::table('restauranttables')
+        $tables = DB::table('restaurant_tables')
         ->get();
 
         return view('pos.tableview')->with('tables', $tables);
