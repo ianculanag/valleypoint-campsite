@@ -334,3 +334,10 @@ function computeTotalDiscount() {
 	
 	jQuery('#totalDiscount').html(toPeso(numeral(totalDiscount).format('0,0.00')));
 }
+
+jQuery('#saveDiscountButton').click( function() {
+	jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#totalDiscount').html()).format('0,0.00')));
+	updateOrderTotal();
+
+	//jQuery('#discountMethod').removeAttr('checked', false);
+})
