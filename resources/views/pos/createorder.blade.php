@@ -20,15 +20,16 @@
                         <table class="table table-striped" style="font-size:.88em;">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width:45%;">Description</th>
+                                    <th scope="col" style="width:40%;">Description</th>
                                     <th scope="col">Qty.</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Total</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="orderSlip">
                                 <tr id="emptyEntryHolder">
-                                    <td class="py-2" style="text-align:center" colspan="4">Add items from the menu</td>
+                                    <td class="py-2" style="text-align:center" colspan="5">Add items from the menu</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -62,12 +63,12 @@
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
-                                <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-info btn-block" style="text-align:center;">
+                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton">
                                     Discount
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
-                                <button class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
+                                <button type="button" class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
                                     Clear
                                 </button>
                             </div>
@@ -136,11 +137,17 @@
                         @foreach ($products as $product)
                         @if($product->productCategory == 'appetizer')
                             <a class="px-1 mx-1">       
+<<<<<<< HEAD
                                 <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5em; cursor:pointer" id="{{$product->id}}">
                                     <div class="card-body text-center my-auto">
+=======
+                                <div class="card px-0 mx-0 menu-item" style="width:9.3rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
+                                    <div class="card-body pt-2 text-center">
+>>>>>>> Discount computation
                                         <h6 class="card-text">
                                             {{$product->productName}}
                                         </h6>
+                                        <p>₱{{number_format((float)($product->price), 2, '.', '')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -174,18 +181,19 @@
         <div class="itemRemovalModal">
         </div>
 
-        <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+        <div id="discountModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
+                        <h5 class="modal-title">Discount</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="checkbox" checked data-toggle="toggle" data-on="₱" data-off="%" data-onstyle="success" data-offstyle="primary">
-                        <p>Modal body text goes here.</p>
+                        <span style="font-size:1.2em;">₱</span> <input type="checkbox" id="discountMethod" data-toggle="toggle" data-onstyle="primary" data-offstyle="success" data-on=" " data-off=" "> <strong style="font-size:1.2em;">%</strong>
+                        <div class="mt-2" id="discountModalBody">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary">Save changes</button>
