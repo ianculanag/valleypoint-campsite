@@ -137,13 +137,8 @@
                         @foreach ($products as $product)
                         @if($product->productCategory == 'appetizer')
                             <a class="px-1 mx-1">       
-<<<<<<< HEAD
-                                <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5em; cursor:pointer" id="{{$product->id}}">
-                                    <div class="card-body text-center my-auto">
-=======
-                                <div class="card px-0 mx-0 menu-item" style="width:9.3rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
-                                    <div class="card-body pt-2 text-center">
->>>>>>> Discount computation
+                                <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
+                                    <div class="card-body text-center pt-2">
                                         <h6 class="card-text">
                                             {{$product->productName}}
                                         </h6>
@@ -196,7 +191,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="saveDiscountButton">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
