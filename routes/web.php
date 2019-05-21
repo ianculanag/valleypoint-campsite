@@ -250,6 +250,9 @@ Route::post('/save-order', 'OrdersController@saveOrder');
 
 Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
+//View table orders
+Route::get('/load-table-order-slip/{tableNumber}', 'OrdersController@loadTableOrders');
+
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 

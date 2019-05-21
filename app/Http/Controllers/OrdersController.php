@@ -169,7 +169,7 @@ class OrdersController extends Controller
     }
 
     /**
-     * Show custom restaurant report 
+     * Show current order slips 
      *
      * @return \Illuminate\Http\Response
      */
@@ -193,5 +193,30 @@ class OrdersController extends Controller
 
         //return $orderItems;
         return view('pos.vieworderslips')->with('orders', $orders)->with('items', $orderItems);
+    }
+
+    /**
+     * Show table order slip 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadTableOrders($tableNumber) {
+        $tableOrder = array();
+
+        $order = DB::table('orders')
+        ->where('status', '=', 'ongoing')
+        ->where('tableNumber', '=', $tableNumber)
+        ->get();
+
+        $items = DB::table('orders')
+        ->join('items', 'items.orderID', 'orders.id')
+        ->join('products', 'products.id', 'items.productID')
+        ->where('orders.id', '=', $order[0]->id)
+        ->get();
+
+        array_push($tableOrder, $order);
+        array_push($tableOrder, $items);
+
+        return $tableOrder;
     }
 }

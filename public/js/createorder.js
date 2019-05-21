@@ -171,3 +171,30 @@ jQuery(document).ready(function () {
 	})
 
 });
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '.restaurant-tables', function () {
+		var tableNumber = jQuery(this).attr('id');
+		/*if(jQuery.get('load-table-order-slip/'+jQuery(this).attr('id')) === 'undefined') {
+			jQuery('#orderTableNumber').val(tableNumber);
+			console.log('No orders');
+		} else {*/
+			jQuery.get('load-table-order-slip/'+jQuery(this).attr('id'), function(data){
+				jQuery('#orderTableNumber').val(data[0][0].tableNumber);
+				jQuery('#orderQueueNumber').val(data[0][0].queueNumber);
+
+				var htmlString = "";
+
+				for(var index = 0; index < data[1].length; index++) {
+					//console.log(index);
+					htmlString += "<tr><td class='py-2'>" + data[1][index].productName + "</td>";
+					htmlString += "<td class='py-2'>" + data[1][index].quantity + "</td>";
+					htmlString += "<td class='py-2'>" + (numeral(data[1][index].price).format('0,0.00')) + "</td>";
+					htmlString += "<td class='py-2'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
+					htmlString += "<td class='py-2'>" + data[1][index].paymentStatus + "</td></tr>";
+					jQuery('#orderSlip').html(htmlString);
+				}
+			})
+		//}
+	})
+});
