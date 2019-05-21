@@ -162,7 +162,6 @@ class OrdersController extends Controller
 
     public function viewOrders(){
         $order = DB::table('orders')
-        ->select('orders.ID as orderID ', 'orders.orderNumber', 'orders.paymentStatus', 'orders.orderDatetime')
         ->get();
         
         return view('pos.viewOrders')

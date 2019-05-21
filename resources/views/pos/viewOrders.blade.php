@@ -22,9 +22,9 @@
                 @if(count($orders) > 1)
                 @foreach($orders as $order)
                 <tr class="">
-                  <td>{{$order->orderID}}</td>
-                  <td>{{$order->orderNumber}}</td>
-                  <td>{{$order->orderDateTime}}</td>
+                  <td>{{$order->id}}</td>
+                  <td>{{$order->queueNumber}}</td>
+                  <td>{{$order->orderDatetime}}</td>
                 </tr>
                 @endforeach
                 @endif
