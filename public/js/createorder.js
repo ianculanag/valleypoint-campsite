@@ -147,6 +147,7 @@ function updateOrderTotal() {
 
 	//hidden totalbill input
 	jQuery('#totalBill').val(grandTotal);
+	console.log(grandTotal);
 }
 
 //remove item in the order slip
@@ -317,7 +318,7 @@ jQuery('#discountMethod').change(function() {
 		for(var index = 0; index < jQuery('.discountInputs').length; index++) {
 			htmlString = "";
 			
-			htmlString += "<input class='form-control pt-0 orderDiscounts' min='0' max='100' placeholder='0' type='number'>";
+			htmlString += "<input class='form-control pt-0 orderDiscounts input-group-prepend	' min='0' max='100' placeholder='0' type='number'>";
 			
 			htmlString += "<div class='input-group-prepend'>";
 			htmlString += "<span class='input-group-text discountIcons'>%</span>";

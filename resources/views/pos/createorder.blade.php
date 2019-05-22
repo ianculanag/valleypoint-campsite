@@ -82,8 +82,10 @@
                 <input id="numberOfOrders" name="numberOfOrders" type="number" value="0">
                 <!--the insertOrderEntry() function in createorder.js handles this part of the code-->
                 <!--it inserts hidden inputs containing the orders-->
-                <input id="totalBill" name="totalBill" type="number" value="0">
             </div>
+            
+            <input id="totalBill" name="totalBill" type="hidden" value="0">
+            <!--Handles total bill-->
             <!--Ends here-->
             <div class="col-md-8">
                 <div class="container row pt-2 pb-1">
@@ -187,7 +189,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span style="font-size:1.2em;">₱</span> <input type="checkbox" id="discountMethod" data-toggle="toggle" data-onstyle="primary" data-offstyle="success" data-on=" " data-off=" "> <strong style="font-size:1.2em;">%</strong>
+                        {{--<span style="font-size:1.2em;">₱</span> <input type="checkbox" id="discountMethod" data-toggle="toggle" data-onstyle="primary" data-offstyle="success" data-on=" " data-off=" "> <strong style="font-size:1.2em;">%</strong>--}}
+                        <span>₱</span>
+                        <label class="switch">
+                            <input type="checkbox" id="discountMethod">
+                            <span class="slider round"></span>
+                        </label>
+                        <strong>%</strong>
+
+                        <div style="float:right">
+                            <strong>All</strong>
+                            <label class="switch">
+                                <input type="checkbox" id="discountToAll">
+                                <span class="slider-alt round"></span>
+                            </label>
+                        </div>
                         <div class="mt-2" id="discountModalBody">
                         </div>
                     </div>
