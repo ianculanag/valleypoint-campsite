@@ -211,6 +211,7 @@ jQuery(document).ready(function () {
 					jQuery('#orderSlip').html(htmlString);
 				}
 
+				jQuery('#orderID').val(data[1][0].orderID);
 				jQuery('#ordersGrandTotal').html('');
 				jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
 			})

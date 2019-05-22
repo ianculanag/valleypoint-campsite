@@ -166,12 +166,13 @@
                                         <td class="py-2 orderItemPrice">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
                                         <td class="py-2">{{$item->paymentStatus}}</td>
                                     </tr>
-                                    @endforeach
                                     <input class="form-control" type="number" id="orderID" name="orderID" value="{{$item->orderID}}" style="display:none;">
+                                    @endforeach
                                 @else
                                     <tr>
                                         <td class="py-2 text-center" colspan="5"> No order items to show </td> 
                                     </tr>
+                                    <input class="form-control" type="number" id="orderID" name="orderID" value="" style="display:none;">
                                 @endif
                             </tbody>
                         </table>
