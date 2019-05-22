@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Orders;
 use App\Items;
 use App\Products;
+use App\RestaurantTable;
 use Carbon\Carbon;
 use DB;
 
@@ -155,6 +156,14 @@ class OrdersController extends Controller
                 $item->paymentStatus = $paymentStatus;
                 $item->save();
             } 
+        }
+
+        //toggle table status
+        if(!($request->input('tableNumber')=='')) {
+            $table = RestaurantTable::find($request->input('tableNumber'));
+            $table->update([
+                'status' => 'occupied'
+            ]);
         }
 
         return redirect ('/create-order');
