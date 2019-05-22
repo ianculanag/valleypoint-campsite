@@ -211,7 +211,8 @@ jQuery(document).ready(function () {
 					jQuery('#orderSlip').html(htmlString);
 				}
 
-				updateOrderTotal();
+				jQuery('#ordersGrandTotal').html('');
+				jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
 			})
 		//}
 	})
@@ -232,6 +233,57 @@ jQuery(document).ready(function () {
 			
 			updateOrderTotal();
 		})
+	})
+});
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '#editTableNumber', function () {
+		jQuery('#orderTableNumber').prop('disabled', false);
+
+		htmlString = "";
+		htmlString += "<button class='btn btn-sm btn-success update-table-button'><i id='saveTable' class='fa fa-check'></i></button>";
+
+		jQuery('#editTableNumber').html(htmlString);
+
+		jQuery('#editTableNumber').removeClass();
+		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements saveTable px-2 mx-0');
+		/*jQuery('.update-table-button').attr('type', 'submit');
+		jQuery('.update-table-button').attr('formaction', 'submit');*/
+
+		/*jQuery('#editTable').addClass('save-table-number');
+		jQuery('#editTable').css('color', 'green');
+		jQuery('#editTable').css('font-size', '1.2em');*/
+	})
+});
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '.saveTable', function () {
+		jQuery.get("update-table-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderTableNumber').val() + "/" + jQuery('#oldTableNumber').val(), function(data) {
+		});
+
+		htmlString = "";
+		htmlString += "<i id='editTable' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
+
+		jQuery('#editTableNumber').html(htmlString);
+		jQuery('#editTableNumber').removeClass();
+		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
+	})
+});
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '#editQueueNumber', function () {
+		jQuery('#orderQueueNumber').prop('disabled', false);
+
+		htmlString = "";
+		htmlString += "<button class='btn btn-sm btn-success'><i id='saveQueue' class='fa fa-check'></i></button>";
+
+		jQuery('#editQueueNumber').html(htmlString);
+		jQuery('#editQueueNumber').removeClass();
+		jQuery('#editQueueNumber').addClass('col-sm-2 input-group-addon saveQueue px-2 mx-0');
+
+		/*jQuery('#editQueue').addClass('save-queue-number');
+		jQuery('#editQueue').css('color', 'green');
+		jQuery('#editQueue').css('font-size', '1.2em');*/
 	})
 });
 

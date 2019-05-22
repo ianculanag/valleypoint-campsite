@@ -86,7 +86,7 @@
                             </h5>
                             <p class="card-text pt-3"> 
                                 Total bill: 
-                                <span class="float-right"> ₱0.00 </span>
+                                <span class="float-right"> ₱{{number_format((float)($table->totalBill), 2, '.', '')}} </span>
                             </p>
                             @endif
                         </div>
@@ -96,33 +96,35 @@
             </div>
         </div>
         <div class="col-md-5" id="tableOrders">
+            <meta name="csrf-token" content="{{ Session::token() }}"> 
             <div class="mx-0 mt-2 pl-4">
                 <div class="card p-0 m-0" style="min-height:70vh; max-height:70vh;">
                     <div class="row pt-2 pb-1 px-3">
                         <div class="col-md-6">
                             <div class="form-group my-1 row">
-                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
+                                <label class="col-sm-5 pr-0 mr-0 pt-1" for="tableNumber">Table:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="tableNumber" id="orderTableNumber" min="1" max="30" placeholder="" value="{{$firstTable->id}}" disabled>
+                                    <input class="form-control" type="number" name="orderTableNumber" id="orderTableNumber" min="1" max="30" placeholder="" value="{{$firstTable->id}}" disabled>
+                                    <input class="form-control" type="number" name="oldTableNumber" id="oldTableNumber" value="{{$firstTable->id}}" style="display:none">
                                 </div>        
                                 @if(count($items) > 0)                            
-                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
-                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                <span id="editTableNumber" class="col-sm-2 input-group-addon hidden-elements px-3 mx-0" style="cursor:pointer">
+                                    <i id="editTable" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
                                 @else                                
-                                <span class="col-sm-1 input-group-addon px-2 mx-0 hidden-elements" onclick="" style="display:none;">
-                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                <span id="editTableNumber" class="col-sm-2 input-group-addon hidden-elements px-3 mx-0" style="display:none; cursor:pointer;">
+                                    <i id="editTable" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
                                 @endif
                             </div>
                         </div>
                         @if(count($items) > 0)
-                        <div class="col-md-6">
+                        <div class="hidden-elements col-md-6">
                         @else
                         <div class="hidden-elements col-md-6" style="display:none;">
                         @endif
                             <div class="form-group my-1 row">
-                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
+                                <label class="col-sm-5 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 @if(isset($orderQueueNumber))
                                     <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="{{$orderQueueNumber}}" disabled>
@@ -130,8 +132,8 @@
                                     <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="" disabled>   
                                 @endif
                                 </div>                                  
-                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
-                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                <span id="editQueueNumber" class="col-sm-2 input-group-addon px-3 mx-0" style="cursor:pointer">
+                                    <i id="editQueue" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
                             </div>
                         </div>
@@ -162,9 +164,10 @@
                                         <td class="py-2">{{$item->quantity}}</td>
                                         <td class="py-2">{{number_format((float)($item->price), 2, '.', '')}}</td>
                                         <td class="py-2 orderItemPrice">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
-                                        <td class="py-2"></td>
+                                        <td class="py-2">{{$item->paymentStatus}}</td>
                                     </tr>
                                     @endforeach
+                                    <input class="form-control" type="number" id="orderID" name="orderID" value="{{$item->orderID}}" style="display:none;">
                                 @else
                                     <tr>
                                         <td class="py-2 text-center" colspan="5"> No order items to show </td> 
@@ -178,7 +181,16 @@
                             <thead>
                                 <tr>
                                     <th colspan="3" scope="row" class="py-2">TOTAL:</th>
-                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">₱{{number_format((float)($grandTotal), 2, '.', '')}}</th>
+                                    @if(isset($totalBill))
+                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">
+                                        {{--₱{{number_format((float)($grandTotal), 2, '.', '')--}}
+                                        ₱{{number_format((float)($totalBill), 2, '.', '')}}
+                                    </th>
+                                    @else
+                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">
+                                        ₱{{number_format((float)($grandTotal), 2, '.', '')}}
+                                    </th>
+                                    @endif
                                 </tr>
                                 <tr>
                                     <th colspan="3" scope="row" class="py-2">Tendered:</th>

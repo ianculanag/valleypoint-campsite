@@ -251,7 +251,14 @@ class OrdersController extends Controller
     public function viewTables()
     {
         $tables = DB::table('restaurant_tables')
+        ->leftJoin('orders', 'orders.tableNumber', 'restaurant_tables.id')
+        ->select('restaurant_tables.*', 'orders.id AS orderID', 'orders.queueNumber',
+                'orders.tableNumber AS orderTableNumber', 'orders.totalBill', 'orders.status AS orderStatus',
+                'orders.orderDatetime', 'orders.shiftID')
+        ->orderBy('id', 'ASC')
         ->get();
+
+        //return $tables;
 
         $firstTable = DB::table('restaurant_tables')
         ->first();
@@ -263,14 +270,39 @@ class OrdersController extends Controller
         ->where('tableNumber', '=', $firstTable->id)
         ->get();
 
+        //return $items;
+
         if(count($items) > 0) {
-            $orderQueueNumber = $items->queueNumber;
+            $orderQueueNumber = $items[0]->queueNumber;
+            $totalBill = $items[0]->totalBill;
 
             return view('pos.tableview')->with('tables', $tables)->with('firstTable', $firstTable)
-                ->with('items', $items)->with('orderQueueNumber', $orderQueueNumber);
+                ->with('items', $items)->with('orderQueueNumber', $orderQueueNumber)->with('totalBill', $totalBill);
         } else {
             return view('pos.tableview')->with('tables', $tables)->with('firstTable', $firstTable)
                 ->with('items', $items);
         }
+    }
+
+    /**
+     * Update table number
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTableNumber($orderID, $tableNumber, $oldTableNumber) {
+        $order = Orders::find($orderID);
+        $order->update([
+            'tableNumber' => $tableNumber
+        ]);
+
+        $table = RestaurantTable::find($tableNumber);
+        $table->update([
+            'status' => 'occupied'
+        ]);
+
+        $oldTable = RestaurantTable::find($oldTableNumber);
+        $oldTable->update([
+            'status' => 'available'
+        ]);
     }
 }

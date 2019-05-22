@@ -256,6 +256,9 @@ Route::get('/load-table/{tableNumber}', 'OrdersController@loadTable');
 //View table orders
 Route::get('/load-table-order-slip/{tableNumber}', 'OrdersController@loadTableOrders');
 
+//Update table number
+Route::get('/update-table-number/{orderID}/{tableNumber}/{oldTableNumber}', 'OrdersController@updateTableNumber');
+
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 

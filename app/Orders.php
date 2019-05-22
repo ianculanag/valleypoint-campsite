@@ -8,6 +8,9 @@ class Orders extends Model
 {
     //
 
+    protected $fillable = [
+        'id', 'tableNumber', 'queueNumber'
+    ];
     // Foreign Key to
     public function additionalCharge()
     {
