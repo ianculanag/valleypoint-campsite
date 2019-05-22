@@ -80,17 +80,11 @@ class CreateProductsTable extends Migration
             $product8->guestPrice = '210.00';
             $product8->save();
 
-            // $product9 = new Products;
-            // $product9->productCategory = 'bread';
-            // $product9->productName = 'Special Beef Burger';
-            // $product9->price = '159.00';
-            // $product9->save();
-
             $product10 = new Products;
             $product10->productCategory = 'bread';
             $product10->productName = 'Egg Sandwich w/ Fries';
             $product10->walkInPrice = '120.00';
-            $product1->guestPrice = '120.00';
+            $product10->guestPrice = '120.00';
             $product10->save();
 
             $product11 = new Products;
@@ -120,24 +114,6 @@ class CreateProductsTable extends Migration
             $product14->walkInPrice = '175.00';
             $product14->guestPrice = '175.00';
             $product14->save();
-
-            // $product15 = new Products;
-            // $product15->productCategory = 'breakfast';
-            // $product15->productName = 'Lumpiasilog';
-            // $product15->price = '175.00';
-            // $product15->save();
-
-            // $product16 = new Products;
-            // $product16->productCategory = 'breakfast';
-            // $product16->productName = 'Hotsilog';
-            // $product16->price = '175.00';
-            // $product16->save();
-
-            // $product17 = new Products;
-            // $product17->productCategory = 'breakfast';
-            // $product17->productName = 'Cornsilog';
-            // $product17->price = '175.00';
-            // $product17->save();
 
             $product18 = new Products;
             $product18->productCategory = 'breakfast';
@@ -240,7 +216,7 @@ class CreateProductsTable extends Migration
             $product32 = new Products;
             $product32->productCategory = 'riceBowl';
             $product32->productName = 'Chicken Fried Rice';
-            $product32->price = '200.00';
+            $product32->guestPrice = '200.00';
             $product32->save();
 
             $product33 = new Products;
@@ -310,7 +286,7 @@ class CreateProductsTable extends Migration
             $product42->productCategory = 'specialRiceMeal';
             $product42->productName = 'Sizzling Sisig Rice';
             $product42->walkInPrice = '250.00';
-            $product44->guestPrice = '250.00';
+            $product42->guestPrice = '250.00';
             $product42->save();
 
             $product43 = new Products;
@@ -416,14 +392,14 @@ class CreateProductsTable extends Migration
             $product57->productCategory = 'beverage';
             $product57->productName = 'Hot Tea';
             $product57->walkInPrice = '75.00';
-            $product58->price = '75.00';
+            $product57->guestPrice = '75.00';
             $product57->save();
 
             $product58 = new Products;
             $product58->productCategory = 'beverage';
             $product58->productName = 'Strawberry Shake';
             $product58->walkInprice = '110.00';
-            $product58->price = '110.00';
+            $product58->guestPrice = '110.00';
             $product58->save();
 
             $product59 = new Products;
@@ -451,7 +427,7 @@ class CreateProductsTable extends Migration
             $product62->productCategory = 'liquor';
             $product62->productName = 'Special Beer (Per Bucket)';
             $product62->walkInPrice = '400.00';
-            $product62->price = '400.00';
+            $product62->guestPrice = '400.00';
             $product62->save();
 
             $product63 = new Products;
@@ -542,7 +518,7 @@ class CreateProductsTable extends Migration
             $product75->productCategory = 'liquor';
             $product75->productName = 'Johnnie Walker (Double Black)';
             $product75->walkInPrice = '3500.00';
-            $product76->guestPrice = '3500.00';
+            $product75->guestPrice = '3500.00';
             $product75->save();
 
             $product76 = new Products;
