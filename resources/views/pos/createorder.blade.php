@@ -135,7 +135,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3"> 
+                    <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:59.9vh;"> 
                         <div class="row p-3 scrollbar-near-moon" id="menu" style="overflow-y:auto;">
                         @foreach ($products as $product)
                         @if($product->productCategory == 'appetizer')
