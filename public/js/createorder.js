@@ -228,6 +228,7 @@ jQuery(document).ready(function () {
 			htmlString += "<tr><td class='py-2 text-center' colspan='5'> No order items to show </td></tr>";
 
 			jQuery('#orderSlip').html(htmlString);
+			
 			updateOrderTotal();
 		})
 	})

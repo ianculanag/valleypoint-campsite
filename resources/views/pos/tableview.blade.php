@@ -74,13 +74,21 @@
                     <div class="card mx-2 restaurant-occupied-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
                     @endif
                         <div class="card-body">
-                            <h5 class="card-title"> {{$table->tableNumber}}
-                                @if($table->status == 'available') 
+                            @if($table->status == 'available') 
+                            <h5 class="card-title"> 
+                                {{$table->tableNumber}}
                                 <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
-                                @elseif($table->status == 'occupied')
-                                <span class="badge badge-dark float-right badgeStatus" style="font-size:.55em;">Occupied</span>
-                                @endif
                             </h5>
+                            @elseif($table->status == 'occupied')
+                            <h5 class="card-title"> 
+                                {{$table->tableNumber}}
+                                <span class="badge badge-dark float-right badgeStatus" style="font-size:.55em;">Occupied</span>
+                            </h5>
+                            <p class="card-text pt-3"> 
+                                Total bill: 
+                                <span class="float-right"> ₱0.00 </span>
+                            </p>
+                            @endif
                         </div>
                     </div> 
                 </a>
@@ -153,7 +161,7 @@
                                         <td class="py-2">{{$item->productName}}</td>
                                         <td class="py-2">{{$item->quantity}}</td>
                                         <td class="py-2">{{number_format((float)($item->price), 2, '.', '')}}</td>
-                                        <td class="py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                        <td class="py-2 orderItemPrice">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
                                         <td class="py-2"></td>
                                     </tr>
                                     @endforeach
