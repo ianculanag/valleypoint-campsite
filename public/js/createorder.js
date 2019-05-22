@@ -380,3 +380,38 @@ jQuery('#saveDiscountButton').click( function() {
 
 	//jQuery('#discountMethod').removeAttr('checked', false);
 })
+
+jQuery('#discountToAll').click( function() {
+	htmlString = "";
+
+	htmlString += "";
+	htmlString += "<div class='row'>";
+	htmlString += "<div class='form-group row col-md-7'>";
+	htmlString += "<label class='col-sm-6 mr-0 pr-0' for='discountAmount'>Amount:</label>";
+	htmlString += "<div class='input-group input-group-sm col-sm-6 ml-0 pl-0'>";
+	htmlString += "<input id='discountAmount' class='form-control'>";
+	htmlString += "</div>";
+	htmlString += "</div>";
+	htmlString += "<div class='col-md-5 row mb-3'>";
+	htmlString += "<button style='width: 3.5em;' class='btn btn-secondary btn-sm mx-1'>5%</button>";
+	htmlString += "<button style='width: 3.5em;' class='btn btn-secondary btn-sm mx-1'>10%</button>";
+	htmlString += "<button style='width: 3.5em;' class='btn btn-secondary btn-sm mx-1'>20%</button>";
+	htmlString += "</div>";
+	htmlString += "</div>";
+	htmlString += "<table class='table table-borderless'>";	
+	htmlString += "<thead>";
+	htmlString += "<tr>";
+	htmlString += "<th scope='col' style='width:50%;'></th>";
+	htmlString += "<th scope='col'></th>";
+	htmlString += "</tr>";
+	htmlString += "</thead>";
+	htmlString += "<tfoot>";
+	htmlString += "<tr>";
+	htmlString += "<th>Total Discount:</th>";
+	htmlString += "<th style='text-align: right'>P0.00</th>";
+	htmlString += "</tr>";
+	htmlString += "</tfoot>";
+	htmlString += "</table>";
+
+	jQuery('#discountModalBody').html(htmlString);
+})
