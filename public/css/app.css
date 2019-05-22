@@ -11574,6 +11574,7 @@ a.ui-button:active,
 .makeorder {
   background-color: #dfdfdf !important;
   text-decoration: none !important;
+  padding: 0.5rem 1.25rem !important;
 }
 
 .makeorder:hover {
