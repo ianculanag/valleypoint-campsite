@@ -71,11 +71,11 @@ class CreateProductsTable extends Migration
             $product8->price = '260.00';
             $product8->save();
 
-            $product9 = new Products;
-            $product9->productCategory = 'bread';
-            $product9->productName = 'Special Beef Burger';
-            $product9->price = '159.00';
-            $product9->save();
+            // $product9 = new Products;
+            // $product9->productCategory = 'bread';
+            // $product9->productName = 'Special Beef Burger';
+            // $product9->price = '159.00';
+            // $product9->save();
 
             $product10 = new Products;
             $product10->productCategory = 'bread';
