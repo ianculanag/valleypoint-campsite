@@ -66,15 +66,20 @@
         <div class="col-md-7 scrollbar-near-moon" style="max-height:74vh; overflow-y:auto;">
             <div class="row">
                 @foreach ($tables as $table)
-                <a class="restaurant-tables" style="cursor:pointer">
-                    <div class="card mx-2 restaurant-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
+                
+                <a style="cursor:pointer">
+                    @if($table->status == 'available') 
+                    <div class="card mx-2 restaurant-available-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
+                    @elseif($table->status == 'occupied')
+                    <div class="card mx-2 restaurant-occupied-tables" id="{{$table->id}}" style="width:12.5rem; height:7em; background-image:url({{asset('')}}); background-size:cover; background-repeat:no-repeat;">
+                    @endif
                         <div class="card-body">
                             <h5 class="card-title"> {{$table->tableNumber}}
-                            @if($table->status == 'available') 
-                            <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
-                            @elseif($table->status == 'occupied')
-                            <span class="badge badge-dark float-right badgeStatus" style="font-size:.55em;">Occupied</span>
-                            @endif
+                                @if($table->status == 'available') 
+                                <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
+                                @elseif($table->status == 'occupied')
+                                <span class="badge badge-dark float-right badgeStatus" style="font-size:.55em;">Occupied</span>
+                                @endif
                             </h5>
                         </div>
                     </div> 

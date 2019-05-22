@@ -8,19 +8,24 @@
             <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
-    <div class="col-md-3 offset-9 pb-2 px-5">
-        <div class="form-group my-0 row">
-            <label class="col-sm-4 pr-0 mr-0 pt-1" for="searchOrder">Search</label>
-            <div class="input-group input-group-sm col-sm-8 pl-0 pr-4 mx-0">
-                <input class="form-control" type="text" name="searchOrder" id="searchOrder" minlength="1" maxlength="20" placeholder="" value="">
-            </div>
+    <div class="row pb-2 px-5">
+        <div class="col-md-9">
+            <h6>Total order count: {{count($items)}}</h6>
         </div>
-    </div>  
+        <div class="col-md-3">
+            <div class="form-group my-0 row">
+                <label class="col-sm-4 pr-0 mr-0 pt-1" for="searchOrder">Search</label>
+                <div class="input-group input-group-sm col-sm-8 pl-0 pr-4 mx-0">
+                    <input class="form-control" type="text" name="searchOrder" id="searchOrder" minlength="1" maxlength="20" placeholder="" value="">
+                </div>
+            </div>
+        </div>  
+    </div>
     <div class="container-fluid col-md-12 pb-2 pt-0 px-5 scrollbar-near-moon-wide" style="max-height:73vh; overflow-x:auto;">      
         <div class="row">
             @if(isset($orders))
             @foreach ($orders as $order)
-            <div class="col-md-4 order-md-12 mb-4 mx-0" >
+            <div class="col-md-4 mb-2 mx-0" >
                 <div class="card p-0 m-0" style="min-height:70vh; max-height:70vh;">
                     <div class="row pt-2 pb-1 px-3">
                         <div class="col-md-6">

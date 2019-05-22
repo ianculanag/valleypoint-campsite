@@ -186,7 +186,7 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function () {
-	jQuery(document).on('click', '.restaurant-tables', function () {
+	jQuery(document).on('click', '.restaurant-occupied-tables', function () {
 		/*var tableNumber = jQuery(this).attr('id');
 		if(jQuery.get('load-table-order-slip/'+jQuery(this).attr('id')) === 'undefined') {
 			jQuery('#orderTableNumber').val(tableNumber);
@@ -213,6 +213,23 @@ jQuery(document).ready(function () {
 				updateOrderTotal();
 			})
 		//}
+	})
+});
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '.restaurant-available-tables', function () {
+		jQuery.get('load-table/'+jQuery(this).attr('id'), function(data){
+			jQuery('.hidden-elements').hide();
+			jQuery('#billOut').prop('disabled', true);
+			jQuery('#orderTableNumber').val(data[0].id);
+
+			var htmlString = "";
+			
+			htmlString += "<tr><td class='py-2 text-center' colspan='5'> No order items to show </td></tr>";
+
+			jQuery('#orderSlip').html(htmlString);
+			updateOrderTotal();
+		})
 	})
 });
 

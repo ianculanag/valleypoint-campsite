@@ -231,6 +231,19 @@ class OrdersController extends Controller
     }
 
     /**
+     * Show table details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loadTable($tableNumber) {
+        $table = DB::table('restaurant_tables')
+        ->where('id', '=', $tableNumber)
+        ->get();
+
+        return $table;
+    }
+
+    /**
      * Table View 
      *
      * @return \Illuminate\Http\Response
