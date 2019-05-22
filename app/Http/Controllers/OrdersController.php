@@ -136,6 +136,7 @@ class OrdersController extends Controller
         $order = new Orders;
         $order->queueNumber = $request->input('queueNumber');
         $order->tableNumber = $request->input('tableNumber');
+        $order->totalBill = $request->input('totalBill');
         $order->status = 'ongoing'; //BRUTE FORCE
         $order->orderDatetime = Carbon::now();
         $order->shiftID = '1';

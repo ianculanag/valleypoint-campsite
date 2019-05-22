@@ -53,22 +53,22 @@
                         </table>
                         <div class="row mx-2">
                             <div class="col-md-12 mb-1 px-1">
-                                <button class="btn btn-primary btn-block" style="text-align:center;" id="getPayment">
+                                <button class="btn btn-primary btn-block" style="text-align:center;" id="getPayment" disabled>
                                     Get Cash Payment
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
-                                <button type="submit" class="btn btn-success btn-block" style="text-align:center;">
+                                <button type="submit" class="btn btn-success btn-block" style="text-align:center;" id="saveOrder" disabled>
                                     Save
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
-                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton">
+                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton" disabled>
                                     Discount
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
-                                <button type="button" class="btn btn-danger btn-block" style="text-align:center;" id="clearItems">
+                                <button type="button" class="btn btn-danger btn-block" style="text-align:center;" id="clearItems" disabled>
                                     Clear
                                 </button>
                             </div>
@@ -82,6 +82,7 @@
                 <input id="numberOfOrders" name="numberOfOrders" type="number" value="0">
                 <!--the insertOrderEntry() function in createorder.js handles this part of the code-->
                 <!--it inserts hidden inputs containing the orders-->
+                <input id="totalBill" name="totalBill" type="number" value="0">
             </div>
             <!--Ends here-->
             <div class="col-md-8">

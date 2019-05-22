@@ -102,6 +102,7 @@ function addRowInOrderSlip() {
 	jQuery('#orderSlip').append(htmlString);
 
 	updateOrderSubtotal();
+	enableOrderSlipButtons();
 }
 
 function getFoodItem(productID) {
@@ -143,6 +144,9 @@ function updateOrderTotal() {
 
 	jQuery('#ordersGrandTotal').html('');
 	jQuery('#ordersGrandTotal').html(toPeso(numeral(grandTotal).format('0,0.00')));
+
+	//hidden totalbill input
+	jQuery('#totalBill').val(grandTotal);
 }
 
 //remove item in the order slip
@@ -211,6 +215,7 @@ jQuery(document).ready(function () {
 		//}
 	})
 });
+
 function displayEmptyMenu() {
 	//Gac
 	if (jQuery('.items').length == 0) {
@@ -223,6 +228,21 @@ function displayEmptyMenu() {
 		jQuery('#orderSlip').html(htmlString);
 	}
 	//end
+	disableOrderSlipButtons();
+}
+
+function enableOrderSlipButtons() {
+	jQuery('#getPayment').attr('disabled', false);
+	jQuery('#saveOrder').attr('disabled', false);
+	jQuery('#discountButton').attr('disabled', false);
+	jQuery('#clearItems').attr('disabled', false);
+}
+
+function disableOrderSlipButtons() {
+	jQuery('#getPayment').attr('disabled', true);
+	jQuery('#saveOrder').attr('disabled', true);
+	jQuery('#discountButton').attr('disabled', true);
+	jQuery('#clearItems').attr('disabled', true);
 }
 
 jQuery('#discountButton').click(function() {
