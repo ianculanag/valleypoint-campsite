@@ -23,28 +23,37 @@ jQuery(document).ready(function () {
 		removeItemEntries();
 
 		var productCategory = jQuery(this).attr('id');
-		var htmlString = "";
 
-		jQuery.get('/view-menu/' + productCategory, function (data) {
-			if (data.length > 0) {
-				for (var index = 0; index < data.length; index++) {
-					htmlString += "<a class='px-1 mx-1'>";
-					htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.3rem; height:5.5em; cursor:pointer;' id='" + data[index].id + "'>";
-					htmlString += "<div class='card-body text-center pt-2'>";
-					htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6>";
-					htmlString += "<p>₱"+numeral(data[index].price).format('0,0.00')+"</p>";
-					htmlString += "</div> </div> </a>";
-					jQuery('#menu').html(htmlString);
-				}
-			} else {
-				htmlString += "<div class='container'> <p style='font-style:italic;'> No product available </p></div>";
-				jQuery('#menu').html(htmlString);
-			}
-		})
+		displayCategoryItems(productCategory);
+
 		jQuery('.makeorder').removeClass('active');
 		jQuery(this).addClass('active');
 	})
 });
+
+function displayCategoryItems(productCategory) {	
+	var htmlString = "";
+	jQuery.get('/view-menu/' + productCategory, function (data) {
+		if (data.length > 0) {
+			for (var index = 0; index < data.length; index++) {
+				htmlString += "<a class='px-1 mx-1'>";
+				htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.785rem; height:5.5em; cursor:pointer;' id='" + data[index].id + "'>";
+				htmlString += "<div class='card-body text-center pt-2'>";
+				htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6>";
+				if(checkOrderIsGuest() == true) {
+					htmlString += "<p>₱"+numeral(data[index].guestPrice).format('0,0.00')+"</p>";
+				} else {
+					htmlString += "<p>₱"+numeral(data[index].price).format('0,0.00')+"</p>";
+				}
+				htmlString += "</div> </div> </a>";
+				jQuery('#menu').html(htmlString);
+			}
+		} else {
+			htmlString += "<div class='container'> <p style='font-style:italic;'> No product available </p></div>";
+			jQuery('#menu').html(htmlString);
+		}
+	})
+}
 
 function toPeso(valueString) {
 	//console.log('₱'+valueString);
@@ -110,7 +119,11 @@ function getFoodItem(productID) {
 		//console.log(data);
 		jQuery('#itemID').val(data[0].id);
 		jQuery('#itemDescription').val(data[0].productName);
-		jQuery('#itemUnitPrice').val(data[0].price);
+		if(checkOrderIsGuest() == true) {
+			jQuery('#itemUnitPrice').val(data[0].guestPrice);
+		} else {
+			jQuery('#itemUnitPrice').val(data[0].price);
+		}
 		updateItemPrice();
 	})
 }
@@ -479,4 +492,15 @@ jQuery('#orderType').change(function() {
 	} else {
 		jQuery('#orderTypeText').html('Walk-in');
 	}
+
+	changePricesDisplay(jQuery(this).prop('checked') == true);
 })
+
+function checkOrderIsGuest() {
+	return jQuery('#orderType').prop('checked');
+}
+
+function changePricesDisplay(isGuest) {
+	productCategory = jQuery('.makeorder.active').attr('id');
+	displayCategoryItems(productCategory);
+}

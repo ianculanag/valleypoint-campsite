@@ -216,6 +216,7 @@ class CreateProductsTable extends Migration
             $product32 = new Products;
             $product32->productCategory = 'riceBowl';
             $product32->productName = 'Chicken Fried Rice';
+            $product32->price = '200.00';
             $product32->guestPrice = '200.00';
             $product32->save();
 
