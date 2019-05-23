@@ -88,6 +88,11 @@
             <!--Handles total bill-->
             <!--Ends here-->
             <div class="col-md-8">
+                <label class="switch">
+                    <input type="checkbox" id="orderType">
+                    <span class="slider round"></span>
+                </label>
+                <strong id="orderTypeText">Walk-in</strong>
                 <div class="container row pt-2 pb-1">
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">

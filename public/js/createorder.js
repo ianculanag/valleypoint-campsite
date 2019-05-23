@@ -468,3 +468,11 @@ jQuery('#discountToAll').click( function() {
 
 	jQuery('#discountModalBody').html(htmlString);
 })
+
+jQuery('#orderType').change(function() {
+	if(jQuery(this).prop('checked') == true) {
+		jQuery('#orderTypeText').html('Checked-in');
+	} else {
+		jQuery('#orderTypeText').html('Walk-in');
+	}
+})
