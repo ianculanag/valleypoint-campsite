@@ -262,12 +262,16 @@ jQuery(document).ready(function () {
 		jQuery.get("update-table-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderTableNumber').val() + "/" + jQuery('#oldTableNumber').val(), function(data) {
 		});
 
+		var newTableNumber = jQuery('#orderTableNumber').val();
+
 		htmlString = "";
 		htmlString += "<i id='editTable' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
 
 		jQuery('#editTableNumber').html(htmlString);
 		jQuery('#editTableNumber').removeClass();
 		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
+
+		jQuery('#oldTableNumber').val(newTableNumber);
 	})
 });
 
