@@ -305,4 +305,16 @@ class OrdersController extends Controller
             'status' => 'available'
         ]);
     }
+
+    /**
+     * Update queue number
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateQueueNumber($orderID, $queueNumber, $oldQueueNumber) {
+        $order = Orders::find($orderID);
+        $order->update([
+            'queueNumber' => $queueNumber
+        ]);
+    }
 }

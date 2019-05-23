@@ -227,6 +227,9 @@ jQuery(document).ready(function () {
 				jQuery('#orderID').val(data[1][0].orderID);
 				jQuery('#ordersGrandTotal').html('');
 				jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
+
+				jQuery('#oldTableNumber').val(data[0][0].tableNumber);
+				jQuery('#oldQueueNumber').val(data[0][0].queueNumber);
 			})
 		//}
 	})
@@ -240,7 +243,6 @@ jQuery(document).ready(function () {
 			jQuery('#orderTableNumber').val(data[0].id);
 
 			var htmlString = "";
-			
 			htmlString += "<tr><td class='py-2 text-center' colspan='5'> No order items to show </td></tr>";
 
 			jQuery('#orderSlip').html(htmlString);
@@ -272,10 +274,13 @@ jQuery(document).ready(function () {
 
 jQuery(document).ready(function () {
 	jQuery(document).on('click', '.saveTable', function () {
+		jQuery('#orderTableNumber').prop('disabled', true);
+
 		jQuery.get("update-table-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderTableNumber').val() + "/" + jQuery('#oldTableNumber').val(), function(data) {
 		});
 
 		var newTableNumber = jQuery('#orderTableNumber').val();
+		jQuery('#oldTableNumber').val(newTableNumber);
 
 		htmlString = "";
 		htmlString += "<i id='editTable' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
@@ -283,8 +288,6 @@ jQuery(document).ready(function () {
 		jQuery('#editTableNumber').html(htmlString);
 		jQuery('#editTableNumber').removeClass();
 		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
-
-		jQuery('#oldTableNumber').val(newTableNumber);
 	})
 });
 
@@ -302,6 +305,25 @@ jQuery(document).ready(function () {
 		/*jQuery('#editQueue').addClass('save-queue-number');
 		jQuery('#editQueue').css('color', 'green');
 		jQuery('#editQueue').css('font-size', '1.2em');*/
+	})
+});
+
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '.saveQueue', function () {
+		jQuery('#orderQueueNumber').prop('disabled', true); 
+
+		jQuery.get("update-queue-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderQueueNumber').val() + "/" + jQuery('#oldQueueNumber').val(), function(data) {
+		});
+
+		var newQueueNumber = jQuery('#orderQueueNumber').val();
+		jQuery('#oldQueueNumber').val(newQueueNumber);
+
+		htmlString = "";
+		htmlString += "<i id='editQueue' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
+
+		jQuery('#editQueueNumber').html(htmlString);
+		jQuery('#editQueueNumber').removeClass();
+		jQuery('#editQueueNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
 	})
 });
 

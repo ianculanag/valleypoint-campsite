@@ -127,9 +127,11 @@
                                 <label class="col-sm-5 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 @if(isset($orderQueueNumber))
-                                    <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="{{$orderQueueNumber}}" disabled>
+                                    <input class="form-control" type="number" name="orderQueueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="{{$orderQueueNumber}}" disabled>
+                                    <input class="form-control" type="number" name="oldQueueNumber" id="oldQueueNumber" value="{{$orderQueueNumber}}" style="display:none">
                                 @else
-                                    <input class="form-control" type="number" name="queueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="" disabled>   
+                                    <input class="form-control" type="number" name="orderQueueNumber" id="orderQueueNumber" min="1" max="50" placeholder="" value="" disabled>  
+                                    <input class="form-control" type="number" name="oldQueueNumber" id="oldQueueNumber" value="" style="display:none"> 
                                 @endif
                                 </div>                                  
                                 <span id="editQueueNumber" class="col-sm-2 input-group-addon px-3 mx-0" style="cursor:pointer">
