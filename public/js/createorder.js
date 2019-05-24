@@ -57,7 +57,7 @@ function displayCategoryItems(productCategory) {
 
 function toPeso(valueString) {
 	//console.log('₱'+valueString);
-	return '₱'+valueString;
+	return '₱ '+valueString;
 }
 
 function addOrderEntry() {
@@ -268,7 +268,7 @@ jQuery('#discountButton').click(function() {
 	htmlString += "<tfoot>";
 	htmlString += "<tr>";
 	htmlString += "<th colspan='4'>Total Discount:</th>";
-	htmlString += "<th style='text-align:right' id='totalDiscount'>₱0.00</th>";
+	htmlString += "<th style='text-align:right' id='totalDiscount'>₱ 0.00</th>";
 	htmlString += "</tr>";
 
 	htmlString += "</tfoot>";	
@@ -386,7 +386,8 @@ jQuery('#orderType').change(function() {
 	} else {
 		jQuery('#orderTypeText').html('Walk-in');
 	}
-
+	
+	removeItemEntries();
 	changePricesDisplay(jQuery(this).prop('checked') == true);
 })
 
@@ -397,4 +398,40 @@ function checkOrderIsGuest() {
 function changePricesDisplay(isGuest) {
 	productCategory = jQuery('.makeorder.active').attr('id');
 	displayCategoryItems(productCategory);
+}
+
+/**PAYMENTS SA RESTO */
+
+jQuery('#getPayment').click(function() {
+	jQuery('#amountToPay').html(jQuery('#ordersGrandTotal').html());
+})
+
+jQuery('.cashButtons').click(function() {
+	amountTendered = numeral(jQuery('#amountTendered').val()).value();
+
+	amountToAdd = numeral(jQuery(this).html()).value();
+
+	newAmountTendered = amountTendered + amountToAdd;
+	jQuery('#amountTendered').val(newAmountTendered);
+
+	computeChange();
+})
+
+jQuery('#exactPayment').click(function() {
+	jQuery('#amountTendered').val(numeral(jQuery('#amountToPay').html()).value());
+	computeChange();
+})
+
+jQuery('#clearPayment').click(function() {
+	jQuery('#amountTendered').val('');
+	jQuery('#changeToGive').html('₱ 0.00');
+})
+
+function computeChange() {	
+	amountTendered = numeral(jQuery('#amountTendered').val()).value();
+	amountToPay = numeral(jQuery('#amountToPay').html()).value();
+
+	change = amountTendered - amountToPay;
+	
+	jQuery('#changeToGive').html(toPeso(numeral(change).format('0,0.00')));
 }

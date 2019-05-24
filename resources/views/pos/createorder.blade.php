@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+    .modal-backdrop{
+        opacity:0.1 !important;
+    }
+    </style>
     <div class="col-md-12 text-center pos-tabs pb-1">
         <nav class="nav nav-pills centered-pills py-2">
             <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Create Order</a>
@@ -39,21 +44,21 @@
                             <thead>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
-                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱0.00</td>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ 0.00</td>
                                 </tr>
-                                <tr>
+                                <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
-                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱0.00</td>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ 0.00</td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
-                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱0.00</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ 0.00</th>
                                 </tr>
                             </thead>
                         </table>
                         <div class="row mx-2">
                             <div class="col-md-12 mb-1 px-1">
-                                <button class="btn btn-primary btn-block" style="text-align:center;" id="getPayment" disabled>
+                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-primary btn-block" style="text-align:center;" id="getPayment" disabled>
                                     Get Cash Payment
                                 </button>
                             </div>
@@ -152,7 +157,7 @@
                                         <h6 class="card-text">
                                             {{$product->productName}}
                                         </h6>
-                                        <p>₱{{number_format((float)($product->price), 2, '.', '')}}</p>
+                                        <p>₱ {{number_format((float)($product->price), 2, '.', '')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -216,6 +221,71 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDiscountButton">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="paymentModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title align-center">Payment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-borderless" style="font-size:.88em;">
+                            <tbody>
+                                <tr>
+                                    <th>Total to Pay</th>
+                                    <th class="text-right"><h4 id="amountToPay"></h4></th>
+                                </tr>
+                                <tr>
+                                    <th class="pt-3" style="width:50%;">Amount Tendered</th>
+                                    <th class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">₱</span>
+                                        </div>
+                                        <input type="number" class="form-control form-control-lg text-right" id="amountTendered">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Change</th>
+                                    <th class="text-right"><h5 id="changeToGive">₱ 0.00</h5></th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-borderless" style="font-size:.88em;">
+                            <tbody>
+                                <tr>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
+                                </tr>
+                                <tr>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
+                                </tr>
+                                <tr>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
+                                </tr>
+                                <tr>
+                                    <th class="px-1 py-1"></th>
+                                    <th class="px-1 py-1"><button class="btn btn-lg btn-danger btn-block" id="clearPayment">Clear</button></th>
+                                    <th class="px-1 py-1"></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePaymentButton">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
