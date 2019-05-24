@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link-drop" id="restoTransactionsTab">
+                        <button class="dropdown-btn nav-link-drop nav-link-drop-pos" id="restoTransactionsTab">
                             <i class="fa fa-book" aria-hidden="true"></i>
                             <span> Transactions </span>
                             <i class="fa fa-caret-down"></i>
@@ -75,7 +75,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link-drop" id="restoReportsTab">
+                        <button class="dropdown-btn nav-link-drop nav-link-drop-pos" id="restoReportsTab">
                             <i class="fa fa-print" aria-hidden="true"></i>
                             <span> Reports </span>
                             <i class="fa fa-caret-down"></i>

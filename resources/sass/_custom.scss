@@ -16,7 +16,12 @@
 .sidebar-pos {
 	background-color: #48525d;
 }
-  
+ 
+.sidebar-admin {
+	//background-color: #331216;
+	background-color: #1f0b0e;
+}
+
 .sidebar .nav-link, .nav-link-drop {
 	font-weight: 500;
 	color: rgb(211, 211, 211);
@@ -44,13 +49,24 @@
 	background-color: #c0ffff96;
 }
 
-.sidebar-lodging .nav-link-drop.active {
+.sidebar-admin .nav-link.active, 
+.sidebar-admin .nav-link-drop.activeTab {
+	border-left-color: #ff8080;
+	background-color: #ffc4c496;
+}
+
+.nav-link-drop-lodging.active {
 	background-color: rgba(224, 248, 242, 0.436);
 	color: rgb(211, 211, 211);
 }
 
-.sidebar-pos .nav-link-drop.active {
+.nav-link-drop-pos.active {
 	background-color: rgba(224, 245, 248, 0.28);
+	color: rgb(211, 211, 211);
+}
+
+.nav-link-drop-admin.active {
+	background-color: rgba(248, 224, 224, 0.28);
 	color: rgb(211, 211, 211);
 }
   
@@ -59,20 +75,27 @@
 	color: white;
 }
   
-.sidebar-lodging .nav-link-drop.activeTab:hover,
-.sidebar-lodging .nav-link-drop.activeTab:hover span
+.nav-link-drop-lodging.activeTab:hover,
+.nav-link-drop-lodging.activeTab:hover span
 .sidebar-lodging .dropdown-container a.active:hover {
 	background-color: rgba(224, 248, 242, 0.436);
 	color: white !important;
 }
 
-.sidebar-pos .nav-link-drop.activeTab:hover,
-.sidebar-pos .nav-link-drop.activeTab:hover span
+.nav-link-drop-pos.activeTab:hover,
+.nav-link-drop-pos.activeTab:hover span
 .sidebar-pos .dropdown-container a.active:hover {
 	background-color: rgba(224, 247, 248, 0.436);
 	color: white !important;
 }
-  
+	
+.nav-link-drop-admin.activeTab:hover,
+.nav-link-drop-admin.activeTab:hover span
+.sidebar-admin .dropdown-container a.active:hover {
+	background-color: rgba(248, 224, 224, 0.436);
+	color: white !important;
+}
+
 .sidebar .nav-link i, .nav-link-drop i {
 	padding-right: 4px;
 	color: rgb(211, 211, 211);
@@ -86,12 +109,16 @@
 	color: inherit;
 }
   
-.sidebar-lodging .nav-link:hover, .nav-link-drop:hover {
+.sidebar-lodging .nav-link:hover, .nav-link-drop-lodging:hover {
 	background-color: rgba(214, 248, 242, 0.336);
 }
 
-.sidebar-pos .nav-link:hover, .nav-link-drop:hover {
+.sidebar-pos .nav-link:hover, .nav-link-drop-pos:hover {
 	background-color: rgba(214, 243, 248, 0.336);
+}
+
+.sidebar-admin .nav-link:hover, .nav-link-drop-admin:hover {
+	background-color: rgba(248, 214, 214, 0.336);
 }
   
 .sidebar-heading {
@@ -122,6 +149,10 @@
 .sidebar-pos .dropdown-container {
 	background-color: #6d7c7e6b;
 }
+
+.sidebar-admin .dropdown-container {
+	background-color: #7e6d6d6b;
+}
   
 .fa-caret-down {
 	float: right;
@@ -149,6 +180,10 @@
 
 .navbar-pos {
 	background-color: #4d5761 !important;
+}
+
+.navbar-admin {
+	background-color: #270e12 !important;
 }
 
 .navbar ul li a {

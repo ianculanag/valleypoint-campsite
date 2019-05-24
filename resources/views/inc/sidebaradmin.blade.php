@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-laravel p-1 shadow fixed-top">
+<nav class="navbar navbar-admin navbar-expand-md navbar-laravel p-1 shadow fixed-top">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}">
         {{ config('app.name', 'Laravel') }}
     </a>
@@ -79,7 +79,7 @@
                         </div>--}}
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link-drop" href="#" id="lodgingTab">
+                        <button class="dropdown-btn nav-link-drop nav-link-drop-admin" href="#" id="lodgingTab">
                             <i class="fa fa-hotel" aria-hidden="true"></i>
                             <span> Lodging </span>
                             <i class="fa fa-caret-down"></i>
@@ -96,7 +96,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <button class="dropdown-btn nav-link-drop" href="#" id="barRestoTab">
+                        <button class="dropdown-btn nav-link-drop nav-link-drop-admin" href="#" id="barRestoTab">
                             <i class="fa fa-concierge-bell" aria-hidden="true"></i>
                             <span> Bar and Restaurant </span>
                             <i class="fa fa-caret-down"></i>

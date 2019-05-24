@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="nav-item transactionsTab">
-                        <button class="dropdown-btn nav-link-drop transactionsTab" id="transactionsTab">
+                        <button class="dropdown-btn nav-link-drop nav-link-drop-lodging transactionsTab" id="transactionsTab">
                             <i class="fa fa-book transactionsTab" aria-hidden="true"></i>
                             <span> Transactions </span>
                             <i class="fa fa-caret-down"></i>
