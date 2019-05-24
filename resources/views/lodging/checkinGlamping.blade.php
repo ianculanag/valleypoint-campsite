@@ -70,17 +70,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="firstName">First name</label>
                             <input class="form-control" type="text" name="firstName" required="required" maxlength="15" id = "#name" placeholder="" value="" autocomplete = "off">
-                            @php
-                            $firstname=$_POST['firstname'];
-    if(preg_match("/[^a-zA-Z0-9]+/", $firstname))
-    {
-    echo 'Invalid Name';
-    }
-    else
-    {
-    echo $firstname;
-    }
-                        @endphp
+
                         </div>                  
                       
                         
