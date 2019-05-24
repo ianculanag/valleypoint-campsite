@@ -194,24 +194,29 @@ class OrdersController extends Controller
         //return $inventoryToday;
         
         for($count = 0; $count < count($ingredients); $count++) {
-            $inventoryEntry = new Inventory;
-            $inventoryEntry->ingredientID = $ingredients[$count]->ingredientID;
-            $inventoryEntry->quantity = $ingredients[$count]->quantity*$quantity;
-            $inventoryEntry->date = Carbon::now()->format('Y-m--d');
-            $inventoryEntry->save();
-        }
-
-        /*for($index = 0; $index < count($inventoryToday); $index++) {
-            for($count = 0; $count < count($ingredients); $count++) {
+            $itemExists = false;
+            for($index = 0; $index < count($inventoryToday); $index++) {
                 if($ingredients[$count]->ingredientID == $inventoryToday[$index]->ingredientID) {
-                    $newQuantity == $inventoryToday[$index]->quantity + $ingredients[$count]->quantity*$quantity;
-                    $inventoryEntry = Inventory::find($inventoryToday[$index]->id);
-                    $inventoryEntry->update([
-                        'quantity' => $newQuantity
-                    ]);
+                    $itemExists = true;
+                    $oldQuantity  = $inventoryToday[$index]->quantity;
+                    $existingInventoryEntryID = $inventoryToday[$index]->id;
                 }
             }
-        }*/
+
+            if($itemExists) {
+                $newQuantity = $oldQuantity + $ingredients[$count]->quantity*$quantity;
+                $inventoryEntry = Inventory::find($existingInventoryEntryID);
+                $inventoryEntry->update([
+                    'quantity' => $newQuantity
+                ]);
+            } else {                                    
+                $inventoryEntry = new Inventory;
+                $inventoryEntry->ingredientID = $ingredients[$count]->ingredientID;
+                $inventoryEntry->quantity = $ingredients[$count]->quantity*$quantity;
+                $inventoryEntry->date = Carbon::now()->format('Y-m--d');
+                $inventoryEntry->save();
+            }
+        }
     }
 
     /**
