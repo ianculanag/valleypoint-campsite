@@ -244,7 +244,7 @@
                                     <th class="text-right"><h4 id="amountToPay"></h4></th>
                                 </tr>
                                 <tr>
-                                    <th class="pt-3" style="width:50%;">Amount Tendered</th>
+                                    <th class="pt-4" style="width:50%;">Amount Tendered</th>
                                     <th class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">₱</span>
