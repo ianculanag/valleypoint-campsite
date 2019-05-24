@@ -77,7 +77,7 @@
                             @if($table->status == 'available') 
                             <h5 class="card-title"> 
                                 {{$table->tableNumber}}
-                                <span class="badge badge-success float-right badgeStatus" style="font-size:.55em;">Available</span>
+                                <span class="badge badge-info float-right badgeStatus" style="font-size:.55em;">Available</span>
                             </h5>
                             @elseif($table->status == 'occupied')
                             <h5 class="card-title"> 
