@@ -279,9 +279,6 @@ Route::get('/view-orders', 'OrdersController@viewOrders');
 //View payments for restaurant
 Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
 
-<<<<<<< HEAD
-Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
-=======
 /* Inventory */
 Route::get('/view-inventory', 'InventoryController@viewInventory');
->>>>>>> Added InventoryController, route for view inventory
+Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
