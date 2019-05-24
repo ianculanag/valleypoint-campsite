@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid mx-1 py-0">
-        <h3 class="text-center pb-3">Inventory Library</h3>
+        <h3 class="text-center pb-3 mb-0">Inventory Library</h3>
         <div class="row px-3">
             <div class="col-md-9">
             {{--<div class="row px-3">
@@ -38,17 +38,18 @@
                         </ul>
                     </div>
                 {{--</div>--}}
-                <div class="container py-1 scrollbar-near-moon-wide" id="inventoryLibrary" style="min-height:70vh; max-height:70vh; overflow-y:auto;">
+                <div class="container py-0 scrollbar-near-moon-wide" id="inventoryLibrary" style="min-height:71.5vh; max-height:71.5vh; overflow-y:auto;">
                     <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe" cellspacing="0" id="inventoryTable">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Last used</th>
+                                <th>Category</th>
+                                <th>Quantity Consumed</th>
+                                <th>Last Consumed</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="displayIngredientCategory">
                             @php
                                 $ingredientCount = 0;
                             @endphp
@@ -58,18 +59,33 @@
                             @php
                                 $ingredientCount++;
                             @endphp
+
+                            @php
+                                $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($ingredient->ingredientCategory)); 
+                                $displayName = '';
+
+                                for($index = 0; $index < count($displayNameSplit); $index++) {
+                                    if(($index) + 1 == count($displayNameSplit)) {
+                                        $displayName .= $displayNameSplit[$index];
+                                    } else {
+                                        $displayName .= $displayNameSplit[$index].' ';                                        
+                                    }
+                                }
+                            @endphp
+
                             <tr>
-                                <td>{{$ingredientCount}}</td>
-                                <td>{{$ingredient->ingredientName}}</td>
-                                <td class="text-right">{{$ingredient->quantity}}</td>                
-                                <td class="text-right">{{$ingredient->updated_at}}</td>                             
+                                <td class="pl-4">{{$ingredientCount}}</td>
+                                <td class="pl-4">{{$ingredient->ingredientName}}</td>
+                                <td class="pl-4">{{$displayName}}</td>
+                                <td class="text-right pr-5">{{$ingredient->quantity}}</td>                
+                                <td class="pl-4">{{\Carbon\Carbon::parse($ingredient->updated_at)->toDayDateTimeString()}}</td>                             
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-2 float-right mx-5 pl-4 pt-5 mt-3" style="position:fixed; right:0;">
+            <div class="col-md-2 float-right mx-5 pl-4 pt-4 mt-3" style="position:fixed; right:0;">
                 <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
                     <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>
                     <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="">Weekly</a>
