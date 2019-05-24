@@ -23,7 +23,7 @@
                 @if (Route::has('register'))
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
+                    </li> 
                 @endif
             @else
                 <li class="nav-item dropdown px-2">
@@ -49,7 +49,7 @@
 <div class="container-fluid">
     <div class="row sidebarMainContent">
         <div class="container col-md-2" style="margin:0; padding:0;">
-            <nav class="d-none d-md-block sidebar">
+            <nav class="d-none d-md-block sidebar sidebar-admin">
                 <ul class="nav flex-column nav-list">
                     <li class="nav-item">
                         <a class="nav-link" href="/admin-dashboard">

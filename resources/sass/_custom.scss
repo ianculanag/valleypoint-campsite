@@ -2,117 +2,153 @@
 .sidebar {
 	z-index: 100; 
 	padding: 2.5em 0 0;
-	//background-color: rgb(75, 85, 87);
-	background-color: #060f0ed4;
 	transition: all 0.3s;
 	min-height:100%;
 	position: fixed !important;
 	min-height: 100vh;
 	width: 17%;
-  }
+}
+
+.sidebar-lodging {
+	background-color: #060f0ed4;
+}
+
+.sidebar-pos {
+	background-color: #48525d;
+}
   
-  .sidebar .nav-link, .nav-link-drop {
+.sidebar .nav-link, .nav-link-drop {
 	font-weight: 500;
 	color: rgb(211, 211, 211);
-  }
+}
   
-  .sidebar .nav-link i, .nav-link-drop i {
+.sidebar .nav-link i, .nav-link-drop i {
 	padding-left: .5em !important;
-  }
+}
   
-  .sidebar .nav-link.active, 
-  .nav-link-drop.activeTab {
+.sidebar .nav-link.active, 
+.sidebar .nav-link-drop.activeTab {
 	border-left: .4em solid;
 	padding-left: .5em !important;
-	//border-left-color:  rgb(167, 250, 236);
+}
+
+.sidebar-lodging .nav-link.active, 
+.sidebar-lodging .nav-link-drop.activeTab { 
 	border-left-color: #00ffc8;
-  }
-
-  .sidebar .nav-link.active,
-  .nav-link-drop.activeTab {
-	//background-color: rgba(224, 248, 242, 0.436);
 	background-color: #b4e7ce96;
-  }
+}
 
-  .nav-link-drop.active {
+.sidebar-pos .nav-link.active, 
+.sidebar-pos .nav-link-drop.activeTab {
+	border-left-color: #77faff;
+	background-color: #c0ffff96;
+}
+
+.sidebar-lodging .nav-link-drop.active {
 	background-color: rgba(224, 248, 242, 0.436);
 	color: rgb(211, 211, 211);
-  }
+}
+
+.sidebar-pos .nav-link-drop.active {
+	background-color: rgba(224, 245, 248, 0.28);
+	color: rgb(211, 211, 211);
+}
   
-  .dropdown-container a.active {
+.sidebar .dropdown-container a.active {
 	background-color: inherit !important;
 	color: white;
-  }
+}
   
-  .nav-link-drop.activeTab:hover,
-  .nav-link-drop.activeTab:hover span
-  .dropdown-container a.active:hover {
+.sidebar-lodging .nav-link-drop.activeTab:hover,
+.sidebar-lodging .nav-link-drop.activeTab:hover span
+.sidebar-lodging .dropdown-container a.active:hover {
 	background-color: rgba(224, 248, 242, 0.436);
 	color: white !important;
-  }
+}
+
+.sidebar-pos .nav-link-drop.activeTab:hover,
+.sidebar-pos .nav-link-drop.activeTab:hover span
+.sidebar-pos .dropdown-container a.active:hover {
+	background-color: rgba(224, 247, 248, 0.436);
+	color: white !important;
+}
   
-  .sidebar .nav-link i, .nav-link-drop i {
-	margin-right: 4px;
+.sidebar .nav-link i, .nav-link-drop i {
+	padding-right: 4px;
 	color: rgb(211, 211, 211);
-  }
+}
   
-  .sidebar .nav-link.active, .nav-link-drop.activeTab {
+.sidebar .nav-link.active, .nav-link-drop.activeTab {
 	color: rgb(253, 254, 255);
-  }
+}
   
-  .sidebar .nav-link.active i, .nav-link-drop.activeTab i {
+.sidebar .nav-link.active i, .nav-link-drop.activeTab i {
 	color: inherit;
-  }
+}
   
-  .sidebar .nav-link:hover, .nav-link-drop:hover {
+.sidebar-lodging .nav-link:hover, .nav-link-drop:hover {
 	background-color: rgba(214, 248, 242, 0.336);
-  }
+}
+
+.sidebar-pos .nav-link:hover, .nav-link-drop:hover {
+	background-color: rgba(214, 243, 248, 0.336);
+}
   
-  .sidebar-heading {
+.sidebar-heading {
 	font-size: .75rem;
 	text-transform: uppercase;
-  }
+}
   
-  .dropdown-btn {
-	padding: 6px 8px 6px 16px;    display: block;
+.dropdown-btn {
+	padding: 6px 8px 6px 16px;    
+	display: block;
 	border: none;
 	background: none;
 	width:100%;
 	text-align: left;
 	cursor: pointer;
 	outline: none;
-  }
+}
   
-  .dropdown-container {
+.dropdown-container {
 	display: none;
-	background-color: rgb(81, 92, 94);
 	padding-left: 8px;
-  }
+}
+
+.sidebar-lodging .dropdown-container {
+	background-color: rgb(81, 92, 94);
+}
+
+.sidebar-pos .dropdown-container {
+	background-color: #6d7c7e6b;
+}
   
-  .fa-caret-down {
+.fa-caret-down {
 	float: right;
 	padding-top: 4px; 
-  }
+}
   
-  .dropdown-item {
+.dropdown-item {
 	color: rgb(211, 211, 211) !important;
-  }
+}
   
-  .dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
+.dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
 	background-color: inherit !important;
 	color: white !important;
-  }
+}
   
-  .dropdown-item i {
-	margin-right: 4px;
+.dropdown-item i {
+	padding-right: 4px;
 	width: 1.25em;
-  }
+}
  
 /* Navbar */
-.navbar {
+.navbar-lodging {
 	background-color: rgb(40, 46, 48) !important;
-	//background-color: #6aaea0 !important;
-	//background-color: #4b5557 !important;
+}
+
+.navbar-pos {
+	background-color: #4d5761 !important;
 }
 
 .navbar ul li a {

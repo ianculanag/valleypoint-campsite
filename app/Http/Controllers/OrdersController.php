@@ -296,14 +296,17 @@ class OrdersController extends Controller
         ]);
 
         $table = RestaurantTable::find($tableNumber);
-        $table->update([
-            'status' => 'occupied'
-        ]);
-
         $oldTable = RestaurantTable::find($oldTableNumber);
-        $oldTable->update([
-            'status' => 'available'
-        ]);
+
+        if($table != $oldTable) {
+            $table->update([
+                'status' => 'occupied'
+            ]);
+
+            $oldTable->update([
+                'status' => 'available'
+            ]);
+        }
     }
 
     /**
