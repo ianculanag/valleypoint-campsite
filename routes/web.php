@@ -288,3 +288,5 @@ Route::get('/view-orders', 'OrdersController@viewOrders');
 
 //View payments for restaurant
 Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
+
+Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');

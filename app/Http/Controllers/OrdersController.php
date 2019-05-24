@@ -7,6 +7,8 @@ use App\Orders;
 use App\Items;
 use App\Products;
 use App\RestaurantTable;
+use App\Inventory;
+use App\Ingredients;
 use Carbon\Carbon;
 use DB;
 
@@ -156,6 +158,8 @@ class OrdersController extends Controller
                 $item->totalPrice = $request->input($totalPrice);
                 $item->paymentStatus = $paymentStatus;
                 $item->save();
+                
+                $this->updateInventory($request->input($productID), $request->input($quantity));
             } 
         }
 
@@ -170,6 +174,51 @@ class OrdersController extends Controller
         return redirect ('/create-order');
     }
 
+    /**
+     *  Save orders from create order page
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function updateInventory($productID, $quantity) {
+        $ingredients = DB::table('recipes')
+        ->where('productID', '=', $productID)
+        ->get();
+
+        //return $ingredients;
+
+        $inventoryToday = DB::table('inventories')
+        ->where('date', '=', Carbon::now()->format('Y-m-d'))
+        ->get();
+
+        //return $inventoryToday;
+        
+        for($count = 0; $count < count($ingredients); $count++) {
+            $inventoryEntry = new Inventory;
+            $inventoryEntry->ingredientID = $ingredients[$count]->ingredientID;
+            $inventoryEntry->quantity = $ingredients[$count]->quantity*$quantity;
+            $inventoryEntry->date = Carbon::now()->format('Y-m--d');
+            $inventoryEntry->save();
+        }
+
+        /*for($index = 0; $index < count($inventoryToday); $index++) {
+            for($count = 0; $count < count($ingredients); $count++) {
+                if($ingredients[$count]->ingredientID == $inventoryToday[$index]->ingredientID) {
+                    $newQuantity == $inventoryToday[$index]->quantity + $ingredients[$count]->quantity*$quantity;
+                    $inventoryEntry = Inventory::find($inventoryToday[$index]->id);
+                    $inventoryEntry->update([
+                        'quantity' => $newQuantity
+                    ]);
+                }
+            }
+        }*/
+    }
+
+    /**
+     * Show orders
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function viewOrders(){
         $order = DB::table('orders')
         ->get();
