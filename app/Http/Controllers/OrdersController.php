@@ -319,7 +319,7 @@ class OrdersController extends Controller
     }
 
     /**
-     * Reload table view on table or queue number update
+     * Reload table view on table number update
      *
      * @return \Illuminate\Http\Response
      */

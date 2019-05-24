@@ -313,7 +313,6 @@ jQuery(document).ready(function () {
 		jQuery('#orderQueueNumber').prop('disabled', true); 
 
 		jQuery.get("update-queue-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderQueueNumber').val() + "/" + jQuery('#oldQueueNumber').val(), function(data) {
-			reloadTableView();
 		});
 
 		var newQueueNumber = jQuery('#orderQueueNumber').val();
@@ -329,9 +328,9 @@ jQuery(document).ready(function () {
 });
 
 function reloadTableView() {
-	console.log("It worked!");
+	//console.log("It worked!");
 	jQuery.get("/reload-table-view", function(data) {
-		console.log("It worked again!");
+		//console.log("It worked again!");
 			
 		tableCards = "";
 

@@ -13,9 +13,9 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
-            <div class="col-md-4 order-md-12 mb-4 mx-0" >
-                <div class="card p-0 m-0" style="min-height:67vh; max-height:67vh;">
-                    <h5 class="text-muted text-center pt-3 pb-2" style="font-size:1.2em;">Order Slip</h5>
+            <div class="col-md-4 order-md-12 mb-3 mx-0" >
+                <div class="card p-0 m-0" style="min-height:73.5vh; max-height:73.5vh;">
+                    <h5 class="text-muted text-center pt-3 pb-1" style="font-size:1.2em;">Order Slip</h5>
                     <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
                         <table class="table table-striped" style="font-size:.88em;">
                             <thead>
@@ -88,10 +88,9 @@
             <!--Handles total bill-->
             <!--Ends here-->
             <div class="col-md-8">
-                <div class="container row pt-2 pb-1">
-                    
-                    <div class="col-md-3 py-2 px-0 ml-0 mr-0 pr-0">
-                        <label class="switch">
+                <div class="container row py-0">
+                    <div class="col-md-3 py-2 px-0 ml-1 mr-0 pr-0">
+                        <label class="switch mr-2">
                             <input type="checkbox" id="orderType">
                             <span class="slider round"></span>
                         </label>
@@ -99,7 +98,7 @@
                     </div>
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">
-                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
+                            <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
                             </div>
@@ -107,7 +106,7 @@
                     </div>
                     <div class="col-md-3 px-0 ml-0 mr-4">
                         <div class="form-group my-1 row pr-4">
-                            <label class="col-sm-8 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
+                            <label class="col-sm-7 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="">
                             </div>
