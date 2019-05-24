@@ -57,6 +57,7 @@
 <script src="{{ asset('js/custom7.js') }}"></script>
 <script src="{{ asset('js/createorder.js') }}"></script>
 <script src="{{ asset('js/tableview.js') }}"></script>
+<script src="{{ asset('js/inventory.js') }}"></script>
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;

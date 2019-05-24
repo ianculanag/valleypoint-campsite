@@ -4,40 +4,32 @@
     <div class="container-fluid mx-1 py-0">
         <h3 class="text-center pb-3 mb-0">Inventory Library</h3>
         <div class="row px-3">
-            <div class="col-md-9">
-            {{--<div class="row px-3">
-                <div class="container ml-4" style="position:absolute;">
-                    <div class="form-group row mb-0 float-right">
-                        <label for="staticEmail" class="col-md-4 col-form-label" style="padding-left:0; padding-right:.5;"> View: </label>
-                        <div class="col-md-8 p-0" style="width:8em;;">
-                            <select class="form-control">
-                                <option> Today </option>
-                                <option> This Week </option>
-                                <option> This Month </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>--}}
-                    <div class="container-fluid lodging-tabs px-0">
-                        <ul class="nav nav-tabs pt-0" style="">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">All</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#505050;" href="">Meat & Poultry</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#505050;" href="">Produce</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#505050;" href="">Grocery & Dry</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#505050;" href="">Beer & Liquor</a>
-                            </li>
-                        </ul>
-                    </div>
-                {{--</div>--}}
+            <div class="col-md-9 pr-0">
+                <div class="container-fluid lodging-tabs px-0">
+                    <ul class="nav nav-tabs pt-0" style="">
+                        <li class="nav-item">
+                            <a class="ingredientCategories nav-link active" id="allIngredientCategories">All</a>
+                        </li>
+                        @foreach ($ingredientCategories as $ingredientCategory)
+
+                        @php
+                            $ingredientNameSplit = preg_split('/(?=[A-Z])/', ucfirst($ingredientCategory)); 
+                            $ingredientName = '';
+
+                            for($index = 0; $index < count($ingredientNameSplit); $index++) {
+                                if(($index) + 1 == count($ingredientNameSplit)) {
+                                    $ingredientName .= $ingredientNameSplit[$index];
+                                } else {
+                                    $ingredientName .= $ingredientNameSplit[$index].' ';                                        
+                                }
+                            }
+                        @endphp
+                        <li class="nav-item">
+                            <a class="ingredientCategories nav-link" id="{{$ingredientCategory}}" style="color:#505050;">{{$ingredientName}}</a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
                 <div class="container py-0 scrollbar-near-moon-wide" id="inventoryLibrary" style="min-height:71.5vh; max-height:71.5vh; overflow-y:auto;">
                     <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe" cellspacing="0" id="inventoryTable">
                         <thead>
@@ -74,11 +66,11 @@
                             @endphp
 
                             <tr>
-                                <td class="pl-4">{{$ingredientCount}}</td>
-                                <td class="pl-4">{{$ingredient->ingredientName}}</td>
-                                <td class="pl-4">{{$displayName}}</td>
+                                <td class="text-right pr-5">{{$ingredientCount}}</td>
+                                <td class="pl-3">{{$ingredient->ingredientName}}</td>
+                                <td class="pl-3">{{$displayName}}</td>
                                 <td class="text-right pr-5">{{$ingredient->quantity}}</td>                
-                                <td class="pl-4">{{\Carbon\Carbon::parse($ingredient->updated_at)->toDayDateTimeString()}}</td>                             
+                                <td class="pl-3">{{\Carbon\Carbon::parse($ingredient->updated_at)->toDayDateTimeString()}}</td>                             
                             </tr>
                             @endforeach
                         </tbody>
