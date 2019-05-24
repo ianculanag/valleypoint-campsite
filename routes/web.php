@@ -28,7 +28,6 @@ Route::post('/reload-calendar-glamping', 'UnitsController@reloadCalendarGlamping
 Route::post('/reload-calendar-backpacker', 'UnitsController@reloadCalendarBackpacker'); 
 
 Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
-//Route::resource('staff', 'StaffController');
 Route::get('/load-tents', 'unitsController@loadTents');
 
 //Modals
@@ -41,8 +40,6 @@ Route::get('/load-backpacker-available-unit/{id}', 'UnitsController@loadBackpack
 Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();
 
-//Route::get('/dashboard', 'UnitsController@glamping');
-
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Unit finder: Get glamping tents
@@ -52,8 +49,6 @@ Route::get('/get-glamping-tents', 'UnitsController@getGlampingTents');
 Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
 
 //Check-in guests glamping
-//Route::get('/checkin/{unitID}', 'GuestsController@showCheckinForm');
-//Route::post('/checkinAt', 'GuestsController@checkin');
 Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
 Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
 
@@ -79,7 +74,6 @@ Route::post('/reserve-backpacker-finder', 'ReservationsController@showBackpacker
 //Calendar
 Route::get('/checkin-glamping/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
 Route::get('/reserve-glamping/{unitID}/{checkinDate}', 'ReservationsController@showReserveFromCalendar');
-
 
 //Make reservation
 Route::get('/reserve-glamping/{unitID}', 'ReservationsController@showGlampingReservationForm');
@@ -109,10 +103,6 @@ Route::post('/update-backpacker-details', 'GuestsController@updateBackpackerDeta
 //Edit backpacker guests
 Route::get('/edit-backpacker-details/{unitID}/{accommodationID}', 'GuestsController@viewBackpackerGuestDetails');
 
-//AddReservation
-//Route::get('/addReservation/{unitID}', 'AccommodationsController@showAddReserveForm');
-//Route::post('/addReservation','AccommodationsController@addReservation');
- 
 //ViewGuests
 Route::get('/view-guests', 'GuestsController@viewguests');
 
@@ -178,6 +168,9 @@ Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGues
 //View side by side charges-payments
 Route::get('/side-by-side/charges-payments', 'GuestsController@viewAllGuestsPayments');
 
+//Load room capacity
+Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
+
 /* Admin */
 //Dashboard
 Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
@@ -224,9 +217,6 @@ Route::post('/update-service', 'ServicesController@updateService');
 //Delete service
 Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
 Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
-
-//Load room capacity
-Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
 
 /* Restaurant */
 //POS Dashboard Pages
@@ -289,4 +279,9 @@ Route::get('/view-orders', 'OrdersController@viewOrders');
 //View payments for restaurant
 Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
 
+<<<<<<< HEAD
 Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
+=======
+/* Inventory */
+Route::get('/view-inventory', 'InventoryController@viewInventory');
+>>>>>>> Added InventoryController, route for view inventory

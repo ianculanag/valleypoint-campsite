@@ -30,30 +30,30 @@
                     <div class="row pt-2 pb-1 px-3">
                         <div class="col-md-6">
                             <div class="form-group my-1 row">
-                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
-                                <div class="input-group input-group-sm col-sm-6 mx-0">
+                                <label class="col-sm-5 pr-0 mr-0 pt-1" for="tableNumber">Table:</label>
+                                {{--<div class="input-group input-group-sm col-sm-6 mx-0">
                                     <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
-                                </div>  
-                                {{--<div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                </div>--}}  
+                                <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                     <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}" disabled>
                                 </div>                                    
-                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
+                                <span class="col-sm-2 input-group-addon px-2 mx-0" onclick="">
                                     <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
-                                </span>--}}
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group my-1 row">
-                                <label class="col-sm-6 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
-                                <div class="input-group input-group-sm col-sm-6 mx-0">
+                                <label class="col-sm-5 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
+                                {{--<div class="input-group input-group-sm col-sm-6 mx-0">
                                     <input class="form-control" type="number" name="queueNumber" id="queueNumber{{$order->id}}" min="1" max="50" placeholder="" value="{{$order->queueNumber}}">
-                                </div>
-                                {{--<div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                </div>--}}  
+                                <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                     <input class="form-control" type="number" name="queueNumber" id="queueNumber{{$order->id}}" min="1" max="50" placeholder="" value="{{$order->queueNumber}}" disabled>
-                                </div>                                  
-                                <span class="col-sm-1 input-group-addon px-2 mx-0" onclick="">
+                                </div>                                
+                                <span class="col-sm-2 input-group-addon px-2 mx-0" onclick="">
                                     <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
-                                </span>--}}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -68,9 +68,6 @@
                                 </tr>
                             </thead>
                             <tbody id="orderSlip">
-                                {{--<tr id="emptyEntryHolder">
-                                    <td style="text-align:center" colspan="4">Add items from the menu</td>
-                                </tr>--}}
                                 @php 
                                    $grandTotal = 0; 
                                 @endphp
