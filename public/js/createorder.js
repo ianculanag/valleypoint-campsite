@@ -293,6 +293,7 @@ jQuery(document).ready(function () {
 		jQuery('#orderTableNumber').prop('disabled', true);
 
 		jQuery.get("update-table-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderTableNumber').val() + "/" + jQuery('#oldTableNumber').val(), function(data) {
+			reloadTableView();
 		});
 
 		var newTableNumber = jQuery('#orderTableNumber').val();
@@ -312,6 +313,7 @@ jQuery(document).ready(function () {
 		jQuery('#orderQueueNumber').prop('disabled', true); 
 
 		jQuery.get("update-queue-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderQueueNumber').val() + "/" + jQuery('#oldQueueNumber').val(), function(data) {
+			reloadTableView();
 		});
 
 		var newQueueNumber = jQuery('#orderQueueNumber').val();
@@ -325,6 +327,41 @@ jQuery(document).ready(function () {
 		jQuery('#editQueueNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
 	})
 });
+
+function reloadTableView() {
+	console.log("It worked!");
+	jQuery.get("/reload-table-view", function(data) {
+		console.log("It worked again!");
+			
+		tableCards = "";
+
+		for(var index = 0; index < data.length; index++) {
+			console.log("It worked again, again!");
+			tableCards += "<a style='cursor:pointer'>";
+
+			if(data[index].status == 'available') {
+				tableCards += "<div class='card mx-2 restaurant-available-tables' id='" + data[index].id + "' style='width:12.5rem; height:7em;'>";
+			} else if(data[index].status == 'occupied') {
+				tableCards += "<div class='card mx-2 restaurant-occupied-tables' id='" + data[index].id + "' style='width:12.5rem; height:7em;'>";
+			}
+
+			tableCards += "<div class='card-body'>";
+			tableCards += "<h5 class='card-title'>" + data[index].tableNumber;
+
+			if(data[index].status == 'available') {
+				tableCards += "<span class='badge badge-success float-right badgeStatus' style='font-size:.55em;'>Available</span></h5>";
+			} else if(data[index].status == 'occupied') {
+				tableCards += "<span class='badge badge-dark float-right badgeStatus' style='font-size:.55em;'>Occupied</span></h5>";
+				tableCards += "<p class='card-text pt-3'> Total bill:";
+				tableCards += "<span class='float-right'> ₱" + numeral(data[index].totalBill).format('0, 0.00') + "</span></p>";
+			}
+			
+			tableCards += "</div></div></a>";
+		}
+
+		jQuery('#restaurantTableRow').html(tableCards);
+	});
+}
 
 function displayEmptyMenu() {
 	//Gac

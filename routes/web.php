@@ -262,6 +262,9 @@ Route::get('/update-table-number/{orderID}/{tableNumber}/{oldTableNumber}', 'Ord
 //Update queue number
 Route::get('/update-queue-number/{orderID}/{queueNumber}/{oldQueueNumber}', 'OrdersController@updateQueueNumber');
 
+//Reload table view on table or queue number update
+Route::get('/reload-table-view', 'OrdersController@reloadTables');
+
 //Bar and restaurant checkout Bill
 Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
 

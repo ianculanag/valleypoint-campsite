@@ -317,4 +317,22 @@ class OrdersController extends Controller
             'queueNumber' => $queueNumber
         ]);
     }
+
+    /**
+     * Reload table view on table or queue number update
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reloadTables()
+    {
+        $tables = DB::table('restaurant_tables')
+        ->leftJoin('orders', 'orders.tableNumber', 'restaurant_tables.id')
+        ->select('restaurant_tables.*', 'orders.id AS orderID', 'orders.queueNumber',
+                'orders.tableNumber AS orderTableNumber', 'orders.totalBill', 'orders.status AS orderStatus',
+                'orders.orderDatetime', 'orders.shiftID')
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        return $tables;
+    }
 }

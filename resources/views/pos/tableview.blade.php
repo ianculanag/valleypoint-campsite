@@ -64,7 +64,7 @@
     </div>
     <div class="container-fluid row col-md-12 px-5 pt-3 mx-0">
         <div class="col-md-7 scrollbar-near-moon" style="max-height:74vh; overflow-y:auto;">
-            <div class="row">
+            <div class="row" id="restaurantTableRow">
                 @foreach ($tables as $table)
                 
                 <a style="cursor:pointer">
