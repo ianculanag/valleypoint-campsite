@@ -79,31 +79,88 @@
             </div>
             <div class="col-md-2 float-right mx-5 pl-4 pt-4 mt-3" style="position:fixed; right:0;">
                 <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
-                    <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Daily</a>
-                    <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="">Weekly</a>
-                    <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="">Monthly</a>
-                    <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="">Custom</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center active" style="background-color:#060f0ed4;">Daily</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Weekly</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Monthly</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Custom</a>
                 </nav>
-                <form method="POST" action="/reload-weekly-lodging-report">
-                    @csrf
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <div class="row px-3">
-                        <div class="form-group col-md-9 px-0 mx-1">
-                            <div class="input-group input-group-sm">
-                                @if(isset($displayfrom))
-                                <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
-                                @else
-                                <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-2 px-0 mx-1">
-                            <button class="btn btn-sm btn-success" type="submit">
-                                <i class="fa fa-calendar-check" aria-hidden="true"></i>
-                            </button>
+                {{--Daily and weekly--}}
+                <div class="inventory-inputs row px-3" id="dailyWeeklyInventory">
+                    <div class="form-group col-md-9 px-0 mx-1">
+                        <div class="input-group input-group-sm">
+                            @if(isset($displayfrom))
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            @else
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
                         </div>
                     </div>
-                </form>
+                    <div class="col-md-2 px-0 mx-1">
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                {{--Monthly--}}
+                <div class="inventory-inputs row px-3" id="monthlyInventory">
+                    <div class="form-group col-md-5 px-0 mr-1">
+                        <div class="input-group input-group-sm">
+                            <select class="form-control" name="selectMonth">
+                                <option>Jan</option>
+                                <option>Feb</option>
+                                <option>Mar</option>
+                                <option>Apr</option>
+                                <option selected>May</option>
+                                <option>Jun</option>
+                                <option>Jul</option>
+                                <option>Aug</option>
+                                <option>Sep</option>
+                                <option>Oct</option>
+                                <option>Nov</option>
+                                <option>Dec</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 px-0 ">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="number" name="selectYear" min="2018" max="" value="2019" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2 px-0 mx-1">
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                {{--Custom--}}
+                <div class="inventory-inputs px-1" id="customInventory">
+                    <div class="form-group row px-0 mx-0">
+                        <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
+                        <div class="input-group input-group-sm col-md-9 px-0 mx-0">
+                            @if(isset($displayfrom))
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            @else
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row px-0 mx-0">
+                        <label for="displayTo" class="col-md-3 mb-0 mt-2 p-0">To:</label>
+                        <div class="input-group input-group-sm col-md-9 px-0 mx-0">
+                            @if(isset($displayto))
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="{{$displayto}}" required>
+                            @else
+                            
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="px-0 mx-0">
+                        <button class="btn btn-sm btn-block btn-success" type="submit">
+                            Load
+                        </button>
+                    </div>
+                </div>
             <div>
         </div>
     </div>
