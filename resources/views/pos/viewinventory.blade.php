@@ -8,7 +8,7 @@
                 <div class="container-fluid lodging-tabs px-0">
                     <ul class="nav nav-tabs pt-0" style="">
                         <li class="ingredientCategories nav-item">
-                            <a class="ingredientCategories nav-link active" id="allIngredientCategories">All</a>
+                            <a class="categories nav-link active" id="allIngredientCategories">All</a>
                         </li>
                         @foreach ($ingredientCategories as $ingredientCategory)
 
@@ -24,8 +24,8 @@
                                 }
                             }
                         @endphp
-                        <li class="ingredientCategories nav-item">
-                            <a class="ingredientCategories nav-link" id="{{$ingredientCategory}}" style="color:#505050;">{{$ingredientName}}</a>
+                        <li class="ingredientCategories nav-item" id="{{$ingredientCategory}}">
+                            <a class="nav-link categories" id="this{{$ingredientCategory}}" style="color:#505050;">{{$ingredientName}}</a>
                         </li>
                         @endforeach
                     </ul>

@@ -9813,7 +9813,7 @@ h3 {
 }
 
 .nav-link-drop-pos.activeTab:hover,
-.nav-link-drop-pos.activeTab:hover span .sidebar-pos .dropdown-container a.active:hover {
+.nav-link-drop-pos.activeTab:hover span .nav-link-drop-pos.activeTab:active span .sidebar-pos .dropdown-container a.active:hover {
   background-color: rgba(224, 247, 248, 0.436);
   color: white !important;
 }
@@ -9834,7 +9834,7 @@ h3 {
 }
 
 .sidebar .nav-link.active i, .nav-link-drop.activeTab i {
-  color: inherit;
+  color: white;
 }
 
 .sidebar-lodging .nav-link:hover, .nav-link-drop-lodging:hover {

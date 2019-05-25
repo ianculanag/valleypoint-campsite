@@ -14,7 +14,7 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewInventory() {
+    public function viewInventory() { 
 
         $ingredients = DB::table('inventories')
         ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
@@ -35,6 +35,7 @@ class InventoryController extends Controller
     public function viewIngredientCategory($ingredientCategory) {
 
         $ingredients = DB::table('inventories')
+        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
         ->where('ingredientCategory', '=', $ingredientCategory)
         ->get();
 
