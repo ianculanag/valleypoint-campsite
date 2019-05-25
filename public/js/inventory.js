@@ -24,7 +24,7 @@ jQuery(document).ready(function () {
                     //htmlString += "<td class='pl-3'>" + displayNameSplit(data[index].ingredientCategory) + "</td>";
                     htmlString += "<td class='pl-3'>" + data[index].ingredientCategory + "</td>";
                     htmlString += "<td class='text-right pr-5'>" + data[index].quantity + "</td>";                
-                    htmlString += "<td class='pl-3'>" + data[index].updated_at + "</td></tr>";
+                    htmlString += "<td class='pl-3'>" + moment(data[index].updated_at).format('llll') + "</td></tr>";
                 } 
 
                 htmlString += "</tbody></table>";
@@ -41,7 +41,6 @@ jQuery(document).ready(function () {
 
 		jQuery('.categories').removeClass('active');
         jQuery('#this' + ingredientCategory).addClass('active');
-        
     })
 
     jQuery('#allIngredientCategories').click(function () {
@@ -62,7 +61,7 @@ jQuery(document).ready(function () {
                 //htmlString += "<td class='pl-3'>" + displayNameSplit(data[index].ingredientCategory) + "</td>";
                 htmlString += "<td class='pl-3'>" + data[index].ingredientCategory + "</td>";
                 htmlString += "<td class='text-right pr-5'>" + data[index].quantity + "</td>";                
-                htmlString += "<td class='pl-3'>" + data[index].updated_at + "</td></tr>";
+                htmlString += "<td class='pl-3'>" + moment(data[index].updated_at).format('llll') + "</td></tr>";
             } 
 
             htmlString += "</tbody></table>";
