@@ -28,7 +28,21 @@ class InventoryController extends Controller
     }
 
     /**
-     * View inventory
+     * View inventory of all ingredient category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewAllIngredientCategory() {
+
+        $ingredients = DB::table('inventories')
+        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+        ->get();
+
+        return $ingredients;
+    }
+
+    /**
+     * View inventory by ingredient category
      *
      * @return \Illuminate\Http\Response
      */
