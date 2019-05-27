@@ -28,6 +28,8 @@ jQuery(document).ready(function () {
 
 		jQuery('.makeorder').removeClass('active');
 		jQuery(this).addClass('active');
+		
+		jQuery('#allProducts').html('All');
 	})
 });
 
@@ -434,4 +436,44 @@ function computeChange() {
 	change = amountTendered - amountToPay;
 	
 	jQuery('#changeToGive').html(toPeso(numeral(change).format('0,0.00')));
+}
+
+
+/** SEARCH */
+jQuery('#searchFoodItem').keyup(function() {
+	if(jQuery(this).val() == "") {
+		displayCategoryItems('allProducts');
+		jQuery('#allProducts').html('All');
+	} else {
+		displaySearchedItems(jQuery(this).val());
+	}	
+	removeItemEntries();
+	
+	jQuery('.makeorder').removeClass('active');
+	jQuery('#allProducts').addClass('active');
+})
+
+function displaySearchedItems(searchQuery) {
+	htmlString = "";
+	jQuery.get('/search-item/' + searchQuery, function (data) {
+		if (data.length > 0) {
+			for (var index = 0; index < data.length; index++) {
+				htmlString += "<a class='px-1 mx-1'>";
+				htmlString += "<div class='menu-item card px-0 mx-1' style='width:9.785rem; height:5.5em; cursor:pointer;' id='" + data[index].id + "'>";
+				htmlString += "<div class='card-body text-center pt-2'>";
+				htmlString += "<h6 class='card-text'>" + data[index].productName + "</h6>";
+				if(checkOrderIsGuest() == true) {
+					htmlString += "<p>₱"+numeral(data[index].guestPrice).format('0,0.00')+"</p>";
+				} else {
+					htmlString += "<p>₱"+numeral(data[index].price).format('0,0.00')+"</p>";
+				}
+				htmlString += "</div> </div> </a>";
+				jQuery('#menu').html(htmlString);
+			}
+		} else {
+			htmlString += "<div class='container'> <p style='font-style:italic;'> No products match the query </p></div>";
+			jQuery('#menu').html(htmlString);
+		}
+	})
+	jQuery('#allProducts').html("All 🡒 '"+searchQuery+"'");
 }

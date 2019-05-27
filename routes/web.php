@@ -287,4 +287,7 @@ Route::get('/view-inventory', 'InventoryController@viewInventory');
 Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');
 Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');
 
+//Search item from order slip
+Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
+
 Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');

@@ -108,10 +108,19 @@ class ProductsController extends Controller
     }
 
     public function viewMenu($productCategory){
-        $products = DB::table('products')
-        ->where('productCategory', '=', $productCategory)
-        ->get();
+        if($productCategory == 'allProducts') {        
+            $products = DB::table('products')
+            ->get();
+        } else {            
+            $products = DB::table('products')
+            ->where('productCategory', '=', $productCategory)
+            ->get();
+        }
+        return $products;
+    }
 
+    public function searchItem($searchQuery) {
+        $products = Products::where('productName','LIKE',"%{$searchQuery}%")->get();
         return $products;
     }
 

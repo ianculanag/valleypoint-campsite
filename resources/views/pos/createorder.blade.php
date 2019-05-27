@@ -129,7 +129,7 @@
                 <div class="row">
                     <div class="col-md-3 pr-0 rounded-0">
                         <div class="list-group rounded-0">
-                            <a href="#" id="all" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">All</a>
+                            <a href="#" id="allProducts" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">All</a>
                             @foreach($categories as $category)
                             @php
                                 $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($category)); 
