@@ -8,7 +8,7 @@
                 <div class="container-fluid lodging-tabs px-0">
                     <ul class="nav nav-tabs pt-0" style="">
                         <li class="ingredientCategories nav-item">
-                            <a class="categories nav-link active" id="allIngredientCategories">All</a>
+                            <a class="categories nav-link active" id="allIngredientCategories" style="color:#505050; cursor:pointer;">All</a>
                         </li>
                         @foreach ($ingredientCategories as $ingredientCategory)
 
@@ -25,7 +25,7 @@
                             }
                         @endphp
                         <li class="ingredientCategories nav-item" id="{{$ingredientCategory}}">
-                            <a class="nav-link categories" id="this{{$ingredientCategory}}" style="color:#505050;">{{$ingredientName}}</a>
+                            <a class="nav-link categories" id="this{{$ingredientCategory}}" style="color:#505050; cursor:pointer;">{{$ingredientName}}</a>
                         </li>
                         @endforeach
                     </ul>
@@ -78,14 +78,13 @@
                 </div>
             </div>
             <div class="col-md-2 float-right mx-5 pl-4 pt-4 mt-3" style="position:fixed; right:0;">
-                <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
-                    <a class="nav-item nav-link inventory-reports-tabs text-center active" style="background-color:#060f0ed4;">Daily</a>
-                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Weekly</a>
-                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Monthly</a>
-                    <a class="nav-item nav-link inventory-reports-tabs text-center" style="color:#505050">Custom</a>
+                <nav class="nav nav-pills nav-stacked mb-5" style="display:block;">
+                    <a class="nav-item nav-link inventory-reports-tabs text-center active" id="dailyInventory" style="background-color:#060f0ed4; cursor:pointer;">Daily</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="monthlyInventory" style="color:#505050; cursor:pointer;">Monthly</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="customInventory" style="color:#505050; cursor:pointer;">Custom</a>
                 </nav>
                 {{--Daily and weekly--}}
-                <div class="inventory-inputs row px-3" id="dailyWeeklyInventory">
+                <div class="inventory-inputs row px-3" id="dailyInventoryInput">
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
                             @if(isset($displayfrom))
@@ -102,7 +101,7 @@
                     </div>
                 </div>
                 {{--Monthly--}}
-                <div class="inventory-inputs row px-3" id="monthlyInventory">
+                <div class="inventory-inputs row px-3" id="monthlyInventoryInput" style="display:none;">
                     <div class="form-group col-md-5 px-0 mr-1">
                         <div class="input-group input-group-sm">
                             <select class="form-control" name="selectMonth">
@@ -126,14 +125,14 @@
                             <input class="form-control" type="number" name="selectYear" min="2018" max="" value="2019" required>
                         </div>
                     </div>
-                    <div class="col-md-2 px-0 mx-1">
+                    <div class="col-md-2 px-0 ml-2">
                         <button class="btn btn-sm btn-success" type="submit">
                             <i class="fa fa-calendar-check" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
                 {{--Custom--}}
-                <div class="inventory-inputs px-1" id="customInventory">
+                <div class="inventory-inputs px-1" id="customInventoryInput" style="display:none;">
                     <div class="form-group row px-0 mx-0">
                         <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
                         <div class="input-group input-group-sm col-md-9 px-0 mx-0">

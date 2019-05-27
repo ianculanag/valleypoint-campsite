@@ -71,6 +71,19 @@ jQuery(document).ready(function () {
             jQuery('#allIngredientCategories').addClass('active');
         });
     })
+
+    jQuery('.inventory-reports-tabs').click(function () {
+        var ingredientConsumption = jQuery(this).attr('id');
+        console.log(ingredientConsumption);
+
+        jQuery('.inventory-inputs').hide();
+        jQuery('#' + ingredientConsumption + 'Input').show();
+
+        console.log('yes');
+        /*jQuery.get('/view-inventory/' + jQuery(this).attr('id'), function (data) {
+
+        });*/
+    })
 });
 
 jQuery(document).ajaxComplete(function() {

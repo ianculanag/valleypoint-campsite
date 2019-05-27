@@ -9943,16 +9943,16 @@ h3 {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 
-/* Main content*/
-.main-content {
-  padding-top: 3em;
-  float: left;
-}
-
 /* Sidebar & Main Content */
 .sidebarMainContent {
   padding-top: 2em;
   min-height: 100vh;
+}
+
+/* Main content*/
+.main-content {
+  padding-top: 3em;
+  float: left;
 }
 
 /* Physical view */
@@ -10011,6 +10011,7 @@ h3 {
   padding-right: 1em !important;
 }
 
+/* Customized scrollbar */
 .scrollbar-near-moon::-webkit-scrollbar-track {
   background-color: #F5F5F5;
   border-radius: 0px;
@@ -10043,108 +10044,6 @@ h3 {
   background-image: linear-gradient(to top, #5ee7de88 0%, #59f79b88 100%);
 }
 
-/* 
-.wrapper {
-    display: flex;
-    align-items: stretch;
-}
-
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    background: rgb(41, 41, 43);
-    background: rgb(48,62,77);
-    color: rgb(255, 255, 255);
-    transition: all 0.3s;
-    position:fixed;
-    min-height:100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.main-content {
-    margin-left: 250px !important;
-    width: 81% !important;
-}
-
-#sidebar.active {
-    min-width: 80px;
-    max-width: 80px;
-    text-align: center;
-}
-
-#sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
-    display: none;
-}
-
-#sidebar.active .sidebar-header strong {
-    display: block;
-}
-
-#sidebar ul li a {
-    text-align: left;
-}
-
-#sidebar.active ul li a {
-    padding: 20px 10px;
-    text-align: center;
-    font-size: 0.85em;
-}
-
-#sidebar.active ul li a i {
-    margin-right:  0;
-    display: block;
-    font-size: 1.8em;
-    margin-bottom: 5px;
-}
-
-#sidebar.active ul ul a {
-    padding: 10px !important;
-}
-
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #383838;
-    background: rgb(44,56,73);
-}
-
-#sidebar .sidebar-header strong {
-    display: none;
-    font-size: 1.8em;
-}
-
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #4e4e4e;
-}
-
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-    color: #17a2b8;
-    color: rgb(153,160,168);
-}
-#sidebar ul li a:hover {
-    color: rgb(82, 82, 83);
-    color: rgb(153,160,168);
-    background: #fff;
-    background: rgb(156, 202, 253);
-    text-decoration: none;
-}
-#sidebar ul li a i {
-    margin-right: 10px;
-}
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: #4e4e4e;
-    background: rgb(102,152,200);
-}
-#content {
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-} */
 /* Guest check-out */
 .check-out-form {
   font-size: 0.9em;
@@ -10159,12 +10058,23 @@ h3 {
   background-color: rgba(132, 156, 145, 0.1);
 }
 
+.reports-tabs.active:hover {
+  color: white !important;
+}
+
 /* Modals */
 .modal-body {
   max-height: 70vh;
   overflow-y: auto !important;
 }
 
+/* Inventory category tabs */
+.nav-item .categories.active {
+  font-weight: 600;
+  color: black !important;
+}
+
+/* Token field */
 @-webkit-keyframes blink {
   0% {
     border-color: #ededed;
