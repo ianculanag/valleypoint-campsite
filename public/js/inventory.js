@@ -73,16 +73,20 @@ jQuery(document).ready(function () {
     })
 
     jQuery('.inventory-reports-tabs').click(function () {
+        
         var ingredientConsumption = jQuery(this).attr('id');
-        console.log(ingredientConsumption);
+
+        jQuery('.inventory-reports-tabs').removeClass('active');
+        jQuery('#' + ingredientConsumption).addClass('active');
 
         jQuery('.inventory-inputs').hide();
         jQuery('#' + ingredientConsumption + 'Input').show();
+    })
 
-        console.log('yes');
-        /*jQuery.get('/view-inventory/' + jQuery(this).attr('id'), function (data) {
+    jQuery('.load-inventory').click(function() {
+        jQuery.get('/view-inventory/' + jQuery(this).attr('id'), function (data) {
 
-        });*/
+        });
     })
 });
 

@@ -10054,11 +10054,25 @@ h3 {
 }
 
 /* Reports tab */
-.reports-tabs:hover {
+.reports-tabs,
+.inventory-reports-tabs {
+  color: #505050;
+  cursor: pointer;
+}
+
+.reports-tabs:hover,
+.inventory-reports-tabs:hover {
   background-color: rgba(132, 156, 145, 0.1);
 }
 
-.reports-tabs.active:hover {
+.reports-tabs.active,
+.inventory-reports-tabs.active {
+  background-color: #060f0ed4 !important;
+  color: white;
+}
+
+.reports-tabs.active:hover,
+.inventory-reports-tabs.active:hover {
   color: white !important;
 }
 

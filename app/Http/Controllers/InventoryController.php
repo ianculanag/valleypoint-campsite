@@ -10,16 +10,17 @@ use DB;
 class InventoryController extends Controller
 {
     /**
-     * View inventory
+     * View todays inventory
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewInventory() { 
+    public function viewTodaysInventory() { 
 
         $ingredients = DB::table('inventories')
         ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
         ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
                  'ingredients.ingredientName', 'ingredients.ingredientCategory')
+        //->whereDate('date', '=', )
         ->get();
 
         $ingredientCategories = Ingredients::getAllCategories();

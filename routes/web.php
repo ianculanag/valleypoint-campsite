@@ -281,7 +281,7 @@ Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestau
 
 /* Inventory */
 //Display all ingredient categories
-Route::get('/view-inventory', 'InventoryController@viewInventory');
+Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
 
 //Display ingredient category
 Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');

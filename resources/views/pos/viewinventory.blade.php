@@ -79,11 +79,11 @@
             </div>
             <div class="col-md-2 float-right mx-5 pl-4 pt-4 mt-3" style="position:fixed; right:0;">
                 <nav class="nav nav-pills nav-stacked mb-5" style="display:block;">
-                    <a class="nav-item nav-link inventory-reports-tabs text-center active" id="dailyInventory" style="background-color:#060f0ed4; cursor:pointer;">Daily</a>
-                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="monthlyInventory" style="color:#505050; cursor:pointer;">Monthly</a>
-                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="customInventory" style="color:#505050; cursor:pointer;">Custom</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center active" id="dailyInventory">Daily</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="monthlyInventory">Monthly</a>
+                    <a class="nav-item nav-link inventory-reports-tabs text-center" id="customInventory">Custom</a>
                 </nav>
-                {{--Daily and weekly--}}
+                {{--Daily--}}
                 <div class="inventory-inputs row px-3" id="dailyInventoryInput">
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">
-                        <button class="btn btn-sm btn-success" type="submit">
+                        <button class="btn btn-sm btn-success load-inventory" id="loadDailyInventory" type="submit">
                             <i class="fa fa-calendar-check" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 px-0 ml-2">
-                        <button class="btn btn-sm btn-success" type="submit">
+                        <button class="btn btn-sm btn-success load-inventory" id="loadMonthlyInventory" type="submit">
                             <i class="fa fa-calendar-check" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <div class="px-0 mx-0">
-                        <button class="btn btn-sm btn-block btn-success" type="submit">
+                        <button class="btn btn-sm btn-block btn-success load-inventory" id="loadCustomInventory" type="submit">
                             Load
                         </button>
                     </div>
