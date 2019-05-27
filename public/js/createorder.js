@@ -21,6 +21,7 @@ jQuery(document).ready(function () {
 
 	jQuery('.makeorder').click(function () {
 		removeItemEntries();
+		jQuery('#searchFoodItem').val('');
 
 		var productCategory = jQuery(this).attr('id');
 
@@ -390,16 +391,21 @@ jQuery('#orderType').change(function() {
 	}
 	
 	removeItemEntries();
-	changePricesDisplay(jQuery(this).prop('checked') == true);
+	changePricesDisplay();
 })
 
 function checkOrderIsGuest() {
 	return jQuery('#orderType').prop('checked');
 }
 
-function changePricesDisplay(isGuest) {
-	productCategory = jQuery('.makeorder.active').attr('id');
-	displayCategoryItems(productCategory);
+function changePricesDisplay() {
+	searchQuery = jQuery('#searchFoodItem').val();
+	if(searchQuery == "") {		
+		productCategory = jQuery('.makeorder.active').attr('id');
+		displayCategoryItems(productCategory);
+	} else {
+		displaySearchedItems(searchQuery);
+	}
 }
 
 /**PAYMENTS SA RESTO */
