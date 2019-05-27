@@ -13,7 +13,7 @@
             <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
         </nav>
     </div>
-    <div class="container-fluid col-md-12 pb-2 pt-4 px-5">        
+    <div class="container-fluid col-md-12 pb-2 pt-4 px-4">        
         <form method="POST" action="/save-order">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
@@ -93,15 +93,15 @@
             <!--Handles total bill-->
             <!--Ends here-->
             <div class="col-md-8">
-                <div class="container row py-0">
-                    <div class="col-md-3 py-2 px-0 ml-1 mr-0 pr-0">
+                <div class="container row py-0 mx-0 px-0">
+                    <div class="col-md-3 py-2 pl-1 mr-0 pr-0">
                         <label class="switch mr-2">
                             <input type="checkbox" id="orderType">
                             <span class="slider round"></span>
                         </label>
                         <label id="orderTypeText">Walk-in</label>
                     </div>
-                    <div class="col-md-3 px-0 ml-0 mr-4">
+                    <div class="col-md-3 px-0 ml-0">
                         <div class="form-group my-1 row pr-4">
                             <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 px-0 ml-0 mr-4">
+                    <div class="col-md-3 px-0 ml-0">
                         <div class="form-group my-1 row pr-4">
                             <label class="col-sm-7 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
@@ -117,10 +117,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3 px-0 float-right">
+                        <div class="form-group my-1 row">
+                            <label class="col-sm-2  pl-3 pt-1" for="queueNumber"><span class="fa fa-search text-secondary"></span></label>
+                            <div class="input-group input-group-sm px-0 mx-0 col-sm-10">
+                                <input class="form-control" type="text" name="searchFoodItem" id="searchFoodItem" min="1" max="50" placeholder="" value="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 pr-0 rounded-0">
                         <div class="list-group rounded-0">
+                            <a href="#" id="all" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">All</a>
                             @foreach($categories as $category)
                             @php
                                 $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($category)); 
@@ -138,11 +147,7 @@
                                     $displayName .= 's';
                                 }
                             @endphp
-                            @if($loop->iteration == 1)
-                            <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">{{$displayName}}</a>
-                            @else
                             <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder' style="color:black">{{$displayName}}</a>
-                            @endif                            
                             @endforeach
                         </div>
                     </div>
@@ -150,18 +155,16 @@
                     <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:59.9vh;"> 
                         <div class="row p-3 scrollbar-near-moon" id="menu" style="overflow-y:auto;">
                         @foreach ($products as $product)
-                        @if($product->productCategory == 'appetizer')
-                            <a class="px-1 mx-1">       
-                                <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
-                                    <div class="card-body text-center pt-2">
-                                        <h6 class="card-text">
-                                            {{$product->productName}}
-                                        </h6>
-                                        <p>₱ {{number_format((float)($product->price), 2, '.', '')}}</p>
-                                    </div>
+                        <a class="px-1 mx-1">       
+                            <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
+                                <div class="card-body text-center pt-2">
+                                    <h6 class="card-text">
+                                        {{$product->productName}}
+                                    </h6>
+                                    <p>₱ {{number_format((float)($product->price), 2, '.', '')}}</p>
                                 </div>
-                            </a>
-                        @endif
+                            </div>
+                        </a>
                         @endforeach
                         </div>    
                     </div>
