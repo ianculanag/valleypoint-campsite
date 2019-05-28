@@ -23,7 +23,12 @@ jQuery(document).ready(function () {
             jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
 
             jQuery('#oldTableNumber').val(data[0][0].tableNumber);
-            jQuery('#oldQueueNumber').val(data[0][0].queueNumber);
+			jQuery('#oldQueueNumber').val(data[0][0].queueNumber);
+			
+			//IAN CODE
+			var billOutLink = "<a href='/bill-out/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
+
+			jQuery('#billOut').wrap(billOutLink);
         })
 	})
 });

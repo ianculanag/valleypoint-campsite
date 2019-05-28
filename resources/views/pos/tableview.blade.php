@@ -214,7 +214,9 @@
                             @if(count($items) > 0)
                             <div class="col-md-6 px-1">
                                 <button type="button" class="btn btn-success btn-block" id="billOut" style="text-align:center;">
+                                    <a href="/bill-out/{{$items[0]->orderID}}">
                                     Bill Out
+                                    </a>
                                 </button>
                             </div>
                             @else

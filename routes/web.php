@@ -240,6 +240,9 @@ Route::post('/save-order', 'OrdersController@saveOrder');
 
 Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
+//Bill out
+Route::get('/bill-out/{orderID}', 'OrdersController@showBilloutOrderSlip');
+
 //View table details
 Route::get('/load-table/{tableNumber}', 'OrdersController@loadTable');
 

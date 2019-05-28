@@ -237,7 +237,7 @@ jQuery('#discountButton').click(function() {
 	jQuery('#discountModalBody').html(htmlString);
 
 	
-	jQuery('#amountToPay').html(jQuery('#ordersGrandTotal').html());
+	jQuery('#amountToPayDiscount').html(jQuery('#ordersGrandTotal').html());
 
 	/*OLD DISCOUNT IMPLEMENTATION
 	htmlString += "<table class='table table-striped' style='font-size:.88em;'>";
@@ -340,7 +340,7 @@ function computeTotalDiscount() {
 	var totalDiscount = 0;
 
 	if(jQuery('#numberOfPax').val() != '' && jQuery('#discountRate').val() != '') {
-		amountToPay = numeral(jQuery('#amountToPay').html()).value();
+		amountToPay = numeral(jQuery('#amountToPayDiscount').html()).value();
 		numberOfPax = numeral(jQuery('#numberOfPax').val()).value();
 		discountRate = numeral(jQuery('#discountRate').val()).value() / 100;
 

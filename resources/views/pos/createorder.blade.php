@@ -208,7 +208,7 @@
                             <tbody>
                                 <tr>
                                     <th>Total to Pay</th>
-                                    <th class="text-right"><h4 id="amountToPay"></h4></th>
+                                    <th class="text-right"><h4 id="amountToPayDiscount"></h4></th>
                                 </tr>
                                 <tr>
                                     <th class="pt-4" style="width:50%;">Number of Pax</th>
