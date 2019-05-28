@@ -150,20 +150,6 @@ class CreateProductsTable extends Migration
             $product22->guestPrice = '140.00';
             $product22->save();
 
-            $product23 = new Products;
-            $product23->productCategory = 'noodles';
-            $product23->productName = 'Pesto';
-            $product23->price = '180.00';
-            $product23->guestPrice = '140.00';
-            $product23->save();
-
-            $product24 = new Products;
-            $product24->productCategory = 'noodles';
-            $product24->productName = 'Marinara';
-            $product24->price = '180.00';
-            $product24->guestPrice = '140.00';
-            $product24->save();
-
             $product25 = new Products;
             $product25->productCategory = 'noodles';
             $product25->productName = 'Bihon';
@@ -199,13 +185,6 @@ class CreateProductsTable extends Migration
             $product29->guestPrice = '140.00';
             $product29->save();
 
-            $product30 = new Products;
-            $product30->productCategory = 'riceBowl';
-            $product30->productName = 'Siomai Fried Rice';
-            $product30->price = '180.00';
-            $product30->guestPrice = '140.00';
-            $product30->save();
-
             $product31 = new Products;
             $product31->productCategory = 'riceBowl';
             $product31->productName = 'Porkchop Fried Rice';
@@ -219,13 +198,6 @@ class CreateProductsTable extends Migration
             $product32->price = '200.00';
             $product32->guestPrice = '200.00';
             $product32->save();
-
-            $product33 = new Products;
-            $product33->productCategory = 'riceBowl';
-            $product33->productName = 'Fried Rice Silog Meal';
-            $product33->price = '200.00';
-            $product33->guestPrice = '160.00';
-            $product33->save();
 
             $product34 = new Products;
             $product34->productCategory = 'groupMeal';
@@ -318,12 +290,12 @@ class CreateProductsTable extends Migration
             $product46->guestPrice = '375.00';
             $product46->save();
 
-            $product47 = new Products;
-            $product47->productCategory = 'soup';
-            $product47->productName = 'Pinikpikan';
-            $product47->price = '375.00';
-            $product47->guestPrice = '375.00';
-            $product47->save();
+            // $product47 = new Products;
+            // $product47->productCategory = 'soup';
+            // $product47->productName = 'Pinikpikan';
+            // $product47->price = '375.00';
+            // $product47->guestPrice = '375.00';
+            // $product47->save();
 
             $product48 = new Products;
             $product48->productCategory = 'extra';
