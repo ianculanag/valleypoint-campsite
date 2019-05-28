@@ -65,16 +65,26 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewDailyInventory($onDate) { 
+    public function viewDailyInventory($category, $onDate) { 
 
         $thisDate = Carbon::parse($onDate);   
 
-        $ingredients = DB::table('inventories')
-        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
-        ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
-                 'ingredients.ingredientName', 'ingredients.ingredientCategory')
-        ->whereDate('date', '=', $thisDate)
-        ->get();
+        if ($category != 'categories') {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereDate('date', '=', $thisDate)
+            ->where('ingredientCategory', '=', $category)
+            ->get();
+        } else {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereDate('date', '=', $thisDate)
+            ->get();
+        }
 
         return $ingredients;
     }
@@ -84,7 +94,7 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewMonthlyInventory($onMonth, $onYear) { 
+    public function viewMonthlyInventory($category, $onMonth, $onYear) { 
 
         $monthString = '22-'.$onMonth.'-1999';
         $month = Carbon::parse($monthString)->format('m');
@@ -92,13 +102,24 @@ class InventoryController extends Controller
         $yearString = '22-12-'.$onYear;
         $year = Carbon::parse($yearString)->format('Y');
 
-        $ingredients = DB::table('inventories')
-        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
-        ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
-                 'ingredients.ingredientName', 'ingredients.ingredientCategory')
-        ->whereMonth('date', '=', $month)
-        ->whereYear('date', '=', $year)
-        ->get();
+        if ($category != 'categories') {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereMonth('date', '=', $month)
+            ->whereYear('date', '=', $year)
+            ->where('ingredientCategory', '=', $category)
+            ->get();
+        } else {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereMonth('date', '=', $month)
+            ->whereYear('date', '=', $year)
+            ->get();
+        }
 
         return $ingredients;
     }
@@ -108,18 +129,29 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function viewCustomInventory($fromDate, $toDate) { 
+    public function viewCustomInventory($category, $fromDate, $toDate) { 
 
         $displayFrom = Carbon::parse($fromDate);  
         $displayTo = Carbon::parse($toDate);  
 
-        $ingredients = DB::table('inventories')
-        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
-        ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
-                 'ingredients.ingredientName', 'ingredients.ingredientCategory')
-        ->whereDate('date', '>=', $displayFrom)
-        ->whereDate('date', '<=', $displayTo)
-        ->get();
+        if ($category != 'categories') {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereDate('date', '>=', $displayFrom)
+            ->whereDate('date', '<=', $displayTo)
+            ->where('ingredientCategory', '=', $category)
+            ->get();
+        } else {
+            $ingredients = DB::table('inventories')
+            ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+            ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                    'ingredients.ingredientName', 'ingredients.ingredientCategory')
+            ->whereDate('date', '>=', $displayFrom)
+            ->whereDate('date', '<=', $displayTo)
+            ->get();
+        }
 
         return $ingredients;
     }

@@ -293,10 +293,10 @@ Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredie
 Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');
 
 //Reload daily inventory
-Route::get('/view-inventory/daily/{onDate}', 'InventoryController@viewDailyInventory');
+Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
 
 //Reload monthly inventory
-Route::get('/view-inventory/monthly/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
+Route::get('/view-inventory/monthly/{category}/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
 
 //Reload custom inventory
-Route::get('/view-inventory/custom/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
+Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');

@@ -8,17 +8,17 @@ jQuery(document).ready(function () {
         });  
 
 		jQuery('.categories').removeClass('active');
-        jQuery('#this' + ingredientCategory).addClass('active');
+        jQuery('#this-' + ingredientCategory).addClass('active');
     })
 
-    jQuery('#allIngredientCategories').click(function () {
+    jQuery('#all-categories').click(function () {
 
         jQuery.get('/view-all-ingredient-category/', function (data) {
             loadInventoryTable(data);
         });
 
         jQuery('.categories').removeClass('active');
-        jQuery('#allIngredientCategories').addClass('active');
+        jQuery('#all-categories').addClass('active');
     })
 
     jQuery('.inventory-reports-tabs').click(function () {
@@ -34,11 +34,16 @@ jQuery(document).ready(function () {
 
     jQuery('.load-inventory').click(function() {
 
+        var id = jQuery('.categories.active').attr('id').split('-');
+        var category = id[1];
+
+        console.log(category);
+
         if (jQuery(this).attr('id') == 'loadDailyInventory') {
 
-            var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-Do');
+            var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-D');
 
-            jQuery.get('/view-inventory/daily/' + onDate, function (data) {
+            jQuery.get('/view-inventory/daily/' + category + '/' + onDate, function (data) {
                 loadInventoryTable(data);
             });
 
@@ -48,22 +53,19 @@ jQuery(document).ready(function () {
             var onYear = jQuery('#selectYear').val();
 
             //console.log(onMonth, onYear);
-            jQuery.get('/view-inventory/monthly/' + onMonth + '/' + onYear , function (data) {
+            jQuery.get('/view-inventory/monthly/' + category + '/' + onMonth + '/' + onYear , function (data) {
                 loadInventoryTable(data);
             });
 
         } else if (jQuery(this).attr('id') == 'loadCustomInventory') {
 
-            var fromDate = moment(jQuery('#fromDate').val()).format('YYYY-MM-Do');
-            var toDate = moment(jQuery('#toDate').val()).format('YYYY-MM-Do');
+            var fromDate = moment(jQuery('#fromDate').val()).format('YYYY-MM-D');
+            var toDate = moment(jQuery('#toDate').val()).format('YYYY-MM-D');
 
-            jQuery.get('/view-inventory/custom/' + fromDate + '/' + toDate , function (data) {
+            jQuery.get('/view-inventory/custom/' + category + '/' + fromDate + '/' + toDate , function (data) {
                 loadInventoryTable(data);
             });
         }
-        
-        jQuery('.categories').removeClass('active');
-        jQuery('#allIngredientCategories').addClass('active');
     })
 });
 
