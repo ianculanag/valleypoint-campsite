@@ -34,10 +34,16 @@ jQuery(document).ready(function () {
 
     jQuery('.load-inventory').click(function() {
         if (jQuery(this).attr('id') == 'loadDailyInventory') {
+
             var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-Do');
+
             jQuery.get('/view-inventory/daily/' + onDate, function (data) {
-                loadInventoryTable();
+                loadInventoryTable(data);
             });
+
+            jQuery('.categories').removeClass('active');
+            jQuery('#allIngredientCategories').addClass('active');
+
         } else if (jQuery(this).attr('id') == 'loadMonthlyInventory') {
 
         } else if (jQuery(this).attr('id') == 'loadCustomInventory') {
@@ -78,7 +84,7 @@ function loadInventoryTable(data) {
         htmlString += "<table class='table table-sm dataTable stripe' cellspacing='0' id='inventoryTable'>";
         htmlString += "<thead><tr> <th>No.</th> <th>Description</th> <th>Category</th> <th>Quantity Consumed</th>";
         htmlString += "<th>Last Consumed</th> </tr></thead><tbody id='displayIngredientCategory'></tbody></table>";
-        
+
         jQuery('#inventoryLibrary').html(htmlString);
     } 
 }
