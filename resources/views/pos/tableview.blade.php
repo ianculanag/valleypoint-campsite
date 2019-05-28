@@ -206,18 +206,30 @@
                             </thead>
                         </table>
                         <div class="row mx-1" id="orderSlipButtons">
-                            <div class="col-md-6 px-1">
-                                <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
-                                    Add Order
-                                </button>
-                            </div>
                             @if(count($items) > 0)
                             <div class="col-md-6 px-1">
-                                <button type="button" class="btn btn-success btn-block" id="billOut" style="text-align:center;">
-                                    <a href="/bill-out/{{$items[0]->orderID}}">
-                                    Bill Out
-                                    </a>
-                                </button>
+                                <a href="/add-order/{{$items[0]->orderID}}" style="text-decoration:none">
+                                    <button type="button" class="btn btn-primary btn-block" id="addOrder" style="text-align:center;">
+                                        Add Order
+                                    </button>
+                                </a>
+                            </div>
+                            @else
+                            <div class="col-md-6 px-1">                                
+                                <a href="/create-order/" style="text-decoration:none">
+                                    <button type="button" class="btn btn-primary btn-block" id="addOrder" style="text-align:center;">
+                                        Add Order
+                                    </button>
+                                </a>
+                            </div>
+                            @endif
+                            @if(count($items) > 0)
+                            <div class="col-md-6 px-1">
+                                <a href="/bill-out/{{$items[0]->orderID}}" style="text-decoration:none">
+                                    <button type="button" class="btn btn-success btn-block" id="billOut" style="text-align:center;">
+                                        Bill Out
+                                    </button>
+                                </a>
                             </div>
                             @else
                             <div class="col-md-6 px-1">

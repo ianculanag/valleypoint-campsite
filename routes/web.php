@@ -240,9 +240,6 @@ Route::post('/save-order', 'OrdersController@saveOrder');
 
 Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
-//Bill out
-Route::get('/bill-out/{orderID}', 'OrdersController@showBilloutOrderSlip');
-
 //View table details
 Route::get('/load-table/{tableNumber}', 'OrdersController@loadTable');
 
@@ -259,7 +256,7 @@ Route::get('/update-queue-number/{orderID}/{queueNumber}/{oldQueueNumber}', 'Ord
 Route::get('/reload-table-view', 'OrdersController@reloadTables');
 
 //Bar and restaurant checkout Bill
-Route::get('/checkout-bill', 'SalesController@showCheckOutBillForm');
+Route::get('/bill-out/{orderID}', 'OrdersController@showBilloutOrderSlip');
 
 //Cashier shift report
 Route::get('/cashier-shift-report', 'CashierController@showCashierReport');

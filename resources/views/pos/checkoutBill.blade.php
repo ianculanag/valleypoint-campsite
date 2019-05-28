@@ -14,52 +14,59 @@
         <form method="POST" action="/checkin-backpacker">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-        <!--<input type="hidden" name="selectedUnit" id="selectedUnit" value="">
-        <input type="hidden" name="backpackerQuantity" id="backpackerQuantity" value="">-->
-
+        
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-4 mx-0">
-                <div class="card p-0 mx-0">
-                    <h4 class="text-muted" style="text-align:center; padding:0.5em;">Charges</h4>
-                    <table class="table table-striped" style="font-size:.88em;">
-                        <thead>
-                            <tr>
-                                <th scope="col" style="width:40%">Item</th>
-                                <th scope="col">Qty.</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="invoiceRows">
-                            <tr id="">
-                                <td style="display:none;"><input id="" class="form-check-input" type="checkbox" checked></td>
-                                <td id="invoiceItem" class="invoiceDescriptions">Tapsilog</td>
-                                <td id="invoiceQuantity" style="text-align:right;" class="invoiceQuantities">1</td>
-                                <td id="invoiceUnitPrice" style="text-align:right;" class="invoiceUnitPrices">100</td>
-                                <td id="invoiceTotalPrice" style="text-align:right;" class="invoicePrices">100</td>
-                            </tr>
+            <div class="col-md-6 offset-3 mb-3" >
+                <div class="card p-0 m-0" style="min-height:73.5vh; max-height:73.5vh;">
+                    <h5 class="text-muted text-center pt-3 pb-1" style="font-size:1.2em;">Order Slip</h5>
+                    <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
+                        <table class="table table-striped" style="font-size:.88em;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width:40%;">Description</th>
+                                    <th scope="col">Qty.</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderSlip">
+                                <tr id="emptyEntryHolder">
+                                    <td class="py-2" style="text-align:center" colspan="5">Add items from the menu</td>
+                                </tr>
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;"></th>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
-                                    Confirm
-                                </button></td>
-                                <td colspan="2"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="">
-                                    Go Back
-                                </button></td>
-                            </tr>
-                            {{--<tr>
-                                <th colspan="1">Amount Paid:</th>
-                                <th style="text-align:right;"  colspan="3">
-                                <input type="number" name="amountPaid" placeholder="0" min="0" style="text-align:right;" class="form-control" id="amount" required>
-                                </th>
-                            </tr>--}}
-                        </tfoot>
-                    </table>
+                        </table>
+                    </div>
+                    <div class="card-footer bg-white border-0 px-0 mx-0">
+                        <table class="table table-striped" style="font-size:.88em;">
+                            <thead>
+                                <tr>
+                                    <th class="py-2" colspan="3" scope="row">Subtotal:</th>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ 0.00</td>
+                                </tr>
+                                <tr  class="text-primary">
+                                    <th class="py-2" colspan="3" scope="row">Discount:</th>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ 0.00</td>
+                                </tr>
+                                <tr>
+                                    <th class="py-2" colspan="3" scope="row">TOTAL:</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ 0.00</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="row mx-2">
+                            <div class="col-md-6 mb-1 px-1">
+                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-success btn-block" style="text-align:center;" id="getPayment" disabled>
+                                    Get Cash Payment
+                                </button>
+                            </div>
+                            <div class="col-md-6 px-1">
+                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton" disabled>
+                                    Discount
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

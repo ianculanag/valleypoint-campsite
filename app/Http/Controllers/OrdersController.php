@@ -392,4 +392,25 @@ class OrdersController extends Controller
 
         return $tables;
     }
+
+    /**
+     * Show order slip upon bill out
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function showBilloutOrderSlip($orderID)
+    {
+        $order = Orders::find($orderID);
+
+        //return $order;
+
+        $items = DB::table('orders')
+        ->join('items', 'items.orderID', 'orders.id')
+        ->join('products', 'products.id', 'items.productID')
+        ->where('orders.id', '=', $orderID)
+        ->get();
+
+        //return $items;
+        return view('pos.checkoutBill');
+    }
 }

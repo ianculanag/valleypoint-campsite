@@ -29,6 +29,10 @@ jQuery(document).ready(function () {
 			var billOutLink = "<a href='/bill-out/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
 
 			jQuery('#billOut').wrap(billOutLink);
+
+			var addOrderLink = "<a href='/add-order/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
+
+			jQuery('#addOrder').wrap(addOrderLink);
         })
 	})
 });
@@ -47,6 +51,9 @@ jQuery(document).ready(function () {
 			
 			updateOrderTotal();
 		})
+
+		var addOrderLink = "<a href='/create-order' style='text-decoration:none;color:white'></a>";
+		jQuery('#addOrder').wrap(addOrderLink);
 	})
 });
 
