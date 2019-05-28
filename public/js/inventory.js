@@ -33,22 +33,30 @@ jQuery(document).ready(function () {
     })
 
     jQuery('.load-inventory').click(function() {
+
         if (jQuery(this).attr('id') == 'loadDailyInventory') {
 
             var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-Do');
-
             jQuery.get('/view-inventory/daily/' + onDate, function (data) {
                 loadInventoryTable(data);
             });
 
-            jQuery('.categories').removeClass('active');
-            jQuery('#allIngredientCategories').addClass('active');
-
         } else if (jQuery(this).attr('id') == 'loadMonthlyInventory') {
+
+            var onMonth = jQuery('#selectMonth').val();
+            var onYear = jQuery('#selectYear').val();
+
+            console.log(onMonth, onYear);
+            jQuery.get('/view-inventory/monthly/' + onMonth + '/' + onYear , function (data) {
+                loadInventoryTable(data);
+            });
 
         } else if (jQuery(this).attr('id') == 'loadCustomInventory') {
 
         }
+        
+        jQuery('.categories').removeClass('active');
+        jQuery('#allIngredientCategories').addClass('active');
     })
 });
 

@@ -61,7 +61,7 @@ class InventoryController extends Controller
     }
 
     /**
-     * Reload daily inventory for all categories
+     * Daily inventory for all categories
      *
      * @return \Illuminate\Http\Response
      */
@@ -74,6 +74,30 @@ class InventoryController extends Controller
         ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
                  'ingredients.ingredientName', 'ingredients.ingredientCategory')
         ->whereDate('date', '=', $thisDate)
+        ->get();
+
+        return $ingredients;
+    }
+
+    /**
+     * Monthly inventory for all categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewMonthlyInventory($onMonth, $onYear) { 
+
+        $monthString = '22-'.$onMonth.'-1999';
+        $month = Carbon::parse($monthString)->format('m');
+
+        $yearString = '22-12-'.$onYear;
+        $year = Carbon::parse($yearString)->format('Y');
+
+        $ingredients = DB::table('inventories')
+        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+        ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                 'ingredients.ingredientName', 'ingredients.ingredientCategory')
+        ->whereMonth('date', '=', $month)
+        ->whereYear('date', '=', $year)
         ->get();
 
         return $ingredients;

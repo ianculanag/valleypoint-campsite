@@ -88,9 +88,9 @@
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
                             {{-- @if(isset($displayfrom))
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" value="{{$displayfrom}}" required>
                             @else --}}
-                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" value="<?php echo date("Y-m-d");?>" required>
                             {{-- @endif --}}
                         </div>
                     </div>
@@ -104,25 +104,25 @@
                 <div class="inventory-inputs row px-3" id="monthlyInventoryInput" style="display:none;">
                     <div class="form-group col-md-5 px-0 mr-1">
                         <div class="input-group input-group-sm">
-                            <select class="form-control" name="selectMonth">
-                                <option>Jan</option>
-                                <option>Feb</option>
-                                <option>Mar</option>
-                                <option>Apr</option>
-                                <option selected>May</option>
-                                <option>Jun</option>
-                                <option>Jul</option>
-                                <option>Aug</option>
-                                <option>Sep</option>
-                                <option>Oct</option>
-                                <option>Nov</option>
-                                <option>Dec</option>
+                            <select class="form-control" name="selectMonth" id="selectMonth">
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05" selected>May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-md-4 px-0 ">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" type="number" name="selectYear" min="2018" max="" value="2019" required>
+                            <input class="form-control" type="number" name="selectYear" id="selectYear" min="2018" max="" value="2019" required>
                         </div>
                     </div>
                     <div class="col-md-2 px-0 ml-2">
@@ -136,22 +136,24 @@
                     <div class="form-group row px-0 mx-0">
                         <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
                         <div class="input-group input-group-sm col-md-9 px-0 mx-0">
-                            @if(isset($displayfrom))
+                            {{-- @if(isset($displayfrom))
                             <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
-                            @else
+                            @else --}}
                             <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     </div>
                     <div class="form-group row px-0 mx-0">
                         <label for="displayTo" class="col-md-3 mb-0 mt-2 p-0">To:</label>
                         <div class="input-group input-group-sm col-md-9 px-0 mx-0">
-                            @if(isset($displayto))
+                            {{-- @if(isset($displayto))
                             <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="{{$displayto}}" required>
-                            @else
-                            
-                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
-                            @endif
+                            @else --}}
+                            @php
+                                $dateToday = \Carbon\Carbon::now();
+                            @endphp
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="<?php echo date("Y-m-d", strtotime($dateToday . "+1 days"));?>" required>
+                            {{-- @endif --}}
                         </div>
                     </div>
                     <div class="px-0 mx-0">
