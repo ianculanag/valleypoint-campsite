@@ -108,11 +108,11 @@
                     <div class="form-group row">
                         <div class="col-md-4 mb-1">
                             <label for="firstName">First name</label>
-                            <input class="form-control" type="text" name="firstName" required="required" maxlength="15" placeholder="" value="{{$reservation->firstName}}" autocomplete = "off">
+                            <input class="form-control" type="text" name="firstName" id="firstName" required="required" maxlength="15" placeholder="" value="{{$reservation->firstName}}" autocomplete = "off">
                         </div>
                         <div class="col-md-5 mb-1">
                             <label for="lastName">Last name</label>
-                            <input class="form-control" type="text" name="lastName" required="required" maxlength="20" placeholder="" value="{{$reservation->lastName}}" autocomplete = "off">
+                            <input class="form-control" type="text" name="lastName" id="lastName" required="required" maxlength="20" placeholder="" value="{{$reservation->lastName}}" autocomplete = "off">
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="unitNumberOfPax">No. of pax</label>
