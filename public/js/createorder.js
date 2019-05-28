@@ -234,6 +234,12 @@ function disableOrderSlipButtons() {
 jQuery('#discountButton').click(function() {
 	htmlString = "";
 
+	jQuery('#discountModalBody').html(htmlString);
+
+	
+	jQuery('#amountToPay').html(jQuery('#ordersGrandTotal').html());
+
+	/*OLD DISCOUNT IMPLEMENTATION
 	htmlString += "<table class='table table-striped' style='font-size:.88em;'>";
 	htmlString += "<thead>";
 	htmlString += "<tr>";
@@ -275,9 +281,7 @@ jQuery('#discountButton').click(function() {
 	htmlString += "</tr>";
 
 	htmlString += "</tfoot>";	
-	htmlString += "</table>";
-
-	jQuery('#discountModalBody').html(htmlString);
+	htmlString += "</table>";*/
 })
 
 jQuery('#discountMethod').change(function() {
@@ -310,12 +314,41 @@ jQuery('#discountMethod').change(function() {
 	jQuery('#totalDiscount').html(toPeso(numeral('0').format('0,0.00')));
 })
 
-jQuery(document).on('change', '.orderDiscounts', function() {
+jQuery(document).on('keyup', '#discountRate', function() {
+	computeTotalDiscount();
+})
+
+jQuery(document).on('change', '#discountRate', function() {
+	computeTotalDiscount();
+})
+
+jQuery(document).on('keyup', '#numberOfPax', function() {
+	computeTotalDiscount();
+})
+
+jQuery(document).on('change', '#numberOfPax', function() {
+	computeTotalDiscount();
+})
+
+jQuery('.discountButtons').click( function() {
+	discountValue = numeral(jQuery(this).html()).value()*100;
+	jQuery('#discountRate').val(discountValue);
 	computeTotalDiscount();
 })
 
 function computeTotalDiscount() {
 	var totalDiscount = 0;
+
+	if(jQuery('#numberOfPax').val() != '' && jQuery('#discountRate').val() != '') {
+		amountToPay = numeral(jQuery('#amountToPay').html()).value();
+		numberOfPax = numeral(jQuery('#numberOfPax').val()).value();
+		discountRate = numeral(jQuery('#discountRate').val()).value() / 100;
+
+		totalDiscount = (amountToPay/numberOfPax) * discountRate;
+
+		jQuery('#totalDiscount').html(toPeso(numeral(totalDiscount).format('0,0.00')));
+	}
+	/* OLD IMPLEMENTATION
 	if(jQuery('#discountMethod').prop('checked') == true) {
 		for(var index = 0; index < jQuery('.orderDiscounts').length; index++) {
 			if(jQuery('.orderDiscounts').eq(index).val()) {
@@ -336,15 +369,12 @@ function computeTotalDiscount() {
 				totalDiscount += parseInt(jQuery('.orderDiscounts').eq(index).val());
 			}
 		}
-	}
-	
-	jQuery('#totalDiscount').html(toPeso(numeral(totalDiscount).format('0,0.00')));
+	}*/
 }
 
 jQuery('#saveDiscountButton').click( function() {
 	jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#totalDiscount').html()).format('0,0.00')));
 	updateOrderTotal();
-
 	//jQuery('#discountMethod').removeAttr('checked', false);
 })
 

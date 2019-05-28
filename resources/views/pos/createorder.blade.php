@@ -204,8 +204,45 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{--<span style="font-size:1.2em;">₱</span> <input type="checkbox" id="discountMethod" data-toggle="toggle" data-onstyle="primary" data-offstyle="success" data-on=" " data-off=" "> <strong style="font-size:1.2em;">%</strong>--}}
-                        <span>₱</span>
+                        <table class="table table-borderless" style="font-size:.88em;">
+                            <tbody>
+                                <tr>
+                                    <th>Total to Pay</th>
+                                    <th class="text-right"><h4 id="amountToPay"></h4></th>
+                                </tr>
+                                <tr>
+                                    <th class="pt-4" style="width:50%;">Number of Pax</th>
+                                    <th class="input-group">
+                                        <input type="number" class="form-control form-control-lg text-right" min="1" value="1" id="numberOfPax">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="pt-4" style="width:50%;">Discount Rate</th>
+                                    <th class="input-group">
+                                        <input type="number" class="form-control form-control-lg text-right input-group-prepend" id="discountRate">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr class="text-primary">
+                                    <th>Total Discount</th>
+                                    <th class="text-right"><h4 id="totalDiscount">₱ 0.00</h4></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-borderless" style="font-size:.88em;">
+                            <tbody>
+                                <tr>
+                                    <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">5%</button></th>
+                                    <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">10%</button></th>
+                                    <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">15%</button></th>
+                                    <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">20%</button></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {{--OLD DISCOUNT IMPLEMENTATION<span style="font-size:1.2em;">₱</span> <input type="checkbox" id="discountMethod" data-toggle="toggle" data-onstyle="primary" data-offstyle="success" data-on=" " data-off=" "> <strong style="font-size:1.2em;">%</strong>--}}
+                        {{--<span>₱</span>
                         <label class="switch">
                             <input type="checkbox" id="discountMethod">
                             <span class="slider round"></span>
@@ -220,7 +257,7 @@
                             </label>
                         </div>
                         <div class="mt-2" id="discountModalBody">
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDiscountButton">Save</button>
@@ -265,24 +302,24 @@
                         <table class="table table-borderless" style="font-size:.88em;">
                             <tbody>
                                 <tr>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
                                 </tr>
                                 <tr>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
                                 </tr>
                                 <tr>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
                                 </tr>
                                 <tr>
-                                    <th class="px-1 py-1"></th>
-                                    <th class="px-1 py-1"><button class="btn btn-lg btn-danger btn-block" id="clearPayment">Clear</button></th>
-                                    <th class="px-1 py-1"></th>
+                                    <th class="px-1 py-1" style="width:33.33%"></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-danger btn-block" id="clearPayment">Clear</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"></th>
                                 </tr>
                             </tbody>
                         </table>
