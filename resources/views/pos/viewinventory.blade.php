@@ -7,7 +7,7 @@
             <div class="col-md-9 pr-0">
                 <div class="container-fluid lodging-tabs px-0">
                     <ul class="nav nav-tabs pt-0" style="">
-                        <li class="ingredientCategories nav-item">
+                        <li class="nav-item">
                             <a class="categories nav-link active" id="allIngredientCategories" style="color:#505050; cursor:pointer;">All</a>
                         </li>
                         @foreach ($ingredientCategories as $ingredientCategory)
@@ -87,11 +87,11 @@
                 <div class="inventory-inputs row px-3" id="dailyInventoryInput">
                     <div class="form-group col-md-9 px-0 mx-1">
                         <div class="input-group input-group-sm">
-                            @if(isset($displayfrom))
+                            {{-- @if(isset($displayfrom))
                             <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
-                            @else
+                            @else --}}
                             <input class="form-control lodgingReportDateInputs" id="lodgingReportDate" type="date" name="lodgingReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">

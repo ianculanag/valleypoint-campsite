@@ -279,15 +279,18 @@ Route::get('/view-orders', 'OrdersController@viewOrders');
 //View payments for restaurant
 Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
 
+//Search item from order slip
+Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
+
+//Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
+
 /* Inventory */
 //Display all ingredient categories
-Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
+Route::get('/view-inventory/{onDate}', 'InventoryController@viewTodaysInventory');
 
 //Display ingredient category
 Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');
 Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');
 
-//Search item from order slip
-Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
-
-Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
+//Reload daily inventory
+Route::get('/view-inventory/daily/{onDate}', 'InventoryController@viewDailyInventory');
