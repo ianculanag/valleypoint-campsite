@@ -37,6 +37,7 @@ jQuery(document).ready(function () {
         if (jQuery(this).attr('id') == 'loadDailyInventory') {
 
             var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-Do');
+
             jQuery.get('/view-inventory/daily/' + onDate, function (data) {
                 loadInventoryTable(data);
             });
@@ -46,13 +47,19 @@ jQuery(document).ready(function () {
             var onMonth = jQuery('#selectMonth').val();
             var onYear = jQuery('#selectYear').val();
 
-            console.log(onMonth, onYear);
+            //console.log(onMonth, onYear);
             jQuery.get('/view-inventory/monthly/' + onMonth + '/' + onYear , function (data) {
                 loadInventoryTable(data);
             });
 
         } else if (jQuery(this).attr('id') == 'loadCustomInventory') {
 
+            var fromDate = moment(jQuery('#fromDate').val()).format('YYYY-MM-Do');
+            var toDate = moment(jQuery('#toDate').val()).format('YYYY-MM-Do');
+
+            jQuery.get('/view-inventory/custom/' + fromDate + '/' + toDate , function (data) {
+                loadInventoryTable(data);
+            });
         }
         
         jQuery('.categories').removeClass('active');

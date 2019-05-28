@@ -139,7 +139,7 @@
                             {{-- @if(isset($displayfrom))
                             <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
                             @else --}}
-                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayFrom" id="fromDate" maxlength="15" value="<?php echo date("Y-m-d");?>" required>
                             {{-- @endif --}}
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             @php
                                 $dateToday = \Carbon\Carbon::now();
                             @endphp
-                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="<?php echo date("Y-m-d", strtotime($dateToday . "+1 days"));?>" required>
+                            <input class="form-control lodgingReportDateInputs" type="date" name="displayTo" id="toDate" maxlength="15" value="<?php echo date("Y-m-d", strtotime($dateToday . "+1 days"));?>" required>
                             {{-- @endif --}}
                         </div>
                     </div>

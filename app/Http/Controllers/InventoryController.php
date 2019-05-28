@@ -102,4 +102,25 @@ class InventoryController extends Controller
 
         return $ingredients;
     }
+
+    /**
+     * Custom date range inventory for all categories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewCustomInventory($fromDate, $toDate) { 
+
+        $displayFrom = Carbon::parse($fromDate);  
+        $displayTo = Carbon::parse($toDate);  
+
+        $ingredients = DB::table('inventories')
+        ->join('ingredients', 'ingredients.id', 'inventories.ingredientID')
+        ->select('inventories.id', 'inventories.quantity','inventories.updated_at',
+                 'ingredients.ingredientName', 'ingredients.ingredientCategory')
+        ->whereDate('date', '>=', $displayFrom)
+        ->whereDate('date', '<=', $displayTo)
+        ->get();
+
+        return $ingredients;
+    }
 }

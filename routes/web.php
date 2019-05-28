@@ -297,3 +297,6 @@ Route::get('/view-inventory/daily/{onDate}', 'InventoryController@viewDailyInven
 
 //Reload monthly inventory
 Route::get('/view-inventory/monthly/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
+
+//Reload custom inventory
+Route::get('/view-inventory/custom/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
