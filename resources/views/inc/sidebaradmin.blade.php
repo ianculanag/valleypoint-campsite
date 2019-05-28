@@ -101,11 +101,11 @@
                             <span> Bar and Restaurant </span>
                             <i class="fa fa-caret-down"></i>
                         </button>
-                        @php 
+                        {{-- @php 
                             $onDate = \Carbon\Carbon::now()->format('Y-m-d');
-                        @endphp
+                        @endphp --}}
                         <div class="dropdown-container" id="dropdownBarResto">
-                            <a class="dropdown-item" href="/view-inventory/{{$onDate}}">
+                            <a class="dropdown-item" href="/view-inventory">
                                 <i class="fa fa-boxes" aria-hidden="true"></i>
                                 <span> Inventory </span>
                             </a>

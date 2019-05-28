@@ -1,24 +1,53 @@
 jQuery(document).ready(function () {
     jQuery('.ingredientCategories').click(function () {
 
-        var ingredientCategory = jQuery(this).attr('id');
+        var category = jQuery(this).attr('id');
+        var inventoryReportTab = jQuery('.inventory-reports-tabs.active').attr('id');
+
+        console.log(category);
+        console.log(inventoryReportTab);
         
-        jQuery.get('/view-ingredient-category/' + ingredientCategory, function (data) {
-            loadInventoryTable(data);
-        });  
+        if (inventoryReportTab == 'dailyInventory') {
+            
+            var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-D');
+            console.log(onDate);
+            jQuery.get('/view-inventory/daily/' + category + '/' + onDate, function (data) {
+                loadInventoryTable(data);
+            });
 
-		jQuery('.categories').removeClass('active');
-        jQuery('#this-' + ingredientCategory).addClass('active');
-    })
+        } else if (inventoryReportTab == 'monthlyInventory') {
 
-    jQuery('#all-categories').click(function () {
+            var onMonth = jQuery('#selectMonth').val();
+            var onYear = jQuery('#selectYear').val();
+            console.log(onMonth, onYear);
+            jQuery.get('/view-inventory/monthly/' + category + '/' + onMonth + '/' + onYear , function (data) {
+                loadInventoryTable(data);
+            });
 
-        jQuery.get('/view-all-ingredient-category/', function (data) {
-            loadInventoryTable(data);
-        });
+        } else if (inventoryReportTab == 'customInventory') {
 
-        jQuery('.categories').removeClass('active');
-        jQuery('#all-categories').addClass('active');
+            var fromDate = moment(jQuery('#fromDate').val()).format('YYYY-MM-D');
+            var toDate = moment(jQuery('#toDate').val()).format('YYYY-MM-D');
+            console.log(fromDate, toDate);
+            jQuery.get('/view-inventory/custom/' + category + '/' + fromDate + '/' + toDate , function (data) {
+                loadInventoryTable(data);
+            });
+
+        }
+
+        if (category == 'allCategories') {
+            /*jQuery.get('/view-all-ingredient-category/', function (data) {
+                loadInventoryTable(data);
+            });*/
+            jQuery('.categories').removeClass('active');
+            jQuery('#all-categories').addClass('active');
+        } else {
+            /*jQuery.get('/view-ingredient-category/' + category, function (data) {
+                loadInventoryTable(data);
+            });*/
+            jQuery('.categories').removeClass('active');
+            jQuery('#this-' + category).addClass('active');
+        }
     })
 
     jQuery('.inventory-reports-tabs').click(function () {

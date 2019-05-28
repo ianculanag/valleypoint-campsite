@@ -7,7 +7,7 @@
             <div class="col-md-9 pr-0">
                 <div class="container-fluid lodging-tabs px-0">
                     <ul class="nav nav-tabs pt-0" style="">
-                        <li class="nav-item">
+                        <li class="ingredientCategories nav-item" id="allCategories">
                             <a class="categories nav-link active" id="all-categories" style="color:#505050; cursor:pointer;">All</a>
                         </li>
                         @foreach ($ingredientCategories as $ingredientCategory)

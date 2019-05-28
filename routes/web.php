@@ -286,11 +286,11 @@ Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
 
 /* Inventory */
 //Display all ingredient categories
-Route::get('/view-inventory/{onDate}', 'InventoryController@viewTodaysInventory');
+Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
 
 //Display ingredient category
-Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');
-Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');
+/*Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');
+Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');*/
 
 //Reload daily inventory
 Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
