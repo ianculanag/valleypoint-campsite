@@ -208,7 +208,7 @@
                                     </tr>
 
                                     <tr>
-                                    <td>Smirn Off Mule</td>
+                                    <td>Smirnoff Mule</td>
                                     <td>Beer and Liquor</td>
                                     <td>3</td>
                                     <td>225.00</td>

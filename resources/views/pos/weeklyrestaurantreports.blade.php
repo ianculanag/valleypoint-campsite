@@ -38,6 +38,88 @@
                     </div>
                 </div>
                 <div class="card-body">
+                        <div class="col-md-6">
+                                <table class="table table-sm table-bordered" style="font-size:.90em;">
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Sales</th>
+                            <tbody>
+                                <tr>
+                                    <td>Appetizers</td>
+                                    <td>23</td>
+                                    <td>7000</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Breads</td>
+                                    <td>18</td>
+                                    <td>2000</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Breakfasts</td>
+                                    <td>37</td>
+                                    <td>7900</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Group Meals</td>
+                                    <td>20</td>
+                                    <td>9877</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Noodles</td>
+                                    <td>2</td>
+                                    <td>300</td>
+                                </tr>
+            
+                                <tr>
+                                    <td>Rice Bowls</td>
+                                    <td>3</td>
+                                    <td>870</td>
+                                </tr>
+                                    
+                                <tr>
+                                    <td>Soups</td>
+                                    <td>2</td>
+                                    <td>200</td>
+                                </tr>
+            
+                                <tr>
+                                    <td>Special Rice Meals</td>
+                                    <td>2</td>
+                                    <td>500</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Extras</td>
+                                    <td>2</td>
+                                    <td>200</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>Beverages</td>
+                                    <td>120</td>
+                                    <td>10000</td>
+                                </tr>
+                                        
+                                <tr>
+                                    <td>Liquors</td>
+                                    <td>100</td>
+                                    <td>15000</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Gross Sales</td>
+                                    <td></td>
+                                    <td>Total</td>
+                                </tr>
+                            </tbody>
+                        </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div> 
