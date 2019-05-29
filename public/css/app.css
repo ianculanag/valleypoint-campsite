@@ -9769,18 +9769,21 @@ h3 {
 }
 
 .sidebar-lodging .nav-link.active,
+.sidebar-lodging .nav-link.active:hover,
 .sidebar-lodging .nav-link-drop.activeTab {
   border-left-color: #00ffc8;
   background-color: #b4e7ce96;
 }
 
 .sidebar-pos .nav-link.active,
+.sidebar-pos .nav-link.active:hover,
 .sidebar-pos .nav-link-drop.activeTab {
   border-left-color: #77faff;
   background-color: #c0ffff96;
 }
 
 .sidebar-admin .nav-link.active,
+.sidebar-admin .nav-link.active:hover,
 .sidebar-admin .nav-link-drop.activeTab {
   border-left-color: #ff8080;
   background-color: #ffc4c496;
@@ -9806,21 +9809,14 @@ h3 {
   color: white;
 }
 
-.nav-link-drop-lodging.activeTab:hover,
-.nav-link-drop-lodging.activeTab:hover span .sidebar-lodging .dropdown-container a.active:hover {
-  background-color: rgba(224, 248, 242, 0.436);
+.activeTab:hover,
+.activeTab:hover span {
   color: white !important;
 }
 
-.nav-link-drop-pos.activeTab:hover,
-.nav-link-drop-pos.activeTab:hover span .nav-link-drop-pos.activeTab:active span .sidebar-pos .dropdown-container a.active:hover {
-  background-color: rgba(224, 247, 248, 0.436);
-  color: white !important;
-}
-
-.nav-link-drop-admin.activeTab:hover,
-.nav-link-drop-admin.activeTab:hover span .sidebar-admin .dropdown-container a.active:hover {
-  background-color: rgba(248, 224, 224, 0.436);
+.dropdown-container a.active:hover,
+.dropdown-container a:hover {
+  background-color: #ffffff00 !important;
   color: white !important;
 }
 
@@ -9892,7 +9888,6 @@ h3 {
 }
 
 .dropdown-item:focus, .dropdown-item:hover, .dropdown-item:active {
-  background-color: inherit !important;
   color: white !important;
 }
 

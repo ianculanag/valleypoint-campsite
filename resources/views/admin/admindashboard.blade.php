@@ -4,7 +4,7 @@
     <div class="container mx-2 px-5">
         <h3 class="px-4 pt-3">Welcome, {{ Auth::user()->name }}!</h3>
     </div>
-    <div class="container row pt-3 pb-5 mx-3 px-5">
+    <div class="container row pt-3 pb-4 mx-3 px-5">
         <div class="container col-md-6 px-3">
             <div class="container row">
                 <h4 class="pt-2"> Users </h4> 
