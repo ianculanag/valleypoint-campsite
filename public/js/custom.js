@@ -1149,13 +1149,18 @@ jQuery(document).ready(function() {
         jQuery('#dropdownBarResto').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
+    } else if(pathname == '/view-tables' || pathname == '/view-order-slips') {
+        jQuery('#POSDashboard').addClass('active');
     } else if(pathname == '/cashier-shift-report') {
         jQuery('#restoReportsTab').addClass('activeTab');
         jQuery('#dropdownRestoReports').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
-    } else if(pathname == '/view-tables' || pathname == '/view-order-slips') {
-        jQuery('#POSDashboard').addClass('active');
+    } else if(pathname == '/view-orders' || pathname == '/view-restaurant-payments') {
+        jQuery('#restoTransactionsTab').addClass('activeTab');
+        jQuery('#dropdownRestoTransactions').css('display', 'block');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
+        jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
     } else {
         jQuery('.nav-list > li > a[href="'+pathname+'"]').addClass('active');
     }
