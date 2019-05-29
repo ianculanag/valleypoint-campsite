@@ -454,16 +454,13 @@ class OrdersController extends Controller
     {
         $order = Orders::find($orderID);
 
-        //return $order;
-
         $items = DB::table('orders')
         ->join('items', 'items.orderID', 'orders.id')
         ->join('products', 'products.id', 'items.productID')
         ->where('orders.id', '=', $orderID)
         ->get();
 
-        //return $items;
-        return view('pos.checkoutBill');
+        return view('pos.checkoutBill')->with('items', $items);
     }
     
     /**
