@@ -11572,6 +11572,23 @@ a.ui-button:active,
   text-decoration: none !important;
 }
 
+.product-categories.active {
+  border-right: 0;
+  background-color: white !important;
+  border-color: #dfdfdf !important;
+  font-weight: 600;
+}
+
+.product-categories {
+  background-color: #dfdfdf !important;
+  text-decoration: none !important;
+  padding: 0.393rem 1.5rem !important;
+}
+
+.product-categories:hover {
+  text-decoration: none !important;
+}
+
 /*Message*/
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {

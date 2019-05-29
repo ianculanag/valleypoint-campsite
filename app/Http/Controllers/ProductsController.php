@@ -125,7 +125,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * View menu inventory
+     * View menu
      *
      * @return \Illuminate\Http\Response
      */
@@ -139,7 +139,26 @@ class ProductsController extends Controller
         return view('admin.viewmenu')
         ->with('products', $products)
         ->with('categories', $categories);
-    }
+    } 
+
+    /**
+     * View menu per category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewMenuCategories($category) { 
+
+        if($category == 'allCategories') {
+            $products = DB::table('products')
+            ->get();
+        } else {
+            $products = DB::table('products')
+            ->where('productCategory', '=', $category)
+            ->get();
+        }
+
+        return $products;
+    } 
 
     /*public function viewAppetizers(){
         $food = DB::table('foods')

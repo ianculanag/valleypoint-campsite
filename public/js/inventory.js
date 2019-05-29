@@ -1,3 +1,4 @@
+/* View Inventory */
 jQuery(document).ready(function () {
     jQuery('.ingredientCategories').click(function () {
 
@@ -100,6 +101,7 @@ jQuery(document).ready(function () {
 
 jQuery(document).ajaxComplete(function() {
     jQuery('#inventoryTable').DataTable();
+    jQuery('#productsTable').DataTable();
 })
 
 function loadInventoryTable(data) {
@@ -142,3 +144,54 @@ function loadInventoryTable(data) {
 
     return finalResult;
 } */
+
+/* View Menu */
+jQuery(document).ready(function () {
+    jQuery('.product-categories').click(function () {
+
+        var category = jQuery(this).attr('id');
+        
+        jQuery.get('/view-menu/' + category, function (data) {
+            loadProductsTable(data);
+        });
+
+        if (category == 'allProducts') {
+            jQuery('.product-categories').removeClass('active');
+            jQuery('#allProducts').addClass('active');
+        } else {
+            jQuery('.product-categories').removeClass('active');
+            jQuery('#' + category).addClass('active');
+        }
+    })
+});
+
+function loadProductsTable(data) {
+    var htmlString = "";
+
+    if(data.length > 0) {
+        var productCount = 0;
+
+        htmlString += "<table class='table table-sm dataTable compact' cellspacing='0' id='productsTable'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th>Product Name</th> <th style='width:15%'>Price</th> <th style='width:21%'>Price (guest)</th>";
+        htmlString += "</tr></thead><tbody id='displayProductCategory'>";
+
+        for (var index = 0; index < data.length; index++) {
+            productCount++;
+
+            htmlString += "<tr style='cursor:pointer'><td class='text-right pr-5'>" + productCount + "</td>";
+            htmlString += "<td class='pl-3'>" + data[index].productName + "</td>";
+            htmlString += "<td class='pl-3'>" + data[index].price + "</td>";
+            htmlString += "<td class='text-right pr-5'>" + data[index].guestPrice + "</td></tr>";
+        } 
+
+        htmlString += "</tbody></table>";
+        jQuery('#productsLibrary').html(htmlString);
+
+    } else {
+        htmlString += "<table class='table table-sm dataTable compact' cellspacing='0' id='productsTable'>";
+        htmlString += "<thead><tr> <th>No.</th> <th>Product Name</th> <th>Price</th> <th>Price (guest)</th>";
+        htmlString += "</tr></thead><tbody id='displayProductCategory'></tbody></table>";
+
+        jQuery('#productsLibrary').html(htmlString);
+    } 
+}

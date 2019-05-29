@@ -1144,7 +1144,7 @@ jQuery(document).ready(function() {
         jQuery('#dropdownLodging').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > i').css('color', 'white');
-    } else if(pathname == '/view-menu' || pathname == '/view-recipes') {
+    } else if(pathname == '/view-menu' || pathname == '/view-inventory') {
         jQuery('#barRestoTab').addClass('activeTab');
         jQuery('#dropdownBarResto').css('display', 'block');
         jQuery('.nav-list > li > .dropdown-container > a[href="'+pathname+'"] > span').css('color', 'white');

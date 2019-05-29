@@ -7,14 +7,14 @@
         <div class="col-md-8">
             <div class="container row py-0 mx-0 px-0">
                 <div class="col-md-9 mb-2 px-0">
-                    <button id="addCategory" class="btn btn-sm btn-success mr-2" style="width:10em;" type="button">Add Category</button>
-                    <button id="addItem" class="btn btn-sm btn-success" style="width:10em;" type="button">Add Menu Item</button>
+                    <button id="addCategory" class="btn btn-sm btn-success mr-1" type="button">Add Category</button>
+                    <button id="addItem" class="btn btn-sm btn-success" type="button">Add Menu Item</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 pr-0 rounded-0">
                     <div class="list-group rounded-0">
-                        <a href="#" id="allProducts" class='rounded-left rounded-0 list-group-item makeorder active py-2' style="color:black">All</a>
+                        <a id="allProducts" class='rounded-left rounded-0 list-group-item product-categories active py-2' style="color:black; cursor:pointer">All</a>
                         @foreach($categories as $category)
                         @php
                             $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($category)); 
@@ -32,19 +32,19 @@
                                 $displayName .= 's';
                             }
                         @endphp
-                        <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder py-2' style="color:black">{{$displayName}}</a>
+                        <a id="{{$category}}" class='rounded-left rounded-0 list-group-item product-categories py-2' style="color:black; cursor:pointer">{{$displayName}}</a>
                         @endforeach
                     </div>
                 </div>
                 <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:68vh;"> 
                     <div class="container px-2 pt-3 pb-1 scrollbar-near-moon-wide" id="productsLibrary" style="max-height:65vh; overflow-y:auto;">
-                        <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable compact stripe" cellspacing="0" id="productsTable">
+                        <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable compact" cellspacing="0" id="productsTable">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    <th style="width:10%">No.</th>
                                     <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Price (guest)</th>
+                                    <th style="width:15%">Price</th>
+                                    <th style="width:21%">Price (guest)</th>
                                 </tr>
                             </thead>
                             <tbody id="displayProductCategory">
@@ -57,8 +57,7 @@
                                 @php
                                     $productCount++;
                                 @endphp
-
-                                <tr>
+                                <tr style="cursor:pointer">
                                     <td class="text-right pr-5">{{$productCount}}</td>
                                     <td class="pl-3">{{$product->productName}}</td>
                                     <td class="pl-3">{{$product->price}}</td>
@@ -75,7 +74,7 @@
             <div class="card p-0 m-0" style="min-height:70.5vh; max-height:70.5vh;">
                 <h5 class="text-muted text-center pt-4 pb-2" id="productName">Product Recipe</h5>
                 <div class="card-body px-2 py-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
-                    <table class="table " style="font-size:.88em;">
+                    <table class="table" style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:80%;">Description</th>
