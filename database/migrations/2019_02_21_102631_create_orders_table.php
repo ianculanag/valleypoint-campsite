@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('queueNumber')->nullable();
             $table->integer('tableNumber')->nullable();
             $table->double('totalBill', 8, 2);
+            $table->double('discountAmount', 8, 2)->nullable();
             $table->enum('status',['ongoing','finished', 'cancelled']);
             $table->dateTime('orderDatetime');
             $table->integer('shiftID')->unsigned();

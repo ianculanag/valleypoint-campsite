@@ -139,6 +139,7 @@ class OrdersController extends Controller
         $order->queueNumber = $request->input('queueNumber');
         $order->tableNumber = $request->input('tableNumber');
         $order->totalBill = $request->input('totalBill');
+        $order->discountAmount = $request->input('discountAmount');
         $order->status = 'ongoing'; //BRUTE FORCE
         $order->orderDatetime = Carbon::now();
         $order->shiftID = '1';
@@ -159,7 +160,7 @@ class OrdersController extends Controller
                 $item->paymentStatus = $paymentStatus;
                 $item->save();
                 
-                $this->updateInventory($request->input($productID), $request->input($quantity));
+                //$this->updateInventory($request->input($productID), $request->input($quantity));
             } 
         }
 
@@ -412,5 +413,37 @@ class OrdersController extends Controller
 
         //return $items;
         return view('pos.checkoutBill');
+    }
+    
+    /**
+     * Add order in existing order
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function addOrder($orderID)
+    {
+        $order = Orders::find($orderID);
+
+        //return $order;
+
+        $items = DB::table('orders')
+        ->join('items', 'items.orderID', 'orders.id')
+        ->join('products', 'products.id', 'items.productID')
+        ->where('orders.id', '=', $orderID)
+        ->get();
+
+        //return $items;
+
+        //ProductsController@createOrder
+        $products = DB::table('products')
+        ->get();
+
+        $categories = Products::getAllCategories();
+
+        return view('pos.createorder')
+        ->with('order', $order)
+        ->with('items', $items)
+        ->with('products', $products)
+        ->with('categories', $categories);
     }
 }

@@ -71,7 +71,7 @@ function addOrderEntry() {
 	htmlString += "<div id='itemOrderDiv" + orderIdentifier + "'>";
 	htmlString += "<input type='number' value='" + jQuery('#itemID').val() + "' id='productID" + orderIdentifier + "' name='productID" + orderIdentifier + "'>";
 	htmlString += "<input type='number' value='" + jQuery('#itemQuantity').val() + "' id='quantity" + orderIdentifier + "' name='quantity" + orderIdentifier + "'>";
-	htmlString += "<input type='number' value='" + jQuery('#itemTotalPrice').val() + "' id='productID" + orderIdentifier + "' name='totalPrice" + orderIdentifier + "'>";
+	htmlString += "<input type='number' value='" + jQuery('#itemTotalPrice').val() + "' id='totalPrice" + orderIdentifier + "' name='totalPrice" + orderIdentifier + "'>";
 	htmlString += "</div>"
 
 	jQuery('#ordersContainer').append(htmlString);
@@ -107,7 +107,7 @@ function addRowInOrderSlip() {
 	htmlString += "<td style='text-align:right' class='orderItemQuantity py-2'>" + jQuery('#itemQuantity').val() + "</td>";
 	htmlString += "<td style='text-align:right' class='orderItemUnitPrice py-2'>" + numeral(jQuery('#itemUnitPrice').val()).format('0,0.00') + "</td>";
 	htmlString += "<td style='text-align:right' class='orderItemPrice py-2'>" + numeral(jQuery('#itemTotalPrice').val()).format('0,0.00') + "</td>";
-	htmlString += "<td style='cursor:pointer;' class='py-2 text-muted removeItem'><span class='fa fa-times-circle'></td>";
+	htmlString += "<td style='cursor:pointer;' class='py-2 text-muted removeItem'><span class='fa fa-times-circle'></span></td>";
 	htmlString += "</tr>";
 
 	jQuery('#emptyEntryHolder').remove();
@@ -374,6 +374,7 @@ function computeTotalDiscount() {
 
 jQuery('#saveDiscountButton').click( function() {
 	jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#totalDiscount').html()).format('0,0.00')));
+	jQuery('#discountAmount').val(numeral(jQuery('#totalDiscount').html()).value());
 	updateOrderTotal();
 	//jQuery('#discountMethod').removeAttr('checked', false);
 })

@@ -13,8 +13,13 @@
             <a class="nav-item nav-link" style="color:#505050; cursor:pointer;" href="/view-tables">View Tables</a>
         </nav>
     </div>
-    <div class="container-fluid col-md-12 pb-2 pt-4 px-4">        
+    <div class="container-fluid col-md-12 pb-2 pt-4 px-4">       
+        @if(isset($order)) 
+        <form method="POST" action="/save-additional-order">
+        <input type="hidden" name="orderID" value="{{$order->id}}">
+        @else        
         <form method="POST" action="/save-order">
+        @endif
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="row">
@@ -33,9 +38,20 @@
                                 </tr>
                             </thead>
                             <tbody id="orderSlip">
-                                <tr id="emptyEntryHolder">
-                                    <td class="py-2" style="text-align:center" colspan="5">Add items from the menu</td>
+                                @if(isset($items))
+                                @foreach($items as $item)
+                                @php
+                                    $unitPrice = $item->totalPrice/$item->quantity;
+                                @endphp
+                                <tr class="items" id="orderSlipItem{{$loop->iteration}}">
+                                    <td class="orderItemDescription py-2">{{$item->productName}}</td>
+                                    <td style="text-align:right" class="orderItemQuantity py-2">{{$item->quantity}}</td>
+                                    <td style="text-align:right" class="orderItemUnitPrice py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
+                                    <td style="text-align:right" class="orderItemPrice py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                    <td style="cursor:pointer;" class="py-2 text-muted removeItem"><span class="fa fa-times-circle"></span></td>
                                 </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -44,27 +60,46 @@
                             <thead>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
+                                    @if(isset($items))
+                                    @php
+                                        $subtotal = 0;
+
+                                        for($index = 0; $index < count($items); $index++) {
+                                            $subtotal += $items[$index]->totalPrice;
+                                        }
+                                    @endphp
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ {{number_format((float)($subtotal), 2, '.', '')}}</td>
+                                    @else
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ 0.00</td>
+                                    @endif
                                 </tr>
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
+                                    @if(isset($order))
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ {{number_format((float)($order->discountAmount), 2, '.', '')}}</td>
+                                    @else
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ 0.00</td>
+                                    @endif
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
+                                    @if(isset($order))
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ {{number_format((float)($order->totalBill), 2, '.', '')}}</th>
+                                    @else
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ 0.00</th>
+                                    @endif
                                 </tr>
                             </thead>
                         </table>
                         <div class="row mx-2">
                             <div class="col-md-12 mb-1 px-1">
-                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-primary btn-block" style="text-align:center;" id="getPayment" disabled>
-                                    Get Cash Payment
+                                <button type="submit" class="btn btn-primary btn-block" style="text-align:center;" id="saveOrder" disabled>
+                                    Save Order
                                 </button>
-                            </div>
+                            </div>                            
                             <div class="col-md-4 px-1">
-                                <button type="submit" class="btn btn-success btn-block" style="text-align:center;" id="saveOrder" disabled>
-                                    Save
+                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-success btn-block" style="text-align:center;" id="getPayment" disabled>
+                                    Get Cash
                                 </button>
                             </div>
                             <div class="col-md-4 px-1">
@@ -84,12 +119,30 @@
             <!--Code below records the orders that has been listed in the order slip, although hidden-->
             <!--Starts here-->
             <div id="ordersContainer" style="display:none;">
+                @if(isset($items))                
+                <input id="numberOfOrders" name="numberOfOrders" type="number" value="{{count($items)}}">
+
+                @foreach($items as $orderItem)
+                <div id="itemOrderDiv{{$loop->iteration}}">
+                    <input type="number" value="{{$orderItem->productID}}" id="productID{{$loop->iteration}}" name="productID{{$loop->iteration}}">
+                    <input type="number" value="{{$orderItem->quantity}}" id="quantity{{$loop->iteration}}" name="quantity{{$loop->iteration}}">
+                    <input type="number" value="{{$orderItem->totalPrice}}" id="productID{{$loop->iteration}}" name="totalPrice{{$loop->iteration}}">
+                </div>
+                @endforeach
+                @else
                 <input id="numberOfOrders" name="numberOfOrders" type="number" value="0">
+                @endif
                 <!--the insertOrderEntry() function in createorder.js handles this part of the code-->
                 <!--it inserts hidden inputs containing the orders-->
             </div>
             
+            @if(isset($order))
+            <input id="totalBill" name="totalBill" type="hidden" value="{{$order->totalBill}}">
+            <input id="discountAmount" name="discountAmount" type="hidden" value="{{$order->discountAmount}}">
+            @else
             <input id="totalBill" name="totalBill" type="hidden" value="0">
+            <input id="discountAmount" name="discountAmount" type="hidden" value="0">
+            @endif
             <!--Handles total bill-->
             <!--Ends here-->
             <div class="col-md-8">
@@ -105,7 +158,11 @@
                         <div class="form-group my-1 row pr-4">
                             <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                @if(isset($order))
+                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="{{$order->tableNumber}}" disabled>
+                                @else
                                 <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -113,7 +170,11 @@
                         <div class="form-group my-1 row pr-4">
                             <label class="col-sm-7 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                @if(isset($order))
+                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="{{$order->queueNumber}}">
+                                @else
                                 <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -318,7 +379,7 @@
                                 </tr>
                                 <tr>
                                     <th class="px-1 py-1" style="width:33.33%"></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-danger btn-block" id="clearPayment">Clear</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-warning btn-block" id="clearPayment">Clear</button></th>
                                     <th class="px-1 py-1" style="width:33.33%"></th>
                                 </tr>
                             </tbody>

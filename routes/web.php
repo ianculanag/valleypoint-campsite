@@ -259,6 +259,11 @@ Route::get('/view-beverages', 'FoodsController@viewBeverages');*/
 
 //Save Order
 Route::post('/save-order', 'OrdersController@saveOrder');
+Route::post('/save-additional-order', 'OrdersController@saveAdditionalOrder');
+
+//Add order
+Route::get('/add-order/{orderID}', 'OrdersController@addOrder');
+
 
 Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
