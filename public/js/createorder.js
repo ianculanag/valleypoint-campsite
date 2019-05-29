@@ -232,13 +232,10 @@ function disableOrderSlipButtons() {
 }
 
 jQuery('#discountButton').click(function() {
-	htmlString = "";
-
-	jQuery('#discountModalBody').html(htmlString);
-
-	
+	jQuery('#amountToPayDiscountPeso').html(jQuery('#ordersGrandTotal').html());
 	jQuery('#amountToPayDiscount').html(jQuery('#ordersGrandTotal').html());
 
+	displayDiscountMethod();
 	/*OLD DISCOUNT IMPLEMENTATION
 	htmlString += "<table class='table table-striped' style='font-size:.88em;'>";
 	htmlString += "<thead>";
@@ -284,8 +281,27 @@ jQuery('#discountButton').click(function() {
 	htmlString += "</table>";*/
 })
 
+function displayDiscountMethod() {
+	if(jQuery('#discountMethod').prop('checked')) {
+		jQuery('#discountRateBody').css('display', 'none');
+		jQuery('#discountHelperTable').css('display', 'none');
+		jQuery('#discountRatePeso').css('display', '');
+	} else {		
+		jQuery('#discountRateBody').css('display', '');
+		jQuery('#discountHelperTable').css('display', '');
+		jQuery('#discountRatePeso').css('display', 'none');
+	}
+}
+
 jQuery('#discountMethod').change(function() {
 	if(jQuery(this).prop('checked')) {
+		jQuery('#discountMethodLabel').html('₱');
+	} else {		
+		jQuery('#discountMethodLabel').html('%');
+	}
+	displayDiscountMethod();
+	jQuery('#totalDiscount').html(toPeso(numeral('0').format('0,0.00')));
+	/*if(jQuery(this).prop('checked')) {
 		for(var index = 0; index < jQuery('.discountInputs').length; index++) {
 			htmlString = "";
 			
@@ -309,9 +325,7 @@ jQuery('#discountMethod').change(function() {
 			
 			jQuery('.discountInputs').eq(index).html(htmlString);
 		}
-	}
-		
-	jQuery('#totalDiscount').html(toPeso(numeral('0').format('0,0.00')));
+	}*/
 })
 
 jQuery(document).on('keyup', '#discountRate', function() {
@@ -373,8 +387,13 @@ function computeTotalDiscount() {
 }
 
 jQuery('#saveDiscountButton').click( function() {
-	jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#totalDiscount').html()).format('0,0.00')));
-	jQuery('#discountAmount').val(numeral(jQuery('#totalDiscount').html()).value());
+	if(jQuery('#discountMethod').prop('checked') == true) {
+		jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#discountPesoAmount').val()).format('0,0.00')));
+		jQuery('#discountAmount').val(numeral(jQuery('#discountPesoAmount').val()).value());
+	} else {
+		jQuery('#ordersDiscount').html(toPeso(numeral(jQuery('#totalDiscount').html()).format('0,0.00')));
+		jQuery('#discountAmount').val(numeral(jQuery('#totalDiscount').html()).value());
+	}
 	updateOrderTotal();
 	//jQuery('#discountMethod').removeAttr('checked', false);
 })

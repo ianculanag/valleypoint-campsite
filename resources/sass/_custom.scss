@@ -1831,7 +1831,7 @@ input:checked + .slider:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: gray;
+  background-color: #2196F3;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -1849,11 +1849,11 @@ input:checked + .slider:before {
 }
 
 input:checked + .slider-alt {
-  background-color: #17a2b8;
+  background-color: #28a745;
 }
 
 input:focus + .slider-alt {
-  box-shadow: 0 0 1px #17a2b8;
+  box-shadow: 0 0 1px #28a745;
 }
 
 input:checked + .slider-alt:before {

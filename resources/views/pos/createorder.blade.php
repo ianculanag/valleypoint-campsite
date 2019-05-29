@@ -268,6 +268,17 @@
                         <table class="table table-borderless" style="font-size:.88em;">
                             <tbody>
                                 <tr>
+                                    <td>                                        
+                                        <label class="switch text-center">
+                                            <input type="checkbox" id="discountMethod">
+                                            <span class="slider-alt round"></span>
+                                        </label>
+                                        <span id="discountMethodLabel">%</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody id="discountRateBody">
+                                <tr>
                                     <th>Total to Pay</th>
                                     <th class="text-right"><h4 id="amountToPayDiscount"></h4></th>
                                 </tr>
@@ -291,8 +302,21 @@
                                     <th class="text-right"><h4 id="totalDiscount">₱ 0.00</h4></th>
                                 </tr>
                             </tbody>
+                            <tbody id="discountRatePeso"  style="display:none">
+                                <tr>
+                                    <th>Total to Pay</th>
+                                    <th class="text-right"><h4 id="amountToPayDiscountPeso"></h4></th>
+                                </tr>
+                                <th class="pt-4 text-primary" style="width:50%;">Discount Amount</th>
+                                <th class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">₱</span>
+                                    </div>
+                                    <input type="number" class="form-control form-control-lg text-right input-group-prepend" id="discountPesoAmount">
+                                </th>
+                            </tbody>
                         </table>
-                        <table class="table table-borderless" style="font-size:.88em;">
+                        <table class="table table-borderless" style="font-size:.88em;" id="discountHelperTable">
                             <tbody>
                                 <tr>
                                     <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">5%</button></th>
