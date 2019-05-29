@@ -1,24 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid pb-5 px-5">
+<div class="container-fluid pb-5 px-4">
     <h3 class="text-center pb-4"> Restaurant Menu </h3>
     <div class="row">
         <div class="col-md-8">
             <div class="container row py-0 mx-0 px-0">
-                <div class="col-md-3 offset-9 px-0 float-right">
-                    <div class="form-group my-1 row">
-                        <label class="col-sm-2  pl-3 pt-1" for="queueNumber"><span class="fa fa-search text-secondary"></span></label>
-                        <div class="input-group input-group-sm px-0 mx-0 col-sm-10">
-                            <input class="form-control" type="text" name="searchFoodItem" id="searchFoodItem" min="1" max="50" placeholder="" value="">
-                        </div>
-                    </div>
+                <div class="col-md-9 mb-2 px-0">
+                    <button id="addCategory" class="btn btn-sm btn-success mr-2" style="width:10em;" type="button">Add Category</button>
+                    <button id="addItem" class="btn btn-sm btn-success" style="width:10em;" type="button">Add Menu Item</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 pr-0 rounded-0">
                     <div class="list-group rounded-0">
-                        <a href="#" id="allProducts" class='rounded-left rounded-0 list-group-item makeorder active' style="color:black">All</a>
+                        <a href="#" id="allProducts" class='rounded-left rounded-0 list-group-item makeorder active py-2' style="color:black">All</a>
                         @foreach($categories as $category)
                         @php
                             $displayNameSplit = preg_split('/(?=[A-Z])/', ucfirst($category)); 
@@ -36,34 +32,50 @@
                                 $displayName .= 's';
                             }
                         @endphp
-                        <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder' style="color:black">{{$displayName}}</a>
+                        <a href="#" id="{{$category}}" class='rounded-left rounded-0 list-group-item makeorder py-2' style="color:black">{{$displayName}}</a>
                         @endforeach
                     </div>
                 </div>
+                <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:68vh;"> 
+                    <div class="container px-2 pt-3 pb-1 scrollbar-near-moon-wide" id="productsLibrary" style="max-height:65vh; overflow-y:auto;">
+                        <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable compact stripe" cellspacing="0" id="productsTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Price (guest)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="displayProductCategory">
+                                @php
+                                    $productCount = 0;
+                                @endphp
 
-                <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:59.9vh;"> 
-                    <div class="row p-3 scrollbar-near-moon" id="menu" style="overflow-y:auto;">
-                    @foreach ($products as $product)
-                    <a class="px-1 mx-1">       
-                        <div class="card px-0 mx-1 menu-item" style="width:9.785rem; height:5.5em; cursor:pointer" id="{{$product->id}}">
-                            <div class="card-body text-center pt-2">
-                                <h6 class="card-text">
-                                    {{$product->productName}}
-                                </h6>
-                                <p>₱ {{number_format((float)($product->price), 2, '.', '')}}</p>
-                            </div>
-                        </div>
-                    </a>
-                    @endforeach
-                    </div>    
+                                @foreach($products as $product)
+
+                                @php
+                                    $productCount++;
+                                @endphp
+
+                                <tr>
+                                    <td class="text-right pr-5">{{$productCount}}</td>
+                                    <td class="pl-3">{{$product->productName}}</td>
+                                    <td class="pl-3">{{$product->price}}</td>
+                                    <td class="text-right pr-5">{{$product->guestPrice}}</td>                                       
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>   
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4 order-md-12 mb-3 mx-0" >
-            <div class="card p-0 m-0" style="min-height:66vh; max-height:66vh;">
+            <div class="card p-0 m-0" style="min-height:70.5vh; max-height:70.5vh;">
                 <h5 class="text-muted text-center pt-4 pb-2" id="productName">Product Recipe</h5>
-                <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
-                    <table class="table table-striped" style="font-size:.88em;">
+                <div class="card-body px-2 py-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
+                    <table class="table " style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:80%;">Description</th>
