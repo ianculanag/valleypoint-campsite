@@ -8,9 +8,9 @@
     </style>
     <div class="col-md-12 text-center pos-tabs pb-1">
         <nav class="nav nav-pills centered-pills py-2">
-            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Create Order</a>
-            <a class="nav-item nav-link" style="color:#505050" href="/view-order-slips">Order Slips</a>
-            <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
+            <a class="nav-item nav-link active" style="background-color:#060f0ed4; cursor:pointer;" href="#">Create Order</a>
+            <a class="nav-item nav-link" style="color:#505050; cursor:pointer;" href="/view-order-slips">Order Slips</a>
+            <a class="nav-item nav-link" style="color:#505050; cursor:pointer;" href="/view-tables">View Tables</a>
         </nav>
     </div>
     <div class="container-fluid col-md-12 pb-2 pt-4 px-4">        

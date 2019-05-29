@@ -3,9 +3,9 @@
 @section('content')
     <div class="col-md-12 text-center pos-tabs">
         <nav class="nav nav-pills centered-pills py-2">
-            <a class="nav-item nav-link" style="color:#505050" href="/create-order">Create Order</a>
-            <a class="nav-item nav-link active" style="background-color:#060f0ed4;" href="#">Order Slips</a>
-            <a class="nav-item nav-link" style="color:#505050" href="/view-tables">View Tables</a>
+            <a class="nav-item nav-link" style="color:#505050; cursor:pointer;" href="/create-order">Create Order</a>
+            <a class="nav-item nav-link active" style="background-color:#060f0ed4; cursor:pointer;" href="#">Order Slips</a>
+            <a class="nav-item nav-link" style="color:#505050; cursor:pointer;" href="/view-tables">View Tables</a>
         </nav>
     </div>
     <div class="row pb-2 px-5">
