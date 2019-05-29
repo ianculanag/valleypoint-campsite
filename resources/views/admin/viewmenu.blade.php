@@ -57,7 +57,7 @@
                                 @php
                                     $productCount++;
                                 @endphp
-                                <tr style="cursor:pointer">
+                                <tr id="{{$product->id}}" class="menuItemList" style="cursor:pointer">
                                     <td class="text-right pr-5">{{$productCount}}</td>
                                     <td class="pl-3">{{$product->productName}}</td>
                                     <td class="pl-3">{{$product->price}}</td>
@@ -72,18 +72,20 @@
         </div>
         <div class="col-md-4 order-md-12 mb-3 mx-0" >
             <div class="card p-0 m-0" style="min-height:70.5vh; max-height:70.5vh;">
-                <h5 class="text-muted text-center pt-4 pb-2" id="productName">Product Recipe</h5>
-                <div class="card-body px-2 py-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
-                    <table class="table" style="font-size:.88em;">
+                <h5 class="text-muted text-center pt-4 pb-2" id="productName">Recipe</h5>
+                <div class="card-body px-3 py-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
+                    <table class="table my-1" style="font-size:.88em;">
                         <thead>
                             <tr>
                                 <th scope="col" style="width:80%;">Description</th>
                                 <th scope="col">Qty.</th>
                             </tr>
                         </thead>
-                        <tbody id="orderSlip">
+                    </table>
+                    <table class="table table-borderless my-1" style="font-size:.88em;">
+                        <tbody id="recipe">
                             <tr id="emptyEntryHolder">
-                                <td class="py-2" style="text-align:center" colspan="2">Add ingredients to the recipe</td>
+                                <td class="py-2" style="text-align:center" colspan="2">Click on a menu item to view recipe</td>
                             </tr>
                         </tbody>
                     </table>

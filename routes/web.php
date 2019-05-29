@@ -233,7 +233,12 @@ Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryCo
 
 //View menu
 Route::get('/view-menu', 'ProductsController@viewMenuItems');
+
+//View menu by category
 Route::get('/view-menu/{category}', 'ProductsController@viewMenuCategories');
+
+//View recipe of a menu item
+Route::get('/load-recipe/{menuItem}', 'ProductsController@viewMenuItemRecipe');
 
 /* Restaurant */
 //POS Dashboard Pages

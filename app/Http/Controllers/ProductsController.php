@@ -160,6 +160,21 @@ class ProductsController extends Controller
         return $products;
     } 
 
+    /**
+     * View recipe of a menu item
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewMenuItemRecipe($menuItem) { 
+        $recipes = DB::table('recipes')
+        ->join('ingredients', 'ingredients.id', 'recipes.ingredientID')
+        ->join('products', 'products.id', 'recipes.productID')
+        ->where('productID', '=', $menuItem)
+        ->get();
+
+        return $recipes;
+    }
+
     /*public function viewAppetizers(){
         $food = DB::table('foods')
         ->where('foodCategory', '=', 'appetizers')

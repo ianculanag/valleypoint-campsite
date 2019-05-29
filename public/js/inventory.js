@@ -163,6 +163,24 @@ jQuery(document).ready(function () {
             jQuery('#' + category).addClass('active');
         }
     })
+    jQuery(".menuItemList").click(function () {
+
+        var menuItem = jQuery(this).attr('id');
+
+        jQuery.get('/load-recipe/' + menuItem, function (data) {
+
+            jQuery("#productName").html(data[0].productName + " Recipe");
+            htmlString = "";
+
+            for (var index = 0; index < data.length; index++) {
+                htmlString += "<tr><td class='py-2'>" + data[index].ingredientName + "</td>";
+                htmlString += "<td class='text-right py-2'>" + data[index].quantity + "</td></tr>";
+            }
+
+            jQuery("#recipe").html(htmlString);
+            jQuery("#editRecipe").prop('disabled', false);
+        });
+    })
 });
 
 function loadProductsTable(data) {
@@ -178,7 +196,7 @@ function loadProductsTable(data) {
         for (var index = 0; index < data.length; index++) {
             productCount++;
 
-            htmlString += "<tr style='cursor:pointer'><td class='text-right pr-5'>" + productCount + "</td>";
+            htmlString += "<tr id=" + data[index].id + " class='menuItemList' style='cursor:pointer'><td class='text-right pr-5'>" + productCount + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].productName + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].price + "</td>";
             htmlString += "<td class='text-right pr-5'>" + data[index].guestPrice + "</td></tr>";
