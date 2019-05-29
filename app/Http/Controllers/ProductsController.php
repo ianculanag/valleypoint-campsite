@@ -124,6 +124,23 @@ class ProductsController extends Controller
         return $products;
     }
 
+    /**
+     * View menu inventory
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewMenuItems() { 
+
+        $products = DB::table('products')
+        ->get();
+
+        $categories = Products::getAllCategories();
+
+        return view('admin.viewmenu')
+        ->with('products', $products)
+        ->with('categories', $categories);
+    }
+
     /*public function viewAppetizers(){
         $food = DB::table('foods')
         ->where('foodCategory', '=', 'appetizers')

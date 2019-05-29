@@ -218,6 +218,22 @@ Route::post('/update-service', 'ServicesController@updateService');
 Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
 Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
 
+/* Inventory */
+//Display all ingredient categories
+Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
+
+//Reload daily inventory
+Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
+
+//Reload monthly inventory
+Route::get('/view-inventory/monthly/{category}/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
+
+//Reload custom inventory
+Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
+
+//View menu
+Route::get('/view-menu', 'ProductsController@viewMenuItems');
+
 /* Restaurant */
 //POS Dashboard Pages
 Route::get('/create-order', 'ProductsController@createOrder');
@@ -283,20 +299,3 @@ Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestau
 Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
 
 //Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
-
-/* Inventory */
-//Display all ingredient categories
-Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
-
-//Display ingredient category
-/*Route::get('/view-all-ingredient-category', 'InventoryController@viewAllIngredientCategory');
-Route::get('/view-ingredient-category/{ingredientCategory}', 'InventoryController@viewIngredientCategory');*/
-
-//Reload daily inventory
-Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
-
-//Reload monthly inventory
-Route::get('/view-inventory/monthly/{category}/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
-
-//Reload custom inventory
-Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');

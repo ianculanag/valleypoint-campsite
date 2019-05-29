@@ -26,7 +26,7 @@ class InventoryController extends Controller
 
         $ingredientCategories = Ingredients::getAllCategories();
 
-        return view('pos.viewinventory')->with('ingredients', $ingredients) ->with('ingredientCategories', $ingredientCategories);
+        return view('admin.viewinventory')->with('ingredients', $ingredients) ->with('ingredientCategories', $ingredientCategories);
     }
 
     /**
