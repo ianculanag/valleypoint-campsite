@@ -176,7 +176,58 @@ class OrdersController extends Controller
     }
 
     /**
-     *  Save orders from create order page
+     * Save additional orders
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function saveAdditionalOrder(Request $request) {
+        
+        //Update orders
+        $order = Orders::find($request->input('orderID'));
+        $order->update([
+            'queueNumber' => $request->input('queueNumber'),
+            'totalBill' => $request->input('totalBill'),
+            'discountAmount' => $request->input('discountAmount')
+        ]);
+
+        //Clear existing items for update
+        $existingItems = Items::where('orderID', $request->input('orderID'))->delete();
+
+        $numberOfOrders = $request->input('numberOfOrders');
+
+        for($index = 1; $index <= $numberOfOrders; $index++) {
+            $productID = 'productID'.$index;
+            $quantity = 'quantity'.$index;
+            $totalPrice = 'totalPrice'.$index;
+            $paymentStatus = 'pending'; //BRUTE FORCE
+            
+            if($request->input($productID)) {
+                $item = new Items;
+                $item->orderID = $order->id;
+                $item->productID = $request->input($productID);
+                $item->quantity = $request->input($quantity);
+                $item->totalPrice = $request->input($totalPrice);
+                $item->paymentStatus = $paymentStatus;
+                $item->save();
+                
+                //$this->updateInventory($request->input($productID), $request->input($quantity));
+            } 
+        }
+
+        //toggle table status
+        if(!($request->input('tableNumber')=='')) {
+            $table = RestaurantTable::find($request->input('tableNumber'));
+            $table->update([
+                'status' => 'occupied'
+            ]);
+        }
+
+        return redirect ('/view-tables');
+    }
+
+    /**
+     *  Update inventory upon checkout
      * 
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response 
