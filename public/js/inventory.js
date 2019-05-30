@@ -172,9 +172,13 @@ jQuery(document).ready(function () {
             jQuery("#productName").html(data[0].productName + " Recipe");
             htmlString = "";
 
-            for (var index = 0; index < data.length; index++) {
-                htmlString += "<tr><td class='py-2'>" + data[index].ingredientName + "</td>";
-                htmlString += "<td class='text-right py-2'>" + data[index].quantity + "</td></tr>";
+            if(data.length > 0) {
+                for (var index = 0; index < data.length; index++) {
+                    htmlString += "<tr><td class='py-2'>" + data[index].ingredientName + "</td>";
+                    htmlString += "<td class='text-right py-2'>" + data[index].quantity + "</td></tr>";
+                }
+            } else {
+                htmlString += "<tr><td colspan='2' class='text-center py-2'>Add ingredients to " + data[0].productName + "</td></tr>";
             }
 
             jQuery("#recipe").html(htmlString);
