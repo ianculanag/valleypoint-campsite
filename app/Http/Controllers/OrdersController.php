@@ -362,6 +362,7 @@ class OrdersController extends Controller
         ->select('restaurant_tables.*', 'orders.id AS orderID', 'orders.queueNumber',
                 'orders.tableNumber AS orderTableNumber', 'orders.totalBill', 'orders.status AS orderStatus',
                 'orders.orderDatetime', 'orders.shiftID')
+        //->where('orders.status', '!=', 'finished')
         ->orderBy('id', 'ASC')
         ->get();
 
@@ -505,8 +506,6 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response 
      */
     public function finishOrderTransaction(Request $request) {
-        $test = DBs::table('test');
-
         $order = Orders::find($request->input('orderID'));
         $order->update([
             'totalBill' => $request->input('totalBill'),
@@ -538,5 +537,13 @@ class OrdersController extends Controller
                 $this->updateInventory($request->input($productID), $request->input($quantity));
             } 
         }
+
+        //toggle table status
+        $table = RestaurantTable::find($order->tableNumber);
+        $table->update([
+            'status' => 'available'
+        ]);
+
+        return redirect('/view-tables');
     }
 }

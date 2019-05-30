@@ -192,13 +192,21 @@
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">
+                                    @if(count($items) > 0)
                                         ₱ {{number_format((float)($item->discountAmount), 2, '.', '')}}
+                                    @else
+                                        ₱ 0.00
+                                    @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">
+                                    @if(count($items) > 0)
                                         ₱ {{number_format((float)($item->totalBill), 2, '.', '')}}
+                                    @else
+                                        ₱ 0.00
+                                    @endif
                                     </th>
                                 </tr>
                             </thead>
