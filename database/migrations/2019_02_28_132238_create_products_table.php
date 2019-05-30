@@ -208,7 +208,7 @@ class CreateProductsTable extends Migration
 
             $product35 = new Products;
             $product35->productCategory = 'groupMeal';
-            $product35->productName = 'Creamy Kare-Kare';
+            $product35->productName = 'Crispy Kare-Kare';
             $product35->price = '375.00';
             $product35->guestPrice = '375.00';
             $product35->save();
