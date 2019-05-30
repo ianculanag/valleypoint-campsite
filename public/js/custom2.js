@@ -47,6 +47,18 @@ function validateContactNumber() {
     jQuery('#contactNumber').setSelectionRange(cursor, cursor);
 }
 
+function validateAdditionalService() {
+    var cursor = jQuery('#additionalServiceNumberOfPax').selectionStart,
+        allowedCharacters = /[^0-9]/gi,
+        inputValue = jQuery('#additionalServiceNumberOfPax').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#additionalServiceNumberOfPax').val(inputValue.replace(allowedCharacters, ''));
+        cursor--;
+    }
+    jQuery('#additionalServiceNumberOfPax').setSelectionRange(cursor, cursor);
+}
+
 
 jQuery(document).ready(function () {
     jQuery(document).on('input', '#firstName', function () {
@@ -66,7 +78,7 @@ jQuery(document).ready(function () {
     })
 
     jQuery(document).on('input', '#additionalServiceNumberOfPax', function () {
-        alert("bababababa");
+        validateAdditionalService();
     })
 
 });
