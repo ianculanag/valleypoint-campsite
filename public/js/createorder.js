@@ -503,6 +503,9 @@ jQuery('#savePaymentButton').click(function() {
 
 	jQuery('#amountTenderedDisplay').html(toPeso(numeral(jQuery('#amountTendered').val()).format('0,0.00')));
 	jQuery('#changeDisplay').html(jQuery('#changeToGive').html());
+
+	jQuery('#tenderedAmount').val(jQuery('#amountTendered').val());
+	jQuery('#changeDue').val(numeral(jQuery('#changeToGive').html()).value());
 })
 
 

@@ -264,6 +264,9 @@ Route::post('/save-additional-order', 'OrdersController@saveAdditionalOrder');
 //Add order
 Route::get('/add-order/{orderID}', 'OrdersController@addOrder');
 
+//Finish Order Transaction
+Route::post('/finish-order-transaction', 'OrdersController@finishOrderTransaction');
+
 
 Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 

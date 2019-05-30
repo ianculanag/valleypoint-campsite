@@ -11,7 +11,8 @@
             </a>
             {{--<h3>Check-out Bill</h3>--}}
         </div>   
-        <form method="POST" action="/">
+        <form method="POST" action="/finish-order-transaction">            
+        <input type="hidden" name="orderID" value="{{$order->id}}">
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         
@@ -96,15 +97,35 @@
                                 </button>
                             </div>
                             <div class="col-md-12 px-1">
-                                <button type="button" class="btn btn-success btn-block" style="text-align:center;" id="discountButton">
+                                <button type="submit" class="btn btn-success btn-block" style="text-align:center;" id="discountButton">
                                     Finish Transaction
                                 </button>
                             </div>
+                        </div>
+                        <!-- Code below catches the payments and discounts -->
+                        <input id="totalBill" name="totalBill" type="hidden" value="{{$order->totalBill}}">
+                        <input id="discountAmount" name="discountAmount" type="hidden" value="{{$order->discountAmount}}">
+                        
+                        <input id="tenderedAmount" name="tenderedAmount" type="hidden" value="">
+                        <input id="changeDue" name="changeDue" type="hidden" value="">
+                        <!-- Ends here -->
+                        <!--Code below records the orders that has been listed in the order slip, although hidden-->
+                        <div id="ordersContainer" style="display:none;">              
+                            <input id="numberOfOrders" name="numberOfOrders" type="number" value="{{count($items)}}">
+
+                            @foreach($items as $orderItem)
+                            <div id="itemOrderDiv{{$loop->iteration}}">
+                                <input type="number" value="{{$orderItem->productID}}" id="productID{{$loop->iteration}}" name="productID{{$loop->iteration}}">
+                                <input type="number" value="{{$orderItem->quantity}}" id="quantity{{$loop->iteration}}" name="quantity{{$loop->iteration}}">
+                                <input type="number" value="{{$orderItem->totalPrice}}" id="productID{{$loop->iteration}}" name="totalPrice{{$loop->iteration}}">
+                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <div id="discountModal" class="modal fade" tabindex="-1" role="dialog">

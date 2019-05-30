@@ -9,6 +9,7 @@ use App\Products;
 use App\RestaurantTable;
 use App\Inventory;
 use App\Ingredients;
+use App\Payments;
 use Carbon\Carbon;
 use DB;
 
@@ -460,7 +461,9 @@ class OrdersController extends Controller
         ->where('orders.id', '=', $orderID)
         ->get();
 
-        return view('pos.checkoutBill')->with('items', $items);
+        return view('pos.checkoutBill')
+        ->with('items', $items)
+        ->with('order', $order);
     }
     
     /**
@@ -493,5 +496,47 @@ class OrdersController extends Controller
         ->with('items', $items)
         ->with('products', $products)
         ->with('categories', $categories);
+    }
+
+    /**
+     * End the order transaction
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function finishOrderTransaction(Request $request) {
+        $test = DBs::table('test');
+
+        $order = Orders::find($request->input('orderID'));
+        $order->update([
+            'totalBill' => $request->input('totalBill'),
+            'discountAmount' => $request->input('discountAmount'),
+            'status' => 'finished'
+        ]);
+
+        $payment = new Payments;
+        $payment->paymentDatetime = Carbon::now();
+        $payment->amount = $request->input('tenderedAmount');
+        $payment->changeDue = $request->input('changeDue');
+        $payment->paymentStatus = 'full';
+        $payment->orderID = $request->input('orderID');
+        $payment->save();
+        
+        $numberOfOrders = $request->input('numberOfOrders');
+
+        for($index = 1; $index <= $numberOfOrders; $index++) {
+            $productID = 'productID'.$index;
+            $quantity = 'quantity'.$index;
+            $paymentStatus = 'paid';
+            
+            if($request->input($productID)) {
+                $item = DB::table('items')
+                ->where('orderID', '=', $request->input('orderID'))
+                ->where('productID', '=', $request->input($productID))
+                ->update(array('paymentStatus' => $paymentStatus));
+                
+                $this->updateInventory($request->input($productID), $request->input($quantity));
+            } 
+        }
     }
 }

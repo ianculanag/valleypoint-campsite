@@ -19,7 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->double('amount', 8, 2);
             $table->double('changeDue', 8, 2);
             $table->enum('paymentStatus', ['partial', 'full']);
-            $table->integer('chargeID')->unsigned();
+            $table->integer('chargeID')->unsigned()->nullable();
+            $table->integer('orderID')->unsigned()->nullable();
             //$table->foreign('chargeID')->references('id')->on('Charge');
             $table->timestamps();
         });
