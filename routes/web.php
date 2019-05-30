@@ -105,18 +105,18 @@ Route::group(['middleware' => ['auth', 'lodging']], function() {
     //Edit backpacker guests
     Route::get('/edit-backpacker-details/{unitID}/{accommodationID}', 'GuestsController@viewBackpackerGuestDetails');
 
-    //ViewGuests
+    //View guests
     Route::get('/view-guests', 'GuestsController@viewguests');
 
-    //ViewReservations
+    //View reservations
     Route::get('/view-reservations', 'ReservationsController@viewReservations');
     //Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
-    //View Reservation Details
+    //View reservation details
     Route::get('/view-reservation-details/{unitID}/{reservationID}', 'ReservationsController@viewReservationDetails');
     Route::post('/save-glamping-reservation-details', 'ReservationsController@saveGlampingReservation');
 
-    //CancelReservations
+    //Cancel reservations
     Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
 
     //View payment transactions
@@ -253,6 +253,12 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
     Route::get('/create-order', 'ProductsController@createOrder');
     Route::get('/view-tables', 'OrdersController@viewTables');
     Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
+    
+    //View menu
+    Route::get('/view-menu', 'ProductsController@viewMenuItems');
+
+    //View menu by category
+    Route::get('/view-menu/{category}', 'ProductsController@viewMenuCategories');
 
     //Make Order POS
     Route::get('/view-menu/{productCategory}', 'ProductsController@viewMenu');
@@ -274,7 +280,6 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
 
     //Finish Order Transaction
     Route::post('/finish-order-transaction', 'OrdersController@finishOrderTransaction');
-
 
     Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
