@@ -8,7 +8,7 @@
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                     <strong>Back</strong>
                 </span>
-            </a>
+            </a> 
             {{--<h3>Check-out Bill</h3>--}}
         </div>   
         <form method="POST" action="/finish-order-transaction">            
@@ -201,7 +201,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDiscountButton">Save</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="saveDiscountButton">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -266,7 +266,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePaymentButton">Save</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="savePaymentButton">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

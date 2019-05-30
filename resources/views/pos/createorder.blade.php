@@ -180,8 +180,8 @@
                     </div>
                     <div class="col-md-3 px-0 float-right">
                         <div class="form-group my-1 row">
-                            <label class="col-sm-2  pl-3 pt-1" for="queueNumber"><span class="fa fa-search text-secondary"></span></label>
-                            <div class="input-group input-group-sm px-0 mx-0 col-sm-10">
+                            <label class="col-sm-3 pr-0 pl-4 pt-1" for="queueNumber"><span class="fa fa-search text-secondary"></span></label>
+                            <div class="input-group input-group-sm px-0 mx-0 col-sm-9">
                                 <input class="form-control" type="text" name="searchFoodItem" id="searchFoodItem" min="1" max="50" placeholder="" value="">
                             </div>
                         </div>
@@ -345,7 +345,7 @@
                         </div>--}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDiscountButton">Save</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="saveDiscountButton">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -410,7 +410,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePaymentButton">Save</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="savePaymentButton">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -28,31 +28,33 @@
             <div class="col-md-4 mb-2 mx-0" >
                 <div class="card p-0 m-0" style="min-height:70vh; max-height:70vh;">
                     <div class="row pt-2 pb-1 px-3">
-                        <div class="col-md-6">
+                        <div class="col-md-6 pr-4">
                             <div class="form-group my-1 row">
                                 <label class="col-sm-5 pr-0 mr-0 pt-1" for="tableNumber">Table:</label>
                                 {{--<div class="input-group input-group-sm col-sm-6 mx-0">
                                     <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
                                 </div>--}}  
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}" disabled>
-                                </div>                                    
-                                <span class="col-sm-2 input-group-addon px-2 mx-0" onclick="">
-                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
-                                </span>
+                                    <input class="form-control" type="number" name="tableNumber{{$order->id}}" id="tableNumber{{$order->id}}" min="1" max="30" value="{{$order->tableNumber}}" disabled>
+                                    <input class="form-control" type="number" name="oldTableNumber{{$order->id}}" id="oldTableNumber{{$order->id}}" value="{{$order->tableNumber}}" style="display:none">
+                                </div>       
+                                <span id="editTableNumber-{{$order->id}}" class="edit-table-number col-sm-2 input-group-addon hidden-elements px-3 mx-0" style="cursor:pointer">
+                                    <i id="editTable-{{$order->id}}" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                </span>  
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 pl-1 pr-3">
                             <div class="form-group my-1 row">
                                 <label class="col-sm-5 pr-0 mr-0 pt-1" for="queueNumber">Queue:</label>
                                 {{--<div class="input-group input-group-sm col-sm-6 mx-0">
                                     <input class="form-control" type="number" name="queueNumber" id="queueNumber{{$order->id}}" min="1" max="50" placeholder="" value="{{$order->queueNumber}}">
                                 </div>--}}  
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
-                                    <input class="form-control" type="number" name="queueNumber" id="queueNumber{{$order->id}}" min="1" max="50" placeholder="" value="{{$order->queueNumber}}" disabled>
+                                    <input class="form-control" type="number" name="queueNumber{{$order->id}}" id="queueNumber{{$order->id}}" min="1" max="50" value="{{$order->queueNumber}}" disabled>
+                                    <input class="form-control" type="number" name="oldQueueNumber{{$order->id}}" id="oldQueueNumber{{$order->id}}" value="{{$order->queueNumber}}" style="display:none">
                                 </div>                                
-                                <span class="col-sm-2 input-group-addon px-2 mx-0" onclick="">
-                                    <i class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
+                                <span id="editQueueNumber-{{$order->id}}" class="edit-queue-number col-sm-2 input-group-addon px-3 mx-0" style="cursor:pointer">
+                                    <i id="editQueue-{{$order->id}}" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>
                                 </span>
                             </div>
                         </div>

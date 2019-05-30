@@ -144,7 +144,7 @@
                         <table class="table table-striped mb-0" style="font-size:.88em;">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="py-2" style="width:40%;">Description</th>
+                                    <th scope="col" class="py-2" style="width:45%;">Description</th>
                                     <th scope="col" class="py-2">Qty.</th>
                                     <th scope="col" class="py-2">Price</th>
                                     <th scope="col" class="py-2">Total</th>
@@ -159,14 +159,14 @@
                                     @foreach ($items as $item)
                                     <tr>
                                         <td class="py-2">{{$item->productName}}</td>
-                                        <td class="py-2">{{$item->quantity}}</td>
+                                        <td class="text-right py-2">{{$item->quantity}}</td>
                                         @php 
                                             $subTotal += $item->totalPrice;
 
                                             $unitPrice = $item->totalPrice/$item->quantity;
                                         @endphp
-                                        <td class="py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
-                                        <td class="py-2 orderItemPrice">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                        <td class="text-right py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
+                                        <td class="text-right py-2 orderItemPrice">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
                                         <td class="py-2">{{$item->paymentStatus}}</td>
                                     </tr>
                                     <input class="form-control" type="number" id="orderID" name="orderID" value="{{$item->orderID}}" style="display:none;">

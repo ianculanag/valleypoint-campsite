@@ -1,3 +1,4 @@
+/* Table View */
 jQuery(document).ready(function () {
 	jQuery(document).on('click', '.restaurant-occupied-tables', function () {
         jQuery.get('load-table-order-slip/'+jQuery(this).attr('id'), function(data){
@@ -12,9 +13,12 @@ jQuery(document).ready(function () {
             for(var index = 0; index < data[1].length; index++) {
                 //console.log(index);
                 htmlString += "<tr><td class='py-2'>" + data[1][index].productName + "</td>";
-                htmlString += "<td class='py-2'>" + data[1][index].quantity + "</td>";
-                htmlString += "<td class='py-2'>" + (numeral(data[1][index].price).format('0,0.00')) + "</td>";
-                htmlString += "<td class='py-2 orderItemPrice'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
+				htmlString += "<td class='text-right py-2'>" + data[1][index].quantity + "</td>";
+
+				var unitPrice = data[1][index].totalPrice/data[1][index].quantity;
+
+                htmlString += "<td class='text-right py-2'>" + (numeral(unitPrice).format('0,0.00')) + "</td>";
+                htmlString += "<td class='text-right py-2 orderItemPrice'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
                 htmlString += "<td class='py-2'>" + data[1][index].paymentStatus + "</td></tr>";
 				jQuery('#orderSlip').html(htmlString);
 				
@@ -39,9 +43,7 @@ jQuery(document).ready(function () {
 			jQuery('#addOrder').wrap(addOrderLink);
         })
 	})
-});
 
-jQuery(document).ready(function () {
 	jQuery(document).on('click', '.restaurant-available-tables', function () {
 		jQuery.get('load-table/'+jQuery(this).attr('id'), function(data){
 			jQuery('.hidden-elements').hide();
@@ -59,9 +61,7 @@ jQuery(document).ready(function () {
 		var addOrderLink = "<a href='/create-order' style='text-decoration:none;color:white'></a>";
 		jQuery('#addOrder').wrap(addOrderLink);
 	})
-});
-
-jQuery(document).ready(function () {
+	
 	jQuery(document).on('click', '#editTableNumber', function () {
 		jQuery('#orderTableNumber').prop('disabled', false);
 
@@ -72,9 +72,7 @@ jQuery(document).ready(function () {
 		jQuery('#editTableNumber').removeClass();
 		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements saveTable px-2 mx-0');
 	})
-});
-
-jQuery(document).ready(function () {
+	
 	jQuery(document).on('click', '#editQueueNumber', function () {
 		jQuery('#orderQueueNumber').prop('disabled', false);
 
@@ -85,9 +83,7 @@ jQuery(document).ready(function () {
 		jQuery('#editQueueNumber').removeClass();
 		jQuery('#editQueueNumber').addClass('col-sm-2 input-group-addon hidden-elements saveQueue px-2 mx-0');
 	})
-});
-
-jQuery(document).ready(function () {
+	
 	jQuery(document).on('click', '.saveTable', function () {
 		jQuery('#orderTableNumber').prop('disabled', true);
 
@@ -105,9 +101,7 @@ jQuery(document).ready(function () {
 		jQuery('#editTableNumber').removeClass();
 		jQuery('#editTableNumber').addClass('col-sm-2 input-group-addon hidden-elements px-3 mx-0');
 	})
-});
-
-jQuery(document).ready(function () {
+	
 	jQuery(document).on('click', '.saveQueue', function () {
 		jQuery('#orderQueueNumber').prop('disabled', true); 
 
@@ -160,3 +154,74 @@ function reloadTableView() {
 		jQuery('#restaurantTableRow').html(tableCards);
 	});
 }
+
+/* View Order Slips */
+jQuery(document).ready(function () {
+	jQuery(document).on('click', '.edit-table-number', function () {
+
+		var id = jQuery(this).attr('id').split('-');
+        var orderID = id[1];
+		jQuery('#tableNumber' + orderID).prop('disabled', false);
+  
+		htmlString = "";
+		htmlString += "<button class='btn btn-sm btn-success update-table-button'><i id='saveTable-" + orderID + "' class='fa fa-check'></i></button>";
+
+		jQuery('#editTableNumber-' + orderID).html(htmlString);
+		jQuery('#editTableNumber-' + orderID).removeClass();
+		jQuery('#editTableNumber-' + orderID).addClass('col-sm-2 input-group-addon save-table px-2 mx-0');
+	})
+	
+	jQuery(document).on('click', '.edit-queue-number', function () {
+
+		var id = jQuery(this).attr('id').split('-');
+        var orderID = id[1];
+		jQuery('#queueNumber' + orderID).prop('disabled', false);
+
+		htmlString = "";
+		htmlString += "<button class='btn btn-sm btn-success update-queue-button'><i id='saveQueue-" + orderID + "' class='fa fa-check'></i></button>";
+
+		jQuery('#editQueueNumber-' + orderID).html(htmlString);
+		jQuery('#editQueueNumber-' + orderID).removeClass();
+		jQuery('#editQueueNumber-' + orderID).addClass('col-sm-2 input-group-addon save-queue px-2 mx-0');
+	})
+	
+	jQuery(document).on('click', '.save-table', function () {
+
+		var id = jQuery(this).attr('id').split('-');
+        var orderID = id[1];
+		jQuery('#tableNumber' + orderID).prop('disabled', true);
+
+		jQuery.get("update-table-number/" + orderID + "/"  + jQuery('#orderTableNumber' + orderID).val() + "/" + jQuery('#oldTableNumber' + orderID).val(), function(data) {
+		});
+
+		var newTableNumber = jQuery('#orderTableNumber' + orderID).val();
+		jQuery('#oldTableNumber' + orderID).val(newTableNumber);
+
+		htmlString = "";
+		htmlString += "<i id='editTable-" + orderID + "' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
+
+		jQuery('#editTableNumber' + orderID).html(htmlString);
+		jQuery('#editTableNumber' + orderID).removeClass();
+		jQuery('#editTableNumber' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
+	})
+	
+	jQuery(document).on('click', '.save-queue', function () {
+
+		var id = jQuery(this).attr('id').split('-');
+		var orderID = id[1];
+		jQuery('#orderQueueNumber' + orderID).prop('disabled', true); 
+
+		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#orderQueueNumber' + orderID).val() + "/" + jQuery('#oldQueueNumber' + orderID).val(), function(data) {
+		});
+
+		var newQueueNumber = jQuery('#orderQueueNumber' + orderID).val();
+		jQuery('#oldQueueNumber' + orderID).val(newQueueNumber);
+
+		htmlString = "";
+		htmlString += "<i id='editQueue-" + orderID + "' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
+
+		jQuery('#editQueueNumber' + orderID).html(htmlString);
+		jQuery('#editQueueNumber' + orderID).removeClass();
+		jQuery('#editQueueNumber' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
+	})
+});
