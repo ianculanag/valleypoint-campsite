@@ -301,6 +301,21 @@ class CreateIngredientsTable extends Migration
     $ingredient56->ingredientName = 'Sinigang Mix';
     $ingredient56->save();
 
+    $ingredient73 = new Ingredients;
+    $ingredient73->ingredientCategory = 'groceryAndDry';
+    $ingredient73->ingredientName = 'Iced Tea';
+    $ingredient73->save();
+
+    $ingredient74 = new Ingredients;
+    $ingredient74->ingredientCategory = 'groceryAndDry';
+    $ingredient74->ingredientName = 'Coffee';
+    $ingredient74->save();
+
+    $ingredient75 = new Ingredients;
+    $ingredient75->ingredientCategory = 'groceryAndDry';
+    $ingredient75->ingredientName = 'Milk';
+    $ingredient75->save();
+
     $ingredient57 = new Ingredients;
     $ingredient57->ingredientCategory = 'beerAndLiquor';
     $ingredient57->ingredientName = 'San Mig Light';
