@@ -107,14 +107,18 @@
                         </table>
                         <div class="row mx-1">
                             <div class="col-md-6 px-1">
-                                <button type="button" class="btn btn-primary btn-block" style="text-align:center;">
-                                    Add Order
-                                </button>
+                                <a href="/add-order/{{$order->id}}" style="text-decoration:none">
+                                    <button type="button" class="btn btn-primary btn-block" id="addOrder" style="text-align:center;">
+                                        Add Order
+                                    </button> 
+                                </a>
                             </div>
                             <div class="col-md-6 px-1">
-                                <button type="button" class="btn btn-success btn-block" style="text-align:center;">
-                                    Bill Out
-                                </button>
+                                <a href="/bill-out/{{$order->id}}" style="text-decoration:none">
+                                    <button type="button" class="btn btn-success btn-block" style="text-align:center;">
+                                        Bill Out
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>

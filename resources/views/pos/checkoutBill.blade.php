@@ -79,7 +79,7 @@
                                 </button>
                             </div>
                             <div class="col-md-6 px-1">
-                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton">
+                                <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-secondary btn-block" style="text-align:center;" id="discountButton">
                                     Discount
                                 </button>
                             </div>
