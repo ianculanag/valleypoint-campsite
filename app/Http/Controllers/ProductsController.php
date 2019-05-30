@@ -120,7 +120,8 @@ class ProductsController extends Controller
     }
 
     public function searchItem($searchQuery) {
-        $products = Products::where('productName','LIKE',"%{$searchQuery}%")->get();
+        $products = Products::where('productName','LIKE',"%{$searchQuery}%")
+        ->get();
         return $products;
     }
 
@@ -148,7 +149,7 @@ class ProductsController extends Controller
      */
     public function viewMenuCategories($category) { 
 
-        if($category == 'allCategories') {
+        if($category == 'allProducts') {
             $products = DB::table('products')
             ->get();
         } else {
