@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class PagesController extends Controller
 {
@@ -20,7 +21,15 @@ class PagesController extends Controller
         //$title = 'Valleypoint Campsite Homepage';
         //return view('pages.index', compact('title')); 
         //return view('pages.index')->with('title', $title);
-        return redirect('/glamping');
+        if(Auth::user()->role == 'admin') {
+            return redirect('/admin-dashboard');
+        } elseif(Auth::user()->role == 'lodging') {
+            return redirect('/glamping');
+        } elseif(Auth::user()->role == 'cashier') {
+            return redirect('/create-order');
+        } else {
+            return redirect('/logout'); 
+        }
         
     }
 

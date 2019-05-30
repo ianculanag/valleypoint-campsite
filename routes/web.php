@@ -14,302 +14,311 @@
 Route::get('/', 'PagesController@index');
 Route::get('/lodging', 'PagesController@lodging');
 
-/* Lodging */
-//Dashboard: Physical view
-Route::get('/backpacker', 'UnitsController@backpacker'); 
-Route::get('/glamping', 'UnitsController@glamping'); 
-
-//Dashboard: Calendar view
-Route::get('/calendar-glamping', 'UnitsController@calendarGlamping'); 
-Route::get('/calendar-backpacker', 'UnitsController@calendarBackpacker'); 
-
-//Dashboard: Reload calendar
-Route::post('/reload-calendar-glamping', 'UnitsController@reloadCalendarGlamping'); 
-Route::post('/reload-calendar-backpacker', 'UnitsController@reloadCalendarBackpacker'); 
-
-Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
-Route::get('/load-tents', 'unitsController@loadTents');
-
-//Modals
-Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
-Route::get('/load-glamping-available-unit/{id}', 'UnitsController@loadGlampingAvailableUnit');
-
-Route::get('/load-backpacker-details/{id}', 'UnitsController@loadBackpackerUnit');
-Route::get('/load-backpacker-available-unit/{id}', 'UnitsController@loadBackpackerAvailableUnit');
-
-Route::post('/guests', 'GuestsController@addGuest');
 Auth::routes();
-
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-//Unit finder: Get glamping tents
-Route::get('/get-glamping-tents', 'UnitsController@getGlampingTents');
+/* Lodging */
+Route::group(['middleware' => ['auth', 'lodging']], function() {
+    
+    //Dashboard: Physical view
+    Route::get('/backpacker', 'UnitsController@backpacker'); 
+    Route::get('/glamping', 'UnitsController@glamping'); 
 
-//Unit finder: Get backpacker rooms
-Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
+    //Dashboard: Calendar view
+    Route::get('/calendar-glamping', 'UnitsController@calendarGlamping'); 
+    Route::get('/calendar-backpacker', 'UnitsController@calendarBackpacker'); 
 
-//Check-in guests glamping
-Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
-Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
+    //Dashboard: Reload calendar
+    Route::post('/reload-calendar-glamping', 'UnitsController@reloadCalendarGlamping'); 
+    Route::post('/reload-calendar-backpacker', 'UnitsController@reloadCalendarBackpacker'); 
 
-//Check-in glamping guests from reservation
-Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showCheckinForm');
-Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
+    Route::get('/guest-checkout/{id}', 'UnitsController@loadGuestDetails');
+    Route::get('/load-tents', 'UnitsController@loadTents');
 
-//Check-in backpacker guests from reservation
-Route::get('/checkin-backpacker/{unitdID}/{reservationID}', 'ReservationsController@showBackpackerCheckinForm');
-Route::post('/checkin-backpacker-reservation', 'ReservationsController@checkinBackpacker');
+    //Modals
+    Route::get('/load-glamping-details/{id}', 'UnitsController@loadGlampingUnit');
+    Route::get('/load-glamping-available-unit/{id}', 'UnitsController@loadGlampingAvailableUnit');
 
-//Find Package
-Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
+    Route::get('/load-backpacker-details/{id}', 'UnitsController@loadBackpackerUnit');
+    Route::get('/load-backpacker-available-unit/{id}', 'UnitsController@loadBackpackerAvailableUnit');
 
-//Unit finder: Tent finder
-Route::post('/checkin-glamping-finder', 'AccommodationsController@showGlampingCheckinFromFinder');
-Route::post('/reserve-glamping-finder', 'ReservationsController@showGlampingReserveFromFinder');
+    Route::post('/guests', 'GuestsController@addGuest');
 
-//Unit finder: Room finder
-Route::post('/checkin-backpacker-finder', 'AccommodationsController@showBackpackerCheckinFromFinder');
-Route::post('/reserve-backpacker-finder', 'ReservationsController@showBackpackerReserveFromFinder');
+    //Unit finder: Get glamping tents
+    Route::get('/get-glamping-tents', 'UnitsController@getGlampingTents');
 
-//Calendar
-Route::get('/checkin-glamping/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
-Route::get('/reserve-glamping/{unitID}/{checkinDate}', 'ReservationsController@showReserveFromCalendar');
+    //Unit finder: Get backpacker rooms
+    Route::get('/get-backpacker-rooms', 'UnitsController@getBackpackerRooms');
 
-//Make reservation
-Route::get('/reserve-glamping/{unitID}', 'ReservationsController@showGlampingReservationForm');
-Route::post('/reserve-glamping', 'ReservationsController@reserveGlamping');
+    //Check-in guests glamping
+    Route::get('/checkin/{unitID}', 'AccommodationsController@showCheckinForm');
+    Route::post('/checkin-glamping', 'AccommodationsController@checkinGlamping');
 
-//Cancel unit reservation
-Route::get('/cancel-reservation-modal/{reservationID}/{unitID}', 'ReservationsController@cancelReservationModal');
-Route::get('/cancel-reservation/{reservationID}/{unitID}','ReservationsController@cancelReservation');
+    //Check-in glamping guests from reservation
+    Route::get('/checkin/{unitdID}/{reservationID}', 'ReservationsController@showCheckinForm');
+    Route::post('/checkin-glamping-reservation', 'ReservationsController@checkinGlamping');
 
-//Cancel all reservations made by this guest
-Route::get('/cancel-all-reservations-modal/{reservationID}', 'ReservationsController@cancelGuestReservationModal');
-Route::get('/cancel-all-reservations/{reservationID}','ReservationsController@cancelGuestReservation');
+    //Check-in backpacker guests from reservation
+    Route::get('/checkin-backpacker/{unitdID}/{reservationID}', 'ReservationsController@showBackpackerCheckinForm');
+    Route::post('/checkin-backpacker-reservation', 'ReservationsController@checkinBackpacker');
 
-//Reservation backpacker
-Route::get('/reserve-backpacker/{unitID}', 'ReservationsController@showBackpackerReservationForm');
-Route::post('/reserve-backpacker','ReservationsController@reserveBackpacker');
+    //Find Package
+    Route::get('/getService/{serviceID}', 'ServicesController@getPrices');
 
-//Check-in backpacker
-Route::get('/checkin-backpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
-Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');
+    //Unit finder: Tent finder
+    Route::post('/checkin-glamping-finder', 'AccommodationsController@showGlampingCheckinFromFinder');
+    Route::post('/reserve-glamping-finder', 'ReservationsController@showGlampingReserveFromFinder');
 
-//Edit guest details
-Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');
-Route::post('/updateDetails', 'GuestsController@updateDetails');
-Route::post('/update-backpacker-details', 'GuestsController@updateBackpackerDetails');
+    //Unit finder: Room finder
+    Route::post('/checkin-backpacker-finder', 'AccommodationsController@showBackpackerCheckinFromFinder');
+    Route::post('/reserve-backpacker-finder', 'ReservationsController@showBackpackerReserveFromFinder');
 
-//Edit backpacker guests
-Route::get('/edit-backpacker-details/{unitID}/{accommodationID}', 'GuestsController@viewBackpackerGuestDetails');
+    //Calendar
+    Route::get('/checkin-glamping/{unitID}/{checkinDate}', 'AccommodationsController@showCheckinFromCalendar');
+    Route::get('/reserve-glamping/{unitID}/{checkinDate}', 'ReservationsController@showReserveFromCalendar');
 
-//ViewGuests
-Route::get('/view-guests', 'GuestsController@viewguests');
+    //Make reservation
+    Route::get('/reserve-glamping/{unitID}', 'ReservationsController@showGlampingReservationForm');
+    Route::post('/reserve-glamping', 'ReservationsController@reserveGlamping');
 
-//ViewReservations
-Route::get('/view-reservations', 'ReservationsController@viewReservations');
-//Route::get('/viewReservations', 'AccommodationsController@viewReservation');
+    //Cancel unit reservation
+    Route::get('/cancel-reservation-modal/{reservationID}/{unitID}', 'ReservationsController@cancelReservationModal');
+    Route::get('/cancel-reservation/{reservationID}/{unitID}','ReservationsController@cancelReservation');
 
-//View Reservation Details
-Route::get('/view-reservation-details/{unitID}/{reservationID}', 'ReservationsController@viewReservationDetails');
-Route::post('/save-glamping-reservation-details', 'ReservationsController@saveGlampingReservation');
+    //Cancel all reservations made by this guest
+    Route::get('/cancel-all-reservations-modal/{reservationID}', 'ReservationsController@cancelGuestReservationModal');
+    Route::get('/cancel-all-reservations/{reservationID}','ReservationsController@cancelGuestReservation');
 
-//CancelReservations
-Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
+    //Reservation backpacker
+    Route::get('/reserve-backpacker/{unitID}', 'ReservationsController@showBackpackerReservationForm');
+    Route::post('/reserve-backpacker','ReservationsController@reserveBackpacker');
 
-//View payment transactions
-Route::get('/view-payments', 'PaymentsController@viewLodgingSales');
+    //Check-in backpacker
+    Route::get('/checkin-backpacker/{unitID}' , 'AccommodationsController@showcheckinBackpackerForm');
+    Route::post('/checkin-backpacker','AccommodationsController@checkinBackpacker');
 
-//View charges
-Route::get('/view-charges', 'ChargesController@viewLodgingCharges');
+    //Edit guest details
+    Route::get('/edit-details/{unitID}', 'GuestsController@viewGuestDetails');
+    Route::post('/updateDetails', 'GuestsController@updateDetails');
+    Route::post('/update-backpacker-details', 'GuestsController@updateBackpackerDetails');
 
-//Select Service	
-Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
+    //Edit backpacker guests
+    Route::get('/edit-backpacker-details/{unitID}/{accommodationID}', 'GuestsController@viewBackpackerGuestDetails');
 
-//Post additional services
-Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
+    //ViewGuests
+    Route::get('/view-guests', 'GuestsController@viewguests');
 
-Route::get('/getDates', 'UnitsController@getDates');
-Route::get('/get-room-dates', 'UnitsController@getRoomDates');
+    //ViewReservations
+    Route::get('/view-reservations', 'ReservationsController@viewReservations');
+    //Route::get('/viewReservations', 'AccommodationsController@viewReservation');
 
-//Check-out glamping guests
-Route::get('/checkout-glamping/{unitID}', 'GuestsController@showGlampingCheckoutForm');
-Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
+    //View Reservation Details
+    Route::get('/view-reservation-details/{unitID}/{reservationID}', 'ReservationsController@viewReservationDetails');
+    Route::post('/save-glamping-reservation-details', 'ReservationsController@saveGlampingReservation');
 
-Route::get('/checkout-glamping-due-today/{unitID}', 'GuestsController@showGlampingCheckoutFormDueToday');
-Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
+    //CancelReservations
+    Route::get('/cancel-reservation/{reservationID}', 'ReservationsController@cancelReservation');
 
-//Check-out backpacker guests
-Route::get('/checkout-backpacker/{unitID}', 'GuestsController@showBackpackerCheckoutForm');
-Route::post('/checkoutBackpacker', 'AccommodationsController@checkoutBackpacker');
+    //View payment transactions
+    Route::get('/view-payments', 'PaymentsController@viewLodgingSales');
 
-Route::get('/checkout-backpacker-due-today/{unitID}', 'GuestsController@showBackpackerCheckoutFormDueToday');
-Route::post('/checkoutDueTodayBackpacker', 'AccommodationsController@checkoutBackpacker');
+    //View charges
+    Route::get('/view-charges', 'ChargesController@viewLodgingCharges');
 
-//Daily lodging reports
-Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
-Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingReport');
+    //Select Service	
+    Route::get('/serviceSelect/{serviceID}', 'ServicesController@getPrices'); 
 
-//Weekly lodging reports
-Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
-Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgingReport');
+    //Post additional services
+    Route::post('/addAdditionalService', 'ChargesController@addAdditionalService');
 
-//Monthly lodging reports
-Route::get('/this-months-lodging-report', 'UnitsController@thisMonthsLodgingReport');
-Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodgingReport');
+    Route::get('/getDates', 'UnitsController@getDates');
+    Route::get('/get-room-dates', 'UnitsController@getRoomDates');
 
-//Custom lodging reports
-Route::get('/custom-lodging-report', 'UnitsController@customLodgingReport');
-Route::post('/reload-custom-lodging-report', 'UnitsController@reloadCustomLodgingReport');
+    //Check-out glamping guests
+    Route::get('/checkout-glamping/{unitID}', 'GuestsController@showGlampingCheckoutForm');
+    Route::post('/checkoutGlamping', 'AccommodationsController@checkoutGlamping');
 
-//View Guest Payments
-Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');
+    Route::get('/checkout-glamping-due-today/{unitID}', 'GuestsController@showGlampingCheckoutFormDueToday');
+    Route::post('/checkoutDueTodayGlamping', 'AccommodationsController@checkoutGlamping');
 
-//View side by side charges-payments
-Route::get('/side-by-side/charges-payments', 'GuestsController@viewAllGuestsPayments');
+    //Check-out backpacker guests
+    Route::get('/checkout-backpacker/{unitID}', 'GuestsController@showBackpackerCheckoutForm');
+    Route::post('/checkoutBackpacker', 'AccommodationsController@checkoutBackpacker');
 
-//Load room capacity
-Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
+    Route::get('/checkout-backpacker-due-today/{unitID}', 'GuestsController@showBackpackerCheckoutFormDueToday');
+    Route::post('/checkoutDueTodayBackpacker', 'AccommodationsController@checkoutBackpacker');
+
+    //Daily lodging reports
+    Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
+    Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingReport');
+
+    //Weekly lodging reports
+    Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
+    Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgingReport');
+
+    //Monthly lodging reports
+    Route::get('/this-months-lodging-report', 'UnitsController@thisMonthsLodgingReport');
+    Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodgingReport');
+
+    //Custom lodging reports
+    Route::get('/custom-lodging-report', 'UnitsController@customLodgingReport');
+    Route::post('/reload-custom-lodging-report', 'UnitsController@reloadCustomLodgingReport');
+
+    //View Guest Payments
+    Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');
+
+    //View side by side charges-payments
+    Route::get('/side-by-side/charges-payments', 'GuestsController@viewAllGuestsPayments');
+
+    //Load room capacity
+    Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
+});
 
 /* Admin */
-//Dashboard
-Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
+Route::group(['middleware' => ['auth', 'admin']], function() {
 
-//View users
-Route::get('/view-users', 'UsersController@viewUsers');
+    //Dashboard
+    Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
 
-//Add user
-Route::get('/add-user', 'UsersController@showAddUserForm');
-Route::post('user-added', 'UsersController@addUser');
+    //View users
+    Route::get('/view-users', 'UsersController@viewUsers');
 
-//View units
-Route::get('/view-units', 'UnitsController@viewUnits');
-Route::get('/view-units-tent', 'UnitsController@viewTents');
-Route::get('/view-units-room', 'UnitsController@viewRooms');
+    //Add user
+    Route::get('/add-user', 'UsersController@showAddUserForm');
+    Route::post('user-added', 'UsersController@addUser');
 
-//Add unit
-Route::get('/add-unit', 'UnitsController@showAddUnitForm');
-Route::post('/unit-added', 'UnitsController@addUnit');
+    //View units
+    Route::get('/view-units', 'UnitsController@viewUnits');
+    Route::get('/view-units-tent', 'UnitsController@viewTents');
+    Route::get('/view-units-room', 'UnitsController@viewRooms');
 
-//Edit unit
-Route::get('/edit-unit/{unitID}', 'UnitsController@viewUnitDetails');
-Route::post('/update-unit', 'UnitsController@updateUnit');
+    //Add unit
+    Route::get('/add-unit', 'UnitsController@showAddUnitForm');
+    Route::post('/unit-added', 'UnitsController@addUnit');
 
-//Delete unit
-Route::get('/delete-unit-modal/{unitID}', 'UnitsController@deleteUnitModal');
-Route::post('/confirm-unit-deletion/{unitID}', 'UnitsController@deleteUnit');
- 
-//View services
-Route::get('/view-services', 'ServicesController@viewServices');
-Route::get('/view-services-package', 'ServicesController@viewPackages');
-Route::get('/view-services-service', 'ServicesController@viewServicesOnly');
-Route::get('/view-services-extra', 'ServicesController@viewExtra');
-Route::get('/view-services-damage', 'ServicesController@viewDamageFees');
+    //Edit unit
+    Route::get('/edit-unit/{unitID}', 'UnitsController@viewUnitDetails');
+    Route::post('/update-unit', 'UnitsController@updateUnit');
 
-//Add service
-Route::get('/add-service', 'ServicesController@showAddServiceForm');
-Route::post('/service-added', 'ServicesController@addService');
+    //Delete unit
+    Route::get('/delete-unit-modal/{unitID}', 'UnitsController@deleteUnitModal');
+    Route::post('/confirm-unit-deletion/{unitID}', 'UnitsController@deleteUnit');
+    
+    //View services
+    Route::get('/view-services', 'ServicesController@viewServices');
+    Route::get('/view-services-package', 'ServicesController@viewPackages');
+    Route::get('/view-services-service', 'ServicesController@viewServicesOnly');
+    Route::get('/view-services-extra', 'ServicesController@viewExtra');
+    Route::get('/view-services-damage', 'ServicesController@viewDamageFees');
 
-//Edit service
-Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
-Route::post('/update-service', 'ServicesController@updateService');
+    //Add service
+    Route::get('/add-service', 'ServicesController@showAddServiceForm');
+    Route::post('/service-added', 'ServicesController@addService');
 
-//Delete service
-Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
-Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
+    //Edit service
+    Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
+    Route::post('/update-service', 'ServicesController@updateService');
 
-/* Inventory */
-//Display all ingredient categories
-Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
+    //Delete service
+    Route::get('/delete-service-modal/{serviceID}', 'ServicesController@deleteServiceModal');
+    Route::post('/confirm-service-deletion/{serviceID}', 'ServicesController@deleteService');
 
-//Reload daily inventory
-Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
+    /* Inventory */
+    //Display all ingredient categories
+    Route::get('/view-inventory', 'InventoryController@viewTodaysInventory');
 
-//Reload monthly inventory
-Route::get('/view-inventory/monthly/{category}/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
+    //Reload daily inventory
+    Route::get('/view-inventory/daily/{category}/{onDate}', 'InventoryController@viewDailyInventory');
 
-//Reload custom inventory
-Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
+    //Reload monthly inventory
+    Route::get('/view-inventory/monthly/{category}/{onMonth}/{onYear}', 'InventoryController@viewMonthlyInventory');
 
-//View menu
-Route::get('/view-menu', 'ProductsController@viewMenuItems');
+    //Reload custom inventory
+    Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
 
-//View menu by category
-Route::get('/view-menu/{category}', 'ProductsController@viewMenuCategories');
+    //View menu
+    Route::get('/view-menu', 'ProductsController@viewMenuItems');
 
-//View recipe of a menu item
-Route::get('/load-recipe/{menuItem}', 'ProductsController@viewMenuItemRecipe');
+    //View menu by category
+    Route::get('/view-menu/{category}', 'ProductsController@viewMenuCategories');
+
+    //View recipe of a menu item
+    Route::get('/load-recipe/{menuItem}', 'ProductsController@viewMenuItemRecipe');
+});
 
 /* Restaurant */
-//POS Dashboard Pages
-Route::get('/create-order', 'ProductsController@createOrder');
-Route::get('/view-tables', 'OrdersController@viewTables');
-Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
+Route::group(['middleware' => ['auth', 'cashier']], function() {
+    
+    //POS Dashboard Pages
+    Route::get('/create-order', 'ProductsController@createOrder');
+    Route::get('/view-tables', 'OrdersController@viewTables');
+    Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
 
-//Make Order POS
-Route::get('/view-menu/{productCategory}', 'ProductsController@viewMenu');
-/*Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
-Route::get('/view-breads', 'FoodsController@viewBreads');
-Route::get('/view-breakfast', 'FoodsController@viewBreakfast');
-Route::get('/view-group-meals', 'FoodsController@viewGroupmeals');
-Route::get('/view-noodles', 'FoodsController@viewNoodles');
-Route::get('/view-rice-bowl', 'FoodsController@viewRicebowl' );
-Route::get('/view-soup', 'FoodsController@viewSoup');
-Route::get('/view-beverages', 'FoodsController@viewBeverages');*/
+    //Make Order POS
+    Route::get('/view-menu/{productCategory}', 'ProductsController@viewMenu');
+    /*Route::get('/view-appetizers', 'FoodsController@viewAppetizers');
+    Route::get('/view-breads', 'FoodsController@viewBreads');
+    Route::get('/view-breakfast', 'FoodsController@viewBreakfast');
+    Route::get('/view-group-meals', 'FoodsController@viewGroupmeals');
+    Route::get('/view-noodles', 'FoodsController@viewNoodles');
+    Route::get('/view-rice-bowl', 'FoodsController@viewRicebowl' );
+    Route::get('/view-soup', 'FoodsController@viewSoup');
+    Route::get('/view-beverages', 'FoodsController@viewBeverages');*/
 
-//Save Order
-Route::post('/save-order', 'OrdersController@saveOrder');
-Route::post('/save-additional-order', 'OrdersController@saveAdditionalOrder');
+    //Save Order
+    Route::post('/save-order', 'OrdersController@saveOrder');
+    Route::post('/save-additional-order', 'OrdersController@saveAdditionalOrder');
 
-//Add order
-Route::get('/add-order/{orderID}', 'OrdersController@addOrder');
+    //Add order
+    Route::get('/add-order/{orderID}', 'OrdersController@addOrder');
 
-//Finish Order Transaction
-Route::post('/finish-order-transaction', 'OrdersController@finishOrderTransaction');
+    //Finish Order Transaction
+    Route::post('/finish-order-transaction', 'OrdersController@finishOrderTransaction');
 
 
-Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
+    Route::get('/get-product-item/{productID}', 'ProductsController@getProductItem');
 
-//View table details
-Route::get('/load-table/{tableNumber}', 'OrdersController@loadTable');
+    //View table details
+    Route::get('/load-table/{tableNumber}', 'OrdersController@loadTable');
 
-//View table orders
-Route::get('/load-table-order-slip/{tableNumber}', 'OrdersController@loadTableOrders');
+    //View table orders
+    Route::get('/load-table-order-slip/{tableNumber}', 'OrdersController@loadTableOrders');
 
-//Update table number
-Route::get('/update-table-number/{orderID}/{tableNumber}/{oldTableNumber}', 'OrdersController@updateTableNumber');
+    //Update table number
+    Route::get('/update-table-number/{orderID}/{tableNumber}/{oldTableNumber}', 'OrdersController@updateTableNumber');
 
-//Update queue number
-Route::get('/update-queue-number/{orderID}/{queueNumber}/{oldQueueNumber}', 'OrdersController@updateQueueNumber');
+    //Update queue number
+    Route::get('/update-queue-number/{orderID}/{queueNumber}/{oldQueueNumber}', 'OrdersController@updateQueueNumber');
 
-//Reload table view on table number update
-Route::get('/reload-table-view', 'OrdersController@reloadTables');
+    //Reload table view on table number update
+    Route::get('/reload-table-view', 'OrdersController@reloadTables');
 
-//Bar and restaurant checkout Bill
-Route::get('/bill-out/{orderID}', 'OrdersController@showBilloutOrderSlip');
+    //Bar and restaurant checkout Bill
+    Route::get('/bill-out/{orderID}', 'OrdersController@showBilloutOrderSlip');
 
-//Cashier shift report
-Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
+    //Cashier shift report
+    Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
 
-//Daily restaurant reports
-Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
+    //Daily restaurant reports
+    Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
 
-//Weekly restaurant reports
-Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestaurantReport');
+    //Weekly restaurant reports
+    Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestaurantReport');
 
-//Monthly restaurant reports
-Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');
+    //Monthly restaurant reports
+    Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');
 
-//Custom restaurant reports
-Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport');
+    //Custom restaurant reports
+    Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport');
 
-//View orders for restaurant 
-Route::get('/view-orders', 'OrdersController@viewOrders');
+    //View orders for restaurant 
+    Route::get('/view-orders', 'OrdersController@viewOrders');
 
-//View payments for restaurant
-Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
+    //View payments for restaurant
+    Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
 
-//Search item from order slip
-Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
+    //Search item from order slip
+    Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');
 
-//Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
+    //Route::get('/update-inventory-test/{productID}/{quantity}', 'OrdersController@updateInventory');
+});
