@@ -291,6 +291,7 @@ class ReservationsController extends Controller
 
     public function saveGlampingReservation(Request $request)
     {
+        $fuck = DB::tabls('fuc');
         $this->validate($request, [
             'contactNumber' => 'required|min:11|max:11',
             'firstName' => 'required|max:30',
@@ -1174,20 +1175,50 @@ class ReservationsController extends Controller
                 }
             }
 
+            $amountPaid = $request->input('amountPaid');
+
+            if($request->input('amountPaid') == '') {
+                $amountPaid = 0;
+            }
+
             for($count = 0; $count < $chargesCount; $count++) {
                 $paymentEntry = 'payment'.$count;
                 if($request->input($paymentEntry)) {
                     $payment = new Payments;
                     $payment->paymentDatetime = Carbon::now();
-                    $payment->amount = $request->input($paymentEntry);
-                    $payment->paymentStatus = 'full';
-                    $payment->chargeID = $chargesArray[$count];
-                    $payment->save();
+                    
+                    $chargePrice = $request->input($paymentEntry);
 
-                    $charge = Charges::find($chargesArray[$count]);
-                    $charge->update([
-                        'remarks' => 'full'
-                    ]);
+                    if(!($amountPaid == 0)) {
+                        if(($amountPaid - $chargePrice) >= 0) {
+                            $amountPaid -= $chargePrice;
+                            $payment->amount = $chargePrice;
+                            $payment->paymentStatus = 'full';
+                            $payment->chargeID = $chargesArray[$count];
+                            $payment->save();
+            
+                            $charge = Charges::find($chargesArray[$count]);
+                            $charge->update([
+                                'remarks' => 'full',
+                                'balance' => '0'
+                            ]);
+                            
+                        } else if(($amountPaid - $chargePrice) < 0) {
+                            $payment->amount = $amountPaid;
+                            $payment->paymentStatus = 'partial';
+                            $payment->chargeID = $chargesArray[$count];
+                            $payment->save();
+
+                            $balance = $chargePrice - $amountPaid;
+            
+                            $charge = Charges::find($chargesArray[$count]);
+                            $charge->update([
+                                'remarks' => 'partial',
+                                'balance' => $balance
+                            ]);    
+                            $amountPaid = 0;                    
+                        }
+                    }
                 }
             }
         }  

@@ -41,8 +41,8 @@
                         <tr class="guestChargesRows" id="{{$charge->chargeID}}">
                         <th scope="row">{{$charge->chargeID}}</th>
                         <td scope="row">{{$charge->serviceName}}</td>
-                        <td scope="row" style="text-align:right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
-                        <td scope="row" style="text-align:right">{{number_format((float)($charge->balance), 2, '.', '')}}</td>
+                        <td scope="row" style="text-align:right">{{number_format($charge->totalPrice, 2)}}</td>
+                        <td scope="row" style="text-align:right">{{number_format($charge->balance, 2)}}</td>
                         <td scope="row" style="text-align:center">{{$charge->remarks}}</td>
                         </tr>   
                         @php
@@ -63,12 +63,12 @@
                     <tfoot>
                         <tr>
                             <th colspan="2" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalCharges), 2, '.', '')}}</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalCharges, 2)}}</th>
                             <th colspan="3"></th>
                         </tr>  
                         <tr>
                             <th colspan="3" scope="row">BALANCE:</th>
-                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;">{{number_format((float)($totalBalance), 2, '.', '')}}</th>
+                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;">₱ {{number_format($totalBalance, 2)}}</th>
                             <th colspan="2"></th>
                         </tr>
                         <tr>
@@ -100,7 +100,7 @@
                         <tr class="{{$payment->chargeID}} guestPaymentsRows">
                         <th scope="row">{{$payment->id}}</th>                        
                         <td>{{$payment->chargeID}}</td>
-                        <td style="text-align:right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
+                        <td style="text-align:right">{{number_format($payment->amount, 2)}}</td>
                         <td style="text-align:center">{{$payment->paymentStatus}}</td>
                         <td>{{\Carbon\Carbon::parse($payment->paymentDatetime)->format('F j, Y h:iA')}}</td>
                         </tr>
@@ -115,7 +115,7 @@
                     <tfoot>
                         <tr>
                             <th colspan="2" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPayments), 2, '.', '')}}</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalPayments, 2)}}</th>
                             <th colspan="3"></th>
                         </tr>
                     </tfoot>

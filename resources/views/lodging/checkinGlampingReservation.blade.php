@@ -68,6 +68,9 @@
                             <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($additionalService->price), 2, '.', '')}}</td>
                             <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($additionalService->totalPrice), 2, '.', '')}}</td>
                             </tr>
+                            @php
+                                $totalPrice += $additionalService->totalPrice;    
+                            @endphp
                             @endforeach
                             @endif
                             </tbody>
