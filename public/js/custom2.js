@@ -1,29 +1,50 @@
 //Validation
-
+//[^a-z. ] all characters inside that bracket are excempted from checking
 function validateFirstName() {
 
-    var c = jQuery('#firstName').selectionStart,
-        restrictedCharacters = /[^a-z0-9]/gi,
+    var cursor = jQuery('#firstName').selectionStart,
+        allowedCharacters = /[^a-z. ]/gi,
         inputValue = jQuery('#firstName').val();
 
-    if (restrictedCharacters.test(inputValue)) {
-        jQuery('#firstName').val(inputValue.replace(restrictedCharacters, ''));
-        c--;
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#firstName').val(inputValue.replace(allowedCharacters, ''));
+        cursor--;
     }
-    jQuery('#firstName').setSelectionRange(c, c);
+    jQuery('#firstName').setSelectionRange(cursor, cursor);
 
 }
 
 function validateLastName() {
-    var c = jQuery('#lasttName').selectionStart,
-        restrictedCharacters = /[^a-z0-9]/gi,
+    var cursor = jQuery('#lasttName').selectionStart,
+        allowedCharacters = /[^a-z. ]/gi,
         inputValue = jQuery('#lastName').val();
 
-    if (restrictedCharacters.test(inputValue)) {
-        jQuery('#lastName').val(inputValue.replace(restrictedCharacters, ''));
-        c--;
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#lastName').val(inputValue.replace(allowedCharacters, ''));
+        cursor--;
     }
-    jQuery('#lastName').setSelectionRange(c, c);
+    jQuery('#lastName').setSelectionRange(cursor, cursor);
+}
+
+function validateNumberofPaxGlamping() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('.numberOfPaxGlamping').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('.numberOfPaxGlamping').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateContactNumber() {
+    var cursor = jQuery('#contactNumber').selectionStart,
+        allowedCharacters = /[^0-9]/gi,
+        inputValue = jQuery('#contactNumber').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#contactNumber').val(inputValue.replace(allowedCharacters, ''));
+        cursor--;
+    }
+    jQuery('#contactNumber').setSelectionRange(cursor, cursor);
 }
 
 
@@ -34,6 +55,18 @@ jQuery(document).ready(function () {
 
     jQuery(document).on('input', '#lastName', function () {
         validateLastName();
+    })
+
+    jQuery(document).on('input', '.numberOfPaxGlamping', function () {
+        validateNumberofPaxGlamping();
+    })
+
+    jQuery(document).on('input', '#contactNumber', function () {
+        validateContactNumber();
+    })
+
+    jQuery(document).on('input', '#additionalServiceNumberOfPax', function () {
+        alert("bababababa");
     })
 
 });
