@@ -10,7 +10,7 @@
     </div>
     <div class="row pb-2 px-5">
         <div class="col-md-9">
-            <h6>Total order count: {{count($items)}}</h6>
+            <h6>Order count: {{count($items)}}</h6>
         </div>
         <div class="col-md-3">
             <div class="form-group my-0 row">

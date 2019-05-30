@@ -293,7 +293,7 @@ class OrdersController extends Controller
     public function viewOrderSlips() {
         $orders = DB::table('orders')
         ->where('status', '=', 'ongoing')
-        ->orderBy('orderDatetime', 'ASC')
+        ->orderBy('orderDatetime', 'DESC')
         ->get();
 
         $orderItems = array();

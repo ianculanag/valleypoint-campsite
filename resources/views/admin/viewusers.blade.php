@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container pb-5">
-    <div class="pt-3 pb-3">
-        <a href="{{ URL::previous() }}">
+    <div class="pt-1 pb-0">
+        {{-- <a href="{{ URL::previous() }}">
             <span style="float:left;">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 <strong>Back</strong>
             </span>
-        </a>
+        </a> --}}
         <h3 class="text-center">Users</h3>
     </div>
     <div class="col-md-12">

@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-9 card m-0 ml-0 border-left-0 rounded-0 px-3" style="max-height:68vh;"> 
                     <div class="container px-2 pt-3 pb-1 scrollbar-near-moon-wide" id="productsLibrary" style="max-height:65vh; overflow-y:auto;">
-                        <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable compact" cellspacing="0" id="productsTable">
+                        <table class="table table-sm dataTable compact" cellspacing="0" id="productsTable">
                             <thead>
                                 <tr>
                                     <th style="width:10%">No.</th>

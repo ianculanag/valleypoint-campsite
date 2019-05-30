@@ -163,7 +163,7 @@ jQuery(document).ready(function () {
             jQuery('#' + category).addClass('active');
         }
     })
-    jQuery(".menuItemList").click(function () {
+    jQuery(document).on('click', '.menuItemList', function () {
 
         var menuItem = jQuery(this).attr('id');
 
@@ -196,7 +196,8 @@ function loadProductsTable(data) {
         for (var index = 0; index < data.length; index++) {
             productCount++;
 
-            htmlString += "<tr id=" + data[index].id + " class='menuItemList' style='cursor:pointer'><td class='text-right pr-5'>" + productCount + "</td>";
+            htmlString += "<tr id=" + data[index].id + " class='menuItemList' style='cursor:pointer'>";
+            htmlString += "<td class='text-right pr-5'>" + productCount + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].productName + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].price + "</td>";
             htmlString += "<td class='text-right pr-5'>" + data[index].guestPrice + "</td></tr>";
