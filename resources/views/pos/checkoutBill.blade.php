@@ -20,7 +20,7 @@
                 <div class="card p-0 m-0" style="min-height:80vh; max-height:80vh;">
                     <h4 class="text-muted text-center pt-3 pb-1">Check-out Bill</h4>
                     <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
-                        <table class="table table-striped" style="font-size:.88em;">
+                        <table class="table table-striped" >
                             <thead>
                                 <tr>
                                     <th scope="col" style="width:50%;">Description</th>
@@ -50,15 +50,15 @@
                         </table>
                     </div>
                     <div class="card-footer bg-white border-0 px-0 mx-0">
-                        <table class="table table-striped" style="font-size:.88em;">
+                        <table class="table table-striped" >
                             <thead>
-                                <tr>
+                                <tr id="subtotalRow">
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">
                                         ₱ {{number_format((float)($subTotal), 2, '.', '')}}
                                     </td>
                                 </tr>
-                                <tr  class="text-primary">
+                                <tr class="text-primary"  id="discountRow">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">
                                         ₱ {{number_format((float)($item->discountAmount), 2, '.', '')}}
@@ -71,16 +71,33 @@
                                     </th>
                                 </tr>
                             </thead>
+                            <thead id="paymentContainer" style="display:none">
+                                <tr class="text-primary">
+                                    <th class="py-2" colspan="3" scope="row">Amount Tendered:</th>
+                                    <th class="py-2" id="amountTenderedDisplay" style="text-align:right;">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="py-2" colspan="3" scope="row">Change:</th>
+                                    <th class="py-2" id="changeDisplay" style="text-align:right;">
+                                    </th>
+                                </tr>
+                            </thead>
                         </table>
                         <div class="row mx-2">
                             <div class="col-md-6 mb-1 px-1">
-                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-success btn-block" style="text-align:center;" id="getPayment">
+                                <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-primary btn-block" style="text-align:center;" id="getPayment">
                                     Get Cash Payment
                                 </button>
                             </div>
                             <div class="col-md-6 px-1">
                                 <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-secondary btn-block" style="text-align:center;" id="discountButton">
                                     Discount
+                                </button>
+                            </div>
+                            <div class="col-md-12 px-1">
+                                <button type="button" class="btn btn-success btn-block" style="text-align:center;" id="discountButton">
+                                    Finish Transaction
                                 </button>
                             </div>
                         </div>
@@ -100,8 +117,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-borderless" style="font-size:.88em;">
+                    <table class="table table-borderless" >
                         <tbody>
+                            <tr>
+                                <td>                                        
+                                    <label class="switch text-center">
+                                        <input type="checkbox" id="discountMethod">
+                                        <span class="slider-alt round"></span>
+                                    </label>
+                                    <span id="discountMethodLabel">%</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id="discountRateBody">
                             <tr>
                                 <th>Total to Pay</th>
                                 <th class="text-right"><h4 id="amountToPayDiscount"></h4></th>
@@ -126,14 +154,27 @@
                                 <th class="text-right"><h4 id="totalDiscount">₱ 0.00</h4></th>
                             </tr>
                         </tbody>
+                        <tbody id="discountRatePeso"  style="display:none">
+                            <tr>
+                                <th>Total to Pay</th>
+                                <th class="text-right"><h4 id="amountToPayDiscountPeso"></h4></th>
+                            </tr>
+                            <th class="pt-4 text-primary" style="width:50%;">Discount Amount</th>
+                            <th class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₱</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg text-right input-group-prepend" id="discountPesoAmount">
+                            </th>
+                        </tbody>
                     </table>
-                    <table class="table table-borderless" style="font-size:.88em;">
+                    <table class="table table-borderless"  id="discountHelperTable">
                         <tbody>
                             <tr>
-                                <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">5%</button></th>
-                                <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">10%</button></th>
-                                <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">15%</button></th>
-                                <th class="px-1 py-1" style="width:25%"><button class="btn btn-lg btn-info btn-block discountButtons">20%</button></th>
+                                <th class="px-1 py-1" style="width:25%"><button type="button" class="btn btn-lg btn-info btn-block discountButtons">5%</button></th>
+                                <th class="px-1 py-1" style="width:25%"><button type="button" class="btn btn-lg btn-info btn-block discountButtons">10%</button></th>
+                                <th class="px-1 py-1" style="width:25%"><button type="button" class="btn btn-lg btn-info btn-block discountButtons">15%</button></th>
+                                <th class="px-1 py-1" style="width:25%"><button type="button" class="btn btn-lg btn-info btn-block discountButtons">20%</button></th>
                             </tr>
                         </tbody>
                     </table>
@@ -156,7 +197,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-borderless" style="font-size:.88em;">
+                    <table class="table table-borderless" >
                         <tbody>
                             <tr>
                                 <th>Total to Pay</th>
@@ -178,26 +219,26 @@
                         </tbody>
                     </table>
 
-                    <table class="table table-borderless" style="font-size:.88em;">
+                    <table class="table table-borderless" >
                         <tbody>
                             <tr>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
                             </tr>
                             <tr>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
                             </tr>
                             <tr>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
                             </tr>
                             <tr>
                                 <th class="px-1 py-1" style="width:33.33%"></th>
-                                <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-warning btn-block" id="clearPayment">Clear</button></th>
+                                <th class="px-1 py-1" style="width:33.33%"><button type="button" class="btn btn-lg btn-warning btn-block" id="clearPayment">Clear</button></th>
                                 <th class="px-1 py-1" style="width:33.33%"></th>
                             </tr>
                         </tbody>

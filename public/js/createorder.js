@@ -494,6 +494,17 @@ function computeChange() {
 	jQuery('#changeToGive').html(toPeso(numeral(change).format('0,0.00')));
 }
 
+jQuery('#savePaymentButton').click(function() {
+	jQuery('#subtotalRow').css('display', 'none');
+	jQuery('#discountRow').css('display', 'none');
+	jQuery('#discountButton').attr('disabled', 'true');
+
+	jQuery('#paymentContainer').css('display', '');
+
+	jQuery('#amountTenderedDisplay').html(toPeso(numeral(jQuery('#amountTendered').val()).format('0,0.00')));
+	jQuery('#changeDisplay').html(jQuery('#changeToGive').html());
+})
+
 
 /** SEARCH */
 jQuery('#searchFoodItem').keyup(function() {
