@@ -27,8 +27,13 @@ jQuery(document).ready(function () {
 
 			jQuery('#orderID').val(data[1][0].orderID);
 			
+			jQuery('#ordersGrandTotal').html('');
 			jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
+
+			jQuery('#ordersSubtotal').html('');
 			jQuery('#ordersSubtotal').html(toPeso(numeral(subTotal).format('0,0.00')));
+
+			jQuery('#ordersDiscount').html('');
 			jQuery('#ordersDiscount').html(toPeso(numeral(data[1][0].discountAmount).format('0,0.00')));
 
             jQuery('#oldTableNumber').val(data[0][0].tableNumber);
