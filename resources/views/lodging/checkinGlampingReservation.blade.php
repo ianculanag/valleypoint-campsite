@@ -65,8 +65,8 @@
                             <input type="hidden" name="charge{{$loop->iteration}}" class="chargeIDs" value="{{$additionalService->chargeID}}"></td>
                             <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
                             <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
-                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{$additionalService->price}}</td>
-                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{$additionalService->totalPrice}}</td>
+                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($additionalService->price), 2, '.', '')}}</td>
+                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($additionalService->totalPrice), 2, '.', '')}}</td>
                             </tr>
                             @endforeach
                             @endif
