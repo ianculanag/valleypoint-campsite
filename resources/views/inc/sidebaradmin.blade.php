@@ -109,7 +109,7 @@
                                 <i class="fa fa-boxes" aria-hidden="true"></i>
                                 <span> Inventory </span>
                             </a>
-                            <a class="dropdown-item" href="/view-menu-items">
+                            <a class="dropdown-item" href="/view-menu-recipe">
                                 <i class="fa fa-utensils" aria-hidden="true"></i>
                                 <span> Menu </span>
                             </a>
