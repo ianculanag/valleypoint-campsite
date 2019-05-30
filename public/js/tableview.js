@@ -205,16 +205,16 @@ jQuery(document).ready(function () {
 		htmlString = "";
 		htmlString += "<i id='editTable-" + orderID + "' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
 
-		jQuery('#editTableNumber' + orderID).html(htmlString);
-		jQuery('#editTableNumber' + orderID).removeClass();
-		jQuery('#editTableNumber' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
+		jQuery('#editTableNumber-' + orderID).html(htmlString);
+		jQuery('#editTableNumber-' + orderID).removeClass();
+		jQuery('#editTableNumber-' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
 	})
 	
 	jQuery(document).on('click', '.save-queue', function () {
 
 		var id = jQuery(this).attr('id').split('-');
 		var orderID = id[1];
-		jQuery('#orderQueueNumber' + orderID).prop('disabled', true); 
+		jQuery('#queueNumber' + orderID).prop('disabled', true); 
 
 		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#orderQueueNumber' + orderID).val() + "/" + jQuery('#oldQueueNumber' + orderID).val(), function(data) {
 		});
@@ -225,8 +225,8 @@ jQuery(document).ready(function () {
 		htmlString = "";
 		htmlString += "<i id='editQueue-" + orderID + "' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
 
-		jQuery('#editQueueNumber' + orderID).html(htmlString);
-		jQuery('#editQueueNumber' + orderID).removeClass();
-		jQuery('#editQueueNumber' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
+		jQuery('#editQueueNumber-' + orderID).html(htmlString);
+		jQuery('#editQueueNumber-' + orderID).removeClass();
+		jQuery('#editQueueNumber-' + orderID).addClass('col-sm-2 input-group-addon px-3 mx-0');
 	})
 });
