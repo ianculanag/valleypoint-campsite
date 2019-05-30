@@ -27,13 +27,8 @@ jQuery(document).ready(function () {
 
 			jQuery('#orderID').val(data[1][0].orderID);
 			
-			jQuery('#ordersGrandTotal').html('');
 			jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
-
-			jQuery('#ordersSubtotal').html('');
 			jQuery('#ordersSubtotal').html(toPeso(numeral(subTotal).format('0,0.00')));
-
-			jQuery('#ordersDiscount').html('');
 			jQuery('#ordersDiscount').html(toPeso(numeral(data[1][0].discountAmount).format('0,0.00')));
 
             jQuery('#oldTableNumber').val(data[0][0].tableNumber);
@@ -59,8 +54,10 @@ jQuery(document).ready(function () {
 			htmlString += "<tr><td class='py-2 text-center' colspan='5'> No order items to show </td></tr>";
 
 			jQuery('#orderSlip').html(htmlString);
-			
-			updateOrderTotal();
+
+			jQuery('#ordersGrandTotal').html('₱ 0.00');
+			jQuery('#ordersSubtotal').html('₱ 0.00');
+			jQuery('#ordersDiscount').html('₱ 0.00');
 		})
 
 		var addOrderLink = "<a href='/create-order' style='text-decoration:none;color:white'></a>";
@@ -196,7 +193,7 @@ jQuery(document).ready(function () {
         var orderID = id[1];
 		jQuery('#tableNumber' + orderID).prop('disabled', true);
 
-		jQuery.get("update-table-number/" + orderID + "/"  + jQuery('#orderTableNumber' + orderID).val() + "/" + jQuery('#oldTableNumber' + orderID).val(), function(data) {
+		jQuery.get("update-table-number/" + orderID + "/"  + jQuery('#tableNumber' + orderID).val() + "/" + jQuery('#oldTableNumber' + orderID).val(), function(data) {
 		});
 
 		var newTableNumber = jQuery('#orderTableNumber' + orderID).val();
@@ -216,7 +213,7 @@ jQuery(document).ready(function () {
 		var orderID = id[1];
 		jQuery('#queueNumber' + orderID).prop('disabled', true); 
 
-		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#orderQueueNumber' + orderID).val() + "/" + jQuery('#oldQueueNumber' + orderID).val(), function(data) {
+		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#queueNumber' + orderID).val() + "/" + jQuery('#oldQueueNumber' + orderID).val(), function(data) {
 		});
 
 		var newQueueNumber = jQuery('#orderQueueNumber' + orderID).val();
