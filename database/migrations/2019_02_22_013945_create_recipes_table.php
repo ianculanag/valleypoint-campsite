@@ -918,7 +918,7 @@ class CreateRecipesTable extends Migration
 
         $recipe149 = new Recipes;
         $recipe149->productID = '59';
-        $recipe149->ingredientID = '64';
+        $recipe149->ingredientID = '65';
         $recipe149->quantity = '1';
         $recipe149->save();
 
