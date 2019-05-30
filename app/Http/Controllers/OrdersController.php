@@ -415,7 +415,7 @@ class OrdersController extends Controller
             ]);
         }
     }
-
+ 
     /**
      * Update queue number
      *
