@@ -6,7 +6,8 @@ jQuery(document).ready(function () {
             jQuery('#orderTableNumber').val(data[0][0].tableNumber);
             jQuery('#orderQueueNumber').val(data[0][0].queueNumber);
 
-            var htmlString = "";
+			var htmlString = "";
+			var subTotal = 0;
 
             for(var index = 0; index < data[1].length; index++) {
                 //console.log(index);
@@ -15,17 +16,20 @@ jQuery(document).ready(function () {
                 htmlString += "<td class='py-2'>" + (numeral(data[1][index].price).format('0,0.00')) + "</td>";
                 htmlString += "<td class='py-2 orderItemPrice'>" + (numeral(data[1][index].totalPrice).format('0,0.00')) + "</td>";
                 htmlString += "<td class='py-2'>" + data[1][index].paymentStatus + "</td></tr>";
-                jQuery('#orderSlip').html(htmlString);
+				jQuery('#orderSlip').html(htmlString);
+				
+				subTotal += data[1][index].totalPrice;
             }
 
-            jQuery('#orderID').val(data[1][0].orderID);
-            jQuery('#ordersGrandTotal').html('');
-            jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
+			jQuery('#orderID').val(data[1][0].orderID);
+			
+			jQuery('#ordersGrandTotal').html(toPeso(numeral(data[1][0].totalBill).format('0,0.00')));
+			jQuery('#ordersSubtotal').html(toPeso(numeral(subTotal).format('0,0.00')));
+			jQuery('#ordersDiscount').html(toPeso(numeral(data[1][0].discountAmount).format('0,0.00')));
 
             jQuery('#oldTableNumber').val(data[0][0].tableNumber);
 			jQuery('#oldQueueNumber').val(data[0][0].queueNumber);
 			
-			//IAN CODE
 			var billOutLink = "<a href='/bill-out/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
 
 			jQuery('#billOut').wrap(billOutLink);

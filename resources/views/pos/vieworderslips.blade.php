@@ -69,19 +69,19 @@
                             </thead>
                             <tbody id="orderSlip">
                                 @php 
-                                   $grandTotal = 0; 
+                                    $subTotal = 0; 
                                 @endphp
 
                                 @foreach ($items[$loop->index] as $item)
-
-                                @php 
-                                   $grandTotal += $item->totalPrice; 
-                                @endphp
-
                                 <tr>
                                     <td class="py-2">{{$item->productName}}</td>
                                     <td class="py-2">{{$item->quantity}}</td>
-                                    <td class="py-2">{{number_format((float)($item->price), 2, '.', '')}}</td>
+                                    @php 
+                                        $subTotal += $item->totalPrice;
+
+                                        $unitPrice = $item->totalPrice/$item->quantity;
+                                    @endphp
+                                    <td class="py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
                                     <td class="py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
                                 </tr>
                                 @endforeach
@@ -92,16 +92,22 @@
                         <table class="table table-striped" style="font-size:.88em;">
                             <thead>
                                 <tr>
-                                    <th colspan="3" scope="row" class="py-2">TOTAL:</th>
-                                    <th id="ordersGrandTotal" style="text-align:right;" class="py-2">₱{{number_format((float)($grandTotal), 2, '.', '')}}</th>
+                                    <th class="py-2" colspan="3" scope="row">Subtotal:</th>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">
+                                        ₱ {{number_format((float)($subTotal), 2, '.', '')}}
+                                    </td>
+                                </tr>
+                                <tr  class="text-primary">
+                                    <th class="py-2" colspan="3" scope="row">Discount:</th>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">
+                                        ₱ {{number_format((float)($order->discountAmount), 2, '.', '')}}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th colspan="3" scope="row" class="py-2">Tendered:</th>
-                                    <th id="tenderedCash" style="text-align:right;" class="py-2">₱0.00</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3" scope="row" class="py-2">Change:</th>
-                                    <th id="changeDue" style="text-align:right;" class="py-2">₱0.00</th>
+                                    <th class="py-2" colspan="3" scope="row">TOTAL:</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">
+                                        ₱ {{number_format((float)($order->totalBill), 2, '.', '')}}
+                                    </th>
                                 </tr>
                             </thead>
                         </table>
