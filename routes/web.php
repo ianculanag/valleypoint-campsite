@@ -237,10 +237,10 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
 
     //View menu
-    Route::get('/view-menu', 'ProductsController@viewMenuItems');
+    Route::get('/view-menu-items', 'ProductsController@viewMenuItems');
 
     //View menu by category
-    Route::get('/view-menu/{category}', 'ProductsController@viewMenuCategories');
+    Route::get('/view-menu-items/{category}', 'ProductsController@viewMenuCategories');
 
     //View recipe of a menu item
     Route::get('/load-recipe/{menuItem}', 'ProductsController@viewMenuItemRecipe');

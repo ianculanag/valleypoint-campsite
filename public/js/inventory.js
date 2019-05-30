@@ -151,7 +151,7 @@ jQuery(document).ready(function () {
 
         var category = jQuery(this).attr('id');
         
-        jQuery.get('/view-menu/' + category, function (data) {
+        jQuery.get('/view-menu-items/' + category, function (data) {
             loadProductsTable(data);
         });
 
