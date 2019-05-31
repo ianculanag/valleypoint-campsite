@@ -78,7 +78,7 @@ function validateNumberofPaxBackpacker() {
     }
 }
 
-
+//lodgin validations
 jQuery(document).ready(function () {
     jQuery(document).on('input', '#firstName', function () {
         validateFirstName();
@@ -108,3 +108,101 @@ jQuery(document).ready(function () {
         validateNumberofPaxBackpacker();
     })
 });
+
+
+//pos validations
+function validateTableNumber() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#tableNumber').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#tableNumber').val(inputValue.replace(allowedCharacters, ''));
+    }
+
+}
+
+function validateQueueNumber() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#queueNumber').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#queueNumber').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateItemQuantity() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#itemQuantity').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#itemQuantity').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateAmountTendered() {
+    var allowedCharacters = /[^0-9.]/gi;
+    inputValue = jQuery('#amountTendered').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#amountTendered').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateNumberofPaxPos() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#numberOfPax').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#numberOfPax').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateDiscountRate() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#discountRate').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#discountRate').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+function validateDiscountPesoAmount() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#discountPesoAmount').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#discountPesoAmount').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
+
+jQuery(document).ready(function () {
+
+    jQuery(document).on('input', '#tableNumber', function () {
+        validateTableNumber();
+    })
+
+    jQuery(document).on('input', '#queueNumber', function () {
+        validateQueueNumber();
+    })
+
+    jQuery(document).on('input', '#itemQuantity', function () {
+        validateItemQuantity();
+    })
+
+    jQuery(document).on('input', '#amountTendered', function () {
+        validateAmountTendered();
+    })
+
+    jQuery(document).on('input', '#numberOfPax', function () {
+        validateNumberofPaxPos();
+    })
+
+    jQuery(document).on('input', '#discountRate', function () {
+        validateDiscountRate();
+    })
+
+    jQuery(document).on('input', '#discountPesoAmount', function () {
+        validateDiscountPesoAmount();
+    })
+})
