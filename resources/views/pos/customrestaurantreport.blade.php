@@ -51,88 +51,31 @@
                     </div>
                 </div>
                 <div class="card-body">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                                 <table class="table table-sm table-bordered" style="font-size:.90em;">
-                            <tr>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>Sales</th>
-                            <tbody>
-                                <tr>
-                                    <td>Appetizers</td>
-                                    <td>23</td>
-                                    <td>7000</td>
-                                </tr>
-        
-                                <tr>
-                                    <td>Breads</td>
-                                    <td>18</td>
-                                    <td>2000</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>Breakfasts</td>
-                                    <td>37</td>
-                                    <td>7900</td>
-                                </tr>
-        
-                                <tr>
-                                    <td>Group Meals</td>
-                                    <td>20</td>
-                                    <td>9877</td>
-                                </tr>
-        
-                                <tr>
-                                    <td>Noodles</td>
-                                    <td>2</td>
-                                    <td>300</td>
-                                </tr>
-            
-                                <tr>
-                                    <td>Rice Bowls</td>
-                                    <td>3</td>
-                                    <td>870</td>
-                                </tr>
-                                    
-                                <tr>
-                                    <td>Soups</td>
-                                    <td>2</td>
-                                    <td>200</td>
-                                </tr>
-            
-                                <tr>
-                                    <td>Special Rice Meals</td>
-                                    <td>2</td>
-                                    <td>500</td>
-                                </tr>
-        
-                                <tr>
-                                    <td>Extras</td>
-                                    <td>2</td>
-                                    <td>200</td>
-                                </tr>
-                
-                                <tr>
-                                    <td>Beverages</td>
-                                    <td>120</td>
-                                    <td>10000</td>
-                                </tr>
-                                        
-                                <tr>
-                                    <td>Liquors</td>
-                                    <td>100</td>
-                                    <td>15000</td>
-                                </tr>
-        
-                                <tr>
-                                    <td>Gross Sales</td>
-                                    <td></td>
-                                    <td>Total</td>
-                                </tr>
-                            </tbody>
-                        </tr>
-                        </table>
-                    </div>
+                                        <tr>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Quantity</th>
+                                                <th>Amount</th>
+                                                <tbody>
+                                                    @if(count($productOrdered) > 1)
+                                                    @foreach($productOrdered as $orders)
+                                                    <tr class="">
+                                                      <td>{{$orders->productName}}</td>
+                                                      <td>{{$orders->productCategory}}</td>
+                                                      <td>{{$orders->quantity}}</td>
+                                                      <td class="reportTotalAmount">{{$orders->totalPrice}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @endif
+                                                </tbody>
+                                        </tr>
+                                </table>
+                                <div class="form-group row py-0 my-0 ">
+                                        <h6 label for="totalIncome" class="col-sm-4 pt-2" id="reportGrandTotal" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Total Income: 0000.00</label></h6>
+                                           <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
+                                   </div>
                 </div>
             </div>
         </div> 

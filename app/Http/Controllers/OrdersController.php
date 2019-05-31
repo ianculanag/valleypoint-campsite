@@ -111,7 +111,12 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function thisWeeksRestaurantReport() {
-        return view('pos.weeklyrestaurantreports');
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->where('paymentStatus', '=', 'paid')
+        ->get();
+       return view('pos.weeklyrestaurantreports')->with('productOrdered', $productOrdered);
     }
 
     /**
@@ -120,7 +125,12 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function thisMonthsRestaurantReport() {
-        return view('pos.monthlyrestaurantreports');
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->where('paymentStatus', '=', 'paid')
+        ->get();
+       return view('pos.monthlyrestaurantreports')->with('productOrdered', $productOrdered);
     }
 
     /**
@@ -129,7 +139,12 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function customRestaurantReport() {
-        return view('pos.customrestaurantreport');
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->where('paymentStatus', '=', 'paid')
+        ->get();
+       return view('pos.customrestaurantreport')->with('productOrdered', $productOrdered);
     }
 
     /**

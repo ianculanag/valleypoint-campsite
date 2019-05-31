@@ -41,11 +41,6 @@
                 <div class="row">
                 <div class="col-md-12">
                             <table class="table table-sm table-bordered" style="font-size:.90em;">
-                            <thread>
-                                    <tr class="text-center">
-                                        <th colspan="4"> Bar and Restaurant  </th>                                        
-                                    </tr>
-                                </thread>
                                 <tr>
                                 <th>Name</th>
                                 <th>Category</th>
