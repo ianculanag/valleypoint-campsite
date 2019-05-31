@@ -43,26 +43,25 @@
                             <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thread>
                                     <tr class="text-center">
-                                        <th colspan="4"> Restaurant  </th>                                        
+                                        <th colspan="4"> Bar and Restaurant  </th>                                        
                                     </tr>
-                                <thread>
+                                </thread>
                                 <tr>
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Quantity</th>
                                 <th>Amount</th>
                                 <tbody>
-                                        @php
-                                        $productOrderedCount = 0;
-                                         @endphp
-     
-                                         <tr>
-                                             @foreach ($productOrdered as $orderedProduct)
-                                                 @php
-                                                     $productOrderedCount++;
-                                                 @endphp
-                                             @endforeach
-                                         </tr>
+                                    @if(count($productOrdered) > 1)
+                                    @foreach($productOrdered as $orders)
+                                    <tr class="">
+                                      <td>{{$orders->productName}}</td>
+                                      <td>{{$orders->productCategory}}</td>
+                                      <td>{{$orders->quantity}}</td>
+                                      <td>{{$orders->totalPrice}}</td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
                                  </tbody>
                         </table>
                               <div class="form-group row py-0 my-0 ">
@@ -70,55 +69,6 @@
                                      <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
                              </div>
                      </div> 
-                <div class="col-md-12">
-                            <table class="table table-sm table-bordered" style="font-size:.90em;">
-                            <thread>
-                                    <tr class="text-center">
-                                        <th colspan="4"> Beer and Liquors </th>                                        
-                                    </tr>
-                                <thread>
-                                <tr>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
-
-                                <tbody>
-                                    <tr>
-                                    <td>San Mig Light</td>
-                                    <td>Beer and Liquor</td>
-                                    <td>5</td>
-                                    <td>350.00</td>
-                                    </tr>
-
-                                    <tr>
-                                    <td>Smirnoff Mule</td>
-                                    <td>Beer and Liquor</td>
-                                    <td>3</td>
-                                    <td>225.00</td>
-                                    </tr>
-
-                                    <tr>
-                                    <td>San Mig Apple</td>
-                                    <td>Beer and Liquor</td>
-                                    <td>5</td>
-                                    <td>350.00</td>
-                                    </tr>
-
-                                    <tr>
-                                    <td>Mojito Silver</td>
-                                    <td>Beer and Liquor</td>
-                                    <td>5</td>
-                                    <td>600.00</td>
-                                    </tr>
-                          </tbody>
-                      </table>
-                   </div>    
-                            <div class="form-group row py-0 my-0 ">
-                                <h6 label for="totalIncome" class="col-sm-4 pt-2" style="font-size:1em; margin-left:30em;">Total Income: 0000.00</label></h6>
-                                   <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
-                        </div>
-                     </div>
                 </div>
             </div>
         </div> 

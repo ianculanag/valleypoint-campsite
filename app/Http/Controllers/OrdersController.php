@@ -99,18 +99,10 @@ class OrdersController extends Controller
     public function todaysRestaurantReport() {
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
-        //->where('products.id', '=', 'items.productID')
         ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
         ->where('paymentStatus', '=', 'paid')
         ->get();
-
-        // $productOrdered=DB::table('items')
-        // ->leftJoin('products','products.id','products.productName')
-        // ->select('productID', 'paymentStatus', 'products.productName')
-        // ->get();
-
-        return $productOrdered;
-       //return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered);
+       return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered);
     }
 
     /**
