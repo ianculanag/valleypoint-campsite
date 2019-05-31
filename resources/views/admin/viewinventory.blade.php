@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid mx-1 py-0">
-        <h3 class="text-center pb-3 mb-0">Inventory Library</h3>
+        <h3 class="text-center pb-3 mb-0">Ingredient Consumption</h3>
         <div class="row px-3">
             <div class="col-md-9 pr-0">
                 <div class="container-fluid lodging-tabs px-0">

@@ -10,8 +10,7 @@ jQuery(document).ready(function () {
 			var htmlString = "";
 			var subTotal = 0;
 
-            for(var index = 0; index < data[1].length; index++) {
-                //console.log(index);
+            for (var index = 0; index < data[1].length; index++) {
                 htmlString += "<tr><td class='py-2'>" + data[1][index].productName + "</td>";
 				htmlString += "<td class='text-right py-2'>" + data[1][index].quantity + "</td>";
 
@@ -31,8 +30,7 @@ jQuery(document).ready(function () {
 			jQuery('#ordersSubtotal').html(toPeso(numeral(subTotal).format('0,0.00')));
 			jQuery('#ordersDiscount').html(toPeso(numeral(data[1][0].discountAmount).format('0,0.00')));
 
-            jQuery('#oldTableNumber').val(data[0][0].tableNumber);
-			jQuery('#oldQueueNumber').val(data[0][0].queueNumber);
+            jQuery('#oldTableNumber').val(data[0][0].tableNumber);\
 			
 			var billOutLink = "<a href='/bill-out/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
 
@@ -120,28 +118,25 @@ jQuery(document).ready(function () {
 });
 
 function reloadTableView() {
-	//console.log("It worked!");
 	jQuery.get("/reload-table-view", function(data) {
-		//console.log("It worked again!");
 			
 		tableCards = "";
 
-		for(var index = 0; index < data.length; index++) {
-			console.log("It worked again, again!");
+		for (var index = 0; index < data.length; index++) {
 			tableCards += "<a style='cursor:pointer'>";
 
-			if(data[index].status == 'available') {
+			if (data[index].status == 'available') {
 				tableCards += "<div class='card mx-2 restaurant-available-tables' id='" + data[index].id + "' style='width:12.5rem; height:7em;'>";
-			} else if(data[index].status == 'occupied') {
+			} else if (data[index].status == 'occupied') {
 				tableCards += "<div class='card mx-2 restaurant-occupied-tables' id='" + data[index].id + "' style='width:12.5rem; height:7em;'>";
 			}
 
 			tableCards += "<div class='card-body'>";
 			tableCards += "<h5 class='card-title'>" + data[index].tableNumber;
 
-			if(data[index].status == 'available') {
+			if (data[index].status == 'available') {
 				tableCards += "<span class='badge badge-info float-right badgeStatus' style='font-size:.55em;'>Available</span></h5>";
-			} else if(data[index].status == 'occupied') {
+			} else if (data[index].status == 'occupied') {
 				tableCards += "<span class='badge badge-dark float-right badgeStatus' style='font-size:.55em;'>Occupied</span></h5>";
 				tableCards += "<p class='card-text pt-3'> Total bill:";
 				tableCards += "<span class='float-right'> ₱" + numeral(data[index].totalBill).format('0, 0.00') + "</span></p>";

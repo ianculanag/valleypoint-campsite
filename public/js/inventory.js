@@ -4,14 +4,11 @@ jQuery(document).ready(function () {
 
         var category = jQuery(this).attr('id');
         var inventoryReportTab = jQuery('.inventory-reports-tabs.active').attr('id');
-
-        console.log(category);
-        console.log(inventoryReportTab);
         
         if (inventoryReportTab == 'dailyInventory') {
             
             var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-D');
-            console.log(onDate);
+            
             jQuery.get('/view-inventory/daily/' + category + '/' + onDate, function (data) {
                 loadInventoryTable(data);
             });
@@ -20,7 +17,7 @@ jQuery(document).ready(function () {
 
             var onMonth = jQuery('#selectMonth').val();
             var onYear = jQuery('#selectYear').val();
-            console.log(onMonth, onYear);
+            
             jQuery.get('/view-inventory/monthly/' + category + '/' + onMonth + '/' + onYear , function (data) {
                 loadInventoryTable(data);
             });
@@ -29,7 +26,7 @@ jQuery(document).ready(function () {
 
             var fromDate = moment(jQuery('#fromDate').val()).format('YYYY-MM-D');
             var toDate = moment(jQuery('#toDate').val()).format('YYYY-MM-D');
-            console.log(fromDate, toDate);
+            
             jQuery.get('/view-inventory/custom/' + category + '/' + fromDate + '/' + toDate , function (data) {
                 loadInventoryTable(data);
             });
@@ -37,15 +34,9 @@ jQuery(document).ready(function () {
         }
 
         if (category == 'allCategories') {
-            /*jQuery.get('/view-all-ingredient-category/', function (data) {
-                loadInventoryTable(data);
-            });*/
             jQuery('.categories').removeClass('active');
             jQuery('#all-categories').addClass('active');
         } else {
-            /*jQuery.get('/view-ingredient-category/' + category, function (data) {
-                loadInventoryTable(data);
-            });*/
             jQuery('.categories').removeClass('active');
             jQuery('#this-' + category).addClass('active');
         }
@@ -67,8 +58,6 @@ jQuery(document).ready(function () {
         var id = jQuery('.categories.active').attr('id').split('-');
         var category = id[1];
 
-        console.log(category);
-
         if (jQuery(this).attr('id') == 'loadDailyInventory') {
 
             var onDate = moment(jQuery('#lodgingReportDate').val()).format('YYYY-MM-D');
@@ -82,7 +71,6 @@ jQuery(document).ready(function () {
             var onMonth = jQuery('#selectMonth').val();
             var onYear = jQuery('#selectYear').val();
 
-            //console.log(onMonth, onYear);
             jQuery.get('/view-inventory/monthly/' + category + '/' + onMonth + '/' + onYear , function (data) {
                 loadInventoryTable(data);
             });
@@ -107,7 +95,7 @@ jQuery(document).ajaxComplete(function() {
 function loadInventoryTable(data) {
     var htmlString = "";
 
-    if(data.length > 0) {
+    if (data.length > 0) {
         var ingredientCount = 0;
 
         htmlString += "<table class='table table-sm dataTable stripe' cellspacing='0' id='inventoryTable'>";
@@ -172,7 +160,7 @@ jQuery(document).ready(function () {
             jQuery("#productName").html(data[0].productName + " Recipe");
             htmlString = "";
 
-            if(data.length > 0) {
+            if (data.length > 0) {
                 for (var index = 0; index < data.length; index++) {
                     htmlString += "<tr><td class='py-2'>" + data[index].ingredientName + "</td>";
                     htmlString += "<td class='text-right py-2'>" + data[index].quantity + "</td></tr>";
@@ -190,7 +178,7 @@ jQuery(document).ready(function () {
 function loadProductsTable(data) {
     var htmlString = "";
 
-    if(data.length > 0) {
+    if (data.length > 0) {
         var productCount = 0;
 
         htmlString += "<table class='table table-sm dataTable compact' cellspacing='0' id='productsTable'>";
@@ -209,7 +197,6 @@ function loadProductsTable(data) {
 
         htmlString += "</tbody></table>";
         jQuery('#productsLibrary').html(htmlString);
-
     } else {
         htmlString += "<table class='table table-sm dataTable compact' cellspacing='0' id='productsTable'>";
         htmlString += "<thead><tr> <th>No.</th> <th>Product Name</th> <th>Price</th> <th>Price (guest)</th>";
