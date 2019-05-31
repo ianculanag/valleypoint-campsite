@@ -13,6 +13,7 @@ use App\Units;
 use App\Services;
 use App\Charges;
 use App\Payments;
+use App\VoidTransactions;
 use Carbon\Carbon;
 use Auth;
 
@@ -700,5 +701,20 @@ class AccommodationsController extends Controller
         } 
 
         return redirect('/backpacker');
+    }
+
+
+    /**
+     * Void transaction
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function voidTransaction(Request $request) {
+        $void = new voidTransactions;
+        $void->accommodationID = $request->input('accommodationID');
+        $void->userID = Auth::user()->id;
+        $void->remarks = $request->input('reasonForVoid');
+        $void->save();
     }
 }

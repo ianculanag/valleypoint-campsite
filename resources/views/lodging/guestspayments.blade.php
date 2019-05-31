@@ -166,7 +166,7 @@
                         <p>
                             Please type in the last name of the representative guest to confirm.
                         </p>
-                        <input type="text" class="form-control mb-2" id="guestNameConfirm" required>
+                        <input type="text" class="form-control mb-2" id="guestNameConfirm" autocomplete="off" required>
                         <button type="button" class="btn btn-danger" style="width:100%" id="confirmVoidTransaction" disabled>I understand the consequences, void this transaction.</button>
                     </div>
                 </div>

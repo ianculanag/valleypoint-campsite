@@ -172,6 +172,11 @@ Route::group(['middleware' => ['auth', 'lodging']], function() {
 
     //Load room capacity
     Route::get('/load-room-capacity/{unitNumber}', 'UnitsController@loadRoomCapacity');
+
+
+    //DANGER
+    //Void Transaction
+    Route::post('/voidTransaction', 'AccommodationsController@voidTransaction');
 });
 
 /* Admin */
