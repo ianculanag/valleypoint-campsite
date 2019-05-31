@@ -15,8 +15,10 @@
         @csrf
         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                    
         {{--<input type="hidden" name="accommodationID" value="{{$guestDetails->accommodationID}}">--}}
+        </form>
         @foreach($guest as $guest)
         <h5 style="margin-bottom:.80em;">{{$guest->firstName}} {{$guest->lastName}}</h5>
+        <input type="hidden" id="guestLastName" value="{{$guest->lastName}}">
         @endforeach
         <div class="row">
             <div class="col-md-5 card p-0">
@@ -126,6 +128,49 @@
         <button type="button" class="btn btn-primary">Get Payment</button>
         <button type="button" class="btn btn-info">Refund Payment</button>
         <button type="button" class="btn btn-secondary">Add Negative Charge</button>
-        <button type="button" class="btn btn-danger">Void Transaction</button>
-    </div>          
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#voidModal">Void Transaction</button>
+    </div> 
+    
+    
+    <form class="form" id="voidTransaction" method="POST" action="/voidTransaction">
+        @csrf
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
+        <input type="hidden" name="accommodationID" value="{{$guest->accommodationID}}">
+
+        <div id="voidModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Are you absolutely sure?</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-0 mx-0 mt-0 pt-0 mb-0 pb-0">
+                        <div class="alert alert-warning rounded-0">
+                            Unexpected bad things will happen if you don’t read this!
+                        </div>
+                    </div>
+                    <div class="modal-body mt-0 pt-0">
+                        <p>
+                            This action <strong>cannot</strong> be undone. This will permanently void 
+                            all transactions of <strong>{{$guest->firstName}} {{$guest->lastName}}</strong>
+                            incuding accommodation units, charges, and payments.
+                        </p>
+                        <p>
+                            This void transaction will be recorded under your account name, {{Auth::user()->name}}.
+                        </p>
+                        <p>Please input your reason for voiding (required): </p>
+                        <textarea class="form-control mb-3 rows-3" name="reasonForVoid" id="reasonForVoid" required></textarea>
+                        
+                        <p>
+                            Please type in the last name of the representative guest to confirm.
+                        </p>
+                        <input type="text" class="form-control mb-2" id="guestNameConfirm" required>
+                        <button type="button" class="btn btn-danger" style="width:100%" id="confirmVoidTransaction" disabled>I understand the consequences, void this transaction.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection
