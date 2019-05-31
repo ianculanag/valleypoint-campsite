@@ -24,7 +24,7 @@ class CreateAccommodationUnitsTable extends Migration
             $table->dateTime('checkinDatetime');
             $table->dateTime('checkoutDatetime');
             $table->integer('serviceID')->default(5);
-            $table->enum('status', ['ongoing','finished']);
+            $table->enum('status', ['ongoing','finished', 'void']);
             //$table->foreign('accommodationID')->references('id')->on('Accommodations');
             //$table->foreign('unitID')->references('id')->on('Units');            
             //$table->foreign('serviceID')->references('id')->on('Services');

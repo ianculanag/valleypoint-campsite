@@ -17,7 +17,7 @@ class CreateReservationUnitsTable extends Migration
             $table->integer('reservationID')->unsigned();
             $table->integer('unitID')->unsigned();         
             $table->primary(['reservationID', 'unitID']);
-            $table->enum('status', ['reserved','checkedin', 'canceled']);
+            $table->enum('status', ['reserved','checkedin', 'canceled', 'void']);
             $table->integer('numberOfPax');
             //$table->integer('numberOfGroups')->nullable();
             $table->integer('numberOfBunks')->nullable();
