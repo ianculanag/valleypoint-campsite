@@ -389,19 +389,24 @@ class ReservationsController extends Controller
                  'services.price')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '<', '6')
-        ->where('charges.remarks', '=', 'unpaid')
-        ->orWhere('charges.remarks', '=', 'partial')
+        ->where(function($query) use ($reservationID) {
+            $query->where('charges.remarks', '=', 'unpaid')
+                  ->orWhere('charges.remarks', '=', 'partial');
+        })
         ->groupBy('chargeID')
         ->get();
 
-        //return $charges;
+        //return $reservationID;
+        return $charges;
 
         $additionalCharges = DB::table('charges')
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '>', '5')
-        ->where('charges.remarks', '=', 'unpaid')
-        ->orWhere('charges.remarks', '=', 'partial')
+        ->where(function($query) use ($reservationID) {
+            $query->where('charges.remarks', '=', 'unpaid')
+                  ->orWhere('charges.remarks', '=', 'partial');
+        })
         ->get();
 
         $additionalServices = DB::table('charges')
@@ -518,8 +523,10 @@ class ReservationsController extends Controller
                  'charges.reservationID', 'services.serviceName', 'services.price')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '=', '5')
-        ->where('charges.remarks', '=', 'unpaid')
-        ->orWhere('charges.remarks', '=', 'partial')
+        ->where(function($query) use ($reservationID) {
+            $query->where('charges.remarks', '=', 'unpaid')
+                  ->orWhere('charges.remarks', '=', 'partial');
+        })
         ->get();
 
         $backpackerQuantity = $charges[0]->quantity;
@@ -529,8 +536,10 @@ class ReservationsController extends Controller
         ->join('services', 'services.id', 'charges.serviceID')
         ->where('charges.reservationID', '=', $reservationID)
         ->where('charges.serviceID', '>', '6')
-        ->where('charges.remarks', '=', 'unpaid')
-        ->orWhere('charges.remarks', '=', 'partial')
+        ->where(function($query) use ($reservationID) {
+            $query->where('charges.remarks', '=', 'unpaid')
+                  ->orWhere('charges.remarks', '=', 'partial');
+        })
         ->get();
 
         //return $additionalCharges;
