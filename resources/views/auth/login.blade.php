@@ -8,7 +8,7 @@
         background-size: cover;
     }
 </style>
-<div class="container col-md-5 pt-5 mt-5">
+<div class="container col-md-5 col-sm-10 pt-5 mt-4">
     <div class="card mt-5" style="background-color: #ffffffb3;">
         <div class="mt-4 mb-3 text-center">
             <img src="{{asset('logo.png')}}" style="width: 12em;">
@@ -33,12 +33,12 @@
                     </span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mt-4 mb-2">
+                <button type="submit" class="btn btn-primary btn-block mt-4 mb-5">
                     {{ __('Login') }}
                 </button>
-                <a href="#forgotPass" class="forgetPass">
+                {{-- <a href="#forgotPass" class="forgetPass">
                     <p class="text-center pb-4">Forgot Password?</p>
-                </a>
+                </a> --}}
             </div>
         </form>
    </div> 

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-3">
-                        <img src={{asset('logo.jpg')}} class="float-right" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
+                        <img src={{asset('logo.png')}} class="float-right" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
                     </div>
                 </div>
                 <div class="card-body">

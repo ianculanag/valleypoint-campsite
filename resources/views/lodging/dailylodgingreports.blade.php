@@ -64,7 +64,7 @@
             <div class="card col-md-10 offset-md-1 col-sm-12 py-4 ">
                 <div class="row">
                     <div class="col-md-6 col-sm-4">
-                        <img src={{asset('logo.jpg')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
+                        <img src={{asset('logo.png')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <h6 class="text-right"> Lodging Sales Report </h6>

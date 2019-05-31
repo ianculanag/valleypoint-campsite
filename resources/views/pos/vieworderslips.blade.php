@@ -35,8 +35,13 @@
                                     <input class="form-control" type="number" name="tableNumber" id="tableNumber{{$order->id}}" min="1" max="30" placeholder="" value="{{$order->tableNumber}}">
                                 </div>--}}  
                                 <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                    {{-- @if($order->tableNumber == null)
+                                    <input class="form-control" type="number" name="tableNumber{{$order->id}}" id="tableNumber{{$order->id}}" min="1" max="30" value="{{$order->tableNumber}}" disabled>
+                                    <input class="form-control" type="number" name="oldTableNumber{{$order->id}}" id="oldTableNumber{{$order->id}}" value="0" style="display:none">
+                                    @else --}}
                                     <input class="form-control" type="number" name="tableNumber{{$order->id}}" id="tableNumber{{$order->id}}" min="1" max="30" value="{{$order->tableNumber}}" disabled>
                                     <input class="form-control" type="number" name="oldTableNumber{{$order->id}}" id="oldTableNumber{{$order->id}}" value="{{$order->tableNumber}}" style="display:none">
+                                    {{-- @endif --}}
                                 </div>       
                                 <span id="editTableNumber-{{$order->id}}" class="edit-table-number col-sm-2 input-group-addon hidden-elements px-3 mx-0" style="cursor:pointer">
                                     <i id="editTable-{{$order->id}}" class="fa fa-pencil-alt" style="color:#3b3f44 !important;"></i>

@@ -416,6 +416,24 @@ class OrdersController extends Controller
             ]);
         }
     }
+
+    /**
+     * Add table number
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addTableNumber($orderID, $tableNumber) {
+        $order = Orders::find($orderID);
+        $order->update([
+            'tableNumber' => $tableNumber
+        ]);
+
+        $table = RestaurantTable::find($tableNumber);
+
+        $table->update([
+            'status' => 'occupied'
+        ]);
+    }
  
     /**
      * Update queue number

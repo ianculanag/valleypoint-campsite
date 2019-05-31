@@ -291,6 +291,7 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
 
     //Update table number
     Route::get('/update-table-number/{orderID}/{tableNumber}/{oldTableNumber}', 'OrdersController@updateTableNumber');
+    Route::get('/update-table-number/{orderID}/{tableNumber}', 'OrdersController@addTableNumber');
 
     //Update queue number
     Route::get('/update-queue-number/{orderID}/{queueNumber}/{oldQueueNumber}', 'OrdersController@updateQueueNumber');
