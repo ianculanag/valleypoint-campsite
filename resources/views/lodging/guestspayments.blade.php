@@ -19,7 +19,6 @@
         @foreach($guest as $guest)
         <h5 style="margin-bottom:.80em;">{{$guest->firstName}} {{$guest->lastName}}</h5>
         <input type="hidden" id="guestLastName" value="{{$guest->lastName}}">
-        @endforeach
         <div class="row">
             <div class="col-md-5 card p-0">
                 <h5 style="text-align:center;padding-top:0.5em;">Charges</h5>
@@ -172,5 +171,6 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </form>
 @endsection

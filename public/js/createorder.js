@@ -19,6 +19,14 @@ jQuery(document).ready(function () {
 		removeItemEntries();
 	})
 
+	jQuery('.menu-item').dblclick(function() {
+		showItemAddedMessage();
+		addRowInOrderSlip();
+		addOrderEntry(); //adds the order as hidden input
+
+		removeItemEntries();
+	});
+
 	jQuery('.makeorder').click(function () {
 		removeItemEntries();
 		jQuery('#searchFoodItem').val('');
@@ -180,6 +188,22 @@ jQuery(document).ready(function () {
 
 		jQuery('#orderSlipItem' + jQuery(this).parent().attr('id').slice(13)).remove(); //GAC
 		jQuery('#itemOrderDiv' + jQuery(this).parent().attr('id').slice(13)).remove();
+		updateOrderSubtotal();
+
+		displayEmptyMenu();
+		updateOrderSubtotal();
+	});
+
+	jQuery(document).on('dblclick', '.items', function() {
+		displayMessage = 'Item removed successfully.';
+		jQuery('#snackbar').html(displayMessage);
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+		setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+		//jQuery(this).remove();
+
+		jQuery('#orderSlipItem' + jQuery(this).attr('id').slice(13)).remove(); //GAC
+		jQuery('#itemOrderDiv' + jQuery(this).attr('id').slice(13)).remove();
 		updateOrderSubtotal();
 
 		displayEmptyMenu();

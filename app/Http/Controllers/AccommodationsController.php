@@ -711,10 +711,33 @@ class AccommodationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function voidTransaction(Request $request) {
+        $accommodationID = $request->input('accommodationID');
+
         $void = new voidTransactions;
-        $void->accommodationID = $request->input('accommodationID');
+        $void->accommodationID = $accommodationID;
         $void->userID = Auth::user()->id;
         $void->remarks = $request->input('reasonForVoid');
         $void->save();
+
+        //void accommodation units
+        $accommodationUnit = DB::table('accommodation_units')
+        ->where('accommodationID', '=', $accommodationID)
+        ->update(array('status' => 'void'));
+
+        //void charges
+        $charge = DB::table('charges')
+        ->where('accommodationID', '=', $accommodationID)
+        ->update(array('remarks' => 'void'));
+
+        $voidedCharges = DB::table('charges')
+        ->where('accommodationID', '=', $accommodationID)
+        ->get();
+
+        //void payments
+        for($index = 0; $index < count($voidedCharges); $index++) {
+            $payment = DB::table('payments')
+            ->where('chargeID', '=', $voidedCharges[$index]->id)
+            ->update(array('paymentStatus' => 'void'));
+        }
     }
 }
