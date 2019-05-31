@@ -59,6 +59,25 @@ function validateAdditionalService() {
     jQuery('#additionalServiceNumberOfPax').setSelectionRange(cursor, cursor);
 }
 
+function validatePayment() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('#amount').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('#amount').val(inputValue.replace(allowedCharacters, ''));
+    }
+
+}
+
+function validateNumberofPaxBackpacker() {
+    var allowedCharacters = /[^0-9]/gi;
+    inputValue = jQuery('.numberOfPaxBackpacker').val();
+
+    if (allowedCharacters.test(inputValue)) {
+        jQuery('.numberOfPaxBackpacker').val(inputValue.replace(allowedCharacters, ''));
+    }
+}
+
 
 jQuery(document).ready(function () {
     jQuery(document).on('input', '#firstName', function () {
@@ -81,4 +100,11 @@ jQuery(document).ready(function () {
         validateAdditionalService();
     })
 
+    jQuery(document).on('input', '#amount', function () {
+        validatePayment();
+    })
+
+    jQuery(document).on('input', '.numberOfPaxBackpacker', function () {
+        validateNumberofPaxBackpacker();
+    })
 });

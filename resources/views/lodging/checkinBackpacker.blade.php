@@ -80,7 +80,7 @@
                                         <i class="fa fa-users" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="" id="{{$unit->unitNumber}}">
+                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="1" value="" id="{{$unit->unitNumber}}">
                             </div>
                         </div>
                     </div>  
@@ -93,7 +93,7 @@
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="number" name="contactNumber"  required="required" maxlength="11" placeholder="" value="" autocomplete = "off">
+                                <input class="form-control" type="text" name="contactNumber" id="contactNumber" required="required" maxlength="11" placeholder="" value="" autocomplete = "off">
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
@@ -266,7 +266,7 @@
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="" value="">
+                            <input class="form-control numberOfPaxBackpacker"  required="required" min="1" max="100" name="numberOfPaxBackpacker" type="number" placeholder="1" value="">
                         </div>
                     </div>
                 </div>  
@@ -279,7 +279,7 @@
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input class="form-control" type="text" name="contactNumber"  required="required" maxlength="11" placeholder="" value="">
+                            <input class="form-control" type="text" name="contactNumber" id="contactNumber" required="required" maxlength="11" placeholder="" value="">
                         </div>
                     </div>
                     <div class="col-md-6 mb-1">
