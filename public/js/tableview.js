@@ -107,11 +107,8 @@ jQuery(document).ready(function () {
 	jQuery(document).on('click', '.saveQueue', function () {
 		jQuery('#orderQueueNumber').prop('disabled', true); 
 
-		jQuery.get("update-queue-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderQueueNumber').val() + "/" + jQuery('#oldQueueNumber').val(), function(data) {
+		jQuery.get("update-queue-number/" + jQuery('#orderID').val() + "/"  + jQuery('#orderQueueNumber').val(), function(data) {
 		});
-
-		var newQueueNumber = jQuery('#orderQueueNumber').val();
-		jQuery('#oldQueueNumber').val(newQueueNumber);
 
 		htmlString = "";
 		htmlString += "<i id='editQueue' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";
@@ -213,11 +210,8 @@ jQuery(document).ready(function () {
 		var orderID = id[1];
 		jQuery('#queueNumber' + orderID).prop('disabled', true); 
 
-		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#queueNumber' + orderID).val() + "/" + jQuery('#oldQueueNumber' + orderID).val(), function(data) {
+		jQuery.get("update-queue-number/"  + orderID + "/"  + jQuery('#queueNumber' + orderID).val(), function(data) {
 		});
-
-		var newQueueNumber = jQuery('#orderQueueNumber' + orderID).val();
-		jQuery('#oldQueueNumber' + orderID).val(newQueueNumber);
 
 		htmlString = "";
 		htmlString += "<i id='editQueue-" + orderID + "' class='fa fa-pencil-alt' style='color:#3b3f44 !important;'></i>";

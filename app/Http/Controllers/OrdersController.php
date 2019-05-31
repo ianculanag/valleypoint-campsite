@@ -440,7 +440,7 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateQueueNumber($orderID, $queueNumber, $oldQueueNumber) {
+    public function updateQueueNumber($orderID, $queueNumber) {
         $order = Orders::find($orderID);
         $order->update([
             'queueNumber' => $queueNumber
