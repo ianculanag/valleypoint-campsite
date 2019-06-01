@@ -42,8 +42,8 @@ class CreateUsersTable extends Migration
             )
         );*/
         $user = new User;
-        $user->username = 'jpaquino';
-        $user->password = Hash::make('jpaquino');
+        $user->username = 'lodging';
+        $user->password = Hash::make('lodging');
         $user->name = 'JP Aquino';
         $user->role = 'lodging';
         $user->contactNumber = '09178504634';
@@ -51,8 +51,8 @@ class CreateUsersTable extends Migration
         $user->save();
 
         $user = new User;
-        $user->username = 'jhaypee';
-        $user->password = Hash::make('jhaypee');
+        $user->username = 'admin';
+        $user->password = Hash::make('admin');
         $user->name = 'Jhaypee';
         $user->role = 'admin';
         $user->contactNumber = '09177777634';
@@ -62,7 +62,7 @@ class CreateUsersTable extends Migration
         $user = new User;
         $user->username = 'cashier';
         $user->password = Hash::make('cashier');
-        $user->name = 'Cashier';
+        $user->name = 'Jay';
         $user->role = 'cashier';
         $user->contactNumber = '09112347634';
         $user->email = 'cashier@valleypoint.com';
