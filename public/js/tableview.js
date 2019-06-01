@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
 			jQuery('#ordersSubtotal').html(toPeso(numeral(subTotal).format('0,0.00')));
 			jQuery('#ordersDiscount').html(toPeso(numeral(data[1][0].discountAmount).format('0,0.00')));
 
-            jQuery('#oldTableNumber').val(data[0][0].tableNumber);\
+            jQuery('#oldTableNumber').val(data[0][0].tableNumber);
 			
 			var billOutLink = "<a href='/bill-out/"+data[1][0].orderID+"' style='text-decoration:none;color:white'></a>";
 

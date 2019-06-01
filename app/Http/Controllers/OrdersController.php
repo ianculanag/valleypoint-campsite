@@ -549,6 +549,7 @@ class OrdersController extends Controller
             'totalBill' => $request->input('totalBill'),
             'discountAmount' => $request->input('discountAmount'),
             'status' => 'finished'
+            //'referenceNumber' => $request->input('referenceNumber')
         ]);
 
         $payment = new Payments;

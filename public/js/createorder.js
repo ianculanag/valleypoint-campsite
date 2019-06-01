@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 		removeItemEntries();
 	})
 
-	jQuery('.menu-item').dblclick(function() {
+	jQuery(document).on('dblclick', '.menu-item', function() {
 		showItemAddedMessage();
 		addRowInOrderSlip();
 		addOrderEntry(); //adds the order as hidden input

@@ -97,17 +97,17 @@
                                     Save Order
                                 </button>
                             </div>                            
-                            <div class="col-md-4 px-1">
+                            <!--div class="col-md-4 px-1">
                                 <button type="button" data-toggle="modal" data-target="#paymentModal" class="btn btn-success btn-block" style="text-align:center;" id="getPayment" disabled>
                                     Get Cash
                                 </button>
-                            </div>
-                            <div class="col-md-4 px-1">
+                            </div-->
+                            <div class="col-md-6 px-1">
                                 <button type="button" data-toggle="modal" data-target="#discountModal" class="btn btn-info btn-block" style="text-align:center;" id="discountButton" disabled>
                                     Discount
                                 </button>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-6 px-1">
                                 <button type="button" class="btn btn-danger btn-block" style="text-align:center;" id="clearItems" disabled>
                                     Clear
                                 </button>

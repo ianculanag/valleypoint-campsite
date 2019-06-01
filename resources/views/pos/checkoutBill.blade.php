@@ -19,7 +19,12 @@
         <div class="row">
             <div class="col-md-6 offset-3 mb-3" >
                 <div class="card p-0 m-0" style="min-height:80vh; max-height:80vh;">
-                    <h4 class="text-muted text-center pt-3 pb-1">Check-out Bill</h4>
+                    <div class="container row">
+                    <h4 class="text-muted text-center col-sm-12 pt-3 pb-1">Bill Out</h4>
+                    <input class="form-control col-sm-4 mt-2 mr-2" type="text" style="position:absolute;right:0" value="" id="referenceNumber" name="referenceNumber">
+                    </div>
+                    <!--h4 class="text-muted text-center pt-3 pb-1">Bill Out</h4-->
+
                     <div class="card-body p-0 m-0 scrollbar-near-moon" style="overflow-y:auto;">
                         <table class="table table-striped" >
                             <thead>
