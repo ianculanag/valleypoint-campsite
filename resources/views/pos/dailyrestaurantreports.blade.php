@@ -48,19 +48,27 @@
                                 <th>Amount</th>
                                 <tbody>
                                     @if(count($productOrdered) > 1)
+                                    @php
+                                    
+                                    $totalPrice = 0;
+                                @endphp
                                     @foreach($productOrdered as $orders)
                                     <tr class="">
                                       <td>{{$orders->productName}}</td>
                                       <td>{{$orders->productCategory}}</td>
                                       <td>{{$orders->quantity}}</td>
-                                      <td>{{$orders->totalPrice}}</td>
+                                      <td class="restaurantPricesDaily">{{$orders->totalPrice}}</td>
                                     </tr>
+                                    @php
+                                        $totalPrice += $orders->totalPrice;
+                                    @endphp
+
                                     @endforeach
                                     @endif
                                  </tbody>
                         </table>
                               <div class="form-group row py-0 my-0 ">
-                                  <h6 label for="totalIncome" class="col-sm-4 pt-2" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Total Income: 0000.00</label></h6>
+                              <h6 label for="totalIncome" class="col-sm-4 pt-2" id="restaurantIncomeDaily" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Gross Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
                                      <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
                              </div>
                      </div> 
