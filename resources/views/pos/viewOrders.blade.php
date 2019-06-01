@@ -22,8 +22,10 @@
                 @if(count($orders) > 1)
                 @foreach($orders as $order)
                 <tr class="">
-                  <td>{{$order->id}}</td>
+                  <td>{{$order->productID}}</td>
                   <td>{{$order->queueNumber}}</td>
+                  <td>{{$order->productName}}</td>
+                  <td>{{$order->paymentStatus}}</td>
                   <td>{{$order->orderDatetime}}</td>
                 </tr>
                 @endforeach

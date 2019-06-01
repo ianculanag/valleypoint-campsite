@@ -298,11 +298,22 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function viewOrders(){
-        $order = DB::table('orders')
+
+        $orders = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','paymentStatus', 'orderDatetime', 'queueNumber')
         ->get();
+    
         
-        return view('pos.viewOrders')
-        ->with ('orders', $order);
+            // $orders = DB::table('orders')
+            // ->leftJoin('products', 'products.id')
+            // ->leftJoin('payments', 'payments.id')
+            // ->select('orders.id','products.productName', 'payments.paymentStatus', 'payments.paymentDatetime')
+            // ->get();
+    
+           return view('pos.viewOrders')->with('orders', $orders);
+        
     }
 
     /**
