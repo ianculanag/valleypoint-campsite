@@ -312,21 +312,26 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
 
     //Daily restaurant reports
     Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
+    Route::get('/reload-todays-restaurant-report', 'OrdersController@reloadTodaysRestaurantReport');
+
 
     //Weekly restaurant reports
     Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestaurantReport');
+    Route::get('/reload-this-weeks-restaurant-report', 'OrdersController@reloadthisWeeksRestaurantReport');
 
     //Monthly restaurant reports
     Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');
+    Route::get('/reload-this-months-restaurant-report', 'OrdersController@reloadThisMonthsRestaurantReport');
 
     //Custom restaurant reports
     Route::get('/custom-restaurant-report', 'OrdersController@customRestaurantReport');
+    Route::get('/reload-custom-restaurant-report', 'OrdersController@reloadCustomRestaurantReport');
 
     //View orders for restaurant 
     Route::get('/view-orders', 'OrdersController@viewOrders');
 
     //View payments for restaurant
-    Route::get('/view-restaurant-payments', 'restaurantPaymentsController@viewRestaurantPayments');
+    Route::get('/view-restaurant-payments', 'PaymentsController@viewRestoPayments');
 
     //Search item from order slip
     Route::get('/search-item/{searchQuery}', 'ProductsController@searchItem');

@@ -10,27 +10,28 @@
             <thead>
                 <tr>
                     <th>Payment ID</th>
-                    <th>Date</th>
-                    <th>Table Number</th>              
-                    <th>Orders</th>                            
+                    <th>Table Number</th> 
+                    <th>Orders</th>
                     <th>Payment Status</th>
+                    <th>Date</th>           
                     <th>Amount Paid</th>
                 </tr>
             </thead>
             <tbody>
-               
-                @foreach($payments as $restaurantPayment)
+
+                @foreach($restPayments as $restaurantPayment)
                 <tr>
-                    <td>{{$restaurantPayment->paymentID}}</td>
-                    <td>{{$restaurantPayment->paymetDatetime}}</td>
-                    {{-- <td>{{$restaurantPayment->paymentTableNumber}}</td>                                                                                  --}}
-                    <td class="text-right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
-                    <td>{{$restaurantPayment->paymentStatus}}</td>                            
+                   
+                    <td>{{$restaurantPayment->queueNumber}}</td>
+                    <td>{{$restaurantPayment->productName}}</td>
+                    <td>{{$restaurantPayment->paymentStatus}}</td> 
+                    <td>{{$restaurantPayment->paymentDatetime}}</td>
+                    <td class="text-right">{{number_format((float)($payments->amount), 2, '.', '')}}</td>
+                                              
                 </tr>
                 @endforeach
-                
+                   
             </tbody>
         </table>
-    </div>
 </div>
 @endsection

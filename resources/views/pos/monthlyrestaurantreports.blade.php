@@ -20,8 +20,8 @@
                                 <option>Feb</option>
                                 <option>Mar</option>
                                 <option>Apr</option>
-                                <option selected>May</option>
-                                <option>Jun</option>
+                                <option>May</option>
+                                <option selected>Jun</option>
                                 <option>Jul</option>
                                 <option>Aug</option>
                                 <option>Sep</option>
@@ -49,10 +49,9 @@
                     </div>
                     <div class="form-group col-md-4 px-0 ">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" type="number" name="selectYear" min="2018" max="" value="2019" required>
-                        {{--@if(isset($year))
+                        @if(isset($year))
                             <input class="form-control" type="number" name="selectYear" min="2018" max="{{$thisYear}}" value="{{$year}}" required>
-                        @endif--}}
+                        @endif
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">
@@ -71,7 +70,11 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <h6 class="text-right"> Restaurant Sales Report </h6>
-                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F o')}}</h6>
+                        @if(isset($display))
+                        <h6 class="text-right"> {{$display}} </h6>
+                        @else
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F o')}} </h6>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -83,6 +86,7 @@
                                                 <th>Category</th>
                                                 <th>Quantity</th>
                                                 <th>Amount</th>
+                                                <th>Order Date</th>
                                                 <tbody>
                                                     @if(count($productOrdered) > 1)
                                                     @php
@@ -92,8 +96,9 @@
                                                     <tr class="">
                                                       <td>{{$orders->productName}}</td>
                                                       <td>{{$orders->productCategory}}</td>
-                                                      <td>{{$orders->quantity}}</td>
-                                                      <td>{{$orders->totalPrice}}</td>
+                                                      <td class="text-right">{{$orders->quantity}}</td>
+                                                      <td class="text-right">{{$orders->totalPrice}}</td>
+                                                      <td class="text-right">{{\Carbon\Carbon::parse($orders->orderDatetime)->format('M j, Y')}}</td>
                                                     </tr>
                                                     @php
                                                     $totalPrice += $orders->totalPrice;

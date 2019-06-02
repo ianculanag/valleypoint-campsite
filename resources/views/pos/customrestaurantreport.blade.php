@@ -15,20 +15,19 @@
                     <div class="form-group row px-0 mx-0">
                         <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
                         <div class="input-group input-group-sm col-md-9 px-0 mx-0">
-                            {{--@if(isset($displayfrom))
-                            <input class="form-control restaurantReportDateInputs" type="date" name="displayFrom" value="{{$displayfrom}}" required>
-                            @else--}}
-                            <input class="form-control restaurantReportDateInputs" type="date" name="displayFrom"value="<?php echo date("Y-m-d");?>" required>
-                            {{--@endif--}}
+                        @if(isset($displayfrom))
+                            <input class="form-control restaurantReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            @else
+                            <input class="form-control restaurantReportDateInputs" type="date" name="displayFrom" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row px-0 mx-0">
                         <label for="displayTo" class="col-md-3 mb-0 mt-2 p-0">To:</label>
                         <div class="input-group input-group-sm col-md-9 px-0 mx-0">
-                            <input class="form-control restaurantReportDateInputs" type="date" name="displayFrom" value="<?php echo date("Y-m-d");?>" required>
-                            {{--@if(isset($displayto))
-                            <input class="form-control restaurantReportDateInputs" type="date" name="displayTo" value="{{$displayto}}" required>
-                            @endif--}}
+                            @if(isset($displayto))
+                            <input class="form-control restaurantReportDateInputs" type="date" name="displayTo" maxlength="15" placeholder="" value="{{$displayto}}" required>
+                            @endif
                         </div>
                     </div>
                     <div class="px-0 mx-0">
@@ -47,7 +46,11 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <h6 class="text-right"> Restaurant Sales Report </h6>
-                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        @if(isset($displayfrom))
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        @else
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -58,6 +61,7 @@
                                                 <th>Category</th>
                                                 <th>Quantity</th>
                                                 <th>Amount</th>
+                                                <th>Order Date</th>
                                                 <tbody>
                                                     @if(count($productOrdered) > 1)
                                                     @php
@@ -67,8 +71,9 @@
                                                     <tr class="">
                                                       <td>{{$orders->productName}}</td>
                                                       <td>{{$orders->productCategory}}</td>
-                                                      <td>{{$orders->quantity}}</td>
-                                                      <td class="reportTotalAmount">{{$orders->totalPrice}}</td>
+                                                      <td class="text-right">{{$orders->quantity}}</td>
+                                                      <td class="reportTotalAmount text-right">{{$orders->totalPrice}}</td>
+                                                      <td class="text-right">{{\Carbon\Carbon::parse($orders->orderDatetime)->format('M j, Y')}}</td>                                                      
                                                     </tr>
                                                     @php
                                                     $totalPrice += $orders->totalPrice;

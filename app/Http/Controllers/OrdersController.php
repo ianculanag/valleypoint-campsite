@@ -99,11 +99,31 @@ class OrdersController extends Controller
     public function todaysRestaurantReport() {
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
-        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
         ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
         ->get();
+
        return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered);
     }
+
+    public function reloadTodaysRestaurantReport() {
+
+        $display = Carbon::parse($request->input('restaurantReportDate'))->format('Y-m-d');
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', $display)
+        ->whereDate('orders.orderDatetime', '<=', $display)
+        ->get();
+
+       return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered)->with('display', $display);
+    }
+
 
     /**
      * Show weekly restaurant report 
@@ -111,12 +131,39 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function thisWeeksRestaurantReport() {
+        $displayto = Carbon::now()->addDays(6)->format('Y-m-d');
+
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
-        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
         ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
         ->get();
-       return view('pos.weeklyrestaurantreports')->with('productOrdered', $productOrdered);
+
+       return view('pos.weeklyrestaurantreports')
+       ->with('displayto', $displayto)
+       ->with('productOrdered', $productOrdered);
+    }
+
+
+    public function reloadThisWeeksRestaurantReport(Request $request) {
+
+    $displayfrom = Carbon::parse($request->input('restaurantReportDate'))->format('Y-m-d');
+    $displayto = Carbon::parse($request->input('restaurantReportDate'))->addDays(6)->format('Y-m-d');
+
+    $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', $displayfrom)
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
+        ->get();
+
+       return view('pos.weeklyrestaurantreports')->with('displayfrom', $displayfrom)->with('displayto', $displayto)
+       ->with('productOrdered', $productOrdered);
     }
 
     /**
@@ -125,13 +172,52 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function thisMonthsRestaurantReport() {
+
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+
+        $thisYear = Carbon::now()->format('Y');
+
+        $display = Carbon::now()->format('M Y');
+
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
-        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
         ->where('paymentStatus', '=', 'paid')
+        ->whereMonth('orders.orderDatetime', '=', $month)
+        ->whereYear('orders.orderDatetime', '=', $year)
         ->get();
-       return view('pos.monthlyrestaurantreports')->with('productOrdered', $productOrdered);
+
+       return view('pos.monthlyrestaurantreports')->with('productOrdered', $productOrdered)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)->with('display', $display);
     }
+
+    public function reloadThisMonthsRestaurantReport() {
+
+        $monthString = '22-'.$request->input('selectMonth').'-1999';
+        $month = Carbon::parse($monthString)->format('m');
+        
+        $yearString = '22-12-'.$request->input('selectYear');
+        $year = Carbon::parse($yearString)->format('Y');
+
+        $dateInput = '22-'.$month.'-'.$year;
+
+        $thisYear = Carbon::now()->format('Y');
+
+        $display = Carbon::parse($dateInput)->format('M Y');
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereMonth('orders.orderDatetime', '=', $month)
+        ->whereYear('orders.orderDatetime', '=', $year)
+        ->get();
+
+       return view('pos.monthlyrestaurantreports')->with('productOrdered', $productOrdered)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)->with('display', $display);
+    }
+
 
     /**
      * Show custom restaurant report 
@@ -139,13 +225,38 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function customRestaurantReport() {
+        $displayto = Carbon::now()->addDays(1)->format('Y-m-d');
+
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
-        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
         ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
         ->get();
-       return view('pos.customrestaurantreport')->with('productOrdered', $productOrdered);
+
+       return view('pos.customrestaurantreport')->with('productOrdered', $productOrdered)->with('displayto', $displayto);
     }
+
+    public function reloadCustomRestaurantReport() {
+        
+        $displayfrom = Carbon::parse($request->input('displayFrom'))->format('Y-m-d');
+        $displayto = Carbon::parse($request->input('displayTo'))->format('Y-m-d');
+
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', $displayfrom)
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
+        ->get();
+
+       return view('pos.customrestaurantreport')->with('productOrdered', $productOrdered)->with('displayfrom', $displayfrom)->with('displayto', $displayto);
+    }
+
 
     /**
      *  Save orders from create order page
@@ -302,7 +413,7 @@ class OrdersController extends Controller
         $orders = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
         ->leftJoin('orders', 'orders.id', 'orderID')
-        ->select('productID','products.productName','products.productCategory','paymentStatus', 'orderDatetime', 'queueNumber')
+        ->select('orderID','products.productName','products.productCategory','status', 'orderDatetime', 'queueNumber')
         ->get();
     
         

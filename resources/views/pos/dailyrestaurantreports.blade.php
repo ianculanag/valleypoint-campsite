@@ -34,7 +34,11 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <h6 class="text-right"> Restaurant Sales Report </h6>
+                        @if(isset($display))
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($display)->format('F j, o')}} </h6>
+                        @else
                         <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -46,6 +50,7 @@
                                 <th>Category</th>
                                 <th>Quantity</th>
                                 <th>Amount</th>
+                                <th>Order Date</th>
                                 <tbody>
                                     @if(count($productOrdered) > 1)
                                     @php
@@ -56,8 +61,9 @@
                                     <tr class="">
                                       <td>{{$orders->productName}}</td>
                                       <td>{{$orders->productCategory}}</td>
-                                      <td>{{$orders->quantity}}</td>
-                                      <td class="restaurantPricesDaily">{{$orders->totalPrice}}</td>
+                                      <td class="text-right">{{$orders->quantity}}</td>
+                                      <td class="restaurantPricesDaily text-right">{{$orders->totalPrice}}</td>
+                                      <td class="text-right">{{\Carbon\Carbon::parse($orders->orderDatetime)->format('M j, Y')}}</td>
                                     </tr>
                                     @php
                                         $totalPrice += $orders->totalPrice;

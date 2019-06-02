@@ -22,11 +22,11 @@
                 @if(count($orders) > 1)
                 @foreach($orders as $order)
                 <tr class="">
-                  <td>{{$order->productID}}</td>
+                  <td>{{$order->orderID}}</td>
                   <td>{{$order->queueNumber}}</td>
                   <td>{{$order->productName}}</td>
-                  <td>{{$order->paymentStatus}}</td>
-                  <td>{{$order->orderDatetime}}</td>
+                  <td>{{$order->status}}</td>
+                  <td>{{\Carbon\Carbon::parse($order->orderDatetime)->format('M j, Y')}}</td>
                 </tr>
                 @endforeach
                 @endif

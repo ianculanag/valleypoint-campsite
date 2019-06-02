@@ -14,8 +14,12 @@
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                 <div class="row px-3">
                     <div class="form-group col-md-9 px-0 mx-1">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control restaurantReportDateInputs" id="restaurantReportDate" type="date" name="restaurantReportDate" value="<?php echo date("Y-m-d");?>" required>
+                    <div class="input-group input-group-sm">
+                            @if(isset($displayfrom))
+                            <input class="form-control restaurantReportDateInputs" id="restaurantReportDate" type="date" name="restaurantReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            @else
+                            <input class="form-control restaurantReportDateInputs" id="restaurantReportDate" type="date" name="restaurantReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">
@@ -34,7 +38,11 @@
                     </div>
                     <div class="col-md-6 col-sm-8 px-5 pt-3">
                         <h6 class="text-right"> Restaurant Sales Report </h6>
-                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        @if(isset($displayfrom))
+                        <h6 class="text-right"> {{\Carbon\Carbon::parse($displayfrom)->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        @else
+                        <h6 class="text-right"> {{\Carbon\Carbon::now()->format('F j, o')}} - {{\Carbon\Carbon::parse($displayto)->format('F j, o')}}</h6>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,6 +53,7 @@
                                             <th>Category</th>
                                             <th>Quantity</th>
                                             <th>Amount</th>
+                                            <th>Order Date</th>
                                             <tbody>
                                                 @if(count($productOrdered) > 1)
                                                 @php
@@ -55,8 +64,9 @@
                                                 <tr class="">
                                                   <td>{{$orders->productName}}</td>
                                                   <td>{{$orders->productCategory}}</td>
-                                                  <td>{{$orders->quantity}}</td>
-                                                  <td>{{$orders->totalPrice}}</td>
+                                                  <td class="text-right">{{$orders->quantity}}</td>
+                                                  <td class="text-right">{{$orders->totalPrice}}</td>
+                                                  <td class="text-right">{{\Carbon\Carbon::parse($orders->orderDatetime)->format('M j, Y')}}</td>
                                                 </tr>
                                                 @php
                                                     $totalPrice += $orders->totalPrice;
