@@ -209,23 +209,23 @@ jQuery(document).ready(function () {
     }*/
 });
 
-// function updateRestaurantTotal() {
-//     var totalPrice = 0;
-//     var prices = document.getElementsByClassName('restaurantPricesDaily');
+function updateRestaurantTotal() {
+    var totalPrice = 0;
+    var prices = document.getElementsByClassName('restaurantPricesDaily');
 
-//     for (var index = 0; index < prices.length; index++) {
-//         //console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
-//         totalPrice += parseInt(prices[index].innerHTML);
-//         //console.log(totalPrice);
-//     }
-//     document.getElementById('restaurantIncomeDaily').innerHTML = "";
-//     //document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
+    for (var index = 0; index < prices.length; index++) {
+        //console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
+        totalPrice += parseInt(prices[index].innerHTML);
+        //console.log(totalPrice);
+    }
+    document.getElementById('restaurantIncomeDaily').innerHTML = "";
+    //document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
 
-//     jQuery('#restaurantIncomeDaily').html(parseFloat(totalPrice).toFixed(2));
-// }
+    jQuery('#restaurantIncomeDaily').html(parseFloat(totalPrice).toFixed(2));
+}
 
-// jQuery(document).ready(function () {
-//     jQuery(document).on('', '#restaurantIncomeDaily', function () {
-//         updateRestaurantTotal();
-//     })
-// })
+jQuery(document).ready(function () {
+    jQuery(document).on('', '#restaurantIncomeDaily', function () {
+        updateRestaurantTotal();
+    })
+})

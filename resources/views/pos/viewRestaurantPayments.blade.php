@@ -9,11 +9,10 @@
         <table id="restaurantPaymentsTable" data-order='[[ 0, "asc" ]]' class="table table-sm dataTable stripe compact" cellspacing="0">
             <thead>
                 <tr>
-                    <th>Payment ID</th>
+                    <th>Order ID</th>
                     <th>Table Number</th> 
-                    <th>Orders</th>
+                    <th>Date</th> 
                     <th>Payment Status</th>
-                    <th>Date</th>           
                     <th>Amount Paid</th>
                 </tr>
             </thead>
@@ -21,12 +20,11 @@
 
                 @foreach($restPayments as $restaurantPayment)
                 <tr>
-                   
+                    <td>{{$restaurantPayment->orderID}}</td>
                     <td>{{$restaurantPayment->queueNumber}}</td>
-                    <td>{{$restaurantPayment->productName}}</td>
-                    <td>{{$restaurantPayment->paymentStatus}}</td> 
+                    <td class=>{{$restaurantPayment->paymentStatus}}</td> 
                     <td>{{$restaurantPayment->paymentDatetime}}</td>
-                    <td class="text-right">{{number_format((float)($payments->amount), 2, '.', '')}}</td>
+                    <td class="text-right">{{number_format((float)($restaurantPayment->amount), 2, '.', '')}}</td>
                                               
                 </tr>
                 @endforeach

@@ -100,7 +100,7 @@ class OrdersController extends Controller
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
         ->leftJoin('orders', 'orders.id', 'orderID')
-        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->select('productID','products.productName','products.productCategory','quantity', 'items.totalPrice', 'orderDatetime')
         ->where('paymentStatus', '=', 'paid')
         ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
         ->get();
@@ -240,7 +240,7 @@ class OrdersController extends Controller
     }
 
     public function reloadCustomRestaurantReport() {
-        
+
         $displayfrom = Carbon::parse($request->input('displayFrom'))->format('Y-m-d');
         $displayto = Carbon::parse($request->input('displayTo'))->format('Y-m-d');
 
@@ -415,13 +415,6 @@ class OrdersController extends Controller
         ->leftJoin('orders', 'orders.id', 'orderID')
         ->select('orderID','products.productName','products.productCategory','status', 'orderDatetime', 'queueNumber')
         ->get();
-    
-        
-            // $orders = DB::table('orders')
-            // ->leftJoin('products', 'products.id')
-            // ->leftJoin('payments', 'payments.id')
-            // ->select('orders.id','products.productName', 'payments.paymentStatus', 'payments.paymentDatetime')
-            // ->get();
     
            return view('pos.viewOrders')->with('orders', $orders);
         

@@ -28,12 +28,13 @@ class PaymentsController extends Controller
         return view('lodging.viewpayments')->with('payments', $payments);
     }
 
-    public function viewRestaurantPayments(){
+    public function viewRestoPayments(){
 
         $restPayments = DB::table('payments')
-        ->leftJoin('products', 'products.id','productID')
+        
         ->leftJoin('orders', 'orders.id', 'orderID')
-        ->select('payments.id as paymentID', 'products.productName', 'queueNumber', 'paymentStatus', 'paymentDatetime', 'amount');
+        ->select('orderID','queueNumber', 'paymentStatus', 'paymentDatetime', 'amount')
+        ->get();
 
         return view('pos.viewRestaurantPayments')
         ->with ('restPayments', $restPayments);

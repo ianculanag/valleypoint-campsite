@@ -13,7 +13,7 @@
                   <th>Order ID</th>
                   <th>Table Number</th>
                   <th>Orders</th>
-                  <th>Payment Status</th>
+                  <th>Order Status</th>
                   <th>Date</th>
                 </tr>
               </thead>
