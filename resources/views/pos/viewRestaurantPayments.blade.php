@@ -22,9 +22,9 @@
                 <tr>
                     <td>{{$restaurantPayment->orderID}}</td>
                     <td>{{$restaurantPayment->queueNumber}}</td>
-                    <td class=>{{$restaurantPayment->paymentStatus}}</td> 
-                    <td>{{$restaurantPayment->paymentDatetime}}</td>
-                    <td class="text-right">{{number_format((float)($restaurantPayment->amount), 2, '.', '')}}</td>
+                    <td>{{\Carbon\Carbon::parse($restaurantPayment->paymentDatetime)->format('M j, Y')}}</td>
+                    <td>{{$restaurantPayment->paymentStatus}}</td> 
+                    <td >{{number_format((float)($restaurantPayment->amount), 2, '.', '')}}</td>
                                               
                 </tr>
                 @endforeach
