@@ -65,15 +65,15 @@
                 <h5 style="margin-bottom:.80em;">Guest Details</h5>
                     <div class="form-group row">
                         <div class="col-md-4 mb-1">
-                            <label for="firstName">First name</label>
+                            <label for="firstName">First name <h7 style="color:red">*</h7></label>
                             <input class="form-control" type="text" name="firstName" required="required" id="firstName" maxlength="15" placeholder="" value="" autocomplete = "off">
                         </div>
                         <div class="col-md-5 mb-1">
-                            <label for="lastName">Last name</label>
+                            <label for="lastName">Last name <h7 style="color:red">*</h7></label>
                             <input class="form-control" type="text" name="lastName" id="lastName" required="required" maxlength="20" placeholder="" value="" autocomplete = "off">
                         </div>
                         <div class="col-md-3 mb-1">
-                            <label for="unitNumberOfPax">No. of pax</label>
+                            <label for="unitNumberOfPax">No. of pax <h7 style="color:red">*</h7></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -86,7 +86,7 @@
                     </div>  
                     <div class="form-group row">
                         <div class="col-md-6 mb-1">
-                            <label for="contactNumber">Contact number</label>
+                            <label for="contactNumber">Contact number <h7 style="color:red">*</h7></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -170,7 +170,7 @@
                         </div>
 
                         <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
-                            <label for="checkoutDate">Check-out date</label>
+                            <label for="checkoutDate">Check-out date <h7 style="color:red">*</h7></label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -251,15 +251,15 @@
             <h5 style="margin-bottom:.80em;">Guest Details</h5>
                 <div class="form-group row">
                     <div class="col-md-4 mb-1">
-                        <label for="firstName">First name</label>
+                        <label for="firstName">First name <h7 style="color:red">*</h7></label>
                         <input class="form-control" type="text" name="firstName" id="firstName" required="required" maxlength="15" placeholder="" value="">
                     </div>
                     <div class="col-md-5 mb-1">
-                        <label for="lastName">Last name</label>
+                        <label for="lastName">Last name <h7 style="color:red">*</h7></label>
                         <input class="form-control" type="text" name="lastName" id="lastName" required="required" maxlength="20" placeholder="" value="">
                     </div>
                     <div class="col-md-3 mb-1">
-                        <label for="unitNumberOfPax">No. of pax</label>
+                        <label for="unitNumberOfPax">No. of pax <h7 style="color:red">*</h7></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -272,7 +272,7 @@
                 </div>  
                 <div class="form-group row">
                     <div class="col-md-6 mb-1">
-                        <label for="contactNumber">Contact number</label>
+                        <label for="contactNumber">Contact number <h7 style="color:red">*</h7></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -283,7 +283,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <label for="backpacker">Accommodation</label>
+                        <label for="backpacker">Accommodation <h7 style="color:red">*</h7></label>
                         <div class="input-group">
                             <input class="form-control" type="text" name="backpacker" maxlength="11" placeholder="" value="Backpacker" disabled>
                         </div>
@@ -370,7 +370,7 @@
                     </div>
 
                     <div class="col-md-4 mb-1" id="divCheckoutDate{{$unit->unitNumber}}">
-                        <label for="checkoutDate">Check-out date</label>
+                        <label for="checkoutDate">Check-out date <h7 style="color:red">*</h7></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
