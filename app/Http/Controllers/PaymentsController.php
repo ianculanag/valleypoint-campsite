@@ -31,9 +31,8 @@ class PaymentsController extends Controller
     public function viewRestoPayments(){
 
         $restPayments = DB::table('payments')
-        
-        ->leftJoin('orders', 'orders.id', 'orderID')
-        ->select('orderID','queueNumber', 'paymentStatus', 'paymentDatetime', 'amount')
+        ->join ('orders', 'orders.id', 'payments.orderID')
+        ->join ('items', 'items.orderID', 'items.productID')
         ->get();
 
         return view('pos.viewRestaurantPayments')
