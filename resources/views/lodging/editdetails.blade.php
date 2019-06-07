@@ -595,7 +595,7 @@
                     
                     <div class="mt-3" style="float:right;">
                         <button class="btn btn-success" style="width:10em;" type="submit">Save</button>
-                        <a style="text-decoration:none;" href="/checkout/{{$guestDetails->unitID}}">
+                        <a style="text-decoration:none;" href="/checkout-glamping/{{$guestDetails->unitID}}">
                             <button class="btn btn-primary" style="width:11em;" type="button" id="checkoutUnit">Check-out</button>
                         </a>
                         <a style="text-decoration:none;" href="/glamping">

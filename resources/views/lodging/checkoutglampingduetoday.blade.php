@@ -224,7 +224,7 @@
                 <div class="container glamping-accomodation-tabs pb-4 px-0">
                     <ul class="nav nav-tabs pt-0" style="width:100%">
                         <li class="nav-item">
-                            <a class="nav-link" style="color:#505050;" href="/checkout-backpacker/{{$guestDetails->unitID}}">All</a>
+                            <a class="nav-link" style="color:#505050;" href="/checkout-glamping/{{$guestDetails->unitID}}">All</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Due today</a>
