@@ -1,44 +1,49 @@
 /* Navbar clock */
-jQuery(document).ready(function(){
-    var currentDate = jQuery('#date'),
-        currentTime = jQuery('#time');
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 
-        'July', 'August', 'September', 'October', 'November', 'December'];
+var $currentDate = $('#date'),
+    $currentTime = $('#time');
+var months = [
+  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+];
 
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var days = [
+  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+];
 
-    function updateDate(){
-        var date = new Date();
+function update(){
+    var date = new Date();
+  
+    var ampm = date.getHours() < 12
+        ? 'AM'
+        : 'PM';
+  
+    var hours = date.getHours() == 0
+        ? 12
+        : date.getHours() > 12
+        ? date.getHours() - 12
+        : date.getHours();
+  
+    var minutes = date.getMinutes() < 10 
+        ? '0' + date.getMinutes() 
+        : date.getMinutes();
+  
+    var seconds = date.getSeconds() < 10 
+        ? '0' + date.getSeconds() 
+        : date.getSeconds();
+  
+    var dayOfWeek = days[date.getDay()];
+    var month = months[date.getMonth()];
+    var day = date.getDate();
+    var year = date.getFullYear();
     
-        var ampm = date.getHours() < 12
-            ? 'AM'
-            : 'PM';
-    
-        var hours = date.getHours() == 0
-            ? 12
-            : date.getHours() > 12
-            ? date.getHours() - 12
-            : date.getHours();
-    
-        var minutes = date.getMinutes() < 10 
-            ? '0' + date.getMinutes() 
-            : date.getMinutes();
-    
-        var dayOfWeek = days[date.getDay()];
-        var month = months[date.getMonth()];
-        var day = date.getDate();
-        var year = date.getFullYear();
-    
-        var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
-        var timeString = hours + ':' + minutes + ' ' + ampm;
-        
-        currentDate.text(dateString);
-        currentTime.text(timeString);
-    } 
+    var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
+    var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
 
-    updateDate();
-    window.setInterval(update, 1000);
-});
+    $currentDate.text(dateString);
+    $currentTime.text(timeString);
+} 
+
+update();
+window.setInterval(update, 1000);
 
 /* Sidebar highlight */
 jQuery(document).ready(function(){
