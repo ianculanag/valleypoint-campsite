@@ -224,7 +224,7 @@
                             $checkout = new DateTime($givenCheckoutDate);
                             $stayDuration = date_diff($checkin, $checkout)->days;
 
-                            $invoicePrice = 1350 * $stayDuration;
+                            $invoicePrice = 750 * $stayDuration;
 
                             $totalPrice += $invoicePrice;
                         @endphp
