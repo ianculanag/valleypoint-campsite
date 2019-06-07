@@ -6,7 +6,11 @@
                 <div class="row">
                     <div class="col-md-8 col-sm-8 px-5 pt-3">
                         <h4 class=""> Cashier Shift Report </h4>
-                        <h6 class="pb-5"> June 24, 2019 </h6>
+                        @if(isset($display))
+                        <h6 class=""> {{\Carbon\Carbon::parse($display)->format('F j, o')}} </h6>
+                        @else
+                        <h6 class=""> {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
+                        @endif
                         <div class="form-group row py-0 my-0">
                             <label for="name" class="col-sm-4 pt-2" style="font-size:0.80em;">Name:</label>
                             <input class="form-control-plaintext col-sm-8" type="text" name="name" value="Sheila Yu" readonly>
@@ -27,9 +31,9 @@
                 <div class="card-body">
                     <div class="px-2">
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
-                            <tbody>
-                                <tr>
-                                    <td class="text-center" style="width:6%;"> No. </td>
+                            <thead>
+                            <tr>
+                            <td class="text-center"> No. </td>
                                     <td class="text-center"> Description </td>
                                     <td class="text-center" style="width:7%;"> Qty. </td>
                                     <td class="text-center" style="width:14%;"> Unit Price </td>
@@ -38,46 +42,32 @@
                                     <td class="text-center" style="width:14%;"> Change Due </td>
                                     <td class="text-center"> Payment time </td>
                                 </tr>
-                                <tr>
-                                    <td> 1 </td>
-                                    <td> Tapsilog </td>
-                                    <td> 3 </td>
-                                    <td class="text-right"> ₱ 100.00 </td>
-                                    <td class="text-right"> ₱ 300.00 </td>
-                                    <td class="text-right"> ₱ 300.00 </td>
-                                    <td class="text-right"> ₱ 0.00 </td>
-                                    <td> 9:35 AM </td>
-                                </tr>
-                                <tr>
-                                    <td> 2 </td>
-                                    <td> Carbonara </td>
-                                    <td> 2 </td>
-                                    <td class="text-right"> ₱ 140.00 </td>
-                                    <td class="text-right"> ₱ 280.00 </td>
-                                    <td class="text-right"> ₱ 300.00 </td>
-                                    <td class="text-right"> ₱ 20.00 </td>
-                                    <td> 10:45 AM </td>
-                                </tr>
-                                <tr>
-                                    <td> 3 </td>
-                                    <td> Carbonara </td>
-                                    <td> 1 </td>
-                                    <td class="text-right"> ₱ 140.00 </td>
-                                    <td class="text-right"> ₱ 140.00 </td>
-                                    <td class="text-right"> ₱ 150.00 </td>
-                                    <td class="text-right"> ₱ 10.00 </td>
-                                    <td> 11:30 AM </td>
-                                </tr>
+                            </thead>
+                            <tbody>
+                            @if(count($shifts) > 1)
+                                @foreach($shifts as $shift)
+                                    <tr class="">
+                                      <td class="text-center">{{$shift->orderID}}</td>
+                                       <td class="text-center">{{$shift->productName}}</td>
+                                       <td class="text-center">{{$shift->quantity}}</td>
+                                       <td class="text-right">{{$shift->price}}</td>
+                                       <td class="text-right">{{$shift->totalPrice}}</td>
+                                       <td class="text-right">{{number_format((float)($shift->amount), 2, '.', '')}}</td>
+                                       <td class="text-right">{{number_format((float)($shift->changeDue), 2, '.', '')}}</td>
+                                       <td class="text-center">{{\Carbon\Carbon::parse($shift->paymentDatetime)->format('M j, Y')}}</td>
+                                   </tr>
                             </tbody>
+                            @endforeach
+                                     @endif
                         </table>
                     </div>
                     <div class="form-group row py-0 my-0 col-md-8">
                         <label for="cashEnd" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash End:</label>
-                        <input class="form-control-plaintext col-sm-8" type="text" name="cashEnd" value="₱ 2520.00" readonly>
+                        <input class="form-control-plaintext col-sm-8" type="text" name="cashEnd" value="₱" readonly>
                     </div>
                     <div class="form-group row py-0 my-0 col-md-8">
                         <label for="shiftSales" class="col-sm-4 pt-2" style="font-size:0.80em;">Total Sales: </label>
-                        <input class="form-control-plaintext col-sm-8" type="text" name="name" value="₱ 720.00" readonly>
+                        <input class="form-control-plaintext col-sm-8" type="text" name="name" value="₱" readonly>
                     </div>
                     <button type="button" class="btn btn-primary float-right mx-3" style="" id="" data-toggle="" data-target="">
                         Change Register

@@ -79,13 +79,14 @@
                                                     $totalPrice += $orders->totalPrice;
                                                 @endphp
                                                     @endforeach
-                                                    @endif
+                                                   
                                                 </tbody>
                                         </tr>
                                 </table>
                                 <div class="form-group row py-0 my-0 ">
                                         <h6 label for="totalIncome" class="col-sm-4 pt-2" id="reportGrandTotal" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Gross Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
                                            <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
+                                           @endif
                                    </div>
                 </div>
             </div>

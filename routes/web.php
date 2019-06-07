@@ -309,6 +309,7 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
 
     //Cashier shift report
     Route::get('/cashier-shift-report', 'CashierController@showCashierReport');
+    Route::get('/reload-cashier-shift-report', 'CashierController@reloadShowCashierReport');
 
     //Daily restaurant reports
     Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
