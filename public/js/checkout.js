@@ -214,7 +214,7 @@ jQuery('#saveAdditionalPayments').click(function() {
     var htmlString = "";
     for(var index = 0; index < jQuery('.balancePaymentCheckboxes').length; index++){
         if(jQuery('.balancePaymentCheckboxes').eq(index).prop('checked')){
-            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+jQuery('.chargeBalances').eq(index).html()+"' style='display:none;'>";
+            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+numeral(jQuery('.chargeBalances').eq(index).html()).value()+"' style='display:none;'>";
         //console.log('fuck');
         }
     }
@@ -233,7 +233,7 @@ jQuery('#saveAllPayments').click(function() {
     var htmlString = "";
     for(var index = 0; index < jQuery('.balancePaymentCheckboxes').length; index++){
         if(jQuery('.balancePaymentCheckboxes').eq(index).prop('checked')){
-            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+jQuery('.chargeBalances').eq(index).html()+"' style='display:none;'>";
+            htmlString += "<input type='number' class='paymentRecords' name='payment"+index+"' value='"+numeral(jQuery('.chargeBalances').eq(index).html()).value()+"' style='display:none;'>";
         //console.log('fuck');
         }
     }

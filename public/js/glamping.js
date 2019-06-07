@@ -402,7 +402,7 @@ jQuery('#savePayments').click(function() {
     var htmlString = "";
     for(var index = 0; index < jQuery('.paymentCheckboxes').length; index++){
         if(jQuery('.paymentCheckboxes').eq(index).prop('checked')){
-            htmlString += "<input type='number' name='payment"+index+"' value='"+jQuery('.chargesInvoicePrices').eq(index).html()+"' style='display:none;'>";
+            htmlString += "<input type='number' name='payment"+index+"' value='"+numeral(jQuery('.chargesInvoicePrices').eq(index).html()).value()+"' style='display:none;'>";
         }
     }
     jQuery('#selectedPayments').html(htmlString);
