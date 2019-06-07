@@ -264,7 +264,7 @@
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
-                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350.00</td>
+                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1,350.00</td>
                             <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($invoicePrice), 2, '.', '')}}</td>
                         </tr>
                         @endforeach

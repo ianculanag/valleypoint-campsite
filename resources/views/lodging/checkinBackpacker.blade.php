@@ -233,7 +233,7 @@
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Backpacker</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1</td>
                             <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">750.00</td>
-                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($invoicePrice), 2, '.', '')}}</td>
+                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format($invoicePrice, 2)}}</td>
                         </tr>
                         @endforeach
                         @endif

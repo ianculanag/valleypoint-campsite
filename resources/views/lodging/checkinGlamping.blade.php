@@ -36,8 +36,8 @@
                                 <td style="display:none;"><input id="invoiceCheckBox{{$unit->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                                 <td id="invoiceDescription{{$unit->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                                 <td id="invoiceQuantity{{$unit->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x1</td>
-                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350.00</td>
-                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1350.00</td>
+                                <td id="invoiceUnitPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1,350.00</td>
+                                <td id="invoiceTotalPrice{{$unit->unitNumber}}" style="text-align:right;" class="invoicePrices">1,350.00</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -241,8 +241,8 @@
                             <td style="display:none;"><input id="invoiceCheckBox{{$charge->unitNumber}}" class="form-check-input invoiceCheckboxes" type="checkbox" checked></td>
                             <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">Glamping Solo</td>
                             <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">1x{{$stayDuration}}</td>
-                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1350.00</td>
-                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($invoicePrice), 2, '.', '')}}</td>
+                            <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">1,350.00</td>
+                            <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format($invoicePrice, 2)}}</td>
                         </tr>
                         @endforeach
                         @endif
@@ -250,7 +250,7 @@
                         <tfoot>
                         <tr>
                             <th colspan="3" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPrice), 2, '.', '')}}</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format($totalPrice, 2)}}</th>
                         </tr>                        
                         <tr id="rowAmountPaid" style="display:none">
                             <th colspan="3" scope="row">AMOUNT PAID:</th>
