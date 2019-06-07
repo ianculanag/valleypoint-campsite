@@ -21,6 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->enum('paymentStatus', ['partial', 'full', 'void']);
             $table->integer('chargeID')->unsigned()->nullable();
             $table->integer('orderID')->unsigned()->nullable();
+            $table->string('referenceNumber')->nullable();
             //$table->foreign('chargeID')->references('id')->on('Charge');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav px-5 mx-5">
             <li class="nav-item px-5 mx-5">
-                {{--<span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span>--}}
+                <span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span>
             </li>
         </ul>
         <!-- Right Side Of Navbar -->

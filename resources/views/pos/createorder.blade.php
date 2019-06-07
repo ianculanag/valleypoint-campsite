@@ -161,7 +161,7 @@
                                 @if(isset($order))
                                 <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" maxlength="2" value="{{$order->tableNumber}}" oninput="maxLengthCheck(this)" disabled>
                                 @else
-                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
+                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" maxlength="2" oninput="maxLengthCheck(this)">
                                 @endif
                             </div>
                         </div>
@@ -171,9 +171,9 @@
                             <label class="col-sm-7 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 @if(isset($order))
-                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" maxlength="2" value="{{$order->queueNumber}}" oninput="maxLengthCheck(this)">
+                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="99" maxlength="2" value="{{$order->queueNumber}}" oninput="maxLengthCheck(this)">
                                 @else
-                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="">
+                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="99" maxlength="2" oninput="maxLengthCheck(this)">
                                 @endif
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                         <div class="form-group my-1 row">
                             <label class="col-sm-3 pr-0 pl-4 pt-1" for="queueNumber"><span class="fa fa-search text-secondary"></span></label>
                             <div class="input-group input-group-sm px-0 mx-0 col-sm-9">
-                                <input class="form-control" type="text" name="searchFoodItem" id="searchFoodItem" min="1" max="50" placeholder="" value="">
+                                <input class="form-control" type="text" name="searchFoodItem" id="searchFoodItem" maxlength="10" placeholder="" value="">
                             </div>
                         </div>
                     </div>

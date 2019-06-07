@@ -8,9 +8,9 @@
  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"> 
-                <span style="color:white;"> </span>
+        <ul class="navbar-nav px-5 mx-5">
+            <li class="nav-item px-5 mx-5">
+                <span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span>
             </li>
         </ul>
         <!-- Right Side Of Navbar -->
