@@ -56,9 +56,9 @@
 <script src="{{ asset('js/input-validation.js') }}"></script>
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/checkout.js') }}"></script>
-<script src="{{ asset('js/custom4.js') }}"></script>
-<script src="{{ asset('js/custom5.js') }}"></script>
-<script src="{{ asset('js/custom6.js') }}"></script>
+<script src="{{ asset('js/unitfinder-calendar.js') }}"></script>
+<script src="{{ asset('js/backpacker.js') }}"></script>
+<script src="{{ asset('js/backpacker-2.js') }}"></script>
 <script src="{{ asset('js/custom7.js') }}"></script>
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
