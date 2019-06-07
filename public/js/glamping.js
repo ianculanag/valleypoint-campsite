@@ -311,7 +311,7 @@ jQuery('#proceedToPayment').click(function() {
     var htmlString = "";
     console.log(jQuery('.invoiceQuantities').length);
 
-    var chargesGrandTotal = parseFloat(0);
+    var chargesGrandTotal = 0;
 
     var checked = "";
 
@@ -332,13 +332,13 @@ jQuery('#proceedToPayment').click(function() {
         htmlString += "</tr>";
 
         if(jQuery('.invoiceCheckboxes').eq(index).prop('checked') == true) {
-            chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html()); 
+            chargesGrandTotal += numeral(jQuery('.invoicePrices').eq(index).html()).value(); 
         }
     }
 
     chargesRows.html(htmlString);
 
-    jQuery('#chargesGrandTotal').html(parseFloat(chargesGrandTotal).toFixed(2));
+    jQuery('#chargesGrandTotal').html(toPeso(numeral(chargesGrandTotal).format('0,0.00')));
 });
 
 jQuery('#selectAll').change(function() {
@@ -359,25 +359,25 @@ function updateChargesTotal() {
     } else {
         for(var index = 0; index < jQuery('.invoicePrices').length; index++) {
             console.log(jQuery('.invoicePrices').eq(index).html());
-            chargesGrandTotal += parseFloat(jQuery('.invoicePrices').eq(index).html());
+            chargesGrandTotal += numeral(jQuery('.invoicePrices').eq(index).html()).value();
         }              
-        jQuery('#chargesGrandTotal').html(parseFloat(chargesGrandTotal).toFixed(2));
+        jQuery('#chargesGrandTotal').html(toPeso(numeral(chargesGrandTotal).format('0,0.00')));
     }
 }
 
 jQuery(document).on('change', '.paymentCheckboxes', function() {
-    var chargesGrandTotal = parseFloat(jQuery('#chargesGrandTotal').html());
+    var chargesGrandTotal = numeral(jQuery('#chargesGrandTotal').html()).value();
     var chargeNumber = jQuery(this).attr('id').slice(6);
-    var invoicePrice = parseFloat(jQuery('.invoicePrices').eq(chargeNumber).html());
+    var invoicePrice = numeral(jQuery('.invoicePrices').eq(chargeNumber).html()).value();
     console.log(chargesGrandTotal);
     if(!(jQuery(this).is(':checked'))) {
         var newGrandTotal = chargesGrandTotal-invoicePrice;
         jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', false);      
-        jQuery('#chargesGrandTotal').html(parseFloat(newGrandTotal).toFixed(2));
+        jQuery('#chargesGrandTotal').html(toPeso(numeral(newGrandTotal).format('0,0.00')));
     } else {
         var newGrandTotal = chargesGrandTotal+invoicePrice;            
         jQuery('.invoiceCheckboxes').eq(chargeNumber).prop('checked', true);       
-        jQuery('#chargesGrandTotal').html(parseFloat(newGrandTotal).toFixed(2));
+        jQuery('#chargesGrandTotal').html(toPeso(numeral(newGrandTotal).format('0,0.00')));
     }
 
     checkToggledCheckboxes();

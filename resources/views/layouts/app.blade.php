@@ -48,7 +48,11 @@
 <script src="{{ asset('js/moment.min.js') }}"></script>
 <script src="{{ asset('js/numbers2words.min.js') }}"></script>
 <script src="{{ asset('js/numeral.min.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
+<script src="{{ asset('js/createorder.js') }}"></script>
+<script src="{{ asset('js/tableview.js') }}"></script>
+<script src="{{ asset('js/inventory.js') }}"></script>
+<script src="{{ asset('js/voidtransactions.js') }}"></script>
+<script src="{{ asset('js/glamping.js') }}"></script>
 <script src="{{ asset('js/input-validation.js') }}"></script>
 <script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/custom3.js') }}"></script>
@@ -56,10 +60,6 @@
 <script src="{{ asset('js/custom5.js') }}"></script>
 <script src="{{ asset('js/custom6.js') }}"></script>
 <script src="{{ asset('js/custom7.js') }}"></script>
-<script src="{{ asset('js/createorder.js') }}"></script>
-<script src="{{ asset('js/tableview.js') }}"></script>
-<script src="{{ asset('js/inventory.js') }}"></script>
-<script src="{{ asset('js/voidtransactions.js') }}"></script>
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;
