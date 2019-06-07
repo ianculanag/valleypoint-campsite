@@ -46,8 +46,8 @@
                                 <tr class="items" id="orderSlipItem{{$loop->iteration}}">
                                     <td class="orderItemDescription py-2">{{$item->productName}}</td>
                                     <td style="text-align:right" class="orderItemQuantity py-2">{{$item->quantity}}</td>
-                                    <td style="text-align:right" class="orderItemUnitPrice py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
-                                    <td style="text-align:right" class="orderItemPrice py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                    <td style="text-align:right" class="orderItemUnitPrice py-2">{{number_format($unitPrice, 2)}}</td>
+                                    <td style="text-align:right" class="orderItemPrice py-2">{{number_format($item->totalPrice, 2)}}</td>
                                     <td style="cursor:pointer;" class="py-2 text-muted removeItem"><span class="fa fa-times-circle"></span></td>
                                 </tr>
                                 @endforeach
@@ -68,7 +68,7 @@
                                             $subtotal += $items[$index]->totalPrice;
                                         }
                                     @endphp
-                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ {{number_format((float)($subtotal), 2, '.', '')}}</td>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ {{number_format($subtotal, 2)}}</td>
                                     @else
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ 0.00</td>
                                     @endif
@@ -76,7 +76,7 @@
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     @if(isset($order))
-                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ {{number_format((float)($order->discountAmount), 2, '.', '')}}</td>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ {{number_format($order->discountAmount, 2)}}</td>
                                     @else
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ 0.00</td>
                                     @endif
@@ -84,7 +84,7 @@
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     @if(isset($order))
-                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ {{number_format((float)($order->totalBill), 2, '.', '')}}</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ {{number_format($order->totalBill, 2)}}</th>
                                     @else
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ 0.00</th>
                                     @endif
@@ -222,7 +222,7 @@
                                     <h6 class="card-text">
                                         {{$product->productName}}
                                     </h6>
-                                    <p>₱ {{number_format((float)($product->price), 2, '.', '')}}</p>
+                                    <p>₱ {{number_format($product->price, 2)}}</p>
                                 </div>
                             </div>
                         </a>

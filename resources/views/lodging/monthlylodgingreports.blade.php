@@ -302,8 +302,8 @@
                                     <td> {{$glampingPayment->serviceName}} </td>
                                     <td class="text-right"> {{$glampingPayment->quantity}} </td>
                                     <td> {{$glampingPayment->paymentDatetime}}</td>
-                                    <td class="text-right"> ₱ {{number_format((float)($glampingPayment->amount), 2, '.', '')}} </td>
-                                    {{--<td class="text-right"> ₱ {{number_format((float)($glampingPayment->balance), 2, '.', '')}} </td>--}}
+                                    <td class="text-right"> ₱ {{number_format($glampingPayment->amount, 2)}} </td>
+                                    {{--<td class="text-right"> ₱ {{number_format($glampingPayment->balance, 2)}} </td>--}}
                                 </tr>
                                 @php
                                     $totalGlampingEarnings += $glampingPayment->amount;
@@ -311,7 +311,7 @@
                                 @endforeach
                                 <tr>
                                     <td colspan="5"> TOTAL GROSS SALES: </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($totalGlampingEarnings), 2, '.', '')}}</td>
+                                    <td class="text-right"> ₱ {{number_format($totalGlampingEarnings, 2)}}</td>
                                 </tr>
                                 @else
                                 <tr>
@@ -348,8 +348,8 @@
                                     <td> {{$backpackerPayment->serviceName}} </td>
                                     <td class="text-right"> {{$backpackerPayment->quantity}} </td>
                                     <td> {{$backpackerPayment->paymentDatetime}}</td>
-                                    <td class="text-right"> ₱ {{number_format((float)($backpackerPayment->amount), 2, '.', '')}} </td>
-                                    {{--<td class="text-right"> ₱ {{number_format((float)($backpackerPayment->balance), 2, '.', '')}} </td>--}}
+                                    <td class="text-right"> ₱ {{number_format($backpackerPayment->amount, 2)}} </td>
+                                    {{--<td class="text-right"> ₱ {{number_format($backpackerPayment->balance, 2)}} </td>--}}
                                 </tr>
                                 @php
                                     $totalBackpackerEarnings += $backpackerPayment->amount;
@@ -357,7 +357,7 @@
                                 @endforeach
                                 <tr>
                                     <td colspan="5"> TOTAL GROSS SALES: </td>
-                                    <td class="text-right"> ₱ {{number_format((float)($totalBackpackerEarnings), 2, '.', '')}}</td>
+                                    <td class="text-right"> ₱ {{number_format($totalBackpackerEarnings, 2)}}</td>
                                 </tr>
                                 @else
                                 <tr>

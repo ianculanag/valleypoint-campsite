@@ -34,8 +34,8 @@
                     <td>{{$charge->lastName}}</td>    
                     <td>{{$charge->serviceName}}</td>                           
                     <td class="text-right">{{$charge->quantity}}</td>                                     
-                    <td class="text-right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>                            
-                    <td class="text-right">{{number_format((float)($charge->balance), 2, '.', '')}}</td>
+                    <td class="text-right">{{number_format($charge->totalPrice, 2)}}</td>                            
+                    <td class="text-right">{{number_format($charge->balance, 2)}}</td>
                 </tr>
                 @endforeach
             </tbody>

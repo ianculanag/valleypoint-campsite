@@ -76,8 +76,8 @@
 
                                         $unitPrice = $item->totalPrice/$item->quantity;
                                     @endphp
-                                    <td class="py-2">{{number_format((float)($unitPrice), 2, '.', '')}}</td>
-                                    <td class="py-2">{{number_format((float)($item->totalPrice), 2, '.', '')}}</td>
+                                    <td class="py-2">{{number_format($unitPrice, 2)}}</td>
+                                    <td class="py-2">{{number_format($item->totalPrice, 2)}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -89,19 +89,19 @@
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">
-                                        ₱ {{number_format((float)($subTotal), 2, '.', '')}}
+                                        ₱ {{number_format($subTotal, 2)}}
                                     </td>
                                 </tr>
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">
-                                        ₱ {{number_format((float)($order->discountAmount), 2, '.', '')}}
+                                        ₱ {{number_format($order->discountAmount, 2)}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">
-                                        ₱ {{number_format((float)($order->totalBill), 2, '.', '')}}
+                                        ₱ {{number_format($order->totalBill, 2)}}
                                     </th>
                                 </tr>
                             </thead>

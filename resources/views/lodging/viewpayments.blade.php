@@ -35,7 +35,7 @@
                     <td>{{$payment->lastName}}</td>                             
                     <td>{{$payment->paymentDatetime}}</td>                                     
                     <td>{{$payment->paymentStatus}}</td>                            
-                    <td class="text-right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
+                    <td class="text-right">{{number_format($payment->amount, 2)}}</td>
                 </tr>
                 @endforeach
             </tbody>

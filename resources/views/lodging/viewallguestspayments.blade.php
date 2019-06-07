@@ -34,8 +34,8 @@
                                 <th scope="row">{{$charge->chargeID}}</th>
                                 <td scope="row">{{$charge->firstName}} {{$charge->lastName}}</td>
                                 <td scope="row">{{$charge->serviceName}}</td>
-                                <td scope="row" class="text-right">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
-                                <td scope="row" class="text-right">{{number_format((float)($charge->balance), 2, '.', '')}}</td>
+                                <td scope="row" class="text-right">{{number_format($charge->totalPrice, 2)}}</td>
+                                <td scope="row" class="text-right">{{number_format($charge->balance, 2)}}</td>
                                 {{--<td scope="row">{{$charge->remarks}}</td>--}}
                                 <td scope="row">{{$charge->unitNumber}}</td>
                                 {{--<td scope="row" class="text-center">{{$charge->accommodationID}}</td>--}}
@@ -63,7 +63,7 @@
                             @foreach($payments as $payment)
                             <tr class="{{$payment->chargeID}} guestPaymentsRows">
                                 <th scope="row">{{$payment->paymentID}}</th>
-                                <td style="text-align:right">{{number_format((float)($payment->amount), 2, '.', '')}}</td>
+                                <td style="text-align:right">{{number_format($payment->amount, 2)}}</td>
                                 <td>{{$payment->paymentStatus}}</td>
                                 <td>{{\Carbon\Carbon::parse($payment->paymentDatetime)->format('F j, Y h:iA')}}</td>
                                 {{--<td scope="row" style="text-align:center">{{$payment->accommodationID}}</td>--}}

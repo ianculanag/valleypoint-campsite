@@ -49,8 +49,8 @@
                                 <input type="hidden" name="charge{{$charge->unitNumber}}" class="chargeIDs" value="{{$charge->chargeID}}"></td>
                                 <td id="invoiceDescription{{$charge->unitNumber}}" class="invoiceDescriptions">{{$charge->serviceName}}</td>
                                 <td id="invoiceQuantity{{$charge->unitNumber}}" style="text-align:right;" class="invoiceQuantities">{{$charge->quantity}}x{{$stayDuration}}</td>
-                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($charge->price), 2, '.', '')}}</td>
-                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($charge->totalPrice), 2, '.', '')}}</td>
+                                <td id="invoiceUnitPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format($charge->price, 2)}}</td>
+                                <td id="invoiceTotalPrice{{$charge->unitNumber}}" style="text-align:right;" class="invoicePrices">{{number_format($charge->totalPrice, 2)}}</td>
                             </tr>
                             @php
                                 $totalPrice += $charge->totalPrice;    
@@ -65,8 +65,8 @@
                             <input type="hidden" name="charge{{$loop->iteration}}" class="chargeIDs" value="{{$additionalService->chargeID}}"></td>
                             <td id="invoiceDescription{{$loop->iteration}}" class="invoiceDescriptions">{{$additionalService->serviceName}}</td>
                             <td id="invoiceQuantity{{$loop->iteration}}" style="text-align:right;" class="invoiceQuantities">{{$additionalService->quantity}}</td>
-                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format((float)($additionalService->price), 2, '.', '')}}</td>
-                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{number_format((float)($additionalService->totalPrice), 2, '.', '')}}</td>
+                            <td id="invoiceUnitPrice{{$loop->iteration}}" style="text-align:right;" class="invoiceUnitPrices">{{number_format($additionalService->price, 2)}}</td>
+                            <td id="invoiceTotalPrice{{$loop->iteration}}" style="text-align:right;" class="invoicePrices">{{number_format($additionalService->totalPrice, 2)}}</td>
                             </tr>
                             @php
                                 $totalPrice += $additionalService->totalPrice;    
@@ -77,7 +77,7 @@
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;">{{number_format((float)($totalPrice), 2, '.', '')}}</th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">{{number_format($totalPrice, 2)}}</th>
                             </tr>
                             {{--<tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
