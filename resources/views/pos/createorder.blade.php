@@ -159,7 +159,7 @@
                             <label class="col-sm-6 pr-0 mr-0 pt-1" for="tableNumber">Table No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 @if(isset($order))
-                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="{{$order->tableNumber}}" disabled>
+                                <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" maxlength="2" value="{{$order->tableNumber}}" oninput="maxLengthCheck(this)" disabled>
                                 @else
                                 <input class="form-control" type="number" name="tableNumber" id="tableNumber" min="1" max="30" placeholder="" value="">
                                 @endif
@@ -171,7 +171,7 @@
                             <label class="col-sm-7 pr-0 mr-0 pt-1" for="queueNumber">Queue No:</label>
                             <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
                                 @if(isset($order))
-                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="{{$order->queueNumber}}">
+                                <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" maxlength="2" value="{{$order->queueNumber}}" oninput="maxLengthCheck(this)">
                                 @else
                                 <input class="form-control" type="number" name="queueNumber" id="queueNumber" min="1" max="50" placeholder="" value="">
                                 @endif
@@ -234,7 +234,7 @@
                         <div class="form-group row mt-2 pr-4">
                             <label class="col-sm-3 pt-1" for="itemQuantity">Quantity:</label>
                             <div class="input-group input-group-sm col-sm-4">
-                                <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="50" placeholder="1" value="1" required>
+                                <input class="form-control" type="number" name="itemQuantity" id="itemQuantity" min="1" max="500" maxlength="3" placeholder="1" value="1" oninput="maxLengthCheck(this)" required>
                             </div>
                             <button id="addItemButton" class="form-control btn btn-sm btn-success col-sm-5" style="width:10em;" type="button" disabled>Add Item</button>
                         </div>
@@ -416,4 +416,10 @@
                 </div>
             </div>
         </div>
+        <script>
+            function maxLengthCheck(object) {
+                if (object.value.length > object.maxLength)
+                object.value = object.value.slice(0, object.maxLength)
+            }
+        </script>
 @endsection

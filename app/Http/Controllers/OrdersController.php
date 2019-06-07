@@ -694,9 +694,11 @@ class OrdersController extends Controller
 
         //toggle table status
         $table = RestaurantTable::find($order->tableNumber);
-        $table->update([
-            'status' => 'available'
-        ]);
+        if($table != null) {
+            $table->update([
+                'status' => 'available'
+            ]);
+        }
 
         return redirect('/view-tables');
     }
