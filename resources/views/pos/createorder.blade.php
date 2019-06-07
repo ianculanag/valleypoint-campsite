@@ -68,25 +68,25 @@
                                             $subtotal += $items[$index]->totalPrice;
                                         }
                                     @endphp
-                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ {{number_format($subtotal, 2)}}</td>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱&nbsp;{{number_format($subtotal, 2)}}</td>
                                     @else
-                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱ 0.00</td>
+                                    <td class="py-2" id="ordersSubtotal" style="text-align:right;">₱&nbsp;0.00</td>
                                     @endif
                                 </tr>
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     @if(isset($order))
-                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ {{number_format($order->discountAmount, 2)}}</td>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱&nbsp;{{number_format($order->discountAmount, 2)}}</td>
                                     @else
-                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱ 0.00</td>
+                                    <td class="py-2" id="ordersDiscount" style="text-align:right;">₱&nbsp;0.00</td>
                                     @endif
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     @if(isset($order))
-                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ {{number_format($order->totalBill, 2)}}</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱&nbsp;{{number_format($order->totalBill, 2)}}</th>
                                     @else
-                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱ 0.00</th>
+                                    <th class="py-2" id="ordersGrandTotal" style="text-align:right;">₱&nbsp;0.00</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -222,7 +222,7 @@
                                     <h6 class="card-text">
                                         {{$product->productName}}
                                     </h6>
-                                    <p>₱ {{number_format($product->price, 2)}}</p>
+                                    <p>₱&nbsp;{{number_format($product->price, 2)}}</p>
                                 </div>
                             </div>
                         </a>
@@ -299,7 +299,7 @@
                                 </tr>
                                 <tr class="text-primary">
                                     <th>Total Discount</th>
-                                    <th class="text-right"><h4 id="totalDiscount">₱ 0.00</h4></th>
+                                    <th class="text-right"><h4 id="totalDiscount">₱&nbsp;0.00</h4></th>
                                 </tr>
                             </tbody>
                             <tbody id="discountRatePeso"  style="display:none">
@@ -379,7 +379,7 @@
                                 </tr>
                                 <tr>
                                     <th>Change</th>
-                                    <th class="text-right"><h5 id="changeToGive">₱ 0.00</h5></th>
+                                    <th class="text-right"><h5 id="changeToGive">₱&nbsp;0.00</h5></th>
                                 </tr>
                             </tbody>
                         </table>
@@ -388,18 +388,18 @@
                             <tbody>
                                 <tr>
                                     <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block" id="exactPayment">Exact</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1.00</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 5.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;1.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;5.00</button></th>
                                 </tr>
                                 <tr>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 10.00</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 20.00</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 50.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;10.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;20.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;50.00</button></th>
                                 </tr>
                                 <tr>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 100.00</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 500.00</button></th>
-                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱ 1000.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;100.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;500.00</button></th>
+                                    <th class="px-1 py-1" style="width:33.33%"><button class="btn btn-lg btn-info btn-block cashButtons">₱&nbsp;1000.00</button></th>
                                 </tr>
                                 <tr>
                                     <th class="px-1 py-1" style="width:33.33%"></th>

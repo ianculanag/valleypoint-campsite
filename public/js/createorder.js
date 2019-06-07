@@ -68,7 +68,7 @@ function displayCategoryItems(productCategory) {
 
 function toPeso(valueString) {
 	//console.log('₱'+valueString);
-	return '₱ '+valueString;
+	return '₱&nbsp;'+valueString;
 }
 
 function addOrderEntry() {
@@ -298,7 +298,7 @@ jQuery('#discountButton').click(function() {
 	htmlString += "<tfoot>";
 	htmlString += "<tr>";
 	htmlString += "<th colspan='4'>Total Discount:</th>";
-	htmlString += "<th style='text-align:right' id='totalDiscount'>₱ 0.00</th>";
+	htmlString += "<th style='text-align:right' id='totalDiscount'>₱&nbsp;0.00</th>";
 	htmlString += "</tr>";
 
 	htmlString += "</tfoot>";	
@@ -506,7 +506,7 @@ jQuery('#exactPayment').click(function() {
 
 jQuery('#clearPayment').click(function() {
 	jQuery('#amountTendered').val('');
-	jQuery('#changeToGive').html('₱ 0.00');
+	jQuery('#changeToGive').html('₱&nbsp;0.00');
 })
 
 function computeChange() {	

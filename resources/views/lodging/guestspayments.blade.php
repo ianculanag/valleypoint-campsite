@@ -64,12 +64,12 @@
                     <tfoot>
                         <tr>
                             <th colspan="2" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalCharges, 2)}}</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">₱&nbsp;{{number_format($totalCharges, 2)}}</th>
                             <th colspan="3"></th>
                         </tr>  
                         <tr>
                             <th colspan="3" scope="row">BALANCE:</th>
-                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;">₱ {{number_format($totalBalance, 2)}}</th>
+                            <th id="invoiceTotalBalance" class="invoiceTotalBalance" style="text-align:right;">₱&nbsp;{{number_format($totalBalance, 2)}}</th>
                             <th colspan="2"></th>
                         </tr>
                         <tr>
@@ -116,7 +116,7 @@
                     <tfoot>
                         <tr>
                             <th colspan="2" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalPayments, 2)}}</th>
+                            <th id="invoiceGrandTotal" style="text-align:right;">₱&nbsp;{{number_format($totalPayments, 2)}}</th>
                             <th colspan="3"></th>
                         </tr>
                     </tfoot>

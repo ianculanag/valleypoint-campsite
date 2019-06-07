@@ -77,7 +77,7 @@
                             <tfoot>
                             <tr>
                                 <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalPrice, 2)}}</th>
+                                <th id="invoiceGrandTotal" style="text-align:right;">₱&nbsp;{{number_format($totalPrice, 2)}}</th>
                             </tr>
                             {{--<tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary btn-block w-100" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">

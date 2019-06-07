@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group row py-0 my-0">
                             <label for="cashStart" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash Start:</label>
-                            <input class="form-control-plaintext col-sm-8" type="text" name="cashStart" value="₱ 1800.00" readonly>
+                            <input class="form-control-plaintext col-sm-8" type="text" name="cashStart" value="₱&nbsp;1800.00" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-3">

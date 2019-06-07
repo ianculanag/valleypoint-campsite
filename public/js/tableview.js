@@ -53,9 +53,9 @@ jQuery(document).ready(function () {
 
 			jQuery('#orderSlip').html(htmlString);
 
-			jQuery('#ordersGrandTotal').html('₱ 0.00');
-			jQuery('#ordersSubtotal').html('₱ 0.00');
-			jQuery('#ordersDiscount').html('₱ 0.00');
+			jQuery('#ordersGrandTotal').html('₱&nbsp;0.00');
+			jQuery('#ordersSubtotal').html('₱&nbsp;0.00');
+			jQuery('#ordersDiscount').html('₱&nbsp;0.00');
 		})
 
 		var addOrderLink = "<a href='/create-order' style='text-decoration:none;color:white'></a>";

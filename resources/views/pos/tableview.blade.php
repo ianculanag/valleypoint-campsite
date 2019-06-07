@@ -184,16 +184,16 @@
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">
-                                        ₱ {{number_format($subTotal, 2)}}
+                                        ₱&nbsp;{{number_format($subTotal, 2)}}
                                     </td>
                                 </tr>
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">
                                     @if(count($items) > 0)
-                                        ₱ {{number_format($item->discountAmount, 2)}}
+                                        ₱&nbsp;{{number_format($item->discountAmount, 2)}}
                                     @else
-                                        ₱ 0.00
+                                        ₱&nbsp;0.00
                                     @endif
                                     </td>
                                 </tr>
@@ -201,9 +201,9 @@
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">
                                     @if(count($items) > 0)
-                                        ₱ {{number_format($item->totalBill, 2)}}
+                                        ₱&nbsp;{{number_format($item->totalBill, 2)}}
                                     @else
-                                        ₱ 0.00
+                                        ₱&nbsp;0.00
                                     @endif
                                     </th>
                                 </tr>

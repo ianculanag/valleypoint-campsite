@@ -1170,11 +1170,11 @@ jQuery(document).ready(function(){
             htmlString += "<tr><td style='width:38%'>Service name: </td>";
             htmlString += "<td>" + data[0].serviceName + "</td></tr>";
             htmlString += "<tr><td style='width:38%'>Price: </td>";
-            htmlString += "<td>₱ " + data[0].price + "</td></tr>";
+            htmlString += "<td>₱&nbsp;" + data[0].price + "</td></tr>";
             htmlString += "<tr><td style='width:38%'>Price (lean): </td>";
-            htmlString += "<td>₱ " + data[0].leanPrice + "</td></tr>";
+            htmlString += "<td>₱&nbsp;" + data[0].leanPrice + "</td></tr>";
             htmlString += "<tr><td style='width:38%'>Price (peak): </td>";
-            htmlString += "<td>₱ " + data[0].peakPrice + "</td></tr></table></div></div>";
+            htmlString += "<td>₱&nbsp;" + data[0].peakPrice + "</td></tr></table></div></div>";
 
             jQuery('#deleteServiceModalBody').html(htmlString);
             jQuery("#confirmServiceDeletion").attr("href", "/confirm-service-deletion/"+data[0].serviceID);

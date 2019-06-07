@@ -250,7 +250,7 @@
                         <tfoot>
                         <tr>
                             <th colspan="2" scope="row">TOTAL:</th>
-                            <th colspan="2" id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($totalPrice, 2)}}</th>
+                            <th colspan="2" id="invoiceGrandTotal" style="text-align:right;">₱&nbsp;{{number_format($totalPrice, 2)}}</th>
                         </tr>                        
                         <tr id="rowAmountPaid" style="display:none">
                             <th colspan="2" scope="row">AMOUNT PAID:</th>

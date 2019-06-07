@@ -89,19 +89,19 @@
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">Subtotal:</th>
                                     <td class="py-2" id="ordersSubtotal" style="text-align:right;">
-                                        ₱ {{number_format($subTotal, 2)}}
+                                        ₱&nbsp;{{number_format($subTotal, 2)}}
                                     </td>
                                 </tr>
                                 <tr  class="text-primary">
                                     <th class="py-2" colspan="3" scope="row">Discount:</th>
                                     <td class="py-2" id="ordersDiscount" style="text-align:right;">
-                                        ₱ {{number_format($order->discountAmount, 2)}}
+                                        ₱&nbsp;{{number_format($order->discountAmount, 2)}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="py-2" colspan="3" scope="row">TOTAL:</th>
                                     <th class="py-2" id="ordersGrandTotal" style="text-align:right;">
-                                        ₱ {{number_format($order->totalBill, 2)}}
+                                        ₱&nbsp;{{number_format($order->totalBill, 2)}}
                                     </th>
                                 </tr>
                             </thead>
