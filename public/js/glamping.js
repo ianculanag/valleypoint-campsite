@@ -408,7 +408,7 @@ jQuery('#savePayments').click(function() {
     jQuery('#selectedPayments').html(htmlString);
 
     jQuery('#rowAmountPaid').css('display', '');
-    jQuery('#invoiceAmountPaid').html(parseFloat(jQuery('#amount').val()).toFixed(2));
+    jQuery('#invoiceAmountPaid').html(toPeso(numeral(jQuery('#amount').val()).format('0,0.00')));
 });
 /**/
 
@@ -420,8 +420,8 @@ function makeInvoiceEntry(unitNumber) {
     htmlString += "<td style='display:none;'><input id='invoiceCheckBox'"+unitNumber+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
     htmlString += "<td id='invoiceDescription"+unitNumber+"' class='invoiceDescriptions'>Glamping Solo</td>";
     htmlString += "<td id='invoiceQuantity"+unitNumber+"' style='text-align:right;' class='invoiceQuantities'>1x1</td>";
-    htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;' class='invoiceUnitPrices'>1350.00</td>";
-    htmlString += "<td id='invoiceTotalPrice"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1350.00</td>";
+    htmlString += "<td id='invoiceUnitPrice"+unitNumber+"' style='text-align:right;' class='invoiceUnitPrices'>1,350.00</td>";
+    htmlString += "<td id='invoiceTotalPrice"+unitNumber+"' style='text-align:right;' class='invoicePrices'>1,350.00</td>";
     htmlString += "</tr>";
 
     invoiceRows.append(htmlString);
@@ -456,13 +456,13 @@ function makeInvoiceEntry(unitNumber) {
 
         jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
 
-        packagePrice = jQuery(invoiceUnitPrice).html();  
+        packagePrice = numeral(jQuery(invoiceUnitPrice).html()).value();  
 
         console.log(packagePrice);
         totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
         
-        jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));            
-        jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2));   
+        jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));            
+        jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00'));   
                     
         jQuery(hiddenTotalPrice).val(totalPrice);   
         //NEEDS REFACTORING
@@ -489,13 +489,13 @@ function makeInvoiceEntry(unitNumber) {
 
         jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
 
-        packagePrice = jQuery(invoiceUnitPrice).html();  
+        packagePrice = numeral(jQuery(invoiceUnitPrice).html()).value();  
 
         console.log(packagePrice);
         totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
         
-        jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));            
-        jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2));   
+        jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));            
+        jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00'));   
                     
         jQuery(hiddenTotalPrice).val(totalPrice);   
         //NEEDS REFACTORING
@@ -660,13 +660,13 @@ jQuery(document).ready(function(){
 
             jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
 
-            packagePrice = jQuery(invoiceUnitPrice).html();  
+            packagePrice = numeral(jQuery(invoiceUnitPrice).html()).value();  
 
             console.log(packagePrice);
             totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
             
-            jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));            
-            jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2));   
+            jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));            
+            jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00'));   
                         
             jQuery(hiddenTotalPrice).val(totalPrice);   
             
@@ -727,13 +727,13 @@ jQuery(document).ready(function(){
 
             jQuery(invoiceQuantity).html(jQuery(accommodationPackage).val()+'x'+(daysDiff));
 
-            packagePrice = jQuery(invoiceUnitPrice).html();  
+            packagePrice = numeral(jQuery(invoiceUnitPrice).html()).value();  
 
             console.log(packagePrice);
             totalPrice = packagePrice * jQuery(accommodationPackage).val() * (daysDiff);                       
             
-            jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));            
-            jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2));   
+            jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));            
+            jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00'));   
                         
             jQuery(hiddenTotalPrice).val(totalPrice);   
             
@@ -783,10 +783,10 @@ jQuery(document).ready(function(){
                 packageName = data[0].serviceName;       
                 
                 jQuery(invoiceDescription).html(packageName);                    
-                jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));
+                jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));
                 //console.log(daysDiff);
                 totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
-                jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2)); 
+                jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00')); 
 
                 jQuery(hiddenTotalPrice).val(totalPrice);
 
@@ -814,10 +814,10 @@ jQuery(document).ready(function(){
                 packageName = data[0].serviceName;       
                 
                 jQuery(invoiceDescription).html(packageName);                    
-                jQuery(invoiceUnitPrice).html(parseFloat(packagePrice).toFixed(2));
+                jQuery(invoiceUnitPrice).html(numeral(packagePrice).format('0,0.00'));
                 //console.log(daysDiff);
                 totalPrice = packagePrice * jQuery(unitNumberId).val() * (daysDiff);
-                jQuery(invoiceTotalPrice).html(parseFloat(totalPrice).toFixed(2)); 
+                jQuery(invoiceTotalPrice).html(numeral(totalPrice).format('0,0.00')); 
     
                 jQuery(hiddenTotalPrice).val(totalPrice);
     
@@ -874,8 +874,8 @@ jQuery(document).ready(function(){
             htmlStringRow += "<td style='display:none;'><input id='invoiceCheckBox"+additionalServices+"' class='form-check-input invoiceCheckboxes' type='checkbox' checked></td>";
             htmlStringRow += "<td id='invoiceDescription"+additionalServices+"' class='invoiceDescriptions'>"+data[0].serviceName+"</td>";
             htmlStringRow += "<td id='invoiceQuantity"+additionalServices+"' style='text-align:right;' class='invoiceQuantities'>"+jQuery('#additionalServiceNumberOfPax').val()+"</td>";
-            htmlStringRow += "<td id='invoiceUnitPrices"+additionalServices+"' style='text-align:right;' class='invoiceUnitPrices'>"+parseInt(document.getElementsByClassName('additionalServiceUnitPrice')[0].value).toFixed(2)+"</td>";
-            htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+parseInt(document.getElementsByClassName('additionalServiceTotalPrice')[0].value).toFixed(2)+"</td>";
+            htmlStringRow += "<td id='invoiceUnitPrices"+additionalServices+"' style='text-align:right;' class='invoiceUnitPrices'>"+numeral(document.getElementsByClassName('additionalServiceUnitPrice')[0].value).format('0,0.00')+"</td>";
+            htmlStringRow += "<td id='invoiceTotalPrice"+additionalServices+"' style='text-align:right;' class='invoicePrices'>"+numeral(document.getElementsByClassName('additionalServiceTotalPrice')[0].value).format('0,0.00')+"</td>";
             htmlStringRow += "</tr>";
             
             jQuery('#invoiceRows').append(htmlStringRow);
@@ -953,17 +953,15 @@ jQuery(document).ready(function(){
 
 function updateTotal() {
     var totalPrice = 0;
-    var prices =  document.getElementsByClassName('invoicePrices');
+    var prices =  jQuery('.invoicePrices');
 
     for (var index = 0; index < prices.length; index++) {
         //console.log(document.getElementsByClassName('invoicePrices')[index].innerHTML);
-        totalPrice += parseInt(prices[index].innerHTML);
+        totalPrice += numeral(prices.eq(index).html()).value();
         //console.log(totalPrice);
     }
-    document.getElementById('invoiceGrandTotal').innerHTML="";
-    //document.getElementById('invoiceGrandTotal').innerHTML = totalPrice;
 
-    jQuery('#invoiceGrandTotal').html(parseFloat(totalPrice).toFixed(2));
+    jQuery('#invoiceGrandTotal').html(toPeso(numeral(totalPrice).format('0,0.00')));
 }
 
 jQuery(document).on('click','.collapse.in',function(e) {

@@ -42,8 +42,8 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th colspan="3" scope="row">TOTAL:</th>
-                                <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                                <th colspan="2" scope="row">TOTAL:</th>
+                                <th colspan="2" id="invoiceGrandTotal" style="text-align:right;"></th>
                             </tr>
                             <!--tr>
                                 <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
@@ -272,8 +272,8 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th colspan="3" scope="row">TOTAL:</th>
-                            <th id="invoiceGrandTotal" style="text-align:right;"></th>
+                            <th colspan="2" scope="row">TOTAL:</th>
+                            <th colspan="2" id="invoiceGrandTotal" style="text-align:right;"></th>
                         </tr>
                         <!--tr>
                             <td colspan="4"><button type="button" class="btn btn-primary" style="text-align:center;width:8em" id="proceedToPayment" data-toggle="modal" data-target="#chargesModal">
