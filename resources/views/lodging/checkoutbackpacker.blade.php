@@ -64,11 +64,11 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" scope="row">TOTAL:</th>
-                                            <th style="text-align:right;">{{number_format($total, 2)}}</th>
+                                            <th style="text-align:right;">₱ {{number_format($total, 2)}}</th>
                                         </tr>
                                         <tr>
                                             <th colspan="3" scope="row">AMOUNT:</th>
-                                            <th style="text-align:right;">{{number_format($totalPayment, 2)}}</th>
+                                            <th style="text-align:right;">₱ {{number_format($totalPayment, 2)}}</th>
                                         </tr>
                                     </tfoot>
                                     @else
@@ -131,7 +131,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="2" scope="row">TOTAL:</th>
-                                            <th id="invoiceGrandTotal" style="text-align:right;">{{number_format($total, 2)}}</th>
+                                            <th id="invoiceGrandTotal" style="text-align:right;">₱ {{number_format($total, 2)}}</th>
                                             <th></th>
                                         </tr>                                        
                                         <tr id="rowAmountPaid" style="display:none">
@@ -140,7 +140,7 @@
                                         </tr>    
                                         <tr>
                                             <th colspan="3" scope="row">BALANCE:</th>
-                                            <th id="invoiceTotalBalance" style="text-align:right;">{{number_format($totalBalance, 2)}}</th>
+                                            <th id="invoiceTotalBalance" style="text-align:right;">₱ {{number_format($totalBalance, 2)}}</th>
                                         </tr>
                                                                                
                                         <tr style="display:none;">
