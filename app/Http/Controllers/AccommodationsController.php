@@ -128,7 +128,7 @@ class AccommodationsController extends Controller
             'lastName' => 'required|max:30'
         ]);
 
-        $accommodation = new Accommodations;    
+        $accommodation = new Accommodation;    
         $unitNumbers = array_map('trim', explode(',', $request->input('unitNumber')));  //for the three for loops
 
         $accommodation->numberOfPax = $request->input('numberOfPaxGlamping');

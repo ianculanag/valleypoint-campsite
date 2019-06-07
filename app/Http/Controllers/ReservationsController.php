@@ -1163,7 +1163,7 @@ class ReservationsController extends Controller
                             $charge->update([                    
                                 'quantity' => $request->input($additionalServiceNumberOfPax),
                                 'totalPrice' => $request->input($additionalTotalPrice),                          
-                                'balance' => $request->input($totalPrice),
+                                'balance' => $request->input($additionalTotalPrice),
                                 'remarks' => 'unpaid',
                                 'accommodationID' => $accommodation->id,
                                 'serviceID' => $request->input($additionalServiceID)
