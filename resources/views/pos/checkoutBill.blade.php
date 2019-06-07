@@ -21,7 +21,7 @@
                 <div class="card p-0 m-0" style="min-height:80vh; max-height:80vh;">
                     <div class="container row">
                     <h4 class="text-muted text-center col-sm-12 pt-3 pb-1">Bill Out</h4>
-                    <input class="form-control col-sm-4 mt-2 mr-2" type="text" style="position:absolute;right:0" value="" id="referenceNumber" name="referenceNumber">
+                    <input class="form-control col-sm-4 mt-2 mr-2" type="text" style="position:absolute;right:0" maxlength="16" value="" id="referenceNumber" name="referenceNumber">
                     </div>
                     <!--h4 class="text-muted text-center pt-3 pb-1">Bill Out</h4-->
 

@@ -1,5 +1,5 @@
+/* Navbar clock */
 jQuery(document).ready(function(){
-    /* Navbar clock */
     var currentDate = jQuery('#date'),
         currentTime = jQuery('#time');
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 
@@ -38,8 +38,10 @@ jQuery(document).ready(function(){
 
     updateDate();
     window.setInterval(update, 1000);
-    
-    /* Sidebar highlight */
+});
+
+/* Sidebar highlight */
+jQuery(document).ready(function(){
     var pathname = window.location.pathname; 
     
     if(pathname == '/backpacker' || pathname == '/calendar-glamping' || pathname == '/calendar-backpacker'

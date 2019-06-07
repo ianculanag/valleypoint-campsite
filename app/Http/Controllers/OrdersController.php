@@ -664,7 +664,6 @@ class OrdersController extends Controller
             'totalBill' => $request->input('totalBill'),
             'discountAmount' => $request->input('discountAmount'),
             'status' => 'finished'
-            //'referenceNumber' => $request->input('referenceNumber')
         ]);
 
         $payment = new Payments;
@@ -673,6 +672,7 @@ class OrdersController extends Controller
         $payment->changeDue = $request->input('changeDue');
         $payment->paymentStatus = 'full';
         $payment->orderID = $request->input('orderID');
+        $payment->referenceNumber = $request->input('referenceNumber');
         $payment->save();
         
         $numberOfOrders = $request->input('numberOfOrders');

@@ -10,8 +10,8 @@
     <div class="col-md-8 text-center" style="color:white;">
         <!-- Left Side Of Navbar -->
         {{-- <span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span> --}}
-        <span id="date"></span>
-        <span id="time" class="pl-1"></span>
+        {{-- <span id="date"></span>
+        <span id="time" class="pl-1"></span> --}}
     </div>
     <div class="collapse navbar-collapse col-md-2 px-1">
         <!-- Right Side Of Navbar -->
@@ -121,5 +121,9 @@
                         </div>
                     </li>
                 </ul>
+                <div class="text-center p-4" style="color:white; position:fixed; bottom:0;">
+                    <span id="date"></span>
+                    <span id="time" class="pl-1"></span>
+                </div>
             </nav>
         </div>
