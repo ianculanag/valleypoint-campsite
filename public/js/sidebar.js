@@ -1,12 +1,13 @@
 /* Navbar clock */
-var $currentDate = $('#date'),
+var $currentWeek = $('#week'),
+    $currentDate = $('#date'),
     $currentTime = $('#time');
 var months = [
-  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nove', 'Dec'
 ];
 
 var days = [
-  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+  'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
 ];
 
 function update(){
@@ -35,9 +36,10 @@ function update(){
     var day = date.getDate();
     var year = date.getFullYear();
     
-    var dateString = dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
+    var dateString = month + ' ' + day + ', ' + year;
     var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
 
+    $currentWeek.text(dayOfWeek);
     $currentDate.text(dateString);
     $currentTime.text(timeString);
 } 

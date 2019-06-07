@@ -93,8 +93,9 @@
                         </div>
                     </li>
                 </ul>
-                <div class="text-center pb-4 px-3" style="color:white; position:fixed; bottom:0;">
-                    <span id="date"></span>
+                <div class="text-center mb-4 px-3" style="background-color:#0808084a; color: white; position:fixed; bottom:0;">
+                    <span id="week"></span>
+                    <span id="date" class="pl-1"></span>
                     <span id="time" class="pl-1"></span>
                 </div>
             </nav>

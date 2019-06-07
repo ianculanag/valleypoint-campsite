@@ -9,7 +9,7 @@
                     <strong>Back</strong>
                 </span>
             </a> 
-            {{--<h3>Check-out Bill</h3>--}}
+            {{-- <h3>Bill Out</h3> --}}
         </div>   
         <form method="POST" action="/finish-order-transaction">            
         <input type="hidden" name="orderID" value="{{$order->id}}">
@@ -20,8 +20,19 @@
             <div class="col-md-6 offset-3 mb-3" >
                 <div class="card p-0 m-0" style="min-height:80vh; max-height:80vh;">
                     <div class="container row">
-                    <h4 class="text-muted text-center col-sm-12 pt-3 pb-1">Bill Out</h4>
-                    <input class="form-control col-sm-4 mt-2 mr-2" type="text" style="position:absolute;right:0" maxlength="16" value="" id="referenceNumber" name="referenceNumber">
+                    {{-- <h4 class="text-muted text-center col-sm-12 pt-3 pb-1">Bill Out</h4> --}}
+                        <div class="col-md-5 form-group mt-3 mb-2 row">
+                        @if(isset($order->tableNumber)) 
+                            <label class="col-sm-5 pr-0 mr-0 pt-1" for="tableNumber">Table:</label>
+                            <div class="input-group input-group-sm col-sm-4 px-0 mx-0">
+                                <p class="py-1 my-0"> {{$order->tableNumber}} </p>
+                                {{-- <input class="form-control" type="number" name="tableNumber{{$order->id}}" id="tableNumber{{$order->id}}" min="1" max="30" value="{{$order->tableNumber}}"> --}}
+                            </div>   
+                        @else
+                            <label class="col-sm-5 pr-0 mr-0 py-2 mb-3" for="tableNumber"> </label>
+                        @endif
+                        </div>
+                        <input class="form-control col-sm-4 mt-2 mr-2" type="text" style="position:absolute;right:0" maxlength="16" value="" id="referenceNumber" name="referenceNumber" autocomplete="off">
                     </div>
                     <!--h4 class="text-muted text-center pt-3 pb-1">Bill Out</h4-->
 
