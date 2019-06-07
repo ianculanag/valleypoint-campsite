@@ -1,18 +1,19 @@
 <nav class="navbar navbar-lodging navbar-expand-md navbar-laravel p-1 shadow fixed-top">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}">
-        {{ config('app.name', 'Laravel') }}
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-        <span class="navbar-toggler-icon"></span>
-    </button>
- 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse col-md-2 px-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button> 
+    </div>
+    <div class="col-md-8 text-center" style="color:white;">
         <!-- Left Side Of Navbar -->
-        <ul class="navbar-nav px-5 mx-5">
-            <li class="nav-item px-5 mx-5">
-                <span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span>
-            </li>
-        </ul>
+        {{-- <span class="px-5 mx-5" id="currentDatetime" style="color:white;"></span> --}}
+        <span id="date"></span>
+        <span id="time" class="pl-1"></span>
+    </div>
+    <div class="collapse navbar-collapse col-md-2 px-1">
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
@@ -26,15 +27,14 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown px-2">
+                <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="px-1 caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" style="color:#505050 !important;" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -47,7 +47,6 @@
         </ul>
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row sidebarMainContent">
         <div class="container col-md-2" style="margin:0; padding:0;">

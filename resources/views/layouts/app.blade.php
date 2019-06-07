@@ -50,6 +50,7 @@
 <script src="{{ asset('js/numeral.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/input-validation.js') }}"></script>
+<script src="{{ asset('js/sidebar.js') }}"></script>
 <script src="{{ asset('js/custom3.js') }}"></script>
 <script src="{{ asset('js/custom4.js') }}"></script>
 <script src="{{ asset('js/custom5.js') }}"></script>
