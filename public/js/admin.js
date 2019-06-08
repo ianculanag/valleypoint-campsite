@@ -53,3 +53,28 @@ jQuery(document).ready(function(){
         })
     });
 });
+
+/* Delete ingredient */
+jQuery(document).ready(function(){
+    jQuery('.delete-ingredient-modal').click(function(){
+        jQuery.get('/delete-ingredient-modal/'+$(this).attr('id'), function(data){
+            
+            console.log(data);
+
+            var htmlString = "";
+
+            htmlString += "<p class='mx-3'><strong>Warning!</strong> Are you sure you want to delete " + data[0].ingredientName + "?</p>";
+            htmlString += "<div class='card'><div class='card-body'><table class='table table-sm borderless mb-0'>";
+            htmlString += "<tr><td style='width:28%'>Ingredient name: </td>";
+            htmlString += "<td>" + data[0].ingredientName + "</td></tr>";
+            htmlString += "<tr><td style='width:28%'>Category: </td>";
+            htmlString += "<td>" + data[0].ingredientCategory + "</td></tr></table></div></div>";
+
+            htmlString += "<input type='hidden' name='thisIngredient' value='"+ data[0].id +"'>";
+
+            jQuery('#deleteIngredientModalBody').html(htmlString);
+            jQuery("#confirmIngredientDeletion").attr("href", "/confirm-ingredient-deletion/"+data[0].id);
+            jQuery('#deleteIngredientForm').attr("action", "/confirm-ingredient-deletion/"+data[0].id);
+        })
+    });
+});

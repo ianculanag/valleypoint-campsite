@@ -234,8 +234,8 @@ function loadIngredientTable(data) {
         var ingredientCount = 0;
 
         htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='ingredientTable'>";
-        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:60%'>Description</th> <th class='pl-3'>Category</th></tr>";
-        htmlString += "</thead><tbody id='displayIngredientCategory'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:50%'>Description</th>";
+        htmlString += "<th class='pl-3'>Category</th><th>Action</th></tr></thead><tbody id='displayIngredientCategory'>";
 
         for (var index = 0; index < data.length; index++) {
             ingredientCount++;
@@ -243,13 +243,17 @@ function loadIngredientTable(data) {
             htmlString += "<tr><td class='text-center pr-5'>" + ingredientCount + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].ingredientName + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].ingredientCategory + "</td></tr>";
+            htmlString += "<td><a href='edit-ingredient/" + data[index].id + "'>";
+            htmlString += "<button class='btn btn-sm btn-info'>Edit</button></a>";
+            htmlString += "<a id='" + data[index].id + "' class='delete-ingredient-modal' data-toggle='modal' data-target='#deleteIngredientModal'>";
+            htmlString += "<button class='btn btn-sm btn-danger'>Delete</button></a></td>";
         } 
         jQuery('#ingredientLibrary').html(htmlString);
 
     } else {
         htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='ingredientTable'>";
-        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:60%'>Description</th> <th class='pl-3'>Category</th></tr>";
-        htmlString += "</thead><tbody id='displayIngredientCategory'></tbody></table>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:50%'>Description</th>";
+        htmlString += "<th class='pl-3'>Category</th><th>Action</th></tr></thead><tbody id='displayIngredientCategory'></tbody></table>";
 
         jQuery('#ingredientLibrary').html(htmlString);
     } 
