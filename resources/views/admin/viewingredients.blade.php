@@ -3,10 +3,13 @@
 @section('content')
     <div class="container px-4 py-0">
         <h3 class="text-center pb-3 mb-0">Ingredients</h3>
-            <a class="btn btn-sm btn-success mb-2" href="/add-ingredient">Add ingredient</a>
+            <div class="container-fluid row">
+                <a class="btn btn-sm btn-success mb-2" href="/add-category">Add category</a>
+                <a class="btn btn-sm btn-success mb-2 ml-2" href="/add-ingredient">Add ingredient</a>
+            </div>
             <div class="container-fluid lodging-tabs px-0">
                 <ul class="nav nav-tabs pt-0" style="">
-                    <li class="ingredientCategories nav-item" id="allCategories">
+                    <li class="ingredient-categories nav-item" id="allCategories">
                         <a class="categories nav-link active" id="all-categories" style="color:#505050; cursor:pointer;">All</a>
                     </li>
                     @foreach ($ingredientCategories as $ingredientCategory)
@@ -23,7 +26,7 @@
                             }
                         }
                     @endphp
-                    <li class="ingredientCategories nav-item" id="{{$ingredientCategory}}">
+                    <li class="ingredient-categories nav-item" id="{{$ingredientCategory}}">
                         <a class="nav-link categories" id="this-{{$ingredientCategory}}" style="color:#505050; cursor:pointer;">{{$ingredientName}}</a>
                     </li>
                     @endforeach
@@ -34,7 +37,7 @@
                     <thead>
                         <tr>
                             <th style='width:10%'>No.</th>
-                            <th class="pl-3">Description</th>
+                            <th style='width:60%' class="pl-3">Description</th>
                             <th class="pl-3">Category</th>
                         </tr>
                     </thead>
@@ -63,7 +66,7 @@
                         @endphp
 
                         <tr>
-                            <td class="text-right pr-5">{{$ingredientCount}}</td>
+                            <td class="text-center pr-5">{{$ingredientCount}}</td>
                             <td class="pl-3">{{$ingredient->ingredientName}}</td>
                             <td class="pl-3">{{$displayName}}</td>                            
                         </tr>

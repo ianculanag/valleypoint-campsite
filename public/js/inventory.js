@@ -90,6 +90,7 @@ jQuery(document).ready(function () {
 jQuery(document).ajaxComplete(function() {
     jQuery('#inventoryTable').DataTable();
     jQuery('#productsTable').DataTable();
+    jQuery('#ingredientTable').DataTable();
 })
 
 function loadInventoryTable(data) {
@@ -217,11 +218,11 @@ jQuery(document).ready(function () {
         });
 
         if (category == 'allCategories') {
-            jQuery('.ingredient-categories').removeClass('active');
-            jQuery('#allCategories').addClass('active');
+            jQuery('.categories').removeClass('active');
+            jQuery('#all-categories').addClass('active');
         } else {
-            jQuery('.ingredient-categories').removeClass('active');
-            jQuery('#' + category).addClass('active');
+            jQuery('.categories').removeClass('active');
+            jQuery('#this-' + category).addClass('active');
         }
     })
 });
@@ -232,23 +233,24 @@ function loadIngredientTable(data) {
     if (data.length > 0) {
         var ingredientCount = 0;
 
-        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='inventoryTable'>";
-        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3'>Description</th> <th class='pl-3'>Category</th></tr>";
+        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='ingredientTable'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:60%'>Description</th> <th class='pl-3'>Category</th></tr>";
         htmlString += "</thead><tbody id='displayIngredientCategory'>";
 
         for (var index = 0; index < data.length; index++) {
             ingredientCount++;
 
-            htmlString += "<tr><td class='text-right pr-5'>" + ingredientCount + "</td>";
+            htmlString += "<tr><td class='text-center pr-5'>" + ingredientCount + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].ingredientName + "</td>";
             htmlString += "<td class='pl-3'>" + data[index].ingredientCategory + "</td></tr>";
         } 
+        jQuery('#ingredientLibrary').html(htmlString);
 
     } else {
-        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='inventoryTable'>";
-        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3'>Description</th> <th class='pl-3'>Category</th></tr>";
+        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='ingredientTable'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3' style='width:60%'>Description</th> <th class='pl-3'>Category</th></tr>";
         htmlString += "</thead><tbody id='displayIngredientCategory'></tbody></table>";
 
-        jQuery('#ingredientsLibrary').html(htmlString);
+        jQuery('#ingredientLibrary').html(htmlString);
     } 
 }

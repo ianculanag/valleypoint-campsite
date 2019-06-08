@@ -37,7 +37,7 @@ function update(){
     var year = date.getFullYear();
     
     var dateString = month + ' ' + day + ', ' + year;
-    var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+    var timeString = hours + ':' + minutes + /*':' + seconds + */' ' + ampm;
 
     $currentWeek.text(dayOfWeek);
     $currentDate.text(dateString);
