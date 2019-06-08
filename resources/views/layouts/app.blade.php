@@ -50,6 +50,7 @@
 <script src="{{ asset('js/numeral.min.js') }}"></script>
 <script src="{{ asset('js/createorder.js') }}"></script>
 <script src="{{ asset('js/tableview.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('js/inventory.js') }}"></script>
 <script src="{{ asset('js/voidtransactions.js') }}"></script>
 <script src="{{ asset('js/glamping.js') }}"></script>
