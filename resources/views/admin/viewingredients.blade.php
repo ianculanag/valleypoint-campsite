@@ -38,7 +38,7 @@
                     <tr>
                         <th style='width:10%'>No.</th>
                         <th style='width:50%' class="pl-3">Description</th>
-                        <th class="pl-3">Category</th>
+                        <th style='width:25%' class="pl-3">Category</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -100,7 +100,9 @@
                     <div class="modal-body" id="deleteIngredientModalBody">
                     </div>
                     <div class="modal-footer">
-                        <a href="" id="confirmIngredientDeletion"><button type="submit" class="btn btn-danger" style="width:5em;">Yes</button></a>
+                        <a href="" id="confirmIngredientDeletion">
+                            <button type="submit" class="btn btn-danger" style="width:5em;">Yes</button>
+                        </a>
                         <button type="button" class="btn btn-primary" style="width:5em;" data-dismiss="modal">No</button>
                     </div>
                 </div>

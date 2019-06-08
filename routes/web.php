@@ -185,6 +185,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     //Dashboard
     Route::get('/admin-dashboard', 'UnitsController@loadAdminDashboard');
 
+    /* Users */
     //View users
     Route::get('/view-users', 'UsersController@viewUsers');
 
@@ -259,6 +260,18 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
     //View ingredients by category
     Route::get('/view-ingredients/{category}', 'IngredientsController@viewIngredientCategories');
+
+    //Add ingredient
+    // Route::get('/add-ingredient', 'IngredientsController@showAddIngredientForm');
+    // Route::post('/ingredient-added', 'IngredientController@addIngredient');
+
+    //Edit ingredient
+    // Route::get('/edit-ingredient/{ingredientID}', 'IngredientsController@viewServiceDetails');
+    // Route::post('/update-ingredient', 'IngredientsController@updateService');
+
+    //Delete ingredient
+    Route::get('/delete-ingredient-modal/{ingredientID}', 'IngredientsController@deleteIngredientModal');
+    //Route::post('/confirm-ingredient-deletion/{ingredientID}', 'IngredientsController@deleteIngredient');
 });
 
 /* Restaurant */

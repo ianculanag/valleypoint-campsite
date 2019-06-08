@@ -120,4 +120,17 @@ class IngredientsController extends Controller
         return $ingredients;
     } 
 
+    /**
+     * Delete ingredient modal
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteIngredientModal($ingredientID)
+    {   
+        $ingredients = DB::table('ingredients')
+        ->where('ingredients.id', '=', $ingredientID)
+        ->get();
+
+        return $ingredients;
+    }
 }
