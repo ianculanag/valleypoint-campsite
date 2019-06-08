@@ -7,7 +7,7 @@ var months = [
 ];
 
 var days = [
-  'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
+  'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'
 ];
 
 function update(){
