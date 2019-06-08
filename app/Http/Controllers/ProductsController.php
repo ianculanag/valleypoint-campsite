@@ -110,10 +110,12 @@ class ProductsController extends Controller
     public function viewMenu($productCategory){
         if($productCategory == 'allProducts') {        
             $products = DB::table('products')
+            ->orderBy('productName')
             ->get();
         } else {            
             $products = DB::table('products')
             ->where('productCategory', '=', $productCategory)
+            ->orderBy('productName')
             ->get();
         }
         return $products;
@@ -133,6 +135,7 @@ class ProductsController extends Controller
     public function viewMenuItems() { 
 
         $products = DB::table('products')
+        ->orderBy('productName')
         ->get();
 
         $categories = Products::getAllCategories();
@@ -151,10 +154,12 @@ class ProductsController extends Controller
 
         if($category == 'allProducts') {
             $products = DB::table('products')
+            ->orderBy('productName')
             ->get();
         } else {
             $products = DB::table('products')
             ->where('productCategory', '=', $category)
+            ->orderBy('productName')
             ->get();
         }
 

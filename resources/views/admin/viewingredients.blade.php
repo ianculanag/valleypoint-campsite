@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="container py-0 scrollbar-near-moon-wide" id="ingredientLibrary" style="min-height:66.5vh; max-height:66.5vh; overflow-y:auto;">
-            <table data-order='[[ 0, "asc" ]]' class="table table-sm dataTable compact stripe" cellspacing="0" id="ingredientTable">
+            <table data-order='[[ 1, "asc" ]]' class="table table-sm dataTable compact stripe" cellspacing="0" id="ingredientTable">
                 <thead>
                     <tr>
                         <th style='width:10%'>No.</th>

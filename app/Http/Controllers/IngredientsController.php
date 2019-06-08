@@ -92,6 +92,7 @@ class IngredientsController extends Controller
     public function viewIngredients() { 
 
         $ingredients = DB::table('ingredients')
+        ->orderBy('ingredientName')
         ->get();
 
         $ingredientCategories = Ingredients::getAllCategories();
@@ -110,10 +111,12 @@ class IngredientsController extends Controller
 
         if($category == 'allCategories') {
             $ingredients = DB::table('ingredients')
+            ->orderBy('ingredientName')
             ->get();
         } else {
             $ingredients = DB::table('ingredients')
             ->where('ingredientCategory', '=', $category)
+            ->orderBy('ingredientName')
             ->get();
         }
 
