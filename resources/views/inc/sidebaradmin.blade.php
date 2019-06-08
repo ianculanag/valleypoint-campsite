@@ -114,10 +114,10 @@
                                 <i class="fa fa-utensils" aria-hidden="true"></i>
                                 <span> Menu </span>
                             </a>
-                            {{-- <a class="dropdown-item" href="/view-recipes">
+                            <a class="dropdown-item" href="/view-ingredients">
                                 <i class="fa fa-book" aria-hidden="true"></i>
-                                <span> Recipes </span>
-                            </a> --}}
+                                <span> Ingredients </span>
+                            </a>
                         </div>
                     </li>
                 </ul>

@@ -160,7 +160,7 @@ class ProductsController extends Controller
 
         return $products;
     } 
-
+ 
     /**
      * View recipe of a menu item
      *

@@ -205,3 +205,50 @@ function loadProductsTable(data) {
         jQuery('#productsLibrary').html(htmlString);
     } 
 }
+
+/* View Ingredients */
+jQuery(document).ready(function () {
+    jQuery('.ingredient-categories').click(function () {
+
+        var category = jQuery(this).attr('id');
+        
+        jQuery.get('/view-ingredients/' + category, function (data) {
+            loadIngredientTable(data);
+        });
+
+        if (category == 'allCategories') {
+            jQuery('.ingredient-categories').removeClass('active');
+            jQuery('#allCategories').addClass('active');
+        } else {
+            jQuery('.ingredient-categories').removeClass('active');
+            jQuery('#' + category).addClass('active');
+        }
+    })
+});
+
+function loadIngredientTable(data) {
+    var htmlString = "";
+
+    if (data.length > 0) {
+        var ingredientCount = 0;
+
+        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='inventoryTable'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3'>Description</th> <th class='pl-3'>Category</th></tr>";
+        htmlString += "</thead><tbody id='displayIngredientCategory'>";
+
+        for (var index = 0; index < data.length; index++) {
+            ingredientCount++;
+
+            htmlString += "<tr><td class='text-right pr-5'>" + ingredientCount + "</td>";
+            htmlString += "<td class='pl-3'>" + data[index].ingredientName + "</td>";
+            htmlString += "<td class='pl-3'>" + data[index].ingredientCategory + "</td></tr>";
+        } 
+
+    } else {
+        htmlString += "<table class='table table-sm dataTable compact stripe' cellspacing='0' id='inventoryTable'>";
+        htmlString += "<thead><tr> <th style='width:10%'>No.</th> <th class='pl-3'>Description</th> <th class='pl-3'>Category</th></tr>";
+        htmlString += "</thead><tbody id='displayIngredientCategory'></tbody></table>";
+
+        jQuery('#ingredientsLibrary').html(htmlString);
+    } 
+}

@@ -192,6 +192,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/add-user', 'UsersController@showAddUserForm');
     Route::post('user-added', 'UsersController@addUser');
 
+    /* Units */
     //View units
     Route::get('/view-units', 'UnitsController@viewUnits');
     Route::get('/view-units-tent', 'UnitsController@viewTents');
@@ -209,6 +210,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/delete-unit-modal/{unitID}', 'UnitsController@deleteUnitModal');
     Route::post('/confirm-unit-deletion/{unitID}', 'UnitsController@deleteUnit');
     
+    /* Services: Packages, Services, Extra Utilities, Damage Fees */
     //View services
     Route::get('/view-services', 'ServicesController@viewServices');
     Route::get('/view-services-package', 'ServicesController@viewPackages');
@@ -241,6 +243,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     //Reload custom inventory
     Route::get('/view-inventory/custom/{category}/{fromDate}/{toDate}', 'InventoryController@viewCustomInventory');
 
+    /* Menu and Recipes */
     //View menu
     Route::get('/view-menu-recipe', 'ProductsController@viewMenuItems');
 
@@ -249,6 +252,13 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
     //View recipe of a menu item
     Route::get('/load-recipe/{menuItem}', 'ProductsController@viewMenuItemRecipe');
+
+    /* Ingredients */
+    //View ingredients
+    Route::get('/view-ingredients', 'IngredientsController@viewIngredients');
+
+    //View ingredients by category
+    Route::get('/view-ingredients/{category}', 'IngredientsController@viewIngredientCategories');
 });
 
 /* Restaurant */

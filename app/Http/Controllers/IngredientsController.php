@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ingredients;
+use DB;
 
 class IngredientsController extends Controller
 {
@@ -81,4 +83,41 @@ class IngredientsController extends Controller
     {
         //
     }
+
+     /**
+     * View ingredients
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewIngredients() { 
+
+        $ingredients = DB::table('ingredients')
+        ->get();
+
+        $ingredientCategories = Ingredients::getAllCategories();
+
+        return view('admin.viewingredients')
+        ->with('ingredients', $ingredients)
+        ->with('ingredientCategories', $ingredientCategories);
+    } 
+
+    /**
+     * View ingredient per category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewIngredientCategories($category) { 
+
+        if($category == 'allCategories') {
+            $ingredients = DB::table('ingredients')
+            ->get();
+        } else {
+            $ingredients = DB::table('ingredients')
+            ->where('ingredientCategory', '=', $category)
+            ->get();
+        }
+
+        return $ingredients;
+    } 
+
 }
