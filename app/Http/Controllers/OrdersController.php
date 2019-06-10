@@ -413,7 +413,7 @@ class OrdersController extends Controller
         $orders = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
         ->leftJoin('orders', 'orders.id', 'orderID')
-        ->select('orderID','products.productName','products.productCategory','status', 'orderDatetime', 'queueNumber')
+        ->select('orderID','products.productName','products.productCategory','status', 'orderDatetime', 'tableNumber')
         ->get();
     
            return view('pos.viewOrders')->with('orders', $orders);

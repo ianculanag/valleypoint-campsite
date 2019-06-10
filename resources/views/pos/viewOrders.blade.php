@@ -23,7 +23,7 @@
                 @foreach($orders as $order)
                 <tr class="">
                   <td>{{$order->orderID}}</td>
-                  <td>{{$order->queueNumber}}</td>
+                  <td>{{$order->tableNumber}}</td>
                   <td>{{$order->productName}}</td>
                   <td>{{$order->status}}</td>
                   <td>{{\Carbon\Carbon::parse($order->orderDatetime)->format('M j, Y')}}</td>
