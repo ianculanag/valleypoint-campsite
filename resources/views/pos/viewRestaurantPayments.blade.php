@@ -21,7 +21,7 @@
                 @foreach($restPayments as $restaurantPayment)
                 <tr>
                     <td>{{$restaurantPayment->orderID}}</td>
-                    <td>{{$restaurantPayment->queueNumber}}</td>
+                    <td>{{$restaurantPayment->tableNumber}}</td>
                     <td>{{\Carbon\Carbon::parse($restaurantPayment->paymentDatetime)->format('M j, Y')}}</td>
                     <td>{{$restaurantPayment->paymentStatus}}</td> 
                     <td >{{number_format($restaurantPayment->amount, 2)}}</td>
