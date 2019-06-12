@@ -196,6 +196,10 @@
                                 <th>Total to Pay</th>
                                 <th class="text-right"><h4 id="amountToPayDiscountPeso"></h4></th>
                             </tr>
+                            <th class="pt-4" style="width:50%;">Senior Citizen Id/Pwd Id</th>
+                            <th class="input-group">
+                                <input type="text" class="form-control form-control-lg text-right input-group-prepend" id="SeniorPwdId">
+                            </th><tr></tr>
                             <th class="pt-4 text-primary" style="width:50%;">Discount Amount</th>
                             <th class="input-group">
                                 <div class="input-group-prepend">
