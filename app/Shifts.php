@@ -18,4 +18,9 @@ class Shifts extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function payment()
+    {
+        return $this->hasMany('App\Payments');
+    }
 }

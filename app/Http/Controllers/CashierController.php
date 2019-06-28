@@ -7,6 +7,7 @@ use App\Shifts;
 use App\Items;
 use App\Products;
 use App\Orders;
+use App\Payments;
 use Carbon\Carbon;
 use DB;
 
@@ -20,7 +21,7 @@ class CashierController extends Controller
         $shifts = DB::table('items')
             ->leftJoin('orders', 'orders.id', 'items.orderID')
             ->leftJoin('products', 'products.id', 'items.productID')
-            ->leftJoin('payments', 'payments.id', 'payments.orderID')
+            ->leftJoin('payments', 'payments.id', 'items.orderID')
             ->select('items.orderID', 'products.productName',
             'items.quantity', 'products.price', 'items.totalPrice',
             'payments.amount as amount', 'payments.changeDue', 'payments.paymentDatetime' )
@@ -35,7 +36,7 @@ class CashierController extends Controller
         $shifts = DB::table('items')
             ->leftJoin('orders', 'orders.id', 'items.orderID')
             ->leftJoin('products', 'products.id', 'items.productID')
-            ->leftJoin('payments', 'payments.id', 'items.orderID')
+            ->leftJoin('payments', 'payments.id', 'itemS.orderID')
             ->select('items.orderID','products.productName',
             'items.quantity as quantity', 'products.price', 'items.totalPrice',
             'payments.amount', 'payments.changeDue', 'payments.paymentDatetime' )

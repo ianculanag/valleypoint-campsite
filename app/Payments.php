@@ -19,4 +19,9 @@ class Payments extends Model
     {
         return $this->belongsTo('App\Charges');
     }
+
+    public function shift()
+    {
+        return $this->belongsTo('App\Shifts');
+    }
 }

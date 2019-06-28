@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group row py-0 my-0">
                             <label for="cashStart" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash Start:</label>
-                            <input class="form-control-plaintext col-sm-8" type="text" name="cashStart" value="₱&nbsp;1800.00" readonly>
+                            <input class="form-control-plaintext col-sm-8" type="text" name="cashStart" value="₱&nbsp;" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-3">
@@ -33,7 +33,7 @@
                         <table class="table table-sm table-bordered" style="font-size:.90em;">
                             <thead>
                             <tr>
-                            <td class="text-center"> No. </td>
+                           
                                     <td class="text-center"> Description </td>
                                     <td class="text-center" style="width:7%;"> Qty. </td>
                                     <td class="text-center" style="width:14%;"> Unit Price </td>
@@ -45,33 +45,33 @@
                             </thead>
                             <tbody>
                             @if(count($shifts) > 1)
+                            @php
+                                 $totalPrice = 0;
+                            @endphp
                                 @foreach($shifts as $shift)
                                     <tr class="">
-                                      <td class="text-center">{{$shift->orderID}}</td>
+                                     
                                        <td class="text-center">{{$shift->productName}}</td>
                                        <td class="text-center">{{$shift->quantity}}</td>
                                        <td class="text-right">{{$shift->price}}</td>
                                        <td class="text-right">{{$shift->totalPrice}}</td>
                                        <td class="text-right">{{number_format((float)($shift->amount), 2, '.', '')}}</td>
                                        <td class="text-right">{{number_format((float)($shift->changeDue), 2, '.', '')}}</td>
-                                       <td class="text-center">{{\Carbon\Carbon::parse($shift->paymentDatetime)->format('M j, Y')}}</td>
+                                       <td class="text-center">{{\Carbon\Carbon::parse($shift->paymentDatetime)->format('g:ia')}}</td>
                                    </tr>
                             </tbody>
+                            @php
+                                        $totalPrice += $shift->totalPrice;
+                                    @endphp
                             @endforeach
-                                     @endif
                         </table>
                     </div>
-                    <div class="form-group row py-0 my-0 col-md-8">
-                        <label for="cashEnd" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash End:</label>
-                        <input class="form-control-plaintext col-sm-8" type="text" name="cashEnd" value="₱" readonly>
-                    </div>
-                    <div class="form-group row py-0 my-0 col-md-8">
-                        <label for="shiftSales" class="col-sm-4 pt-2" style="font-size:0.80em;">Total Sales: </label>
-                        <input class="form-control-plaintext col-sm-8" type="text" name="name" value="₱" readonly>
-                    </div>
+                    <h6 label for="totalIncome" class="col-sm-4 pt-2" id="restaurantIncomeDaily" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Cash End: ₱{{number_format($totalPrice, 2)}}</label></h6>
+                    <h6 label for="totalIncome" class="col-sm-4 pt-2" id="restaurantIncomeDaily" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Total Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
                     <button type="button" class="btn btn-primary float-right mx-3" style="" id="" data-toggle="" data-target="">
                         Change Register
                     </button>
+                    @endif
                 </div>
             </div> 
         </div>      
