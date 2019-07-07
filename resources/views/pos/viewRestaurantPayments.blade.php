@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-
+            @if(count($restPayments) > 1)
                 @foreach($restPayments as $restaurantPayment)
                 <tr>
                     <td>{{$restaurantPayment->orderID}}</td>
@@ -28,6 +28,7 @@
                                               
                 </tr>
                 @endforeach
+                @endif
                    
             </tbody>
         </table>

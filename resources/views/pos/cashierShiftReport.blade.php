@@ -13,15 +13,19 @@
                         @endif
                         <div class="form-group row py-0 my-0">
                             <label for="name" class="col-sm-4 pt-2" style="font-size:0.80em;">Name:</label>
-                            <input class="form-control-plaintext col-sm-8" type="text" name="name" value="Sheila Yu" readonly>
+                            <input class="form-control-plaintext col-sm-8" type="text" name="name" value="{{ Auth::user()->name }}" readonly>
                         </div>
                         <div class="form-group row py-0 my-0">
                             <label for="shiftDuration" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift Duration:</label>
-                            <input class="form-control-plaintext col-sm-8" type="text" name="shiftDuration" value="9:00 AM - 8:00 PM">
+                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftDuration" value="9:00 AM - 8:00 PM">
+                        </div>
+                        <div class="form-group row py-0 my-0">
+                            <label for="shiftDuration" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift Duration:</label>
+                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftDuration" value="9:00 AM - 8:00 PM">
                         </div>
                         <div class="form-group row py-0 my-0">
                             <label for="cashStart" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash Start:</label>
-                            <input class="form-control-plaintext col-sm-8" type="text" name="cashStart" value="₱&nbsp; 0.00">
+                            <input class="form-control-plaintext col-sm-8" type="number" name="cashStart" value="₱&nbsp; 0.00">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-3">
