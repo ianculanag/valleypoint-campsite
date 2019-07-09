@@ -50,6 +50,11 @@
         </div>
         <div class="container col-md-10 col-sm-12">
             <div class="card col-md-10 offset-md-1 col-sm-12 py-4 ">
+            <div class="px-6">
+                <button class="print" style="height:2.5em; width:2.75em; float:right;">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                </button>
+            </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-4">
                         <img src={{asset('logo.png')}} class="float-left" style="height:7.5em; width:9.75em;" aria-hidden="true"></img>
