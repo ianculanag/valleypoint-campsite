@@ -229,3 +229,27 @@ jQuery(document).ready(function () {
         updateRestaurantTotal();
     })
 })
+
+
+jQuery(document).ready(function(){
+    jQuery('.change-register-details').click(function(){
+        jQuery.get('change-register-details/'+$(this).attr('id'), function(data){
+
+            console.log(data);
+            
+            var htmlString = "";
+            htmlString += "<h5 class='text-center'>Shift Details</h5>";
+            htmlString += "<div class='container'>";
+            htmlString += "<table class='table table-sm borderless'>";
+            htmlString += "<tr><td style='width:35%'>Shift Duration: </td>";
+ 
+            
+            jQuery('#modal-body1').html(htmlString);
+            
+
+            jQuery("#changeRegister").attr("href", "create-order/"+data[0].orderID);
+            
+        })
+    });
+
+}); 

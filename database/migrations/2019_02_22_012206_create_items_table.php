@@ -16,6 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->integer('orderID')->unsigned();
             $table->integer('productID')->unsigned();
+            $table->integer('shiftID')->unsigned();
             $table->integer('quantity');
             $table->double('totalPrice', 8, 2);
             $table->enum('paymentStatus',['pending','paid', 'cancelled']);

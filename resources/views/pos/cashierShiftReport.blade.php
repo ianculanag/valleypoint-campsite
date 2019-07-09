@@ -11,18 +11,25 @@
                         @else
                         <h6 class=""> {{\Carbon\Carbon::now()->format('F j, o')}}</h6>
                         @endif
+
+                        <form method="POST" action="/">
+                             @csrf
+
                         <div class="form-group row py-0 my-0">
                             <label for="name" class="col-sm-4 pt-2" style="font-size:0.80em;">Name:</label>
                             <input class="form-control-plaintext col-sm-8" type="text" name="name" value="{{ Auth::user()->name }}" readonly>
                         </div>
+
                         <div class="form-group row py-0 my-0">
-                            <label for="shiftDuration" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift Duration:</label>
-                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftDuration" value="9:00 AM - 8:00 PM">
+                            <label for="shiftStart" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift Start:</label>
+                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftStart" value="9:00 AM - 8:00 PM">
                         </div>
+
                         <div class="form-group row py-0 my-0">
-                            <label for="shiftDuration" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift Duration:</label>
-                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftDuration" value="9:00 AM - 8:00 PM">
+                            <label for="shiftEnd" class="col-sm-4 pt-2" style="font-size:0.80em;">Shift End:</label>
+                            <input class="form-control-plaintext col-sm-8" type="time" name="shiftEnd" value="9:00 AM - 8:00 PM">
                         </div>
+
                         <div class="form-group row py-0 my-0">
                             <label for="cashStart" class="col-sm-4 pt-2" style="font-size:0.80em;">Cash Start:</label>
                             <input class="form-control-plaintext col-sm-8" type="number" name="cashStart" value="₱&nbsp; 0.00">
@@ -65,16 +72,49 @@
                                    </tr>
                             </tbody>
                             @php
-                                        $totalPrice += $shift->totalPrice;
-                                    @endphp
+                                 $totalPrice += $shift->totalPrice;
+                             @endphp
                             @endforeach
                         </table>
                     </div>
                     <h6 label for="totalIncome" class="col-sm-4 pt-2" id="restaurantIncomeDaily" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Cash End: ₱{{number_format($totalPrice, 2)}}</label></h6>
                     <h6 label for="totalIncome" class="col-sm-4 pt-2" id="restaurantIncomeDaily" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Total Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
-                    <button type="button" class="btn btn-primary float-right mx-3" style="" id="" data-toggle="" data-target="">
-                        Change Register
+                    
+
+                    <a data-toggle="modal" data-target="#changeRegister" style="cursor:pointer" class="change-register-details" id="">       
+                    <!-- <div class="card mx-2" style="width:10rem; height:5rem; float: right">
+                                <div class="card-body"> -->
+                                <button type="button" class="btn btn-primary float-right mx-3" type="submit" style="" id="" data-toggle="" data-target="">
+                                     Change Register </button>
+                        
+        <div class="modal fade right" id="changeRegister" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+            <div class="modal-content">
+             
+                <div class="modal-header">
+                    <h4>{{Auth::user()->name}}<h4>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
                     </button>
+                    <!--Body-->
+
+                <div class="modal-body scrollbar-near-moon-wide" id="modal-body">
+                </div>
+
+                    <div class="modal-footer justify-content-right">
+                    <a href="" >
+                        <button type="button" class="btn btn-success">OK</button>
+                    </a>
+</div>
+     </div>
+    </div>
+</div>
+</div>
+
+
+
+
                     @endif
                 </div>
             </div> 

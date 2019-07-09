@@ -22,9 +22,11 @@ class CashierController extends Controller
             ->leftJoin('orders', 'orders.id', 'items.orderID')
             ->leftJoin('products', 'products.id', 'items.productID')
             ->leftJoin('payments', 'payments.id', 'items.orderID')
+            ->leftJoin('shifts', 'shifts.id', 'items.shiftID')
             ->select('items.orderID', 'products.productName',
             'items.quantity', 'products.price', 'items.totalPrice',
-            'payments.amount as amount', 'payments.changeDue', 'payments.paymentDatetime' )
+            'payments.amount as amount', 'payments.changeDue', 'payments.paymentDatetime',
+            'shifts.shiftStart', 'shifts.shiftEnd', 'shifts.cashStart')
             ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
             ->get();
         
@@ -37,9 +39,11 @@ class CashierController extends Controller
             ->leftJoin('orders', 'orders.id', 'items.orderID')
             ->leftJoin('products', 'products.id', 'items.productID')
             ->leftJoin('payments', 'payments.id', 'itemS.orderID')
+            ->leftJoin('shifts', 'shifts.id', 'items.shiftID')
             ->select('items.orderID','products.productName',
             'items.quantity as quantity', 'products.price', 'items.totalPrice',
-            'payments.amount', 'payments.changeDue', 'payments.paymentDatetime' )
+            'payments.amount', 'payments.changeDue', 'payments.paymentDatetime', 
+            'shifts.shiftStart', 'shifts.shiftEnd', 'shifts.cashStart')
             ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
             ->get();
         
