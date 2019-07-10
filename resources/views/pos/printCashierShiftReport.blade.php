@@ -1,9 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.noSidebar')
 
 @section('content')
-<a href="/print-cashier-shift-report" target="_blank">
-Print Preview
-</a>   
     <div class="container pb-5">
             <div class="card col-md-8 offset-md-2 col-sm-12 py-4 ">
                 <div class="row">
@@ -87,8 +84,12 @@ Print Preview
                     <a data-toggle="modal" data-target="#changeRegister" style="cursor:pointer" class="change-register-details" id="">       
                     <!-- <div class="card mx-2" style="width:10rem; height:5rem; float: right">
                                 <div class="card-body"> -->
+                                    <div id="dateFilter">
+                                        <button id="printReport"type="button" class="btn btn-primary float-right mx-3" type="submit" style="" id="" data-toggle="" data-target="">
+                                                Print Report</button>
                                 <button type="button" class="btn btn-primary float-right mx-3" type="submit" style="" id="" data-toggle="" data-target="">
                                      Change Register </button>
+                                    </div> 
                         
         <div class="modal fade right" id="changeRegister" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
