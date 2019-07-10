@@ -204,6 +204,28 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function monthlyRestaurantReportPrint(){
+
+        $month = Carbon::now()->format('m');
+        $year = Carbon::now()->format('Y');
+
+        $thisYear = Carbon::now()->format('Y');
+
+        $display = Carbon::now()->format('M Y');
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereMonth('orders.orderDatetime', '=', $month)
+        ->whereYear('orders.orderDatetime', '=', $year)
+        ->get();
+
+       return view('pos.printMonthlyReports')->with('productOrdered', $productOrdered)->with('month', $month)->with('year', $year)->with('thisYear', $thisYear)->with('display', $display);
+
+     }
     public function thisMonthsRestaurantReport() {
 
         $month = Carbon::now()->format('m');
@@ -257,6 +279,21 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function customRestaurantReportPrint(){
+        $displayto = Carbon::now()->addDays(1)->format('Y-m-d');
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
+        ->get();
+
+       return view('pos.printCustomReport')->with('productOrdered', $productOrdered)->with('displayto', $displayto);    
+    }
     public function customRestaurantReport() {
         $displayto = Carbon::now()->addDays(1)->format('Y-m-d');
 

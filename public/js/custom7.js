@@ -255,8 +255,9 @@ jQuery(document).ready(function(){
 }); 
 
 jQuery(document).ready(function(){
-    jQuery(document).on('click', '#DailyPrint', function(){
+    jQuery(document).on('click', '#printReport', function(){
         jQuery(this).hide();
+        jQuery('#dateFilter').hide();
         window.print();
 
     })

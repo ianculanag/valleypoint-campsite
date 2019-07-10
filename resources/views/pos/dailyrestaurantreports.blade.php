@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href ="/todayPrint" target="_blank"
+<a href ="/daily-sales-report-print" target="_blank"
 <button>Print View</button>
 </a>
     <div class="container row pb-5 pt-3">

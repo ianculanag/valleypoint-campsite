@@ -1,19 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.noSideBar')
 
 @section('content')
-<a href ="/custom-sales-report-print" target="_blank"
-<button>Print View</button>
-</a>
     <div class="container row pb-5 pt-3">
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
-            <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
-                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/todays-restaurant-report">Daily</a>
-                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/custom-restaurant-report">Weekly</a>
-                <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-months-restaurant-report">Monthly</a>
-                <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Custom</a>
-            </nav>
             <form method="POST" action="/reload-custom-restaurant-report">
                 @csrf
+                <div id="dateFilter">
+                    <h3>Date Filter:</h3>
                 <div class="px-1">
                     <div class="form-group row px-0 mx-0">
                         <label for="displayFrom" class="col-md-3 mb-0 mt-2 p-0">From:</label>
@@ -38,6 +31,7 @@
                             Load
                         </button>
                     </div>
+                </div>
                 </div>
             </form>
         </div>
@@ -90,6 +84,7 @@
                                         <h6 label for="totalIncome" class="col-sm-4 pt-2" id="reportGrandTotal" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Gross Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
                                            <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
                                            @endif
+                                           <button id="printReport">Print Report</button>    
                                    </div>
                 </div>
             </div>

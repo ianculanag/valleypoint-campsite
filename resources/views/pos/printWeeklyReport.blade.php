@@ -6,12 +6,24 @@
             <form method="POST" action="/reload-daily-restaurant-report">
                 @csrf
                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <div id="dateFilter">
                 <div class="row px-3">
+                    <h3>Filter:</h3>
                     <div class="form-group col-md-9 px-0 mx-1">
-
+                    <div class="input-group input-group-sm">
+                            @if(isset($displayfrom))
+                            <input class="form-control restaurantReportDateInputs" id="restaurantReportDate" type="date" name="restaurantReportDate" maxlength="15" placeholder="" value="{{$displayfrom}}" required>
+                            @else
+                            <input class="form-control restaurantReportDateInputs" id="restaurantReportDate" type="date" name="restaurantReportDate" maxlength="15" placeholder="" value="<?php echo date("Y-m-d");?>" required>
+                            @endif
+                        </div>
                     </div>
                     <div class="col-md-2 px-0 mx-1">
+                        <button class="btn btn-sm btn-success" type="submit">
+                            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+                        </button>
                     </div>
+                </div>
                 </div>
             </form>
         </div>
@@ -65,12 +77,10 @@
                                         <h6 label for="totalIncome" class="col-sm-4 pt-2" style="font-size:1em; margin-left:30em; margin-bottom:2em;">Gross Sales: ₱{{number_format($totalPrice, 2)}}</label></h6>
                                            <!-- <input class="form-control-plaintext col-sm-8"  type="number" name="totalIncome" value="0000.00"> -->
                                           @endif
-                                          <button id="DailyPrint">Print Report</button>
+                                          <button id="printReport">Print Report</button>
                      </div>
                 </div>
             </div>
         </div> 
-        
     </div>
-    
 @endsection
