@@ -253,3 +253,11 @@ jQuery(document).ready(function(){
     });
 
 }); 
+
+jQuery(document).ready(function(){
+    jQuery(document).on('click', '#DailyPrint', function(){
+        jQuery(this).hide();
+        window.print();
+
+    })
+})

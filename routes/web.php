@@ -337,11 +337,13 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
     //Daily restaurant reports
     Route::get('/todays-restaurant-report', 'OrdersController@todaysRestaurantReport');
     Route::get('/reload-todays-restaurant-report', 'OrdersController@reloadTodaysRestaurantReport');
+    Route::get('/todayPrint','OrdersController@todaysRestaurantReportPrint');
 
 
     //Weekly restaurant reports
     Route::get('/this-weeks-restaurant-report', 'OrdersController@thisWeeksRestaurantReport');
     Route::get('/reload-this-weeks-restaurant-report', 'OrdersController@reloadthisWeeksRestaurantReport');
+    Route::get('/WeeklyPrint','OrdersController@weeklyRestaurantReportPrint');
 
     //Monthly restaurant reports
     Route::get('/this-months-restaurant-report', 'OrdersController@thisMonthsRestaurantReport');

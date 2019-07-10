@@ -12,6 +12,7 @@ use App\Ingredients;
 use App\Payments;
 use Carbon\Carbon;
 use DB;
+use \PDF;
 
 class OrdersController extends Controller
 {
@@ -96,6 +97,22 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function todaysRestaurantReportPrint(){
+         //$pdf = PDF::loadView('pos.todaysReportPrint');
+         //return $pdf->download('today.pdf');
+
+         $productOrdered = DB::table('items')
+         ->leftJoin('products', 'products.id','productID')
+         ->leftJoin('orders', 'orders.id', 'orderID')
+         ->select('productID','products.productName','products.productCategory','quantity', 'items.totalPrice', 'orderDatetime')
+         ->where('paymentStatus', '=', 'paid')
+         ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
+         ->get();
+        return view('pos.printDailyReport')->with('productOrdered', $productOrdered);
+         
+
+     }
     public function todaysRestaurantReport() {
         $productOrdered = DB::table('items')
         ->leftJoin('products', 'products.id','productID')
@@ -104,7 +121,6 @@ class OrdersController extends Controller
         ->where('paymentStatus', '=', 'paid')
         ->whereDate('orders.orderDatetime', '=', Carbon::now()->format('Y-m-d'))
         ->get();
-
        return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered);
     }
 
@@ -121,7 +137,7 @@ class OrdersController extends Controller
         ->whereDate('orders.orderDatetime', '<=', $display)
         ->get();
 
-       return view('pos.dailyrestaurantreports')->with('productOrdered', $productOrdered)->with('display', $display);
+       return view('pos.printDailyReport')->with('productOrdered', $productOrdered)->with('display', $display);
     }
 
 
@@ -130,6 +146,23 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function weeklyRestaurantReportPrint(){
+        $displayto = Carbon::now()->addDays(6)->format('Y-m-d');
+
+        $productOrdered = DB::table('items')
+        ->leftJoin('products', 'products.id','productID')
+        ->leftJoin('orders', 'orders.id', 'orderID')
+        ->select('productID','products.productName','products.productCategory','quantity', 'totalPrice', 'orderDatetime')
+        ->where('paymentStatus', '=', 'paid')
+        ->whereDate('orders.orderDatetime', '>=', Carbon::now()->format('Y-m-d'))
+        ->whereDate('orders.orderDatetime', '<=', $displayto)
+        ->get();
+
+       return view('pos.printWeeklyReport')
+       ->with('displayto', $displayto)
+       ->with('productOrdered', $productOrdered);
+     }
     public function thisWeeksRestaurantReport() {
         $displayto = Carbon::now()->addDays(6)->format('Y-m-d');
 
