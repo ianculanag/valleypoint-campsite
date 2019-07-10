@@ -1,9 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.noSidebar')
 
 @section('content')
-<a href ="/weeklyLodgingPrint" target="_blank"
-<button>Print View</button>
-</a>
     <div class="container row pb-5 pt-3">
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
             <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
@@ -36,6 +33,9 @@
         <div class="container col-md-10 col-sm-12">
             <div class="card col-md-10 offset-md-1 col-sm-12 py-4 ">
             <div class="px-6">
+                <button class="print" id="Print" style="height:2.5em; width:2.75em; float:right;">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                </button>
             </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-4">

@@ -253,6 +253,12 @@ jQuery(document).ready(function(){
     });
 
 }); 
+jQuery(document).ready(function(){
+    jQuery(document).on('click', '#Print', function(){
+        jQuery(this).hide();
+        window.print();
+    })
+})
 
 jQuery(document).ready(function(){
     jQuery(document).on('click', '#printReport', function(){
@@ -260,5 +266,5 @@ jQuery(document).ready(function(){
         jQuery('#dateFilter').hide();
         window.print();
 
-    })
+            })
 })

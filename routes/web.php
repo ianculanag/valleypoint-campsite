@@ -151,18 +151,22 @@ Route::group(['middleware' => ['auth', 'lodging']], function() {
     //Daily lodging reports
     Route::get('/todays-lodging-report', 'UnitsController@todaysLodgingReport');
     Route::post('/reload-daily-lodging-report', 'UnitsController@reloadDailyLodgingReport');
+    Route::get('/dailyLodgingPrint','UnitsController@todaysLodgingReportPrint');
 
     //Weekly lodging reports
     Route::get('/this-weeks-lodging-report', 'UnitsController@thisWeeksLodgingReport');
     Route::post('/reload-weekly-lodging-report', 'UnitsController@reloadWeeklyLodgingReport');
+    Route::get('/weeklyLodgingPrint', 'UnitsController@thisWeeksLodgingReportPrint');
 
     //Monthly lodging reports
     Route::get('/this-months-lodging-report', 'UnitsController@thisMonthsLodgingReport');
     Route::post('/reload-monthly-lodging-report', 'UnitsController@reloadMonthlyLodgingReport');
+    Route::get('/monthlyLodgingPrint', 'UnitsController@thisMonthsLodgingReportPrint');
 
     //Custom lodging reports
     Route::get('/custom-lodging-report', 'UnitsController@customLodgingReport');
     Route::post('/reload-custom-lodging-report', 'UnitsController@reloadCustomLodgingReport');
+    Route::get('/customLodgingPrint', 'UnitsController@customLodgingReportPrint');
 
     //View Guest Payments
     Route::get('/view-guests-payments/{accommodationID}', 'GuestsController@viewGuestsPayments');
