@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use DB;
 
 class UsersController extends Controller
 {
@@ -30,7 +33,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addUser(Request $request)
+    public function addNewUser(Request $request)
     {
         /*$data = $request->validate([
             'name' => 'required|max:25',
@@ -59,12 +62,13 @@ class UsersController extends Controller
             'role' => 'required'
         ]);
 
-        $user = new Users;
+        $user = new User;
         $user->name = $request->input('name');
         $user->username = $request->input('username');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input['password']);
         $user->contactNumber = $request->input('contactNumber');
         $user->email = $request->input('email');
+        $user->role = $request->input('role');
         $user->save();
 
         return redirect('/view-users');
@@ -75,7 +79,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAddUserForm()
+    public function showAddNewUserForm()
     {
         $users = DB::table('users')
         ->get(); 

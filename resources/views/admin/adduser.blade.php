@@ -10,7 +10,7 @@
                 </span>
             </a>
         </div>        
-        <form method="POST" action="/register">
+        <form method="POST" action="/addNewUser">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                   
 
@@ -36,7 +36,7 @@
                             <input type="text" required="required" name="contactNumber" class="form-control" placeholder="Contact Number" minlength=11 maxlength=11>
                         </div>
                         <div class="form-group">
-                            <input type="email" required="required" class="form-control" name="inputEmail" placeholder="Email" minlength=10 maxlength=25>
+                            <input type="email" required="required" class="form-control" name="email" placeholder="Email" minlength=10 maxlength=25>
                         </div>
                         <div class="form-group pb-3">
                             <select class="custom-select d-block w-100" id="state" required="required" name="role">

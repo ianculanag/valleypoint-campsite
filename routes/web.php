@@ -194,8 +194,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/view-users', 'UsersController@viewUsers');
 
     //Add user
-    Route::get('/add-user', 'UsersController@showAddUserForm');
-    Route::post('user-added', 'UsersController@addUser');
+    Route::get('/add-user', 'UsersController@showAddNewUserForm');
+    Route::post('/addNewUser', 'UsersController@addNewUser');
+   
 
     /* Units */
     //View units
