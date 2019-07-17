@@ -61,6 +61,7 @@
 <script src="{{ asset('js/backpacker.js') }}"></script>
 <script src="{{ asset('js/backpacker-2.js') }}"></script>
 <script src="{{ asset('js/custom7.js') }}"></script>
+<script src="{{ asset('js/pos.js') }}"></script>
 <script>
     var dropdown = document.getElementsByClassName("dropdown-btn");
     var i;

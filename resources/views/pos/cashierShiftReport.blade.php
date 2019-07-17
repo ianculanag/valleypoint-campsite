@@ -87,32 +87,36 @@ Print Preview
                     <a data-toggle="modal" data-target="#changeRegister" style="cursor:pointer" class="change-register-details" id="">       
                     <!-- <div class="card mx-2" style="width:10rem; height:5rem; float: right">
                                 <div class="card-body"> -->
-                                <button type="button" class="btn btn-primary float-right mx-3" type="submit" style="" id="" data-toggle="" data-target="">
+                                <button type="button" class="btn btn-primary float-right mx-3" type="submit" style="" id="changeRegisterBtn" data-toggle="" data-target="">
                                      Change Register </button>
                         
-        <div class="modal fade right" id="changeRegister" tabindex="-1" role="dialog">
+     <div class="modal fade right" id="changeRegister" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
             <div class="modal-content">
-             
-                <div class="modal-header">
-                    <h4>{{Auth::user()->name}}<h4>
+
+                {{-- modal-header --}}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="">Cashier name: {{Auth::user()->name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">×</span>
-                    </button>
-                    <!--Body-->
-
-                <div class="modal-body scrollbar-near-moon-wide" id="modal-body">
-                </div>
-
-                    <div class="modal-footer justify-content-right">
-                    <a href="" >
-                        <button type="button" class="btn btn-success">OK</button>
-                    </a>
-</div>
-     </div>
-    </div>
-</div>
+                    {{-- modal-body --}}
+                    <div class="modal-body">
+                    {{\Carbon\Carbon::now()->format('F j, o')}}<br>
+                    Total Sales: ₱{{number_format($totalPrice, 2)}}<br>
+                    Cash End: ₱{{number_format($totalPrice, 2)}}
+                    
+                    </div>
+                    
+                    {{-- modal-footer --}}
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Change Register</button>
+                    </div>
+                    </div>
+</div> 
 </div>
 
 
