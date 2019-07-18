@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<a href ="/monthlyLodgingPrint" target="_blank"
-<button>Print View</button>
-</a>
+
     <div class="container row pb-5 pt-3">
         <div class="col-md-2 float-right mx-5 pl-4" style="position:fixed; right:0;">
             <nav class="nav nav-pills nav-stacked mb-5 pb-5" style="display:block;">
+            <a href="/print-cashier-shift-report" target="_blank">
+                <button class="print" style="height:2.5em; width:2.75em; margin-left: 5em; margin-bottom: 1em">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                </button></a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/todays-lodging-report">Daily</a>
                 <a class="nav-item nav-link reports-tabs text-center" style="color:#505050" href="/this-weeks-lodging-report">Weekly</a>
                 <a class="nav-item nav-link reports-tabs text-center active" style="background-color:#060f0ed4;" href="#">Monthly</a>
