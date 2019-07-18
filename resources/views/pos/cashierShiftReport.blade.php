@@ -2,7 +2,7 @@
 
 @section('content')
 <a href="/print-cashier-shift-report" target="_blank">
-<button class="print" style="height:2.5em; width:2.75em; float:right;">
+<button class="print" style="height:2.5em; width:2.75em; margin-left: 70em; margin-top: 2em">
                     <i class="fa fa-print" aria-hidden="true"></i>
  </button>
 </a>   
