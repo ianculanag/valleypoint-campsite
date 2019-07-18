@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\Shifts;
+use Carbon\Carbon;
 use DB;
 
 class ProductsController extends Controller
@@ -91,6 +93,24 @@ class ProductsController extends Controller
 
         return $productItem;
     }
+
+    /**
+     * Shift start dateTime
+     * 
+     */
+
+    public function viewShiftStartPage(){
+        return view('pos.shiftStart');
+     }
+
+     public function shiftStart(){
+        $shift = new Shifts();
+        $shift->ShiftStart=Carbon::now()->format('Y-m-d h:i:s');
+        $shift->cashStart="500";
+        $shift->save();
+
+        return redirect('/create-order');
+     }
     
     public function createOrder()
     {

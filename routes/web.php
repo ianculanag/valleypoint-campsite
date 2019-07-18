@@ -283,6 +283,8 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 Route::group(['middleware' => ['auth', 'cashier']], function() {
     
     //POS Dashboard Pages
+    Route::get('/start-shift', 'ProductsController@viewShiftStartPage');
+    Route::get('/started-shift', 'ProductsController@shiftStart');
     Route::get('/create-order', 'ProductsController@createOrder');
     Route::get('/view-tables', 'OrdersController@viewTables');
     Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');

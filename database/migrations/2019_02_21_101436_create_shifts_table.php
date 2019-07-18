@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Shifts;
+use Carbon\Carbon;
 
 class CreateShiftsTable extends Migration
 {
@@ -22,6 +24,11 @@ class CreateShiftsTable extends Migration
             //$table->foreign('userID')->references('id')->on('User');
             $table->timestamps();
         });
+
+        $shift = new Shifts();
+        $shift->ShiftStart=Carbon::now()->format('Y-m-d h:i:s');
+        $shift->cashStart="900";
+        $shift->save();
     }
 
     /**

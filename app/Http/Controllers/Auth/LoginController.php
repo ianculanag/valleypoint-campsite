@@ -35,7 +35,7 @@ class LoginController extends Controller
         } elseif(Auth::user()->role == 'lodging') {
             return '/glamping';
         } elseif(Auth::user()->role == 'cashier') {
-            return '/create-order';
+            return '/start-shift';
         } else {
             return '/logout'; 
         }
