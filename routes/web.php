@@ -288,6 +288,7 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
     Route::get('/create-order', 'ProductsController@createOrder');
     Route::get('/view-tables', 'OrdersController@viewTables');
     Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
+    Route::get('/shiftEnd', 'ProductsController@shiftEnd');
     
     //View menu
     Route::get('/view-menu', 'ProductsController@viewMenuItems');

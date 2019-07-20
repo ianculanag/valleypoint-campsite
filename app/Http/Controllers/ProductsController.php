@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Products;
 use App\Shifts;
 use Carbon\Carbon;
+use Auth;
 use DB;
 
 class ProductsController extends Controller
@@ -106,10 +107,27 @@ class ProductsController extends Controller
      public function shiftStart(){
         $shift = new Shifts();
         $shift->ShiftStart=Carbon::now()->format('Y-m-d h:i:s');
-        $shift->cashStart="500";
+        $shift->cashStart="";
+        $shift->cashierName=Auth::user()->name;
         $shift->save();
 
         return redirect('/create-order');
+     }
+
+     public function shiftEnd(){
+         $shiftEndCount = DB::table('shifts')
+         ->where('id','>', '0')
+         ->count();
+
+        //  $shiftEnd = DB::table('shifts')
+        //  ->where('id', $shiftEndCount)
+        //  ->get();
+        $shift = DB::table('shifts')
+        ->where('id', $shiftEndCount)
+        ->update(['shiftEnd' => Carbon::now()->format('Y-m-d h:i:s')]);
+        //$shift->shiftEnd = Carbon::now()->format('Y-m-d h:i:s');
+        return redirect('/logout');
+
      }
     
     public function createOrder()
