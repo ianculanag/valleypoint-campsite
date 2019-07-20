@@ -18,10 +18,10 @@
             @csrf
         <div class="container px-5">
         <div class="form-group">
-    <button  class="btn btn-primary">Start Shift</button>
+    <button  class="btn btn-primary" style="margin-left: 6em">Start Shift</button>
         </form>
         <form method="" action="/logout">
-            <button  class="btn btn-secondary">logout</button> 
+            <button  class="btn btn-secondary" style="margin-left: 5em; margin-top: 1em">Change Account</button> 
         </form>                                                          
                 </div>
                 <div class="form-group my-2">
