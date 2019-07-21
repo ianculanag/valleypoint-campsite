@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Shifts;
+use App\User;
 use Carbon\Carbon;
 use Auth;
 use DB;
@@ -111,7 +112,7 @@ class ProductsController extends Controller
         $shift->cashierName=Auth::user()->name;
         $shift->save();
 
-        return redirect('/create-order');
+        return redirect('/cashStart');
      }
 
      public function shiftEnd(){

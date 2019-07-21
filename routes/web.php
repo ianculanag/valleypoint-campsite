@@ -289,6 +289,7 @@ Route::group(['middleware' => ['auth', 'cashier']], function() {
     Route::get('/view-tables', 'OrdersController@viewTables');
     Route::get('/view-order-slips', 'OrdersController@viewOrderSlips');
     Route::get('/shiftEnd', 'ProductsController@shiftEnd');
+    Route::get('/cashStart', 'ShiftsController@cashStart');
     
     //View menu
     Route::get('/view-menu', 'ProductsController@viewMenuItems');

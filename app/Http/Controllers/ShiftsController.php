@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Products;
+use App\Shifts;
+use Carbon\Carbon;
+use Auth;
+use DB;
 
 class ShiftsController extends Controller
 {
@@ -80,5 +85,23 @@ class ShiftsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cashStart(){
+    $idCount = Shifts::pluck('id')
+        ->count();
+
+        $cashEndCountMinus =$idCount-1;
+        $cashEnd = Shifts::where('id', $cashEndCountMinus)->pluck('cashEnd');
+
+        foreach($cashEnd as $cashEnds){
+            $cashEnds;
+        }
+
+        $cashStartUpdate = Shifts::where('id',$idCount)
+        ->update(['cashStart' => $cashEnds]);
+
+        return redirect('/create-order');
+
     }
 }

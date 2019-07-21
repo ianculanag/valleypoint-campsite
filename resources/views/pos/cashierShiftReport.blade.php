@@ -108,14 +108,19 @@
                     <div class="modal-body">
                     {{\Carbon\Carbon::now()->format('F j, o')}}<br>
                     Total Sales: ₱{{number_format($totalPrice, 2)}}<br>
-                    Cash End: ₱{{number_format($totalPrice, 2)}}
+                    <form method="POST" action="">
+                    Cash End:<input type="text" required="required" class="form-control" name="Cashend" value="₱{{number_format($totalPrice, 2)}}" disabled>
+                    </form>
                     
                     </div>
                     
                     {{-- modal-footer --}}
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Change Register</button>
+                    <form action="/shiftEnd">
+                    <a href="/shiftEnd" 
+                    <button type="button" class="btn btn-primary">Change Register</button></a>
+                    </form>
                     </div>
                     </div>
 </div> 

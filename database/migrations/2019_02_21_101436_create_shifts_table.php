@@ -21,6 +21,7 @@ class CreateShiftsTable extends Migration
             $table->datetime('shiftStart');
             $table->datetime('shiftEnd');
             $table->double('cashStart', 8, 2);
+            $table->double('cashEnd', 8, 2);
             $table->integer('userID')->unsigned();
             //$table->foreign('userID')->references('id')->on('User');
             $table->timestamps();
@@ -29,8 +30,9 @@ class CreateShiftsTable extends Migration
         $shift = new Shifts();
         $shift->ShiftStart=Carbon::now()->format('Y-m-d h:i:s');
         $shift->shiftEnd="2019-07-20 11:35:23";
-        $shift->cashStart="900";
-        $shift->cashierName="Ervin";
+        $shift->cashStart="0";
+        $shift->cashEnd="500";
+        $shift->cashierName="Joshua";
         $shift->save();
     }
 
