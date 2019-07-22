@@ -36,7 +36,7 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->role}}</td>
                     <td>
-                        <a href="edit-user/{{$user->id}}">
+                        <a href="/view-user-info/{{$user->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>
                         </a>
                         <button class="btn btn-sm btn-danger">Delete</button>

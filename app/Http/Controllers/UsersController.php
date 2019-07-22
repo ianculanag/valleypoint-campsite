@@ -74,6 +74,14 @@ class UsersController extends Controller
         return redirect('/view-users');
     }
 
+    public function viewUserInfo($userId){
+        $userInfo = DB::table('users')
+        ->select('username', 'name', 'role', 'contactNumber', 'email')
+        ->where('id', '=', $userId)
+        ->get();
+        return view('admin.editUser')->with('userInfo', $userInfo);
+    }
+
     /**
      * Show the add user form
      *
