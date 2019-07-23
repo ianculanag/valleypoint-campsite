@@ -9,6 +9,17 @@
                 <strong>Back</strong>
             </span>
         </a> --}}
+        @if(session("deleteMessage"))
+        <div class="alert alert-success">
+        {{session('deleteMessage')}}
+        </div>
+        @endif
+        @if(session("updateMessage"))
+        <div class="alert alert-success">
+        {{session('updateMessage')}}
+        </div>
+        @endif
+
         <h3 class="text-center">Users</h3>
     </div>
     <div class="col-md-12">
@@ -36,10 +47,12 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->role}}</td>
                     <td>
-                        <a href="/view-user-info/{{$user->id}}">
+                        <a href="/edit-user-info/{{$user->id}}">
                             <button class="btn btn-sm btn-info">Edit</button>
                         </a>
+                    <a href="/delete-user/{{$user->id}}">
                         <button class="btn btn-sm btn-danger">Delete</button>
+                        </a>
                     </td>
                 </tr>
                     @endforeach

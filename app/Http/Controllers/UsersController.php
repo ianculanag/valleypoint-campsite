@@ -76,11 +76,39 @@ class UsersController extends Controller
 
     public function viewUserInfo($userId){
         $userInfo = DB::table('users')
-        ->select('username', 'name', 'role', 'contactNumber', 'email')
+        ->select('id','username', 'name', 'role', 'contactNumber', 'email')
         ->where('id', '=', $userId)
         ->get();
         return view('admin.editUser')->with('userInfo', $userInfo);
     }
+
+    /**
+     * Update the user information in the database
+     */
+
+     public function updateUser(Request $request){
+         $user= DB::table('users')
+         ->where('id', $request->input('userID'))
+         ->update(['name' => $request->input('newName'),
+                   'contactNumber' => $request->input('newContactNumber'),
+                   'username' => $request->input('newUserName'),
+                   'email' => $request->input('newEmail'),
+                   'role' => $request->input('newRole')]);
+
+
+         return redirect('/view-users')->with('updateMessage', 'User has been updated!');
+
+     }
+
+     /**
+      * Delete the user in the database
+      */
+
+      public function deleteUser($userId){
+          $user = User::where('id', $userId)->delete();
+          return redirect('/view-users')->with('deleteMessage', ' User has been deleted successfully');
+
+      }
 
     /**
      * Show the add user form

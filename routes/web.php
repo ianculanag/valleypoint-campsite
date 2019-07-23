@@ -194,7 +194,11 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/view-users', 'UsersController@viewUsers');
 
     //Edit users
-    Route::get('/view-user-info/{userId}', 'UsersController@viewUserInfo');
+    Route::get('/edit-user-info/{userId}', 'UsersController@viewUserInfo');
+    Route::post('/update-user', 'UsersController@updateUser');
+
+    //delete users
+    Route::get('/delete-user/{userId}', 'UsersController@deleteUser');
 
     //Add user
     Route::get('/add-user', 'UsersController@showAddNewUserForm');
