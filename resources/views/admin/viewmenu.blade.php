@@ -7,8 +7,8 @@
         <div class="col-md-8">
             <div class="container row py-0 mx-0 px-0">
                 <div class="col-md-9 mb-2 px-0">
-                    <button id="addCategory" class="btn btn-sm btn-success mr-1" type="button">Add Category</button>
-                    <button id="addItem" class="btn btn-sm btn-success" type="button">Add Menu Item</button>
+                    <a class="btn btn-sm btn-success mb-2" href="/add-category">Add Category</a>
+                    <a class="btn btn-sm btn-success mb-2" href="/add-menu-item">Add Menu Item</a>
                 </div>
             </div>
             <div class="row">

@@ -136,4 +136,12 @@ class IngredientsController extends Controller
 
         return $ingredients;
     }
+
+    public function showAddIngredientForm()
+    {
+        $ingredient = DB::table('ingredients')
+        ->get();
+
+        return view('admin.addingredient')->with('ingredient', $ingredient);
+    }
 }

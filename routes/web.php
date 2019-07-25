@@ -235,6 +235,18 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/add-service', 'ServicesController@showAddServiceForm');
     Route::post('/service-added', 'ServicesController@addService');
 
+    //Add menu item
+    Route::get('/add-menu-item', 'ProductsController@showAddMenuItemForm');
+    Route::post('/menu-item-added', 'ProductsController@addNewMenuItem');
+
+    //Add Category
+    Route::get('/add-category', 'ProductsController@showAddCategoryForm');
+    Route::post('/category-added', 'ProductsController@addCategory');
+
+    //Add Ingredient
+    Route::get('/add-ingredient', 'IngredientsController@showAddIngredientForm');
+    Route::post('/ingredient-added', 'IngredientsController@addNewIngredient');
+
     //Edit service
     Route::get('/edit-service/{serviceID}', 'ServicesController@viewServiceDetails');
     Route::post('/update-service', 'ServicesController@updateService');
@@ -284,6 +296,8 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     //Delete ingredient
     Route::get('/delete-ingredient-modal/{ingredientID}', 'IngredientsController@deleteIngredientModal');
     //Route::post('/confirm-ingredient-deletion/{ingredientID}', 'IngredientsController@deleteIngredient');
+
+
 });
 
 /* Restaurant */
