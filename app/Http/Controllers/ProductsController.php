@@ -228,19 +228,21 @@ class ProductsController extends Controller
     }
 
     public function addNewMenuItem(Request $request){
+
+
         $this->validate($request, [
-            'name' => 'required',
+            'MenuName' => 'required',
             'category' => 'required',
             'price' => 'required',
             'priceGuest' => 'required',
         ]);
 
-        $item = new Item;
-        $item->name = $request->input('name');
-        $item->username = $request->input('category');
-        $item->price = $request->input('price');
-        $item->priceGuest = $request->input('priceGuest');
-        $item->save();
+        $NewItem = new Products;
+        $NewItem->productName = $request->input('MenuName');
+        $NewItem->productCategory = $request->input('category');
+        $NewItem->price = $request->input('price');
+        $NewItem->guestPrice = $request->input('priceGuest');
+        $NewItem->save();
 
         return redirect('/view-menu-recipe');
     }

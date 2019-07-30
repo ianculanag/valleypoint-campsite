@@ -10,7 +10,7 @@
                 </span>
             </a>
         </div>        
-        <form method="POST" action="/add-menu-item">
+        <form method="POST" action="/menu-item-added">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                   
 
@@ -21,7 +21,7 @@
                             <h3>Add Menu Item</h3>
                         </div>
                         <div class="form-group">
-                            <input type="text" required="required" class="form-control" name="name" placeholder="Name" maxlength=25>
+                            <input type="text" required="required" class="form-control" name="MenuName" placeholder="Name" maxlength=25>
                         </div>
                         <div class="form-group pb-3">
                             <select class="custom-select d-block w-100" id="state" required="required" name="category" placeholder="Category">
