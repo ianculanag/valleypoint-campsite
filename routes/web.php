@@ -241,7 +241,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
     //Add Category
     Route::get('/add-category', 'ProductsController@showAddCategoryForm');
-    Route::post('/category-added', 'ProductsController@addCategory');
+    Route::post('/category-added', 'ProductsController@addNewCategory');
 
     //Add Ingredient
     Route::get('/add-ingredient', 'IngredientsController@showAddIngredientForm');

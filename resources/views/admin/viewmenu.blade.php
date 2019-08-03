@@ -92,7 +92,7 @@
                 </div>
                 <div class="card-footer bg-white border-0 px-0 mx-2">
                     <div class="col-md-12 mb-1 px-1">
-                        <button type="button" class="btn btn-primary btn-block" style="text-align:center;" id="editRecipe" disabled>
+                        <button type="button" href="" class="btn btn-primary btn-block" style="text-align:center;" id="editRecipe" disabled>
                             Edit Recipe
                         </button>
                     </div>

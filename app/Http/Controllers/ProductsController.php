@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\Ingredients;
 use App\Shifts;
 use App\User;
 use Carbon\Carbon;
@@ -235,6 +236,8 @@ class ProductsController extends Controller
             'category' => 'required',
             'price' => 'required',
             'priceGuest' => 'required',
+            'ingredientName' => 'required',
+            'ingredientCategory' => 'required',
         ]);
 
         $NewItem = new Products;
@@ -244,8 +247,48 @@ class ProductsController extends Controller
         $NewItem->guestPrice = $request->input('priceGuest');
         $NewItem->save();
 
+        $NewItem = new Ingredients;
+        $NewItem->ingredientName = $request->input('ingredientName');
+        $NewItem->ingredientCategory = $request->input('ingredientCategory');
+        $NewItem->save();
+
         return redirect('/view-menu-recipe');
     }
+
+
+    public function addNewCategory(Request $request){
+
+        $this->validate($request, [
+           'category' => 'required',
+        ]);
+
+        $newCategory = new Products;
+        $newCategory->productCategory = $request->input('category');
+        $newCategory->save();
+
+        return redirect('/view-menu-recipe');
+    }
+
+    public function viewMenuInfo($userId){
+        $userInfo = DB::table('users')
+        ->select('id','username', 'name', 'role', 'contactNumber', 'email')
+        ->where('id', '=', $userId)
+        ->get();
+        return view('admin.editUser')->with('userInfo', $userInfo);
+    }
+
+    // public function updateRecipe(Request $request){
+    //     $NewItem= DB::table('products')
+    // //    ->where('id', $request->input('userID'))
+    //     ->update(['MenuName' => $request->input('newMenuName'),
+    //               'category' => $request->input('newCategory'),
+    //               'price' => $request->input('newPrice'),
+    //               'priceGuest' => $request->input('newPriceGuest'),
+
+    //     return redirect('/view-')->with('updateMessage', 'User has been updated!');
+
+    // }
+
 
     public function showAddCategoryForm(){
         $category = DB::table('products')

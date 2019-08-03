@@ -21,7 +21,7 @@
                             <h3>Add Category</h3>
                         </div>
                         <div class="form-group">
-                            <input type="text" required="required" class="form-control" name="name" placeholder="Category" maxlength=25>
+                            <input type="text" required="required" class="form-control" name="category" placeholder="Category" maxlength=25>
                         </div>
                        
                         <button type="submit" class="btn btn-block btn-success mt-4">Add</button>
