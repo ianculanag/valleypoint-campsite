@@ -10,7 +10,7 @@
                 </span>
             </a>
         </div>        
-        <form method="POST" action="/add-category">
+        <form method="POST" action="/category-added">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                   
 
