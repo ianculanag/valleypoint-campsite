@@ -10,7 +10,7 @@
                 </span>
             </a>
         </div>        
-        <form method="POST" action="/add-ingredient">
+        <form method="POST" action="/ingredient-added">
             @csrf
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">                   
 
@@ -21,10 +21,10 @@
                             <h3>Add Ingredient</h3>
                         </div>
                         <div class="form-group">
-                            <input type="text" required="required" class="form-control" name="description" placeholder="Description" maxlength=25>
+                            <input type="text" required="required" class="form-control" name="ingredientName" placeholder="Name" maxlength=25>
                         </div>
                         <div class="form-group pb-3">
-                            <select class="custom-select d-block w-100" id="state" required="required" name="category" placeholder="Category">
+                            <select class="custom-select d-block w-100" id="state" required="required" name="ingredientCategory" placeholder="Category">
                                 <option value="meatAndPoultry">Meat and Poultry</option>
                                 <option value="produce">Produce</option>
                                 <option value="groceryAndDry">Grocery and Dry</option>

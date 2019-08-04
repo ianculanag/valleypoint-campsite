@@ -102,8 +102,6 @@
                                 <option value="stringBeans">String beans</option>
                                 <option value="teaBag">Tea Bag</option>
                                 <option value="tocino">Tocino</option>
-
-
                             </select>
                         </div>
 

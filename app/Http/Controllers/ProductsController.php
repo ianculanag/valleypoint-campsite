@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Ingredients;
+
 use App\Shifts;
 use App\User;
 use Carbon\Carbon;
@@ -256,19 +257,6 @@ class ProductsController extends Controller
     }
 
 
-    public function addNewCategory(Request $request){
-
-        $this->validate($request, [
-           'category' => 'required',
-        ]);
-
-        $newCategory = new Products;
-        $newCategory->productCategory = $request->input('category');
-        $newCategory->save();
-
-        return redirect('/view-menu-recipe');
-    }
-
     public function viewMenuInfo($userId){
         $userInfo = DB::table('users')
         ->select('id','username', 'name', 'role', 'contactNumber', 'email')
@@ -296,6 +284,20 @@ class ProductsController extends Controller
 
         return view('admin.addcategory')->with('category', $category);
     }
+    
+    public function addNewCategory(Request $request){
+
+        $this->validate($request, [
+           'category' => 'required',
+        ]);
+
+        $newCategory = new Products;
+        $newCategory->productCategory = $request->input('category');
+        $newCategory->save();
+
+        return redirect('/view-menu-recipe');
+    }
+
 
 }
 

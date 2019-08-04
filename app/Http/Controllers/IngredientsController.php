@@ -144,4 +144,20 @@ class IngredientsController extends Controller
 
         return view('admin.addingredient')->with('ingredient', $ingredient);
     }
+
+    public function addNewIngredient(Request $request)
+    {
+        $this->validate($request,[
+            'ingredientName' => 'required',
+            'ingredientCategory' => 'required',
+        ]);
+
+        $newIngredient = new Ingredients;
+        $newIngredient->ingredientName = $request->input('ingredientName');
+        $newIngredient->ingredientCategory = $request->input('ingredientCategory');
+        $newIngredient->save();
+
+        return redirect('/view-ingredients');
+
+    }
 }
