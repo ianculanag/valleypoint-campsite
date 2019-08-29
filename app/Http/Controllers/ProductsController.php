@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Ingredients;
-
 use App\Shifts;
 use App\User;
 use Carbon\Carbon;
@@ -297,6 +296,14 @@ class ProductsController extends Controller
 
         return redirect('/view-menu-recipe');
     }
+
+    public function deleteItem($productCount){
+       // $product = $this->product->whereProductId($productId)->delete();
+       $product = Products::where('id', $productCount)->delete();
+        return redirect('/view-menu-recipe')->with('deleteMessage', ' Item has been deleted successfully');
+
+    }
+
 
 
 }

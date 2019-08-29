@@ -239,6 +239,9 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/add-menu-item', 'ProductsController@showAddMenuItemForm');
     Route::post('/menu-item-added', 'ProductsController@addNewMenuItem');
 
+    //delete item
+    Route::get('/delete-item/{productId}/', 'ProductsController@deleteItem');
+
     //Add Category
     Route::get('/add-category', 'ProductsController@showAddCategoryForm');
     Route::post('/category-added', 'ProductsController@addNewCategory');

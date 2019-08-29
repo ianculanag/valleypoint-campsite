@@ -11,6 +11,11 @@
                     <a class="btn btn-sm btn-success mb-2" href="/add-menu-item">Add Menu Item</a>
                 </div>
             </div>
+            @if(session("deleteMessage"))
+               <div class="alert alert-success">
+           {{session('deleteMessage')}}
+               </div>
+            @endif
             <div class="row">
                 <div class="col-md-3 pr-0 rounded-0">
                     <div class="list-group rounded-0">
@@ -57,11 +62,12 @@
                                 @php
                                     $productCount++;
                                 @endphp
-                                <tr id="{{$product->id}}" class="menuItemList" style="cursor:pointer">
+                                    <tr id="{{$product->id}}" class="menuItemList" style="cursor:pointer">
                                     <td class="text-right pr-5">{{$productCount}}</td>
                                     <td class="pl-3">{{$product->productName}}</td>
                                     <td class="pl-3">{{$product->price}}</td>
-                                    <td class="text-right pr-5">{{$product->guestPrice}}</td>                                       
+                                    <td class="text-right pr-5">{{$product->guestPrice}}</td>   
+                                    <!-- <td class="text-right pr-5 hide">{{$product->id}}</td>                                     -->
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -95,6 +101,12 @@
                         <button type="button" href="" class="btn btn-primary btn-block" style="text-align:center;" id="editRecipe" disabled>
                             Edit Recipe
                         </button>
+                               <a href="/delete-item/{{$product->id}}">
+                        <button type = "button" class="btn btn-sm btn-danger" style="text-align:center; width: 24.5em; height: 3em">Delete</button>
+                              </a>
+                        <!-- <button type="button" href="/delete-item/{{$product->id}}" class="btn btn-danger btn-block" style="text-align:center;">
+                            Delete Item
+                        </button> -->
                     </div>
                 </div>
             </div>
