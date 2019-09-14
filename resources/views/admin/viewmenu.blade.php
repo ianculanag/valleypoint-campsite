@@ -98,9 +98,9 @@
                 </div>
                 <div class="card-footer bg-white border-0 px-0 mx-2">
                     <div class="col-md-12 mb-1 px-1">
-                        <button type="button" href="" class="btn btn-primary btn-block" style="text-align:center;" id="editRecipe" disabled>
+                        {{-- <button type="button" href="" class="btn btn-primary btn-block" style="text-align:center;" id="editRecipe" disabled>
                             Edit Recipe
-                        </button>
+                        </button> --}}
                                <a href="/delete-item/{{$product->id}}">
                         <button type = "button" class="btn btn-sm btn-danger" style="text-align:center; width: 24.5em; height: 3em">Delete</button>
                               </a>

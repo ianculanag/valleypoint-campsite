@@ -71,9 +71,9 @@
                         <td class="pl-3">{{$ingredient->ingredientName}}</td>
                         <td class="pl-3">{{$displayName}}</td> 
                         <td>
-                            <a href="edit-ingredient/{{$ingredient->id}}">
+                            {{-- <a href="edit-ingredient/{{$ingredient->id}}">
                                 <button class="btn btn-sm btn-info">Edit</button>
-                            </a>
+                            </a> --}}
                             <a id="{{$ingredient->id}}" class="delete-ingredient-modal" data-toggle="modal" data-target="#deleteIngredientModal">
                                 <button class="btn btn-sm btn-danger">Delete</button>
                             </a>

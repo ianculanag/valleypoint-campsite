@@ -971,7 +971,7 @@ class UnitsController extends Controller
         ->where('units.id', '=', $unitID)
         ->get();
 
-        return $units;
+        return $unit;
     }
 
     /**
