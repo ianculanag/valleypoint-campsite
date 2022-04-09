@@ -26,6 +26,6 @@
     "dependencies": {
         "datatables.net": "^1.10.19",
         "datatables.net-dt": "^1.10.19",
-        "moment": "^2.24.0"
+        "moment": "^2.29.2"
     }
 }
